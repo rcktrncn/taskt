@@ -11,13 +11,13 @@ namespace taskt.Core.Automation.Commands
     [Serializable]
     [Attributes.ClassAttributes.Group("Window Commands")]
     [Attributes.ClassAttributes.SubGruop("Window Actions")]
-    [Attributes.ClassAttributes.CommandSettings("Activate Window")]
-    [Attributes.ClassAttributes.Description("This command activates a window and brings it to the front.")]
-    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to active a window by name or bring it to attention.")]
+    [Attributes.ClassAttributes.CommandSettings("Get Window Handle From Window Name")]
+    [Attributes.ClassAttributes.Description("This command allows you to Get Window Handle from Window Name.")]
+    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to Get Window Handle from Window Name.")]
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ActivateWindowCommand : ScriptCommand
+    public class GetWindowHandleFromWindowNameCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WindowName))]
@@ -28,7 +28,7 @@ namespace taskt.Core.Automation.Commands
         public string v_SearchMethod { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_MatchMethod))]
+        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_MatchMethod_Single))]
         [PropertySelectionChangeEvent(nameof(MatchMethodComboBox_SelectionChangeCommitted))]
         public string v_MatchMethod { get; set; }
 
@@ -37,34 +37,26 @@ namespace taskt.Core.Automation.Commands
         public string v_TargetWindowIndex { get; set; }
 
         [XmlAttribute]
+        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_OutputWindowHandle))]
+        [Remarks("")]
+        [PropertyIsOptional(false)]
+        [PropertyValidationRule("Window Handle", PropertyValidationRule.ValidationRuleFlags.Empty)]
+        public string v_WindowHandle { get; set; }
+
+        [XmlAttribute]
         [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WaitTime))]
         public string v_WaitTime { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WindowNameResult))]
-        public string v_NameResult { get; set; }
-
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_OutputWindowHandle))]
-        public string v_HandleResult { get; set; }
-
-        public ActivateWindowCommand()
+        public GetWindowHandleFromWindowNameCommand()
         {
-            //this.CommandName = "ActivateWindowCommand";
-            //this.SelectionName = "Activate Window";
-            //this.CommandEnabled = true;
-            //this.CustomRendering = true;
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            WindowNameControls.WindowAction(this, engine,
+            WindowNameControls.WindowAction( this, engine,
                 new Action<List<(IntPtr, string)>>(wins =>
                 {
-                    foreach (var win in wins)
-                    {
-                        WindowNameControls.ActivateWindow(win.Item1);
-                    }
+                    wins[0].Item1.StoreInUserVariable(engine, v_WindowHandle);
                 })
             );
         }
@@ -76,8 +68,6 @@ namespace taskt.Core.Automation.Commands
 
         public override void Refresh(frmCommandEditor editor)
         {
-            //ComboBox cmb = (ComboBox)ControlsList[nameof(v_WindowName)];
-            //cmb.AddWindowNames();
             ControlsList.GetPropertyControl<ComboBox>(nameof(v_WindowName)).AddWindowNames();
         }
     }

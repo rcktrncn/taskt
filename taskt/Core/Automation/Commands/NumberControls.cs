@@ -27,6 +27,38 @@ namespace taskt.Core.Automation.Commands
         public static string v_BothNumericalVariableName { get; }
 
         /// <summary>
+        /// for both numerical variable name
+        /// </summary>
+        [PropertyDescription("Numerical Variable Name")]
+        [InputSpecification("")]
+        [Remarks("")]
+        [PropertyDetailSampleUsage("**vNum**", PropertyDetailSampleUsage.ValueType.VariableName)]
+        [PropertyDetailSampleUsage("**{{{vNum}}}**", PropertyDetailSampleUsage.ValueType.VariableName)]
+        [PropertyShowSampleUsageInDescription(true)]
+        [PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
+        [PropertyParameterDirection(PropertyParameterDirection.ParameterDirection.Input)]
+        [PropertyIsVariablesList(true)]
+        [PropertyValidationRule("Numerical Variable", PropertyValidationRule.ValidationRuleFlags.Empty)]
+        [PropertyDisplayText(true, "Numerical Name")]
+        public static string v_InputNumericalVariableName { get; }
+
+        /// <summary>
+        /// for output numerical variable name
+        /// </summary>
+        [PropertyDescription("Numerical Variable Name to Store Result")]
+        [InputSpecification("")]
+        [Remarks("")]
+        [PropertyDetailSampleUsage("**vNum**", PropertyDetailSampleUsage.ValueType.VariableName)]
+        [PropertyDetailSampleUsage("**{{{vNum}}}**", PropertyDetailSampleUsage.ValueType.VariableName)]
+        [PropertyShowSampleUsageInDescription(true)]
+        [PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
+        [PropertyParameterDirection(PropertyParameterDirection.ParameterDirection.Output)]
+        [PropertyIsVariablesList(true)]
+        [PropertyValidationRule("Result", PropertyValidationRule.ValidationRuleFlags.Empty)]
+        [PropertyDisplayText(true, "Result")]
+        public static string v_OutputNumericalVariableName { get; }
+
+        /// <summary>
         /// for numerical value
         /// </summary>
         [PropertyDescription("Numerical Value")]

@@ -1,0 +1,40 @@
+﻿using System;
+using System.Xml.Serialization;
+using taskt.Core.Automation.Attributes.PropertyAttributes;
+
+namespace taskt.Core.Automation.Commands
+{
+    [Serializable]
+    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.SubGruop("Window Handle Actions")]
+    [Attributes.ClassAttributes.CommandSettings("Activate Window By Window Handle")]
+    [Attributes.ClassAttributes.Description("This command activates a window and brings it to the front.")]
+    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to active a window by name or bring it to attention.")]
+    [Attributes.ClassAttributes.ImplementationDescription("")]
+    [Attributes.ClassAttributes.EnableAutomateRender(true)]
+    [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
+    public class ActivateWindowByWindowHandleCommand : ScriptCommand
+    {
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_InputWindowHandle))]
+        public string v_WindowHandle { get; set; }
+
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WaitTime))]
+        public string v_WaitTime { get; set; }
+
+        public ActivateWindowByWindowHandleCommand()
+        {
+        }
+
+        public override void RunCommand(Engine.AutomationEngineInstance engine)
+        {
+            WindowNameControls.WindowHandleAction(this, engine,
+                new Action<IntPtr>(whnd =>
+                {
+                    WindowNameControls.ActivateWindow(whnd);
+                })
+            );
+        }
+    }
+}

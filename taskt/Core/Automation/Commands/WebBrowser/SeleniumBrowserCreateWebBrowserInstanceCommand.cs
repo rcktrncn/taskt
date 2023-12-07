@@ -25,6 +25,20 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
+        [PropertyDescription("Web Browser Type")]
+        [PropertyUISelectionOption("Edge")]
+        [PropertyUISelectionOption("Chrome")]
+        [PropertyUISelectionOption("Firefox")]
+        [PropertyUISelectionOption("IE")]
+        [InputSpecification("", true)]
+        [Remarks("")]
+        [PropertyIsOptional(true, "Chrome")]
+        [PropertyFirstValue("Chrome")]
+        [PropertyDisplayText(true, "Web Browser Type")]
+        public string v_EngineType { get; set; }
+
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
         [PropertyDescription("Instance Tracking (After task ends)")]
         [PropertyUISelectionOption("Forget Instance")]
         [PropertyUISelectionOption("Keep Instance Alive")]
@@ -53,7 +67,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
-        [PropertyDescription("We bBrowser Command Line Options")]
+        [PropertyDescription("Web Browser Command Line Options")]
         [InputSpecification("Command Line Options", true)]
         [SampleUsage("user-data-dir=c:\\users\\public\\SeleniumTasktProfile")]
         [Remarks("")]
@@ -62,18 +76,8 @@ namespace taskt.Core.Automation.Commands
         public string v_SeleniumOptions { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
-        [PropertyDescription("Web Browser Type")]
-        [PropertyUISelectionOption("Edge")]
-        [PropertyUISelectionOption("Chrome")]
-        [PropertyUISelectionOption("Firefox")]
-        [PropertyUISelectionOption("IE")]
-        [InputSpecification("", true)]
-        [Remarks("")]
-        [PropertyIsOptional(true, "Chrome")]
-        [PropertyFirstValue("Chrome")]
-        [PropertyDisplayText(true, "Web Browser Type")]
-        public string v_EngineType { get; set; }
+        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_OutputWindowHandle))]
+        public string v_Handle { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
@@ -124,18 +128,18 @@ namespace taskt.Core.Automation.Commands
             if (seleniumEngine == "chrome")
             {
                 OpenQA.Selenium.Chrome.ChromeOptions options = new OpenQA.Selenium.Chrome.ChromeOptions();
-                if (!String.IsNullOrEmpty(browserPath))
+                if (!string.IsNullOrEmpty(browserPath))
                 {
                     options.BinaryLocation = browserPath;
                 }
 
-                if (!String.IsNullOrEmpty(v_SeleniumOptions))
+                if (!string.IsNullOrEmpty(v_SeleniumOptions))
                 {
                     var convertedOptions = v_SeleniumOptions.ExpandValueOrUserVariable(engine);
                     options.AddArguments(convertedOptions);
                 }
 
-                if (!String.IsNullOrEmpty(webDriverPath))
+                if (!string.IsNullOrEmpty(webDriverPath))
                 {
                     driverService = OpenQA.Selenium.Chrome.ChromeDriverService.CreateDefaultService(System.IO.Path.GetDirectoryName(webDriverPath), System.IO.Path.GetFileName(webDriverPath));
                 }
@@ -150,7 +154,7 @@ namespace taskt.Core.Automation.Commands
             {
                 OpenQA.Selenium.Edge.EdgeOptions options = new OpenQA.Selenium.Edge.EdgeOptions();
 
-                if (!String.IsNullOrEmpty(webDriverPath))
+                if (!string.IsNullOrEmpty(webDriverPath))
                 {
                     driverService = OpenQA.Selenium.Edge.EdgeDriverService.CreateDefaultService(System.IO.Path.GetDirectoryName(webDriverPath), System.IO.Path.GetFileName(webDriverPath));
                 }
@@ -164,7 +168,7 @@ namespace taskt.Core.Automation.Commands
             else if (seleniumEngine == "firefox")
             {
                 OpenQA.Selenium.Firefox.FirefoxOptions options = new OpenQA.Selenium.Firefox.FirefoxOptions();
-                if (!String.IsNullOrEmpty(browserPath))
+                if (!string.IsNullOrEmpty(browserPath))
                 {
                     options.BrowserExecutableLocation = browserPath;
                 }
@@ -173,7 +177,7 @@ namespace taskt.Core.Automation.Commands
                     options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
                 }
 
-                if (!String.IsNullOrEmpty(webDriverPath))
+                if (!string.IsNullOrEmpty(webDriverPath))
                 {
                     driverService = OpenQA.Selenium.Firefox.FirefoxDriverService.CreateDefaultService(System.IO.Path.GetDirectoryName(webDriverPath), System.IO.Path.GetFileName(webDriverPath));
                 }
@@ -208,6 +212,33 @@ namespace taskt.Core.Automation.Commands
             if (browserWindowOption == "maximize")
             {
                 webDriver.Manage().Window.Maximize();
+            }
+
+            if (!string.IsNullOrEmpty(v_Handle))
+            {
+                var procId = ProcessControls.GetChildProcessId(driverService.ProcessId, 1);
+                if (seleniumEngine == "firefox")
+                {
+                    procId = ProcessControls.GetChildProcessId(procId, 0);
+                }
+                var whnd = WindowNameControls.ConvertProcessIdToWindowHandle(procId);
+                whnd.ToInt32().StoreInUserVariable(engine, v_Handle);
+            }
+        }
+
+        public override void AfterShown(UI.Forms.frmCommandEditor editor)
+        {
+            if (!editor.appSettings.ClientSettings.SupportIECommand)
+            {
+                var cmb = ControlsList.GetPropertyControl<ComboBox>(nameof(v_EngineType));
+                for (int i = cmb.Items.Count - 1; i >= 0; i--)
+                {
+                    if (cmb.Items[i].ToString() == "IE")
+                    {
+                        cmb.Items.RemoveAt(i);
+                        break;
+                    }
+                }
             }
         }
     }

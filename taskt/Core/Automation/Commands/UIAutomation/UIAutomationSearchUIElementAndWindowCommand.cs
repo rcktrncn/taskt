@@ -95,11 +95,10 @@ namespace taskt.Core.Automation.Commands
 
         public override void Refresh(frmCommandEditor editor)
         {
-            base.Refresh();
             ControlsList.GetPropertyControl<ComboBox>(nameof(v_WindowName)).AddWindowNames();
         }
 
-        public override void AfterShown()
+        public override void AfterShown(UI.Forms.frmCommandEditor editor)
         {
             //AutomationElementControls.RenderSearchParameterDataGridView((DataGridView)ControlsList[nameof(v_SearchParameters)]);
             UIElementControls.RenderSearchParameterDataGridView(ControlsList.GetPropertyControl<DataGridView>(nameof(v_SearchParameters)));

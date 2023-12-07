@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Collections.Generic;
 using taskt.UI.Forms;
 using taskt.UI.CustomControls;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
-using System.Security.Principal;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -50,7 +50,7 @@ namespace taskt.Core.Automation.Commands
         public string v_NameResult { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WindowHandleResult))]
+        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_OutputWindowHandle))]
         public string v_HandleResult { get; set; }
 
         public GetWindowStateCommand()
@@ -64,7 +64,7 @@ namespace taskt.Core.Automation.Commands
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
             WindowNameControls.WindowAction(this, engine,
-                new Action<System.Collections.Generic.List<(IntPtr, string)>>(wins =>
+                new Action<List<(IntPtr, string)>>(wins =>
                 {
                     var whnd = wins[0].Item1;
 
@@ -76,7 +76,6 @@ namespace taskt.Core.Automation.Commands
 
         public override void Refresh(frmCommandEditor editor)
         {
-            base.Refresh();
             ControlsList.GetPropertyControl<ComboBox>(nameof(v_WindowName)).AddWindowNames();
         }
 

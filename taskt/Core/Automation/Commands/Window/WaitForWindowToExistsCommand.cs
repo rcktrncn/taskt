@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Collections.Generic;
 using taskt.UI.CustomControls;
 using taskt.UI.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
@@ -35,7 +36,7 @@ namespace taskt.Core.Automation.Commands
         public string v_NameResult { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WindowHandleResult))]
+        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_OutputWindowHandle))]
         public string v_HandleResult { get; set; }
 
         //[XmlIgnore]
@@ -53,7 +54,7 @@ namespace taskt.Core.Automation.Commands
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
             WindowNameControls.WindowAction(this, engine,
-                new Action<System.Collections.Generic.List<(IntPtr, string)>>(wins =>
+                new Action<List<(IntPtr, string)>>(wins =>
                 {
                     // nothing to do
                 })
@@ -62,7 +63,6 @@ namespace taskt.Core.Automation.Commands
 
         public override void Refresh(frmCommandEditor editor)
         {
-            base.Refresh();
             //WindowNameControl.AddWindowNames();
             ControlsList.GetPropertyControl<ComboBox>(nameof(v_WindowName)).AddWindowNames();
         }

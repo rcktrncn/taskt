@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Windows.Automation.Provider;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
@@ -22,6 +24,10 @@ namespace taskt.Core.Automation.Commands
         [PropertyTextBoxSetting(1, false)]
         public string v_InstanceName { get; set; }
 
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_OutputWindowHandle))]
+        public string v_WindowHandle { get; set; }
+
         public WordCreateWordInstanceCommand()
         {
             //this.CommandName = "WordCreateApplicationCommand";
@@ -39,6 +45,34 @@ namespace taskt.Core.Automation.Commands
             };
 
             engine.AddAppInstance(vInstance, newWordSession);
+
+            if (!string.IsNullOrEmpty(v_WindowHandle))
+            {
+                newWordSession.Activate();
+                var currentCaption = newWordSession.Application.Caption;
+
+                var rnd = new Random();
+
+                var newCaption = "rpa_word_" + rnd.Next() + "_" + rnd.Next();
+                newWordSession.Application.Caption = newCaption;
+
+                bool isFound = false;
+                foreach(var p in Process.GetProcessesByName("winword"))
+                {
+                    if (p.MainWindowTitle == newCaption)
+                    {
+                        p.MainWindowHandle.StoreInUserVariable(engine, v_WindowHandle);
+                        newWordSession.Application.Caption = currentCaption;
+                        isFound = true;
+                        break;
+                    }
+                }
+                if (!isFound)
+                {
+                    throw new Exception("Fail to Get Word Instance Window Handle");
+                }
+            }
+
         }
     }
 }

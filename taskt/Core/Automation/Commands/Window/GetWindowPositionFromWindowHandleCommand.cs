@@ -1,31 +1,23 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Xml.Serialization;
-using System.Collections.Generic;
-using taskt.UI.Forms;
-using taskt.UI.CustomControls;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
     [Attributes.ClassAttributes.Group("Window Commands")]
-    [Attributes.ClassAttributes.SubGruop("Window State")]
-    [Attributes.ClassAttributes.CommandSettings("Get Window Position")]
+    [Attributes.ClassAttributes.SubGruop("Get From Window Handle")]
+    [Attributes.ClassAttributes.CommandSettings("Get Window Position From Window Handle")]
     [Attributes.ClassAttributes.Description("This command returns window position.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want window position.")]
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetWindowPositionCommand : ScriptCommand
+    public class GetWindowPositionFromWindowHandleCommand : ScriptCommand
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WindowName))]
-        public string v_WindowName { get; set; }
-
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_CompareMethod))]
-        public string v_SearchMethod { get; set; }
+        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_InputWindowHandle))]
+        public string v_WindowHandle { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
@@ -56,40 +48,17 @@ namespace taskt.Core.Automation.Commands
         public string v_PositionBase { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_MatchMethod_Single))]
-        [PropertySelectionChangeEvent(nameof(MatchMethodComboBox_SelectionChangeCommitted))]
-        public string v_MatchMethod { get; set; }
-
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_TargetWindowIndex))]
-        public string v_TargetWindowIndex { get; set; }
-
-        [XmlAttribute]
         [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WaitTime))]
         public string v_WaitTime { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WindowNameResult))]
-        public string v_NameResult { get; set; }
-
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_OutputWindowHandle))]
-        public string v_HandleResult { get; set; }
-
-        public GetWindowPositionCommand()
+        public GetWindowPositionFromWindowHandleCommand()
         {
-            //this.CommandName = "GetWindowPositionCommand";
-            //this.SelectionName = "Get Window Position";
-            //this.CommandEnabled = true;
-            //this.CustomRendering = true;
         }
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            WindowNameControls.WindowAction(this, engine,
-                new Action<List<(IntPtr, string)>>(wins =>
+            WindowNameControls.WindowHandleAction(this, engine,
+                new Action<IntPtr>(whnd =>
                 {
-                    var whnd = wins[0].Item1;
-
                     var pos = WindowNameControls.GetWindowRect(whnd);
 
                     int x = 0, y = 0;
@@ -126,16 +95,6 @@ namespace taskt.Core.Automation.Commands
                     }
                 })
             );
-        }
-
-        public override void Refresh(frmCommandEditor editor)
-        {
-            ControlsList.GetPropertyControl<ComboBox>(nameof(v_WindowName)).AddWindowNames();
-        }
-
-        private void MatchMethodComboBox_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            WindowNameControls.MatchMethodComboBox_SelectionChangeCommitted(ControlsList, (ComboBox)sender, nameof(v_TargetWindowIndex));
         }
     }
 }
