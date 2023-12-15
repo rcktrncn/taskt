@@ -249,10 +249,8 @@ namespace taskt.UI.Forms
             // set Size, Position
             if (this.Owner is frmScriptBuilder f)
             {
-                f.setCommandEditorSizeAndPosition(this);
+                f.SetCommandEditorSizeAndPosition(this);
             }
-
-            //((frmScriptBuilder)this.Owner).setCommandEditorSizeAndPosition(this);
         }
 
         #endregion Form Events
@@ -442,7 +440,7 @@ namespace taskt.UI.Forms
         {
             using(var fm = new Supplement_Forms.frmCommandList(appSettings, treeAllCommands, treeAllCommandsImage, cboSelectedCommand.Text))
             {
-                if (fm.ShowDialog() == DialogResult.OK)
+                if (fm.ShowDialog(this) == DialogResult.OK)
                 {
                     string newCommand = fm.FullCommandName;
                     if (cboSelectedCommand.Text != fm.FullCommandName)

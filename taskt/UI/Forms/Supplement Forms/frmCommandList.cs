@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace taskt.UI.Forms.Supplement_Forms
 {
     public partial class frmCommandList : ThemedForm
     {
-        private taskt.Core.ApplicationSettings appSettings;
+        private Core.ApplicationSettings appSettings;
 
         private TreeNode[] treeAllCommands;
         private ImageList treeAllCommandsImage;
@@ -20,10 +13,14 @@ namespace taskt.UI.Forms.Supplement_Forms
         private string firstGroup;
         private string firstCommand;
 
-        public frmCommandList(taskt.Core.ApplicationSettings appSettings,TreeNode[] commands, ImageList commandsImage, string selectedCommand)
+        private frmCommandList()
         {
             InitializeComponent();
+            this.FormClosed += SupplementFormsEvents.SupplementFormClosed;
+        }
 
+        public frmCommandList(Core.ApplicationSettings appSettings,TreeNode[] commands, ImageList commandsImage, string selectedCommand) : this()
+        {
             this.appSettings = appSettings;
             treeAllCommands = (TreeNode[])commands.Clone();
             treeAllCommandsImage = commandsImage;
@@ -42,6 +39,8 @@ namespace taskt.UI.Forms.Supplement_Forms
         }
         private void frmCommandList_Load(object sender, EventArgs e)
         {
+            SupplementFormsEvents.SupplementFormLoad(this);
+
             tvCommands.SuspendLayout();
             tvCommands.BeginUpdate();
 
@@ -60,7 +59,7 @@ namespace taskt.UI.Forms.Supplement_Forms
 
             if ((firstGroup != "") && (firstCommand != ""))
             {
-                taskt.Core.CommandsTreeControls.FocusCommand(firstGroup, firstCommand, tvCommands);
+                Core.CommandsTreeControls.FocusCommand(firstGroup, firstCommand, tvCommands);
             }
         }
 
@@ -85,6 +84,29 @@ namespace taskt.UI.Forms.Supplement_Forms
                 if (tvCommands.SelectedNode.Nodes.Count == 0)
                 {
                     this.DialogResult = DialogResult.OK;
+                }
+            }
+        }
+
+        private void tvCommands_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                var trg = tvCommands.HitTest(e.X, e.Y);
+                if (trg.Location.ToString() == "Image")
+                {
+                    var node = trg.Node;
+                    if (node.Nodes.Count > 0)
+                    {
+                        if (node.IsExpanded)
+                        {
+                            node.Collapse();
+                        }
+                        else
+                        {
+                            node.Expand();
+                        }
+                    }
                 }
             }
         }
@@ -117,12 +139,12 @@ namespace taskt.UI.Forms.Supplement_Forms
             string keyword = txtSearchKeyword.Text.Trim().ToLower();
             if (keyword == "")
             {
-                taskt.Core.CommandsTreeControls.ShowCommandsTree(tvCommands, treeAllCommands);
+                Core.CommandsTreeControls.ShowCommandsTree(tvCommands, treeAllCommands);
             }
             else
             {
-                var filterdCommands = taskt.Core.CommandsTreeControls.FilterCommands(keyword, treeAllCommands, appSettings.ClientSettings);
-                taskt.Core.CommandsTreeControls.ShowCommandsTree(tvCommands, filterdCommands, true);
+                var filterdCommands = Core.CommandsTreeControls.FilterCommands(keyword, treeAllCommands, appSettings.ClientSettings);
+                Core.CommandsTreeControls.ShowCommandsTree(tvCommands, filterdCommands, true);
             }
         }
         #endregion
@@ -131,10 +153,9 @@ namespace taskt.UI.Forms.Supplement_Forms
         {
             get
             {
-                return taskt.Core.CommandsTreeControls.GetSelectedFullCommandName(tvCommands);
+                return Core.CommandsTreeControls.GetSelectedFullCommandName(tvCommands);
             }
         }
 
-       
     }
 }

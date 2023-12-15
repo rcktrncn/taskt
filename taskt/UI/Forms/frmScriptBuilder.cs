@@ -33,8 +33,8 @@ namespace taskt.UI.Forms
         private TreeNode[] bufferedCommandList;
         private ImageList bufferedCommandTreeImages;
 
-        private List<Core.Script.ScriptVariable> scriptVariables;
-        private Core.Script.ScriptInformation scriptInfo;
+        private List<ScriptVariable> scriptVariables;
+        private ScriptInformation scriptInfo;
         
         private bool editMode { get; set; }
 
@@ -53,11 +53,18 @@ namespace taskt.UI.Forms
         private int[,] miniMap = null;
         private Bitmap miniMapImg = null;
 
+        #region CommandEditor form variables
         public CommandEditorState currentScriptEditorMode = CommandEditorState.Normal;
         public CommandEditAction currentEditAction = CommandEditAction.Normal;
 
         private Size lastEditorSize = new Size { Height = 0, Width = 0 };
         private Point lastEditorPosition;
+        #endregion
+
+        #region variables for Child form of CommandEditor form
+        private bool isRememberChildCommandEditorPosition = false;
+        private Point lastChildCommandEditorPosition;
+        #endregion
 
         // search & replace
         private int currentIndexInMatchItems = -1;
@@ -242,8 +249,8 @@ namespace taskt.UI.Forms
             //instantiate for script variables
             if (!editMode)
             {
-                scriptVariables = new List<Core.Script.ScriptVariable>();
-                scriptInfo = new Core.Script.ScriptInformation();
+                scriptVariables = new List<ScriptVariable>();
+                scriptInfo = new ScriptInformation();
             }
 
             //instantiate and populate display icons for commands
@@ -296,10 +303,6 @@ namespace taskt.UI.Forms
                     OpenScriptFromFilePath(this.ScriptFilePath, true);
                 }
             }
-
-            // set autosave timer
-            //autoSaveTimer.Enabled = false;
-            //autoSaveTimer.Interval = 300000;    // 5min
 
             // remove old auto saved files
             RemoveOldAutoSavedFiles();
@@ -1091,7 +1094,7 @@ namespace taskt.UI.Forms
                 {
                     //add variables
 
-                    newBuilder.scriptVariables = new List<Core.Script.ScriptVariable>();
+                    newBuilder.scriptVariables = new List<ScriptVariable>();
                     newBuilder.instanceList = instanceList;
 
                     foreach (var variable in this.scriptVariables)
@@ -2592,17 +2595,6 @@ namespace taskt.UI.Forms
 
         private void RemoveOldAutoSavedFiles()
         {
-            //var autoSaveFolder = Script.GetAutoSaveFolderPath();
-            //var files = System.IO.Directory.GetFiles(autoSaveFolder, "*.xml");
-            //foreach(var fp in files)
-            //{
-            //    var info = new System.IO.FileInfo(fp);
-            //    var diff = DateTime.Now - info.CreationTime;
-            //    if (diff.TotalDays >= appSettings.ClientSettings.RemoveAutoSaveFileDays)
-            //    {
-            //        System.IO.File.Delete(fp);
-            //    }
-            //}
             RemoveOldScriptFiles(Script.GetAutoSaveFolderPath(), appSettings.ClientSettings.RemoveAutoSaveFileDays);
         }
 
@@ -2676,12 +2668,12 @@ namespace taskt.UI.Forms
             {
                 //reinitialize
                 lstScriptActions.Items.Clear();
-                scriptVariables = new List<Core.Script.ScriptVariable>();
+                scriptVariables = new List<ScriptVariable>();
                 scriptInfo = null;
                 instanceList = new Core.InstanceCounter(appSettings);
 
                 //get deserialized script
-                Core.Script.Script deserializedScript = Core.Script.Script.DeserializeFile(filePath, appSettings.EngineSettings, scriptSerializer);
+                Script deserializedScript = Core.Script.Script.DeserializeFile(filePath, appSettings.EngineSettings, scriptSerializer);
 
                 if (deserializedScript.Commands.Count == 0)
                 {
@@ -2698,7 +2690,7 @@ namespace taskt.UI.Forms
                 scriptInfo = deserializedScript.Info;
                 if (scriptInfo == null)
                 {
-                    scriptInfo = new Core.Script.ScriptInformation();
+                    scriptInfo = new ScriptInformation();
                 }
 
                 lstScriptActions.BeginUpdate();
@@ -2772,7 +2764,7 @@ namespace taskt.UI.Forms
             try
             {
                 //deserialize file      
-                Core.Script.Script deserializedScript = Core.Script.Script.DeserializeFile(filePath, appSettings.EngineSettings, scriptSerializer);
+                Script deserializedScript = Core.Script.Script.DeserializeFile(filePath, appSettings.EngineSettings, scriptSerializer);
 
                 if (deserializedScript.Commands.Count == 0)
                 {
@@ -2789,7 +2781,7 @@ namespace taskt.UI.Forms
                 lstScriptActions.Items.Add(CreateScriptCommandListViewItem(new CommentCommand() { v_Comment = "Imported From " + fileName + " @ " + dateTimeNow }));
                 //import
                 PopulateExecutionCommands(deserializedScript.Commands, false);
-                foreach (Core.Script.ScriptVariable var in deserializedScript.Variables)
+                foreach (ScriptVariable var in deserializedScript.Variables)
                 {
                     if (scriptVariables.Find(alreadyExists => alreadyExists.VariableName == var.VariableName) == null)
                     {
@@ -2826,9 +2818,9 @@ namespace taskt.UI.Forms
             }
         }
 
-        public void PopulateExecutionCommands(List<Core.Script.ScriptAction> commandDetails, bool isOpen = true)
+        public void PopulateExecutionCommands(List<ScriptAction> commandDetails, bool isOpen = true)
         {
-            foreach (Core.Script.ScriptAction item in commandDetails)
+            foreach (ScriptAction item in commandDetails)
             {
                 lstScriptActions.Items.Add(CreateScriptCommandListViewItem(item.ScriptCommand, isOpen));
                 if (item.AdditionalScriptCommands.Count > 0)
@@ -2842,7 +2834,7 @@ namespace taskt.UI.Forms
                 pnlCommandHelper.Hide();
             }
         }
-        public int InsertExecutionCommands(List<Core.Script.ScriptAction> commandDetails, int position = -1)
+        public int InsertExecutionCommands(List<ScriptAction> commandDetails, int position = -1)
         {
             if (position < 0)
             {
@@ -2855,7 +2847,7 @@ namespace taskt.UI.Forms
                     position = lstScriptActions.SelectedIndices[0];
                 }
             }
-            foreach (Core.Script.ScriptAction item in commandDetails)
+            foreach (ScriptAction item in commandDetails)
             {
                 lstScriptActions.Items.Insert(position + 1, CreateScriptCommandListViewItem(item.ScriptCommand));
                 position++;
@@ -3070,8 +3062,8 @@ namespace taskt.UI.Forms
         {
             this.ScriptFilePath = null;
             lstScriptActions.Items.Clear();
-            scriptVariables = new List<Core.Script.ScriptVariable>();
-            scriptInfo = new Core.Script.ScriptInformation();
+            scriptVariables = new List<ScriptVariable>();
+            scriptInfo = new ScriptInformation();
             instanceList = new Core.InstanceCounter(appSettings);
 
             ChangeSaveState(false);
@@ -3223,7 +3215,8 @@ namespace taskt.UI.Forms
         {
             BeforeAddNewCommandProcess();
         }
-       private void tvCommands_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void tvCommands_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
@@ -3246,6 +3239,7 @@ namespace taskt.UI.Forms
             {
                 return;
             }
+
             if (e.Button == MouseButtons.Right)
             {
                 if (tvCommands.SelectedNode.Level == 0)
@@ -3283,6 +3277,26 @@ namespace taskt.UI.Forms
                         cmdTVCommandMenuStrip.Show(Cursor.Position);
                     }
                 }
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                var trg = tvCommands.HitTest(e.X, e.Y);
+                if (trg.Location.ToString() == "Image")
+                {
+                    var node = trg.Node;
+                    if (node.Nodes.Count > 0)
+                    {
+                        if (node.IsExpanded)
+                        {
+                            node.Collapse();
+                        }
+                        else
+                        {
+                            node.Expand();
+                        }
+                    }
+                }
+                //Console.WriteLine(trg.Location.ToString() + ", " + trg.Node.Text);
             }
         }
         private void picCommandSearch_Click(object sender, EventArgs e)
@@ -4019,7 +4033,7 @@ namespace taskt.UI.Forms
         #endregion
 
         #region CommandEditor
-        public void setCommandEditorSizeAndPosition(frmCommandEditor editor)
+        public void SetCommandEditorSizeAndPosition(frmCommandEditor editor)
         {
             if (editor == null)
             {
@@ -4031,6 +4045,21 @@ namespace taskt.UI.Forms
         }
         #endregion
 
+        #region Child Form of CommandEditor
+        public void SetPositionChildFormOfCommandEditor(Form fm)
+        {
+            if (isRememberChildCommandEditorPosition)
+            {
+                fm.Location = lastChildCommandEditorPosition;
+            }
+        }
+
+        public void StorePositionChildFormOfCommandEditor(Form fm)
+        {
+            this.lastChildCommandEditorPosition = fm.Location;
+            isRememberChildCommandEditorPosition = true;
+        }
+        #endregion
     }
 }
 
