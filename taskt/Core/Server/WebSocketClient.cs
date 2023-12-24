@@ -15,7 +15,7 @@ namespace taskt.Core.Server
     /// </summary>
    public static class SocketClient
     {
-        public static UI.Forms.frmScriptBuilder associatedBuilder;
+        public static UI.Forms.ScriptBuilder.frmScriptBuilder associatedBuilder;
         private static string publicKey;
         private static string serverURI;
         private static DateTime connectionOpened;
@@ -338,7 +338,7 @@ namespace taskt.Core.Server
 
             associatedBuilder.Invoke(new MethodInvoker(delegate ()
             {
-                UI.Forms.frmScriptEngine newEngine = new UI.Forms.frmScriptEngine();
+                var newEngine = new UI.Forms.ScriptEngine.frmScriptEngine();
                 newEngine.xmlData = scriptData;
                 newEngine.callBackForm = null;
                 newEngine.Show();

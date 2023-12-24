@@ -14,7 +14,7 @@ namespace taskt.Core.Server
     /// </summary>
     public static class HttpServerClient
     {
-        public static UI.Forms.frmScriptBuilder associatedBuilder;
+        public static UI.Forms.ScriptBuilder.frmScriptBuilder associatedBuilder;
         private static Serilog.Core.Logger httpLogger;
         private static System.Timers.Timer heartbeatTimer { get; set; }
         private static ApplicationSettings appSettings { get; set; }
@@ -149,14 +149,14 @@ namespace taskt.Core.Server
                         {
                             if (deserialized.ScheduledTask.ExecutionType == "Local")
                             {
-                                UI.Forms.frmScriptEngine newEngine = new UI.Forms.frmScriptEngine(deserialized.PublishedScript.ScriptData, null);
+                                var newEngine = new UI.Forms.ScriptEngine.frmScriptEngine(deserialized.PublishedScript.ScriptData, null);
                                 newEngine.remoteTask = deserialized.ScheduledTask;
                                 newEngine.serverExecution = true;
                                 newEngine.Show();
                             }
                             else
                             {
-                                UI.Forms.frmScriptEngine newEngine = new UI.Forms.frmScriptEngine();
+                                var newEngine = new UI.Forms.ScriptEngine.frmScriptEngine();
                                 newEngine.xmlData = deserialized.PublishedScript.ScriptData;
                                 newEngine.remoteTask = deserialized.ScheduledTask;
                                 newEngine.serverExecution = true;

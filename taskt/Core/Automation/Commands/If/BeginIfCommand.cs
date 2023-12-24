@@ -97,7 +97,7 @@ namespace taskt.Core.Automation.Commands
             this.v_IfActionParameterTable.Columns.Add("Parameter Value");
         }
 
-        private void IfGridViewHelper_MouseEnter(object sender, EventArgs e, frmCommandEditor editor)
+        private void IfGridViewHelper_MouseEnter(object sender, EventArgs e, UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             ifAction_SelectionChangeCommitted(null, null, editor);
         }
@@ -833,7 +833,7 @@ namespace taskt.Core.Automation.Commands
         //}
 
 
-        public override List<Control> Render(frmCommandEditor editor)
+        public override List<Control> Render(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             base.Render(editor);
 
@@ -905,11 +905,11 @@ namespace taskt.Core.Automation.Commands
             return RenderedControls;
         }
 
-        private void linkWebBrowserInstanceSelector_Click(object sender, EventArgs e, frmCommandEditor editor)
+        private void linkWebBrowserInstanceSelector_Click(object sender, EventArgs e, UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             var instances = editor.instanceList.getInstanceClone(Attributes.PropertyAttributes.PropertyInstanceType.InstanceType.WebBrowser);
 
-            using (var frm = new UI.Forms.Supplemental.frmItemSelector(instances.Keys.ToList<string>()))
+            using (var frm = new UI.Forms.ScriptBuilder.CommandEditor.Supplemental.frmItemSelector(instances.Keys.ToList<string>()))
             {
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
@@ -922,7 +922,7 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
-        private void linkWindowNameSelector_Click(object sender, EventArgs e, frmCommandEditor editor)
+        private void linkWindowNameSelector_Click(object sender, EventArgs e, UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             List<string> windowNames = new List<string>();
 
@@ -939,7 +939,7 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            using (var frm = new UI.Forms.Supplemental.frmItemSelector(windowNames))
+            using (var frm = new UI.Forms.ScriptBuilder.CommandEditor.Supplemental.frmItemSelector(windowNames))
             {
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
@@ -952,11 +952,11 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
-        private void linkBooleanInstanceSelector_Click(object sender, EventArgs e, frmCommandEditor editor)
+        private void linkBooleanInstanceSelector_Click(object sender, EventArgs e, UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             var instances = editor.instanceList.getInstanceClone(Attributes.PropertyAttributes.PropertyInstanceType.InstanceType.Boolean);
 
-            using (var frm = new UI.Forms.Supplemental.frmItemSelector(instances.Keys.ToList<string>()))
+            using (var frm = new UI.Forms.ScriptBuilder.CommandEditor.Supplemental.frmItemSelector(instances.Keys.ToList<string>()))
             {
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
@@ -984,7 +984,7 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
-        private void ifAction_SelectionChangeCommitted(object sender, EventArgs e, frmCommandEditor editor)
+        private void ifAction_SelectionChangeCommitted(object sender, EventArgs e, UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             ComboBox ifAction = (ComboBox)ActionDropdown;
             DataGridView ifActionParameterBox = (DataGridView)IfGridViewHelper;
@@ -1514,7 +1514,7 @@ namespace taskt.Core.Automation.Commands
         //    }
         //}
 
-        public override bool IsValidate(frmCommandEditor editor)
+        public override bool IsValidate(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             base.IsValidate(editor);
 

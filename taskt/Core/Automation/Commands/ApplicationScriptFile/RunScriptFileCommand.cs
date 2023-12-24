@@ -123,7 +123,7 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            frmScriptEngine newEngine = new frmScriptEngine(startFile, null, variableList, true, engine.PreloadedTasks);
+            var newEngine = new UI.Forms.ScriptEngine.frmScriptEngine(startFile, null, variableList, true, engine.PreloadedTasks);
             
             engine.tasktEngineUI.Invoke((Action)delegate () { engine.tasktEngineUI.TopMost = false; });
             Application.Run(newEngine);
@@ -163,7 +163,7 @@ namespace taskt.Core.Automation.Commands
             var engine = new Engine.AutomationEngineInstance();
 
             var cmb = (ComboBox)sender;
-            var engineSettings = ((frmCommandEditor)cmb.FindForm()).appSettings.EngineSettings;
+            var engineSettings = ((UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor)cmb.FindForm()).appSettings.EngineSettings;
 
             bool isVisible = (cmb.SelectedItem?.ToString().Trim().ToLower() == "yes");
             foreach(var item in ControlsList.Where(c => (c.Key.Contains(nameof(v_VariableAssignments)))))
@@ -178,7 +178,7 @@ namespace taskt.Core.Automation.Commands
             // check file exists
             if (!System.IO.File.Exists(startFile))
             {
-                using(var fm = new taskt.UI.Forms.Supplemental.frmDialog("Script File Not Found. Name: " + startFile, "error", UI.Forms.Supplemental.frmDialog.DialogType.OkOnly, 0))
+                using(var fm = new UI.Forms.General.frmDialog("Script File Not Found. Name: " + startFile, "error", UI.Forms.General.frmDialog.DialogType.OkOnly, 0))
                 {
                     fm.ShowDialog();
                 }

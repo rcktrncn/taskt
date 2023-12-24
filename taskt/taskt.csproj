@@ -760,7 +760,7 @@
     <Compile Include="Core\Automation\Commands\DataTable\WriteDataRowValueCommand.cs" />
     <Compile Include="Core\Automation\Commands\Text\WriteTextFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\DateTimeControls.cs" />
-    <Compile Include="Core\CommandsTreeControls.cs" />
+    <Compile Include="UI\CustomControls\CommandsTreeControls.cs" />
     <Compile Include="Core\DocumentationGeneration.cs" />
     <Compile Include="Core\EncryptionServices.cs" />
     <Compile Include="Core\Automation\Commands\FilePathControls.cs" />
@@ -811,181 +811,181 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Core\Automation\Commands\ExcelControls.cs" />
-    <Compile Include="UI\Forms\frmAttendedMode.cs">
+    <Compile Include="UI\Forms\AttendedMode\frmAttendedMode.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmAttendedMode.Designer.cs">
+    <Compile Include="UI\Forms\AttendedMode\frmAttendedMode.Designer.cs">
       <DependentUpon>frmAttendedMode.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmNewSettings.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmNewSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmNewSettings.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmNewSettings.Designer.cs">
       <DependentUpon>frmNewSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmSample.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmSample.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmSample.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmSample.Designer.cs">
       <DependentUpon>frmSample.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmScriptInformations.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmScriptInformations.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmScriptInformations.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmScriptInformations.Designer.cs">
       <DependentUpon>frmScriptInformations.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmSequenceRecorder.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmSequenceRecorder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmSequenceRecorder.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmSequenceRecorder.Designer.cs">
       <DependentUpon>frmSequenceRecorder.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmSettings.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmSettings.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmSettings.Designer.cs">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmAddVariable.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmAddVariable.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmAddVariable.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmAddVariable.Designer.cs">
       <DependentUpon>frmAddVariable.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmCodeBuilder.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmCodeBuilder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmCodeBuilder.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmCodeBuilder.Designer.cs">
       <DependentUpon>frmCodeBuilder.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmCommandList.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmCommandList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmCommandList.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmCommandList.Designer.cs">
       <DependentUpon>frmCommandList.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmDisplayManager.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmDisplayManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmDisplayManager.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmDisplayManager.Designer.cs">
       <DependentUpon>frmDisplayManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmDLLExplorer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmDLLExplorer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmDLLExplorer.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmDLLExplorer.Designer.cs">
       <DependentUpon>frmDLLExplorer.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmEngineContextViewer.cs">
+    <Compile Include="UI\Forms\ScriptEngine\Supplemental\frmEngineContextViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmEngineContextViewer.Designer.cs">
+    <Compile Include="UI\Forms\ScriptEngine\Supplemental\frmEngineContextViewer.Designer.cs">
       <DependentUpon>frmEngineContextViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmFormatChecker.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmFormatChecker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmFormatChecker.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmFormatChecker.Designer.cs">
       <DependentUpon>frmFormatChecker.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmHTMLBuilder.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmHTMLBuilder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmHTMLBuilder.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmHTMLBuilder.Designer.cs">
       <DependentUpon>frmHTMLBuilder.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmHTMLDisplayForm.cs">
+    <Compile Include="UI\Forms\ScriptEngine\Supplemental\frmHTMLDisplayForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmHTMLDisplayForm.Designer.cs">
+    <Compile Include="UI\Forms\ScriptEngine\Supplemental\frmHTMLDisplayForm.Designer.cs">
       <DependentUpon>frmHTMLDisplayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmImageCapture.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmImageCapture.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmImageCapture.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmImageCapture.Designer.cs">
       <DependentUpon>frmImageCapture.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmGUIInspect.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmGUIInspect.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmGUIInspect.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmGUIInspect.Designer.cs">
       <DependentUpon>frmGUIInspect.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmInputBox.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInputBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmInputBox.designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInputBox.designer.cs">
       <DependentUpon>frmInputBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmInspectParser.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInspectParser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmInspectParser.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInspectParser.Designer.cs">
       <DependentUpon>frmInspectParser.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmJSONPathHelper.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmJSONPathHelper.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmJSONPathHelper.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmJSONPathHelper.Designer.cs">
       <DependentUpon>frmJSONPathHelper.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmKeysBuilder.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmKeysBuilder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmKeysBuilder.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmKeysBuilder.Designer.cs">
       <DependentUpon>frmKeysBuilder.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmMultiSendKeystrokes.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmMultiSendKeystrokes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmMultiSendKeystrokes.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmMultiSendKeystrokes.Designer.cs">
       <DependentUpon>frmMultiSendKeystrokes.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmRemoteDesktopViewer.cs">
+    <Compile Include="UI\Forms\ScriptEngine\Supplemental\frmRemoteDesktopViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmRemoteDesktopViewer.Designer.cs">
+    <Compile Include="UI\Forms\ScriptEngine\Supplemental\frmRemoteDesktopViewer.Designer.cs">
       <DependentUpon>frmRemoteDesktopViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmSearchCommands.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmSearchCommands.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmSearchCommands.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmSearchCommands.Designer.cs">
       <DependentUpon>frmSearchCommands.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmSplash.cs">
+    <Compile Include="UI\Forms\Splash\frmSplash.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmSplash.Designer.cs">
+    <Compile Include="UI\Forms\Splash\frmSplash.Designer.cs">
       <DependentUpon>frmSplash.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmThickAppElementRecorder.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmThickAppElementRecorder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmThickAppElementRecorder.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmThickAppElementRecorder.Designer.cs">
       <DependentUpon>frmThickAppElementRecorder.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmUserInput.cs">
+    <Compile Include="UI\Forms\ScriptEngine\Supplemental\frmUserInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmUserInput.Designer.cs">
+    <Compile Include="UI\Forms\ScriptEngine\Supplemental\frmUserInput.Designer.cs">
       <DependentUpon>frmUserInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmItemSelector.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmItemSelector.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmItemSelector.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmItemSelector.Designer.cs">
       <DependentUpon>frmItemSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmUpdate.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmUpdate.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmUpdate.Designer.cs">
       <DependentUpon>frmUpdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\SupplementFormsEvents.cs" />
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\SupplementFormsEvents.cs" />
     <Compile Include="UI\Forms\ThemedForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -995,22 +995,22 @@
     <Compile Include="UI\Forms\UIForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmDialog.cs">
+    <Compile Include="UI\Forms\General\frmDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmDialog.Designer.cs">
+    <Compile Include="UI\Forms\General\frmDialog.Designer.cs">
       <DependentUpon>frmDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmScheduleManagement.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmScheduleManagement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmScheduleManagement.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmScheduleManagement.Designer.cs">
       <DependentUpon>frmScheduleManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmAbout.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmAbout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmAbout.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmAbout.Designer.cs">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\Supplement Forms\frmBrowserElementBuilder.cs">
@@ -1019,34 +1019,34 @@
     <Compile Include="UI\Forms\Supplement Forms\frmBrowserElementBuilder.Designer.cs">
       <DependentUpon>frmBrowserElementBuilder.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmScriptVariables.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmScriptVariables.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmScriptVariables.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmScriptVariables.Designer.cs">
       <DependentUpon>frmScriptVariables.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmCommandEditor.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\frmCommandEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmCommandEditor.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\frmCommandEditor.Designer.cs">
       <DependentUpon>frmCommandEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmScriptEngine.cs">
+    <Compile Include="UI\Forms\ScriptEngine\frmScriptEngine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmScriptEngine.Designer.cs">
+    <Compile Include="UI\Forms\ScriptEngine\frmScriptEngine.Designer.cs">
       <DependentUpon>frmScriptEngine.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\frmScriptBuilder.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\frmScriptBuilder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\frmScriptBuilder.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\frmScriptBuilder.Designer.cs">
       <DependentUpon>frmScriptBuilder.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmShowCursorPosition.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmShowCursorPosition.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmShowCursorPosition.Designer.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmShowCursorPosition.Designer.cs">
       <DependentUpon>frmShowCursorPosition.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -1061,107 +1061,107 @@
     <EmbeddedResource Include="UI\CustomControls\CustomControls.resx">
       <DependentUpon>CustomControls.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmAttendedMode.resx">
+    <EmbeddedResource Include="UI\Forms\AttendedMode\frmAttendedMode.resx">
       <DependentUpon>frmAttendedMode.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmNewSettings.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmNewSettings.resx">
       <DependentUpon>frmNewSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmSample.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmSample.resx">
       <DependentUpon>frmSample.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmScheduleManagement.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmScheduleManagement.resx">
       <DependentUpon>frmScheduleManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmScriptBuilder.ru.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\frmScriptBuilder.ru.resx">
       <DependentUpon>frmScriptBuilder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmScriptInformations.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmScriptInformations.resx">
       <DependentUpon>frmScriptInformations.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmSequenceRecorder.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmSequenceRecorder.resx">
       <DependentUpon>frmSequenceRecorder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmSettings.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmAbout.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmAddVariable.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmAddVariable.resx">
       <DependentUpon>frmAddVariable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\Supplement Forms\frmBrowserElementBuilder.resx">
       <DependentUpon>frmBrowserElementBuilder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmCommandEditor.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\frmCommandEditor.resx">
       <DependentUpon>frmCommandEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmScriptEngine.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptEngine\frmScriptEngine.resx">
       <DependentUpon>frmScriptEngine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmScriptBuilder.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\frmScriptBuilder.resx">
       <DependentUpon>frmScriptBuilder.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmCodeBuilder.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmCodeBuilder.resx">
       <DependentUpon>frmCodeBuilder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmCommandList.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmCommandList.resx">
       <DependentUpon>frmCommandList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmDialog.resx">
+    <EmbeddedResource Include="UI\Forms\General\frmDialog.resx">
       <DependentUpon>frmDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmDisplayManager.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmDisplayManager.resx">
       <DependentUpon>frmDisplayManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmDLLExplorer.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmDLLExplorer.resx">
       <DependentUpon>frmDLLExplorer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmEngineContextViewer.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptEngine\Supplemental\frmEngineContextViewer.resx">
       <DependentUpon>frmEngineContextViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmFormatChecker.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmFormatChecker.resx">
       <DependentUpon>frmFormatChecker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmHTMLBuilder.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmHTMLBuilder.resx">
       <DependentUpon>frmHTMLBuilder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmHTMLDisplayForm.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptEngine\Supplemental\frmHTMLDisplayForm.resx">
       <DependentUpon>frmHTMLDisplayForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmImageCapture.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmImageCapture.resx">
       <DependentUpon>frmImageCapture.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\frmScriptVariables.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmScriptVariables.resx">
       <DependentUpon>frmScriptVariables.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmGUIInspect.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmGUIInspect.resx">
       <DependentUpon>frmGUIInspect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmInputBox.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInputBox.resx">
       <DependentUpon>frmInputBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmInspectParser.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInspectParser.resx">
       <DependentUpon>frmInspectParser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmJSONPathHelper.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmJSONPathHelper.resx">
       <DependentUpon>frmJSONPathHelper.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmKeysBuilder.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmKeysBuilder.resx">
       <DependentUpon>frmKeysBuilder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmMultiSendKeystrokes.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmMultiSendKeystrokes.resx">
       <DependentUpon>frmMultiSendKeystrokes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmRemoteDesktopViewer.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptEngine\Supplemental\frmRemoteDesktopViewer.resx">
       <DependentUpon>frmRemoteDesktopViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmSearchCommands.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmSearchCommands.resx">
       <DependentUpon>frmSearchCommands.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmShowCursorPosition.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmShowCursorPosition.resx">
       <DependentUpon>frmShowCursorPosition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -1169,19 +1169,19 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmSplash.resx">
+    <EmbeddedResource Include="UI\Forms\Splash\frmSplash.resx">
       <DependentUpon>frmSplash.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmThickAppElementRecorder.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmThickAppElementRecorder.resx">
       <DependentUpon>frmThickAppElementRecorder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmUserInput.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptEngine\Supplemental\frmUserInput.resx">
       <DependentUpon>frmUserInput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmItemSelector.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmItemSelector.resx">
       <DependentUpon>frmItemSelector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmUpdate.resx">
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmUpdate.resx">
       <DependentUpon>frmUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ThemedForm.resx">
