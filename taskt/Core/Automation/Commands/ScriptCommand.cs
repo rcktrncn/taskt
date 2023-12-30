@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using taskt.UI.CustomControls;
 using taskt.Core.Automation.Attributes.ClassAttributes;
+using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -475,13 +476,14 @@ namespace taskt.Core.Automation.Commands
         public Color DisplayForeColor { get; set; }
 
         [XmlAttribute]
-        [Attributes.PropertyAttributes.PropertyDescription("Comment Field")]
-        [Attributes.PropertyAttributes.InputSpecification("Optional field to enter a custom comment which could potentially describe this command or the need for this command, if required")]
-        [Attributes.PropertyAttributes.SampleUsage("I am using this command to ...")]
-        [Attributes.PropertyAttributes.Remarks("")]
-        [Attributes.PropertyAttributes.PropertyRecommendedUIControl(Attributes.PropertyAttributes.PropertyRecommendedUIControl.RecommendeUIControlType.MultiLineTextBox)]
-        [Attributes.PropertyAttributes.PropertyTextBoxSetting(3, true)]
-        [Attributes.PropertyAttributes.PropertyIsOptional(true)]
+        [PropertyDescription("Comment Field")]
+        [InputSpecification("Optional field to enter a custom comment which could potentially describe this command or the need for this command, if required")]
+        [SampleUsage("I am using this command to ...")]
+        [Remarks("")]
+        [PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.MultiLineTextBox)]
+        [PropertyTextBoxSetting(3, true)]
+        [PropertyIsOptional(true)]
+        [PropertyParameterOrder(int.MaxValue)]
         public string v_Comment { get; set; }
         
         [XmlAttribute]
@@ -518,7 +520,7 @@ namespace taskt.Core.Automation.Commands
 
         public ScriptCommand()
         {
-            this.DisplayForeColor = System.Drawing.Color.SteelBlue;
+            this.DisplayForeColor = Color.SteelBlue;
             this.CommandEnabled = false;
             this.DefaultPause = 0;
             this.IsCommented = false;
@@ -652,7 +654,7 @@ namespace taskt.Core.Automation.Commands
             foreach(var prop in props)
             {
                 var virtualProp = prop.GetVirtualProperty();
-                var methods = PropertyControls.GetCustomAttributeWithVirtual<taskt.Core.Automation.Attributes.PropertyAttributes.PropertyIntermediateConvert>(prop, virtualProp) ?? new Attributes.PropertyAttributes.PropertyIntermediateConvert();
+                var methods = PropertyControls.GetCustomAttributeWithVirtual<PropertyIntermediateConvert>(prop, virtualProp) ?? new PropertyIntermediateConvert();
 
                 if (methods.intermediateMethod.Length > 0)
                 {
@@ -693,7 +695,7 @@ namespace taskt.Core.Automation.Commands
             foreach (var prop in props)
             {
                 var virtualProp = prop.GetVirtualProperty();
-                var methods = PropertyControls.GetCustomAttributeWithVirtual<taskt.Core.Automation.Attributes.PropertyAttributes.PropertyIntermediateConvert>(prop, virtualProp) ?? new Attributes.PropertyAttributes.PropertyIntermediateConvert();
+                var methods = PropertyControls.GetCustomAttributeWithVirtual<PropertyIntermediateConvert>(prop, virtualProp) ?? new PropertyIntermediateConvert();
                 
                 if (methods.rawMethod.Length > 0)
                 {
