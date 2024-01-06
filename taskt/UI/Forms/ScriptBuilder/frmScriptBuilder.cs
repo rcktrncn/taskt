@@ -1151,7 +1151,8 @@ namespace taskt.UI.Forms.ScriptBuilder
                     editCommand.editingCommand = currentCommand;
 
                     //create clone of current command so databinding does not affect if changes are not saved
-                    editCommand.originalCommand = Core.Common.Clone(currentCommand);
+                    //editCommand.originalCommand = Core.Common.Clone(currentCommand);
+                    editCommand.originalCommand = currentCommand.Clone();
 
                     //set variables
                     editCommand.scriptVariables = this.scriptVariables;
@@ -3385,7 +3386,8 @@ namespace taskt.UI.Forms.ScriptBuilder
         {
             List<string> variables = new List<string>();
             variables.AddRange(scriptVariables.Select(f => f.VariableName));
-            variables.AddRange(Core.Common.GenerateSystemVariables().Select(f => f.VariableName));
+            //variables.AddRange(Core.Common.GenerateSystemVariables().Select(f => f.VariableName));
+            variables.AddRange(Core.Automation.Engine.SystemVariables.GetSystemVariablesName());
             return variables;
         }
 

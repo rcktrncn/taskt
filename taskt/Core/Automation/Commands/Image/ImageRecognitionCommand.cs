@@ -4,9 +4,10 @@ using System.Linq;
 using System.Xml.Serialization;
 using System.Drawing;
 using System.Windows.Forms;
-using taskt.UI.Forms;
 using taskt.UI.CustomControls;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.UI.Forms.ScriptBuilder.CommandEditor;
+using System.IO;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -112,7 +113,7 @@ namespace taskt.Core.Automation.Commands
             bool testMode = TestMode;
            
             //user image to bitmap
-            Bitmap userImage = new Bitmap(Common.Base64ToImage(v_ImageCapture));
+            Bitmap userImage = new Bitmap(ConvertBase64ToImage(v_ImageCapture));
 
             //take screenshot
             Size shotSize = Screen.PrimaryScreen.Bounds.Size;
@@ -329,7 +330,7 @@ namespace taskt.Core.Automation.Commands
                             var targetPictureBox = (UIPictureBox)((CommandItemControl)sender).Tag;
 
                             targetPictureBox.Image = imageCaptureForm.userSelectedBitmap;
-                            var convertedImage = Common.ImageToBase64(imageCaptureForm.userSelectedBitmap);
+                            var convertedImage = ConvertImageToBase64(imageCaptureForm.userSelectedBitmap);
                             var convertedLength = convertedImage.Length;
                             targetPictureBox.EncodedImage = convertedImage;
 
@@ -431,6 +432,43 @@ namespace taskt.Core.Automation.Commands
             RenderedControls.AddRange(ctrls);
 
             return RenderedControls;
+        }
+
+        public override void AfterShown(frmCommandEditor editor)
+        {
+            if (!string.IsNullOrEmpty(v_ImageCapture))
+            {
+                //var pic = ControlsList.GetPropertyControl<UIPictureBox>(nameof(v_ImageCapture));
+                //pic.Image = Common.Base64ToImage(v_ImageCapture);
+                var ctrls = editor.flw_InputVariables.Controls;
+                foreach(var c in ctrls)
+                {
+                    if (c is UIPictureBox pic)
+                    {
+                        pic.Image = ConvertBase64ToImage(v_ImageCapture);
+                    }
+                }
+            }
+        }
+
+        private static string ConvertImageToBase64(Image image)
+        {
+            using (MemoryStream m = new MemoryStream())
+            {
+                image.Save(m, System.Drawing.Imaging.ImageFormat.Bmp);
+                byte[] imageBytes = m.ToArray();
+                var base64String = Convert.ToBase64String(imageBytes);
+                return base64String;
+            }
+        }
+
+        private static Image ConvertBase64ToImage(string base64String)
+        {
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+            ms.Write(imageBytes, 0, imageBytes.Length);
+            Image image = Image.FromStream(ms, true);
+            return image;
         }
     }
 }

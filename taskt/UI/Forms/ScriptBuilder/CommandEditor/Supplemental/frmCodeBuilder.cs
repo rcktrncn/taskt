@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using taskt.Core;
+using taskt.Core.Automation.Commands;
 
 namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 {
@@ -105,10 +107,10 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 
             lstCompilerResults.Items.Add("Initializing Compiler Services..");
 
-            var compilerSvc = new Core.CompilerServices();
+            //var compilerSvc = new Core.CompilerServices();
 
             lstCompilerResults.Items.Add("Compiling..");
-            var result = compilerSvc.CompileInput(rtbCode.Text);
+            var result = CSharpCodeCompilerControls.CompileInput(rtbCode.Text);
 
             if (result.Errors.HasErrors)
             {
