@@ -31,7 +31,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyIsOptional(true)]
         [PropertyDisplayText(false, "")]
         [PropertyParameterOrder(6500)]
-        public string v_With { get; set; }
+        public string v_Width { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
@@ -41,10 +41,9 @@ namespace taskt.Core.Automation.Commands
         [PropertyParameterOrder(6500)]
         public string v_Height { get; set; }
 
-        //[XmlAttribute]
-        //[PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_MatchMethod_Single))]
-        //[PropertySelectionChangeEvent(nameof(MatchMethodComboBox_SelectionChangeCommitted))]
-        //public string v_MatchMethod { get; set; }
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_MatchMethod_Single))]
+        public override string v_MatchMethod { get; set; }
 
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_TargetWindowIndex))]
@@ -74,9 +73,9 @@ namespace taskt.Core.Automation.Commands
 
                     var rct = WindowNameControls.GetWindowRect(whnd);
 
-                    if (!string.IsNullOrEmpty(v_With))
+                    if (!string.IsNullOrEmpty(v_Width))
                     {
-                        (rct.right - rct.left).StoreInUserVariable(engine, v_With);
+                        (rct.right - rct.left).StoreInUserVariable(engine, v_Width);
                     }
                     if (!string.IsNullOrEmpty(v_Height))
                     {

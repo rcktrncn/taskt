@@ -31,7 +31,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyIsOptional(true)]
         [PropertyDisplayText(false, "")]
         [PropertyParameterOrder(6500)]
-        public string v_VariablePositionX { get; set; }
+        public string v_XPosition { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
@@ -39,7 +39,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyIsOptional(true)]
         [PropertyDisplayText(false, "")]
         [PropertyParameterOrder(6500)]
-        public string v_VariablePositionY { get; set; }
+        public string v_YPosition { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Base position")]
@@ -56,10 +56,9 @@ namespace taskt.Core.Automation.Commands
         [PropertyParameterOrder(6500)]
         public string v_PositionBase { get; set; }
 
-        //[XmlAttribute]
-        //[PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_MatchMethod_Single))]
-        //[PropertySelectionChangeEvent(nameof(MatchMethodComboBox_SelectionChangeCommitted))]
-        //public string v_MatchMethod { get; set; }
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_MatchMethod_Single))]
+        public override string v_MatchMethod { get; set; }
 
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_TargetWindowIndex))]
@@ -117,13 +116,13 @@ namespace taskt.Core.Automation.Commands
                             y = (pos.top + pos.bottom) / 2;
                             break;
                     }
-                    if (!string.IsNullOrEmpty(v_VariablePositionX))
+                    if (!string.IsNullOrEmpty(v_XPosition))
                     {
-                        x.ToString().StoreInUserVariable(engine, v_VariablePositionX);
+                        x.ToString().StoreInUserVariable(engine, v_XPosition);
                     }
-                    if (!string.IsNullOrEmpty(v_VariablePositionY))
+                    if (!string.IsNullOrEmpty(v_YPosition))
                     {
-                        y.ToString().StoreInUserVariable(engine, v_VariablePositionY);
+                        y.ToString().StoreInUserVariable(engine, v_YPosition);
                     }
                 })
             );
