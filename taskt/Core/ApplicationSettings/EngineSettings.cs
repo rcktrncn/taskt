@@ -51,47 +51,47 @@ namespace taskt.Core
         public bool IgnoreFirstVariableMarkerInOutputParameter { get; set; }
         public int MaxFileCounter { get; set; }
 
-        private static string InterStartVariableMaker = "{{{";
-        private static string InterEndVariableMaker = "}}}";
-        private static string InterCurrentWindowKeyword = "%kwd_current_window%";
-        private static string InterDesktopKeyword = "%kwd_desktop%";
-        private static string InterAllWindowsKeyword = "%kwd_all_windows%";
-        private static string InterCurrentWindowPositionKeyword = "%kwd_current_position%";
-        private static string InterCurrentWindowXPositionKeyword = "%kwd_current_xposition%";
-        private static string InterCurrentWindowYPositionKeyword = "%kwd_current_yposition%";
-        private static string InterCurrentWorksheetKeyword = "%kwd_current_worksheet%";
-        private static string InterNextWorksheetKeyword = "%kwd_next_worksheet%";
-        private static string InterPreviousWorksheetKeyword = "%kwd_previous_worksheet%";
+        private static readonly string InterStartVariableMaker = "{{{";
+        private static readonly string InterEndVariableMaker = "}}}";
+        private static readonly string InterCurrentWindowKeyword = "%kwd_current_window%";
+        private static readonly string InterDesktopKeyword = "%kwd_desktop%";
+        private static readonly string InterAllWindowsKeyword = "%kwd_all_windows%";
+        private static readonly string InterCurrentWindowPositionKeyword = "%kwd_current_position%";
+        private static readonly string InterCurrentWindowXPositionKeyword = "%kwd_current_xposition%";
+        private static readonly string InterCurrentWindowYPositionKeyword = "%kwd_current_yposition%";
+        private static readonly string InterCurrentWorksheetKeyword = "%kwd_current_worksheet%";
+        private static readonly string InterNextWorksheetKeyword = "%kwd_next_worksheet%";
+        private static readonly string InterPreviousWorksheetKeyword = "%kwd_previous_worksheet%";
 
-        private static string[] m_KeyNameList = new string[]
-        {
-            "BACKSPACE", "BS", "BKSP",
-            "BREAK",
-            "CAPSLOCK",
-            "DELETE", "DEL",
-            "UP", "DOWN", "LEFT", "RIGHT",
-            "END",
-            "ENTER",
-            "INSERT", "INS",
-            "NUMLOCK",
-            "PGDN",
-            "PGUP",
-            "SCROLLROCK",
-            "TAB",
-            "F1", "F2", "F3", "F4", "F5", "F6",
-            "F7", "F8", "F9", "F10", "F11", "F12",
-            "ADD", "SUBTRACT", "MULTIPLY", "DIVIDE",
-            "WIN_KEY"
-        };
-        private static string[] m_DisallowVariableCharList = new string[]
-        {
-            "+", "-", "*", "%",
-            "[", "]", "{", "}",
-            ".",
-            " ",
-            "\u2983", "\u2984",
-            "\U0001D542", "\U0001D54E"
-        };
+        //private static readonly string[] m_KeyNameList = new string[]
+        //{
+        //    "BACKSPACE", "BS", "BKSP",
+        //    "BREAK",
+        //    "CAPSLOCK",
+        //    "DELETE", "DEL",
+        //    "UP", "DOWN", "LEFT", "RIGHT",
+        //    "END",
+        //    "ENTER",
+        //    "INSERT", "INS",
+        //    "NUMLOCK",
+        //    "PGDN",
+        //    "PGUP",
+        //    "SCROLLROCK",
+        //    "TAB",
+        //    "F1", "F2", "F3", "F4", "F5", "F6",
+        //    "F7", "F8", "F9", "F10", "F11", "F12",
+        //    "ADD", "SUBTRACT", "MULTIPLY", "DIVIDE",
+        //    "WIN_KEY"
+        //};
+        //private static readonly string[] m_DisallowVariableCharList = new string[]
+        //{
+        //    "+", "-", "*", "%",
+        //    "[", "]", "{", "}",
+        //    ".",
+        //    " ",
+        //    "\u2983", "\u2984",
+        //    "\U0001D542", "\U0001D54E"
+        //};
 
         public EngineSettings()
         {
@@ -124,15 +124,16 @@ namespace taskt.Core
             MaxFileCounter = 999;
         }
 
-        public string[] KeyNameList()
-        {
-            return m_KeyNameList;
-        }
+        //public string[] KeyNameList()
+        //{
+        //    return m_KeyNameList;
+        //}
 
-        public string[] DisallowVariableCharList()
-        {
-            return m_DisallowVariableCharList;
-        }
+        //public string[] DisallowVariableCharList()
+        //{
+        //    return m_DisallowVariableCharList;
+        //}
+
         public string replaceEngineKeyword(string targetString)
         {
             return targetString.Replace(InterStartVariableMaker, this.VariableStartMarker)
@@ -220,60 +221,60 @@ namespace taskt.Core
             return ExtensionMethods.ConvertUserVariableToIntermediateNotation(targetString, engine);
         }
 
-        public string wrapVariableMarker(string variableName)
-        {
-            return this.VariableStartMarker + variableName + this.VariableEndMarker;
-        }
+        //public string wrapVariableMarker(string variableName)
+        //{
+        //    return this.VariableStartMarker + variableName + this.VariableEndMarker;
+        //}
 
-        public string unwrapVariableMarker(string variableName)
-        {
-            if (this.isWrappedVariableMarker(variableName))
-            {
-                string rmvSt = variableName.Substring(this.VariableStartMarker.Length);
-                return rmvSt.Substring(0, rmvSt.Length - this.VariableEndMarker.Length);
-            }
-            else
-            {
-                return variableName;
-            }
-        }
+        //public string unwrapVariableMarker(string variableName)
+        //{
+        //    if (this.isWrappedVariableMarker(variableName))
+        //    {
+        //        string rmvSt = variableName.Substring(this.VariableStartMarker.Length);
+        //        return rmvSt.Substring(0, rmvSt.Length - this.VariableEndMarker.Length);
+        //    }
+        //    else
+        //    {
+        //        return variableName;
+        //    }
+        //}
 
-        public bool isWrappedVariableMarker(string variableName)
-        {
-            return (variableName.StartsWith(this.VariableStartMarker) && variableName.EndsWith(this.VariableEndMarker));
-        }
+        //public bool isWrappedVariableMarker(string variableName)
+        //{
+        //    return (variableName.StartsWith(this.VariableStartMarker) && variableName.EndsWith(this.VariableEndMarker));
+        //}
 
-        public string wrapIntermediateVariableMaker(string variableName)
-        {
-            return "\u2983" + variableName + "\u2984";
-        }
+        //public string wrapIntermediateVariableMaker(string variableName)
+        //{
+        //    return "\u2983" + variableName + "\u2984";
+        //}
 
         private static string wrapIntermediateKeyword(string kw)
         {
             return "\U0001D542" + kw + "\U0001D54E";
         }
 
-        public bool isValidVariableName(string vName)
-        {
-            foreach (string s in m_KeyNameList)
-            {
-                if (vName == s)
-                {
-                    return false;
-                }
-            }
-            foreach (string s in m_DisallowVariableCharList)
-            {
-                if (vName.Contains(s))
-                {
-                    return false;
-                }
-            }
-            if (vName.StartsWith("__INNER_"))
-            {
-                return false;
-            }
-            return true;
-        }
+        //public bool isValidVariableName(string vName)
+        //{
+        //    foreach (string s in m_KeyNameList)
+        //    {
+        //        if (vName == s)
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    foreach (string s in m_DisallowVariableCharList)
+        //    {
+        //        if (vName.Contains(s))
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    if (vName.StartsWith("__INNER_"))
+        //    {
+        //        return false;
+        //    }
+        //    return true;
+        //}
     }
 }

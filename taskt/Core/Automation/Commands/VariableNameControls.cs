@@ -10,8 +10,59 @@ namespace taskt.Core.Automation.Commands
     /// </summary>
     internal static class VariableNameControls
     {
-        #region
-        private const string InnerVariablePrefix = "__INNER_";
+        #region const, properties
+        /// <summary>
+        /// inner variable name prefix
+        /// </summary>
+        private const string INNER_VARIABLE_PREFIX = "__INNER_";
+
+        /// <summary>
+        /// disallow variable name character list
+        /// </summary>
+        public static readonly List<string> DisallowVariableCharList = new List<string>()
+        {
+            "+", "-", "*", "%",
+            "[", "]", "{", "}",
+            ".",
+            " ", "\t", "\r", "\n",
+            IntermediateControls.INTERMEDIATE_VALIABLE_START_MARKER, IntermediateControls.INTERMEDIATE_VALIABLE_END_MARKER,
+            IntermediateControls.INTERMEDIATE_KEYWORD_START_MARKER, IntermediateControls.INTERMEDIATE_VALIABLE_END_MARKER,
+        };
+
+        /// <summary>
+        /// reserved key name, not use variable name
+        /// </summary>
+        public static readonly List<string> ReservedKeyNameList = new List<string>()
+        {
+            "BACKSPACE", "BS", "BKSP",
+            "BREAK",
+            "CAPSLOCK",
+            "DELETE", "DEL",
+            "UP", "DOWN", "LEFT", "RIGHT",
+            "END",
+            "ENTER",
+            "INSERT", "INS",
+            "NUMLOCK",
+            "PGDN",
+            "PGUP",
+            "SCROLLROCK",
+            "TAB",
+            "F1", "F2", "F3", "F4", "F5", "F6",
+            "F7", "F8", "F9", "F10", "F11", "F12",
+            "ADD", "SUBTRACT", "MULTIPLY", "DIVIDE",
+            "WIN_KEY",
+        };
+
+        /// <summary>
+        /// disallow head variable name charactor list
+        /// </summary>
+        public static readonly List<string> DisallowHeadVariableCharList = new List<string>()
+        {
+            "0", "1", "2", "3",
+            "4", "5", "6", "7",
+            "8", "9",
+            INNER_VARIABLE_PREFIX,
+        };
         #endregion
 
         #region virtual properties
@@ -67,7 +118,7 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static string GetVariableName(string name, Engine.AutomationEngineInstance engine)
         {
-            if (IsWrapVariableMarker(name, engine) && engine.engineSettings.IgnoreFirstVariableMarkerInOutputParameter)
+            if (IsWrappedVariableMarker(name, engine) && engine.engineSettings.IgnoreFirstVariableMarkerInOutputParameter)
             {
                 var len = name.Length;
                 var s = engine.engineSettings.VariableStartMarker.Length;
@@ -85,9 +136,9 @@ namespace taskt.Core.Automation.Commands
         /// <param name="name">name is not converted</param>
         /// <param name="engine"></param>
         /// <returns></returns>
-        public static bool IsWrapVariableMarker(string name, Engine.AutomationEngineInstance engine)
+        public static bool IsWrappedVariableMarker(string name, Engine.AutomationEngineInstance engine)
         {
-            return IsWrapVariableMarker(name, engine.engineSettings);
+            return IsWrappedVariableMarker(name, engine.engineSettings);
         }
 
         /// <summary>
@@ -96,9 +147,9 @@ namespace taskt.Core.Automation.Commands
         /// <param name="name">name is not converted</param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        public static bool IsWrapVariableMarker(string name, ApplicationSettings settings)
+        public static bool IsWrappedVariableMarker(string name, ApplicationSettings settings)
         {
-            return IsWrapVariableMarker(name, settings.EngineSettings);
+            return IsWrappedVariableMarker(name, settings.EngineSettings);
         }
 
         /// <summary>
@@ -107,7 +158,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="name">name is not converted</param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        private static bool IsWrapVariableMarker(string name, EngineSettings settings)
+        private static bool IsWrappedVariableMarker(string name, EngineSettings settings)
         {
             return (name.StartsWith(settings.VariableStartMarker) && name.EndsWith(settings.VariableEndMarker));
         }
@@ -120,7 +171,7 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static string GetWrappedVariableName(string name, Engine.AutomationEngineInstance engine)
         {
-            if (IsWrapVariableMarker(name, engine))
+            if (IsWrappedVariableMarker(name, engine))
             {
                 return name;
             }
@@ -138,7 +189,7 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static string GetWrappedVariableName(string name, ApplicationSettings settings)
         {
-            if (IsWrapVariableMarker(name, settings))
+            if (IsWrappedVariableMarker(name, settings))
             {
                 return name;
             }
@@ -167,6 +218,48 @@ namespace taskt.Core.Automation.Commands
         public static List<string> GetVariableNames(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             return editor?.scriptVariables.Select(t => t.VariableName).ToList() ?? new List<string>();
+        }
+
+        /// <summary>
+        /// check valid variable name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool IsValidVariableName(string name)
+        {
+            //foreach (string s in ReservedKeyNameList)
+            //{
+            //    if (name == s)
+            //    {
+            //        return false;
+            //    }
+            //}
+            if (ReservedKeyNameList.Contains(name))
+            {
+                return false;
+            }
+
+            foreach (string s in DisallowVariableCharList)
+            {
+                if (name.Contains(s))
+                {
+                    return false;
+                }
+            }
+
+            foreach(string s in DisallowHeadVariableCharList)
+            {
+                if (name.StartsWith(s))
+                {
+                    return false;
+                }
+            }
+
+            //if (name.StartsWith("__INNER_"))
+            //{
+            //    return false;
+            //}
+            return true;
         }
         #endregion
 
@@ -203,7 +296,7 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static string GetInnerVariableName(int index, Engine.AutomationEngineInstance engine, bool wrapped = true)
         {
-            var varName = InnerVariablePrefix + index.ToString();
+            var varName = INNER_VARIABLE_PREFIX + index.ToString();
             if (wrapped)
             {
                 varName = GetWrappedVariableName(varName, engine);

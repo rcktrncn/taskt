@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using taskt.Core.Automation.Commands;
 using static taskt.Core.Automation.Attributes.PropertyAttributes.PropertyInstanceType;
 
 namespace taskt.Core
@@ -130,9 +131,12 @@ namespace taskt.Core
                 return;
             }
 
-            if ((instanceType.autoWrapVariableMarker) && !(this.appSettings.EngineSettings.isWrappedVariableMarker(instanceName)))
+            //if ((instanceType.autoWrapVariableMarker) && !(this.appSettings.EngineSettings.isWrappedVariableMarker(instanceName)))
+            if ((instanceType.autoWrapVariableMarker) &&
+                    !(VariableNameControls.IsWrappedVariableMarker(instanceName, appSettings)))
             {
-                instanceName = this.appSettings.EngineSettings.wrapVariableMarker(instanceName);
+                //instanceName = this.appSettings.EngineSettings.wrapVariableMarker(instanceName);
+                instanceName = VariableNameControls.GetWrappedVariableName(instanceName, appSettings);
             }
             
             if (targetDic.ContainsKey(instanceName))
@@ -159,9 +163,12 @@ namespace taskt.Core
                 return;
             }
 
-            if ((instanceType.autoWrapVariableMarker) && !(this.appSettings.EngineSettings.isWrappedVariableMarker(instanceName)))
+            //if ((instanceType.autoWrapVariableMarker) && !(this.appSettings.EngineSettings.isWrappedVariableMarker(instanceName)))
+            if ((instanceType.autoWrapVariableMarker) && 
+                    !(VariableNameControls.IsWrappedVariableMarker(instanceName, appSettings)))
             {
-                instanceName = this.appSettings.EngineSettings.wrapVariableMarker(instanceName);
+                //instanceName = this.appSettings.EngineSettings.wrapVariableMarker(instanceName);
+                instanceName = VariableNameControls.GetWrappedVariableName(instanceName, appSettings);
             }
 
             if (targetDic.ContainsKey(instanceName))
