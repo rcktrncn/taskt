@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Xml.Serialization;
-using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -14,16 +12,16 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelGoToCellCommand : AExcelInstanceCommand
+    public class ExcelGoToCellCommand : AExcelCellCommand
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]
         //public string v_InstanceName { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_CellRangeLocation))]
-        [PropertyParameterOrder(6000)]
-        public string v_CellLocation { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_CellRangeLocation))]
+        //[PropertyParameterOrder(6000)]
+        //public string v_CellLocation { get; set; }
 
         public ExcelGoToCellCommand()
         {
@@ -35,9 +33,11 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var excelInstance, var excelSheet) = v_InstanceName.ExpandValueOrUserVariableAsExcelInstanceAndWorksheet(engine);
+            //(var excelInstance, var excelSheet) = v_InstanceName.ExpandValueOrUserVariableAsExcelInstanceAndWorksheet(engine);
 
-            var rg = v_CellLocation.GetExcelRange(engine, excelInstance, excelSheet, this);
+            //var rg = v_CellLocation.GetExcelRange(engine, excelInstance, excelSheet, this);
+
+            var rg = this.ExpandValueOrVariableAsExcelSingleCellLocation(engine);
 
             rg.Select();
         }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
-using taskt.Core.Automation.Commands.Excel;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -42,7 +41,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_OutputListName))]
         [PropertyParameterOrder(7001)]
-        public string v_applyToVariable { get; set; }
+        public string v_Result { get; set; }
 
         public ExcelGetWorksheetsCommand()
         {
@@ -95,7 +94,7 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            sheetNames.StoreInUserVariable(engine, v_applyToVariable);
+            sheetNames.StoreInUserVariable(engine, v_Result);
         }
     }
 }

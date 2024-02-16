@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
-using taskt.Core.Automation.Commands.Excel;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -46,7 +45,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
         [PropertyParameterOrder(7001)]
-        public string v_applyToVariable { get; set; }
+        public string v_Result { get; set; }
 
         public ExcelGetWorksheetInfoCommand()
         {
@@ -99,7 +98,7 @@ namespace taskt.Core.Automation.Commands
                     break;
             }
 
-            ret.StoreInUserVariable(engine, v_applyToVariable);
+            ret.StoreInUserVariable(engine, v_Result);
         }
     }
 }

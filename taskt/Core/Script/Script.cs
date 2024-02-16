@@ -365,6 +365,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_77(doc);
             convertTo3_5_1_79(doc);
             convertTo3_5_1_80(doc);
+            convertTo3_5_1_81(doc);
 
             return doc;
         }
@@ -2219,6 +2220,149 @@ namespace taskt.Core.Script
                     }
                 })
             );
+
+            return doc;
+        }
+
+        private static XDocument convertTo3_5_1_81(XDocument doc)
+        {
+            var oldCurrent = IntermediateControls.GetWrappedIntermediateKeyword("%kwd_current_worksheet%");
+            var newCurrent = IntermediateControls.GetWrappedIntermediateVariable(SystemVariables.Excel_CurrentWorkSheet.VariableName);
+
+            var oldNext = IntermediateControls.GetWrappedIntermediateKeyword("%kwd_next_worksheet%");
+            var newNext = IntermediateControls.GetWrappedIntermediateVariable(SystemVariables.Excel_NextWorkSheet.VariableName);
+
+            var oldPrevious = IntermediateControls.GetWrappedIntermediateKeyword("%kwd_previous_worksheet%");
+            var newPrevious = IntermediateControls.GetWrappedIntermediateVariable(SystemVariables.Excel_PreviousWorkSheet.VariableName);
+
+            var changeAction = new Action<XAttribute>(attr =>
+            {
+                var v = attr.Value;
+                if (v == oldCurrent)
+                {
+                    attr.SetValue(newCurrent);
+                }
+                else if (v == oldNext)
+                {
+                    attr.SetValue(newNext);
+                }
+                else if (v == oldPrevious)
+                {
+                    attr.SetValue(newPrevious);
+                }
+            });
+
+            // ExcelActivateWorksheetCommand
+            ChangeAttributeValue(doc, "ExcelActivateWorksheetCommand", "v_SheetName", changeAction);
+
+            ChangeAttributeValue(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (el.Attribute("CommandName").Value)
+                    {
+                        case "ExcelCopyWorksheetCommand":
+                        case "ExcelRenameWorksheetCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }), "v_TargetSheetName", changeAction
+            );
+
+            // Add Worksheet command v_SheetName
+            ChangeAttributeName(doc, "ExcelAddWorksheetCommand", "v_NewSheetName", "v_SheetName");
+
+            // change attribute v_applyToVariable -> v_Result
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (el.Attribute("CommandName").Value)
+                    {
+                        case "ExcelCheckWorksheetExistsCommand":
+                        case "ExcelGetCurrentWorksheetCommand":
+                        case "ExcelGetExcelInfoCommand":
+                        case "ExcelGetWorksheetInfoCommand":
+                        case "ExcelGetWorksheetsCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_applyToVariable", "v_Result"
+            );
+
+            // change attribute v_applyToVariableName -> v_Result
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (el.Attribute("CommandName").Value)
+                    {
+                        case "ExcelCheckExcelInstanceExistsCommand":
+                        case "ExcelGetLastRowCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_applyToVariableName", "v_Result"
+            );
+
+            // change attribute v_userVariableName -> v_Result
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (el.Attribute("CommandName").Value)
+                    {
+                        case "ExcelCheckCellValueExistsCommand":
+                        case "ExcelCheckCellValueExistsRCCommand":
+                        case "ExcelGetCellCommand":
+                        case "ExcelGetCellRCCommand":
+                        case "ExcelGetColumnValuesAsDataTableCommand":
+                        case "ExcelGetColumnValuesAsDictionaryCommand":
+                        case "ExcelGetColumnValuesAsListCommand":
+                        case "ExcelGetRangeValuesAsDataTableCommand":
+                        case "ExcelGetRowValuesAsDataTableCommand":
+                        case "ExcelGetRowValuesAsDictionaryCommand":
+                        case "ExcelGetRowValuesAsListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_userVariableName", "v_Result"
+            );
+
+            // change attribute v_ExcelCellAddress -> v_CellLocation
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (el.Attribute("CommandName").Value)
+                    {
+                        case "ExcelCheckCellValueExistsCommand":
+                        case "ExcelGetCellCommand":
+                        case "ExcelSetCellCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_ExcelCellAddress", "v_CellLocation"
+            );
+
+            // ExcelGetCellRCCommand, ExcelSetCellRCCommand attributes v_CellRow, v_CellColumn
+            var searchFunc = new Func<XElement, bool>(el =>
+            {
+                switch (el.Attribute("CommandName").Value)
+                {
+                    case "ExcelGetCellRCCommand":
+                    case "ExcelSetCellRCCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            });
+            ChangeAttributeName(doc, searchFunc, "v_ExcelCellRow", "v_CellRow");
+            ChangeAttributeName(doc, searchFunc, "v_ExcelCellColumn", "v_CellColumn");
 
             return doc;
         }
