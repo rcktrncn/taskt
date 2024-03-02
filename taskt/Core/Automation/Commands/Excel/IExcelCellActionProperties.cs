@@ -3,7 +3,7 @@
     /// <summary>
     /// Excel **Single** cell action properties
     /// </summary>
-    public interface IExcelCellActionProperties : IExcelCellProperties, IExcelValueTypeProperties
+    public interface IExcelCellActionProperties : IExcelCellProperties, IExcelCellValueTypeProperties
     {
         // only implememnts
     }

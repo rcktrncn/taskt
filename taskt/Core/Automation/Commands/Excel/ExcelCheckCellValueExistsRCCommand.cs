@@ -39,7 +39,7 @@ namespace taskt.Core.Automation.Commands
         public string v_Result { get; set; }
 
         [XmlAttribute]
-        //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_CheckableValueType))]
+        [PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_CheckableValueType))]
         [PropertySelectionChangeEvent(nameof(cmbValueType_SelectedIndexChanged))]
         //[PropertyParameterOrder(6004)]
         public override string v_ValueType { get; set; }
@@ -66,9 +66,20 @@ namespace taskt.Core.Automation.Commands
 
             //chkFunc(rg).StoreInUserVariable(engine, v_Result);
 
-            var rg = this.ExpandValueOrVariableAsExcelCellLocation(engine);
-            var chkFunc = this.ExpandValueOrVariableAsCheckRangeFunction(engine);
-            chkFunc(rg).StoreInUserVariable(engine, v_Result);
+            //var rg = this.ExpandValueOrVariableAsExcelCellLocation(engine);
+            //var chkFunc = this.ExpandValueOrVariableAsCheckRangeFunction(engine);
+            //chkFunc(rg).StoreInUserVariable(engine, v_Result);
+
+            //(_, var sheet) = this.ExpandValueOrVariableAsExcelInstanceAndCurrentWorksheet(engine);
+            //(var row, var column) = this.ExpandValueOrVariableAsCellRowAndColumnIndex(engine);
+            //var chkFunc = this.ExpandValueOrVariableAsCheckValueFunction(engine);
+            //chkFunc(sheet, column, row).StoreInUserVariable(engine, v_Result);
+
+            this.RCLocationAction(new Action<Microsoft.Office.Interop.Excel.Worksheet, int, int>((sheet, column, row) =>
+            {
+                var chkFunc = this.ExpandValueOrVariableAsCheckValueFunction(engine);
+                chkFunc(sheet, column, row).StoreInUserVariable(engine, v_Result);
+            }), engine);
         }
 
         private void cmbValueType_SelectedIndexChanged(object sender, EventArgs e)

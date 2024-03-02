@@ -3,11 +3,8 @@
     /// <summary>
     /// row Range Get commands properties
     /// </summary>
-    public interface IExcelRowRangeGetProperties : IExcelRowRangeProperties
+    public interface IExcelRowRangeGetProperties : IExcelRowRangeProperties, ILExcelRangeGetProperties
     {
-        /// <summary>
-        /// variable name to store result
-        /// </summary>
-        string v_Result { get; set; }
+        // only implements
     }
 }

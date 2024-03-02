@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelGetCellCommand : AExcelCellActionCommand
+    public class ExcelGetCellCommand : AExcelCellActionCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]
@@ -56,7 +56,7 @@ namespace taskt.Core.Automation.Commands
             //func(rg).StoreInUserVariable(engine, v_Result);
 
             var rg = this.ExpandValueOrVariableAsExcelSingleCellLocation(engine);
-            var func = this.ExpandValueOrVariableAsGetRangeFunction(engine);
+            var func = this.ExpandValueOrVariableAsGetValueFunction(engine);
             func(rg).StoreInUserVariable(engine, v_Result);
         }
     }

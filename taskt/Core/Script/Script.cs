@@ -366,6 +366,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_79(doc);
             convertTo3_5_1_80(doc);
             convertTo3_5_1_81(doc);
+            convertTo3_5_1_83(doc);
 
             return doc;
         }
@@ -2363,6 +2364,80 @@ namespace taskt.Core.Script
             });
             ChangeAttributeName(doc, searchFunc, "v_ExcelCellRow", "v_CellRow");
             ChangeAttributeName(doc, searchFunc, "v_ExcelCellColumn", "v_CellColumn");
+
+            return doc;
+        }
+
+        private static XDocument convertTo3_5_1_83(XDocument doc)
+        {
+            // ExcelSetRowValuesFromDataTableCommand, ExcelSetColumnValuesFromDataTableCommand v_WhenItemNotEnough
+            ChangeAttributeName(doc, 
+                new Func<XElement, bool>(el => {
+                    switch (el.Attribute("CommandName").Value)
+                    {
+                        case "ExcelSetRowValuesFromDataTableCommand":
+                        case "ExcelSetColumnValuesFromDataTableCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                    
+                }), "v_IfDataTableNotEnough", "v_WhenItemNotEnough");
+
+            // ExcelSetRowValuesFromDictionaryCommand, ExcelSetColumnValuesFromDictionaryCommand v_WhenItemNotEnough
+            ChangeAttributeName(doc, 
+                new Func<XElement, bool>(el => {
+                    switch (el.Attribute("CommandName").Value)
+                    {
+                        case "ExcelSetRowValuesFromDictionaryCommand":
+                        case "ExcelSetColumnValuesFromDictionaryCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }), "v_IfDictionaryNotEnough", "v_WhenItemNotEnough");
+
+            // ExcelSetRowValuesFromListCommand, ExcelSetColumnValuesFromListCommand v_WhenItemNotEnough
+            ChangeAttributeName(doc, 
+                new Func<XElement, bool>(el => {
+                    switch (el.Attribute("CommandName").Value)
+                    {
+                        case "ExcelSetRowValuesFromListCommand":
+                        case "ExcelSetColumnValuesFromListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }), "v_IfListNotEnough", "v_WhenItemNotEnough");
+
+            // ExcelSetRowValuesFromDataTableCommand v_RowIndex
+            ChangeAttributeName(doc, "ExcelSetRowValuesFromDataTableCommand", "v_ExcelRowIndex", "v_RowIndex");
+
+            // ExcelSetColumnValuesFromDataTableCommand v_ColumnIndex
+            ChangeAttributeName(doc, "ExcelSetColumnValuesFromDataTableCommand", "v_ExcelColumnIndex", "v_ColumnIndex");
+
+            // ExcelDeleteCellCommand v_CellLocation
+            ChangeAttributeName(doc, "ExcelDeleteCellCommand", "v_Range", "v_CellLocation");
+
+            // ExcelDeleteRowCommand v_RowIndex
+            ChangeAttributeName(doc, "ExcelDeleteRowCommand", "v_RowNumber", "v_RowIndex");
+
+            // ExcelDeleteCellCommand, ExcelDeleteRowCommand v_Shift
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (el.Attribute("CommandName").Value)
+                    {
+                        case "ExcelDeleteCellCommand":
+                        case "ExcelDeleteRowCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }), "v_ShiftUp", "v_Shift");
+
+            // ExcelGetLastRowCommand v_ColumnIndex
+            ChangeAttributeName(doc, "ExcelGetLastRowCommand", "v_ColumnLetter", "v_ColumnIndex");
 
             return doc;
         }

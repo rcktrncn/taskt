@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelCheckCellValueExistsCommand : AExcelCellActionCommand
+    public class ExcelCheckCellValueExistsCommand : AExcelCellActionCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]
@@ -34,7 +34,7 @@ namespace taskt.Core.Automation.Commands
         public string v_Result { get; set; }
 
         [XmlAttribute]
-        //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_CheckableValueType))]
+        [PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_CheckableValueType))]
         [PropertySelectionChangeEvent(nameof(cmbValueType_SelectedIndexChanged))]
         //[PropertyParameterOrder(6002)]
         public override string v_ValueType { get; set; }
@@ -61,7 +61,7 @@ namespace taskt.Core.Automation.Commands
             //chkFunc(rg).StoreInUserVariable(engine, v_Result);
 
             var rg = this.ExpandValueOrVariableAsExcelSingleCellLocation(engine);
-            var chkFunc = this.ExpandValueOrVariableAsCheckRangeFunction(engine);
+            var chkFunc = this.ExpandValueOrVariableAsCheckValueFunction(engine);
             chkFunc(rg).StoreInUserVariable(engine, v_Result);
         }
 
