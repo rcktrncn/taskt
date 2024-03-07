@@ -23,6 +23,7 @@ using System.IO;
 using taskt.Core.Automation.Commands;
 using System.Reflection;
 using taskt.Core.Automation.Engine;
+using System.Text.RegularExpressions;
 
 namespace taskt.Core.Script
 {
@@ -166,6 +167,11 @@ namespace taskt.Core.Script
         /// </summary>
         public static Script DeserializeFile(string scriptFilePath, EngineSettings engineSettings, XmlSerializer serializer = null)
         {
+            // backup before converted
+            var fileName = $"bc-{Path.GetFileNameWithoutExtension(scriptFilePath)}-{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.xml";
+            var bkFile = Path.Combine(GetBeforeConvertedFolderPath(), fileName);
+            File.Copy(scriptFilePath, bkFile);
+
             XDocument xmlScript = XDocument.Load(scriptFilePath);
 
             // pre-convert
@@ -296,6 +302,16 @@ namespace taskt.Core.Script
         }
 
         /// <summary>
+        /// get BeforeConverted Folder Path
+        /// </summary>
+        /// <returns></returns>
+        public static string GetBeforeConvertedFolderPath()
+        {
+            var tasktExePath = Assembly.GetEntryAssembly().Location;
+            return Path.Combine(Path.GetDirectoryName(tasktExePath), "BeforeConverted");
+        }
+
+        /// <summary>
         /// get file path when use 'Run Without Saving'
         /// </summary>
         /// <returns></returns>
@@ -367,6 +383,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_80(doc);
             convertTo3_5_1_81(doc);
             convertTo3_5_1_83(doc);
+            convertTo3_5_1_84(doc);
 
             return doc;
         }
@@ -1136,8 +1153,8 @@ namespace taskt.Core.Script
             }));
             var moveCommands = commands.Where(el => (el.Attribute("v_OperationType").Value.ToLower() != "copy file")).ToList();
             var copyCommands = commands.Where(el => (el.Attribute("v_OperationType").Value.ToLower() == "copy file")).ToList();
-            ChangeCommandName(moveCommands, "MoveFileCommand", "Move File");
-            ChangeCommandName(copyCommands, "CopyFileCommand", "Copy File");
+            ChangeCommandNameProcess(moveCommands, "MoveFileCommand", "Move File");
+            ChangeCommandNameProcess(copyCommands, "CopyFileCommand", "Copy File");
             foreach(var cmd in commands)
             {
                 cmd.Attribute("v_OperationType").Remove();
@@ -1160,8 +1177,8 @@ namespace taskt.Core.Script
             }));
             moveCommands = commands.Where(el => (el.Attribute("v_OperationType").Value.ToLower() != "copy folder")).ToList();
             copyCommands = commands.Where(el => (el.Attribute("v_OperationType").Value.ToLower() == "copy folder")).ToList();
-            ChangeCommandName(moveCommands, "MoveFolderCommand", "Move Folder");
-            ChangeCommandName(copyCommands, "CopyFolderCommand", "Copy Folder");
+            ChangeCommandNameProcess(moveCommands, "MoveFolderCommand", "Move Folder");
+            ChangeCommandNameProcess(copyCommands, "CopyFolderCommand", "Copy Folder");
             foreach (var cmd in commands)
             {
                 cmd.Attribute("v_OperationType").Remove();
@@ -1852,7 +1869,7 @@ namespace taskt.Core.Script
 
             if (cmds.Count() > 0)
             {
-                ChangeCommandName(macroCommands, "ExcelRunMacroCommand", "Run Macro");
+                ChangeCommandNameProcess(macroCommands, "ExcelRunMacroCommand", "Run Macro");
             }
 
             return doc;
@@ -2442,6 +2459,131 @@ namespace taskt.Core.Script
             return doc;
         }
 
+        private static XDocument convertTo3_5_1_84(XDocument doc)
+        {
+            // ConvertDateTimeToExcelSerialCommand v_Result
+            ChangeAttributeName(doc, "ConvertDateTimeToExcelSerialCommand", "v_Serial", "v_Result");
+
+            // GetDataRowCommand -> ConvertDataTableRowToDictioanryCommand
+            ChangeToOtherCommand(doc, "GetDataRowCommand", "ConvertDataTableRowToDictionaryCommand", "Convert DataTable Row To Dictionary",
+                new List<(string, string)>()
+                {
+                    ("v_UserVariableName", "v_OutputVariableName"),
+                }
+            );
+
+            // GetDataRowValueCommand
+            // GetDataRowValueCommand attribute v_Option value
+            // GetDataRowValueCommand -> GetDictionaryValueCommand
+            ChangeToOtherCommand(doc, "GetDataRowValueCommand", "GetDictionaryValueCommand", "Get Dictionary Value",
+                new List<(string, string)>()
+                {
+                    ("v_DataRowName", "v_InputData"),
+                    ("v_Option", "v_KeyType"),
+                    ("v_DataValueIndex", "v_Key"),
+                    ("v_UserVariableName", "v_OutputVariable"),
+                },
+                new List<(string, Action<XAttribute>)>()
+                {
+                    (
+                        "v_Option", 
+                        new Action<XAttribute>(attr =>
+                        {
+                            if (attr.Value.ToLower() == "column name")
+                            {
+                                attr.SetValue("Key");
+                            }
+                        })
+                    )
+                }
+            );
+
+            // RemoveDataRowCommand -> SearchAndDeleteDataTableRowsCommand
+            ChangeCommandName(doc, "RemoveDataRowCommand", "SearchAndDeleteDataTableRowsCommand", "Search And Delete DataTable Rows");
+
+            // WriteDataRowValueCommand -> SetDataTableValueCommand
+            ChangeToOtherCommand(doc, "WriteDataRowValueCommand", "SetDataTableValueCommand", "Set DataTable Value",
+                new List<(string, string)>()
+                {
+                    ("v_DataRowName", "v_DataTableName"),
+                    ("v_Option", "v_ColumnType"),
+                    ("v_DataValueIndex", "v_ColumnIndex"),
+                    ("v_DataRowValue", "v_NewValue"),
+                },
+                new List<(string, Action<XAttribute>)>()
+                {
+                    (
+                        "v_Comment",
+                        new Action<XAttribute>(attr =>
+                        {
+                            if (!attr.Value.StartsWith("Please specify Row Index. Converted by taskt."))
+                            {
+                                string c = attr.Value;
+                                attr.SetValue($"Please specify Row Index. Converted by taskt. {c}");
+                            }
+                        })
+                    )
+                }
+            );
+
+            // ExcelWriteRowCommand -> ExcelSetRowValuesFromDictionaryCommand
+            ChangeToOtherCommand(doc, "ExcelWriteRowCommand", "ExcelSetRowValuesFromDictionaryCommand", "Set Row Values From Dictionary",
+                new List<(string, string)>()
+                {
+                    ("v_DataRowToSet", "v_DictionaryVariable"),
+                },
+                new List<(string, Action<XAttribute>)>()
+                {
+                    (
+                        "v_ExcelCellAddress",
+                        new Action<XAttribute>(attr =>
+                        {
+                            var rg = attr.Value;
+                            var rowIndex = Regex.Match(rg, @"\d+").Value;
+                            var columnName = Regex.Replace(rg, @"[\d-]", string.Empty);
+
+                            var elem = attr.Parent;
+                            elem.SetAttributeValue("v_RowIndex", rowIndex);
+                            elem.SetAttributeValue("v_ColumnStart", columnName);
+                            attr.Remove();
+                        })
+                    )
+                }
+            );
+
+            // ParseDatasetRowCommand (ParseRowCommand) -> GetDataTableValueCommand
+            ChangeToOtherCommand(doc, "ParseRowCommand", "GetDataTableValueCommand", "Get DataTable Value",
+                new List<(string, string)>()
+                {
+                    ("v_DatasetName", "v_DataTableName"),
+                    ("v_ColumnParseType", "v_ColumnType"),
+                    ("v_ColumnParameter", "v_ColumnIndex"),
+                    ("v_applyToVariableName", "v_UserVariableName"),
+                    ("v_SpecifiedRow", "v_RowIndex"),
+                },
+                new List<(string, Action<XAttribute>)>()
+                {
+                    (
+                        "v_ColumnParseType",
+                        new Action<XAttribute>(attr =>
+                        {
+                            switch (attr.Value.ToLower())
+                            {
+                                case "by column name":
+                                    attr.SetValue("Column Name");
+                                    break;
+                                case "by column index":
+                                    attr.SetValue("Index");
+                                    break;
+                            }
+                        })
+                    ),
+                }
+            );
+
+            return doc;
+        }
+
         /// <summary>
         /// get specfied commands
         /// </summary>
@@ -2483,7 +2625,7 @@ namespace taskt.Core.Script
         /// <param name="commands"></param>
         /// <param name="newName"></param>
         /// <param name="newSelectioName"></param>
-        private static void ChangeCommandName(IEnumerable<XElement> commands, string newName, string newSelectioName)
+        private static void ChangeCommandNameProcess(List<XElement> commands, string newName, string newSelectioName)
         {
             XNamespace ns = "http://www.w3.org/2001/XMLSchema-instance";
             foreach (var cmd in commands)
@@ -2504,8 +2646,8 @@ namespace taskt.Core.Script
         /// <returns></returns>
         private static XDocument ChangeCommandName(XDocument doc, Func<XElement, bool> searchFunc, string newName, string newSelectioName)
         {
-            IEnumerable<XElement> commands = doc.Descendants("ScriptCommand").Where(searchFunc);
-            ChangeCommandName(commands, newName, newSelectioName);
+            var commands = doc.Descendants("ScriptCommand").Where(searchFunc).ToList();
+            ChangeCommandNameProcess(commands, newName, newSelectioName);
             return doc;
         }
 
@@ -2519,12 +2661,27 @@ namespace taskt.Core.Script
         /// <returns></returns>
         private static XDocument ChangeCommandName(XDocument doc, string targetName, string newName, string newSelectioName)
         {
-            //return ChangeCommandName(doc, new Func<XElement, bool>(el =>
-            //{
-            //    return (el.Attribute("CommandName").Value == targetName);
-            //}), newName, newSelectioName);
-
             return ChangeCommandName(doc, GetSearchCommandsFunc(targetName), newName, newSelectioName);
+        }
+
+        /// <summary>
+        /// change attribute value process
+        /// </summary>
+        /// <param name="commands"></param>
+        /// <param name="targetAttribute"></param>
+        /// <param name="changeFunc"></param>
+        private static void ChangeAttributeValueProcess(List<XElement> commands, string targetAttribute, Action<XAttribute> changeFunc)
+        {
+            foreach (var cmd in commands)
+            {
+                var attr = cmd.Attribute(targetAttribute);
+                if (attr == null)
+                {
+                    cmd.SetAttributeValue(targetAttribute, "");
+                    attr = cmd.Attribute(targetAttribute);
+                }
+                changeFunc(attr);
+            }
         }
 
         /// <summary>
@@ -2537,12 +2694,13 @@ namespace taskt.Core.Script
         /// <returns></returns>
         private static XDocument ChangeAttributeValue(XDocument doc, Func<XElement, bool> searchFunc, string targetAttribute, Action<XAttribute> changeFunc)
         {
-            IEnumerable<XElement> commands = doc.Descendants("ScriptCommand")
-                .Where(searchFunc);
-            foreach(var cmd in commands)
-            {
-                changeFunc(cmd.Attribute(targetAttribute));
-            }
+            var commands = doc.Descendants("ScriptCommand")
+                            .Where(searchFunc).ToList();
+            //foreach(var cmd in commands)
+            //{
+            //    changeFunc(cmd.Attribute(targetAttribute));
+            //}
+            ChangeAttributeValueProcess(commands, targetAttribute, changeFunc);
             return doc;
         }
 
@@ -2556,11 +2714,6 @@ namespace taskt.Core.Script
         /// <returns></returns>
         private static XDocument ChangeAttributeValue(XDocument doc, string targetCommand, string targetAttribute, Action<XAttribute> changeFunc)
         {
-            //return ChangeAttributeValue(doc, new Func<XElement, bool>(el =>
-            //{
-            //    return (el.Attribute("CommandName").Value == targetCommand);
-            //}), targetAttribute, changeFunc);
-
             return ChangeAttributeValue(doc, GetSearchCommandsFunc(targetCommand), targetAttribute, changeFunc);
         }
 
@@ -2576,7 +2729,7 @@ namespace taskt.Core.Script
         /// <returns></returns>
         private static XDocument ChangeTableCellValue(XDocument doc, Func<XElement, bool> searchFunc, string tableParameterName, string tableCellName, Action<XElement> changeFunc, string defaultCellValue)
         {
-            IEnumerable<XElement> commands = doc.Descendants("ScriptCommand").Where(searchFunc);
+            var commands = doc.Descendants("ScriptCommand").Where(searchFunc).ToList();
 
             XNamespace ns = "urn:schemas-microsoft-com:xml-diffgram-v1";
             foreach (var cmd in commands)
@@ -2611,12 +2764,6 @@ namespace taskt.Core.Script
         /// <returns></returns>
         private static XDocument ChangeTableCellValue(XDocument doc, string commandName, string tableParameterName, string tableCellName, Action<XElement> changeFunc, string defaultCellValue)
         {
-            //ChangeTableCellValue(doc, new Func<XElement, bool>(el =>
-            //{
-            //    return el.Attribute("CommandName").Value == commandName;
-            //}), tableParameterName, tableCellName, changeFunc, defaultCellValue);
-            //return doc;
-
             return ChangeTableCellValue(doc, GetSearchCommandsFunc(commandName), tableParameterName, tableCellName, changeFunc, defaultCellValue);
         }
 
@@ -2667,7 +2814,7 @@ namespace taskt.Core.Script
         /// <returns></returns>
         private static XDocument ModifyTable(XDocument doc, Func<XElement, bool> searchFunc, string tableParameterName, Action<XElement, XElement, List<XElement>, string> modifyFunc)
         {
-            IEnumerable<XElement> commands = doc.Descendants("ScriptCommand").Where(searchFunc);
+            var commands = doc.Descendants("ScriptCommand").Where(searchFunc).ToList();
 
             //XNamespace ns = "urn:schemas-microsoft-com:xml-diffgram-v1";
             foreach (var cmd in commands)
@@ -2693,12 +2840,6 @@ namespace taskt.Core.Script
         /// <returns></returns>
         private static XDocument ModifyTable(XDocument doc, string targetCommand, string tableParameterName, Action<XElement, XElement, List<XElement>, string> modifyFunc)
         {
-            //ModifyTable(doc, new Func<XElement, bool>(el =>
-            //{
-            //    return el.Attribute("CommandName").Value == targetCommand;
-            //}), tableParameterName, modifyFunc);
-            //return doc;
-
             return ModifyTable(doc, GetSearchCommandsFunc(targetCommand), tableParameterName, modifyFunc);
         }
 
@@ -2843,19 +2984,14 @@ namespace taskt.Core.Script
         }
 
         /// <summary>
-        /// change attribute name. target command is specified Func<>
+        /// change attribute name process
         /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="searchFunc"></param>
+        /// <param name="commands"></param>
         /// <param name="targetAttribute"></param>
         /// <param name="newAttribute"></param>
-        /// <returns></returns>
-        private static XDocument ChangeAttributeName(XDocument doc, Func<XElement, bool> searchFunc, string targetAttribute, string newAttribute)
+        private static void ChangeAttributeNameProcess(List<XElement> commands, string targetAttribute, string newAttribute)
         {
-            var commands = doc.Descendants("ScriptCommand")
-                .Where(searchFunc).ToList();
-
-            foreach(var cmd in commands)
+            foreach (var cmd in commands)
             {
                 var trgAttr = cmd.Attribute(targetAttribute);
                 var newAttr = cmd.Attribute(newAttribute);
@@ -2868,6 +3004,35 @@ namespace taskt.Core.Script
                     trgAttr.Remove();
                 }
             }
+        }
+
+        /// <summary>
+        /// change attribute name. target command is specified Func<>
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="searchFunc"></param>
+        /// <param name="targetAttribute"></param>
+        /// <param name="newAttribute"></param>
+        /// <returns></returns>
+        private static XDocument ChangeAttributeName(XDocument doc, Func<XElement, bool> searchFunc, string targetAttribute, string newAttribute)
+        {
+            var commands = doc.Descendants("ScriptCommand")
+                            .Where(searchFunc).ToList();
+
+            //foreach(var cmd in commands)
+            //{
+            //    var trgAttr = cmd.Attribute(targetAttribute);
+            //    var newAttr = cmd.Attribute(newAttribute);
+            //    if (trgAttr != null)
+            //    {
+            //        if (newAttr == null)
+            //        {
+            //            cmd.SetAttributeValue(newAttribute, trgAttr.Value);
+            //        }
+            //        trgAttr.Remove();
+            //    }
+            //}
+            ChangeAttributeNameProcess(commands, targetAttribute, newAttribute);
 
             return doc;
         }
@@ -2882,12 +3047,67 @@ namespace taskt.Core.Script
         /// <returns></returns>
         private static XDocument ChangeAttributeName(XDocument doc, string targetCommand, string targetAttribute, string newAttribute)
         {
-            //return ChangeAttributeName(doc, new Func<XElement, bool>(el =>
-            //{
-            //    return el.Attribute("CommandName").Value == targetCommand;
-            //}), targetAttribute, newAttribute);
-
             return ChangeAttributeName(doc, GetSearchCommandsFunc(targetCommand), targetAttribute, newAttribute);
+        }
+
+        /// <summary>
+        /// change to other command
+        /// </summary>
+        /// <param name="commands"></param>
+        /// <param name="newCommand"></param>
+        /// <param name="newSelectionName"></param>
+        /// <param name="attributes"></param>
+        /// <param name="preAttributeFunc">(attribute name, change action)</param>
+        private static void ChangeToOtherCommandProcess(List<XElement> commands, string newCommand, string newSelectionName, List<(string, string)> attributes, List<(string, Action<XAttribute>)> preAttributeFunc = null)
+        {
+            // attribute values
+            if (preAttributeFunc != null)
+            {
+                foreach((var attr, var func) in preAttributeFunc)
+                {
+                    ChangeAttributeValueProcess(commands, attr, func);
+                }
+            }
+            // command name
+            ChangeCommandNameProcess(commands, newCommand, newSelectionName);
+            // attribute names
+            foreach((string oldAttr, string newAttr) in attributes)
+            {
+                ChangeAttributeNameProcess(commands, oldAttr, newAttr);
+            }
+        }
+
+        /// <summary>
+        /// change to other command, specified commands search Func
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="searchFunc"></param>
+        /// <param name="newCommand"></param>
+        /// <param name="newSelectionName"></param>
+        /// <param name="attributes"></param>
+        /// <param name="preAttributeFunc">(attribute name, change action)</param>
+        /// <returns></returns>
+        private static XDocument ChangeToOtherCommand(XDocument doc, Func<XElement, bool> searchFunc, string newCommand, string newSelectionName, List<(string, string)> attributes, List<(string, Action<XAttribute>)> preAttributeFunc = null)
+        {
+            var commands = doc.Descendants("ScriptCommand")
+                            .Where(searchFunc).ToList();
+            ChangeToOtherCommandProcess(commands, newCommand, newSelectionName, attributes, preAttributeFunc);
+            return doc;
+        }
+
+        /// <summary>
+        /// change to other command, specified command name
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="targetCommand"></param>
+        /// <param name="newCommand"></param>
+        /// <param name="newSelectionName"></param>
+        /// <param name="attributes"></param>
+        /// <param name="preAttributeFunc">(attribute name, change action)</param>
+        /// <returns></returns>
+        private static XDocument ChangeToOtherCommand(XDocument doc, string targetCommand, string newCommand, string newSelectionName, List<(string, string)> attributes, List<(string, Action<XAttribute>)> preAttributeFunc = null)
+        {
+            return ChangeToOtherCommand(doc, GetSearchCommandsFunc(targetCommand), newCommand, newSelectionName, attributes, preAttributeFunc);
         }
     }
 }

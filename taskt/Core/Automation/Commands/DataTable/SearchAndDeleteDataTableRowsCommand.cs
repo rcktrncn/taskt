@@ -4,7 +4,6 @@ using System.Xml.Serialization;
 using System.Data;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using taskt.UI.Forms;
 using taskt.UI.CustomControls;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
@@ -12,12 +11,13 @@ namespace taskt.Core.Automation.Commands
 {
     [Serializable]
     [Attributes.ClassAttributes.Group("DataTable Commands")]
-    [Attributes.ClassAttributes.SubGruop("Other")]
-    [Attributes.ClassAttributes.Description("This command allows you remove specified data rows.")]
-    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to delete a specific row.")]
+    [Attributes.ClassAttributes.SubGruop("Row Action")]
+    [Attributes.ClassAttributes.CommandSettings("Search And Delete DataTable Rows")]
+    [Attributes.ClassAttributes.Description("This command allows you Delete specified DataTable Rows.")]
+    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to Delete a specific Row.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command attempts to delete a DataTable Row")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
-    public class RemoveDataRowCommand : ScriptCommand
+    public class SearchAndDeleteDataTableRowsCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyDescription("Please indicate the DataTable Variable Name")]
@@ -48,12 +48,12 @@ namespace taskt.Core.Automation.Commands
         [Remarks("")]
         public string v_AndOr { get; set; }
 
-        public RemoveDataRowCommand()
+        public SearchAndDeleteDataTableRowsCommand()
         {
-            this.CommandName = "RemoveDataRowCommand";
-            this.SelectionName = "Remove DataRow";
-            this.CommandEnabled = true;
-            this.CustomRendering = true;
+            //this.CommandName = "RemoveDataRowCommand";
+            //this.SelectionName = "Remove DataRow";
+            //this.CommandEnabled = true;
+            //this.CustomRendering = true;
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)

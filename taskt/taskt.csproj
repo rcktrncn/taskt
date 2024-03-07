@@ -313,6 +313,17 @@
     <Compile Include="Core\ApplicationSettings\LocalListenerSettings.cs" />
     <Compile Include="Core\ApplicationSettings\ServerSettings.cs" />
     <Compile Include="Core\ApplicationSettings\WhiteListIP.cs" />
+    <Compile Include="Core\Automation\Commands\Color\AColorCreateCommands.cs" />
+    <Compile Include="Core\Automation\Commands\Color\EM_CanHandleColorExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\Color\ICanHandleColor.cs" />
+    <Compile Include="Core\Automation\Commands\Color\IColorCreateProperties.cs" />
+    <Compile Include="Core\Automation\Commands\DateTime\ADateTimeConvertCommands.cs" />
+    <Compile Include="Core\Automation\Commands\DateTime\ADateTimeCreateCommands.cs" />
+    <Compile Include="Core\Automation\Commands\DateTime\EM_DateTimeConvertPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\DateTime\EM_CanHandleDateTimExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\DateTime\ICanHandleDateTime.cs" />
+    <Compile Include="Core\Automation\Commands\DateTime\IDateTimeConvertProperties.cs" />
+    <Compile Include="Core\Automation\Commands\DateTime\IDateTimeCreateProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\AExcelCellActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\Excel\AExcelCellCommands.cs" />
     <Compile Include="Core\Automation\Commands\Excel\AExcelColumnRangeCommands.cs" />
@@ -733,7 +744,7 @@
     <Compile Include="Core\Automation\Commands\Remote\RemoteAPICommand.cs" />
     <Compile Include="Core\Automation\Commands\Remote\RemoteTaskCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\FilterDataTableCommand.cs" />
-    <Compile Include="Core\Automation\Commands\DataTable\RemoveDataRowCommand.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\SearchAndDeleteDataTableRowsCommand.cs" />
     <Compile Include="Core\Automation\Commands\Folder\RenameFolderCommand.cs" />
     <Compile Include="Core\Automation\Commands\ApplicationScriptFile\LoadScriptFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowser\SeleniumBrowserSwitchWebBrowserFrameCommand.cs" />
@@ -1183,6 +1194,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmAddVariable.resx">
       <DependentUpon>frmAddVariable.cs</DependentUpon>
@@ -1515,6 +1527,7 @@ robocopy "$(ProjectDir)Samples" "$(ProjectDir)$(OutDir)Samples" *.exe /xo /E /S
 robocopy "$(ProjectDir)Manual" "$(ProjectDir)$(OutDir)Manual" *.txt /xo /E /S
 mkdir "$(ProjectDir)$(OutDir)AutoSave"
 mkdir "$(ProjectDir)$(OutDir)RunWithoutSaving"
+mkdir "$(ProjectDir)$(OutDir)BeforeConverted"
 if %25ERRORLEVEL%25 LSS 8 EXIT 0</PreBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Selenium.WebDriver.4.16.2\build\Selenium.WebDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.4.16.2\build\Selenium.WebDriver.targets')" />

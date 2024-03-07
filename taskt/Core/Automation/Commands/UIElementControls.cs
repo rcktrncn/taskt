@@ -8,6 +8,7 @@ using System.Xml.XPath;
 using System.Security;
 using System.Windows.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using System.Diagnostics;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -21,20 +22,20 @@ namespace taskt.Core.Automation.Commands
         /// <summary>
         /// UIElement type for Reflection
         /// </summary>
-        private static Type TypeOfAutomationElement = typeof(AutomationElement);
+        private static readonly Type TypeOfAutomationElement = typeof(AutomationElement);
 
         /// <summary>
         /// ControlType type for Reflection
         /// </summary>
-        private static Type TypeOfControlType = typeof(ControlType);
+        private static readonly Type TypeOfControlType = typeof(ControlType);
 
-        private static string[] TargetControlTypes = new string[]
+        private static readonly string[] TargetControlTypes = new string[]
         {
             "AcceleratorKey", "AccessKey", "AutomationId", "ClassName", "ControlType",
             "FrameworkId", "HasKeyboardFocus", "HelpText", "IsContentElement",
             "IsControlElement", "IsEnabled", "IsKeyboardFocusable", "IsOffscreen",
             "IsPassword", "IsRequiredForForm", "ItemStatus", "ItemType",
-            "LocalizedControlType", "Name", "NativeWindowHandle", "ProcessID",
+            "LocalizedControlType", "Name", "NativeWindowHandle", "ProcessId",
         };
         #endregion
 
@@ -330,7 +331,7 @@ namespace taskt.Core.Automation.Commands
                             case "LocalizedControlType":
                             case "Name":
                             case "NativeWindowHandle":
-                            case "ProcessID":
+                            case "ProcessId":
                                 DataTableControls.SetParameterValue(table, value, name, "ParameterName", "ParameterValue");
                                 break;
 
@@ -362,17 +363,6 @@ namespace taskt.Core.Automation.Commands
                 f.ShowDialog();
             }
         }
-
-        //public static void InspectToolParserClicked(DataTable table, ComboBox windowNames = null)
-        //{
-        //    using (UI.Forms.Supplement_Forms.frmInspectParser frm = new UI.Forms.Supplement_Forms.frmInspectParser())
-        //    {
-        //        if (frm.ShowDialog() == DialogResult.OK)
-        //        {
-        //            parseInspectToolResult(frm.inspectResult, table, windowNames);
-        //        }
-        //    }
-        //}
 
         private static string parseControlTypeInspectToolResult(string value)
         {
@@ -481,15 +471,90 @@ namespace taskt.Core.Automation.Commands
                 var parameterName = row.Field<string>("ParameterName") ?? "";
                 var parameterValue = row.Field<string>("ParameterValue") ?? ""; ;
 
-                PropertyCondition propCondition;
-                if (bool.TryParse(parameterValue, out bool bValue))
+                // value correction
+                switch (parameterName)
                 {
-                    propCondition = CreatePropertyCondition(parameterName, bValue);
+                    case "HasKeyboardFocus":
+                    case "IsContentElement":
+                    case "IsControlElement":
+                    case "IsEnabled":
+                    case "IsKeyboardFocusable":
+                    case "IsOffscreen":
+                    case "IsPassword":
+                    case "IsRequiredForForm":
+                        if (string.IsNullOrEmpty(parameterValue))
+                        {
+                            parameterValue = "False";
+                        }
+                        else
+                        {
+                            switch (parameterValue.ToLower())
+                            {
+                                case "yes":
+                                    parameterValue = "True";
+                                    break;
+                                case "no":
+                                    parameterValue = "False";
+                                    break;
+                            }
+                        }
+                        if (!bool.TryParse(parameterValue, out _))
+                        {
+                            throw new Exception($"Invalid ParamterValue. Value must be 'True' or 'False'. ParameterName: '{parameterName}', ParameteValue: '{parameterValue}'");
+                        }
+                        break;
+
+                    case "NativeWindowHandle":
+                    case "ProcessId":
+                        if (string.IsNullOrEmpty(parameterValue))
+                        {
+                            parameterValue = "0";
+                        }
+                        if (!Int32.TryParse(parameterValue, out _))
+                        {
+                            throw new Exception($"Invalid ParamterValue. Value must be Int32 value. ParameterName: '{parameterName}', ParameteValue: '{parameterValue}'");
+                        }
+                        break;
                 }
-                else
+
+                // DBG
+                //Debug.WriteLine($"Name: '{parameterName}', Value: '{parameterValue}'");
+
+                PropertyCondition propCondition = null;
+
+                switch (parameterName)
                 {
-                    propCondition = CreatePropertyCondition(parameterName, parameterValue);
+                    case "HasKeyboardFocus":
+                    case "IsContentElement":
+                    case "IsControlElement":
+                    case "IsEnabled":
+                    case "IsKeyboardFocusable":
+                    case "IsOffscreen":
+                    case "IsPassword":
+                    case "IsRequiredForForm":
+                        propCondition = CreatePropertyCondition(parameterName, bool.Parse(parameterValue));
+                        break;
+
+                    case "NativeWindowHandle":
+                    case "ProcessId":
+                        propCondition = CreatePropertyCondition(parameterName, Int32.Parse(parameterValue));
+                        break;
+
+                    case "AcceleratorKey":
+                    case "AccessKey":
+                    case "AutomationId":
+                    case "ClassName":
+                    case "ControlType":
+                    case "FrameworkId":
+                    case "HelpText":
+                    case "ItemStatus":
+                    case "ItemType":
+                    case "LocalizedControlType":
+                    case "Name":
+                        propCondition = CreatePropertyCondition(parameterName, parameterValue);
+                        break;
                 }
+
                 conditionList.Add(propCondition);
             }
 
@@ -512,7 +577,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="rootElement"></param>
         /// <param name="searchCondition"></param>
         /// <returns></returns>
-        private static AutomationElement DeepSearchGUIElement(AutomationElement rootElement, Condition searchCondition)
+        private static AutomationElement DeepSearchGUIElement(AutomationElement rootElement, Condition searchCondition, DateTime endTime)
         {
             TreeWalker walker = TreeWalker.RawViewWalker;
 
@@ -530,35 +595,71 @@ namespace taskt.Core.Automation.Commands
                 };
             }
 
-            var ret = WalkerSearch(rootElement, conditions, walker);
+            var ret = WalkerSearch_DepthFirst(rootElement, conditions, walker, endTime);
+            //var ret = WalkerSearch_WidthFirst_Reverse(rootElement, conditions, walker, endTime);
             return ret;
         }
 
         /// <summary>
-        /// Search GUI Element used by TreeWalker
+        /// Search GUI Element used by TreeWalker (Depth First)
         /// </summary>
         /// <param name="rootElement"></param>
         /// <param name="searchConditions"></param>
         /// <param name="walker"></param>
         /// <returns></returns>
-        private static AutomationElement WalkerSearch(AutomationElement rootElement, PropertyCondition[] searchConditions, TreeWalker walker)
+        private static AutomationElement WalkerSearch_DepthFirst(AutomationElement rootElement, PropertyCondition[] searchConditions, TreeWalker walker, DateTime endTime)
         {
             AutomationElement node = walker.GetFirstChild(rootElement);
             AutomationElement ret = null;
 
             while (node != null)
             {
-                var result = searchConditions.All(c => node.GetCurrentPropertyValue(c.Property) == c.Value);
+                // DBG
+                //Console.WriteLine($"# Node: {node.Current.Name}");
+
+                bool result = true;
+                foreach (var c in searchConditions)
+                {
+                    object p = node.GetCurrentPropertyValue(c.Property);
+
+                    switch (c.Property.ProgrammaticName)
+                    {
+                        case "AutomationElementIdentifiers.ControlTypeProperty":
+                            // ControlType compare
+                            result &= (c.Value.ToString() == ((ControlType)p).Id.ToString());
+                            // DBG
+                            //Console.WriteLine($"Property: '{c.Property.ProgrammaticName}', Value Cond: '{c.Value.ToString()}', Value Node: '{((ControlType)p).Id.ToString()}'");
+                            break;
+
+                        default:
+                            // normal compare
+                            result &= (c.Value.ToString() == p.ToString());
+                            // DBG
+                            //Console.WriteLine($"Property: '{c.Property.ProgrammaticName}', Value Cond: '{c.Value.ToString()}', Value Node: '{p.ToString()}'");
+                            break;
+                    }
+
+                    if (!result)
+                    {
+                        break;
+                    }
+                }
+
                 if (result)
                 {
                     ret = node;
+                    break;
+                }
+                // Time up! not found.
+                if (DateTime.Now > endTime)
+                {
                     break;
                 }
 
                 // search child node
                 if (walker.GetFirstChild(node) != null)
                 {
-                    ret = WalkerSearch(node, searchConditions, walker);
+                    ret = WalkerSearch_DepthFirst(node, searchConditions, walker, endTime);
                     if (ret != null)
                     {
                         break;
@@ -573,19 +674,96 @@ namespace taskt.Core.Automation.Commands
         }
 
         /// <summary>
+        /// Search GUI Element used by TreeWalker (Depth First, Reverse)
+        /// </summary>
+        /// <param name="rootElement"></param>
+        /// <param name="searchConditions"></param>
+        /// <param name="walker"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
+        private static AutomationElement WalkerSearch_DepthFirst_Reverse(AutomationElement rootElement, PropertyCondition[] searchConditions, TreeWalker walker, DateTime endTime)
+        {
+            AutomationElement node = walker.GetLastChild(rootElement);
+            AutomationElement ret = null;
+
+            while (node != null)
+            {
+                // DBG
+                //Console.WriteLine($"# Node: {node.Current.Name}");
+
+                bool result = true;
+                foreach (var c in searchConditions)
+                {
+                    object p = node.GetCurrentPropertyValue(c.Property);
+
+                    switch (c.Property.ProgrammaticName)
+                    {
+                        case "AutomationElementIdentifiers.ControlTypeProperty":
+                            // ControlType compare
+                            result &= (c.Value.ToString() == ((ControlType)p).Id.ToString());
+                            // DBG
+                            //Console.WriteLine($"Property: '{c.Property.ProgrammaticName}', Value Cond: '{c.Value.ToString()}', Value Node: '{((ControlType)p).Id.ToString()}'");
+                            break;
+
+                        default:
+                            // normal compare
+                            result &= (c.Value.ToString() == p.ToString());
+                            // DBG
+                            //Console.WriteLine($"Property: '{c.Property.ProgrammaticName}', Value Cond: '{c.Value.ToString()}', Value Node: '{p.ToString()}'");
+                            break;
+                    }
+
+                    if (!result)
+                    {
+                        break;
+                    }
+                }
+
+                if (result)
+                {
+                    ret = node;
+                    break;
+                }
+                // Time up! not found.
+                if (DateTime.Now > endTime)
+                {
+                    break;
+                }
+
+                // search child node
+                if (walker.GetLastChild(node) != null)
+                {
+                    ret = WalkerSearch_DepthFirst_Reverse(node, searchConditions, walker, endTime);
+                    if (ret != null)
+                    {
+                        break;
+                    }
+                }
+
+                // previous sibling
+                node = walker.GetPreviousSibling(node);
+            }
+
+            return ret;
+        }
+
+        /// <summary>
         /// Search GUI Element by specified conditions DataTable
         /// </summary>
         /// <param name="rootElement"></param>
         /// <param name="conditionTable"></param>
         /// <param name="engine"></param>
         /// <returns></returns>
-        private static AutomationElement SearchGUIElement(AutomationElement rootElement, DataTable conditionTable, Engine.AutomationEngineInstance engine)
+        private static AutomationElement SearchGUIElement(AutomationElement rootElement, DataTable conditionTable, Engine.AutomationEngineInstance engine, DateTime endTime)
         {
             Condition searchConditions = CreateSearchCondition(conditionTable, engine);
 
-            var element = rootElement.FindFirst(TreeScope.Descendants, searchConditions) ??
-                            rootElement.FindFirst(TreeScope.Subtree, searchConditions) ??
-                            DeepSearchGUIElement(rootElement, searchConditions);
+            // NOTE: stop hung up
+            //var element = rootElement.FindFirst(TreeScope.Descendants, searchConditions) ??
+            //                rootElement.FindFirst(TreeScope.Subtree, searchConditions) ??
+            //                DeepSearchGUIElement(rootElement, searchConditions);
+
+            var element = DeepSearchGUIElement(rootElement, searchConditions, endTime);
 
             // if element not found, don't throw exception here
             return element;
@@ -605,7 +783,8 @@ namespace taskt.Core.Automation.Commands
             var ret = WaitControls.WaitProcess(waitTime, "AutomationElement",
                 new Func<(bool, object)>(() =>
                 {
-                    var e = SearchGUIElement(elem, conditionTable, engine);
+                    var endTime = DateTime.Now.AddSeconds(waitTime);
+                    var e = SearchGUIElement(elem, conditionTable, engine, endTime);
                     if (e != null)
                     {
                         return (true, e);
@@ -1070,14 +1249,6 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
-        //public static AutomationElement SearchGUIElementByXPath(ScriptCommand command, AutomationElement elem, string xpathName, string waitTimeName, Engine.AutomationEngineInstance engine)
-        //{
-        //    var xpath = command.ConvertToUserVariableAsXPath(xpathName, engine);
-        //    var wait = command.ConvertToUserVariableAsInteger(waitTimeName, engine);
-
-        //    return SearchGUIElementByXPath(elem, xpath, wait, engine);
-        //}
-
         public static AutomationElement SearchGUIElementByXPath(ScriptCommand command, string rootElementName, string xpathName, string waitTimeName, Engine.AutomationEngineInstance engine)
         {
             var element = command.ExpandUserVariableAsUIElement(rootElementName, engine);
@@ -1407,28 +1578,6 @@ namespace taskt.Core.Automation.Commands
                 }
             }
         }
-
-        //public static void GUIInspectTool_UsedByXPath_Clicked(TextBox txtXPath)
-        //{
-        //    using(var fm = new UI.Forms.Supplement_Forms.frmGUIInspect())
-        //    {
-        //        if (fm.ShowDialog() == DialogResult.OK)
-        //        {
-        //            txtXPath.Text = fm.XPath;
-        //        }
-        //    }
-        //}
-        //public static void GUIInspectTool_UsedByInspectResult_Clicked(DataTable searchParams)
-        //{
-        //    using (var fm = new UI.Forms.Supplement_Forms.frmGUIInspect())
-        //    {
-        //        if (fm.ShowDialog() == DialogResult.OK)
-        //        {
-        //            string result = fm.InspectResult;
-        //            parseInspectToolResult(result, searchParams);
-        //        }
-        //    }
-        //}
 
         public static void UIAutomationDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
