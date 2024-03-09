@@ -12,12 +12,18 @@ using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Engine
 {
-    public class AutomationEngineInstance
+    public class AutomationEngineInstance : IAppInstancesProperties
     {
-
-        //engine variables
+        /// <summary>
+        /// script variable list
+        /// </summary>
         public List<ScriptVariable> VariableList { get; set; }
+
+        /// <summary>
+        /// app instances list
+        /// </summary>
         public Dictionary<string, object> AppInstances { get; set; }
+
         public Dictionary<string, Script.Script> PreloadedTasks { get; set; }
         public ErrorHandlingCommand ErrorHandler;
         public List<ScriptError> ErrorsOccured { get; set; }
@@ -105,6 +111,7 @@ namespace taskt.Core.Automation.Engine
                 ExecuteScript(filePath, true);
             }).Start();
         }
+
         public void ExecuteScriptAsync(string filePath)
         {
             WriteLog("Client requesting to execute script independently");
@@ -115,6 +122,7 @@ namespace taskt.Core.Automation.Engine
                 ExecuteScript(filePath, true);
             }).Start();
         }
+
         public void ExecuteScriptXML(string xmlData)
         {
             WriteLog("Client requesting to execute script independently");
@@ -132,7 +140,6 @@ namespace taskt.Core.Automation.Engine
 
             try
             {
- 
                 CurrentStatus = EngineStatus.Running;
 
                 //create stopwatch for metrics tracking
@@ -197,7 +204,6 @@ namespace taskt.Core.Automation.Engine
                         }
                     }
                 }
-
 
                 VariableList = automationScript.Variables;
 
@@ -266,6 +272,7 @@ namespace taskt.Core.Automation.Engine
                 ScriptFinished(ScriptFinishedEventArgs.ScriptFinishedResult.Error, ex.ToString());
             }
         }
+
         public void ExecuteCommand(ScriptAction command)
         {
             //get command
@@ -307,7 +314,6 @@ namespace taskt.Core.Automation.Engine
                 return;
             }
 
-
             //bypass comments
             if (parentCommand is CommentCommand || parentCommand.IsCommented)
             {
@@ -317,7 +323,6 @@ namespace taskt.Core.Automation.Engine
 
             //report intended execution
             ReportProgress("Running Line " + parentCommand.LineNumber + ": " + parentCommand.GetDisplayValue());
-        
 
             //handle any errors
             try
@@ -424,72 +429,98 @@ namespace taskt.Core.Automation.Engine
             }
         }
 
-        public void AddAppInstance(string instanceName, object appObject) {
+        /// <summary>
+        /// add App Instance in Engine List (wrapper)
+        /// </summary>
+        /// <param name="instanceName"></param>
+        /// <param name="appObject"></param>
+        /// <exception cref="Exception"></exception>
+        public void AddAppInstance(string instanceName, object appObject) 
+        {
+            //if (AppInstances.ContainsKey(instanceName) && engineSettings.OverrideExistingAppInstances)
+            //{
+            //    ReportProgress("Overriding Existing Instance: " + instanceName);
+            //    AppInstances.Remove(instanceName);
+            //}
+            //else if (AppInstances.ContainsKey(instanceName) && !engineSettings.OverrideExistingAppInstances)
+            //{
+            //    throw new Exception("App Instance already exists and override has been disabled in engine settings! Enable override existing app instances or use unique instance names!");
+            //}
 
-            if (AppInstances.ContainsKey(instanceName) && engineSettings.OverrideExistingAppInstances)
-            {
-                ReportProgress("Overriding Existing Instance: " + instanceName);
-                AppInstances.Remove(instanceName);
-            }
-            else if (AppInstances.ContainsKey(instanceName) && !engineSettings.OverrideExistingAppInstances)
-            {
-                throw new Exception("App Instance already exists and override has been disabled in engine settings! Enable override existing app instances or use unique instance names!");
-            }
-
-            try
-            {
-                this.AppInstances.Add(instanceName, appObject);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            //try
+            //{
+            //    this.AppInstances.Add(instanceName, appObject);
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
+            this.AddAppInstance(instanceName, appObject, this);
         }
+
+        /// <summary>
+        /// get App Instance from Engine List (wrapper)
+        /// </summary>
+        /// <param name="instanceName"></param>
+        /// <returns></returns>
         public object GetAppInstance(string instanceName)
         {
-            try
-            {
-                if (AppInstances.TryGetValue(instanceName, out object appObject))
-                {
-                    return appObject;
-                }
-                else
-                {
-                    throw new Exception("App Instance '" + instanceName + "' not found!");
-                }
-            }
-            catch (Exception ex)
-            {
+            //try
+            //{
+            //    if (AppInstances.TryGetValue(instanceName, out object appObject))
+            //    {
+            //        return appObject;
+            //    }
+            //    else
+            //    {
+            //        throw new Exception("App Instance '" + instanceName + "' not found!");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
 
-                throw ex;
-            }
-           
+            //    throw ex;
+            //}
+            return ((IAppInstancesProperties)this).GetAppInstance(instanceName);
         }
+
+        /// <summary>
+        /// remove App Instance from Engine List (wrapper)
+        /// </summary>
+        /// <param name="instanceName"></param>
         public void RemoveAppInstance(string instanceName)
         {
-            try
-            {
-                if (AppInstances.ContainsKey(instanceName))
-                {
-                    AppInstances.Remove(instanceName);
-                    
-                }
-                else
-                {
-                    throw new Exception("App Instance '" + instanceName + "' not found!");
-                }
-            }
-            catch (Exception ex)
-            {
+            //try
+            //{
+            //    if (AppInstances.ContainsKey(instanceName))
+            //    {
+            //        AppInstances.Remove(instanceName);
+            //    }
+            //    else
+            //    {
+            //        throw new Exception("App Instance '" + instanceName + "' not found!");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
 
-                throw ex;
-            }
+            //    throw ex;
+            //}
+            ((IAppInstancesProperties)this).RemoveAppInstance(instanceName);
+        }
 
+        /// <summary>
+        /// Get New App Instance name (wrapper)
+        /// </summary>
+        /// <param name="prefixName"></param>
+        /// <returns></returns>
+        public string GetNewAppInstanceName(string prefixName = "")
+        {
+            return ((IAppInstancesProperties)this).GetNewInstanceName(prefixName);
         }
 
         public void AddVariable(string variableName, object variableValue)
         {
-
             if (VariableList.Any(f => f.VariableName == variableName))
             {
                 //update existing variable
@@ -512,7 +543,6 @@ namespace taskt.Core.Automation.Engine
                 newVariable.VariableValue = variableValue;
                 VariableList.Add(newVariable);
             }
-
         }
 
         public void StoreComplexObjectInVariable(string variableName, object value)
@@ -551,14 +581,17 @@ namespace taskt.Core.Automation.Engine
         {
             IsCancellationPending = true;
         }
+
         public void PauseScript()
         {
             IsScriptPaused = true;
         }
+
         public void ResumeScript()
         {
             IsScriptPaused = false;
         }
+
         public virtual void ReportProgress(string progress)
         {
             WriteLog(progress);
@@ -570,6 +603,7 @@ namespace taskt.Core.Automation.Engine
             //invoke event
             ReportProgressEvent?.Invoke(this, args);
         }
+
         public virtual void ScriptFinished(ScriptFinishedEventArgs.ScriptFinishedResult result, string error = null)
         {
             WriteLog("Result Code: " + result.ToString());
@@ -585,7 +619,6 @@ namespace taskt.Core.Automation.Engine
 
             //check value
             var resultValue = resultVar.VariableValue.ToString();
-
 
             if (error == null)
             {
@@ -604,9 +637,7 @@ namespace taskt.Core.Automation.Engine
                 {
                     TasktResult = resultValue;
                 }
-                
             }
-               
             else
             {
                 WriteLog("Error: " + error);
@@ -617,11 +648,9 @@ namespace taskt.Core.Automation.Engine
                 }
 
                 TasktResult = error;
-
             }
 
             engineLogger.Dispose();
-
 
             CurrentStatus = EngineStatus.Finished;
             ScriptFinishedEventArgs args = new ScriptFinishedEventArgs();
@@ -634,7 +663,6 @@ namespace taskt.Core.Automation.Engine
             SocketClient.SendExecutionLog("Result Code: " + result.ToString());
             SocketClient.SendExecutionLog("Total Execution Time: " + sw.Elapsed);
 
-
             //convert to json
             var serializedArguments = JsonConvert.SerializeObject(args);
 
@@ -646,20 +674,16 @@ namespace taskt.Core.Automation.Engine
                 summaryLogger.Dispose();
             }
 
-
             Client.EngineBusy = false;
-
 
             if (serverSettings.ServerConnectionEnabled)
             {
                 HttpServerClient.CheckIn();
             }
 
-
             ScriptFinishedEvent?.Invoke(this, args);
-
-
         }
+
         public virtual void LineNumberChanged(int lineNumber)
         {
             LineNumberChangedEventArgs args = new LineNumberChangedEventArgs();
@@ -692,12 +716,13 @@ namespace taskt.Core.Automation.Engine
                 engineLogger.Information(logText);
             }
         }
-
     }
+
     public class ReportProgressEventArgs : EventArgs
     {
         public string ProgressUpdate { get; set; }
     }
+
     public class ScriptFinishedEventArgs : EventArgs
     {
         public DateTime LoggedOn { get; set; }
@@ -710,10 +735,12 @@ namespace taskt.Core.Automation.Engine
             Successful, Error, Cancelled
         }
     }
+
     public class LineNumberChangedEventArgs : EventArgs
     {
        public int CurrentLineNumber { get; set; }
     }
+
 
     public class ScriptError
     {
@@ -721,6 +748,4 @@ namespace taskt.Core.Automation.Engine
         public string StackTrace { get; set; }
         public string ErrorMessage { get; set; }
     }
-
-
 }

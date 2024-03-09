@@ -450,11 +450,14 @@
     <Compile Include="Core\Automation\Commands\Window\SetWindowStateByWindowHandleCommand.cs" />
     <Compile Include="Core\Automation\Commands\Window\EM_WindowPositionPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Window\EM_WindowSizePropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\_General\IHaveDataTableElements.cs" />
     <Compile Include="Core\Automation\Commands\_General\ILExpandableProperties.cs" />
     <Compile Include="Core\Automation\Commands\_General\ILUIParameterProperties.cs" />
     <Compile Include="Core\Automation\Commands\_General\ILPositionProperties.cs" />
     <Compile Include="Core\Automation\Commands\_General\ILSizeProperties.cs" />
     <Compile Include="Core\Automation\Commands\_General\RECT.cs" />
+    <Compile Include="Core\Automation\Engine\EM_AppInstancesPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Engine\IAppInstancesProperties.cs" />
     <Compile Include="Core\Automation\Engine\SystemVariables.cs" />
     <Compile Include="Core\Automation\Commands\FormUIControls.cs" />
     <Compile Include="Core\Update\ApplicationUpdate.cs" />
@@ -477,8 +480,8 @@
     <Compile Include="Core\Automation\Commands\DataTable\SetDataTableColumnValuesByDataTableCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\SetDataTableColumnValuesByListCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\DeleteDataTableColumnCommand.cs" />
-    <Compile Include="Core\Automation\Commands\AddDataTableColumnsAndFillValuesByDataTableCommand.cs" />
-    <Compile Include="Core\Automation\Commands\AddDataTableColumnAndFillValuesByListCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\AddDataTableColumnsAndFillValuesByDataTableCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\AddDataTableColumnAndFillValuesByListCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\AddDataTableColumnCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\AddDataTableRowCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\SetDataTableValueCommand.cs" />
@@ -696,11 +699,11 @@
     <Compile Include="Core\Automation\Commands\Folder\CreateFolderCommand.cs" />
     <Compile Include="Core\Automation\Commands\Folder\DeleteFolderCommand.cs" />
     <Compile Include="Core\Automation\Commands\Excel\ExcelSplitRangeByColumnCommand.cs" />
-    <Compile Include="Core\Automation\Commands\Excel\ExcelWriteRowCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\ExcelWriteRowCommand.cs" />
     <Compile Include="Core\Automation\Commands\File\ExtractZipFileCommand.cs" />
-    <Compile Include="Core\Automation\Commands\DataTable\GetDataRowCommand.cs" />
-    <Compile Include="Core\Automation\Commands\DataTable\GetDataRowCountCommand.cs" />
-    <Compile Include="Core\Automation\Commands\DataTable\GetDataRowValueCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\GetDataRowCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\GetDataRowCountCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\GetDataRowValueCommand.cs" />
     <Compile Include="Core\Automation\Commands\File\GetFilesCommand.cs" />
     <Compile Include="Core\Automation\Commands\Folder\GetFoldersCommand.cs" />
     <Compile Include="Core\Automation\Commands\List\GetListCountCommand.cs" />
@@ -711,11 +714,11 @@
     <Compile Include="Core\Automation\Commands\Outlook\OutlookEmailCommand.cs" />
     <Compile Include="Core\Automation\Commands\Regex\GetRegexMatchesCommand.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\GetDictionaryValueCommand.cs" />
-    <Compile Include="Core\Automation\Commands\DataTable\AddDataRowCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\AddDataRowCommand.cs" />
     <Compile Include="Core\Automation\Commands\Variable\NewVariableCommand.cs" />
     <Compile Include="Core\Automation\Commands\If\BeginIfCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginContinousLoopCommand.cs" />
-    <Compile Include="Core\Automation\Commands\BeginExcelDatasetLoopCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\BeginExcelDatasetLoopCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginListLoopCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginNumberOfTimesLoopCommand.cs" />
     <Compile Include="Core\Automation\Commands\Window\ActivateWindowCommand.cs" />
@@ -753,7 +756,7 @@
     <Compile Include="Core\Automation\Commands\Engine\SetEnginePreferenceCommand.cs" />
     <Compile Include="Core\Automation\Commands\Error\ThrowExceptionCommand.cs" />
     <Compile Include="Core\Automation\Commands\Error\TryCommand.cs" />
-    <Compile Include="Core\Automation\Commands\DataTable\ParseDatasetRowCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\ParseDatasetRowCommand.cs" />
     <Compile Include="Core\Automation\Commands\Engine\ShowEngineContextCommand.cs" />
     <Compile Include="Core\Automation\Commands\NLG\NLGGenerateNLGPhraseCommand.cs" />
     <Compile Include="Core\Automation\Commands\NLG\NLGSetNLGParameterCommand.cs" />
@@ -801,11 +804,11 @@
     <Compile Include="Core\Automation\Commands\KeyMouse\ClickMouseCommand.cs" />
     <Compile Include="Core\Automation\Commands\KeyMouse\MoveMouseCommand.cs" />
     <Compile Include="Core\Automation\Commands\Misc\SequenceCommand.cs" />
-    <Compile Include="Core\Automation\Commands\ThickAppClickItemCommand.cs" />
-    <Compile Include="Core\Automation\Commands\ThickAppGetTextCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\ThickAppClickItemCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\ThickAppGetTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomation\UIAutomationUIElementActionCommand.cs" />
     <Compile Include="Core\Automation\Commands\DialogMessage\ShowUserInputDialogCommand.cs" />
-    <Compile Include="Core\Automation\Commands\DatabaseRunQueryCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\DatabaseRunQueryCommand.cs" />
     <Compile Include="Core\Automation\Commands\Data\DateCalculationCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\EndLoopCommand.cs" />
     <Compile Include="Core\Automation\Commands\Excel\ExcelActivateWorksheetCommand.cs" />
@@ -864,7 +867,7 @@
     <Compile Include="Core\Automation\Commands\Word\WordReplaceTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\Word\WordSaveAsCommand.cs" />
     <Compile Include="Core\Automation\Commands\Word\WordSaveCommand.cs" />
-    <Compile Include="Core\Automation\Commands\DataTable\WriteDataRowValueCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\WriteDataRowValueCommand.cs" />
     <Compile Include="Core\Automation\Commands\Text\WriteTextFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\DateTimeControls.cs" />
     <Compile Include="UI\CustomControls\CommandsTreeControls.cs" />
@@ -1044,11 +1047,11 @@
     <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmKeysBuilder.Designer.cs">
       <DependentUpon>frmKeysBuilder.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmMultiSendKeystrokes.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmMultiEnterKeys.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmMultiSendKeystrokes.Designer.cs">
-      <DependentUpon>frmMultiSendKeystrokes.cs</DependentUpon>
+    <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmMultiEnterKeys.Designer.cs">
+      <DependentUpon>frmMultiEnterKeys.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\ScriptEngine\Supplemental\frmRemoteDesktopViewer.cs">
       <SubType>Form</SubType>
@@ -1260,8 +1263,8 @@
     <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmKeysBuilder.resx">
       <DependentUpon>frmKeysBuilder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmMultiSendKeystrokes.resx">
-      <DependentUpon>frmMultiSendKeystrokes.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmMultiEnterKeys.resx">
+      <DependentUpon>frmMultiEnterKeys.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ScriptEngine\Supplemental\frmRemoteDesktopViewer.resx">
       <DependentUpon>frmRemoteDesktopViewer.cs</DependentUpon>
