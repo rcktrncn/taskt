@@ -2623,17 +2623,20 @@ namespace taskt.UI.Forms.ScriptBuilder
 
         private void RemoveOldAutoSavedFiles()
         {
-            RemoveOldScriptFiles(Script.GetAutoSaveFolderPath(), appSettings.ClientSettings.RemoveAutoSaveFileDays);
+            //RemoveOldScriptFiles(Script.GetAutoSaveFolderPath(), appSettings.ClientSettings.RemoveAutoSaveFileDays);
+            RemoveOldScriptFiles(Core.IO.Folders.GetAutoSaveFolderPath(), appSettings.ClientSettings.RemoveAutoSaveFileDays);
         }
 
         private void RemoveOldRunWithoutSavingScriptFiles()
         {
-            RemoveOldScriptFiles(Script.GetRunWithoutSavingFolderPath(), appSettings.ClientSettings.RemoveRunWithtoutSavingFileDays);
+            //RemoveOldScriptFiles(Script.GetRunWithoutSavingFolderPath(), appSettings.ClientSettings.RemoveRunWithtoutSavingFileDays);
+            RemoveOldScriptFiles(Core.IO.Folders.GetRunWithoutSavingFolderPath(), appSettings.ClientSettings.RemoveRunWithtoutSavingFileDays);
         }
 
         private void RemoveOldBeforeConvertedScriptFiles()
         {
-            RemoveOldScriptFiles(Script.GetBeforeConvertedFolderPath(), appSettings.ClientSettings.RemoveBeforeConvertedFileDays);
+            //RemoveOldScriptFiles(Script.GetBeforeConvertedFolderPath(), appSettings.ClientSettings.RemoveBeforeConvertedFileDays);
+            RemoveOldScriptFiles(Core.IO.Folders.GetBeforeConvertedFolderPath(), appSettings.ClientSettings.RemoveBeforeConvertedFileDays);
         }
 
         private void RemoveOldScriptFiles(string folderPath, int days)
@@ -3811,6 +3814,7 @@ namespace taskt.UI.Forms.ScriptBuilder
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //var tempFilePath = Script.GetRunWithoutSavingScriptFilePath();
             var tempFilePath = Script.GetRunWithoutSavingScriptFilePath();
             var currentFilePath = this.ScriptFilePath;
             var currentDontSaveFlag = this.dontSaveFlag;

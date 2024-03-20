@@ -169,7 +169,8 @@ namespace taskt.Core.Script
         {
             // backup before converted
             var fileName = $"bc-{Path.GetFileNameWithoutExtension(scriptFilePath)}-{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.xml";
-            var bkFile = Path.Combine(GetBeforeConvertedFolderPath(), fileName);
+            //var bkFile = Path.Combine(GetBeforeConvertedFolderPath(), fileName);
+            var bkFile = Path.Combine(IO.Folders.GetBeforeConvertedFolderPath(), fileName);
             File.Copy(scriptFilePath, bkFile);
 
             XDocument xmlScript = XDocument.Load(scriptFilePath);
@@ -269,15 +270,15 @@ namespace taskt.Core.Script
             return new XmlSerializer(typeof(Script), subClasses);
         }
 
-        /// <summary>
-        /// get AutoSave Folder Path
-        /// </summary>
-        /// <returns></returns>
-        public static string GetAutoSaveFolderPath()
-        {
-            var tasktExePath = Assembly.GetEntryAssembly().Location;
-            return Path.Combine(Path.GetDirectoryName(tasktExePath), "AutoSave");
-        }
+        ///// <summary>
+        ///// get AutoSave Folder Path
+        ///// </summary>
+        ///// <returns></returns>
+        //public static string GetAutoSaveFolderPath()
+        //{
+        //    var tasktExePath = Assembly.GetEntryAssembly().Location;
+        //    return Path.Combine(Path.GetDirectoryName(tasktExePath), "AutoSave");
+        //}
 
         /// <summary>
         /// get autosave script file path
@@ -285,31 +286,32 @@ namespace taskt.Core.Script
         /// <returns></returns>
         public static (string path, string timeStump) GetAutoSaveScriptFilePath()
         {
-            var savePath = GetAutoSaveFolderPath();
+            //var savePath = GetAutoSaveFolderPath();
+            var savePath = IO.Folders.GetAutoSaveFolderPath();
             var saveTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
 
             return (Path.Combine(savePath, "autosave-") + saveTime + ".xml", saveTime);
         }
 
-        /// <summary>
-        /// get RunWithoutSaving Folder Path
-        /// </summary>
-        /// <returns></returns>
-        public static string GetRunWithoutSavingFolderPath()
-        {
-            var tasktExePath = Assembly.GetEntryAssembly().Location;
-            return Path.Combine(Path.GetDirectoryName(tasktExePath), "RunWithoutSaving");
-        }
+        ///// <summary>
+        ///// get RunWithoutSaving Folder Path
+        ///// </summary>
+        ///// <returns></returns>
+        //public static string GetRunWithoutSavingFolderPath()
+        //{
+        //    var tasktExePath = Assembly.GetEntryAssembly().Location;
+        //    return Path.Combine(Path.GetDirectoryName(tasktExePath), "RunWithoutSaving");
+        //}
 
-        /// <summary>
-        /// get BeforeConverted Folder Path
-        /// </summary>
-        /// <returns></returns>
-        public static string GetBeforeConvertedFolderPath()
-        {
-            var tasktExePath = Assembly.GetEntryAssembly().Location;
-            return Path.Combine(Path.GetDirectoryName(tasktExePath), "BeforeConverted");
-        }
+        ///// <summary>
+        ///// get BeforeConverted Folder Path
+        ///// </summary>
+        ///// <returns></returns>
+        //public static string GetBeforeConvertedFolderPath()
+        //{
+        //    var tasktExePath = Assembly.GetEntryAssembly().Location;
+        //    return Path.Combine(Path.GetDirectoryName(tasktExePath), "BeforeConverted");
+        //}
 
         /// <summary>
         /// get file path when use 'Run Without Saving'
@@ -317,7 +319,8 @@ namespace taskt.Core.Script
         /// <returns></returns>
         public static string GetRunWithoutSavingScriptFilePath()
         {
-            var runPath = GetRunWithoutSavingFolderPath();
+            //var runPath = GetRunWithoutSavingFolderPath();
+            var runPath = IO.Folders.GetRunWithoutSavingFolderPath();
             var saveTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
             return Path.Combine(runPath, "run-") + saveTime + ".xml";
         }
@@ -384,6 +387,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_81(doc);
             convertTo3_5_1_83(doc);
             convertTo3_5_1_84(doc);
+            convertTo3_5_1_86(doc);
 
             return doc;
         }
@@ -2579,6 +2583,41 @@ namespace taskt.Core.Script
                         })
                     ),
                 }
+            );
+
+            return doc;
+        }
+
+        private static XDocument convertTo3_5_1_86(XDocument doc)
+        {
+            // LoadDataTableCommand -> ExcelCreateDataTableFromExcelFile
+            ChangeToOtherCommand(doc, "LoadDataTableCommand", "ExcelCreateDataTableFromExcelFile", "Create DataTable From Excel File",
+                new List<(string, string)>()
+                {
+                    ("v_DataSetName", "v_DataTableName"),
+                    ("v_ContainsHeaderRow", "v_FirstRowAsColumnName"),
+                }
+            );
+
+            // LoadDictionaryCommand -> CreateDictionaryFromExcelFile
+            ChangeCommandName(doc, "LoadDictionaryCommand", "CreateDictionaryFromExcelFile", "Create Dictionary From Excel File");
+
+            // SetEnginePreferenceCommand
+            ChangeAttributeValue(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    return (el.Attribute("CommandName").Value == "SetEnginePreferenceCommand") &&
+                            (el.Attribute("v_PreferenceType").Value.ToLower() == "current window keyword");
+                }),
+                "v_Comment",
+                new Action<XAttribute>(attr =>
+                {
+                    var v = attr.Value;
+                    if (!v.StartsWith("'Current Window Keyword' will eventually become unavailable."))
+                    {
+                        attr.SetValue($"'Current Window Keyword' will eventually become unavailable. {v}");
+                    }
+                })
             );
 
             return doc;

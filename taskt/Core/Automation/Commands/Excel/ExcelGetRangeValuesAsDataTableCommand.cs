@@ -57,6 +57,13 @@ namespace taskt.Core.Automation.Commands
         //[PropertyParameterOrder(6006)]
         //public string v_ValueType { get; set; }
 
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(SelectionItemsControls), nameof(SelectionItemsControls.v_YesNoComboBox))]
+        [PropertyDescription("Use the First Row as the Column Names (Value Type is Cell only)")]
+        [PropertyIsOptional(true, "No")]
+        [PropertyParameterOrder(13000)]
+        public string v_FirstRowAsColumnName { get; set; }
+
         public ExcelGetRangeValuesAsDataTableCommand()
         {
             //this.CommandName = "ExcelGetRangeValuesAsDataTableCommand";
@@ -136,7 +143,7 @@ namespace taskt.Core.Automation.Commands
             int rowRange = rowEndIndex - rowStartIndex + 1;
             int colRange = columnEndIndex - columnStartIndex + 1;
 
-            DataTable newDT = new DataTable();
+            var newDT = new DataTable();
             // set columns
             for (int i = 0; i < colRange; i++) 
             {
@@ -153,6 +160,18 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
+            var valueType = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_ValueType), "Value Type", engine);
+            if ((valueType == "cell") && (this.ExpandValueOrUserVariableAsYesNo(nameof(v_FirstRowAsColumnName), engine)))
+            {
+                if (newDT.Rows.Count > 0)
+                {
+                    for (int i = newDT.Columns.Count - 1; i >= 0; i--)
+                    {
+                        newDT.Columns[i].ColumnName = newDT.Rows[0]?.ToString() ?? "";
+                    }
+                    newDT.Rows[0].Delete();
+                }
+            }
             newDT.StoreInUserVariable(engine, v_Result);
         }
     }
