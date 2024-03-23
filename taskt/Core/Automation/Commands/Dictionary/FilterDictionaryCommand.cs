@@ -24,7 +24,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDescription("Dictionary Variable Name to Filter")]
         [PropertyValidationRule("Dictionary to Filter", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "Dictionary to Filter")]
-        public string v_InputDictionary { get; set; }
+        public string v_TargetDictionary { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_FilterValueType))]
@@ -42,7 +42,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_NewOutputDictionaryName))]
-        public string v_OutputDictionary { get; set; }
+        public string v_NewDictionary { get; set; }
 
         public FilterDictionaryCommand()
         {
@@ -54,7 +54,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var targetDic = v_InputDictionary.ExpandUserVariableAsDictinary(engine);
+            var targetDic = v_TargetDictionary.ExpandUserVariableAsDictinary(engine);
 
             var parameters = DataTableControls.GetFieldValues(v_FilterActionParameterTable, "ParameterName", "ParameterValue", engine);
             var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_TargetType), nameof(v_FilterAction), parameters, engine, this);
@@ -69,7 +69,7 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            res.StoreInUserVariable(engine, v_OutputDictionary);
+            res.StoreInUserVariable(engine, v_NewDictionary);
         }
 
         private void cmbTargetType_SelectionChangeCommited(object sender, EventArgs e)

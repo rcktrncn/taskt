@@ -19,11 +19,11 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
-        public string v_InputData { get; set; }
+        public string v_Dictionary { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_OutputDataTableName))]
-        public string v_OutputVariable { get; set; }
+        public string v_Result { get; set; }
 
         public ConvertDictionaryToDataTableCommand()
         {
@@ -35,7 +35,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var dic = v_InputData.ExpandUserVariableAsDictinary(engine);
+            var dic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
 
             DataTable DT = new DataTable();
             DT.Rows.Add();
@@ -44,7 +44,7 @@ namespace taskt.Core.Automation.Commands
                 DT.Columns.Add(item.Key);
                 DT.Rows[0][item.Key] = item.Value;
             }
-            DT.StoreInUserVariable(engine, v_OutputVariable);
+            DT.StoreInUserVariable(engine, v_Result);
         }
     }
 }

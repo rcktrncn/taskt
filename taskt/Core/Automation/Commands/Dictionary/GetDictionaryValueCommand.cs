@@ -19,7 +19,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
-        public string v_InputData { get; set; }
+        public string v_Dictionary { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_Key))]
@@ -27,7 +27,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        public string v_OutputVariable { get; set; }
+        public string v_Result { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_WhenKeyDoesNotExists))]
@@ -63,8 +63,8 @@ namespace taskt.Core.Automation.Commands
             {
                 var getKeys = new GetDictionaryKeysListCommand()
                 {
-                    v_InputData = this.v_InputData,
-                    v_OutputVariable = VariableNameControls.GetInnerVariableName(0, engine),
+                    v_Dictionary = this.v_Dictionary,
+                    v_Result = VariableNameControls.GetInnerVariableName(0, engine),
                 };
                 getKeys.RunCommand(engine);
                 var keys = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
@@ -83,11 +83,11 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            (var dic, var vKey) = this.ExpandUserVariablesAsDictionaryAndKey(nameof(v_InputData), nameof(v_Key), engine);
+            (var dic, var vKey) = this.ExpandUserVariablesAsDictionaryAndKey(nameof(v_Dictionary), nameof(v_Key), engine);
 
             if (dic.ContainsKey(vKey))
             {
-                dic[vKey].StoreInUserVariable(engine, v_OutputVariable);
+                dic[vKey].StoreInUserVariable(engine, v_Result);
             }
             else
             {
@@ -98,7 +98,7 @@ namespace taskt.Core.Automation.Commands
                         throw new Exception("Key " + v_Key + " does not exists in the Dictionary");
 
                     case "set empty":
-                        "".StoreInUserVariable(engine, v_OutputVariable);
+                        "".StoreInUserVariable(engine, v_Result);
                         break;
                 }
             }

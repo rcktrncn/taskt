@@ -317,6 +317,10 @@
     <Compile Include="Core\Automation\Commands\Color\EM_CanHandleColorExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Color\ICanHandleColor.cs" />
     <Compile Include="Core\Automation\Commands\Color\IColorCreateProperties.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\EM_CanHandleDataTable.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\EM_DataTablePropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ICanHandleDataTable.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ILDataTableProperties.cs" />
     <Compile Include="Core\Automation\Commands\DateTime\ADateTimeConvertCommands.cs" />
     <Compile Include="Core\Automation\Commands\DateTime\ADateTimeCreateCommands.cs" />
     <Compile Include="Core\Automation\Commands\DateTime\EM_DateTimeConvertPropertiesExtensionMethods.cs" />
@@ -324,9 +328,11 @@
     <Compile Include="Core\Automation\Commands\DateTime\ICanHandleDateTime.cs" />
     <Compile Include="Core\Automation\Commands\DateTime\IDateTimeConvertProperties.cs" />
     <Compile Include="Core\Automation\Commands\DateTime\IDateTimeCreateProperties.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\ABothDictionaryCommands.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\AInputDictionaryCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_CanHandleDictionary.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ICanHandleDictionary.cs" />
-    <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryActionProperties.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\ILDictionaryProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\AExcelCellActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\Excel\AExcelCellCommands.cs" />
     <Compile Include="Core\Automation\Commands\Excel\AExcelColumnRangeCommands.cs" />
@@ -738,7 +744,7 @@
     <Compile Include="Core\Automation\Commands\Excel\ExcelAppendRowCommand.cs" />
     <Compile Include="Core\Automation\Commands\Excel\ExcelGetRangeCommand .cs" />
     <Compile Include="Core\Automation\Commands\Excel\ExcelGetRangeCommandASDT.cs" />
-    <Compile Include="Core\Automation\Commands\Excel\CreateDictionaryFromExcelFile.cs" />
+    <Compile Include="Core\Automation\Commands\Excel\ExcelCreateDictionaryFromExcelFile.cs" />
     <Compile Include="Core\Automation\Commands\Excel\ExcelWriteRangeCommand.cs" />
     <Compile Include="Core\Automation\Commands\Error\FinallyCommand.cs" />
     <Compile Include="Core\Automation\Commands\Text\EncryptDecryptTextCommand.cs" />
