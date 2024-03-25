@@ -19,7 +19,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
-        public string v_DataTableName { get; set; }
+        public string v_DataTable { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
@@ -43,7 +43,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_OutputDictionaryName))]
-        public string v_OutputVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public ConvertDataTableColumnToDictionaryCommand()
         {
@@ -65,13 +65,13 @@ namespace taskt.Core.Automation.Commands
                 prefix = v_KeyPrefix.ExpandValueOrUserVariable(engine);
             }
 
-            (var srcDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTableName), nameof(v_ColumnType), nameof(v_DataColumnIndex), engine);
+            (var srcDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_DataColumnIndex), engine);
             Dictionary<string, string> myDic = new Dictionary<string, string>();
             for (int i = 0; i < srcDT.Rows.Count; i++)
             {
                 myDic.Add(prefix + i.ToString(), srcDT.Rows[i][colIndex]?.ToString() ?? "");
             }
-            myDic.StoreInUserVariable(engine, v_OutputVariableName);
+            myDic.StoreInUserVariable(engine, v_Result);
         }
     }
 }

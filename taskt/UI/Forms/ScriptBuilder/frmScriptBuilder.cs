@@ -220,7 +220,8 @@ namespace taskt.UI.Forms.ScriptBuilder
             }
 
             //get scripts folder
-            var rpaScriptsFolder = Core.IO.Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder);
+            //var rpaScriptsFolder = Core.IO.Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder);
+            var rpaScriptsFolder = Core.IO.Folders.GetScriptsFolderPath();
 
             if (!System.IO.Directory.Exists(rpaScriptsFolder))
             {
@@ -394,7 +395,8 @@ namespace taskt.UI.Forms.ScriptBuilder
             flwRecentFiles.Controls.Clear();
 
 
-            var scriptPath = Core.IO.Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder);
+            //var scriptPath = Core.IO.Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder);
+            var scriptPath = Core.IO.Folders.GetScriptsFolderPath();
 
             if (!System.IO.Directory.Exists(scriptPath))
             {
@@ -470,7 +472,8 @@ namespace taskt.UI.Forms.ScriptBuilder
         private void NewFileLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             LinkLabel senderLink = (LinkLabel)sender;
-            string targetScriptPath = Core.IO.Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder) + senderLink.Text;
+            //string targetScriptPath = Core.IO.Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder) + senderLink.Text;
+            var targetScriptPath = System.IO.Path.Combine(Core.IO.Folders.GetScriptsFolderPath(), senderLink.Text);
             OpenScriptFromFilePath(targetScriptPath, true);
         }
         #endregion
@@ -1284,7 +1287,10 @@ namespace taskt.UI.Forms.ScriptBuilder
 
                 foreach (ListViewItem item in lstScriptActions.SelectedItems)
                 {
-                    commands.Add((ScriptCommand)item.Tag);
+                    var newCommand = ((ScriptCommand)item.Tag).Clone();
+                    newCommand.GenerateID();
+                    commands.Add(newCommand);
+                    //commands.Add((ScriptCommand)item.Tag);
                 }
 
                 // set clipborad xml string
@@ -2663,7 +2669,8 @@ namespace taskt.UI.Forms.ScriptBuilder
             //show ofd
             using (var openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = Core.IO.Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder);
+                //openFileDialog.InitialDirectory = Core.IO.Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder);
+                openFileDialog.InitialDirectory = Core.IO.Folders.GetScriptsFolderPath();
                 openFileDialog.RestoreDirectory = true;
                 openFileDialog.Filter = "Xml (*.xml)|*.xml";
 
@@ -2771,7 +2778,8 @@ namespace taskt.UI.Forms.ScriptBuilder
             //show ofd
             using (var openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = Core.IO.Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder);
+                //openFileDialog.InitialDirectory = Core.IO.Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder);
+                openFileDialog.InitialDirectory = Core.IO.Folders.GetScriptsFolderPath();
                 openFileDialog.RestoreDirectory = true;
                 openFileDialog.Filter = "Xml (*.xml)|*.xml";
 
@@ -2806,6 +2814,7 @@ namespace taskt.UI.Forms.ScriptBuilder
                 {
                     Notify("Error Parsing File: Commands not found!");
                 }
+                deserializedScript.ReGenerateCommandID();   // change command ids
 
                 //variables for comments
                 var fileName = new System.IO.FileInfo(filePath).Name;
@@ -2845,7 +2854,6 @@ namespace taskt.UI.Forms.ScriptBuilder
 
                 //notify
                 Notify("Script Imported Successfully!");
-
             }
             catch (Exception ex)
             {
@@ -2996,7 +3004,8 @@ namespace taskt.UI.Forms.ScriptBuilder
             {
                 using (var saveFileDialog = new SaveFileDialog())
                 {
-                    saveFileDialog.InitialDirectory = Core.IO.Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder);
+                    //saveFileDialog.InitialDirectory = Core.IO.Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder);
+                    saveFileDialog.InitialDirectory = Core.IO.Folders.GetScriptsFolderPath();
                     saveFileDialog.RestoreDirectory = true;
                     saveFileDialog.Filter = "Xml (*.xml)|*.xml";
 

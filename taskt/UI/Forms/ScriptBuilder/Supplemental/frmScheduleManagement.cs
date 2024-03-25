@@ -36,7 +36,8 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             txtAppPath.Text = System.Reflection.Assembly.GetEntryAssembly().Location;
 
             //get path to scripts folder
-            rpaScriptsFolder = Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder);
+            //rpaScriptsFolder = Folders.GetFolder(Core.IO.Folders.FolderType.ScriptsFolder);
+            rpaScriptsFolder = Folders.GetScriptsFolderPath();
 
             var files = System.IO.Directory.GetFiles(rpaScriptsFolder);
 
@@ -52,21 +53,22 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             //call bgw to pull schedule info
             RefreshTasks();
         }
+
         private void uiBtnOk_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtRecurCount.Text))
+            if (string.IsNullOrEmpty(txtRecurCount.Text))
             {
                 MessageBox.Show("Please indicate a recurrence value!");
                 return;
             }
 
-            if (String.IsNullOrEmpty(cboRecurType.Text))
+            if (string.IsNullOrEmpty(cboRecurType.Text))
             {
                 MessageBox.Show("Please select a recurrence frequency!");
                 return;
             }
 
-            if (String.IsNullOrEmpty(cboSelectedScript.Text))
+            if (string.IsNullOrEmpty(cboSelectedScript.Text))
             {
                 MessageBox.Show("Please select a script!");
                 return;
@@ -92,9 +94,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                     trigger.EndBoundary = dtEndTime.Value;
                 }
 
-                double recurParsed;
-
-                if (!double.TryParse(txtRecurCount.Text, out recurParsed))
+                if (!double.TryParse(txtRecurCount.Text, out double recurParsed))
                 {
                     MessageBox.Show("Recur value must be a number type (double)!");
                     return;
@@ -124,11 +124,15 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 ts.RootFolder.RegisterTaskDefinition(@"taskt-" + cboSelectedScript.Text, td);
             }
         }
+
         private void uiBtnShowScheduleManager_Click(object sender, EventArgs e)
         {
             using (TaskService ts = new TaskService())
+            {
                 ts.StartSystemTaskSchedulerManager();
+            }
         }
+
         private void dgvScheduledTasks_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvScheduledTasks.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
@@ -152,14 +156,18 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             bgwGetSchedulingInfo.RunWorkerAsync();
         }
+
         private void tmrGetSchedulingInfo_Tick(object sender, EventArgs e)
         {
             if (!bgwGetSchedulingInfo.IsBusy)
+            {
                 bgwGetSchedulingInfo.RunWorkerAsync();
+            }
         }
+
         private void bgwGetSchedulingInfo_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<Object[]> scheduledTaskList = new List<Object[]>();
+            var scheduledTaskList = new List<object[]>();
 
             using (TaskService ts = new TaskService())
             {
@@ -176,13 +184,13 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                     }
                 }
             }
-
             e.Result = scheduledTaskList;
         }
+
         private void bgwGetSchedulingInfo_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             dgvScheduledTasks.Rows.Clear();
-            List<object[]> datagridRows = (List<object[]>)e.Result;
+            var datagridRows = (List<object[]>)e.Result;
             datagridRows.ForEach(itm => dgvScheduledTasks.Rows.Add(itm[0], itm[1], itm[2], itm[3], itm[4], itm[5]));
         }
 
