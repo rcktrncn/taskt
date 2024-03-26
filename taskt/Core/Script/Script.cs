@@ -2954,6 +2954,9 @@ namespace taskt.Core.Script
                     }
                 }), "v_InputList", "v_List"
             );
+
+            // ReplaceListCommand v_TargetList -> v_List
+            ChangeAttributeName(doc, "ReplaceListCommand", "v_TargetList", "v_List");
         }
 
         /// <summary>
