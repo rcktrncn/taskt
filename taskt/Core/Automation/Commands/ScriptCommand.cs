@@ -11,7 +11,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    public abstract class ScriptCommand : ILUIParameterProperties
+    public abstract class ScriptCommand : ILUIParameterProperties, ICommandIDProperties
     {
         [XmlAttribute]
         public string CommandID { get; set; }
@@ -112,11 +112,11 @@ namespace taskt.Core.Automation.Commands
             this.CustomRendering = commandSettings.customeRender;
         }
 
-        public void GenerateID()
-        {
-            var id = Guid.NewGuid();
-            this.CommandID = id.ToString();
-        }
+        //public void GenerateID()
+        //{
+        //    var id = Guid.NewGuid();
+        //    this.CommandID = id.ToString();
+        //}
 
         #region RunCommand
 
