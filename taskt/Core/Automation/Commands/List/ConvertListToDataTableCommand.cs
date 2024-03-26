@@ -21,7 +21,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_InputList { get; set; }
+        public string v_Input { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_AType))]
@@ -69,7 +69,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_InputList.ExpandUserVariableAsList(engine);
+            List<string> targetList = v_Input.ExpandUserVariableAsList(engine);
 
             DataTable myDT = new DataTable();
 
@@ -84,7 +84,7 @@ namespace taskt.Core.Automation.Commands
                 }
                 if ((listItemNotEnough == "error") && (targetColumns.Count > targetList.Count))
                 {
-                    throw new Exception("The number of List items in " + v_InputList + " is not enough");
+                    throw new Exception("The number of List items in " + v_Input + " is not enough");
                 }
 
                 if (targetList.Count == targetColumns.Count)

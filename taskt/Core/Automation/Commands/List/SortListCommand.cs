@@ -22,7 +22,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDescription("List Variable Name to Sort")]
         [PropertyValidationRule("List to Sort", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "List to Sort")]
-        public string v_InputList { get; set; }
+        public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Sort Order")]
@@ -69,7 +69,7 @@ namespace taskt.Core.Automation.Commands
             switch (targetType)
             {
                 case "text":
-                    List<string> targetList = v_InputList.ExpandUserVariableAsList(engine);
+                    List<string> targetList = v_List.ExpandUserVariableAsList(engine);
                     List<string> newList = new List<string>(targetList);
 
                     newList.Sort();
@@ -81,7 +81,7 @@ namespace taskt.Core.Automation.Commands
                     break;
 
                 case "number":
-                    List<decimal> targetValueList = v_InputList.ExpandUserVariableAsDecimalList(false, engine);
+                    List<decimal> targetValueList = v_List.ExpandUserVariableAsDecimalList(false, engine);
                     List<decimal> valueList = new List<decimal>(targetValueList);
 
                     valueList.Sort();

@@ -2931,6 +2931,29 @@ namespace taskt.Core.Script
                     }
                 }), "v_ListName", "v_List"
             );
+
+            // List commands v_InputList -> v_List
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "ConvertListToDataTableCommand":
+                        case "ConvertListToDictionaryCommand":
+                        case "ConvertListToJSONCommand":
+                        case "GetAverageFromListCommand":
+                        case "GetMaxFromListCommand":
+                        case "GetMedianFromListCommand":
+                        case "GetMinFromListCommand":
+                        case "GetSumFromListCommand":
+                        case "GetVarianceFromListCommand":
+                        case "SortListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }), "v_InputList", "v_List"
+            );
         }
 
         /// <summary>
