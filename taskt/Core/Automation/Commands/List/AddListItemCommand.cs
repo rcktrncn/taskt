@@ -19,7 +19,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_BothListName))]
-        public string v_ListName { get; set; }
+        public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_OneLineTextBox))]
@@ -39,7 +39,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> lst = v_ListName.ExpandUserVariableAsList(engine);
+            List<string> lst = v_List.ExpandUserVariableAsList(engine);
 
             var variableInput = v_Input.ExpandValueOrUserVariable(engine);
             lst.Add(variableInput);

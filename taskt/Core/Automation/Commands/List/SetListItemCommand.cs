@@ -19,7 +19,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_BothListName))]
-        public string v_ListName { get; set; }
+        public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ListIndex))]
@@ -75,7 +75,7 @@ namespace taskt.Core.Automation.Commands
             //    index = targetList.Count + index;
             //}
 
-            (var list, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_ListName), nameof(v_ItemIndex), engine);
+            (var list, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_List), nameof(v_ItemIndex), engine);
 
             if ((index >= 0) && (index < list.Count))
             {

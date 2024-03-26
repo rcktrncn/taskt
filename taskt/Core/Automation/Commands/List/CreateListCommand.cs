@@ -22,7 +22,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_OutputListName))]
-        public string v_ListName { get; set; }
+        public string v_List { get; set; }
 
         [XmlElement]
         [PropertyDescription("List Values")]
@@ -53,7 +53,7 @@ namespace taskt.Core.Automation.Commands
 
             newList.AddRange(v_ListValues.AsEnumerable().Select(r => r["Values"]?.ToString() ?? "").ToArray());
 
-            newList.StoreInUserVariable(engine, v_ListName);
+            newList.StoreInUserVariable(engine, v_List);
         }
 
         public override void BeforeValidate()

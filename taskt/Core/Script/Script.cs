@@ -2908,6 +2908,31 @@ namespace taskt.Core.Script
             );
         }
 
+        private static void convertTo3_5_1_89(XDocument doc)
+        {
+            // List commands v_ListName -> v_List
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "AddListItemCommand":
+                        case "CheckListItemExistsCommand":
+                        case "CreateListCommand":
+                        case "GetListCountCommand":
+                        case "GetListIndexCommand":
+                        case "GetListIndexFromValueCommand":
+                        case "GetListItemCommand":
+                        case "SetListIndexCommand":
+                        case "SetListItemCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }), "v_ListName", "v_List"
+            );
+        }
+
         /// <summary>
         /// get old, new current window keyword
         /// </summary>

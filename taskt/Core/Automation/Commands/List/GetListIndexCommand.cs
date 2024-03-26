@@ -19,7 +19,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_ListName { get; set; }
+        public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
@@ -31,14 +31,14 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var rawVariable = v_ListName.GetRawVariable(engine);
+            var rawVariable = v_List.GetRawVariable(engine);
             if (rawVariable.VariableValue is List<string>)
             {
                 rawVariable.CurrentPosition.ToString().StoreInUserVariable(engine, v_Result);
             }
             else
             {
-                throw new Exception("Variable '" + v_ListName + "' is not LIST.");
+                throw new Exception("Variable '" + v_List + "' is not LIST.");
             }
         }
     }
