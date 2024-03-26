@@ -20,7 +20,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_Input { get; set; }
+        public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_AType))]
@@ -68,7 +68,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_Input.ExpandUserVariableAsList(engine);
+            List<string> targetList = v_List.ExpandUserVariableAsList(engine);
 
             var keyType = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_KeyType), "Key Type", engine);
 
@@ -85,7 +85,7 @@ namespace taskt.Core.Automation.Commands
                 }
                 if ((listItemNotEnough == "error") && (targetKeys.Count > targetList.Count))
                 {
-                    throw new Exception("The number of List items in " + v_Input + " is not enough");
+                    throw new Exception("The number of List items in " + v_List + " is not enough");
                 }
 
                 if (targetList.Count == targetKeys.Count)
