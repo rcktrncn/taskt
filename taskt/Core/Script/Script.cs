@@ -2979,6 +2979,16 @@ namespace taskt.Core.Script
                     ("v_OutputList", "v_NewList"),
                 }
             );
+
+            // ConcatenateListsCommand
+            ChangeMultiAttributeNames(doc, "ConcatenateListsCommand",
+                new List<(string, string)>()
+                {
+                    ("v_InputListA", "v_ListA"),
+                    ("v_InputListB", "v_ListB"),
+                    ("v_OutputList", "v_NewList"),
+                }
+            );
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**vList1**", PropertyDetailSampleUsage.ValueType.VariableName)]
         [PropertyDetailSampleUsage("**{{{vList1}}}**", PropertyDetailSampleUsage.ValueType.VariableName)]
         [PropertyDisplayText(true, "List1")]
-        public string v_InputListA { get; set; }
+        public string v_ListA { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
@@ -33,12 +33,12 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**vList2**", PropertyDetailSampleUsage.ValueType.VariableName)]
         [PropertyDetailSampleUsage("**{{{vList2}}}**", PropertyDetailSampleUsage.ValueType.VariableName)]
         [PropertyDisplayText(true, "List2")]
-        public string v_InputListB { get; set; }
+        public string v_ListB { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
         [Remarks("Concatenate List1, List2 in that order")]
-        public string v_OutputList { get; set; }
+        public string v_NewList { get; set; }
 
         public ConcatenateListsCommand()
         {
@@ -50,13 +50,13 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> listA = v_InputListA.ExpandUserVariableAsList(engine);
-            List<string> listB = v_InputListB.ExpandUserVariableAsList(engine);
+            List<string> listA = v_ListA.ExpandUserVariableAsList(engine);
+            List<string> listB = v_ListB.ExpandUserVariableAsList(engine);
 
             List<string> newList = new List<string>();
             newList.AddRange(listA);
             newList.AddRange(listB);
-            newList.StoreInUserVariable(engine, v_OutputList);
+            newList.StoreInUserVariable(engine, v_NewList);
         }
     }
 }
