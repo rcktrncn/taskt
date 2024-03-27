@@ -23,7 +23,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
         [PropertyDescription("List Variable Name to Filter")]
         [PropertyValidationRule("List to Filter", PropertyValidationRule.ValidationRuleFlags.Empty)]
-        public string v_InputList { get; set; }
+        public string v_TargetList { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_FilterValueType))]
@@ -41,7 +41,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
-        public string v_OutputList { get; set; }
+        public string v_NewList { get; set; }
 
         public FilterListCommand()
         {
@@ -53,7 +53,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_InputList.ExpandUserVariableAsList(engine);
+            List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
 
             var parameters = DataTableControls.GetFieldValues(v_FilterActionParameterTable, "ParameterName", "ParameterValue", engine);
             var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_TargetType), nameof(v_FilterAction), parameters, engine, this);
@@ -68,7 +68,7 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            res.StoreInUserVariable(engine, v_OutputList);
+            res.StoreInUserVariable(engine, v_NewList);
         }
 
         private void cmbTargetType_SelectionChangeCommited(object sender, EventArgs e)

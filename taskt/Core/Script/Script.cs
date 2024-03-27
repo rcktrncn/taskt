@@ -2957,6 +2957,28 @@ namespace taskt.Core.Script
 
             // ReplaceListCommand v_TargetList -> v_List
             ChangeAttributeName(doc, "ReplaceListCommand", "v_TargetList", "v_List");
+
+            // List commands v_InputList -> v_TargetList, v_OutputList -> v_NewList
+            ChangeMultiAttributeNames(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "CopyListCommand":
+                        case "FilterListCommand":
+                        case "ReverseListCommand":
+                        case "SortListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                new List<(string, string)>()
+                {
+                    ("v_InputList", "v_TargetList"),
+                    ("v_OutputList", "v_NewList"),
+                }
+            );
         }
 
         /// <summary>
