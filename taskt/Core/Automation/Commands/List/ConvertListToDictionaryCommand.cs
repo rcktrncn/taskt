@@ -56,7 +56,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_OutputDictionaryName))]
-        public string v_applyToVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public ConvertListToDictionaryCommand()
         {
@@ -182,7 +182,7 @@ namespace taskt.Core.Automation.Commands
                     }
                     break;
             }
-            myDic.StoreInUserVariable(engine, v_applyToVariableName);
+            myDic.StoreInUserVariable(engine, v_Result);
         }
     }
 }

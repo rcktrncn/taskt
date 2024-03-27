@@ -417,6 +417,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_86(doc);
             convertTo3_5_1_87(doc);
             convertTo3_5_1_88(doc);
+            convertTo3_5_1_89(doc);
 
             return doc;
         }
@@ -2988,6 +2989,18 @@ namespace taskt.Core.Script
                     ("v_InputListB", "v_ListB"),
                     ("v_OutputList", "v_NewList"),
                 }
+            );
+
+            // List Convert commands v_applyToVariableName -> v_Result
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        default:
+                            return false;
+                    }
+                }), "v_applyToVariableName", "v_Result"
             );
         }
 

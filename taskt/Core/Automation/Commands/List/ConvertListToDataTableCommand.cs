@@ -57,7 +57,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_OutputDataTableName))]
-        public string v_applyToVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public ConvertListToDataTableCommand()
         {
@@ -198,7 +198,7 @@ namespace taskt.Core.Automation.Commands
                     }
                     break;
             }
-            myDT.StoreInUserVariable(engine, v_applyToVariableName);
+            myDT.StoreInUserVariable(engine, v_Result);
         }
     }
 }

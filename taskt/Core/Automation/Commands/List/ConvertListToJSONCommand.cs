@@ -23,7 +23,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_OutputJSONName))]
-        public string v_applyToVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public ConvertListToJSONCommand()
         {
@@ -41,7 +41,7 @@ namespace taskt.Core.Automation.Commands
             try
             {
                 string convertedList = Newtonsoft.Json.JsonConvert.SerializeObject(targetList);
-                convertedList.StoreInUserVariable(engine, v_applyToVariableName);
+                convertedList.StoreInUserVariable(engine, v_Result);
             }
             catch (Exception ex)
             {
