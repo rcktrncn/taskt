@@ -23,7 +23,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        public string v_UserVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public GetListCountCommand()
         {
@@ -69,7 +69,7 @@ namespace taskt.Core.Automation.Commands
             }
 
             string count = listToCount.Count.ToString();
-            count.StoreInUserVariable(engine, v_UserVariableName);
+            count.StoreInUserVariable(engine, v_Result);
         }
     }
 }

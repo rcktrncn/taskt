@@ -27,7 +27,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        public string v_UserVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public GetListItemCommand()
         {
@@ -132,7 +132,7 @@ namespace taskt.Core.Automation.Commands
 
             if ((index >= 0) && (index < list.Count))
             {
-                list[index].StoreInUserVariable(engine, v_UserVariableName);
+                list[index].StoreInUserVariable(engine, v_Result);
             }
             else
             {

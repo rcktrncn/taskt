@@ -2997,10 +2997,29 @@ namespace taskt.Core.Script
                 {
                     switch (GetCommandName(el))
                     {
+                        case "ConvertListToDataTableCommand":
+                        case "ConvertListToDictionaryCommand":
+                        case "ConvertListToJSONCommand":
+                            return true;
                         default:
                             return false;
                     }
                 }), "v_applyToVariableName", "v_Result"
+            );
+
+            // List Convert commands v_UserVariableName -> v_Result
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "GetListCountCommand":
+                        case "GetListItemCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }), "v_UserVariableName", "v_Result"
             );
         }
 
