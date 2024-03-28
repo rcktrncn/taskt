@@ -61,7 +61,6 @@ namespace taskt.Core.Automation.Commands
 
             loopTimes = int.Parse(loopParameter);
 
-
             int startIndex = 0;
             int.TryParse(v_LoopStart.ExpandValueOrUserVariable(engine), out startIndex);
 
@@ -102,15 +101,11 @@ namespace taskt.Core.Automation.Commands
                         engine.CurrentLoopContinuing = false;
                         break;
                     }
-
-
                 }
-
-          
                 engine.ReportProgress("Finished Loop From Line " + loopCommand.LineNumber);
-
             }
         }
+
         public override List<Control> Render(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             base.Render(editor);
@@ -132,21 +127,19 @@ namespace taskt.Core.Automation.Commands
             {
                 return "Loop " +  v_LoopParameter + " Times";
             }
-         
         }
 
         public override bool IsValidate(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             base.IsValidate(editor);
 
-            if (String.IsNullOrEmpty(this.v_LoopParameter))
+            if (string.IsNullOrEmpty(this.v_LoopParameter))
             {
                 this.validationResult += "Times is empty.\n";
             }
             else
             {
-                int v;
-                if (int.TryParse(this.v_LoopParameter, out v))
+                if (int.TryParse(this.v_LoopParameter, out int v))
                 {
                     if (v < 0)
                     {
