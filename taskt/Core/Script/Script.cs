@@ -2948,7 +2948,6 @@ namespace taskt.Core.Script
                         case "GetMinFromListCommand":
                         case "GetSumFromListCommand":
                         case "GetVarianceFromListCommand":
-                        case "SortListCommand":
                             return true;
                         default:
                             return false;
