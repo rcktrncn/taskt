@@ -19,11 +19,11 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_InputList { get; set; }
+        public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_OutputJSONName))]
-        public string v_applyToVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public ConvertListToJSONCommand()
         {
@@ -35,13 +35,13 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_InputList.ExpandUserVariableAsList(engine);
+            List<string> targetList = v_List.ExpandUserVariableAsList(engine);
 
             // convert json
             try
             {
                 string convertedList = Newtonsoft.Json.JsonConvert.SerializeObject(targetList);
-                convertedList.StoreInUserVariable(engine, v_applyToVariableName);
+                convertedList.StoreInUserVariable(engine, v_Result);
             }
             catch (Exception ex)
             {

@@ -22,7 +22,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDescription("List Variable Name to Sort")]
         [PropertyValidationRule("List to Sort", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "List to Sort")]
-        public string v_InputList { get; set; }
+        public string v_TargetList { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Sort Order")]
@@ -50,7 +50,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
-        public string v_OutputList { get; set; }
+        public string v_NewList { get; set; }
 
         public SortListCommand()
         {
@@ -69,7 +69,7 @@ namespace taskt.Core.Automation.Commands
             switch (targetType)
             {
                 case "text":
-                    List<string> targetList = v_InputList.ExpandUserVariableAsList(engine);
+                    List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
                     List<string> newList = new List<string>(targetList);
 
                     newList.Sort();
@@ -77,11 +77,11 @@ namespace taskt.Core.Automation.Commands
                     {
                         newList.Reverse();
                     }
-                    newList.StoreInUserVariable(engine, v_OutputList);
+                    newList.StoreInUserVariable(engine, v_NewList);
                     break;
 
                 case "number":
-                    List<decimal> targetValueList = v_InputList.ExpandUserVariableAsDecimalList(false, engine);
+                    List<decimal> targetValueList = v_TargetList.ExpandUserVariableAsDecimalList(false, engine);
                     List<decimal> valueList = new List<decimal>(targetValueList);
 
                     valueList.Sort();
@@ -95,7 +95,7 @@ namespace taskt.Core.Automation.Commands
                     {
                         newList2.Add(v.ToString());
                     }
-                    newList2.StoreInUserVariable(engine, v_OutputList);
+                    newList2.StoreInUserVariable(engine, v_NewList);
 
                     break;
             }

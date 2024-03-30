@@ -20,11 +20,11 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
         [PropertyDescription("List Variable Name to be Copied")]
-        public string v_InputList { get; set; }
+        public string v_TargetList { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
-        public string v_OutputList { get; set; }
+        public string v_NewList { get; set; }
 
         public CopyListCommand()
         {
@@ -36,9 +36,9 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_InputList.ExpandUserVariableAsList(engine);
+            List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
             List<string> newList = new List<string>(targetList);
-            newList.StoreInUserVariable(engine, v_OutputList);
+            newList.StoreInUserVariable(engine, v_NewList);
         }
     }
 }

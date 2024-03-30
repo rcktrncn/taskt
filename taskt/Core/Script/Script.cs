@@ -417,6 +417,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_86(doc);
             convertTo3_5_1_87(doc);
             convertTo3_5_1_88(doc);
+            convertTo3_5_1_89(doc);
 
             return doc;
         }
@@ -2905,6 +2906,119 @@ namespace taskt.Core.Script
                     ("v_DataTableName", "v_TargetDataTable"),
                     ("v_OutputVariableName", "v_NewDataTable"),
                 }
+            );
+        }
+
+        private static void convertTo3_5_1_89(XDocument doc)
+        {
+            // List commands v_ListName -> v_List
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "AddListItemCommand":
+                        case "CheckListItemExistsCommand":
+                        case "CreateListCommand":
+                        case "GetListCountCommand":
+                        case "GetListIndexCommand":
+                        case "GetListIndexFromValueCommand":
+                        case "GetListItemCommand":
+                        case "SetListIndexCommand":
+                        case "SetListItemCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }), "v_ListName", "v_List"
+            );
+
+            // List commands v_InputList -> v_List
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "ConvertListToDataTableCommand":
+                        case "ConvertListToDictionaryCommand":
+                        case "ConvertListToJSONCommand":
+                        case "GetAverageFromListCommand":
+                        case "GetMaxFromListCommand":
+                        case "GetMedianFromListCommand":
+                        case "GetMinFromListCommand":
+                        case "GetSumFromListCommand":
+                        case "GetVarianceFromListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }), "v_InputList", "v_List"
+            );
+
+            // ReplaceListCommand v_TargetList -> v_List
+            ChangeAttributeName(doc, "ReplaceListCommand", "v_TargetList", "v_List");
+
+            // List commands v_InputList -> v_TargetList, v_OutputList -> v_NewList
+            ChangeMultiAttributeNames(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "CopyListCommand":
+                        case "FilterListCommand":
+                        case "ReverseListCommand":
+                        case "SortListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                new List<(string, string)>()
+                {
+                    ("v_InputList", "v_TargetList"),
+                    ("v_OutputList", "v_NewList"),
+                }
+            );
+
+            // ConcatenateListsCommand
+            ChangeMultiAttributeNames(doc, "ConcatenateListsCommand",
+                new List<(string, string)>()
+                {
+                    ("v_InputListA", "v_ListA"),
+                    ("v_InputListB", "v_ListB"),
+                    ("v_OutputList", "v_NewList"),
+                }
+            );
+
+            // List Convert commands v_applyToVariableName -> v_Result
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "ConvertListToDataTableCommand":
+                        case "ConvertListToDictionaryCommand":
+                        case "ConvertListToJSONCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }), "v_applyToVariableName", "v_Result"
+            );
+
+            // List Convert commands v_UserVariableName -> v_Result
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "GetListCountCommand":
+                        case "GetListItemCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }), "v_UserVariableName", "v_Result"
             );
         }
 

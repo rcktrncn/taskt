@@ -22,11 +22,11 @@ namespace taskt.Core.Automation.Commands
         [PropertyDescription("List Variable Name to Reverse")]
         [PropertyValidationRule("List to Reverse", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "List to Reverse")]
-        public string v_InputList { get; set; }
+        public string v_TargetList { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
-        public string v_OutputList { get; set; }
+        public string v_NewList { get; set; }
 
         public ReverseListCommand()
         {
@@ -38,11 +38,11 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_InputList.ExpandUserVariableAsList(engine);
+            List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
 
             List<string> newList = new List<string>(targetList);
             newList.Reverse();
-            newList.StoreInUserVariable(engine, v_OutputList);
+            newList.StoreInUserVariable(engine, v_NewList);
         }
     }
 }

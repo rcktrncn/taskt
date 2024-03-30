@@ -23,7 +23,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_BothListName))]
         [PropertyDescription("List Variable Name to Replace")]
         [PropertyValidationRule("List to Replace", PropertyValidationRule.ValidationRuleFlags.Empty)]
-        public string v_TargetList { get; set; }
+        public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ReplaceValueType))]
@@ -53,7 +53,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
+            List<string> targetList = v_List.ExpandUserVariableAsList(engine);
 
             var parameters = DataTableControls.GetFieldValues(v_ReplaceActionParameterTable, "ParameterName", "ParameterValue", engine);
             var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_TargetType), nameof(v_ReplaceAction), parameters, engine, this);

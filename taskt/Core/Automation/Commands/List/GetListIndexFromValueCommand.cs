@@ -19,7 +19,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_ListName { get; set; }
+        public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_SearchValue))]
@@ -52,7 +52,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_ListName.ExpandUserVariableAsList(engine);
+            List<string> targetList = v_List.ExpandUserVariableAsList(engine);
 
             var searchedValue = v_SearchItem.ExpandValueOrUserVariable(engine);
 

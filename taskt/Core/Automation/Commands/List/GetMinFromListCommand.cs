@@ -20,7 +20,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_InputList { get; set; }
+        public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
@@ -40,7 +40,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            ListControls.MathProcess(this, nameof(v_IfValueIsNotNumeric), v_InputList, engine,
+            ListControls.MathProcess(this, nameof(v_IfValueIsNotNumeric), v_List, engine,
                 new Func<List<decimal>, decimal>((lst) =>
                 {
                     return lst.Min();

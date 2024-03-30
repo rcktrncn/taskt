@@ -18,7 +18,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_BothListName))]
-        public string v_ListName { get; set; }
+        public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ListIndex))]
@@ -35,9 +35,9 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var _, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_ListName), nameof(v_Index), engine);
+            (var _, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_List), nameof(v_Index), engine);
 
-            var rawVariable = v_ListName.GetRawVariable(engine);
+            var rawVariable = v_List.GetRawVariable(engine);
             rawVariable.CurrentPosition = index;
         }
     }

@@ -19,7 +19,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_ListName { get; set; }
+        public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ListIndex))]
@@ -27,7 +27,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        public string v_UserVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public GetListItemCommand()
         {
@@ -123,7 +123,7 @@ namespace taskt.Core.Automation.Commands
             //    index = this.ConvertToUserVariableAsInteger(nameof(v_ItemIndex), engine);
             //}
 
-            (var list, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_ListName), nameof(v_ItemIndex), engine);
+            (var list, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_List), nameof(v_ItemIndex), engine);
 
             if (index < 0)
             {
@@ -132,7 +132,7 @@ namespace taskt.Core.Automation.Commands
 
             if ((index >= 0) && (index < list.Count))
             {
-                list[index].StoreInUserVariable(engine, v_UserVariableName);
+                list[index].StoreInUserVariable(engine, v_Result);
             }
             else
             {

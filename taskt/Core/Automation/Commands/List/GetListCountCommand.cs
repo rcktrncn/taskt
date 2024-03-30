@@ -19,11 +19,11 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_ListName { get; set; }
+        public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        public string v_UserVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public GetListCountCommand()
         {
@@ -35,7 +35,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var listVariable = v_ListName.GetRawVariable(engine);
+            var listVariable = v_List.GetRawVariable(engine);
             dynamic listToCount;
 
             Type listType = listVariable.VariableValue.GetType();
@@ -64,12 +64,12 @@ namespace taskt.Core.Automation.Commands
                 }
                 else
                 {
-                    throw new Exception(v_ListName + " is not List");
+                    throw new Exception(v_List + " is not List");
                 }
             }
 
             string count = listToCount.Count.ToString();
-            count.StoreInUserVariable(engine, v_UserVariableName);
+            count.StoreInUserVariable(engine, v_Result);
         }
     }
 }
