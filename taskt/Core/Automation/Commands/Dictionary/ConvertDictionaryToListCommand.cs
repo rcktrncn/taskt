@@ -15,15 +15,15 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertDictionaryToListCommand : ScriptCommand
+    public class ConvertDictionaryToListCommand : ADictionaryGetFromDictionaryCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
-        public string v_Dictionary { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
+        //public string v_Dictionary { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_OutputListName))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public ConvertDictionaryToListCommand()
         {
@@ -35,7 +35,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var dic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            //var dic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            var dic = this.ExpandUserVariableAsDictionary(engine);
 
             dic.Values.ToList().StoreInUserVariable(engine, v_Result);
         }

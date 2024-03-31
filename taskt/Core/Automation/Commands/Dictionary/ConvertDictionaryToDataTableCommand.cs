@@ -15,15 +15,15 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertDictionaryToDataTableCommand : ScriptCommand
+    public class ConvertDictionaryToDataTableCommand : ADictionaryGetFromDictionaryCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
-        public string v_Dictionary { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
+        //public string v_Dictionary { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_OutputDataTableName))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public ConvertDictionaryToDataTableCommand()
         {
@@ -35,7 +35,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var dic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            //var dic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            var dic = this.ExpandUserVariableAsDictionary(engine);
 
             DataTable DT = new DataTable();
             DT.Rows.Add();
