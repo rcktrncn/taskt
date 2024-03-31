@@ -10,6 +10,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_BothDictionaryName))]
+        [PropertyParameterOrder(5000)]
         public override string v_Dictionary { get; set; }
     }
 }
