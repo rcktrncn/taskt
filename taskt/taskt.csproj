@@ -329,10 +329,12 @@
     <Compile Include="Core\Automation\Commands\DateTime\IDateTimeConvertProperties.cs" />
     <Compile Include="Core\Automation\Commands\DateTime\IDateTimeCreateProperties.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryAddCreateCommands.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryCreateFromDictionaryCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryGetFromDictionaryCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryKeyCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\AInputDictionaryCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_CanHandleDictionary.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\EM_DicitionaryCreateFromDictionaryExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryKeyPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ICanHandleDictionary.cs" />
@@ -340,6 +342,7 @@
     <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryGetFromDictionaryProperties.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryKeyActionProperties.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryKeyProperties.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\ILDictionaryCreateFromDictionary.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ILDictionaryProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\AExcelCellActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\Excel\AExcelCellCommands.cs" />
