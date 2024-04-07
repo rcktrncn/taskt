@@ -4,7 +4,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     /// <summary>
-    /// for Both Dictionary commands
+    /// for Output Dictionary commands
     /// </summary>
     public abstract class AOutputDictionaryCommands : AInputDictionaryCommands
     {
