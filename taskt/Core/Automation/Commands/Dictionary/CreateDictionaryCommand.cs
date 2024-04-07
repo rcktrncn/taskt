@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Xml.Serialization;
-using System.Data;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
@@ -17,16 +15,16 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class CreateDictionaryCommand : AOutputDictionaryCommands
+    public class CreateDictionaryCommand : ADictionaryAddCreateCommands
     {
-        //[XmlAttribute]
-        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_OutputDictionaryName))]
-        //public string v_Dictionary { get; set; }
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_OutputDictionaryName))]
+        public override string v_Dictionary { get; set; }
 
-        [XmlElement]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_KeyAndValue))]
-        [PropertyParameterOrder(6000)]
-        public DataTable v_ColumnNameDataTable { get; set; }
+        //[XmlElement]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_KeyAndValue))]
+        //[PropertyParameterOrder(6000)]
+        //public DataTable v_ColumnNameDataTable { get; set; }
 
         public CreateDictionaryCommand()
         {
@@ -47,10 +45,10 @@ namespace taskt.Core.Automation.Commands
             this.StoreDictionaryInUserVariable(outputDictionary, nameof(v_Dictionary), engine);
         }
 
-        public override void BeforeValidate()
-        {
-            base.BeforeValidate();
-            DataTableControls.BeforeValidate((DataGridView)ControlsList[nameof(v_ColumnNameDataTable)], v_ColumnNameDataTable);
-        }
+        //public override void BeforeValidate()
+        //{
+        //    base.BeforeValidate();
+        //    DataTableControls.BeforeValidate((DataGridView)ControlsList[nameof(v_ColumnNameDataTable)], v_ColumnNameDataTable);
+        //}
     }
 }
