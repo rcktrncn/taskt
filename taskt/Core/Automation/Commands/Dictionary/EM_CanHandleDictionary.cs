@@ -33,7 +33,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="dic"></param>
         /// <param name="parameterName"></param>
         /// <param name="engine"></param>
-        public static void StoreDictionaryInUserVariable(this ICanHandleColor command, Dictionary<string, string> dic, string parameterName, Engine.AutomationEngineInstance engine)
+        public static void StoreDictionaryInUserVariable(this ICanHandleDictionary command, Dictionary<string, string> dic, string parameterName, Engine.AutomationEngineInstance engine)
         {
             var variableName = ((ScriptCommand)command).GetRawPropertyValueAsString(parameterName, "Dictionary Variable");
             ExtensionMethods.StoreInUserVariable(variableName, dic, engine);
