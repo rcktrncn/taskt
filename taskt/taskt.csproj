@@ -328,6 +328,7 @@
     <Compile Include="Core\Automation\Commands\DateTime\ICanHandleDateTime.cs" />
     <Compile Include="Core\Automation\Commands\DateTime\IDateTimeConvertProperties.cs" />
     <Compile Include="Core\Automation\Commands\DateTime\IDateTimeCreateProperties.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\AOutputDictionaryCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ABothDictionaryCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryGetFromDictionaryCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryKeyCommands.cs" />
