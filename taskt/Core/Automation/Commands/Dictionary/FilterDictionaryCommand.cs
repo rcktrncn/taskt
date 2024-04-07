@@ -17,32 +17,35 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class FilterDictionaryCommand : ScriptCommand, IHaveDataTableElements
+    public class FilterDictionaryCommand : ADictionaryCreateFromDictionaryCommands, IHaveDataTableElements
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
         [PropertyDescription("Dictionary Variable Name to Filter")]
         [PropertyValidationRule("Dictionary to Filter", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "Dictionary to Filter")]
-        public string v_TargetDictionary { get; set; }
+        public override string v_TargetDictionary { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_FilterValueType))]
         [PropertySelectionChangeEvent(nameof(cmbTargetType_SelectionChangeCommited))]
+        [PropertyParameterOrder(6000)]
         public string v_TargetType { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_FilterAction))]
         [PropertySelectionChangeEvent(nameof(cmbFilterAction_SelectionChangeCommited))]
+        [PropertyParameterOrder(7000)]
         public string v_FilterAction { get; set; }
 
         [XmlElement]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ActionParameterTable))]
+        [PropertyParameterOrder(8000)]
         public DataTable v_FilterActionParameterTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_NewOutputDictionaryName))]
-        public string v_NewDictionary { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_NewOutputDictionaryName))]
+        //public string v_NewDictionary { get; set; }
 
         public FilterDictionaryCommand()
         {
@@ -54,7 +57,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var targetDic = v_TargetDictionary.ExpandUserVariableAsDictinary(engine);
+            //var targetDic = v_TargetDictionary.ExpandUserVariableAsDictinary(engine);
+            var targetDic = this.ExpandUserVariableAsDictionary(engine);
 
             var parameters = DataTableControls.GetFieldValues(v_FilterActionParameterTable, "ParameterName", "ParameterValue", engine);
             var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_TargetType), nameof(v_FilterAction), parameters, engine, this);
@@ -69,7 +73,8 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            res.StoreInUserVariable(engine, v_NewDictionary);
+            //res.StoreInUserVariable(engine, v_NewDictionary);
+            this.StoreDictionaryInUserVariable(res, engine);
         }
 
         private void cmbTargetType_SelectionChangeCommited(object sender, EventArgs e)
