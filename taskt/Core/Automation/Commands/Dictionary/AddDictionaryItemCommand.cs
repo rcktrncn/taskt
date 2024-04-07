@@ -17,14 +17,15 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class AddDictionaryItemCommand : ScriptCommand, IHaveDataTableElements
+    public class AddDictionaryItemCommand : ABothDictionaryCommands, IHaveDataTableElements
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_BothDictionaryName))]
-        public string v_Dictionary { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_BothDictionaryName))]
+        //public string v_Dictionary { get; set; }
 
         [XmlElement]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_KeyAndValue))]
+        [PropertyParameterOrder(6000)]
         public DataTable v_ColumnNameDataTable { get; set; }
 
         public AddDictionaryItemCommand()
@@ -37,7 +38,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var outputDictionary = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            //var outputDictionary = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            var outputDictionary = this.ExpandUserVariableAsDictionary(engine);
 
             outputDictionary.AddDataAndValueFromDataTable(v_ColumnNameDataTable, engine);
         }
