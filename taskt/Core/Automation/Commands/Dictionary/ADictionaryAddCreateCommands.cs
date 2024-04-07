@@ -5,6 +5,9 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
 {
+    /// <summary>
+    /// for Add Dictionary Items or Create Dictionary commands
+    /// </summary>
     public abstract class ADictionaryAddCreateCommands : AInputDictionaryCommands, IDictionaryAddCreateProperties
     {
         [XmlElement]
