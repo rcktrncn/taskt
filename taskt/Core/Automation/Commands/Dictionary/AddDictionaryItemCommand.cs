@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Xml.Serialization;
 using System.Data;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
