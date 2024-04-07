@@ -42,7 +42,9 @@ namespace taskt.Core.Automation.Commands
 
             outputDictionary.AddDataAndValueFromDataTable(v_ColumnNameDataTable, engine);
 
-            outputDictionary.StoreInUserVariable(engine, v_Dictionary);
+            //outputDictionary.StoreInUserVariable(engine, v_Dictionary);
+
+            this.StoreDictionaryInUserVariable(outputDictionary, nameof(v_Dictionary), engine);
         }
 
         public override void BeforeValidate()
