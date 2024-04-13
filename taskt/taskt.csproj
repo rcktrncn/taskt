@@ -331,6 +331,7 @@
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryAddCreateCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryCreateFromDictionaryCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryGetFromDictionaryCommands.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryKeyActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryKeyCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\AInputDictionaryCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_CanHandleDictionary.cs" />
