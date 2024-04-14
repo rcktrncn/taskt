@@ -47,7 +47,7 @@ namespace taskt.Core.Automation.Commands
             //dic.ContainsKey(vKey).StoreInUserVariable(engine, v_Result);
             try
             {
-                this.ExpandValueOrUserVariableAsDictionaryAndKey(engine);
+                this.ExpandValueOrUserVariableAsDictionaryKeyAndValue(engine);
                 true.StoreInUserVariable(engine, v_Result);
             }
             catch

@@ -6,19 +6,19 @@ namespace taskt.Core.Automation.Commands
     public static class EM_DictionaryKeyPropertiesExtensionMethods
     {
         /// <summary>
-        /// Expand value or UserVariable as Dictionary and Key
+        /// Expand value or UserVariable as Dictionary, Key, and Value
         /// </summary>
         /// <param name="command"></param>
         /// <param name="engine"></param>
-        /// <returns></returns>
+        /// <returns>(Dictionary, key, value)</returns>
         /// <exception cref="Exception"></exception>
-        public static (Dictionary<string, string>, string) ExpandValueOrUserVariableAsDictionaryAndKey(this IDictionaryKeyProperties command, Engine.AutomationEngineInstance engine)
+        public static (Dictionary<string, string> dic, string key, string value) ExpandValueOrUserVariableAsDictionaryKeyAndValue(this IDictionaryKeyProperties command, Engine.AutomationEngineInstance engine)
         {
             var dic = command.ExpandUserVariableAsDictionary(nameof(command.v_Dictionary), engine);
             var key = ((ScriptCommand)command).ExpandValueOrUserVariable(nameof(command.v_Key), "Dictionary Key", engine);
             if (dic.ContainsKey(key))
             {
-                return (dic, key);
+                return (dic, key, dic[key]);
             }
             else
             {
