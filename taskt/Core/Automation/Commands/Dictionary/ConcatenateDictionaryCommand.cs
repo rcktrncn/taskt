@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConcatenateDictionaryCommand : ScriptCommand
+    public class ConcatenateDictionaryCommand : ScriptCommand, ICanHandleDictionary
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
@@ -67,9 +67,12 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var dicA = v_DictionaryA.ExpandUserVariableAsDictinary(engine);
+            //var dicA = v_DictionaryA.ExpandUserVariableAsDictinary(engine);
 
-            var dicB = v_DictionaryB.ExpandUserVariableAsDictinary(engine);
+            //var dicB = v_DictionaryB.ExpandUserVariableAsDictinary(engine);
+
+            var dicA = this.ExpandUserVariableAsDictionary(nameof(v_DictionaryA), engine);
+            var dicB = this.ExpandUserVariableAsDictionary(nameof(v_DictionaryB), engine);
 
             var myDic = new Dictionary<string, string>(dicA);
 
@@ -113,7 +116,9 @@ namespace taskt.Core.Automation.Commands
                     }
                     break;
             }
-            myDic.StoreInUserVariable(engine, v_NewDictionary);
+
+            //myDic.StoreInUserVariable(engine, v_NewDictionary);
+            this.StoreDictionaryInUserVariable(myDic, nameof(v_NewDictionary), engine);
         }
     }
 }
