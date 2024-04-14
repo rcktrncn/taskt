@@ -30,11 +30,11 @@ namespace taskt.Core.Automation.Commands
         [PropertyParameterOrder(7000)]
         public string v_Result { get; set; }
 
-        //[XmlAttribute]
+        [XmlAttribute]
         //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_WhenKeyDoesNotExists))]
-        //[PropertyUISelectionOption("Set Empty")]
-        //[PropertyDetailSampleUsage("**Set Empty**", "Result is Empty Value")]
-        //public string v_WhenKeyDoesNotExists { get; set; }
+        [PropertyUISelectionOption("Set Empty")]
+        [PropertyDetailSampleUsage("**Set Empty**", "Result is Empty Value")]
+        public override string v_WhenKeyDoesNotExists { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Key Type")]
