@@ -469,7 +469,7 @@ namespace taskt.Core.Automation.Commands
                 }
 
                 var parameterName = row.Field<string>("ParameterName") ?? "";
-                var parameterValue = row.Field<string>("ParameterValue") ?? ""; ;
+                var parameterValue = (row.Field<string>("ParameterValue") ?? "").ExpandValueOrUserVariable(engine);
 
                 // value correction
                 switch (parameterName)
