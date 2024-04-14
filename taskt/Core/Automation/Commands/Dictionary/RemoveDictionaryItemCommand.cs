@@ -14,21 +14,21 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class RemoveDictionaryItemCommand : ScriptCommand
+    public class RemoveDictionaryItemCommand : ADictionaryKeyActionCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_BothDictionaryName))]
-        public string v_Dictionary { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_BothDictionaryName))]
+        //public string v_Dictionary { get; set; }
+
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_Key))]
+        //public string v_Key { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_Key))]
-        public string v_Key { get; set; }
-
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_WhenKeyDoesNotExists))]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_WhenKeyDoesNotExists))]
         [PropertyUISelectionOption("Ignore")]
         [PropertyDetailSampleUsage("**Ignore**", "Don't Remove the Dictionary Item")]
-        public string v_WhenKeyDoesNotExists { get; set; }
+        public override string v_WhenKeyDoesNotExists { get; set; }
 
         public RemoveDictionaryItemCommand()
         {
@@ -40,15 +40,29 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var dic, var vKey) = this.ExpandUserVariablesAsDictionaryAndKey(nameof(v_Dictionary), nameof(v_Key), engine);
+            //(var dic, var vKey) = this.ExpandUserVariablesAsDictionaryAndKey(nameof(v_Dictionary), nameof(v_Key), engine);
 
-            if (!dic.Remove(vKey))
+            //if (!dic.Remove(vKey))
+            //{
+            //    string ifNotExists = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenKeyDoesNotExists), "Key Not Exists", engine);
+            //    switch (ifNotExists)
+            //    {
+            //        case "error":
+            //            throw new Exception("Dictionary does not has key name " + vKey);
+            //    }
+            //}
+
+            try
             {
-                string ifNotExists = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenKeyDoesNotExists), "Key Not Exists", engine);
-                switch (ifNotExists)
+                (var dic, var key, _) = this.ExpandValueOrUserVariableAsDictionaryKeyAndValue(engine);
+                dic.Remove(key);
+            }
+            catch (Exception ex)
+            {
+                switch(this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenKeyDoesNotExists), engine))
                 {
                     case "error":
-                        throw new Exception("Dictionary does not has key name " + vKey);
+                        throw ex;
                 }
             }
         }
