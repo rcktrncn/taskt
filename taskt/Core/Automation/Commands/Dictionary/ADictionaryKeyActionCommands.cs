@@ -7,6 +7,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_WhenKeyDoesNotExists))]
+        [PropertyParameterOrder(10000)]
         public string v_WhenKeyDoesNotExists { get; set; }
     }
 }
