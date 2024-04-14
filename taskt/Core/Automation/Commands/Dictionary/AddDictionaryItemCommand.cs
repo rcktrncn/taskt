@@ -38,7 +38,8 @@ namespace taskt.Core.Automation.Commands
             //var outputDictionary = v_Dictionary.ExpandUserVariableAsDictinary(engine);
             var outputDictionary = this.ExpandUserVariableAsDictionary(engine);
 
-            outputDictionary.AddDataAndValueFromDataTable(v_ColumnNameDataTable, engine);
+            //outputDictionary.AddDataAndValueFromDataTable(v_ColumnNameDataTable, engine);
+            AddDataAndValueFromDataTable(outputDictionary, engine);
         }
 
         //public override void BeforeValidate()

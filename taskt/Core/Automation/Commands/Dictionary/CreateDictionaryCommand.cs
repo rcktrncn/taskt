@@ -38,7 +38,8 @@ namespace taskt.Core.Automation.Commands
         {
             var outputDictionary = new Dictionary<string, string>();
 
-            outputDictionary.AddDataAndValueFromDataTable(v_ColumnNameDataTable, engine);
+            //outputDictionary.AddDataAndValueFromDataTable(v_ColumnNameDataTable, engine);
+            AddDataAndValueFromDataTable(outputDictionary, engine);
 
             //outputDictionary.StoreInUserVariable(engine, v_Dictionary);
 
