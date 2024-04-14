@@ -317,6 +317,7 @@
     <Compile Include="Core\Automation\Commands\Color\EM_CanHandleColorExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Color\ICanHandleColor.cs" />
     <Compile Include="Core\Automation\Commands\Color\IColorCreateProperties.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\AInputDataTableCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_CanHandleDataTable.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTablePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ICanHandleDataTable.cs" />
