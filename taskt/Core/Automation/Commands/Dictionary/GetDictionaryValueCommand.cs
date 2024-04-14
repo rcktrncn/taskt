@@ -15,25 +15,26 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetDictionaryValueCommand : ScriptCommand
+    public class GetDictionaryValueCommand : ADictionaryKeyActionCommands, IDictionaryGetFromDictionaryProperties
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
-        public string v_Dictionary { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
+        //public string v_Dictionary { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_Key))]
-        public string v_Key { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_Key))]
+        //public string v_Key { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
+        [PropertyParameterOrder(7000)]
         public string v_Result { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_WhenKeyDoesNotExists))]
-        [PropertyUISelectionOption("Set Empty")]
-        [PropertyDetailSampleUsage("**Set Empty**", "Result is Empty Value")]
-        public string v_WhenKeyDoesNotExists { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_WhenKeyDoesNotExists))]
+        //[PropertyUISelectionOption("Set Empty")]
+        //[PropertyDetailSampleUsage("**Set Empty**", "Result is Empty Value")]
+        //public string v_WhenKeyDoesNotExists { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Key Type")]
@@ -47,6 +48,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
         [PropertyValidationRule("Key Type", PropertyValidationRule.ValidationRuleFlags.None)]
         [PropertyDisplayText(false, "Result")]
+        [PropertyParameterOrder(11000)]
         public string v_KeyType { get; set; }
 
         public GetDictionaryValueCommand()
@@ -83,25 +85,43 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            (var dic, var vKey) = this.ExpandUserVariablesAsDictionaryAndKey(nameof(v_Dictionary), nameof(v_Key), engine);
+            //(var dic, var vKey) = this.ExpandUserVariablesAsDictionaryAndKey(nameof(v_Dictionary), nameof(v_Key), engine);
 
-            if (dic.ContainsKey(vKey))
+            try
             {
-                dic[vKey].StoreInUserVariable(engine, v_Result);
+                (_, _, var value) = this.ExpandValueOrUserVariableAsDictionaryKeyAndValue(engine);
+                value.StoreInUserVariable(engine, v_Result);
             }
-            else
+            catch (Exception ex)
             {
-                string ifNotExists = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenKeyDoesNotExists), "Key Not Exists", engine);
-                switch (ifNotExists)
+                switch(this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenKeyDoesNotExists), "Key Not Exists", engine))
                 {
-                    case "error":
-                        throw new Exception("Key " + v_Key + " does not exists in the Dictionary");
-
                     case "set empty":
                         "".StoreInUserVariable(engine, v_Result);
                         break;
+
+                    case "error":
+                        throw ex;
                 }
             }
+
+            //if (dic.ContainsKey(vKey))
+            //{
+            //    dic[vKey].StoreInUserVariable(engine, v_Result);
+            //}
+            //else
+            //{
+            //    string ifNotExists = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenKeyDoesNotExists), "Key Not Exists", engine);
+            //    switch (ifNotExists)
+            //    {
+            //        case "error":
+            //            throw new Exception("Key " + v_Key + " does not exists in the Dictionary");
+
+            //        case "set empty":
+            //            "".StoreInUserVariable(engine, v_Result);
+            //            break;
+            //    }
+            //}
         }
     }
 }
