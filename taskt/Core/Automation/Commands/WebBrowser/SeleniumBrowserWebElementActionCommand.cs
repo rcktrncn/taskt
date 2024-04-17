@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.ImplementationDescription("This command implements Selenium to achieve automation.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
-    public class SeleniumBrowserWebElementActionCommand : ScriptCommand
+    public class SeleniumBrowserWebElementActionCommand : ScriptCommand, IHaveDataTableElements
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(SeleniumBrowserControls), nameof(SeleniumBrowserControls.v_InputInstanceName))]
@@ -370,6 +370,12 @@ namespace taskt.Core.Automation.Commands
         public override string GetDisplayValue()
         {
             return base.GetDisplayValue() + " [" + v_SeleniumSearchType + " and " + v_SeleniumElementAction + ", Instance Name: '" + v_InstanceName + "']";
+        }
+
+        public override void BeforeValidate()
+        {
+            base.BeforeValidate();
+            DataTableControls.BeforeValidate((DataGridView)ControlsList[nameof(v_WebActionParameterTable)], v_WebActionParameterTable);
         }
     }
 }
