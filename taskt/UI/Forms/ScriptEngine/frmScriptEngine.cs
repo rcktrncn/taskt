@@ -217,15 +217,18 @@ namespace taskt.UI.Forms.ScriptEngine
                 case ScriptFinishedEventArgs.ScriptFinishedResult.Successful:
                     AddStatus("Script Completed Successfully");
                     UpdateUI("debug info (success)");
+                    ShowCallBackFormMessage("Script Completed Successfully");
                     break;
                 case ScriptFinishedEventArgs.ScriptFinishedResult.Error:
                     AddStatus("Error: " + e.Error);
                     AddStatus("Script Completed With Errors!");
                     UpdateUI("debug info (error)");
+                    ShowCallBackFormMessage("Script Completed With Errors!");
                     break;
                 case ScriptFinishedEventArgs.ScriptFinishedResult.Cancelled:
                     AddStatus("Script Cancelled By User");
                     UpdateUI("debug info (cancelled)");
+                    ShowCallBackFormMessage("Script Cancelled By User");
                     break;
                 default:
                     break;
@@ -378,6 +381,20 @@ namespace taskt.UI.Forms.ScriptEngine
                 {
                     contextForm.ShowDialog();
                 }
+            }
+        }
+
+        public delegate void ShowCallBackFormMessageDelegate(string message);
+        public void ShowCallBackFormMessage(string message)
+        {
+            if (InvokeRequired)
+            {
+                var d = new ShowCallBackFormMessageDelegate(ShowCallBackFormMessage);
+                Invoke(d, new object[] { message });
+            }
+            else
+            {
+                callBackForm?.Notify(message);
             }
         }
 
