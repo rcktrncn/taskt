@@ -15,18 +15,18 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class CopyDictionaryCommand : ScriptCommand
+    public class CopyDictionaryCommand : ADictionaryCreateFromDictionaryCommands
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
         [PropertyDescription("Dictionary Variable Name to Copy")]
         [PropertyValidationRule("Dictionary to Copy", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "Dictionary to Copy")]
-        public string v_TargetDictionary { get; set; }
+        public override string v_TargetDictionary { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_NewOutputDictionaryName))]
-        public string v_NewDictionary { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_NewOutputDictionaryName))]
+        //public string v_NewDictionary { get; set; }
 
         public CopyDictionaryCommand()
         {
@@ -38,11 +38,17 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var srcDic = v_TargetDictionary.ExpandUserVariableAsDictinary(engine);
+            //var srcDic = v_TargetDictionary.ExpandUserVariableAsDictinary(engine);
+
+            //var newDic = new Dictionary<string, string>(srcDic);
+
+            //newDic.StoreInUserVariable(engine, v_NewDictionary);
+
+            var srcDic = this.ExpandUserVariableAsDictionary(engine);
 
             var newDic = new Dictionary<string, string>(srcDic);
 
-            newDic.StoreInUserVariable(engine, v_NewDictionary);
+            this.StoreDictionaryInUserVariable(newDic, engine);
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
@@ -177,101 +175,101 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
-        /// <summary>
-        /// expand user variables as Dictionary&lt;string, string&gt; and key name from property names. It supports current position to key.
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="dictionaryName"></param>
-        /// <param name="keyName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public static (Dictionary<string, string>, string) ExpandUserVariablesAsDictionaryAndKey(this ScriptCommand command, string dictionaryName, string keyName, Engine.AutomationEngineInstance engine)
-        {
-            string dicVariable = command.ExpandValueOrUserVariable(dictionaryName, "Dictionary", engine);
-            //var v = dicVariable.GetRawVariable(engine);
-            //if (v.VariableValue is Dictionary<string, string> dictionary)
-            //{
-            //    string keyVariable = command.ConvertToUserVariable(keyName, "Key", engine);
-            //    string key;
-            //    if (String.IsNullOrEmpty(keyVariable))
-            //    {
-            //        int pos = v.CurrentPosition;
-            //        string[] keys = dictionary.Keys.ToArray();
-            //        if ((pos >= 0) && (pos < keys.Length))
-            //        {
-            //            key = keys[pos];
-            //        }
-            //        else
-            //        {
-            //            throw new Exception("Strange Current Position in Dictionary " + pos);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        key = keyVariable.ConvertToUserVariable(engine);
-            //    }
-            //    return (dictionary, key);
-            //}
-            //else
-            //{
-            //    throw new Exception("Variable " + dicVariable + " is not Dictionary");
-            //}
-            var dictionary = dicVariable.ExpandUserVariableAsDictinary(engine);
-            var v = dicVariable.GetRawVariable(engine);
-            string keyVariable = command.ExpandValueOrUserVariable(keyName, "Key", engine);
-            string key;
-            if (string.IsNullOrEmpty(keyVariable))
-            {
-                int pos = v.CurrentPosition;
-                string[] keys = dictionary.Keys.ToArray();
-                if ((pos >= 0) && (pos < keys.Length))
-                {
-                    key = keys[pos];
-                }
-                else
-                {
-                    throw new Exception("Strange Current Position in Dictionary " + pos);
-                }
-            }
-            else
-            {
-                key = keyVariable.ExpandValueOrUserVariable(engine);
-            }
-            return (dictionary, key);
-        }
+        ///// <summary>
+        ///// expand user variables as Dictionary&lt;string, string&gt; and key name from property names. It supports current position to key.
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="dictionaryName"></param>
+        ///// <param name="keyName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception"></exception>
+        //public static (Dictionary<string, string>, string) ExpandUserVariablesAsDictionaryAndKey(this ScriptCommand command, string dictionaryName, string keyName, Engine.AutomationEngineInstance engine)
+        //{
+        //    string dicVariable = command.ExpandValueOrUserVariable(dictionaryName, "Dictionary", engine);
+        //    //var v = dicVariable.GetRawVariable(engine);
+        //    //if (v.VariableValue is Dictionary<string, string> dictionary)
+        //    //{
+        //    //    string keyVariable = command.ConvertToUserVariable(keyName, "Key", engine);
+        //    //    string key;
+        //    //    if (String.IsNullOrEmpty(keyVariable))
+        //    //    {
+        //    //        int pos = v.CurrentPosition;
+        //    //        string[] keys = dictionary.Keys.ToArray();
+        //    //        if ((pos >= 0) && (pos < keys.Length))
+        //    //        {
+        //    //            key = keys[pos];
+        //    //        }
+        //    //        else
+        //    //        {
+        //    //            throw new Exception("Strange Current Position in Dictionary " + pos);
+        //    //        }
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        key = keyVariable.ConvertToUserVariable(engine);
+        //    //    }
+        //    //    return (dictionary, key);
+        //    //}
+        //    //else
+        //    //{
+        //    //    throw new Exception("Variable " + dicVariable + " is not Dictionary");
+        //    //}
+        //    var dictionary = dicVariable.ExpandUserVariableAsDictinary(engine);
+        //    var v = dicVariable.GetRawVariable(engine);
+        //    string keyVariable = command.ExpandValueOrUserVariable(keyName, "Key", engine);
+        //    string key;
+        //    if (string.IsNullOrEmpty(keyVariable))
+        //    {
+        //        int pos = v.CurrentPosition;
+        //        string[] keys = dictionary.Keys.ToArray();
+        //        if ((pos >= 0) && (pos < keys.Length))
+        //        {
+        //            key = keys[pos];
+        //        }
+        //        else
+        //        {
+        //            throw new Exception("Strange Current Position in Dictionary " + pos);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        key = keyVariable.ExpandValueOrUserVariable(engine);
+        //    }
+        //    return (dictionary, key);
+        //}
 
         public static void StoreInUserVariable(this Dictionary<string, string> value, Engine.AutomationEngineInstance engine, string targetVariable)
         {
             ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
         }
 
-        /// <summary>
-        /// add new item to Dictionary from DataTable. check key name is empty
-        /// </summary>
-        /// <param name="dic"></param>
-        /// <param name="table"></param>
-        /// <param name="engine"></param>
-        /// <exception cref="Exception"></exception>
-        public static void AddDataAndValueFromDataTable(this Dictionary<string, string> dic, DataTable table, Engine.AutomationEngineInstance engine)
-        {
-            // Check Items
-            foreach (DataRow row in table.Rows)
-            {
-                string k = (row.Field<string>("Keys") ?? "").ExpandValueOrUserVariable(engine);
-                if (k == "")
-                {
-                    throw new Exception("Key value is empty.");
-                }
-            }
+        ///// <summary>
+        ///// add new item to Dictionary from DataTable. check key name is empty
+        ///// </summary>
+        ///// <param name="dic"></param>
+        ///// <param name="table"></param>
+        ///// <param name="engine"></param>
+        ///// <exception cref="Exception"></exception>
+        //public static void AddDataAndValueFromDataTable(this Dictionary<string, string> dic, DataTable table, Engine.AutomationEngineInstance engine)
+        //{
+        //    // Check Items
+        //    foreach (DataRow row in table.Rows)
+        //    {
+        //        string k = (row.Field<string>("Keys") ?? "").ExpandValueOrUserVariable(engine);
+        //        if (k == "")
+        //        {
+        //            throw new Exception("Key value is empty.");
+        //        }
+        //    }
 
-            // Add Items
-            foreach (DataRow row in table.Rows)
-            {
-                var key = row.Field<string>("Keys").ExpandValueOrUserVariable(engine);
-                var value = (row.Field<string>("Values") ?? "").ExpandValueOrUserVariable(engine);
-                dic.Add(key, value);
-            }
-        }
+        //    // Add Items
+        //    foreach (DataRow row in table.Rows)
+        //    {
+        //        var key = row.Field<string>("Keys").ExpandValueOrUserVariable(engine);
+        //        var value = (row.Field<string>("Values") ?? "").ExpandValueOrUserVariable(engine);
+        //        dic.Add(key, value);
+        //    }
+        //}
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Xml.Serialization;
-using System.Data;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
@@ -17,15 +14,16 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class AddDictionaryItemCommand : ScriptCommand, IHaveDataTableElements
+    public class AddDictionaryItemCommand : ADictionaryAddCreateCommands, IHaveDataTableElements
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_BothDictionaryName))]
-        public string v_Dictionary { get; set; }
+        public override string v_Dictionary { get; set; }
 
-        [XmlElement]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_KeyAndValue))]
-        public DataTable v_ColumnNameDataTable { get; set; }
+        //[XmlElement]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_KeyAndValue))]
+        //[PropertyParameterOrder(6000)]
+        //public DataTable v_ColumnNameDataTable { get; set; }
 
         public AddDictionaryItemCommand()
         {
@@ -37,15 +35,17 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var outputDictionary = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            //var outputDictionary = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            var outputDictionary = this.ExpandUserVariableAsDictionary(engine);
 
-            outputDictionary.AddDataAndValueFromDataTable(v_ColumnNameDataTable, engine);
+            //outputDictionary.AddDataAndValueFromDataTable(v_ColumnNameDataTable, engine);
+            AddDataAndValueFromDataTable(outputDictionary, engine);
         }
 
-        public override void BeforeValidate()
-        {
-            base.BeforeValidate();
-            DataTableControls.BeforeValidate((DataGridView)ControlsList[nameof(v_ColumnNameDataTable)], v_ColumnNameDataTable);
-        }
+        //public override void BeforeValidate()
+        //{
+        //    base.BeforeValidate();
+        //    DataTableControls.BeforeValidate((DataGridView)ControlsList[nameof(v_ColumnNameDataTable)], v_ColumnNameDataTable);
+        //}
     }
 }

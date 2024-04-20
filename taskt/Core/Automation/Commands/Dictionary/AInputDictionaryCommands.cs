@@ -10,6 +10,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
+        [PropertyParameterOrder(5000)]
         public virtual string v_Dictionary { get; set; }
     }
 }

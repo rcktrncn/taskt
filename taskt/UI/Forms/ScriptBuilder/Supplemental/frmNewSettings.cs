@@ -309,7 +309,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
             createLabel("lblResourceTitle", "Resources Folder", FontSize.NormalBold, true);
             createLabel("lblResource", "If you want to update the WebDriver (chromedriver.exe etc),\nopen the Resources folder and overwrite the file.", FontSize.Small, true);
-            Button btnRes = createButton("btnOpenResources", "Open Resources Folder", 280, true);
+            Button btnRes = createButton("btnOpenResources", "Open 'Resources' Folder", 280, true);
             btnRes.Click += (sender, e) => btnShowRecoures_Click(sender, e);
 
             createLabel("lblWebDriverTitle", "Check WebDrivers", FontSize.Normal, true);            
@@ -323,8 +323,8 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             createLabel("lblEdgeDriver", "Edge Driver Version Result: " + versions["edge"], FontSize.Small, true);
             Button btnEdge = createButton("btnEdge", "Edge Driver", 280, true);
 
-            createLabel("lblGeckoDriver", "Gecko Driver Version Result: " + versions["gecko"], FontSize.Small, true);
-            Button btnGecko = createButton("btnGecko", "Gecko Driver (Firefox)", 280, true);
+            createLabel("lblGeckoDriver", "geckodriver Version Result: " + versions["gecko"], FontSize.Small, true);
+            Button btnGecko = createButton("btnGecko", "geckodriver (Firefox)", 280, true);
 
             createLabel("lblIEDriver", "IE Driver Version Result: " + versions["ie"], FontSize.Small, true);
             Button btnIE = createButton("btnIE", "IE Driver", 280, true);

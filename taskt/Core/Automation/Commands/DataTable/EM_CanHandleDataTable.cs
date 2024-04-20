@@ -13,7 +13,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="engine"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static DataTable ExpandUserVariableAsDataTable(this ICanHandleDictionary command, string parameterName, Engine.AutomationEngineInstance engine)
+        public static DataTable ExpandUserVariableAsDataTable(this ICanHandleDataTable command, string parameterName, Engine.AutomationEngineInstance engine)
         {
             var variableName = ((ScriptCommand)command).GetRawPropertyValueAsString(parameterName, "DataTable Variable");
             var v = variableName.GetRawVariable(engine);
@@ -34,7 +34,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="table"></param>
         /// <param name="parameterName"></param>
         /// <param name="engine"></param>
-        public static void StoreDataTableInUserVariable(this ICanHandleColor command, DataTable table, string parameterName, Engine.AutomationEngineInstance engine)
+        public static void StoreDataTableInUserVariable(this ICanHandleDataTable command, DataTable table, string parameterName, Engine.AutomationEngineInstance engine)
         {
             var variableName = ((ScriptCommand)command).GetRawPropertyValueAsString(parameterName, "DataTable Variable");
             ExtensionMethods.StoreInUserVariable(variableName, table, engine);

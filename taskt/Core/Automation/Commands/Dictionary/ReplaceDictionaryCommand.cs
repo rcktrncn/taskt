@@ -17,31 +17,35 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ReplaceDictionaryCommand : ScriptCommand, IHaveDataTableElements
+    public class ReplaceDictionaryCommand : AInputDictionaryCommands, IHaveDataTableElements
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_BothDictionaryName))]
         [PropertyDescription("Dictionary Variable Name to Replace")]
         [PropertyValidationRule("Dictionary to Replace", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "Dictionary to Replace")]
-        public string v_Dictionary { get; set; }
+        public override string v_Dictionary { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ReplaceValueType))]
         [PropertySelectionChangeEvent(nameof(cmbTargetType_SelectionChangeCommited))]
+        [PropertyParameterOrder(6000)]
         public string v_TargetType { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ReplaceAction))]
         [PropertySelectionChangeEvent(nameof(cmbReplaceAction_SelectionChangeCommited))]
+        [PropertyParameterOrder(7000)]
         public string v_ReplaceAction { get; set; }
 
         [XmlElement]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ActionParameterTable))]
+        [PropertyParameterOrder(8000)]
         public DataTable v_ReplaceActionParameterTable { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ReplaceValue))]
+        [PropertyParameterOrder(9000)]
         public string v_ReplaceValue { get; set; }
 
         public ReplaceDictionaryCommand()
@@ -54,7 +58,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var targetDic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            //var targetDic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            var targetDic = this.ExpandUserVariableAsDictionary(engine);
 
             var parameters = DataTableControls.GetFieldValues(v_ReplaceActionParameterTable, "ParameterName", "ParameterValue", engine);
             var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_TargetType), nameof(v_ReplaceAction), parameters, engine, this);

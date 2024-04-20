@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Xml.Serialization;
-using System.Collections.Generic;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
@@ -16,15 +15,15 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetDictionaryKeysListCommand : ScriptCommand
+    public class GetDictionaryKeysListCommand : ADictionaryGetFromDictionaryCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
-        public string v_Dictionary { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
+        //public string v_Dictionary { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_OutputListName))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public GetDictionaryKeysListCommand()
         {
@@ -36,7 +35,9 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var dic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            //var dic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            var dic = this.ExpandUserVariableAsDictionary(engine);
+
             dic.Keys.ToList().StoreInUserVariable(engine, v_Result);
         }
     }

@@ -15,21 +15,22 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetDictionaryKeyFromValueCommand : ScriptCommand
+    public class GetDictionaryKeyFromValueCommand : ADictionaryGetFromDictionaryCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
-        public string v_Dictionary { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
+        //public string v_Dictionary { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_Value))]
+        [PropertyParameterOrder(6000)]
         public string v_Value { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
         [PropertyDescription("Variable Name to Store Key name")]
         [Remarks("When value not found, Result is Empty")]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public GetDictionaryKeyFromValueCommand()
         {
@@ -41,11 +42,11 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var vValue = v_Value.ExpandValueOrUserVariable(engine);
+            //var dic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
+            var dic = this.ExpandUserVariableAsDictionary(engine);
 
-            var dic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
-            
-            foreach(KeyValuePair<string, string> item in dic)
+            var vValue = v_Value.ExpandValueOrUserVariable(engine);
+            foreach (KeyValuePair<string, string> item in dic)
             {
                 if (item.Value == vValue)
                 {
