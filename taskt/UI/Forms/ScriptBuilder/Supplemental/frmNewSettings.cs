@@ -309,7 +309,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
             createLabel("lblResourceTitle", "Resources Folder", FontSize.NormalBold, true);
             createLabel("lblResource", "If you want to update the WebDriver (chromedriver.exe etc),\nopen the Resources folder and overwrite the file.", FontSize.Small, true);
-            Button btnRes = createButton("btnOpenResources", "Open Resources Folder", 280, true);
+            Button btnRes = createButton("btnOpenResources", "Open 'Resources' Folder", 280, true);
             btnRes.Click += (sender, e) => btnShowRecoures_Click(sender, e);
 
             createLabel("lblWebDriverTitle", "Check WebDrivers", FontSize.Normal, true);            
