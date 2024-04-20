@@ -3,7 +3,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
 {
-    public class AInputDataTableCommands : ScriptCommand, ILDataTableProperties
+    public abstract class AInputDataTableCommands : ScriptCommand, ILDataTableProperties
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
