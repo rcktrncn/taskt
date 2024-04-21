@@ -3,11 +3,8 @@
     /// <summary>
     /// Get something from DataTable properties
     /// </summary>
-    public interface IDataTableGetFromDataTable : ILDataTableProperties
+    public interface IDataTableGetFromDataTable : ILResultProperties
     {
-        /// <summary>
-        /// Variable Name to Store Result
-        /// </summary>
-        string v_Result { get; set; }
+        // string v_Result { get;set;}
     }
 }

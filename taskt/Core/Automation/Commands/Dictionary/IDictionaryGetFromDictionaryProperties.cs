@@ -3,11 +3,8 @@
     /// <summary>
     /// Get something from Dictionary properties
     /// </summary>
-    public interface IDictionaryGetFromDictionaryProperties : ILDictionaryProperties
+    public interface IDictionaryGetFromDictionaryProperties : ILResultProperties
     {
-        /// <summary>
-        /// Variable name to store the result obtained from Dictionary
-        /// </summary>
-        string v_Result { get; set; }
+        //string v_Result { get; set; }
     }
 }
