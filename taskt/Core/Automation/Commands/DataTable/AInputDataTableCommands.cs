@@ -3,6 +3,9 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
 {
+    /// <summary>
+    /// for Input DataTable commands
+    /// </summary>
     public abstract class AInputDataTableCommands : ScriptCommand, ILDataTableProperties
     {
         [XmlAttribute]
