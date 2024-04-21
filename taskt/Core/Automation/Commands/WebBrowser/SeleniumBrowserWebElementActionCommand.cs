@@ -38,7 +38,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
         [PropertyDescription("WebElement Action")]
         [PropertyUISelectionOption("Click WebElement")]
-        [PropertyUISelectionOption("Clear WebElement")]
+        [PropertyUISelectionOption("Clear Text")]
         [PropertyUISelectionOption("Set Text")]
         [PropertyUISelectionOption("Get Text")]
         [PropertyUISelectionOption("Get Attribute")]
@@ -145,7 +145,7 @@ namespace taskt.Core.Automation.Commands
                             };
                             clickElement.RunCommand(engine);
                             break;
-                        case "clear webelement":
+                        case "clear text":
                             var clearElement = new SeleniumBrowserClearTextInWebElementCommand()
                             {
                                 v_WebElement = elemVariable,

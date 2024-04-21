@@ -418,6 +418,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_87(doc);
             convertTo3_5_1_88(doc);
             convertTo3_5_1_89(doc);
+            convertTo3_5_1_91(doc);
 
             return doc;
         }
@@ -3019,6 +3020,20 @@ namespace taskt.Core.Script
                             return false;
                     }
                 }), "v_UserVariableName", "v_Result"
+            );
+        }
+
+        private static void convertTo3_5_1_91(XDocument doc)
+        {
+            // SeleniumBrowserWebElementActionCommand, v_SeleniumElementAction
+            ChangeAttributeValue(doc, "SeleniumBrowserWebElementActionCommand", "v_SeleniumElementAction",
+                new Action<XAttribute>(attr =>
+                {
+                    if (attr.Value.ToLower() == "clear webelement")
+                    {
+                        attr.SetValue("Clear Text");
+                    }
+                })
             );
         }
 
