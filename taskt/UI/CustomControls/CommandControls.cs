@@ -657,6 +657,9 @@ namespace taskt.UI.CustomControls
                 propInfo?.SetValue(command, editor.appSettings.replaceApplicationKeyword(firstValue));
             }
 
+            // TODO: support setting
+            inputBox.MouseWheel += (sender, e) => ComboboxMouseWheel_NoChangeSelection(sender, e);
+
             return inputBox;
         }
         #endregion
@@ -1549,6 +1552,20 @@ namespace taskt.UI.CustomControls
                 {
                     trg.DroppedDown = true;
                 }
+            }
+        }
+
+        /// <summary>
+        /// ignore Mouse Wheel when not focues
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void ComboboxMouseWheel_NoChangeSelection(object sender, MouseEventArgs e)
+        {
+            var cmb = (ComboBox)sender;
+            if (!cmb.Focused)
+            {
+                ((HandledMouseEventArgs)e).Handled = true;
             }
         }
         #endregion
