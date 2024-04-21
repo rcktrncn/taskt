@@ -48,18 +48,24 @@ Feel free to open up a feature request or report a bug/issue.
 
 # System specifications
 Please note whatever software that taskt is automating can affect the minimum software requirements. 
+
 ## Minimum
- * Windows 7/8.1/10/Server 2012/Server 2016
+ * Windows 7/8.1/10/Server 2012/Server 2016/Server 2019
  * 1GB ram
  * 200MB disk space
  * 1 vCPU
  * .NET Framework 4.8
+ * (We think it will probably work in Windows 11 :-)
+
+**Attension**: Windows 7, Windows 8.1, Windows Server 2012 are no longer supported.
+
 ## Recommended
- * Windows 10/Server 2012/Server 2016/Server 2019
+ * Windows 10/Server 2016/Server 2019
  * 4GB ram
  * 1GB disk space
  * 2 CPU
  * .NET Framework 4.8
+ * (We think it will probably work in Windows 11 :-)
 
 [![Open New Issue](https://img.shields.io/badge/Open-New&nbsp;Issue-blue.svg)](https://github.com/saucepleez/taskt/issues/new)
 [![Chat on Gitter](https://img.shields.io/badge/Chat-On&nbsp;Gitter-green.svg)](https://gitter.im/taskt-rpa/Lobby)
