@@ -38,7 +38,7 @@ namespace taskt.Core.Automation.Commands
             //DataTable srcDT = v_DataTable.ExpandUserVariableAsDataTable(engine);
             var srcDT = this.ExpandUserVariableAsDataTable(engine);
 
-            List<Dictionary<string, string>> jsonList = new List<Dictionary<string, string>>();
+            var jsonList = new List<Dictionary<string, string>>();
             for (int j = 0; j < srcDT.Rows.Count; j++)
             {
                 Dictionary<string, string> tDic = new Dictionary<string, string>();
