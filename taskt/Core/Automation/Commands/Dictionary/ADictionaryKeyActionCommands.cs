@@ -3,6 +3,9 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
 {
+    /// <summary>
+    /// for Dictionary Key Action commands
+    /// </summary>
     public abstract class ADictionaryKeyActionCommands : ADictionaryKeyCommands, IDictionaryKeyActionProperties
     {
         [XmlAttribute]
