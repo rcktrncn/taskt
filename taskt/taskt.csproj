@@ -481,6 +481,7 @@
     <Compile Include="Core\Automation\Commands\_General\ICommandIDProperties.cs" />
     <Compile Include="Core\Automation\Commands\_General\IHaveDataTableElements.cs" />
     <Compile Include="Core\Automation\Commands\_General\ILExpandableProperties.cs" />
+    <Compile Include="Core\Automation\Commands\_General\ILResultProperties.cs" />
     <Compile Include="Core\Automation\Commands\_General\ILUIParameterProperties.cs" />
     <Compile Include="Core\Automation\Commands\_General\ILPositionProperties.cs" />
     <Compile Include="Core\Automation\Commands\_General\ILSizeProperties.cs" />
