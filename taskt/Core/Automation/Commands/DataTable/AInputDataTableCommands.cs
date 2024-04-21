@@ -7,6 +7,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
+        [PropertyParameterOrder(5000)]
         public string v_DataTable { get; set; }
     }
 }
