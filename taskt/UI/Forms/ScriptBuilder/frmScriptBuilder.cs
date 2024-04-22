@@ -2308,7 +2308,7 @@ namespace taskt.UI.Forms.ScriptBuilder
 
                 bool currentInsertMode = appSettings.ClientSettings.InsertCommandsInline;
                 appSettings.ClientSettings.InsertCommandsInline = true;
-                AddNewCommand("Misc Commands - Add Code Comment");
+                AddNewCommand("Script Commands - Comment");
                 appSettings.ClientSettings.InsertCommandsInline = currentInsertMode;
             }
         }
@@ -2323,7 +2323,7 @@ namespace taskt.UI.Forms.ScriptBuilder
 
                 bool currentInsertMode = appSettings.ClientSettings.InsertCommandsInline;
                 appSettings.ClientSettings.InsertCommandsInline = true;
-                AddNewCommand("Misc Commands - Add Code Comment");
+                AddNewCommand("Script Commands - Comment");
                 appSettings.ClientSettings.InsertCommandsInline = currentInsertMode;
             }
         }
