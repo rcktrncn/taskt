@@ -3035,6 +3035,24 @@ namespace taskt.Core.Script
                     }
                 })
             );
+
+            // ConvertDataTable v_RowIndex
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "ConvertDataTableRowToListCommand":
+                        case "ConvertDataTableRowToJSONCommand":
+                        case "ConvertDataTableRowToDictionaryCommand":
+                        case "ConvertDataTableRowToDataTableCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_DataRowIndex", "v_RowIndex"
+            );
         }
 
         /// <summary>
