@@ -36,7 +36,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_WhenColumnNotExists))]
         [PropertyDescription("When DataTable (to add) Column does not Exists")]
-        public string v_NotExistsKey { get; set; }
+        public string v_WhenColumnNotExists { get; set; }
 
         public AddDataTableRowsByDataTableCommand()
         {
@@ -52,7 +52,7 @@ namespace taskt.Core.Automation.Commands
 
             DataTable addDT = v_RowName.ExpandUserVariableAsDataTable(engine);
 
-            string notExistsKey = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_NotExistsKey), "Key Does Not Exists", engine);
+            string notExistsKey = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenColumnNotExists), "Key Does Not Exists", engine);
 
             // get columns list
             List<string> columns = myDT.Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToList();

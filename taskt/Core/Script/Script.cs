@@ -3140,6 +3140,24 @@ namespace taskt.Core.Script
                 }),
                 "v_SetColumnName", "v_ColumnIndex"
             );
+
+            // DataTableCommands v_WhenKeyNotExists
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "AddDataTableRowByDictionaryCommand":
+                        case "AddDataTableRowsByDataTableCommand":
+                        case "SetDataTableRowValuesByDataTableCommand":
+                        case "SetDataTableRowValuesByDictionaryCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_NotExistsKey", "v_WhenColumnNotExists"
+            );
         }
 
         /// <summary>

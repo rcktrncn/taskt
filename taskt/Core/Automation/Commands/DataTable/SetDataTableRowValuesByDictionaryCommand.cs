@@ -39,7 +39,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyUISelectionOption("Ignore")]
         [PropertyUISelectionOption("Error")]
         [PropertyIsOptional(true, "Ignore")]
-        public string v_NotExistsKey { get; set; }
+        public string v_WhenColumnNotExists { get; set; }
 
         public SetDataTableRowValuesByDictionaryCommand()
         {
@@ -55,7 +55,7 @@ namespace taskt.Core.Automation.Commands
 
             var myDic = v_RowValues.ExpandUserVariableAsDictinary(engine);
 
-            string ifKeyNotExists = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_NotExistsKey), "Key Not Exists", engine);
+            string ifKeyNotExists = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenColumnNotExists), "Key Not Exists", engine);
 
             // get columns list
             new GetDataTableColumnListCommand
