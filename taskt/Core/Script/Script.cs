@@ -3103,6 +3103,43 @@ namespace taskt.Core.Script
                 }),
                 "v_TargetType", "v_ValueType"
             );
+
+            // ConvertDataTable v_ColumnIndex
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "ConvertDataTableColumnToDataTableCommand":
+                        case "ConvertDataTableColumnToDictionaryCommand":
+                        case "ConvertDataTableColumnToJSONCommand":
+                        case "ConvertDataTableColumnToListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_DataColumnIndex", "v_ColumnIndex"
+            );
+
+            // DeleteDataTableColumnCommand v_ColumnIndex
+            ChangeAttributeName(doc, "DeleteDataTableColumnCommand", "v_DeleteColumnName", "v_ColumnIndex");
+
+            // SetDataTableColumn v_ColumnIndex
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "SetDataTableColumnValuesByDataTableCommand":
+                        case "SetDataTableColumnValuesByListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_SetColumnName", "v_ColumnIndex"
+            );
         }
 
         /// <summary>
