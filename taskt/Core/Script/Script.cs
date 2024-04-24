@@ -3053,6 +3053,38 @@ namespace taskt.Core.Script
                 }),
                 "v_DataRowIndex", "v_RowIndex"
             );
+
+            // Filter/ReplaceDataTable v_RowIndex
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "FilterDataTableColumnByRowValueCommand":
+                        case "ReplaceDataTableRowValueCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_TargetRowIndex", "v_RowIndex"
+            );
+
+            // Filter/ReplaceDataTable v_ColumnIndex
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "FilterDataTableRowByColumnValueCommand":
+                        case "ReplaceDataTableColumnValueCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_TargetColumnIndex", "v_ColumnIndex"
+            );
         }
 
         /// <summary>

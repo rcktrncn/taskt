@@ -31,7 +31,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
-        public string v_TargetColumnIndex { get; set; }
+        public string v_ColumnIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_FilterValueType))]
@@ -63,7 +63,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var targetDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_TargetDataTable), nameof(v_ColumnType), nameof(v_TargetColumnIndex), engine);
+            (var targetDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_TargetDataTable), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
 
             var parameters = DataTableControls.GetFieldValues(v_FilterActionParameterTable, "ParameterName", "ParameterValue", engine);
             var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_ColumnType), nameof(v_FilterAction), parameters, engine, this);
