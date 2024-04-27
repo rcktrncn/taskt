@@ -24,12 +24,12 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_RowIndex))]
-        public string v_TargetRowIndex { get; set; }
+        public string v_RowIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ReplaceValueType))]
         [PropertySelectionChangeEvent(nameof(cmbTargetType_SelectionChangeCommited))]
-        public string v_TargetType { get; set; }
+        public string v_ValueType { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ReplaceAction))]
@@ -54,10 +54,10 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var targetDT, var rowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_DataTable), nameof(v_TargetRowIndex), engine);
+            (var targetDT, var rowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_DataTable), nameof(v_RowIndex), engine);
 
             var parameters = DataTableControls.GetFieldValues(v_ReplaceActionParameterTable, "ParameterName", "ParameterValue", engine);
-            var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_TargetType), nameof(v_ReplaceAction), parameters, engine, this);
+            var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_ValueType), nameof(v_ReplaceAction), parameters, engine, this);
 
             string newValue = v_NewValue.ExpandValueOrUserVariable(engine);
 
@@ -75,7 +75,7 @@ namespace taskt.Core.Automation.Commands
 
         private void cmbTargetType_SelectionChangeCommited(object sender, EventArgs e)
         {
-            var TargetTypeComboboxHelper = (ComboBox)ControlsList[nameof(v_TargetType)];
+            var TargetTypeComboboxHelper = (ComboBox)ControlsList[nameof(v_ValueType)];
             var ReplaceActionComboboxHelper = (ComboBox)ControlsList[nameof(v_ReplaceAction)];
             ConditionControls.AddFilterActionItems(TargetTypeComboboxHelper, ReplaceActionComboboxHelper);
         }
@@ -83,7 +83,7 @@ namespace taskt.Core.Automation.Commands
         private void cmbReplaceAction_SelectionChangeCommited(object sender, EventArgs e)
         {
             var ReplaceParametersGridViewHelper = (DataGridView)ControlsList[nameof(v_ReplaceActionParameterTable)];
-            var TargetTypeComboboxHelper = (ComboBox)ControlsList[nameof(v_TargetType)];
+            var TargetTypeComboboxHelper = (ComboBox)ControlsList[nameof(v_ValueType)];
             var ReplaceActionComboboxHelper = (ComboBox)ControlsList[nameof(v_ReplaceAction)];
             ConditionControls.RenderFilter(v_ReplaceActionParameterTable, ReplaceParametersGridViewHelper, ReplaceActionComboboxHelper, TargetTypeComboboxHelper);
         }
@@ -91,7 +91,7 @@ namespace taskt.Core.Automation.Commands
         public override void AfterShown(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             var ReplaceParametersGridViewHelper = (DataGridView)ControlsList[nameof(v_ReplaceActionParameterTable)];
-            var TargetTypeComboboxHelper = (ComboBox)ControlsList[nameof(v_TargetType)];
+            var TargetTypeComboboxHelper = (ComboBox)ControlsList[nameof(v_ValueType)];
             var ReplaceActionComboboxHelper = (ComboBox)ControlsList[nameof(v_ReplaceAction)];
             ConditionControls.AddFilterActionItems(TargetTypeComboboxHelper, ReplaceActionComboboxHelper);
             ConditionControls.RenderFilter(v_ReplaceActionParameterTable, ReplaceParametersGridViewHelper, ReplaceActionComboboxHelper, TargetTypeComboboxHelper);

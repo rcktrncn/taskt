@@ -418,6 +418,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_87(doc);
             convertTo3_5_1_88(doc);
             convertTo3_5_1_89(doc);
+            convertTo3_5_1_91(doc);
 
             return doc;
         }
@@ -3019,6 +3020,183 @@ namespace taskt.Core.Script
                             return false;
                     }
                 }), "v_UserVariableName", "v_Result"
+            );
+        }
+
+        private static void convertTo3_5_1_91(XDocument doc)
+        {
+            // SeleniumBrowserWebElementActionCommand, v_SeleniumElementAction
+            ChangeAttributeValue(doc, "SeleniumBrowserWebElementActionCommand", "v_SeleniumElementAction",
+                new Action<XAttribute>(attr =>
+                {
+                    if (attr.Value.ToLower() == "clear webelement")
+                    {
+                        attr.SetValue("Clear Text");
+                    }
+                })
+            );
+
+            // ConvertDataTable v_RowIndex
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "ConvertDataTableRowToListCommand":
+                        case "ConvertDataTableRowToJSONCommand":
+                        case "ConvertDataTableRowToDictionaryCommand":
+                        case "ConvertDataTableRowToDataTableCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_DataRowIndex", "v_RowIndex"
+            );
+
+            // Filter/ReplaceDataTable v_RowIndex
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "FilterDataTableColumnByRowValueCommand":
+                        case "ReplaceDataTableRowValueCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_TargetRowIndex", "v_RowIndex"
+            );
+
+            // Filter/ReplaceDataTable v_ColumnIndex
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "FilterDataTableRowByColumnValueCommand":
+                        case "ReplaceDataTableColumnValueCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_TargetColumnIndex", "v_ColumnIndex"
+            );
+
+            // Filter/ReplaceDataTable,Dictionary,List v_ValueType
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "FilterDataTableColumnByRowValueCommand":
+                        case "FilterDataTableRowByColumnValueCommand":
+                        case "ReplaceDataTableColumnValueCommand":
+                        case "ReplaceDataTableRowValueCommand":
+                        case "FilterDictionaryCommand":
+                        case "ReplaceDictionaryCommand":
+                        case "FilterListCommand":
+                        case "ReplaceListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_TargetType", "v_ValueType"
+            );
+
+            // ConvertDataTable v_ColumnIndex
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "ConvertDataTableColumnToDataTableCommand":
+                        case "ConvertDataTableColumnToDictionaryCommand":
+                        case "ConvertDataTableColumnToJSONCommand":
+                        case "ConvertDataTableColumnToListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_DataColumnIndex", "v_ColumnIndex"
+            );
+
+            // DeleteDataTableColumnCommand v_ColumnIndex
+            ChangeAttributeName(doc, "DeleteDataTableColumnCommand", "v_DeleteColumnName", "v_ColumnIndex");
+
+            // SetDataTableColumn v_ColumnIndex
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "SetDataTableColumnValuesByDataTableCommand":
+                        case "SetDataTableColumnValuesByListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_SetColumnName", "v_ColumnIndex"
+            );
+
+            // DataTableCommands v_WhenKeyNotExists
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "AddDataTableRowByDictionaryCommand":
+                        case "AddDataTableRowsByDataTableCommand":
+                        case "SetDataTableRowValuesByDataTableCommand":
+                        case "SetDataTableRowValuesByDictionaryCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_NotExistsKey", "v_WhenColumnNotExists"
+            );
+
+            // ListCommands v_Index
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "GetListItemCommand":
+                        case "SetListItemCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_ItemIndex", "v_Index"
+            );
+
+            // ListCommands v_WhenValueIsNotNumeric
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "GetAverageFromListCommand":
+                        case "GetMaxFromListCommand":
+                        case "GetMedianFromListCommand":
+                        case "GetMinFromListCommand":
+                        case "GetSumFromListCommand":
+                        case "GetVarianceFromListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_IfValueIsNotNumeric", "v_WhenValueIsNotNumeric"
             );
         }
 

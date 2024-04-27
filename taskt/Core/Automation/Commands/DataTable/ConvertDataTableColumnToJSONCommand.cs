@@ -27,7 +27,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
-        public string v_DataColumnIndex { get; set; }
+        public string v_ColumnIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_OutputJSONName))]
@@ -47,7 +47,7 @@ namespace taskt.Core.Automation.Commands
             {
                 v_DataTable = this.v_DataTable,
                 v_ColumnType = this.v_ColumnType,
-                v_DataColumnIndex = this.v_DataColumnIndex,
+                v_ColumnIndex = this.v_ColumnIndex,
                 v_Result = VariableNameControls.GetInnerVariableName(0, engine)
             };
             listCommand.RunCommand(engine);

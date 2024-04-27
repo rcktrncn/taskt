@@ -27,7 +27,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
-        public string v_DataColumnIndex { get; set; }
+        public string v_ColumnIndex { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Dictionary Key prefix")]
@@ -65,7 +65,7 @@ namespace taskt.Core.Automation.Commands
                 prefix = v_KeyPrefix.ExpandValueOrUserVariable(engine);
             }
 
-            (var srcDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_DataColumnIndex), engine);
+            (var srcDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
             Dictionary<string, string> myDic = new Dictionary<string, string>();
             for (int i = 0; i < srcDT.Rows.Count; i++)
             {

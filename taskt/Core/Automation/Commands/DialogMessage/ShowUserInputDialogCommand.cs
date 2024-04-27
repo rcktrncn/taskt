@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_input))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ShowUserInputDialogCommand : ScriptCommand
+    public class ShowUserInputDialogCommand : ScriptCommand, IHaveDataTableElements
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
@@ -142,12 +142,12 @@ namespace taskt.Core.Automation.Commands
             {
                 var row = v_UserInputConfig.Rows[i];
                 
-                if (String.IsNullOrEmpty(row.Field<string>("Type")))
+                if (string.IsNullOrEmpty(row.Field<string>("Type")))
                 {
                     this.validationResult += "Input Type #" + (i + 1) + " is empty.\n";
                     this.IsValid = false;
                 }
-                if (String.IsNullOrEmpty(row.Field<string>("Size")))
+                if (string.IsNullOrEmpty(row.Field<string>("Size")))
                 {
                     this.validationResult += "Input Size #" + (i + 1) + " is empty.\n";
                     this.IsValid = false;
@@ -155,6 +155,12 @@ namespace taskt.Core.Automation.Commands
             }
 
             return this.IsValid;
+        }
+
+        public override void BeforeValidate()
+        {
+            base.BeforeValidate();
+            DataTableControls.BeforeValidate_NoRowAdding((DataGridView)ControlsList[nameof(v_UserInputConfig)], v_UserInputConfig);
         }
     }
 }

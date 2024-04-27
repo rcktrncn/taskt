@@ -632,6 +632,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             createCheckBox("chkPoliteTextInDescription", "Try Polite Text In Description (beta)", newAppSettings.ClientSettings, nameof(newAppSettings.ClientSettings.ShowPoliteTextInDescription), true);
             createCheckBox("chkShowSampleUsegeInDescription", "Show Sample Usage In Description", newAppSettings.ClientSettings, nameof(newAppSettings.ClientSettings.ShowSampleUsageInDescription), true);
             createCheckBox("chkShowDefaultValueInDescription", "Show Default Value In Description If Optional", newAppSettings.ClientSettings, nameof(newAppSettings.ClientSettings.ShowDefaultValueInDescription), true);
+            createCheckBox("chkChangeItemsWheelNotFocused", "Change Items with Mouse Wheel when NOT Forcused", newAppSettings.ClientSettings, nameof(newAppSettings.ClientSettings.ChangeItemsWithWheelWhenNotForcused), true);
         }
         #endregion
 

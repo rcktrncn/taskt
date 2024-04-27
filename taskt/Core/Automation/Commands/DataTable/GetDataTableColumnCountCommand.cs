@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml.Serialization;
-using System.Data;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
@@ -15,15 +14,15 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetDataTableColumnCountCommand : ScriptCommand
+    public class GetDataTableColumnCountCommand : ADataTableGetFromDataTableCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
-        public string v_DataTable { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
+        //public string v_DataTable { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public GetDataTableColumnCountCommand()
         {
@@ -35,9 +34,10 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            DataTable myDT = v_DataTable.ExpandUserVariableAsDataTable(engine);
+            //DataTable myDT = v_DataTable.ExpandUserVariableAsDataTable(engine);
+            var myDT = this.ExpandUserVariableAsDataTable(engine);
 
-            myDT.Columns.Count.ToString().StoreInUserVariable(engine, v_Result);
+            myDT.Columns.Count.StoreInUserVariable(engine, v_Result);
         }
     }
 }

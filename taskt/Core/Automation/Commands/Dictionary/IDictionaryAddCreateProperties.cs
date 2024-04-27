@@ -2,6 +2,9 @@
 
 namespace taskt.Core.Automation.Commands
 {
+    /// <summary>
+    /// Add Items to Dictionary or Create Dictionary properties
+    /// </summary>
     public interface IDictionaryAddCreateProperties : ILDictionaryProperties
     {
         /// <summary>

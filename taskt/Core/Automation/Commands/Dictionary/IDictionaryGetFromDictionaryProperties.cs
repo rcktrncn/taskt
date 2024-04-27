@@ -1,10 +1,10 @@
 ﻿namespace taskt.Core.Automation.Commands
 {
-    public interface IDictionaryGetFromDictionaryProperties : ILDictionaryProperties
+    /// <summary>
+    /// Get something from Dictionary properties
+    /// </summary>
+    public interface IDictionaryGetFromDictionaryProperties : ILResultProperties
     {
-        /// <summary>
-        /// Variable name to store the result obtained from Dictionary
-        /// </summary>
-        string v_Result { get; set; }
+        //string v_Result { get; set; }
     }
 }

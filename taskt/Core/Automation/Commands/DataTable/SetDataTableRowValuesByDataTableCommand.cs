@@ -39,7 +39,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_WhenColumnNotExists))]
-        public string v_NotExistsKey { get; set; }
+        public string v_WhenColumnNotExists { get; set; }
 
         public SetDataTableRowValuesByDataTableCommand()
         {
@@ -54,7 +54,7 @@ namespace taskt.Core.Automation.Commands
             (var myDT, var rowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_DataTable), nameof(v_RowIndex), engine);
 
             (var addDT, var srcRowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_RowName), nameof(v_SrcRowIndex), engine);
-            string ifNotColumnExists = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_NotExistsKey), "Column not exists", engine);
+            string ifNotColumnExists = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenColumnNotExists), "Column not exists", engine);
 
             // get columns list
             new GetDataTableColumnListCommand

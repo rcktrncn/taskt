@@ -32,7 +32,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_WhenColumnNotExists))]
         [PropertyDescription("When Dictionary Key does not Exists")]
-        public string v_NotExistsKey { get; set; }
+        public string v_WhenColumnNotExists { get; set; }
 
         public AddDataTableRowByDictionaryCommand()
         {
@@ -48,7 +48,7 @@ namespace taskt.Core.Automation.Commands
 
             Dictionary<string, string> myDic = v_RowName.ExpandUserVariableAsDictinary(engine);
 
-            string notExistsKey = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_NotExistsKey), "Key Does Not Exists", engine);
+            string notExistsKey = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenColumnNotExists), "Key Does Not Exists", engine);
 
             // get columns list
             List<string> columns = myDT.Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToList();
