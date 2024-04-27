@@ -3169,11 +3169,34 @@ namespace taskt.Core.Script
                 {
                     switch (GetCommandName(el))
                     {
+                        case "GetListItemCommand":
+                        case "SetListItemCommand":
+                            return true;
                         default:
                             return false;
                     }
                 }),
                 "v_ItemIndex", "v_Index"
+            );
+
+            // ListCommands v_WhenValueIsNotNumeric
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "GetAverageFromListCommand":
+                        case "GetMaxFromListCommand":
+                        case "GetMedianFromListCommand":
+                        case "GetMinFromListCommand":
+                        case "GetSumFromListCommand":
+                        case "GetVarianceFromListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_IfValueIsNotNumeric", "v_WhenValueIsNotNumeric"
             );
         }
 

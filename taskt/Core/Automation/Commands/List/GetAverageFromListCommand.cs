@@ -28,7 +28,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_WhenValueIsNotNumeric))]
-        public string v_IfValueIsNotNumeric { get; set; }
+        public string v_WhenValueIsNotNumeric { get; set; }
 
         public GetAverageFromListCommand()
         {
@@ -40,7 +40,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            ListControls.MathProcess(this, nameof(v_IfValueIsNotNumeric), v_List, engine,
+            ListControls.MathProcess(this, nameof(v_WhenValueIsNotNumeric), v_List, engine,
                 new Func<List<decimal>, decimal>((lst) =>
                 {
                     return lst.Average();
