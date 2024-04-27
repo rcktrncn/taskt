@@ -3086,7 +3086,7 @@ namespace taskt.Core.Script
                 "v_TargetColumnIndex", "v_ColumnIndex"
             );
 
-            // Filter/ReplaceDataTable v_ValueType
+            // Filter/ReplaceDataTable,Dictionary,List v_ValueType
             ChangeAttributeName(doc,
                 new Func<XElement, bool>(el =>
                 {
@@ -3096,6 +3096,10 @@ namespace taskt.Core.Script
                         case "FilterDataTableRowByColumnValueCommand":
                         case "ReplaceDataTableColumnValueCommand":
                         case "ReplaceDataTableRowValueCommand":
+                        case "FilterDictionaryCommand":
+                        case "ReplaceDictionaryCommand":
+                        case "FilterListCommand":
+                        case "ReplaceListCommand":
                             return true;
                         default:
                             return false;

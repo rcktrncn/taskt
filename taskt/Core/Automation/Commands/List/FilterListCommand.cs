@@ -28,7 +28,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_FilterValueType))]
         [PropertySelectionChangeEvent(nameof(cmbTargetType_SelectionChangeCommited))]
-        public string v_TargetType { get; set; }
+        public string v_ValueType { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_FilterAction))]
@@ -56,7 +56,7 @@ namespace taskt.Core.Automation.Commands
             List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
 
             var parameters = DataTableControls.GetFieldValues(v_FilterActionParameterTable, "ParameterName", "ParameterValue", engine);
-            var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_TargetType), nameof(v_FilterAction), parameters, engine, this);
+            var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_ValueType), nameof(v_FilterAction), parameters, engine, this);
 
             List<string> res = new List<string>();
 
@@ -74,21 +74,21 @@ namespace taskt.Core.Automation.Commands
         private void cmbTargetType_SelectionChangeCommited(object sender, EventArgs e)
         {
             //ConditionControls.AddFilterActionItems(TargetTypeComboboxHelper, FilterActionComboboxHelper);
-            ConditionControls.AddFilterActionItems((ComboBox)ControlsList[nameof(v_TargetType)], (ComboBox)ControlsList[nameof(v_FilterAction)]);
+            ConditionControls.AddFilterActionItems((ComboBox)ControlsList[nameof(v_ValueType)], (ComboBox)ControlsList[nameof(v_FilterAction)]);
         }
 
         private void cmbFilterAction_SelectionChangeCommited(object sender, EventArgs e)
         {
             //ConditionControls.RenderFilter(v_FilterActionParameterTable, FilterParametersGridViewHelper, FilterActionComboboxHelper, TargetTypeComboboxHelper);
-            ConditionControls.RenderFilter(v_FilterActionParameterTable, (DataGridView)ControlsList[nameof(v_FilterActionParameterTable)], (ComboBox)ControlsList[nameof(v_FilterAction)], (ComboBox)ControlsList[nameof(v_TargetType)]);
+            ConditionControls.RenderFilter(v_FilterActionParameterTable, (DataGridView)ControlsList[nameof(v_FilterActionParameterTable)], (ComboBox)ControlsList[nameof(v_FilterAction)], (ComboBox)ControlsList[nameof(v_ValueType)]);
         }
 
         public override void AfterShown(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             //ConditionControls.AddFilterActionItems(TargetTypeComboboxHelper, FilterActionComboboxHelper);
-            ConditionControls.AddFilterActionItems((ComboBox)ControlsList[nameof(v_TargetType)], (ComboBox)ControlsList[nameof(v_FilterAction)]);
+            ConditionControls.AddFilterActionItems((ComboBox)ControlsList[nameof(v_ValueType)], (ComboBox)ControlsList[nameof(v_FilterAction)]);
             //ConditionControls.RenderFilter(v_FilterActionParameterTable, FilterParametersGridViewHelper, FilterActionComboboxHelper, TargetTypeComboboxHelper);
-            ConditionControls.RenderFilter(v_FilterActionParameterTable, (DataGridView)ControlsList[nameof(v_FilterActionParameterTable)], (ComboBox)ControlsList[nameof(v_FilterAction)], (ComboBox)ControlsList[nameof(v_TargetType)]);
+            ConditionControls.RenderFilter(v_FilterActionParameterTable, (DataGridView)ControlsList[nameof(v_FilterActionParameterTable)], (ComboBox)ControlsList[nameof(v_FilterAction)], (ComboBox)ControlsList[nameof(v_ValueType)]);
         }
 
         public override void BeforeValidate()
