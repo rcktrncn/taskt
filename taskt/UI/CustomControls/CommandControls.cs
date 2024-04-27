@@ -657,8 +657,11 @@ namespace taskt.UI.CustomControls
                 propInfo?.SetValue(command, editor.appSettings.replaceApplicationKeyword(firstValue));
             }
 
-            // TODO: support setting
-            inputBox.MouseWheel += (sender, e) => ComboboxMouseWheel_NoChangeSelection(sender, e);
+            // Mouse Wheel option
+            if (!(editor?.appSettings.ClientSettings.ChangeItemsWithWheelWhenNotForcused ?? false))
+            {
+                inputBox.MouseWheel += (sender, e) => ComboboxMouseWheel_NoChangeSelection(sender, e);
+            }
 
             return inputBox;
         }
