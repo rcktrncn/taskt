@@ -3158,6 +3158,19 @@ namespace taskt.Core.Script
                 }),
                 "v_NotExistsKey", "v_WhenColumnNotExists"
             );
+
+            // ListCommands v_Index
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        default:
+                            return false;
+                    }
+                }),
+                "v_ItemIndex", "v_Index"
+            );
         }
 
         /// <summary>

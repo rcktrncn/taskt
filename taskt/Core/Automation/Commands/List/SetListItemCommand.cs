@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml.Serialization;
-using System.Collections.Generic;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
@@ -23,7 +22,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ListIndex))]
-        public string v_ItemIndex { get; set; }
+        public string v_Index { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_OneLineTextBox))]
@@ -75,7 +74,7 @@ namespace taskt.Core.Automation.Commands
             //    index = targetList.Count + index;
             //}
 
-            (var list, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_List), nameof(v_ItemIndex), engine);
+            (var list, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_List), nameof(v_Index), engine);
 
             if ((index >= 0) && (index < list.Count))
             {
@@ -83,7 +82,7 @@ namespace taskt.Core.Automation.Commands
             }
             else
             {
-                throw new Exception("Strange index " + v_ItemIndex + ", parsed " + index);
+                throw new Exception("Strange index " + v_Index + ", parsed " + index);
             }
         }
     }
