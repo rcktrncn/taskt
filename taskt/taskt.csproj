@@ -353,11 +353,13 @@
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DicitionaryCreateFromDictionaryExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryKeyPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryResultPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ICanHandleDictionary.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryAddCreateProperties.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryGetFromDictionaryProperties.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryKeyActionProperties.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryKeyProperties.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryResultProperties.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ILDictionaryCreateFromDictionary.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ILDictionaryProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\AExcelCellActionCommands.cs" />
@@ -418,7 +420,9 @@
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetCopyRenameProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetProperties.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_CanHandleListExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\List\EM_ListResultPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\List\ICanHandleList.cs" />
+    <Compile Include="Core\Automation\Commands\List\IListResultProperties.cs" />
     <Compile Include="Core\Automation\Commands\List\ILListProperties.cs" />
     <Compile Include="Core\Automation\Commands\MathControls.cs" />
     <Compile Include="Core\Automation\Commands\Math\IInverseTrignometricProperties.cs" />
