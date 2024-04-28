@@ -15,23 +15,23 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertDataTableColumnToListCommand : ScriptCommand
+    public class ConvertDataTableColumnToListCommand : ADataTableGetFromDataTableColumnCommands, ICanHandleList
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
-        public string v_DataTable { get; set; }
+        //    [XmlAttribute]
+        //    [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
+        //    public string v_DataTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
-        public string v_ColumnType { get; set; }
+        //    [XmlAttribute]
+        //    [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
+        //    public string v_ColumnType { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
-        public string v_ColumnIndex { get; set; }
+        //    [XmlAttribute]
+        //    [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
+        //    public string v_ColumnIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_OutputListName))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public ConvertDataTableColumnToListCommand()
         {
@@ -43,14 +43,17 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var srcDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
-            List<string> myList = new List<string>();
+            //(var srcDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
+            (var srcDT, var colIndex, _) = this.ExpandValueOrUserVariableAsDataTableAndColumn(engine);
+            
+            var myList = new List<string>();
             for (int i = 0; i < srcDT.Rows.Count; i++)
             {
                 myList.Add(srcDT.Rows[i][colIndex]?.ToString() ?? "");
             }
 
-            myList.StoreInUserVariable(engine, v_Result);
+            //myList.StoreInUserVariable(engine, v_Result);
+            this.StoreListInUserVariable(myList, nameof(v_Result), engine);
         }
     }
 }

@@ -15,23 +15,23 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertDataTableColumnToJSONCommand : ScriptCommand
+    public class ConvertDataTableColumnToJSONCommand : ADataTableGetFromDataTableColumnCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
-        public string v_DataTable { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
+        //public string v_DataTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
-        public string v_ColumnType { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
+        //public string v_ColumnType { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
-        public string v_ColumnIndex { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
+        //public string v_ColumnIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_OutputJSONName))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public ConvertDataTableColumnToJSONCommand()
         {
@@ -52,7 +52,7 @@ namespace taskt.Core.Automation.Commands
             };
             listCommand.RunCommand(engine);
 
-            List<string> myList = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
+            var myList = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
 
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(myList);
             json.StoreInUserVariable(engine, v_Result);

@@ -15,24 +15,24 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertDataTableColumnToDataTableCommand : ScriptCommand
+    public class ConvertDataTableColumnToDataTableCommand : ADataTableGetFromDataTableColumnCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
-        [PropertyDescription("DataTable Variable Name to Converted")]
-        public string v_DataTable { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
+        //[PropertyDescription("DataTable Variable Name to Converted")]
+        //public string v_DataTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
-        public string v_ColumnType { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
+        //public string v_ColumnType { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
-        public string v_ColumnIndex { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
+        //public string v_ColumnIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_NewOutputDataTableName))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public ConvertDataTableColumnToDataTableCommand()
         {
@@ -44,16 +44,19 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var srcDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
+            //(var srcDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
+            (var srcDT, var colIndex, var colName) = this.ExpandValueOrUserVariableAsDataTableAndColumn(engine);
+            
             DataTable myDT = new DataTable();
-            myDT.Columns.Add(srcDT.Columns[colIndex].ColumnName);
+            myDT.Columns.Add(colName);
             for (int i = 0; i < srcDT.Rows.Count; i++)
             {
                 myDT.Rows.Add();
                 myDT.Rows[i][0] = srcDT.Rows[i][colIndex]?.ToString() ?? "";
             }
 
-            myDT.StoreInUserVariable(engine, v_Result);
+            //myDT.StoreInUserVariable(engine, v_Result);
+            this.StoreDataTableInUserVariable(myDT, nameof(v_Result), engine);
         }
     }
 }
