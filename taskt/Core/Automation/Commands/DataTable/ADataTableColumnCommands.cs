@@ -11,11 +11,11 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
         [PropertyParameterOrder(6000)]
-        public string v_ColumnType { get; set; }
+        public virtual string v_ColumnType { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
         [PropertyParameterOrder(7000)]
-        public string v_ColumnIndex { get; set; }
+        public virtual string v_ColumnIndex { get; set; }
     }
 }
