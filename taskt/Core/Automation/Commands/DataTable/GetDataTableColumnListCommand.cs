@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetDataTableColumnListCommand : ADataTableGetFromDataTableCommands
+    public class GetDataTableColumnListCommand : ADataTableGetFromDataTableCommands, IListResultProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
@@ -39,7 +39,11 @@ namespace taskt.Core.Automation.Commands
             //DataTable myDT = v_DataTable.ExpandUserVariableAsDataTable(engine);
             var myDT = this.ExpandUserVariableAsDataTable(engine);
 
-            myDT.Columns.Cast<DataColumn>().Select(col => col.ColumnName).ToList().StoreInUserVariable(engine, v_Result);
+            //myDT.Columns.Cast<DataColumn>().Select(col => col.ColumnName).ToList().StoreInUserVariable(engine, v_Result);
+            this.StoreListInUserVariable(
+                myDT.Columns.Cast<DataColumn>().Select(col => col.ColumnName).ToList(),
+                engine
+            );
         }
     }
 }

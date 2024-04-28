@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertDataTableColumnToListCommand : ADataTableGetFromDataTableColumnCommands, ICanHandleList
+    public class ConvertDataTableColumnToListCommand : ADataTableGetFromDataTableColumnCommands, IListResultProperties
     {
         //    [XmlAttribute]
         //    [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
@@ -53,7 +53,8 @@ namespace taskt.Core.Automation.Commands
             }
 
             //myList.StoreInUserVariable(engine, v_Result);
-            this.StoreListInUserVariable(myList, nameof(v_Result), engine);
+            //this.StoreListInUserVariable(myList, nameof(v_Result), engine);
+            this.StoreListInUserVariable(myList, engine);
         }
     }
 }

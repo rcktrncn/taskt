@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertDataTableColumnToDictionaryCommand : ADataTableGetFromDataTableColumnCommands, ICanHandleDictionary
+    public class ConvertDataTableColumnToDictionaryCommand : ADataTableGetFromDataTableColumnCommands, IDictionaryResultProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
@@ -78,7 +78,8 @@ namespace taskt.Core.Automation.Commands
             }
 
             //myDic.StoreInUserVariable(engine, v_Result);
-            this.StoreDictionaryInUserVariable(myDic, nameof(v_Result), engine);
+            //this.StoreDictionaryInUserVariable(myDic, nameof(v_Result), engine);
+            this.StoreDictionaryInUserVariable(myDic, engine);
         }
     }
 }
