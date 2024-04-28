@@ -6,7 +6,7 @@
     public interface ILDataTableRowPositionProperties
     {
         /// <summary>
-        /// Column Row Index
+        /// DataTable Row Index
         /// </summary>
         string v_RowIndex { get; set; }
     }
