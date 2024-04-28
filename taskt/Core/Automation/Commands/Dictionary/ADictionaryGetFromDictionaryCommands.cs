@@ -6,7 +6,7 @@ namespace taskt.Core.Automation.Commands
     /// <summary>
     /// for Get from Dictionary, or Dictionary convert to something commands
     /// </summary>
-    public abstract class ADictionaryGetFromDictionaryCommands : AInputDictionaryCommands, IDictionaryGetFromDictionaryProperties
+    public abstract class ADictionaryGetFromDictionaryCommands : ADictionaryInputDictionaryCommands, IDictionaryGetFromDictionaryProperties
     {
         [XmlAttribute]
         [PropertyParameterOrder(7000)]

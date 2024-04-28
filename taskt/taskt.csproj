@@ -318,12 +318,16 @@
     <Compile Include="Core\Automation\Commands\Color\ICanHandleColor.cs" />
     <Compile Include="Core\Automation\Commands\Color\IColorCreateProperties.cs" />
     <Compile Include="Core\Automation\Commands\Color\IColorProperties.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ADataTableColumnCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableGetFromDataTableCommands.cs" />
-    <Compile Include="Core\Automation\Commands\DataTable\AInputDataTableCommands.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ADataTableInputDataTableCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_CanHandleDataTable.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTablePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ICanHandleDataTable.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\IDataTableColumnProperties.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\IDataTableGetFromDataTable.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ILDataTableRowPositionProperties.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ILDataTableColumnPositionProperties.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ILDataTableProperties.cs" />
     <Compile Include="Core\Automation\Commands\DateTime\ADateTimeConvertCommands.cs" />
     <Compile Include="Core\Automation\Commands\DateTime\ADateTimeCreateCommands.cs" />
@@ -337,7 +341,7 @@
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryGetFromDictionaryCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryKeyActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryKeyCommands.cs" />
-    <Compile Include="Core\Automation\Commands\Dictionary\AInputDictionaryCommands.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryInputDictionaryCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_CanHandleDictionary.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DicitionaryCreateFromDictionaryExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryKeyPropertiesExtensionMethods.cs" />

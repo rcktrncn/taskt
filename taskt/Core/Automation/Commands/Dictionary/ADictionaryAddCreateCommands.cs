@@ -10,7 +10,7 @@ namespace taskt.Core.Automation.Commands
     /// <summary>
     /// for Add Dictionary Items or Create Dictionary commands
     /// </summary>
-    public abstract class ADictionaryAddCreateCommands : AInputDictionaryCommands, IDictionaryAddCreateProperties
+    public abstract class ADictionaryAddCreateCommands : ADictionaryInputDictionaryCommands, IDictionaryAddCreateProperties
     {
         [XmlElement]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_KeyAndValue))]

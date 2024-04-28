@@ -6,7 +6,7 @@ namespace taskt.Core.Automation.Commands
     /// <summary>
     /// for Get something from DataTable commands
     /// </summary>
-    public abstract class ADataTableGetFromDataTableCommands : AInputDataTableCommands, IDataTableGetFromDataTable
+    public abstract class ADataTableGetFromDataTableCommands : ADataTableInputDataTableCommands, IDataTableGetFromDataTable
     {
         [XmlAttribute]
         [PropertyParameterOrder(10000)]
