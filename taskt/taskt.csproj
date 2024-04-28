@@ -328,6 +328,8 @@
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableColumnPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTablePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableResultPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableRowPositionPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableRowPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ICanHandleDataTable.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\IDataTableColumnProperties.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\IDataTableGetFromDataTable.cs" />
