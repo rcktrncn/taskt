@@ -2,6 +2,6 @@
 {
     public interface IDataTableColumnProperties : ILDataTableProperties, ILDataTableColumnPositionProperties
     {
-        // nothing
+        // only imple
     }
 }
