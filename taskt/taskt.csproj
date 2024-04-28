@@ -321,11 +321,13 @@
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableColumnCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableGetFromDataTableCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableInputDataTableCommands.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ADataTableRowCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_CanHandleDataTable.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTablePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ICanHandleDataTable.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\IDataTableColumnProperties.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\IDataTableGetFromDataTable.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\IDataTableRowProperties.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ILDataTableRowPositionProperties.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ILDataTableColumnPositionProperties.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ILDataTableProperties.cs" />
