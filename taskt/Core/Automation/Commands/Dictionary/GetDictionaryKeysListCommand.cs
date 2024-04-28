@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetDictionaryKeysListCommand : ADictionaryGetFromDictionaryCommands
+    public class GetDictionaryKeysListCommand : ADictionaryGetFromDictionaryCommands, IListResultProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
@@ -38,7 +38,8 @@ namespace taskt.Core.Automation.Commands
             //var dic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
             var dic = this.ExpandUserVariableAsDictionary(engine);
 
-            dic.Keys.ToList().StoreInUserVariable(engine, v_Result);
+            //dic.Keys.ToList().StoreInUserVariable(engine, v_Result);
+            this.StoreListInUserVariable(dic.Keys.ToList(), engine);
         }
     }
 }
