@@ -318,6 +318,8 @@
     <Compile Include="Core\Automation\Commands\Color\ICanHandleColor.cs" />
     <Compile Include="Core\Automation\Commands\Color\IColorCreateProperties.cs" />
     <Compile Include="Core\Automation\Commands\Color\IColorProperties.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ADataTableBothRowCommands.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ADataTableBothColumnCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableBothDataTableCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableColumnCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableGetFromDataTableColumnCommands.cs" />
