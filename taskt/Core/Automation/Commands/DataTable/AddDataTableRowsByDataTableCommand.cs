@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
-using System.Xml.Serialization;
 using System.Data;
-using System.Collections.Generic;
+using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
@@ -55,7 +53,8 @@ namespace taskt.Core.Automation.Commands
             string notExistsKey = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenColumnNotExists), "Key Does Not Exists", engine);
 
             // get columns list
-            List<string> columns = myDT.Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToList();
+            //List<string> columns = myDT.Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToList();
+            var columns = myDT.GetColumnNameList();
             if (notExistsKey == "error")
             {
                 for (int i = 0; i < addDT.Columns.Count; i++)
