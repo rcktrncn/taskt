@@ -41,7 +41,8 @@ namespace taskt.Core.Automation.Commands
 
             //myDT.Columns.Cast<DataColumn>().Select(col => col.ColumnName).ToList().StoreInUserVariable(engine, v_Result);
             this.StoreListInUserVariable(
-                myDT.Columns.Cast<DataColumn>().Select(col => col.ColumnName).ToList(),
+                //myDT.Columns.Cast<DataColumn>().Select(col => col.ColumnName).ToList(),
+                myDT.GetColumnNameList(),
                 engine
             );
         }
