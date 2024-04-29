@@ -15,5 +15,16 @@ namespace taskt.Core.Automation.Commands
         {
             return table.Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToList();
         }
+
+        /// <summary>
+        /// Check Column Name Exists
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool IsColumnNameExists(this DataTable table, string name)
+        {
+            return table.GetColumnNameList().Contains(name);
+        }
     }
 }
