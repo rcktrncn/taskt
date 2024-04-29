@@ -2,6 +2,7 @@
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using OpenQA.Selenium.DevTools.V118.Overlay;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -15,17 +16,17 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SetDataTableRowValuesByDataTableCommand : ScriptCommand
+    public class SetDataTableRowValuesByDataTableCommand : ADataTableRowCommands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_BothDataTableName))]
         [PropertyDescription("DataTable Variable Name to be Setted")]
-        public string v_DataTable { get; set; }
+        public override string v_DataTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_RowIndex))]
-        [PropertyDescription(" Row Index to be Setted")]
-        public string v_RowIndex { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_RowIndex))]
+        //[PropertyDescription(" Row Index to be Setted")]
+        //public string v_RowIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
@@ -34,7 +35,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_RowIndex))]
-        [PropertyDescription(" Row Index to Set")]
+        [PropertyDescription("Row Index to Set")]
         public string v_SrcRowIndex { get; set; }
 
         [XmlAttribute]
@@ -51,9 +52,21 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var myDT, var rowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_DataTable), nameof(v_RowIndex), engine);
+            //(var myDT, var rowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_DataTable), nameof(v_RowIndex), engine);
+            (var myDT, var rowIndex) = this.ExpandValueOrUserVariableAsDataTableAndRow(engine);
 
-            (var addDT, var srcRowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_RowName), nameof(v_SrcRowIndex), engine);
+            var addDT = this.ExpandUserVariableAsDataTable(nameof(v_RowName), engine);
+            var srcRowIndex = this.ExpandValueOrUserVariableAsInteger(nameof(v_SrcRowIndex), engine);
+            if (srcRowIndex < 0)
+            {
+                srcRowIndex += addDT.Rows.Count;
+            }
+            if (srcRowIndex < 0 || srcRowIndex >= addDT.Rows.Count)
+            {
+                throw new Exception($"Strange DataTable Row Index. Index: '{v_SrcRowIndex}', Expand: '{srcRowIndex}'");
+            }
+
+            //(var addDT, var srcRowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_RowName), nameof(v_SrcRowIndex), engine);
             string ifNotColumnExists = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenColumnNotExists), "Column not exists", engine);
 
             // get columns list
