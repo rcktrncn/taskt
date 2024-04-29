@@ -318,6 +318,7 @@
     <Compile Include="Core\Automation\Commands\Color\ICanHandleColor.cs" />
     <Compile Include="Core\Automation\Commands\Color\IColorCreateProperties.cs" />
     <Compile Include="Core\Automation\Commands\Color\IColorProperties.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ADataTableBothDataTableCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableColumnCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableGetFromDataTableColumnCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableGetFromDataTableCommands.cs" />
@@ -327,6 +328,7 @@
     <Compile Include="Core\Automation\Commands\DataTable\EM_CanHandleDataTable.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableColumnPositionPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableColumnPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTablePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableResultPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableRowPositionPropertiesExtensionMethods.cs" />
