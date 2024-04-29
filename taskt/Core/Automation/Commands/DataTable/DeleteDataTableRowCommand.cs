@@ -14,15 +14,15 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class DeleteDataTableRowCommand : ScriptCommand
+    public class DeleteDataTableRowCommand : ADataTableRowCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_BothDataTableName))]
-        public string v_DataTable { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_BothDataTableName))]
+        //public string v_DataTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_RowIndex))]
-        public string v_RowIndex { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_RowIndex))]
+        //public string v_RowIndex { get; set; }
 
         public DeleteDataTableRowCommand()
         {
@@ -34,7 +34,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var myDT, var rowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_DataTable), nameof(v_RowIndex), engine);
+            //(var myDT, var rowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_DataTable), nameof(v_RowIndex), engine);
+            (var myDT, var rowIndex) = this.ExpandValueOrUserVariableAsDataTableAndRow(engine);
 
             myDT.Rows[rowIndex].Delete();
         }
