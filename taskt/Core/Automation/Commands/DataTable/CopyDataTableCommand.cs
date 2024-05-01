@@ -15,18 +15,18 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class CopyDataTableCommand : ScriptCommand
+    public class CopyDataTableCommand : ADataTableCreateFromDataTableCommands
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
         [PropertyDescription("DataTable Variable Name to Copy")]
         [PropertyValidationRule("DataTable to Copy", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "DataTable to Copy")]
-        public string v_TargetDataTable { get; set; }
+        public override string v_TargetDataTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_NewOutputDataTableName))]
-        public string v_NewDataTable { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_NewOutputDataTableName))]
+        //public string v_NewDataTable { get; set; }
 
         public CopyDataTableCommand()
         {
@@ -38,9 +38,10 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            DataTable myDT = v_TargetDataTable.ExpandUserVariableAsDataTable(engine);
+            //DataTable myDT = v_TargetDataTable.ExpandUserVariableAsDataTable(engine);
+            var myDT = this.ExpandUserVariableAsDataTable(engine);
 
-            DataTable newDT = new DataTable();
+            var newDT = new DataTable();
             foreach(DataColumn col in myDT.Columns)
             {
                 newDT.Columns.Add(col.ColumnName);
@@ -48,7 +49,7 @@ namespace taskt.Core.Automation.Commands
 
             foreach(DataRow row in myDT.Rows)
             {
-                DataRow newRow = newDT.NewRow();
+                var newRow = newDT.NewRow();
                 for (int i = 0; i < myDT.Columns.Count; i++)
                 {
                     newRow[i] = row[i];
@@ -56,7 +57,8 @@ namespace taskt.Core.Automation.Commands
                 newDT.Rows.Add(newRow);
             }
 
-            newDT.StoreInUserVariable(engine, v_NewDataTable);
+            //newDT.StoreInUserVariable(engine, v_NewDataTable);
+            this.StoreDataTableInUserVariable(newDT, engine);
         }
     }
 }
