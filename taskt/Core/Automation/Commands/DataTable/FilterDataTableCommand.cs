@@ -61,10 +61,12 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            DataTable Dt = (DataTable)v_TargetDataTable.GetRawVariable(engine).VariableValue;
+            var targetDT = (DataTable)v_TargetDataTable.GetRawVariable(engine).VariableValue;
 
             var vSearchItem = v_SearchItem.ExpandValueOrUserVariable(engine);
+
             var t = new List<Tuple<string, string>>();
+
             var listPairs = vSearchItem.Split('}');
             int i = 0;
 
@@ -78,7 +80,7 @@ namespace taskt.Core.Automation.Commands
                 i++;
             }
 
-            List<DataRow> listrows = Dt.AsEnumerable().ToList();
+            List<DataRow> listrows = targetDT.AsEnumerable().ToList();
             List<DataRow> templist = new List<DataRow>();
 
             foreach (Tuple<string, string> tuple in t)
@@ -95,22 +97,22 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            DataTable outputDT = new DataTable();
+            var newDT = new DataTable();
             int x = 0;
-            foreach(DataColumn column in Dt.Columns)
+            foreach(DataColumn column in targetDT.Columns)
             {
-                outputDT.Columns.Add(Dt.Columns[x].ToString());
+                newDT.Columns.Add(targetDT.Columns[x].ToString());
                 x++;
             }
 
             foreach (DataRow item in templist)
             {
-                outputDT.Rows.Add(item.ItemArray);
+                newDT.Rows.Add(item.ItemArray);
             }
 
-            Dt.AcceptChanges();
+            targetDT.AcceptChanges();
 
-            outputDT.StoreInUserVariable(engine, v_NewDataTable);
+            newDT.StoreInUserVariable(engine, v_NewDataTable);
         }
 
         public override List<Control> Render(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
