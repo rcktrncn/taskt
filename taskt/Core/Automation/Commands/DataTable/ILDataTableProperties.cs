@@ -3,7 +3,7 @@
     /// <summary>
     /// DataTable properties
     /// </summary>
-    public interface ILDataTableProperties : ICanHandleDataTable
+    public interface ILDataTableProperties : ICanHandleDataTable, ILExpandableProperties
     {
         /// <summary>
         /// DataTable variabe name
