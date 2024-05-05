@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command to select data from a database.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements 'OLEDB' to achieve automation.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_database))]
-    public class DatabaseExecuteQueryCommand : ScriptCommand, IHaveDataTableElements
+    public class DatabaseExecuteQueryCommand : ScriptCommand, ICanHandleDataTable, IHaveDataTableElements
     {
         [XmlAttribute]
         [Attributes.PropertyAttributes.PropertyDescription("Please Enter the instance name")]
@@ -156,13 +156,10 @@ namespace taskt.Core.Automation.Commands
                 }
 
                 oleCommand.Parameters.AddWithValue(parameterName, convertedValue);
-
-
             }
 
             if (queryExecutionType == "Return Dataset")
             {
-
                 DataTable dataTable = new DataTable();
                 OleDbDataAdapter adapter = new OleDbDataAdapter(oleCommand);
                 adapter.SelectCommand = oleCommand;
@@ -170,12 +167,12 @@ namespace taskt.Core.Automation.Commands
                 adapter.Fill(dataTable);
                 databaseConnection.Close();
 
-                
                 dataTable.TableName = v_DatasetName;
                 engine.DataTables.Add(dataTable);
 
                 //engine.AddVariable(v_DatasetName, dataTable);
-                dataTable.StoreInUserVariable(engine, v_DatasetName);
+                //dataTable.StoreInUserVariable(engine, v_DatasetName);
+                this.StoreDataTableInUserVariable(dataTable, nameof(v_DatasetName), engine);
             }
             else if (queryExecutionType == "Execute NonQuery")
             {
@@ -199,8 +196,8 @@ namespace taskt.Core.Automation.Commands
             {
                 throw new NotImplementedException($"Query Execution Type '{queryExecutionType}' not implemented.");
             }
-
         }
+
         public override List<Control> Render(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             base.Render(editor);
