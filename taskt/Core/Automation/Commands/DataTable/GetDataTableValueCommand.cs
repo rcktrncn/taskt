@@ -14,26 +14,27 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetDataTableValueCommand : ScriptCommand
+    public class GetDataTableValueCommand : ADataTableColumnRowCommands, ILResultProperties
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
-        public string v_DataTable { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
+        //public string v_DataTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
-        public string v_ColumnType { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
+        //public string v_ColumnType { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
-        public string v_ColumnIndex { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
+        //public string v_ColumnIndex { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_RowIndex))]
-        public string v_RowIndex { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_RowIndex))]
+        //public string v_RowIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
+        [PropertyParameterOrder(9000)]
         public string v_Result { get; set; }
 
         public GetDataTableValueCommand()
@@ -46,7 +47,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var myDT, var rowIndex, var columnIndex) = this.ExpandUserVariablesAsDataTableAndRowColumnIndices(nameof(v_DataTable), nameof(v_RowIndex), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
+            //(var myDT, var rowIndex, var columnIndex) = this.ExpandUserVariablesAsDataTableAndRowColumnIndices(nameof(v_DataTable), nameof(v_RowIndex), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
+            (var myDT, var columnIndex, _, var rowIndex) = this.ExpandValueOrUserVariableAsDataTableAndColumnRow(engine);
 
             string v = myDT.Rows[rowIndex][columnIndex]?.ToString() ?? "";
 
