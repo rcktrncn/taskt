@@ -5,6 +5,9 @@
     /// </summary>
     public interface IHaveDataTableElements
     {
+        /// <summary>
+        /// Process before Validate ScriptCommand parameters
+        /// </summary>
         void BeforeValidate();
     }
 }
