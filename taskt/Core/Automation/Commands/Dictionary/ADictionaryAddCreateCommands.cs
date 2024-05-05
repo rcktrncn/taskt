@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
         [XmlElement]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_KeyAndValue))]
         [PropertyParameterOrder(6000)]
-        public DataTable v_ColumnNameDataTable { get; set; }
+        public virtual DataTable v_ColumnNameDataTable { get; set; }
 
         public override void BeforeValidate()
         {
