@@ -322,6 +322,7 @@
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableBothColumnCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableBothDataTableCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableColumnCommands.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ADataTableColumnRowCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableCreateFromDataTableCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableGetFromDataTableColumnCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableGetFromDataTableCommands.cs" />
@@ -331,6 +332,7 @@
     <Compile Include="Core\Automation\Commands\DataTable\EM_CanHandleDataTable.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableColumnPositionPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableColumnPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableColumnRowPositionPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableCreateFromDataTableExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTablePropertiesExtensionMethods.cs" />
@@ -339,6 +341,7 @@
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableRowPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ICanHandleDataTable.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\IDataTableColumnProperties.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\IDataTableColumnRowPositionProperties.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ILDataTableCreateFromDataTableProperties.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\IDataTableGetFromDataTable.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\IDataTableResultProperties.cs" />
