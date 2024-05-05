@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelSetRowValuesFromDictionaryCommand : AExcelRowRangeSetCommands
+    public class ExcelSetRowValuesFromDictionaryCommand : AExcelRowRangeSetCommands, ICanHandleDictionary
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]
@@ -111,7 +111,9 @@ namespace taskt.Core.Automation.Commands
             //    setFunc(myDic[keys[i]], excelSheet, columnStartIndex + i, rowIndex);
             //}
 
-            var myDic = v_DictionaryVariable.ExpandUserVariableAsDictinary(engine);
+            //var myDic = v_DictionaryVariable.ExpandUserVariableAsDictinary(engine);
+            var myDic = this.ExpandUserVariableAsDictionary(nameof(v_DictionaryVariable), engine);
+            
             string[] keys = new string[myDic.Count];
             myDic.Keys.CopyTo(keys, 0);
 
