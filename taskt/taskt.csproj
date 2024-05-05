@@ -432,11 +432,15 @@
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetActionProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetCopyRenameProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetProperties.cs" />
+    <Compile Include="Core\Automation\Commands\List\AListGetFromListCommands.cs" />
+    <Compile Include="Core\Automation\Commands\List\AListGetMathResultFromListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListInputListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_CanHandleListExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_ListPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_ListResultPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\List\ICanHandleList.cs" />
+    <Compile Include="Core\Automation\Commands\List\IListGetFromListProperties.cs" />
+    <Compile Include="Core\Automation\Commands\List\IListGetMathResultFromListProperties.cs" />
     <Compile Include="Core\Automation\Commands\List\IListResultProperties.cs" />
     <Compile Include="Core\Automation\Commands\List\ILListProperties.cs" />
     <Compile Include="Core\Automation\Commands\MathControls.cs" />
