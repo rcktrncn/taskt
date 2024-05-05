@@ -571,7 +571,7 @@ namespace taskt.Core.Automation.Commands
                 throw new Exception("Parameter Column or Value Column does not exists");
             }
 
-            Dictionary<string, string> dic = new Dictionary<string, string>();
+            var dic = new Dictionary<string, string>();
             foreach (DataRow row in dt.Rows)
             {
                 var key = row.Field<string>(parameterColumnName) ?? "";
@@ -610,7 +610,7 @@ namespace taskt.Core.Automation.Commands
                 throw new Exception("Parameter Column or Value Column does not exists");
             }
 
-            Dictionary<string, string> dic = new Dictionary<string, string>();
+            var dic = new Dictionary<string, string>();
             foreach (DataRow row in dt.Rows)
             {
                 var key = row.Field<string>(parameterColumnName) ?? "";
