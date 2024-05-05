@@ -3,7 +3,7 @@
     /// <summary>
     /// List commands properties
     /// </summary>
-    public interface ILListProperties : ICanHandleList
+    public interface ILListProperties : ICanHandleList, ILExpandableProperties
     {
         /// <summary>
         /// List variable name
