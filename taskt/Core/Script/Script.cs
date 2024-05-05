@@ -420,6 +420,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_89(doc);
             convertTo3_5_1_91(doc);
             convertTo3_5_1_92(doc);
+            convertTo3_5_1_93(doc);
 
             return doc;
         }
@@ -3220,6 +3221,12 @@ namespace taskt.Core.Script
                     }
                 }), "v_ReplaceValue", "v_NewValue"
             );
+        }
+
+        private static void convertTo3_5_1_93(XDocument doc)
+        {
+            // CheckDataTableColumnExistsCommand v_ColumnIndex
+            ChangeAttributeName(doc, "CheckDataTableColumnExistsCommand", "v_ColumnName", "v_ColumnIndex");
         }
 
         /// <summary>
