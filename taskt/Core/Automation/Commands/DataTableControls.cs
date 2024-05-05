@@ -223,7 +223,7 @@ namespace taskt.Core.Automation.Commands
             }
             else
             {
-                throw new Exception("Parameter '" + parameterName + "' is not DataTable");
+                throw new Exception($"Parameter '{parameterName}' is not DataTable");
             }
         }
 
