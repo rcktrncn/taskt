@@ -26,5 +26,17 @@ namespace taskt.Core.Automation.Commands
         {
             return table.GetColumnNameList().Contains(name);
         }
+
+        /// <summary>
+        /// Clone DataTable Only Columns
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static DataTable CloneDataTableOnlyColumns(this DataTable table)
+        {
+            var newDT = new DataTable();
+            newDT.Columns.AddRange(table.Columns.Cast<DataColumn>().ToArray());
+            return newDT;
+        }
     }
 }
