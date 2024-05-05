@@ -221,83 +221,83 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
-        /// <summary>
-        /// expand user variables as DataTable and Column Index from variable name parameter and column parameters
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="tableName"></param>
-        /// <param name="columnTypeName"></param>
-        /// <param name="columnName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        public static (DataTable table, int columnIndex) ExpandUserVariablesAsDataTableAndColumnIndex(this ScriptCommand command, string tableName, string columnTypeName, string columnName, Engine.AutomationEngineInstance engine)
-        {
-            var targetTable = command.ExpandValueOrUserVariable(tableName, "DataTable", engine);
-            var table = targetTable.ExpandUserVariableAsDataTable(engine);
-            var index = command.GetColumnIndex(table, columnTypeName, columnName, engine);
-            return (table, index);
-        }
+        ///// <summary>
+        ///// expand user variables as DataTable and Column Index from variable name parameter and column parameters
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="tableName"></param>
+        ///// <param name="columnTypeName"></param>
+        ///// <param name="columnName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        //public static (DataTable table, int columnIndex) ExpandUserVariablesAsDataTableAndColumnIndex(this ScriptCommand command, string tableName, string columnTypeName, string columnName, Engine.AutomationEngineInstance engine)
+        //{
+        //    var targetTable = command.ExpandValueOrUserVariable(tableName, "DataTable", engine);
+        //    var table = targetTable.ExpandUserVariableAsDataTable(engine);
+        //    var index = command.GetColumnIndex(table, columnTypeName, columnName, engine);
+        //    return (table, index);
+        //}
 
-        /// <summary>
-        /// expand user variables as DataTable and Row Index from variable name property and row name property. If row index is empty, return value is current position.
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="tableName"></param>
-        /// <param name="rowName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public static (DataTable table, int rowIndex) ExpandUserVariablesAsDataTableAndRowIndex(this ScriptCommand command, string tableName, string rowName, Engine.AutomationEngineInstance engine)
-        {
-            var targetTable = command.ExpandValueOrUserVariable(tableName, "DataTable", engine);
-            var table = targetTable.ExpandUserVariableAsDataTable(engine);
+        ///// <summary>
+        ///// expand user variables as DataTable and Row Index from variable name property and row name property. If row index is empty, return value is current position.
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="tableName"></param>
+        ///// <param name="rowName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception"></exception>
+        //public static (DataTable table, int rowIndex) ExpandUserVariablesAsDataTableAndRowIndex(this ScriptCommand command, string tableName, string rowName, Engine.AutomationEngineInstance engine)
+        //{
+        //    var targetTable = command.ExpandValueOrUserVariable(tableName, "DataTable", engine);
+        //    var table = targetTable.ExpandUserVariableAsDataTable(engine);
 
-            var rowValue = command.ExpandValueOrUserVariable(rowName, "Row Index", engine);
-            //int index;
-            //if (String.IsNullOrEmpty(rowValue))
-            //{
-            //    index = targetTable.GetRawVariable(engine).CurrentPosition;
-            //}
-            //else
-            //{
-            //    index = command.ConvertToUserVariableAsInteger(rowName, "Row Index", engine);
-            //}
+        //    var rowValue = command.ExpandValueOrUserVariable(rowName, "Row Index", engine);
+        //    //int index;
+        //    //if (String.IsNullOrEmpty(rowValue))
+        //    //{
+        //    //    index = targetTable.GetRawVariable(engine).CurrentPosition;
+        //    //}
+        //    //else
+        //    //{
+        //    //    index = command.ConvertToUserVariableAsInteger(rowName, "Row Index", engine);
+        //    //}
 
-            //if (index < 0)
-            //{
-            //    index += table.Rows.Count;
-            //}
+        //    //if (index < 0)
+        //    //{
+        //    //    index += table.Rows.Count;
+        //    //}
 
-            //if ((index < 0) || (index >= table.Rows.Count))
-            //{
-            //    throw new Exception("Strange Row Index '" + rowName + "', parsed '" + index + "'");
-            //}
+        //    //if ((index < 0) || (index >= table.Rows.Count))
+        //    //{
+        //    //    throw new Exception("Strange Row Index '" + rowName + "', parsed '" + index + "'");
+        //    //}
 
-            if (string.IsNullOrEmpty(rowValue))
-            {
-                rowValue = targetTable.GetRawVariable(engine).CurrentPosition.ToString();
-            }
+        //    if (string.IsNullOrEmpty(rowValue))
+        //    {
+        //        rowValue = targetTable.GetRawVariable(engine).CurrentPosition.ToString();
+        //    }
 
-            var index = GetRowIndex(table, rowValue, engine);
+        //    var index = GetRowIndex(table, rowValue, engine);
 
-            return (table, index);
-        }
+        //    return (table, index);
+        //}
 
-        /// <summary>
-        /// expand user variables as DataTable Row Index, and Column Index from variable name property and row, column name properties. If row index is empty, return value is current position.
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="tableName"></param>
-        /// <param name="rowName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        public static (DataTable table, int rowIndex, int columnIndex) ExpandUserVariablesAsDataTableAndRowColumnIndices(this ScriptCommand command, string tableName, string rowName, string columnTypeName, string columnName, Engine.AutomationEngineInstance engine)
-        {
-            (var table, var rowIndex) = command.ExpandUserVariablesAsDataTableAndRowIndex(tableName, rowName, engine);
-            (_, var columnIndex) = command.ExpandUserVariablesAsDataTableAndColumnIndex(tableName, columnTypeName, columnName, engine);
+        ///// <summary>
+        ///// expand user variables as DataTable Row Index, and Column Index from variable name property and row, column name properties. If row index is empty, return value is current position.
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="tableName"></param>
+        ///// <param name="rowName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        //public static (DataTable table, int rowIndex, int columnIndex) ExpandUserVariablesAsDataTableAndRowColumnIndices(this ScriptCommand command, string tableName, string rowName, string columnTypeName, string columnName, Engine.AutomationEngineInstance engine)
+        //{
+        //    (var table, var rowIndex) = command.ExpandUserVariablesAsDataTableAndRowIndex(tableName, rowName, engine);
+        //    (_, var columnIndex) = command.ExpandUserVariablesAsDataTableAndColumnIndex(tableName, columnTypeName, columnName, engine);
 
-            return (table, rowIndex, columnIndex);
-        }
+        //    return (table, rowIndex, columnIndex);
+        //}
 
 
         public static void StoreInUserVariable(this DataTable value, Engine.AutomationEngineInstance engine, string targetVariable)
@@ -306,31 +306,31 @@ namespace taskt.Core.Automation.Commands
         }
 
 
-        public static DataTable CreateDataTable(string connection, string query)
-        {
-            //create vars
-            var dataTable = new DataTable();
-            var oleConnection = new System.Data.OleDb.OleDbConnection(connection);
-            var oleCommand = new System.Data.OleDb.OleDbCommand(query, oleConnection);
+        //public static DataTable CreateDataTable(string connection, string query)
+        //{
+        //    //create vars
+        //    var dataTable = new DataTable();
+        //    var oleConnection = new System.Data.OleDb.OleDbConnection(connection);
+        //    var oleCommand = new System.Data.OleDb.OleDbCommand(query, oleConnection);
 
-            //get data
-            System.Data.OleDb.OleDbDataAdapter adapter = new System.Data.OleDb.OleDbDataAdapter(oleCommand);
-            oleConnection.Open();
-            adapter.Fill(dataTable);
-            oleConnection.Close();
+        //    //get data
+        //    System.Data.OleDb.OleDbDataAdapter adapter = new System.Data.OleDb.OleDbDataAdapter(oleCommand);
+        //    oleConnection.Open();
+        //    adapter.Fill(dataTable);
+        //    oleConnection.Close();
 
-            //clean up
-            oleConnection.Dispose();
-            adapter.Dispose();
-            oleCommand.Dispose();
+        //    //clean up
+        //    oleConnection.Dispose();
+        //    adapter.Dispose();
+        //    oleCommand.Dispose();
 
-            //foreach (var rw in dataTable.Rows)
-            //{
+        //    //foreach (var rw in dataTable.Rows)
+        //    //{
 
-            //}
+        //    //}
 
-            return dataTable;
-        }
+        //    return dataTable;
+        //}
 
         /// <summary>
         /// check column name exists
@@ -343,162 +343,162 @@ namespace taskt.Core.Automation.Commands
             return table.Columns.Contains(columnName);
         }
 
-        /// <summary>
-        /// check column index exists
-        /// </summary>
-        /// <param name="table"></param>
-        /// <param name="columnIndex"></param>
-        /// <returns></returns>
-        private static bool IsColumnExists(DataTable table, int columnIndex)
-        {
-            if (columnIndex >= 0)
-            {
-                return (columnIndex < table.Columns.Count);
-            }
-            else
-            {
-                int idx = table.Columns.Count + columnIndex;
-                return ((idx >= 0) && (idx < table.Columns.Count));
-            }
-        }
+        ///// <summary>
+        ///// check column index exists
+        ///// </summary>
+        ///// <param name="table"></param>
+        ///// <param name="columnIndex"></param>
+        ///// <returns></returns>
+        //private static bool IsColumnExists(DataTable table, int columnIndex)
+        //{
+        //    if (columnIndex >= 0)
+        //    {
+        //        return (columnIndex < table.Columns.Count);
+        //    }
+        //    else
+        //    {
+        //        int idx = table.Columns.Count + columnIndex;
+        //        return ((idx >= 0) && (idx < table.Columns.Count));
+        //    }
+        //}
 
-        /// <summary>
-        /// get DataTable column name from value specified by argument
-        /// </summary>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        private static string GetColumnName(DataTable table, string columnName, Engine.AutomationEngineInstance engine)
-        {
-            string col = columnName.ExpandValueOrUserVariable(engine);
-            if (IsColumnExists(table, col))
-            {
-                return col;
-            }
-            else
-            {
-                throw new Exception("Strange Column Name " + columnName);
-            }
-        }
+        ///// <summary>
+        ///// get DataTable column name from value specified by argument
+        ///// </summary>
+        ///// <param name="table"></param>
+        ///// <param name="columnName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception"></exception>
+        //private static string GetColumnName(DataTable table, string columnName, Engine.AutomationEngineInstance engine)
+        //{
+        //    string col = columnName.ExpandValueOrUserVariable(engine);
+        //    if (IsColumnExists(table, col))
+        //    {
+        //        return col;
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("Strange Column Name " + columnName);
+        //    }
+        //}
 
-        /// <summary>
-        /// get column index from value specified by argument
-        /// </summary>
-        /// <param name="table"></param>
-        /// <param name="columnIndex"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        private static int GetColumnIndex(DataTable table, string columnIndex, Engine.AutomationEngineInstance engine)
-        {
-            int index = new PropertyConvertTag(columnIndex, "Column Index").ExpandValueOrUserVariableAsInteger(engine);
-            if (index < 0)
-            {
-                index = table.Columns.Count + index;
-            }
-            if (IsColumnExists(table, index))
-            {
-                return index;
-            }
-            else
-            {
-                throw new Exception("Strange Column Index " + columnIndex + ", parse " + index);
-            }
-        }
+        ///// <summary>
+        ///// get column index from value specified by argument
+        ///// </summary>
+        ///// <param name="table"></param>
+        ///// <param name="columnIndex"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception"></exception>
+        //private static int GetColumnIndex(DataTable table, string columnIndex, Engine.AutomationEngineInstance engine)
+        //{
+        //    int index = new PropertyConvertTag(columnIndex, "Column Index").ExpandValueOrUserVariableAsInteger(engine);
+        //    if (index < 0)
+        //    {
+        //        index = table.Columns.Count + index;
+        //    }
+        //    if (IsColumnExists(table, index))
+        //    {
+        //        return index;
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("Strange Column Index " + columnIndex + ", parse " + index);
+        //    }
+        //}
 
-        /// <summary>
-        /// get column name or Index from value specified by arguments
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="table"></param>
-        /// <param name="columnTypeName"></param>
-        /// <param name="columnName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        private static int GetColumnIndex(this ScriptCommand command, DataTable table, string columnTypeName, string columnName, Engine.AutomationEngineInstance engine)
-        {
-            string columnType = command.ExpandValueOrUserVariableAsSelectionItem(columnTypeName, "Column Type", engine);
+        ///// <summary>
+        ///// get column name or Index from value specified by arguments
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="table"></param>
+        ///// <param name="columnTypeName"></param>
+        ///// <param name="columnName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        //private static int GetColumnIndex(this ScriptCommand command, DataTable table, string columnTypeName, string columnName, Engine.AutomationEngineInstance engine)
+        //{
+        //    string columnType = command.ExpandValueOrUserVariableAsSelectionItem(columnTypeName, "Column Type", engine);
 
-            int columnIndex = 0;
-            switch (columnType)
-            {
-                case "column name":
-                    string targetColumnName = command.ExpandValueOrUserVariable(columnName, "Column Name", engine);
-                    columnIndex = GetColumnIndexFromName(table, targetColumnName, engine);
-                    break;
+        //    int columnIndex = 0;
+        //    switch (columnType)
+        //    {
+        //        case "column name":
+        //            string targetColumnName = command.ExpandValueOrUserVariable(columnName, "Column Name", engine);
+        //            columnIndex = GetColumnIndexFromName(table, targetColumnName, engine);
+        //            break;
 
-                case "index":
-                    string targetColumnIndex = command.ExpandValueOrUserVariable(columnName, "Column Index", engine);
-                    columnIndex = GetColumnIndex(table, targetColumnIndex, engine);
-                    break;
-            }
-            return columnIndex;
-        }
+        //        case "index":
+        //            string targetColumnIndex = command.ExpandValueOrUserVariable(columnName, "Column Index", engine);
+        //            columnIndex = GetColumnIndex(table, targetColumnIndex, engine);
+        //            break;
+        //    }
+        //    return columnIndex;
+        //}
 
-        /// <summary>
-        /// get column index from name
-        /// </summary>
-        /// <param name="table"></param>
-        /// <param name="columnName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        private static int GetColumnIndexFromName(DataTable table, string columnName, Engine.AutomationEngineInstance engine)
-        {
-            string col = GetColumnName(table, columnName, engine);
-            for (int i = table.Columns.Count - 1; i >= 0; i--)
-            {
-                if (table.Columns[i].ColumnName == col)
-                {
-                    return i;
-                }
-            }
-            throw new Exception("Strange Column Name " + columnName);
-        }
+        ///// <summary>
+        ///// get column index from name
+        ///// </summary>
+        ///// <param name="table"></param>
+        ///// <param name="columnName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception"></exception>
+        //private static int GetColumnIndexFromName(DataTable table, string columnName, Engine.AutomationEngineInstance engine)
+        //{
+        //    string col = GetColumnName(table, columnName, engine);
+        //    for (int i = table.Columns.Count - 1; i >= 0; i--)
+        //    {
+        //        if (table.Columns[i].ColumnName == col)
+        //        {
+        //            return i;
+        //        }
+        //    }
+        //    throw new Exception("Strange Column Name " + columnName);
+        //}
 
-        /// <summary>
-        /// get datatable row index
-        /// </summary>
-        /// <param name="table"></param>
-        /// <param name="rowIndex"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        private static int GetRowIndex(DataTable table, string rowIndex, Engine.AutomationEngineInstance engine)
-        {
-            var index = rowIndex.ExpandValueOrUserVariableAsInteger("Row Index", engine);
+        ///// <summary>
+        ///// get datatable row index
+        ///// </summary>
+        ///// <param name="table"></param>
+        ///// <param name="rowIndex"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception"></exception>
+        //private static int GetRowIndex(DataTable table, string rowIndex, Engine.AutomationEngineInstance engine)
+        //{
+        //    var index = rowIndex.ExpandValueOrUserVariableAsInteger("Row Index", engine);
 
-            if (index < 0)
-            {
-                index += table.Rows.Count;
-            }
+        //    if (index < 0)
+        //    {
+        //        index += table.Rows.Count;
+        //    }
 
-            if ((index< 0) || (index >= table.Rows.Count))
-            {
-                throw new Exception("Strange Row Index '" + index + "'");
-            }
+        //    if ((index< 0) || (index >= table.Rows.Count))
+        //    {
+        //        throw new Exception("Strange Row Index '" + index + "'");
+        //    }
 
-            return index;
-        }
+        //    return index;
+        //}
 
-        /// <summary>
-        /// return DataTable with the column names of argument table copied
-        /// </summary>
-        /// <param name="table"></param>
-        /// <returns></returns>
-        public static DataTable CloneDataTableOnlyColumnName(DataTable table)
-        {
-            DataTable ret = new DataTable();
-            int cols = table.Columns.Count;
-            for (int i = 0; i < cols; i++)
-            {
-                ret.Columns.Add(table.Columns[i].ColumnName);
-            }
+        ///// <summary>
+        ///// return DataTable with the column names of argument table copied
+        ///// </summary>
+        ///// <param name="table"></param>
+        ///// <returns></returns>
+        //public static DataTable CloneDataTableOnlyColumnName(DataTable table)
+        //{
+        //    DataTable ret = new DataTable();
+        //    int cols = table.Columns.Count;
+        //    for (int i = 0; i < cols; i++)
+        //    {
+        //        ret.Columns.Add(table.Columns[i].ColumnName);
+        //    }
 
-            return ret;
-        }
+        //    return ret;
+        //}
 
         // todo: fix use case in GetFieldValue methods
 
