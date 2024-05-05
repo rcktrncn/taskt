@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Linq;
-using System.Xml.Serialization;
-using System.Data;
-using System.Windows.Forms;
 using System.Collections.Generic;
-using taskt.UI.CustomControls;
+using System.Data;
+using System.Linq;
+using System.Windows.Forms;
+using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.UI.CustomControls;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -16,31 +16,31 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get specific rows of a DataTable.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command attempts to filter a Datatable into a new Datatable")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
-    public class FilterDataTableCommand : ScriptCommand
+    public class FilterDataTableCommand : ADataTableCreateFromDataTableCommands
     {
         [XmlAttribute]
         [PropertyDescription("Please indicate the DataTable Variable Name")]
         [InputSpecification("Enter the DataTable name you would like to filter through.")]
-        [SampleUsage("**myDataTable** or **{{{vMyDataTable}}}**")]
-        [Remarks("")]
-        [PropertyShowSampleUsageInDescription(true)]
-        [PropertyUIHelper(PropertyUIHelper.UIAdditionalHelperType.ShowVariableHelper)]
-        [PropertyInstanceType(PropertyInstanceType.InstanceType.DataTable)]
-        [PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
-        public string v_TargetDataTable { get; set; }
+        //[SampleUsage("**myDataTable** or **{{{vMyDataTable}}}**")]
+        //[Remarks("")]
+        //[PropertyShowSampleUsageInDescription(true)]
+        //[PropertyUIHelper(PropertyUIHelper.UIAdditionalHelperType.ShowVariableHelper)]
+        //[PropertyInstanceType(PropertyInstanceType.InstanceType.DataTable)]
+        //[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
+        public override string v_TargetDataTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyDescription("Please indicate the output DataTable Variable Name")]
-        [InputSpecification("Enter a unique DataTable name for future reference.")]
-        [SampleUsage("**newData** or **{{{vNewData}}}**")]
-        [Remarks("")]
-        [PropertyShowSampleUsageInDescription(true)]
-        [PropertyUIHelper(PropertyUIHelper.UIAdditionalHelperType.ShowVariableHelper)]
-        [PropertyInstanceType(PropertyInstanceType.InstanceType.DataTable)]
-        [PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
-        [PropertyIsVariablesList(true)]
-        [PropertyParameterDirection(PropertyParameterDirection.ParameterDirection.Output)]
-        public string v_NewDataTable { get; set; }
+        //[XmlAttribute]
+        //[PropertyDescription("Please indicate the output DataTable Variable Name")]
+        //[InputSpecification("Enter a unique DataTable name for future reference.")]
+        //[SampleUsage("**newData** or **{{{vNewData}}}**")]
+        //[Remarks("")]
+        //[PropertyShowSampleUsageInDescription(true)]
+        //[PropertyUIHelper(PropertyUIHelper.UIAdditionalHelperType.ShowVariableHelper)]
+        //[PropertyInstanceType(PropertyInstanceType.InstanceType.DataTable)]
+        //[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
+        //[PropertyIsVariablesList(true)]
+        //[PropertyParameterDirection(PropertyParameterDirection.ParameterDirection.Output)]
+        //public string v_NewDataTable { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Please indicate tuples to filter by.")]
@@ -49,6 +49,7 @@ namespace taskt.Core.Automation.Commands
         [SampleUsage("{ColumnName1,Item1},{ColumnName2,Item2}")]
         [Remarks("")]
         [PropertyShowSampleUsageInDescription(true)]
+        [PropertyParameterOrder(11000)]
         public string v_SearchItem { get; set; }
 
         public FilterDataTableCommand()
@@ -61,35 +62,38 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var targetDT = (DataTable)v_TargetDataTable.GetRawVariable(engine).VariableValue;
+            //var targetDT = (DataTable)v_TargetDataTable.GetRawVariable(engine).VariableValue;
+            var targetDT = this.ExpandUserVariableAsDataTable(engine);
 
             var vSearchItem = v_SearchItem.ExpandValueOrUserVariable(engine);
 
-            var t = new List<Tuple<string, string>>();
+            //var searchConditions = new List<Tuple<string, string>>();
+            var searchConditions = new List<(string, string)>();
 
             var listPairs = vSearchItem.Split('}');
-            int i = 0;
+            //int i = 0;
 
-            listPairs = listPairs.Take(listPairs.Count() - 1).ToArray();
+            //listPairs = listPairs.Take(listPairs.Count() - 1).ToArray();
             foreach (string item in listPairs)
             {
                 string temp;
                 temp = item.Trim('{');
                 var tempList = temp.Split(',');
-                t.Insert(i, Tuple.Create(tempList[0], tempList[1]));
-                i++;
+                //searchConditions.Insert(i, Tuple.Create(tempList[0], tempList[1]));
+                searchConditions.Add((tempList[0], tempList[1]));
+                //i++;
             }
 
-            List<DataRow> listrows = targetDT.AsEnumerable().ToList();
-            List<DataRow> templist = new List<DataRow>();
+            var listrows = targetDT.AsEnumerable().ToList();
+            var templist = new List<DataRow>();
 
-            foreach (Tuple<string, string> tuple in t)
+            foreach ((string col, string value) in searchConditions)
             {
                 foreach (DataRow item in listrows)
                 {
-                    if (item[tuple.Item1] != null)
+                    if (item[col] != null)
                     {
-                        if (item[tuple.Item1].ToString() == tuple.Item2.ToString())
+                        if (item[col].ToString() == value.ToString())
                         {
                             templist.Add(item);
                         }
@@ -112,7 +116,8 @@ namespace taskt.Core.Automation.Commands
 
             targetDT.AcceptChanges();
 
-            newDT.StoreInUserVariable(engine, v_NewDataTable);
+            //newDT.StoreInUserVariable(engine, v_NewDataTable);
+            this.StoreDataTableInUserVariable(newDT, engine);
         }
 
         public override List<Control> Render(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
