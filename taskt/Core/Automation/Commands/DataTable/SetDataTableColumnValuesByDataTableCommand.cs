@@ -61,7 +61,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var myDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
+            //(var myDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
+            (var myDT, var colIndex, _) = this.ExpandValueOrUserVariableAsDataTableAndColumn(engine);
 
             string trgColName = myDT.Columns[colIndex].ColumnName;
 
