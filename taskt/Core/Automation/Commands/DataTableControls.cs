@@ -199,6 +199,12 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
+        public static void StoreInUserVariable(this DataTable value, Engine.AutomationEngineInstance engine, string targetVariable)
+        {
+            ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
+        }
+
+
         /// <summary>
         /// Convert parameter value to DataTable
         /// </summary>
@@ -298,13 +304,6 @@ namespace taskt.Core.Automation.Commands
 
         //    return (table, rowIndex, columnIndex);
         //}
-
-
-        public static void StoreInUserVariable(this DataTable value, Engine.AutomationEngineInstance engine, string targetVariable)
-        {
-            ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
-        }
-
 
         //public static DataTable CreateDataTable(string connection, string query)
         //{
