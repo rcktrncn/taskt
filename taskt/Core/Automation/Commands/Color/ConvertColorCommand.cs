@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertColorCommand : ScriptCommand, ICanHandleColor
+    public class ConvertColorCommand : ScriptCommand, ICanHandleColor, ICanHandleDictionary
     {
         [XmlAttribute]
         [PropertyDescription("Color Variable Name")]
@@ -118,7 +118,8 @@ namespace taskt.Core.Automation.Commands
                         { "S", co.GetSaturation().ToString() },
                         { "L", co.GetBrightness().ToString() }
                     };
-                    hsl.StoreInUserVariable(engine, v_Result);
+                    //hsl.StoreInUserVariable(engine, v_Result);
+                    this.StoreDictionaryInUserVariable(hsl, nameof(v_Result), engine);
                     return;
 
                 case "cmyk":
@@ -149,7 +150,8 @@ namespace taskt.Core.Automation.Commands
                         { "Y", y.ToString()  },
                         { "K", k.ToString() }
                     };
-                    cmyk.StoreInUserVariable(engine, v_Result);
+                    //cmyk.StoreInUserVariable(engine, v_Result);
+                    this.StoreDictionaryInUserVariable(cmyk, nameof(v_Result), engine);
                     return;
 
                 case "rgba dictionary":
@@ -160,7 +162,8 @@ namespace taskt.Core.Automation.Commands
                         { "B", co.B.ToString() },
                         { "A", co.A.ToString() }
                     };
-                    rgbaDic.StoreInUserVariable(engine, v_Result);
+                    //rgbaDic.StoreInUserVariable(engine, v_Result);
+                    this.StoreDictionaryInUserVariable(rgbaDic, nameof(v_Result), engine);
                     return;
 
                 case "rgba datatable":

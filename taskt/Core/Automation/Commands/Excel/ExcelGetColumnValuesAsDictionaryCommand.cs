@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelGetColumnValuesAsDictionaryCommand : AExcelColumnRangeGetCommands
+    public class ExcelGetColumnValuesAsDictionaryCommand : AExcelColumnRangeGetCommands, IDictionaryResultProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]
@@ -109,7 +109,8 @@ namespace taskt.Core.Automation.Commands
                 }), engine
             );
 
-            newDic.StoreInUserVariable(engine, v_Result);
+            //newDic.StoreInUserVariable(engine, v_Result);
+            this.StoreDictionaryInUserVariable(newDic, engine);
         }
     }
 }

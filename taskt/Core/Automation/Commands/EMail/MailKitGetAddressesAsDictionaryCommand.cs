@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class MailKitGetAddressesAsDictionaryCommand : ScriptCommand
+    public class MailKitGetAddressesAsDictionaryCommand : ScriptCommand, ICanHandleDictionary
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(EMailControls), nameof(EMailControls.v_InputEMailName))]
@@ -48,7 +48,9 @@ namespace taskt.Core.Automation.Commands
             {
                 addresses.Add(item.Name, item.Address);
             }
-            addresses.StoreInUserVariable(engine, v_AddressesDictionary);
+
+            //addresses.StoreInUserVariable(engine, v_AddressesDictionary);
+            this.StoreDictionaryInUserVariable(addresses, nameof(v_AddressesDictionary), engine);
         }
     }
 }
