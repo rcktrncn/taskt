@@ -3204,7 +3204,7 @@ namespace taskt.Core.Script
         private static void convertTo3_5_1_92(XDocument doc)
         {
             // ReplaceDataTableValueCommand v_ValueType
-            ChangeAttributeName(doc, "ReplaceDataTableValueCommand", "v_TargetValue", "v_ValueType");
+            ChangeAttributeName(doc, "ReplaceDataTableValueCommand", "v_TargetType", "v_ValueType");
 
             // ReplaceDictionaryCommand, ReplaceListCommand v_NewValue
             ChangeAttributeName(doc, 
