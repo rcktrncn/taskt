@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelSetRowValuesFromDataTableCommand : AExcelRowRangeSetCommands
+    public class ExcelSetRowValuesFromDataTableCommand : AExcelRowRangeSetCommands, ICanHandleDataTable
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]
@@ -122,7 +122,8 @@ namespace taskt.Core.Automation.Commands
             //    setFunc(setValue, excelSheet, columnStartIndex + i, excelRowIndex);
             //}
 
-            var myDT = v_DataTableVariable.ExpandUserVariableAsDataTable(engine);
+            //var myDT = v_DataTableVariable.ExpandUserVariableAsDataTable(engine);
+            var myDT = this.ExpandUserVariableAsDataTable(nameof(v_DataTableVariable), engine);
             var dtRowIndex = v_DataTableRowIndex.ExpandValueOrUserVariableAsInteger("DataTable Row Index", engine);
             if (dtRowIndex >= myDT.Rows.Count)
             {

@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SeleniumBrowserGetTableValueAsDataTableCommand : ScriptCommand
+    public class SeleniumBrowserGetTableValueAsDataTableCommand : ScriptCommand, ICanHandleDataTable
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(SeleniumBrowserControls), nameof(SeleniumBrowserControls.v_InputInstanceName))]
@@ -88,7 +88,7 @@ namespace taskt.Core.Automation.Commands
 
             var firstRowMethod = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_FirstRowMethod), engine);
 
-            DataTable newDT = new DataTable();
+            var newDT = new DataTable();
 
             var trs = trgElem.FindElements(By.XPath("child::tr | child::thead/tr | child::tbody/tr | child::tfoot/tr"));
             if (trs.Count > 0)
@@ -140,7 +140,8 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            newDT.StoreInUserVariable(engine, v_DataTableVariableName);
+            //newDT.StoreInUserVariable(engine, v_DataTableVariableName);
+            this.StoreDataTableInUserVariable(newDT, nameof(v_DataTableVariableName), engine);
         }
 
         private void SearchMethodComboBox_SelectionChangeCommitted(object sender, EventArgs e)

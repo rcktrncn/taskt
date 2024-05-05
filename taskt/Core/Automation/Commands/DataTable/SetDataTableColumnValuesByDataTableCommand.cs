@@ -15,37 +15,40 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SetDataTableColumnValuesByDataTableCommand : ScriptCommand
+    public class SetDataTableColumnValuesByDataTableCommand : ADataTableBothColumnCommands
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_BothDataTableName))]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_BothDataTableName))]
         [PropertyDescription("DataTable Variable Name to be Setted")]
         [PropertyValidationRule("DataTable to be Setted", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "DataTable to be Setted")]
-        public string v_DataTable { get; set; }
+        public override string v_DataTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
-        public string v_ColumnType { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
+        //public string v_ColumnType { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
-        public string v_ColumnIndex { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
+        //public string v_ColumnIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
         [PropertyDescription("DataTable Variable Name to Set")]
         [PropertyValidationRule("DataTable to Set", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "DataTable to Set")]
+        [PropertyParameterOrder(8000)]
         public string v_SetDataTableName { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_WhenLessRows))]
         [PropertyDescription("When there are Less Rows than DataTable to set")]
+        [PropertyParameterOrder(8001)]
         public string v_IfRowNotEnough { set; get; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_WhenGreaterRows))]
+        [PropertyParameterOrder(8002)]
         public string v_IfSetDataTableNotEnough { set; get; }
 
         public SetDataTableColumnValuesByDataTableCommand()
@@ -58,12 +61,14 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var myDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
+            //(var myDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
+            (var myDT, var colIndex, _) = this.ExpandValueOrUserVariableAsDataTableAndColumn(engine);
 
             string trgColName = myDT.Columns[colIndex].ColumnName;
 
 
-            DataTable setDT = v_SetDataTableName.ExpandUserVariableAsDataTable(engine);
+            //DataTable setDT = v_SetDataTableName.ExpandUserVariableAsDataTable(engine);
+            var setDT = this.ExpandUserVariableAsDataTable(nameof(v_SetDataTableName), engine);
 
             string ifRowNotEnough = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_IfRowNotEnough), "Row Not Enough", engine);
             // rows check

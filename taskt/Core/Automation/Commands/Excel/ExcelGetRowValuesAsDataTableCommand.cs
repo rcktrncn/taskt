@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelGetRowValuesAsDataTableCommand : AExcelRowRangeGetCommands
+    public class ExcelGetRowValuesAsDataTableCommand : AExcelRowRangeGetCommands, IDataTableResultProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]
@@ -92,7 +92,7 @@ namespace taskt.Core.Automation.Commands
 
             //newDT.StoreInUserVariable(engine, v_Result);
 
-            DataTable newDT = new DataTable();
+            var newDT = new DataTable();
             newDT.Rows.Add();
 
             this.RowRangeAction(
@@ -103,7 +103,8 @@ namespace taskt.Core.Automation.Commands
                 }), engine
             );
 
-            newDT.StoreInUserVariable(engine, v_Result);
+            //newDT.StoreInUserVariable(engine, v_Result);
+            this.StoreDataTableInUserVariable(newDT, engine);
         }
     }
 }

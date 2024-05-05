@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ReplaceDictionaryCommand : AInputDictionaryCommands, IHaveDataTableElements
+    public class ReplaceDictionaryCommand : ADictionaryInputDictionaryCommands, ILReplaceValueProperties, IHaveDataTableElements
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_BothDictionaryName))]
@@ -46,7 +46,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ReplaceValue))]
         [PropertyParameterOrder(9000)]
-        public string v_ReplaceValue { get; set; }
+        public string v_NewValue { get; set; }
 
         public ReplaceDictionaryCommand()
         {
@@ -64,7 +64,7 @@ namespace taskt.Core.Automation.Commands
             var parameters = DataTableControls.GetFieldValues(v_ReplaceActionParameterTable, "ParameterName", "ParameterValue", engine);
             var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_ValueType), nameof(v_ReplaceAction), parameters, engine, this);
 
-            string newValue = v_ReplaceValue.ExpandValueOrUserVariable(engine);
+            string newValue = v_NewValue.ExpandValueOrUserVariable(engine);
 
             var keys = targetDic.Keys.ToList();
 

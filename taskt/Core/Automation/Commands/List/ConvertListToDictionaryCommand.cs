@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertListToDictionaryCommand : ScriptCommand
+    public class ConvertListToDictionaryCommand : ScriptCommand, IDictionaryResultProperties
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
@@ -182,7 +182,9 @@ namespace taskt.Core.Automation.Commands
                     }
                     break;
             }
-            myDic.StoreInUserVariable(engine, v_Result);
+
+            //myDic.StoreInUserVariable(engine, v_Result);
+            this.StoreDictionaryInUserVariable(myDic, engine);
         }
     }
 }

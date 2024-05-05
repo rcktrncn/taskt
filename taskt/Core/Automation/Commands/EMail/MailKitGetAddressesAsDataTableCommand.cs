@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class MailKitGetAddressesAsDataTableCommand : ScriptCommand
+    public class MailKitGetAddressesAsDataTableCommand : ScriptCommand, ICanHandleDataTable
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(EMailControls), nameof(EMailControls.v_InputEMailName))]
@@ -50,7 +50,8 @@ namespace taskt.Core.Automation.Commands
             {
                 addresses.Rows.Add(new object[] { item.Name, item.Address });
             }
-            addresses.StoreInUserVariable(engine, v_AddressesDataTable);
+            //addresses.StoreInUserVariable(engine, v_AddressesDataTable);
+            this.StoreDataTableInUserVariable(addresses, nameof(v_AddressesDataTable), engine);
         }
     }
 }

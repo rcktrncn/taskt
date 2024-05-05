@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml.Serialization;
-using System.Data;
 using System.Collections.Generic;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
@@ -16,31 +15,34 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SetDataTableColumnValuesByListCommand : ScriptCommand
+    public class SetDataTableColumnValuesByListCommand : ADataTableBothColumnCommands, ICanHandleList
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_BothDataTableName))]
-        public string v_DataTable { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_BothDataTableName))]
+        //public override string v_DataTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
-        public string v_ColumnType { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnType))]
+        //public string v_ColumnType { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
-        public string v_ColumnIndex { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_ColumnNameIndex))]
+        //public string v_ColumnIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        [PropertyParameterOrder(8000)]
         public string v_SetListName { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_WhenLessRows))]
         [PropertyDescription("When there are Less Rows than List to set")]
+        [PropertyParameterOrder(8001)]
         public string v_IfRowNotEnough { set; get; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_WhenGreaterRows))]
+        [PropertyParameterOrder(8002)]
         public string v_IfListNotEnough { set; get; }
 
         public SetDataTableColumnValuesByListCommand()
@@ -53,10 +55,12 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var myDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
-            string trgColumnName = myDT.Columns[colIndex].ColumnName;
+            //(var myDT, var colIndex) = this.ExpandUserVariablesAsDataTableAndColumnIndex(nameof(v_DataTable), nameof(v_ColumnType), nameof(v_ColumnIndex), engine);
+            //string trgColumnName = myDT.Columns[colIndex].ColumnName;
+            (var myDT, _, var trgColumnName) = this.ExpandValueOrUserVariableAsDataTableAndColumn(engine);
 
-            List<string> myList = v_SetListName.ExpandUserVariableAsList(engine);
+            //List<string> myList = v_SetListName.ExpandUserVariableAsList(engine);
+            var myList = this.ExpandUserVariableAsList(nameof(v_SetListName), engine);
 
             string ifRowNotEnough = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_IfRowNotEnough), "Row Not Enough", engine);
             // rows check

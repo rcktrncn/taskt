@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
-using System.Xml.Serialization;
 using System.Data;
-using System.Collections.Generic;
+using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
@@ -17,21 +15,23 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class AddDataTableRowByDictionaryCommand : ScriptCommand
+    public class AddDataTableRowByDictionaryCommand : ADataTableBothDataTableCommands, ICanHandleDictionary
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_BothDataTableName))]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_BothDataTableName))]
         [PropertyDescription("DataTable Variable Name to be Added a Row")]
-        public string v_DataTable { get; set; }
+        public override string v_DataTable { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
         [PropertyDescription("Dictionary Variable Name to add to the DataTable")]
+        [PropertyParameterOrder(6000)]
         public string v_RowName { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_WhenColumnNotExists))]
         [PropertyDescription("When Dictionary Key does not Exists")]
+        [PropertyParameterOrder(7000)]
         public string v_WhenColumnNotExists { get; set; }
 
         public AddDataTableRowByDictionaryCommand()
@@ -44,14 +44,17 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            DataTable myDT = v_DataTable.ExpandUserVariableAsDataTable(engine);
+            //DataTable myDT = v_DataTable.ExpandUserVariableAsDataTable(engine);
+            var myDT = this.ExpandUserVariableAsDataTable(engine);
 
-            Dictionary<string, string> myDic = v_RowName.ExpandUserVariableAsDictinary(engine);
+            //Dictionary<string, string> myDic = v_RowName.ExpandUserVariableAsDictinary(engine);
+            var myDic = this.ExpandUserVariableAsDictionary(nameof(v_RowName), engine);
 
             string notExistsKey = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenColumnNotExists), "Key Does Not Exists", engine);
 
             // get columns list
-            List<string> columns = myDT.Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToList();
+            //var columns = myDT.Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToList();
+            var columns = myDT.GetColumnNameList();
 
             // check column exists
             if (notExistsKey == "error")
@@ -65,7 +68,7 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            DataRow row = myDT.NewRow();
+            var row = myDT.NewRow();
             foreach(var item in myDic)
             {
                 if (columns.Contains(item.Key))

@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertDictionaryToDataTableCommand : ADictionaryGetFromDictionaryCommands
+    public class ConvertDictionaryToDataTableCommand : ADictionaryGetFromDictionaryCommands, IDataTableResultProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]
@@ -38,14 +38,16 @@ namespace taskt.Core.Automation.Commands
             //var dic = v_Dictionary.ExpandUserVariableAsDictinary(engine);
             var dic = this.ExpandUserVariableAsDictionary(engine);
 
-            DataTable DT = new DataTable();
-            DT.Rows.Add();
+            DataTable myDT = new DataTable();
+            myDT.Rows.Add();
             foreach(var item in dic)
             {
-                DT.Columns.Add(item.Key);
-                DT.Rows[0][item.Key] = item.Value;
+                myDT.Columns.Add(item.Key);
+                myDT.Rows[0][item.Key] = item.Value;
             }
-            DT.StoreInUserVariable(engine, v_Result);
+
+            //DT.StoreInUserVariable(engine, v_Result);
+            this.StoreDataTableInUserVariable(myDT, engine);
         }
     }
 }

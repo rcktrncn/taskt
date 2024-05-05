@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelCreateDictionaryFromExcelFile : ScriptCommand
+    public class ExcelCreateDictionaryFromExcelFile : ScriptCommand, ICanHandleDictionary
     {
         [XmlAttribute]
         //[PropertyDescription("Please Enter the Dictionary Variable Name")]
@@ -196,7 +196,8 @@ namespace taskt.Core.Automation.Commands
                 myDic[keyList[i]] = valueList[i];
             }
 
-            myDic.StoreInUserVariable(engine, v_DictionaryName);
+            //myDic.StoreInUserVariable(engine, v_DictionaryName);
+            this.StoreDictionaryInUserVariable(myDic, nameof(v_DictionaryName), engine);
         }
 
         //public override List<Control> Render(frmCommandEditor editor)

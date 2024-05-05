@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SeleniumBrowserGetWebElementsValueAsDictionaryCommand : ScriptCommand
+    public class SeleniumBrowserGetWebElementsValueAsDictionaryCommand : ScriptCommand,ICanHandleDictionary
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(SeleniumBrowserControls), nameof(SeleniumBrowserControls.v_InputInstanceName))]
@@ -54,7 +54,7 @@ namespace taskt.Core.Automation.Commands
             //(var _, var elems) = SeleniumBrowserControls.GetSeleniumBrowserInstanceAndElements(this, nameof(v_InstanceName), nameof(v_SeleniumSearchType), nameof(v_SeleniumSearchParameter), engine);
             (var _, var elems) = SeleniumBrowserControls.ExpandValueOrUserVariableAsSeleniumBrowserInstanceAndWebElements(this, nameof(v_InstanceName), nameof(v_SeleniumSearchType), nameof(v_SeleniumSearchParameter), nameof(v_WaitTime), engine);
 
-            Dictionary<string, string> newDic = new Dictionary<string, string>();
+            var newDic = new Dictionary<string, string>();
 
             SeleniumBrowserControls.GetElementsAttribute(elems, v_AttributeName, engine, new Action<int, string, string>((idx, name, value) =>
                 {
@@ -62,7 +62,8 @@ namespace taskt.Core.Automation.Commands
                 })
             );
 
-            newDic.StoreInUserVariable(engine, v_DictionaryVariableName);
+            //newDic.StoreInUserVariable(engine, v_DictionaryVariableName);
+            this.StoreDictionaryInUserVariable(newDic, nameof(v_DictionaryVariableName), engine);
         }
     }
 }

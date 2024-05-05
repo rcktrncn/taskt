@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SeleniumBrowserGetWebElementsValuesAsDataTableCommand : ScriptCommand, IHaveDataTableElements
+    public class SeleniumBrowserGetWebElementsValuesAsDataTableCommand : ScriptCommand, ICanHandleDataTable, IHaveDataTableElements
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(SeleniumBrowserControls), nameof(SeleniumBrowserControls.v_InputInstanceName))]
@@ -55,7 +55,7 @@ namespace taskt.Core.Automation.Commands
             //(var _, var elems) = SeleniumBrowserControls.GetSeleniumBrowserInstanceAndElements(this, nameof(v_InstanceName), nameof(v_SeleniumSearchType), nameof(v_SeleniumSearchParameter), engine);
             (var _, var elems) = SeleniumBrowserControls.ExpandValueOrUserVariableAsSeleniumBrowserInstanceAndWebElements(this, nameof(v_InstanceName), nameof(v_SeleniumSearchType), nameof(v_SeleniumSearchParameter), nameof(v_WaitTime), engine);
 
-            DataTable newDT = new DataTable();
+            var newDT = new DataTable();
 
             int attrs = v_AttributesName.Rows.Count;
             for (int i = 0; i <attrs; i++)
@@ -78,7 +78,8 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            newDT.StoreInUserVariable(engine, v_DataTableVariableName);
+            //newDT.StoreInUserVariable(engine, v_DataTableVariableName);
+            this.StoreDataTableInUserVariable(newDT, nameof(v_DataTableVariableName), engine);
         }
 
         public override void BeforeValidate()

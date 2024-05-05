@@ -17,18 +17,18 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to Delete a specific Row.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command attempts to delete a DataTable Row")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
-    public class SearchAndDeleteDataTableRowsCommand : ScriptCommand
+    public class SearchAndDeleteDataTableRowsCommand : ADataTableBothDataTableCommands
     {
-        [XmlAttribute]
-        [PropertyDescription("Please indicate the DataTable Variable Name")]
-        [InputSpecification("Enter the name of your DataTable")]
-        [SampleUsage("**myDataTable** or **{{{vMyDataTable}}}**")]
-        [Remarks("")]
-        [PropertyUIHelper(PropertyUIHelper.UIAdditionalHelperType.ShowVariableHelper)]
-        [PropertyShowSampleUsageInDescription(true)]
-        [PropertyInstanceType(PropertyInstanceType.InstanceType.DataTable)]
-        [PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
-        public string v_DataTable { get; set; }
+        //[XmlAttribute]
+        //[PropertyDescription("Please indicate the DataTable Variable Name")]
+        //[InputSpecification("Enter the name of your DataTable")]
+        //[SampleUsage("**myDataTable** or **{{{vMyDataTable}}}**")]
+        //[Remarks("")]
+        //[PropertyUIHelper(PropertyUIHelper.UIAdditionalHelperType.ShowVariableHelper)]
+        //[PropertyShowSampleUsageInDescription(true)]
+        //[PropertyInstanceType(PropertyInstanceType.InstanceType.DataTable)]
+        //[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
+        //public string v_DataTable { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Please indicate tuples to delete column rows")]
@@ -37,6 +37,7 @@ namespace taskt.Core.Automation.Commands
         [SampleUsage("{ColumnName1,Item1},{ColumnName2,Item2}")]
         [Remarks("")]
         [PropertyShowSampleUsageInDescription(true)]
+        [PropertyParameterOrder(6000)]
         public string v_SearchItem { get; set; }
 
         [XmlAttribute]
@@ -46,6 +47,7 @@ namespace taskt.Core.Automation.Commands
         [InputSpecification("Indicate whether this command should remove rows with all the constraints or remove them with 1 or more constraints")]
         [SampleUsage("Select from **And** or **Or**")]
         [Remarks("")]
+        [PropertyParameterOrder(7000)]
         public string v_AndOr { get; set; }
 
         public SearchAndDeleteDataTableRowsCommand()
@@ -58,15 +60,17 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            DataTable Dt = (DataTable)v_DataTable.GetRawVariable(engine).VariableValue;
+            //DataTable Dt = (DataTable)v_DataTable.GetRawVariable(engine).VariableValue;
+            var myDT = this.ExpandUserVariableAsDataTable(engine);
 
             var vSearchItem = v_SearchItem.ExpandValueOrUserVariable(engine);
 
-            var t = new List<Tuple<string, string>>();
+            //var searchConditions = new List<Tuple<string, string>>();
+            var searchConditions = new List<(string, string)>();
             var listPairs = vSearchItem.Split('}');
-            int i = 0;
+            //int i = 0;
 
-            listPairs = listPairs.Take(listPairs.Count() - 1).ToArray();
+            //listPairs = listPairs.Take(listPairs.Count() - 1).ToArray();
             foreach (string item in listPairs)
             {
                 string temp;
@@ -77,69 +81,70 @@ namespace taskt.Core.Automation.Commands
                 {
                     tempList[z] = tempList[z].Trim('{');
                 }
-                t.Insert(i, Tuple.Create(tempList[0], tempList[1]));
-                i++;
+                //searchConditions.Insert(i, Tuple.Create(tempList[0], tempList[1]));
+                searchConditions.Add((tempList[0], tempList[1]));
+                //i++;
             }
 
 
             List<DataRow> listrows = new List<DataRow>();
-            listrows = Dt.AsEnumerable().ToList();
+            listrows = myDT.AsEnumerable().ToList();
             if (v_AndOr == "Or")
             {
-                List<DataRow> templist = new List<DataRow>();
+                var templist = new List<DataRow>();
                 //for each filter
-                foreach (Tuple<string, string> tuple in t)
+                //foreach (Tuple<string, string> tuple in searchConditions)
+                foreach((string colName, string value) in searchConditions)
                 {
                     //for each datarow
                     foreach (DataRow item in listrows)
                     {
-                        if (item[tuple.Item1] != null)
+                        if (item[colName] != null)
                         {
 
-                            if (item[tuple.Item1].ToString() == tuple.Item2.ToString())
+                            if (item[colName].ToString() == value.ToString())
                             {
                                 //add to list if filter matches
                                 if (!templist.Contains(item))
+                                {
                                     templist.Add(item);
+                                }
                             }
                         }
                     }
-
                 }
                 foreach (DataRow item in templist)
                 {
-                    Dt.Rows.Remove(item);
+                    myDT.Rows.Remove(item);
                 }
-                Dt.AcceptChanges();
+                myDT.AcceptChanges();
 
                 //dataSetVariable.VariableValue = Dt;
             }
-
             //If And operation is checked
             else if (v_AndOr == "And")
             {
-                List<DataRow> templist = new List<DataRow>(listrows);
+                var templist = new List<DataRow>(listrows);
 
                 //for each tuple
-                foreach (Tuple<string, string> tuple in t)
+                //foreach (Tuple<string, string> tuple in searchConditions)
+                foreach((string colName, string value) in searchConditions)
                 {
                     //for each datarow
-                    foreach (DataRow drow in Dt.AsEnumerable())
+                    foreach (DataRow drow in myDT.AsEnumerable())
                     {
-                        if (drow[tuple.Item1].ToString() != tuple.Item2)
+                        if (drow[colName].ToString() != value)
                         {
                             //remove from list if filter matches
                             templist.Remove(drow);
                         }
                     }
                 }
-
                 foreach (DataRow item in templist)
                 {
-
-                    Dt.Rows.Remove(item);
+                    myDT.Rows.Remove(item);
                 }
-                Dt.AcceptChanges();
+                myDT.AcceptChanges();
 
                 //Assigns Datatable to newly updated Datatable
                 //dataSetVariable.VariableValue = Dt;

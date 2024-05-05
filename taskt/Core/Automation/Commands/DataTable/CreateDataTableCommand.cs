@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Xml.Serialization;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
@@ -16,11 +17,11 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class CreateDataTableCommand : ScriptCommand
+    public class CreateDataTableCommand : ADataTableInputDataTableCommands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_OutputDataTableName))]
-        public string v_DataTable { get; set; }
+        public override string v_DataTable { get; set; }
 
         [XmlElement]
         [PropertyDescription("Column Names")]
@@ -33,6 +34,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDataGridViewColumnSettings("Column Name", "Column Name", false)]
         [PropertyDataGridViewCellEditEvent(nameof(DataTableControls)+"+"+nameof(DataTableControls.AllEditableDataGridView_CellClick), PropertyDataGridViewCellEditEvent.DataGridViewCellEvent.CellClick)]
         [PropertyDisplayText(true, "Columns")]
+        [PropertyParameterOrder(6000)]
         public DataTable v_ColumnNameDataTable { get; set; }
 
         public CreateDataTableCommand()
@@ -53,23 +55,50 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            DataTable newDT = new DataTable();
+            var newDT = new DataTable();
+
+            var nameList = new List<string>();
 
             // check column name is empty
             for (int i = v_ColumnNameDataTable.Rows.Count - 1; i >= 0 ; i--)
             {
-                if ((v_ColumnNameDataTable.Rows[i].Field<string>("Column Name") ?? "") == "")
+                var name = v_ColumnNameDataTable.Rows[i].Field<string>("Column Name") ?? "";
+                if (!string.IsNullOrEmpty(name))
                 {
-                    throw new Exception("Column Name is Empty. Row: " + i);
+                    nameList.Add(name);
+                }
+                else
+                {
+                    
+                    throw new Exception($"Column Name is Empty. Row: {i}");
                 }
             }
 
-            foreach(DataRow row in v_ColumnNameDataTable.Rows)
+            // dup check
+            int num = nameList.Count;
+            for (int i = 0; i < num - 1; i++)
             {
-                newDT.Columns.Add(row.Field<string>("Column Name"));
+                for (int j = i + 1; i < num; j++)
+                {
+                    if (nameList[i] == nameList[j])
+                    {
+                        throw new Exception($"Duplicate Column Name '{nameList[i]}'. Row1: {i}, Row2: {j}");
+                    }
+                }
             }
 
-            newDT.StoreInUserVariable(engine, v_DataTable);
+            //foreach(DataRow row in v_ColumnNameDataTable.Rows)
+            //{
+            //    newDT.Columns.Add(row.Field<string>("Column Name"));
+            //}
+
+            foreach(var col in nameList)
+            {
+                newDT.Columns.Add(col);
+            }
+
+            //newDT.StoreInUserVariable(engine, v_DataTable);
+            this.StoreDataTableInUserVariable(newDT, nameof(v_DataTable), engine);
         }
 
         public override void BeforeValidate()

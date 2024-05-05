@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
-using System.Xml.Serialization;
 using System.Data;
+using System.Xml.Serialization;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using taskt.UI.CustomControls;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
@@ -12,17 +9,18 @@ namespace taskt.Core.Automation.Commands
     [Serializable]
     [Attributes.ClassAttributes.Group("DataTable Commands")]
     [Attributes.ClassAttributes.SubGruop("Row Action")]
+    [Attributes.ClassAttributes.CommandSettings("Add DataTable Row")]
     [Attributes.ClassAttributes.Description("This command allows you to add a row to a DataTable")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to add a row to a DataTable.")]
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class AddDataTableRowCommand : ScriptCommand, IHaveDataTableElements
+    public class AddDataTableRowCommand : ADataTableBothDataTableCommands, IHaveDataTableElements
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_BothDataTableName))]
-        public string v_DataTable { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_BothDataTableName))]
+        //public string v_DataTable { get; set; }
 
         [XmlElement]
         [PropertyDescription("Column Names and Values")]
@@ -38,6 +36,7 @@ namespace taskt.Core.Automation.Commands
         // todo: enable
         //[PropertyCustomUIHelper("Load Column Names From Existing Table", nameof(LoadSchemaControl_Click), "load_column")]
         [PropertyDisplayText(true, "Rows", "items")]
+        [PropertyParameterOrder(6000)]
         public DataTable v_AddDataDataTable { get; set; }
 
         //[XmlIgnore]
@@ -46,17 +45,18 @@ namespace taskt.Core.Automation.Commands
 
         public AddDataTableRowCommand()
         {
-            this.CommandName = "AddDataTableRowCommand";
-            this.SelectionName = "Add DataTable Row";
-            this.CommandEnabled = true;
-            this.CustomRendering = true;
+            //this.CommandName = "AddDataTableRowCommand";
+            //this.SelectionName = "Add DataTable Row";
+            //this.CommandEnabled = true;
+            //this.CustomRendering = true;
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            DataTable dataTable = v_DataTable.ExpandUserVariableAsDataTable(engine);
+            //DataTable dataTable = v_DataTable.ExpandUserVariableAsDataTable(engine);
+            var myDT = this.ExpandUserVariableAsDataTable(engine);
 
-            var newRow = dataTable.NewRow();
+            var newRow = myDT.NewRow();
 
             foreach (DataRow rw in v_AddDataDataTable.Rows)
             {
@@ -65,7 +65,7 @@ namespace taskt.Core.Automation.Commands
                 newRow.SetField(columnName, data); 
             }
 
-            dataTable.Rows.Add(newRow);
+            myDT.Rows.Add(newRow);
         }
 
         //public override List<Control> Render(UI.Forms.frmCommandEditor editor)

@@ -18,7 +18,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SeleniumBrowserGetAWebElementValuesAsDictionaryCommand : ScriptCommand, IHaveDataTableElements
+    public class SeleniumBrowserGetAWebElementValuesAsDictionaryCommand : ScriptCommand, ICanHandleDictionary, IHaveDataTableElements
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(SeleniumBrowserControls), nameof(SeleniumBrowserControls.v_InputInstanceName))]
@@ -77,7 +77,8 @@ namespace taskt.Core.Automation.Commands
                 })
             );
 
-            newDic.StoreInUserVariable(engine, v_DictionaryVariableName);
+            //newDic.StoreInUserVariable(engine, v_DictionaryVariableName);
+            this.StoreDictionaryInUserVariable(newDic, nameof(v_DictionaryVariableName), engine);
         }
 
         private void SearchMethodComboBox_SelectionChangeCommitted(object sender, EventArgs e)

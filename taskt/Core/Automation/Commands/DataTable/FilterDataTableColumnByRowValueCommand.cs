@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Xml.Serialization;
 using System.Data;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
@@ -16,36 +16,40 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class FilterDataTableColumnByRowValueCommand : ScriptCommand, IHaveDataTableElements
+    public class FilterDataTableColumnByRowValueCommand : ADataTableCreateFromDataTableCommands, ILDataTableRowPositionProperties, ILFilterValueProperties, IHaveDataTableElements
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
         [PropertyDescription("DataTable Variable Name to Filter")]
         [PropertyValidationRule("DataTable to Filter", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "DataTable to Filter")]
-        public string v_TargetDataTable { get; set; }
+        public override string v_TargetDataTable { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_RowIndex))]
+        [PropertyParameterOrder(6000)]
         public string v_RowIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_FilterValueType))]
         [PropertySelectionChangeEvent(nameof(cmbTargetType_SelectionChangeCommited))]
+        [PropertyParameterOrder(7000)]
         public string v_ValueType { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_FilterAction))]
         [PropertySelectionChangeEvent(nameof(cmbFilterAction_SelectionChangeCommited))]
+        [PropertyParameterOrder(8000)]
         public string v_FilterAction { get; set; }
 
         [XmlElement]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ActionParameterTable))]
+        [PropertyParameterOrder(9000)]
         public DataTable v_FilterActionParameterTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_NewOutputDataTableName))]
-        public string v_NewDataTable { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_NewOutputDataTableName))]
+        //public string v_NewDataTable { get; set; }
 
         public FilterDataTableColumnByRowValueCommand()
         {
@@ -59,12 +63,14 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var targetDT, var rowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_TargetDataTable), nameof(v_RowIndex), engine);
+            //(var targetDT, var rowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_TargetDataTable), nameof(v_RowIndex), engine);
+            var targetDT = this.ExpandUserVariableAsDataTable(engine);
+            var rowIndex = this.ExpandValueOrUserVariableAsDataTableRow(targetDT, engine);
 
             var parameters = DataTableControls.GetFieldValues(v_FilterActionParameterTable, "ParameterName", "ParameterValue", engine);
             var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_ValueType), nameof(v_FilterAction), parameters, engine, this);
 
-            var res = new DataTable();
+            var newDT = new DataTable();
 
             int cols = targetDT.Columns.Count;
             int rows = targetDT.Rows.Count;
@@ -74,28 +80,29 @@ namespace taskt.Core.Automation.Commands
                 string value = targetDT.Rows[rowIndex][i]?.ToString() ?? "";
                 if (checkFunc(value, parameters))
                 {
-                    if (res.Rows.Count == 0)
+                    if (newDT.Rows.Count == 0)
                     {
                         // first add column
-                        res.Columns.Add(targetDT.Columns[i].ColumnName);
+                        newDT.Columns.Add(targetDT.Columns[i].ColumnName);
                         for (int j = 0; j < rows; j++)
                         {
-                            res.Rows.Add(targetDT.Rows[j][i]);
+                            newDT.Rows.Add(targetDT.Rows[j][i]);
                         }
                     }
                     else
                     {
-                        int c = res.Columns.Count;
-                        res.Columns.Add(targetDT.Columns[i].ColumnName);
+                        int c = newDT.Columns.Count;
+                        newDT.Columns.Add(targetDT.Columns[i].ColumnName);
                         for (int j = 0; j < rows; j++)
                         {
-                            res.Rows[j][c] = targetDT.Rows[j][i];
+                            newDT.Rows[j][c] = targetDT.Rows[j][i];
                         }
                     }
                 }
             }
 
-            res.StoreInUserVariable(engine, v_NewDataTable);
+            //res.StoreInUserVariable(engine, v_NewDataTable);
+            this.StoreDataTableInUserVariable(newDT, engine);
         }
 
         private void cmbTargetType_SelectionChangeCommited(object sender, EventArgs e)

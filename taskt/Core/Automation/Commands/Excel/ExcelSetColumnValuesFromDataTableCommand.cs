@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelSetColumnValuesFromDataTableCommand : AExcelColumnRangeSetCommands
+    public class ExcelSetColumnValuesFromDataTableCommand : AExcelColumnRangeSetCommands, ICanHandleDataTable
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]
@@ -115,7 +115,9 @@ namespace taskt.Core.Automation.Commands
             //Action<string, Microsoft.Office.Interop.Excel.Worksheet, int, int> setFunc = ExcelControls.SetCellValueFunction(v_ValueType.ExpandValueOrUserVariableAsSelectionItem("v_ValueType", this, engine));
             //var setFunc = ExcelControls.SetCellValueFunction(this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_ValueType), engine));
 
-            DataTable myDT = v_DataTableVariable.ExpandUserVariableAsDataTable(engine);
+            //DataTable myDT = v_DataTableVariable.ExpandUserVariableAsDataTable(engine);
+            var myDT = this.ExpandUserVariableAsDataTable(nameof(v_DataTableVariable), engine);
+            
             var dtColumnIndex = v_DataTableColumnIndex.ExpandValueOrUserVariableAsInteger("DataTable Column Index", engine);
             if ((dtColumnIndex < 0) || (dtColumnIndex >= myDT.Columns.Count))
             {

@@ -15,19 +15,19 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertDataTableRowToListCommand : ScriptCommand
+    public class ConvertDataTableRowToListCommand : ADataTableGetFromDataTableRowCommands, IListResultProperties
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
-        public string v_DataTable { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
+        //public string v_DataTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_RowIndex))]
-        public string v_RowIndex { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_RowIndex))]
+        //public string v_RowIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_OutputListName))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public ConvertDataTableRowToListCommand()
         {
@@ -39,9 +39,10 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var srcDT, var index) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_DataTable), nameof(v_RowIndex), engine);
+            //(var srcDT, var index) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_DataTable), nameof(v_RowIndex), engine);
+            (var srcDT, var index) = this.ExpandValueOrUserVariableAsDataTableAndRow(engine);
 
-            List<string> myList = new List<string>();
+            var myList = new List<string>();
 
             int cols = srcDT.Columns.Count;
             for (int i = 0; i < cols; i++)
@@ -49,7 +50,8 @@ namespace taskt.Core.Automation.Commands
                 myList.Add(srcDT.Rows[index][i]?.ToString() ?? "");
             }
 
-            myList.StoreInUserVariable(engine, v_Result);
+            //myList.StoreInUserVariable(engine, v_Result);
+            this.StoreListInUserVariable(myList, engine);
         }
     }
 }

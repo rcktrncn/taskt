@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class WordAppendDataTableCommand : ScriptCommand
+    public class WordAppendDataTableCommand : ScriptCommand, ICanHandleDataTable
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(WordControls), nameof(WordControls.v_InstanceName))]
@@ -36,20 +36,21 @@ namespace taskt.Core.Automation.Commands
         {
             (var _, var wordDocument) = v_InstanceName.ExpandValueOrUserVariableAsWordInstanceAndDocument(engine);
 
-            var dataTable = v_DataTableName.ExpandUserVariableAsDataTable(engine);
+            //var myDT = v_DataTableName.ExpandUserVariableAsDataTable(engine);
+            var myDT = this.ExpandUserVariableAsDataTable(nameof(v_DataTableName), engine);
 
             //converting System DataTable to Word DataTable
-            int RowCount = dataTable.Rows.Count; 
-            int ColumnCount = dataTable.Columns.Count;
+            int RowCount = myDT.Rows.Count; 
+            int ColumnCount = myDT.Columns.Count;
             Object[,] DataArray = new object[RowCount + 1, ColumnCount + 1];
            
             int r = 0;
             for (int c = 0; c <= ColumnCount - 1; c++)
             {
-                DataArray[r, c] = dataTable.Columns[c].ColumnName;
+                DataArray[r, c] = myDT.Columns[c].ColumnName;
                 for (r = 0; r <= RowCount - 1; r++)
                 {
-                    DataArray[r, c] = dataTable.Rows[r][c];
+                    DataArray[r, c] = myDT.Rows[r][c];
                 } //end row loop
             } //end column loop
 
@@ -91,7 +92,7 @@ namespace taskt.Core.Automation.Commands
             //Adding header row manually
             for (int c = 0; c <= ColumnCount - 1; c++)
             {
-                wordDocument.Application.Selection.Tables[1].Cell(1, c + 1).Range.Text = dataTable.Columns[c].ColumnName;
+                wordDocument.Application.Selection.Tables[1].Cell(1, c + 1).Range.Text = myDT.Columns[c].ColumnName;
             }
 
             //Formatting header row
