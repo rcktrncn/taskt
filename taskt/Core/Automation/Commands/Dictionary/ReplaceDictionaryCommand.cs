@@ -46,7 +46,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ReplaceValue))]
         [PropertyParameterOrder(9000)]
-        public string v_ReplaceValue { get; set; }
+        public string v_NewValue { get; set; }
 
         public ReplaceDictionaryCommand()
         {
@@ -64,7 +64,7 @@ namespace taskt.Core.Automation.Commands
             var parameters = DataTableControls.GetFieldValues(v_ReplaceActionParameterTable, "ParameterName", "ParameterValue", engine);
             var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_ValueType), nameof(v_ReplaceAction), parameters, engine, this);
 
-            string newValue = v_ReplaceValue.ExpandValueOrUserVariable(engine);
+            string newValue = v_NewValue.ExpandValueOrUserVariable(engine);
 
             var keys = targetDic.Keys.ToList();
 

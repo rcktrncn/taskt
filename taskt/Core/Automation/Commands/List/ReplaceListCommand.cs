@@ -41,7 +41,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ReplaceValue))]
-        public string v_ReplaceValue { get; set; }
+        public string v_NewValue { get; set; }
 
         public ReplaceListCommand()
         {
@@ -58,7 +58,7 @@ namespace taskt.Core.Automation.Commands
             var parameters = DataTableControls.GetFieldValues(v_ReplaceActionParameterTable, "ParameterName", "ParameterValue", engine);
             var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_ValueType), nameof(v_ReplaceAction), parameters, engine, this);
 
-            string newValue = v_ReplaceValue.ExpandValueOrUserVariable(engine);
+            string newValue = v_NewValue.ExpandValueOrUserVariable(engine);
 
             for (int i = targetList.Count - 1; i >= 0; i--)
             {

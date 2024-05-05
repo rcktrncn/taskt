@@ -419,6 +419,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_88(doc);
             convertTo3_5_1_89(doc);
             convertTo3_5_1_91(doc);
+            convertTo3_5_1_92(doc);
 
             return doc;
         }
@@ -3197,6 +3198,27 @@ namespace taskt.Core.Script
                     }
                 }),
                 "v_IfValueIsNotNumeric", "v_WhenValueIsNotNumeric"
+            );
+        }
+
+        private static void convertTo3_5_1_92(XDocument doc)
+        {
+            // ReplaceDataTableValueCommand v_ValueType
+            ChangeAttributeName(doc, "ReplaceDataTableValueCommand", "v_TargetValue", "v_ValueType");
+
+            // ReplaceDictionaryCommand, ReplaceListCommand v_NewValue
+            ChangeAttributeName(doc, 
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "ReplaceDictionaryCommand":
+                        case "ReplaceListCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }), "v_ReplaceValue", "v_NewValue"
             );
         }
 
