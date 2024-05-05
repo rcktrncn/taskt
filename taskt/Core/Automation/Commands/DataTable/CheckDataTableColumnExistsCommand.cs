@@ -17,6 +17,8 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
     public class CheckDataTableColumnExistsCommand : ScriptCommand
     {
+        // TODO: support column name or index
+
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_InputDataTableName))]
         public string v_DataTable { get; set; }

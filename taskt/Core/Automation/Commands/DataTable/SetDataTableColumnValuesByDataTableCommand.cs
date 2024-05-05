@@ -67,7 +67,8 @@ namespace taskt.Core.Automation.Commands
             string trgColName = myDT.Columns[colIndex].ColumnName;
 
 
-            DataTable setDT = v_SetDataTableName.ExpandUserVariableAsDataTable(engine);
+            //DataTable setDT = v_SetDataTableName.ExpandUserVariableAsDataTable(engine);
+            var setDT = this.ExpandUserVariableAsDataTable(nameof(v_SetDataTableName), engine);
 
             string ifRowNotEnough = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_IfRowNotEnough), "Row Not Enough", engine);
             // rows check
