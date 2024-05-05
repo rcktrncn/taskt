@@ -1,6 +1,5 @@
 ﻿using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
-using taskt.Core.Automation.Commands.DataTable;
 
 namespace taskt.Core.Automation.Commands
 {
