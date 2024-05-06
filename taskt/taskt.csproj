@@ -436,6 +436,7 @@
     <Compile Include="Core\Automation\Commands\List\AListGetMathResultFromListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListInputListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_CanHandleListExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\List\EM_ListGetMathResultPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_ListPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_ListResultPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\List\ICanHandleList.cs" />
