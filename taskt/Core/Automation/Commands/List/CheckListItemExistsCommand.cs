@@ -23,7 +23,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_SearchValue))]
-        public string v_SearchItem { get; set; }
+        public string v_Value { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(BooleanControls), nameof(BooleanControls.v_Result))]
@@ -42,7 +42,7 @@ namespace taskt.Core.Automation.Commands
         {
             List<string> targetList = v_List.ExpandUserVariableAsList(engine);
 
-            var searchedValue = v_SearchItem.ExpandValueOrUserVariable(engine);
+            var searchedValue = v_Value.ExpandValueOrUserVariable(engine);
 
             targetList.Contains(searchedValue).StoreInUserVariable(engine, v_Result);
         }

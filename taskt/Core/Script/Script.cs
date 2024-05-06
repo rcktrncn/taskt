@@ -3227,6 +3227,22 @@ namespace taskt.Core.Script
         {
             // CheckDataTableColumnExistsCommand v_ColumnIndex
             ChangeAttributeName(doc, "CheckDataTableColumnExistsCommand", "v_ColumnName", "v_ColumnIndex");
+
+            // CheckListItemExistsCommand, GetListIndexFromValueCommand v_Value
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "CheckListItemExistsCommand":
+                        case "GetListIndexFromValueCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_SearchItem", "v_Value"
+            );
         }
 
         /// <summary>
