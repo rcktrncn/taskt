@@ -28,6 +28,35 @@ namespace taskt.Core.Automation.Commands
         }
 
         /// <summary>
+        /// Expand User Variable as Decimal(Numeric) List
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="parameterName"></param>
+        /// <param name="ignoreNotNumeric"></param>
+        /// <param name="engine"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static List<decimal> ExpandUserVariableAsDecimalList(this ICanHandleList command, string parameterName, bool ignoreNotNumeric, Engine.AutomationEngineInstance engine)
+        {
+            var list = command.ExpandUserVariableAsList(parameterName, engine);
+
+            var numList = new List<decimal>();
+            foreach (var value in list)
+            {
+                if (decimal.TryParse(value, out decimal v))
+                {
+                    numList.Add(v);
+                }
+                else if (!ignoreNotNumeric)
+                {
+                    throw new Exception($"List has Not numeric value. Value: '{value}'");
+                }
+            }
+
+            return numList;
+        }
+
+        /// <summary>
         /// store list in User Variable
         /// </summary>
         /// <param name="command"></param>
