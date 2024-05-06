@@ -23,7 +23,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_SearchValue))]
-        public string v_SearchItem { get; set; }
+        public string v_Value { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
@@ -54,7 +54,7 @@ namespace taskt.Core.Automation.Commands
         {
             List<string> targetList = v_List.ExpandUserVariableAsList(engine);
 
-            var searchedValue = v_SearchItem.ExpandValueOrUserVariable(engine);
+            var searchedValue = v_Value.ExpandValueOrUserVariable(engine);
 
             //string searchMethod = this.GetUISelectionValue(nameof(v_SearchMethod), "Search Method", engine);
             string searchMethod = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_SearchMethod), engine);

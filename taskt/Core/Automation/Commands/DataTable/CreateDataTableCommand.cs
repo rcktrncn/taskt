@@ -78,7 +78,7 @@ namespace taskt.Core.Automation.Commands
             int num = nameList.Count;
             for (int i = 0; i < num - 1; i++)
             {
-                for (int j = i + 1; i < num; j++)
+                for (int j = i + 1; j < num; j++)
                 {
                     if (nameList[i] == nameList[j])
                     {

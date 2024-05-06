@@ -16,19 +16,19 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetVarianceFromListCommand : ScriptCommand
+    public class GetVarianceFromListCommand : AListGetMathResultFromListCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_List { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        //public string v_List { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        public string v_Result { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
+        //public string v_Result { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_WhenValueIsNotNumeric))]
-        public string v_WhenValueIsNotNumeric { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_WhenValueIsNotNumeric))]
+        //public string v_WhenValueIsNotNumeric { get; set; }
 
         public GetVarianceFromListCommand()
         {
@@ -40,7 +40,29 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            ListControls.MathProcess(this, nameof(v_WhenValueIsNotNumeric), v_List, engine,
+            //ListControls.MathProcess(this, nameof(v_WhenValueIsNotNumeric), v_List, engine,
+            //    new Func<List<decimal>, decimal>((lst) =>
+            //    {
+            //        if (lst.Count() > 0)
+            //        {
+            //            decimal ave = lst.Average();
+
+            //            decimal sum = 0;
+            //            foreach (var v in lst)
+            //            {
+            //                sum += (v - ave) * (v - ave);
+            //            }
+
+            //            return (sum / lst.Count());
+            //        }
+            //        else
+            //        {
+            //            return 0;
+            //        }
+            //    })
+            //).StoreInUserVariable(engine, v_Result);
+
+            this.MathProcess(
                 new Func<List<decimal>, decimal>((lst) =>
                 {
                     if (lst.Count() > 0)
@@ -59,7 +81,8 @@ namespace taskt.Core.Automation.Commands
                     {
                         return 0;
                     }
-                })
+                }),
+                engine
             ).StoreInUserVariable(engine, v_Result);
         }
     }
