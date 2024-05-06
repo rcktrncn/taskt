@@ -16,11 +16,11 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertListToDictionaryCommand : ScriptCommand, IDictionaryResultProperties
+    public class ConvertListToDictionaryCommand : AListGetFromListCommands, IDictionaryResultProperties
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_List { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        //public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_AType))]
@@ -29,6 +29,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyIsOptional(true, "Key Prefix")]
         [PropertyDisplayText(true, "Dictionary Keys Type")]
         [PropertyDetailSampleUsage("**item**", "When Select **Key Prefix** and Enter **item**, Key Name is item0, item1, item2, ...")]
+        [PropertyParameterOrder(6000)]
         public string v_KeyType { get; set; }
 
         [XmlAttribute]
@@ -41,22 +42,25 @@ namespace taskt.Core.Automation.Commands
         [PropertyIsOptional(true)]
         [PropertyInstanceType(PropertyInstanceType.InstanceType.List)]
         [PropertyDisplayText(true, "Dictionary Keys Name List")]
+        [PropertyParameterOrder(6001)]
         public string v_Keys { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ANotEnough))]
         [PropertyDescription("When the number of items in the List is greater than the number of Keys")]
         [PropertyUISelectionOption("Try Create Keys")]
+        [PropertyParameterOrder(6002)]
         public string v_KeysNotEnough { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ListItemNotEnough))]
         [PropertyDescription("When the number of Keys is greater than the number of items in the List")]
+        [PropertyParameterOrder(6003)]
         public string v_ListItemNotEnough { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_OutputDictionaryName))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public ConvertListToDictionaryCommand()
         {
@@ -68,24 +72,25 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_List.ExpandUserVariableAsList(engine);
+            //List<string> targetList = v_List.ExpandUserVariableAsList(engine);
+            var targetList = this.ExpandUserVariableAsList(engine);
 
             var keyType = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_KeyType), "Key Type", engine);
 
-            Dictionary<string, string> myDic = new Dictionary<string, string>();
+            var myDic = new Dictionary<string, string>();
 
-            Action<List<string>> dicUseKeys = new Action<List<string>>((targetKeys) =>
+            var dicUseKeys = new Action<List<string>>((targetKeys) =>
             {
                 string keysNotEnough = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_KeysNotEnough), "Keys Not Enough", engine);
                 string listItemNotEnough = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_ListItemNotEnough), "List Item Not Enough", engine);
 
                 if ((keysNotEnough == "error") && (targetList.Count > targetKeys.Count))
                 {
-                    throw new Exception("The number of keys in " + v_Keys + " is not enough");
+                    throw new Exception($"The number of keys in '{v_Keys}' is not enough");
                 }
                 if ((listItemNotEnough == "error") && (targetKeys.Count > targetList.Count))
                 {
-                    throw new Exception("The number of List items in " + v_List + " is not enough");
+                    throw new Exception($"The number of List items in '{v_List}' is not enough");
                 }
 
                 if (targetList.Count == targetKeys.Count)
@@ -168,7 +173,7 @@ namespace taskt.Core.Automation.Commands
                     break;
                 case "key prefix":
                     string prefix;
-                    if (String.IsNullOrEmpty(v_Keys))
+                    if (string.IsNullOrEmpty(v_Keys))
                     {
                         prefix = "item";
                     }

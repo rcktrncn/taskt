@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
@@ -15,15 +14,15 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertListToJSONCommand : ScriptCommand
+    public class ConvertListToJSONCommand : AListGetFromListCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_List { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        //public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_OutputJSONName))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public ConvertListToJSONCommand()
         {
@@ -35,17 +34,18 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_List.ExpandUserVariableAsList(engine);
+            //List<string> targetList = v_List.ExpandUserVariableAsList(engine);
+            var targetList = this.ExpandUserVariableAsList(engine);
 
             // convert json
             try
             {
-                string convertedList = Newtonsoft.Json.JsonConvert.SerializeObject(targetList);
+                var convertedList = Newtonsoft.Json.JsonConvert.SerializeObject(targetList);
                 convertedList.StoreInUserVariable(engine, v_Result);
             }
             catch (Exception ex)
             {
-                throw new Exception("Error Occured Selecting Tokens: " + ex.ToString());
+                throw new Exception($"Fail Convert to Json. Message: {ex}");
             }
         }
     }

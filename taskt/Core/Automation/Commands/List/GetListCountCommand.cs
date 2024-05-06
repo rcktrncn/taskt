@@ -15,15 +15,15 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetListCountCommand : ScriptCommand
+    public class GetListCountCommand : AListGetFromListCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_List { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        //public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public GetListCountCommand()
         {
@@ -35,41 +35,44 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var listVariable = v_List.GetRawVariable(engine);
-            dynamic listToCount;
+            //var listVariable = v_List.GetRawVariable(engine);
+            //dynamic listToCount;
 
-            Type listType = listVariable.VariableValue.GetType();
-            if (listType.IsGenericType && (listType.GetGenericTypeDefinition() == typeof(List<>)))
-            {
-                // List<T>
-                listToCount = listVariable.VariableValue;
-            }
-            else
-            {
-                if ((listVariable.VariableValue is string) &&
-                        listVariable.VariableValue.ToString().StartsWith("[") && listVariable.VariableValue.ToString().EndsWith("]") && listVariable.VariableValue.ToString().Contains(","))
-                {
-                    // JSON Array
-                    Newtonsoft.Json.Linq.JArray jsonArray = Newtonsoft.Json.JsonConvert.DeserializeObject(listVariable.VariableValue.ToString()) as Newtonsoft.Json.Linq.JArray;
+            //Type listType = listVariable.VariableValue.GetType();
+            //if (listType.IsGenericType && (listType.GetGenericTypeDefinition() == typeof(List<>)))
+            //{
+            //    // List<T>
+            //    listToCount = listVariable.VariableValue;
+            //}
+            //else
+            //{
+            //    if ((listVariable.VariableValue is string) &&
+            //            listVariable.VariableValue.ToString().StartsWith("[") && listVariable.VariableValue.ToString().EndsWith("]") && listVariable.VariableValue.ToString().Contains(","))
+            //    {
+            //        // JSON Array
+            //        Newtonsoft.Json.Linq.JArray jsonArray = Newtonsoft.Json.JsonConvert.DeserializeObject(listVariable.VariableValue.ToString()) as Newtonsoft.Json.Linq.JArray;
 
-                    var itemList = new List<string>();
-                    foreach (var item in jsonArray)
-                    {
-                        var value = (Newtonsoft.Json.Linq.JValue)item;
-                        itemList.Add(value.ToString());
-                    }
+            //        var itemList = new List<string>();
+            //        foreach (var item in jsonArray)
+            //        {
+            //            var value = (Newtonsoft.Json.Linq.JValue)item;
+            //            itemList.Add(value.ToString());
+            //        }
 
-                    listVariable.VariableValue = itemList;
-                    listToCount = itemList;
-                }
-                else
-                {
-                    throw new Exception(v_List + " is not List");
-                }
-            }
+            //        listVariable.VariableValue = itemList;
+            //        listToCount = itemList;
+            //    }
+            //    else
+            //    {
+            //        throw new Exception(v_List + " is not List");
+            //    }
+            //}
 
-            string count = listToCount.Count.ToString();
-            count.StoreInUserVariable(engine, v_Result);
+            //string count = listToCount.Count.ToString();
+            //count.StoreInUserVariable(engine, v_Result);
+
+            var list = this.ExpandUserVariableAsList(engine);
+            list.Count.StoreInUserVariable(engine, v_Result);
         }
     }
 }

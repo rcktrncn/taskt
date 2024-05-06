@@ -15,15 +15,15 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetListIndexCommand : ScriptCommand
+    public class GetListIndexCommand : AListGetFromListCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_List { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        //public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public GetListIndexCommand()
         {
@@ -31,14 +31,17 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
+            // TODO: i want to remove current position
+
             var rawVariable = v_List.GetRawVariable(engine);
             if (rawVariable.VariableValue is List<string>)
             {
-                rawVariable.CurrentPosition.ToString().StoreInUserVariable(engine, v_Result);
+                //rawVariable.CurrentPosition.ToString().StoreInUserVariable(engine, v_Result);
+                rawVariable.CurrentPosition.StoreInUserVariable(engine, v_Result);
             }
             else
             {
-                throw new Exception("Variable '" + v_List + "' is not LIST.");
+                throw new Exception($"Variable '{v_List}' is not a List. Type: {rawVariable.GetType()}");
             }
         }
     }
