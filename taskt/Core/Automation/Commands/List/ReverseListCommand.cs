@@ -15,18 +15,18 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ReverseListCommand : ScriptCommand
+    public class ReverseListCommand : AListCreateFromListCommands
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
         [PropertyDescription("List Variable Name to Reverse")]
         [PropertyValidationRule("List to Reverse", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "List to Reverse")]
-        public string v_TargetList { get; set; }
+        public override string v_TargetList { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
-        public string v_NewList { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
+        //public string v_NewList { get; set; }
 
         public ReverseListCommand()
         {
@@ -38,11 +38,15 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
+            //List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
+            var targetList = this.ExpandUserVariableAsList(engine);
 
-            List<string> newList = new List<string>(targetList);
+            //List<string> newList = new List<string>(targetList);
+            var newList = new List<string>(targetList);
+
             newList.Reverse();
-            newList.StoreInUserVariable(engine, v_NewList);
+            //newList.StoreInUserVariable(engine, v_NewList);
+            this.StoreListInUserVariable(newList, engine);
         }
     }
 }
