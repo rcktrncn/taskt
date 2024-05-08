@@ -11,11 +11,11 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
         [PropertyParameterOrder(5000)]
-        public string v_TargetList { get; set; }
+        public virtual string v_TargetList { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
         [PropertyParameterOrder(10000)]
-        public string v_NewList { get; set; }
+        public virtual string v_NewList { get; set; }
     }
 }
