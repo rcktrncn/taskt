@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_window))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class UIAutomationGetSelectionItemsFromUIElementCommand : ScriptCommand
+    public class UIAutomationGetSelectionItemsFromUIElementCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(UIElementControls), nameof(UIElementControls.v_InputUIElementName))]
@@ -39,12 +39,13 @@ namespace taskt.Core.Automation.Commands
 
             var items = UIElementControls.GetSelectionItems(targetElement);
 
-            List<string> res = new List<string>();
+            var res = new List<string>();
             foreach(var item in items)
             {
                 res.Add(item.Current.Name);
             }
-            res.StoreInUserVariable(engine, v_ListVariable);
+            //res.StoreInUserVariable(engine, v_ListVariable);
+            this.StoreListInUserVariable(res, nameof(v_ListVariable), engine);
         }
     }
 }

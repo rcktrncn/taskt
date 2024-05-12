@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SeleniumBrowserGetMatchedWebElementsCommand : ScriptCommand
+    public class SeleniumBrowserGetMatchedWebElementsCommand : ScriptCommand, IListResultProperties
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(SeleniumBrowserControls), nameof(SeleniumBrowserControls.v_InputInstanceName))]
@@ -50,7 +50,8 @@ namespace taskt.Core.Automation.Commands
             {
                 lst.Add(elem.GetAttribute("outerHTML"));
             }
-            lst.StoreInUserVariable(engine, v_Result);
+            //lst.StoreInUserVariable(engine, v_Result);
+            this.StoreListInUserVariable(lst, engine);
         }
     }
 }

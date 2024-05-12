@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ParseJSONArrayCommand : ScriptCommand
+    public class ParseJSONArrayCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyDescription("Supply the JSON Array or Variable")]
@@ -72,8 +72,8 @@ namespace taskt.Core.Automation.Commands
                 resultList.Add(result.ToString());
             }
 
-            resultList.StoreInUserVariable(engine, v_applyToVariableName);
-
+            //resultList.StoreInUserVariable(engine, v_applyToVariableName);
+            this.StoreListInUserVariable(resultList, nameof(v_applyToVariableName), engine);
         }
     }
 }

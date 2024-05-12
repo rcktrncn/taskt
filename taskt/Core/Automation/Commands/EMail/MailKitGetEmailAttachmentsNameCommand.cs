@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class MailKitGetEMailAttachmentsNameCommand : ScriptCommand
+    public class MailKitGetEMailAttachmentsNameCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(EMailControls), nameof(EMailControls.v_InputEMailName))]
@@ -39,7 +39,8 @@ namespace taskt.Core.Automation.Commands
 
             var attachments = mail.Attachments.Cast<MimeKit.MimePart>().Select(a => a.FileName).ToList();
 
-            attachments.StoreInUserVariable(engine, v_AttachmentsList);
+            //attachments.StoreInUserVariable(engine, v_AttachmentsList);
+            this.StoreListInUserVariable(attachments, nameof(v_AttachmentsList), engine);
         }
     }
 }

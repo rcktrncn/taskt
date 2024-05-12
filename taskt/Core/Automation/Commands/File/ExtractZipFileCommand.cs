@@ -18,7 +18,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_files))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExtractZipFileCommand : ScriptCommand
+    public class ExtractZipFileCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(FilePathControls), nameof(FilePathControls.v_FilePath))]
@@ -175,7 +175,8 @@ namespace taskt.Core.Automation.Commands
 
                 if (!string.IsNullOrEmpty(v_applyToVariableName))
                 {
-                    fileList.StoreInUserVariable(engine, v_applyToVariableName);
+                    //fileList.StoreInUserVariable(engine, v_applyToVariableName);
+                    this.StoreListInUserVariable(fileList, nameof(v_applyToVariableName), engine);
                 }
             }
             catch (Exception ex)

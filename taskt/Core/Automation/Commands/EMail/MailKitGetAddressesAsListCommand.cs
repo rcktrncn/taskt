@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class MailKitGetAddressesAsListCommand : ScriptCommand
+    public class MailKitGetAddressesAsListCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(EMailControls), nameof(EMailControls.v_InputEMailName))]
@@ -43,12 +43,13 @@ namespace taskt.Core.Automation.Commands
         {
             var lst = this.GetMailKitEMailAddresses(nameof(v_MailName), nameof(v_AddressesType), engine);
 
-            List<string> addresses = new List<string>();
+            var addresses = new List<string>();
             foreach(MimeKit.MailboxAddress item in lst.Cast<MailboxAddress>())
             {
                 addresses.Add(item.Address);
             }
-            addresses.StoreInUserVariable(engine, v_AddressesList);
+            //addresses.StoreInUserVariable(engine, v_AddressesList);
+            this.StoreListInUserVariable(addresses, nameof(v_AddressesList), engine);
         }
     }
 }

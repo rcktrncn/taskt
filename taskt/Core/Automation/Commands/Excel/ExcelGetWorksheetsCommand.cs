@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelGetWorksheetsCommand : AExcelSheetCommands
+    public class ExcelGetWorksheetsCommand : AExcelSheetCommands, IListResultProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]
@@ -96,7 +96,8 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            sheetNames.StoreInUserVariable(engine, v_Result);
+            //sheetNames.StoreInUserVariable(engine, v_Result);
+            this.StoreListInUserVariable(sheetNames, engine);
         }
     }
 }
