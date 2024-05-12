@@ -15,20 +15,20 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class CheckListItemExistsCommand : ScriptCommand
+    public class CheckListItemExistsCommand : AListGetFromValueCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_List { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        //public string v_List { get; set; }
+
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_SearchValue))]
+        //public string v_Value { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_SearchValue))]
-        public string v_Value { get; set; }
-
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(BooleanControls), nameof(BooleanControls.v_Result))]
+        //[PropertyVirtualProperty(nameof(BooleanControls), nameof(BooleanControls.v_Result))]
         [Remarks("When the Item Exists, the Result is **True**")]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public CheckListItemExistsCommand()
         {
@@ -40,7 +40,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_List.ExpandUserVariableAsList(engine);
+            //var targetList = v_List.ExpandUserVariableAsList(engine);
+            var targetList = this.ExpandUserVariableAsList(engine);
 
             var searchedValue = v_Value.ExpandValueOrUserVariable(engine);
 
