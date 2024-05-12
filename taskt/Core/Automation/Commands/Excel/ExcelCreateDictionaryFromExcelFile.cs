@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelCreateDictionaryFromExcelFile : ScriptCommand, ICanHandleDictionary
+    public class ExcelCreateDictionaryFromExcelFile : ScriptCommand, ICanHandleDictionary, ICanHandleList
     {
         [XmlAttribute]
         //[PropertyDescription("Please Enter the Dictionary Variable Name")]
@@ -182,8 +182,11 @@ namespace taskt.Core.Automation.Commands
             };
             closeInstance.RunCommand(engine);
 
-            var keyList = keyListName.ExpandUserVariableAsList(engine);
-            var valueList = valueListName.ExpandUserVariableAsList(engine);
+            //var keyList = keyListName.ExpandUserVariableAsList(engine);
+            var keyList = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
+
+            //var valueList = valueListName.ExpandUserVariableAsList(engine);
+            var valueList = (List<string>)VariableNameControls.GetInnerVariable(1, engine).VariableValue;
 
             var myDic = new Dictionary<string, string>();
             foreach(var key in keyList)

@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelSetRowValuesFromListCommand : AExcelRowRangeSetCommands
+    public class ExcelSetRowValuesFromListCommand : AExcelRowRangeSetCommands, ICanHandleList
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]
@@ -106,7 +106,8 @@ namespace taskt.Core.Automation.Commands
             //    setFunc(myList[i], excelSheet, columnStartIndex + i, rowIndex);
             //}
 
-            var myList = v_ListVariable.ExpandUserVariableAsList(engine);
+            //var myList = v_ListVariable.ExpandUserVariableAsList(engine);
+            var myList = this.ExpandUserVariableAsList(nameof(v_ListVariable), engine);
             this.RowRangeAction(
                 new Func<int>(() => myList.Count),
                 new Func<int, string>((count) =>
