@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
@@ -201,96 +200,96 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
-        /// <summary>
-        /// expand (value or) user variables as List Variabe and Index
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="variableName"></param>
-        /// <param name="indexName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception">value is not List, or index is out of range</exception>
-        public static (List<string>, int) ExpandUserVariablesAsListAndIndex(this ScriptCommand command, string variableName, string indexName, Engine.AutomationEngineInstance engine)
-        {
-            var listVariableName = command.ExpandValueOrUserVariable(variableName, "List Variable Name", engine);
-
-            var list = listVariableName.ExpandUserVariableAsList(engine);
-
-            var indexValue = command.ExpandValueOrUserVariable(indexName, "Index", engine);
-            int index;
-            if (String.IsNullOrEmpty(indexValue))
-            {
-                var raw = listVariableName.GetRawVariable(engine);
-                index = raw.CurrentPosition;
-            }
-            else if (!int.TryParse(indexValue, out index))
-            {
-                throw new Exception("Index is not Integer Number. Value: '" + indexValue + "'");
-            }
-
-            if (index < 0)
-            {
-                index += list.Count;
-            }
-
-            if (list.Count <= index)
-            {
-                throw new Exception("Index is out of List index. Index: " + index);
-            }
-
-            return (list, index);
-        }
-
         public static void StoreInUserVariable<Type>(this List<Type> value, Core.Automation.Engine.AutomationEngineInstance engine, string targetVariable)
         {
             ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
         }
 
-        /// <summary>
-        /// expand user variable as List&lt;string&gt; to List&lt;decimal&gt;
-        /// </summary>
-        /// <param name="listName"></param>
-        /// <param name="ignoreNotNumeric"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception">value is not Decimal List</exception>
-        public static List<decimal> ExpandUserVariableAsDecimalList(this string listName, bool ignoreNotNumeric, Engine.AutomationEngineInstance engine)
-        {
-            var list = listName.ExpandUserVariableAsList(engine);
+        ///// <summary>
+        ///// expand (value or) user variables as List Variabe and Index
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="variableName"></param>
+        ///// <param name="indexName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception">value is not List, or index is out of range</exception>
+        //public static (List<string>, int) ExpandUserVariablesAsListAndIndex(this ScriptCommand command, string variableName, string indexName, Engine.AutomationEngineInstance engine)
+        //{
+        //    var listVariableName = command.ExpandValueOrUserVariable(variableName, "List Variable Name", engine);
 
-            List<decimal> numList = new List<decimal>();
-            foreach(var value in list)
-            {
-                if (decimal.TryParse(value, out decimal v))
-                {
-                    numList.Add(v);
-                }
-                else if (!ignoreNotNumeric)
-                {
-                    throw new Exception(listName + " has not numeric value.");
-                }
-            }
+        //    var list = listVariableName.ExpandUserVariableAsList(engine);
 
-            return numList;
-        }
+        //    var indexValue = command.ExpandValueOrUserVariable(indexName, "Index", engine);
+        //    int index;
+        //    if (String.IsNullOrEmpty(indexValue))
+        //    {
+        //        var raw = listVariableName.GetRawVariable(engine);
+        //        index = raw.CurrentPosition;
+        //    }
+        //    else if (!int.TryParse(indexValue, out index))
+        //    {
+        //        throw new Exception("Index is not Integer Number. Value: '" + indexValue + "'");
+        //    }
 
-        /// <summary>
-        /// math calc process to List
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="notNumericName"></param>
-        /// <param name="listName"></param>
-        /// <param name="engine"></param>
-        /// <param name="mathFunc"></param>
-        /// <returns></returns>
-        /// <exception cref=""></exception>
-        public static string MathProcess(ScriptCommand command, string notNumericName, string listName, Engine.AutomationEngineInstance engine, Func<List<decimal>, decimal> mathFunc)
-        {
-            var notNumeric = command.ExpandValueOrUserVariableAsSelectionItem(notNumericName, "Not Numeric", engine);
+        //    if (index < 0)
+        //    {
+        //        index += list.Count;
+        //    }
 
-            var list = ExpandUserVariableAsDecimalList(listName, (notNumeric == "ignore"), engine);
+        //    if (list.Count <= index)
+        //    {
+        //        throw new Exception("Index is out of List index. Index: " + index);
+        //    }
 
-            return mathFunc(list).ToString();
-        }
+        //    return (list, index);
+        //}
+
+        ///// <summary>
+        ///// expand user variable as List&lt;string&gt; to List&lt;decimal&gt;
+        ///// </summary>
+        ///// <param name="listName"></param>
+        ///// <param name="ignoreNotNumeric"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception">value is not Decimal List</exception>
+        //public static List<decimal> ExpandUserVariableAsDecimalList(this string listName, bool ignoreNotNumeric, Engine.AutomationEngineInstance engine)
+        //{
+        //    var list = listName.ExpandUserVariableAsList(engine);
+
+        //    List<decimal> numList = new List<decimal>();
+        //    foreach(var value in list)
+        //    {
+        //        if (decimal.TryParse(value, out decimal v))
+        //        {
+        //            numList.Add(v);
+        //        }
+        //        else if (!ignoreNotNumeric)
+        //        {
+        //            throw new Exception(listName + " has not numeric value.");
+        //        }
+        //    }
+
+        //    return numList;
+        //}
+
+        ///// <summary>
+        ///// math calc process to List
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="notNumericName"></param>
+        ///// <param name="listName"></param>
+        ///// <param name="engine"></param>
+        ///// <param name="mathFunc"></param>
+        ///// <returns></returns>
+        ///// <exception cref=""></exception>
+        //public static string MathProcess(ScriptCommand command, string notNumericName, string listName, Engine.AutomationEngineInstance engine, Func<List<decimal>, decimal> mathFunc)
+        //{
+        //    var notNumeric = command.ExpandValueOrUserVariableAsSelectionItem(notNumericName, "Not Numeric", engine);
+
+        //    var list = ExpandUserVariableAsDecimalList(listName, (notNumeric == "ignore"), engine);
+
+        //    return mathFunc(list).ToString();
+        //}
     }
 }

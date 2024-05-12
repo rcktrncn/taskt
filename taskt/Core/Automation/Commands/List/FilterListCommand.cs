@@ -17,31 +17,34 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class FilterListCommand : ScriptCommand, ILFilterValueProperties, IHaveDataTableElements
+    public class FilterListCommand : AListCreateFromListCommands, ILFilterValueProperties, IHaveDataTableElements
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
         [PropertyDescription("List Variable Name to Filter")]
         [PropertyValidationRule("List to Filter", PropertyValidationRule.ValidationRuleFlags.Empty)]
-        public string v_TargetList { get; set; }
+        public override string v_TargetList { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_FilterValueType))]
         [PropertySelectionChangeEvent(nameof(cmbTargetType_SelectionChangeCommited))]
+        [PropertyParameterOrder(6000)]
         public string v_ValueType { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_FilterAction))]
         [PropertySelectionChangeEvent(nameof(cmbFilterAction_SelectionChangeCommited))]
+        [PropertyParameterOrder(7000)]
         public string v_FilterAction { get; set; }
 
         [XmlElement]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ActionParameterTable))]
+        [PropertyParameterOrder(8000)]
         public DataTable v_FilterActionParameterTable { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
-        public string v_NewList { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
+        //public string v_NewList { get; set; }
 
         public FilterListCommand()
         {
@@ -53,22 +56,24 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
+            //List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
+            var targetList = this.ExpandUserVariableAsList(engine);
 
             var parameters = DataTableControls.GetFieldValues(v_FilterActionParameterTable, "ParameterName", "ParameterValue", engine);
             var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_ValueType), nameof(v_FilterAction), parameters, engine, this);
 
-            List<string> res = new List<string>();
+            var newList = new List<string>();
 
             foreach(string item in targetList)
             {
                 if (checkFunc(item, parameters))
                 {
-                    res.Add(item);
+                    newList.Add(item);
                 }
             }
 
-            res.StoreInUserVariable(engine, v_NewList);
+            //res.StoreInUserVariable(engine, v_NewList);
+            this.StoreListInUserVariable(newList, engine);
         }
 
         private void cmbTargetType_SelectionChangeCommited(object sender, EventArgs e)

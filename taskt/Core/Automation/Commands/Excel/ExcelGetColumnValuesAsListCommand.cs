@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelGetColumnValuesAsListCommand : AExcelColumnRangeGetCommands
+    public class ExcelGetColumnValuesAsListCommand : AExcelColumnRangeGetCommands, IListResultProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]
@@ -95,7 +95,8 @@ namespace taskt.Core.Automation.Commands
                 }), engine
             );
 
-            newList.StoreInUserVariable(engine, v_Result);
+            //newList.StoreInUserVariable(engine, v_Result);
+            this.StoreListInUserVariable(newList, engine);
         }
     }
 }

@@ -15,11 +15,11 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class AddListItemCommand : ScriptCommand
+    public class AddListItemCommand : AListBothListCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_BothListName))]
-        public string v_List { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_BothListName))]
+        //public string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_OneLineTextBox))]
@@ -27,6 +27,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**Hello**", PropertyDetailSampleUsage.ValueType.Value, "the Value to be added List")]
         [PropertyDetailSampleUsage("**{{{vValue}}}**", PropertyDetailSampleUsage.ValueType.VariableValue, "the Value to be added List")]
         [PropertyDisplayText(true, "Value")]
+        [PropertyParameterOrder(6000)]
         public string v_Input { get; set; }
 
         public AddListItemCommand()
@@ -39,7 +40,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> lst = v_List.ExpandUserVariableAsList(engine);
+            //List<string> lst = v_List.ExpandUserVariableAsList(engine);
+            var lst = this.ExpandUserVariableAsList(engine);
 
             var variableInput = v_Input.ExpandValueOrUserVariable(engine);
             lst.Add(variableInput);

@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_window))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetWindowNamesCommand : AAnyWindowNameCommands
+    public class GetWindowNamesCommand : AAnyWindowNameCommands, ICanHandleList
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WindowName))]
@@ -71,7 +71,8 @@ namespace taskt.Core.Automation.Commands
             WindowControls.WindowAction(this, engine,
                 new Action<List<(IntPtr, string)>>(wins =>
                 {
-                    wins.Select(w => w.Item2).ToList().StoreInUserVariable(engine, v_UserVariableName);
+                    //wins.Select(w => w.Item2).ToList().StoreInUserVariable(engine, v_UserVariableName);
+                    this.StoreListInUserVariable(wins.Select(w => w.Item2).ToList(), nameof(v_UserVariableName), engine);
                 }), 
                 new Action<Exception>(ex =>
                 {
@@ -79,7 +80,8 @@ namespace taskt.Core.Automation.Commands
                     switch (whenNotFound)
                     {
                         case "ignore":
-                            new List<string>().StoreInUserVariable(engine, v_UserVariableName);
+                            //new List<string>().StoreInUserVariable(engine, v_UserVariableName);
+                            this.StoreListInUserVariable(new List<string>(), nameof(v_UserVariableName), engine);
                             break;
                         case "error":
                             throw ex;

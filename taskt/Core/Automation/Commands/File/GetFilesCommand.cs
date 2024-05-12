@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_files))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetFilesCommand : ScriptCommand
+    public class GetFilesCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         //[PropertyDescription("Path to the Source Folder")]
@@ -94,7 +94,7 @@ namespace taskt.Core.Automation.Commands
             List<string> filesList;
             filesList = System.IO.Directory.GetFiles(sourceFolder).ToList();
 
-            if (!String.IsNullOrEmpty(searchFile))
+            if (!string.IsNullOrEmpty(searchFile))
             {
                 var searchMethod = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_SearchMethod), engine);
                 switch (searchMethod)
@@ -114,13 +114,14 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            if (!String.IsNullOrEmpty(ext))
+            if (!string.IsNullOrEmpty(ext))
             {
                 ext = "." + ext;
                 filesList = filesList.Where(t => System.IO.Path.GetExtension(t).ToLower() == ext).ToList();
             }
 
-            filesList.StoreInUserVariable(engine, v_UserVariableName);
+            //filesList.StoreInUserVariable(engine, v_UserVariableName);
+            this.StoreListInUserVariable(filesList, nameof(v_UserVariableName), engine);
         }
     }
 }

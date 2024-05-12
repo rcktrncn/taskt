@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertJSONToListCommand : ScriptCommand
+    public class ConvertJSONToListCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
@@ -43,7 +43,8 @@ namespace taskt.Core.Automation.Commands
                 {
                     resultList.Add(result.Value.ToString());
                 }
-                resultList.StoreInUserVariable(engine, v_applyToVariableName);
+                //resultList.StoreInUserVariable(engine, v_applyToVariableName);
+                this.StoreListInUserVariable(resultList, nameof(v_applyToVariableName), engine);
             });
             Action<JArray> aryFunc = new Action<JArray>((ary) =>
             {
@@ -52,7 +53,8 @@ namespace taskt.Core.Automation.Commands
                 {
                     resultList.Add(result.ToString());
                 }
-                resultList.StoreInUserVariable(engine, v_applyToVariableName);
+                //resultList.StoreInUserVariable(engine, v_applyToVariableName);
+                this.StoreListInUserVariable(resultList, nameof(v_applyToVariableName), engine);
             });
             this.JSONProcess(nameof(v_InputValue), objFunc, aryFunc, engine);
         }

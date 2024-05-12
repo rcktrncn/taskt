@@ -15,15 +15,15 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetListIndexFromValueCommand : ScriptCommand
+    public class GetListIndexFromValueCommand : AListGetFromValueCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_List { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        //public string v_List { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_SearchValue))]
-        public string v_Value { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_SearchValue))]
+        //public string v_Value { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
@@ -35,12 +35,13 @@ namespace taskt.Core.Automation.Commands
         [PropertyUISelectionOption("Last Index")]
         [PropertyIsOptional(true, "First Index")]
         [PropertyDisplayText(true, "Search Method")]
+        [PropertyParameterOrder(8000)]
         public string v_SearchMethod { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
+        //[PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
         [Remarks("When List does not have value, Result is **-1**")]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public GetListIndexFromValueCommand()
         {
@@ -52,7 +53,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_List.ExpandUserVariableAsList(engine);
+            //List<string> targetList = v_List.ExpandUserVariableAsList(engine);
+            var targetList = this.ExpandUserVariableAsList(engine);
 
             var searchedValue = v_Value.ExpandValueOrUserVariable(engine);
 

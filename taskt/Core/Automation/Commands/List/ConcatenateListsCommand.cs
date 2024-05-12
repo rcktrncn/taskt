@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConcatenateListsCommand : ScriptCommand
+    public class ConcatenateListsCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
@@ -50,13 +50,18 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> listA = v_ListA.ExpandUserVariableAsList(engine);
-            List<string> listB = v_ListB.ExpandUserVariableAsList(engine);
+            //var listA = v_ListA.ExpandUserVariableAsList(engine);
+            //var listB = v_ListB.ExpandUserVariableAsList(engine);
 
-            List<string> newList = new List<string>();
+            var listA = this.ExpandUserVariableAsList(nameof(v_ListA), engine);
+            var listB = this.ExpandUserVariableAsList(nameof(v_ListB), engine);
+
+            var newList = new List<string>();
             newList.AddRange(listA);
             newList.AddRange(listB);
-            newList.StoreInUserVariable(engine, v_NewList);
+
+            //newList.StoreInUserVariable(engine, v_NewList);
+            this.StoreListInUserVariable(newList, nameof(v_NewList), engine);
         }
     }
 }

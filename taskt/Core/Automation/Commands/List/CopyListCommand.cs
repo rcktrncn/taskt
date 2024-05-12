@@ -15,16 +15,16 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class CopyListCommand : ScriptCommand
+    public class CopyListCommand : AListCreateFromListCommands
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
         [PropertyDescription("List Variable Name to be Copied")]
-        public string v_TargetList { get; set; }
+        public override string v_TargetList { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
-        public string v_NewList { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
+        //public string v_NewList { get; set; }
 
         public CopyListCommand()
         {
@@ -36,9 +36,14 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
-            List<string> newList = new List<string>(targetList);
-            newList.StoreInUserVariable(engine, v_NewList);
+            //List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
+            var targetList = this.ExpandUserVariableAsList(engine);
+
+            //List<string> newList = new List<string>(targetList);
+            var newList = new List<string>(targetList);
+
+            //newList.StoreInUserVariable(engine, v_NewList);
+            this.StoreListInUserVariable(newList, engine);
         }
     }
 }
