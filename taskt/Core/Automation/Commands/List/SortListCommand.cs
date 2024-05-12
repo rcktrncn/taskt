@@ -15,14 +15,14 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SortListCommand : ScriptCommand
+    public class SortListCommand : AListCreateFromListCommands
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
         [PropertyDescription("List Variable Name to Sort")]
         [PropertyValidationRule("List to Sort", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "List to Sort")]
-        public string v_TargetList { get; set; }
+        public override string v_TargetList { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Sort Order")]
@@ -34,6 +34,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyUISelectionOption("Ascending")]
         [PropertyUISelectionOption("Descending")]
         [PropertyDisplayText(true, "Order")]
+        [PropertyParameterOrder(6000)]
         public string v_SortOrder { get; set; }
 
         [XmlAttribute]
@@ -46,11 +47,12 @@ namespace taskt.Core.Automation.Commands
         [PropertyUISelectionOption("Text")]
         [PropertyUISelectionOption("Number")]
         [PropertyDisplayText(true, "Type")]
+        [PropertyParameterOrder(7000)]
         public string v_TargetType { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
-        public string v_NewList { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_NewOutputListName))]
+        //public string v_NewList { get; set; }
 
         public SortListCommand()
         {
@@ -69,20 +71,23 @@ namespace taskt.Core.Automation.Commands
             switch (targetType)
             {
                 case "text":
-                    List<string> targetList = v_TargetList.ExpandUserVariableAsList(engine);
-                    List<string> newList = new List<string>(targetList);
+                    //var targetList = v_TargetList.ExpandUserVariableAsList(engine);
+                    var targetList = this.ExpandUserVariableAsList(engine);
+                    var newList = new List<string>(targetList);
 
                     newList.Sort();
                     if (sortOrder == "descending")
                     {
                         newList.Reverse();
                     }
-                    newList.StoreInUserVariable(engine, v_NewList);
+                    //newList.StoreInUserVariable(engine, v_NewList);
+                    this.StoreListInUserVariable(newList, engine);
                     break;
 
                 case "number":
-                    List<decimal> targetValueList = v_TargetList.ExpandUserVariableAsDecimalList(false, engine);
-                    List<decimal> valueList = new List<decimal>(targetValueList);
+                    //var targetValueList = v_TargetList.ExpandUserVariableAsDecimalList(false, engine);
+                    var targetValueList = this.ExpandUserVariableAsDecimalList(nameof(v_TargetList), false, engine);
+                    var valueList = new List<decimal>(targetValueList);
 
                     valueList.Sort();
                     if (sortOrder == "descending")
@@ -90,12 +95,13 @@ namespace taskt.Core.Automation.Commands
                         valueList.Reverse();
                     }
 
-                    List<string> newList2 = new List<string>();
+                    var newValueList = new List<string>();
                     foreach(var v in valueList)
                     {
-                        newList2.Add(v.ToString());
+                        newValueList.Add(v.ToString());
                     }
-                    newList2.StoreInUserVariable(engine, v_NewList);
+                    //newList2.StoreInUserVariable(engine, v_NewList);
+                    this.StoreListInUserVariable(newValueList, engine);
 
                     break;
             }
