@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Xml.Serialization;
-using System.Data;
-using System.Windows.Forms;
 using System.Collections.Generic;
-using taskt.Core.Automation.Attributes.PropertyAttributes;
+using System.Data;
 using System.Linq;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -18,11 +18,11 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class CreateListCommand : ScriptCommand, IHaveDataTableElements
+    public class CreateListCommand : AListInputListCommands, IHaveDataTableElements
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_OutputListName))]
-        public string v_List { get; set; }
+        public override string v_List { get; set; }
 
         [XmlElement]
         [PropertyDescription("List Values")]
@@ -49,11 +49,12 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> newList = new List<string>();
+            var newList = new List<string>();
 
             newList.AddRange(v_ListValues.AsEnumerable().Select(r => r["Values"]?.ToString() ?? "").ToArray());
 
-            newList.StoreInUserVariable(engine, v_List);
+            //newList.StoreInUserVariable(engine, v_List);
+            this.StoreListInUserVariable(newList, nameof(v_List), engine);
         }
 
         public override void BeforeValidate()

@@ -14,16 +14,16 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SetListIndexCommand : ScriptCommand
+    public class SetListIndexCommand : AListIndexCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_BothListName))]
-        public string v_List { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_BothListName))]
+        //public string v_List { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ListIndex))]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ListIndex))]
         [PropertyIsOptional(false)]
-        public string v_Index { get; set; }
+        public override string v_Index { get; set; }
 
         public SetListIndexCommand()
         {
@@ -35,8 +35,11 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var _, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_List), nameof(v_Index), engine);
+            //(var _, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_List), nameof(v_Index), engine);
 
+            (_, var index, _) = this.ExpandValueOrUserVariableAsListAndIndexAndValue(engine);
+
+            // TODO: i want to be better
             var rawVariable = v_List.GetRawVariable(engine);
             rawVariable.CurrentPosition = index;
         }

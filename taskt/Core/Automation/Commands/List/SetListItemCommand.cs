@@ -14,15 +14,15 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SetListItemCommand : ScriptCommand
+    public class SetListItemCommand : AListIndexCommands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_BothListName))]
-        public string v_List { get; set; }
+        public override string v_List { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ListIndex))]
-        public string v_Index { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ListIndex))]
+        //public string v_Index { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_OneLineTextBox))]
@@ -31,6 +31,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**{{{vValue}}}**", PropertyDetailSampleUsage.ValueType.VariableValue, "Value to Set")]
         [PropertyValidationRule("Value", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "Value")]
+        [PropertyParameterOrder(7000)]
         public string v_NewValue { get; set; }
 
         public SetListItemCommand()
@@ -74,16 +75,20 @@ namespace taskt.Core.Automation.Commands
             //    index = targetList.Count + index;
             //}
 
-            (var list, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_List), nameof(v_Index), engine);
+            //(var list, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_List), nameof(v_Index), engine);
 
-            if ((index >= 0) && (index < list.Count))
-            {
-                list[index] = v_NewValue.ExpandValueOrUserVariable(engine);
-            }
-            else
-            {
-                throw new Exception("Strange index " + v_Index + ", parsed " + index);
-            }
+            //if ((index >= 0) && (index < list.Count))
+            //{
+            //    list[index] = v_NewValue.ExpandValueOrUserVariable(engine);
+            //}
+            //else
+            //{
+            //    throw new Exception("Strange index " + v_Index + ", parsed " + index);
+            //}
+
+            (var list, var index, _) = this.ExpandValueOrUserVariableAsListAndIndexAndValue(engine);
+
+            list[index] = v_NewValue.ExpandValueOrUserVariable(engine);
         }
     }
 }
