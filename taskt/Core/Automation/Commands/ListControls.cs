@@ -200,6 +200,11 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
+        public static void StoreInUserVariable<Type>(this List<Type> value, Core.Automation.Engine.AutomationEngineInstance engine, string targetVariable)
+        {
+            ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
+        }
+
         ///// <summary>
         ///// expand (value or) user variables as List Variabe and Index
         ///// </summary>
@@ -239,11 +244,6 @@ namespace taskt.Core.Automation.Commands
 
         //    return (list, index);
         //}
-
-        public static void StoreInUserVariable<Type>(this List<Type> value, Core.Automation.Engine.AutomationEngineInstance engine, string targetVariable)
-        {
-            ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
-        }
 
         ///// <summary>
         ///// expand user variable as List&lt;string&gt; to List&lt;decimal&gt;
