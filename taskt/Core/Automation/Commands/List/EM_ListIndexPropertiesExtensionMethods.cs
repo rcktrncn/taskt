@@ -31,16 +31,16 @@ namespace taskt.Core.Automation.Commands
         }
 
         /// <summary>
-        /// Expand Value Or User Variable As List and List Index
+        /// Expand Value Or User Variable As List and List Index and List Value
         /// </summary>
         /// <param name="command"></param>
         /// <param name="engine"></param>
-        /// <returns></returns>
-        public static (List<string>, int) ExpandValueOrUserVariableAsListAndIndex(this IListIndexProperties command, Engine.AutomationEngineInstance engine)
+        /// <returns>(list, index, value)</returns>
+        public static (List<string>, int, string) ExpandValueOrUserVariableAsListAndIndexAndValue(this IListIndexProperties command, Engine.AutomationEngineInstance engine)
         {
             var list = command.ExpandUserVariableAsList(engine);
             var index = command.ExpandValueOrUserVariableAsListIndex(list, engine);
-            return (list, index);
+            return (list, index, list[index]);
         }
     }
 }
