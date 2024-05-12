@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Xml.Serialization;
 using System.Data;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
@@ -17,30 +16,34 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ReplaceListCommand : ScriptCommand, ILReplaceValueProperties, IHaveDataTableElements
+    public class ReplaceListCommand : AListBothListCommands, ILReplaceValueProperties, IHaveDataTableElements
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_BothListName))]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_BothListName))]
         [PropertyDescription("List Variable Name to Replace")]
         [PropertyValidationRule("List to Replace", PropertyValidationRule.ValidationRuleFlags.Empty)]
-        public string v_List { get; set; }
+        public override string v_List { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ReplaceValueType))]
         [PropertySelectionChangeEvent(nameof(cmbTargetType_SelectionChangeCommited))]
+        [PropertyParameterOrder(6000)]
         public string v_ValueType { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ReplaceValueType))]
         [PropertySelectionChangeEvent(nameof(cmbReplaceAction_SelectionChangeCommited))]
+        [PropertyParameterOrder(6001)]
         public string v_ReplaceAction { get; set; }
 
         [XmlElement]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ActionParameterTable))]
+        [PropertyParameterOrder(6002)]
         public DataTable v_ReplaceActionParameterTable { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ConditionControls), nameof(ConditionControls.v_ReplaceValue))]
+        [PropertyParameterOrder(6003)]
         public string v_NewValue { get; set; }
 
         public ReplaceListCommand()
@@ -53,7 +56,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            List<string> targetList = v_List.ExpandUserVariableAsList(engine);
+            //var targetList = v_List.ExpandUserVariableAsList(engine);
+            var targetList = this.ExpandUserVariableAsList(engine);
 
             var parameters = DataTableControls.GetFieldValues(v_ReplaceActionParameterTable, "ParameterName", "ParameterValue", engine);
             var checkFunc = ConditionControls.GetFilterDeterminStatementTruthFunc(nameof(v_ValueType), nameof(v_ReplaceAction), parameters, engine, this);
