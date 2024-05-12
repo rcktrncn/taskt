@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SeleniumBrowserGetOptionsFromWebElementCommand : ScriptCommand
+    public class SeleniumBrowserGetOptionsFromWebElementCommand : ScriptCommand, IListResultProperties
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(SeleniumBrowserControls), nameof(SeleniumBrowserControls.v_InputWebElementName))]
@@ -107,7 +107,8 @@ namespace taskt.Core.Automation.Commands
                     lst.Add(a);
                 }
             }
-            lst.StoreInUserVariable(engine, v_Result);
+            //lst.StoreInUserVariable(engine, v_Result);
+            this.StoreListInUserVariable(lst, engine);
         }
 
         private void cmbScrollToElement_SelectionChange(object sender, EventArgs e)

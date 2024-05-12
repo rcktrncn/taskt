@@ -14,18 +14,19 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetListItemCommand : ScriptCommand
+    public class GetListItemCommand : AListIndexCommands, ILResultProperties
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
-        public string v_List { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
+        //public string v_List { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ListIndex))]
-        public string v_Index { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ListIndex))]
+        //public string v_Index { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
+        [PropertyParameterOrder(7000)]
         public string v_Result { get; set; }
 
         public GetListItemCommand()
@@ -122,21 +123,24 @@ namespace taskt.Core.Automation.Commands
             //    index = this.ConvertToUserVariableAsInteger(nameof(v_ItemIndex), engine);
             //}
 
-            (var list, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_List), nameof(v_Index), engine);
+            //(var list, var index) = this.ExpandUserVariablesAsListAndIndex(nameof(v_List), nameof(v_Index), engine);
 
-            if (index < 0)
-            {
-                index += list.Count;
-            }
+            //if (index < 0)
+            //{
+            //    index += list.Count;
+            //}
 
-            if ((index >= 0) && (index < list.Count))
-            {
-                list[index].StoreInUserVariable(engine, v_Result);
-            }
-            else
-            {
-                throw new Exception("Strange index " + v_Index + ", parsed " + index);
-            }
+            //if ((index >= 0) && (index < list.Count))
+            //{
+            //    list[index].StoreInUserVariable(engine, v_Result);
+            //}
+            //else
+            //{
+            //    throw new Exception("Strange index " + v_Index + ", parsed " + index);
+            //}
+
+            (_, _, var value) = this.ExpandValueOrUserVariableAsListAndIndexAndValue(engine);
+            value.StoreInUserVariable(engine, v_Result);
         }
     }
 }

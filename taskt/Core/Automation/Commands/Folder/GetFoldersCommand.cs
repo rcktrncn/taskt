@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_files))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetFoldersCommand : ScriptCommand
+    public class GetFoldersCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(FolderPathControls), nameof(FolderPathControls.v_FolderPath))]
@@ -87,7 +87,8 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            directoriesList.StoreInUserVariable(engine, v_UserVariableName);
+            //directoriesList.StoreInUserVariable(engine, v_UserVariableName);
+            this.StoreListInUserVariable(directoriesList, nameof(v_UserVariableName), engine);
         }
     }
 }

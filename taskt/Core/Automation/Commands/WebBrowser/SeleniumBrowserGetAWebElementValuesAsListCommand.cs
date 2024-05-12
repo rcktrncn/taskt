@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SeleniumBrowserGetAWebElementValuesAsListCommand : ScriptCommand, IHaveDataTableElements
+    public class SeleniumBrowserGetAWebElementValuesAsListCommand : ScriptCommand, IHaveDataTableElements, ICanHandleList
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(SeleniumBrowserControls), nameof(SeleniumBrowserControls.v_InputInstanceName))]
@@ -69,7 +69,8 @@ namespace taskt.Core.Automation.Commands
                 })
             );
 
-            newList.StoreInUserVariable(engine, v_ListVariableName);
+            //newList.StoreInUserVariable(engine, v_ListVariableName);
+            this.StoreListInUserVariable(newList, nameof(v_ListVariableName), engine);
         }
 
 

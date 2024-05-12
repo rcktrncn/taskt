@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SplitTextCommand : ScriptCommand
+    public class SplitTextCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(TextControls), nameof(TextControls.v_Text_MultiLine))]
@@ -69,7 +69,8 @@ namespace taskt.Core.Automation.Commands
                     break;
             }
 
-            splitString.StoreInUserVariable(engine, v_applyConvertToUserVariableName);
+            //splitString.StoreInUserVariable(engine, v_applyConvertToUserVariableName);
+            this.StoreListInUserVariable(splitString, nameof(v_applyConvertToUserVariableName), engine);
         }
     }
 }

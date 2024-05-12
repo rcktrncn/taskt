@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertListToDataTableCommand : AListGetFromListCommands, IDataTableResultProperties
+    public class ConvertListToDataTableCommand : AListGetFromListCommands, IDataTableResultProperties, ICanHandleList
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]
@@ -165,7 +165,8 @@ namespace taskt.Core.Automation.Commands
             switch (columnsType)
             {
                 case "list":
-                    columnsList = v_Columns.ExpandUserVariableAsList(engine);
+                    //columnsList = v_Columns.ExpandUserVariableAsList(engine);
+                    columnsList = this.ExpandUserVariableAsList(nameof(v_Columns), engine);
                     dtUseColumns(columnsList);
                     break;
                 case "comma separated":

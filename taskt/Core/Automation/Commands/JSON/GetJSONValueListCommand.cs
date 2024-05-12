@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetJSONValueListCommand : ScriptCommand
+    public class GetJSONValueListCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyDescription("Supply the JSON text or variable requiring extraction")]
@@ -157,7 +157,8 @@ namespace taskt.Core.Automation.Commands
             ////assign value to variable
             //requiredComplexVariable.VariableValue = resultList;
 
-            resultList.StoreInUserVariable(engine, v_applyToVariableName);
+            //resultList.StoreInUserVariable(engine, v_applyToVariableName);
+            this.StoreListInUserVariable(resultList, nameof(v_applyToVariableName), engine);
         }
 
         public void lnkJsonPathHelper_Click(object sender, EventArgs e)

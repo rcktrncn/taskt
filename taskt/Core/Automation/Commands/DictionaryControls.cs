@@ -175,6 +175,11 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
+        public static void StoreInUserVariable(this Dictionary<string, string> value, Engine.AutomationEngineInstance engine, string targetVariable)
+        {
+            ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
+        }
+
         ///// <summary>
         ///// expand user variables as Dictionary&lt;string, string&gt; and key name from property names. It supports current position to key.
         ///// </summary>
@@ -238,11 +243,6 @@ namespace taskt.Core.Automation.Commands
         //    }
         //    return (dictionary, key);
         //}
-
-        public static void StoreInUserVariable(this Dictionary<string, string> value, Engine.AutomationEngineInstance engine, string targetVariable)
-        {
-            ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
-        }
 
         ///// <summary>
         ///// add new item to Dictionary from DataTable. check key name is empty

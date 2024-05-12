@@ -152,7 +152,8 @@ namespace taskt.Core.Automation.Commands
             switch (keyType)
             {
                 case "list":
-                    keysList = v_Keys.ExpandUserVariableAsList(engine);
+                    //keysList = v_Keys.ExpandUserVariableAsList(engine);
+                    keysList = this.ExpandUserVariableAsList(nameof(v_Keys), engine);
                     dicUseKeys(keysList);
                     break;
                 case "comma separated":
