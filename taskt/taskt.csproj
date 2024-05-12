@@ -432,6 +432,7 @@
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetActionProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetCopyRenameProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetProperties.cs" />
+    <Compile Include="Core\Automation\Commands\List\AListBothListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListCreateFromListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListGetFromListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListGetMathResultFromListCommands.cs" />
