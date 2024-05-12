@@ -10,6 +10,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_ListIndex))]
-        public string v_Index { get; set; }
+        [PropertyParameterOrder(6000)]
+        public virtual string v_Index { get; set; }
     }
 }
