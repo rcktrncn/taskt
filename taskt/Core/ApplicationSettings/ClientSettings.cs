@@ -161,6 +161,8 @@ namespace taskt.Core
 
         public bool ChangeItemsWithWheelWhenNotForcused { get; set; }
 
+        public bool DisplayNumberBeforeParameterDescription { get; set; }
+
         private static readonly string InterDefaultBrowserInstanceNameKeyword = "%kwd_default_browser_instance%";
         private static readonly string InterDefaultStopWatchInstanceNameKeyword = "%kwd_default_stopwatch_instance%";
         private static readonly string InterDefaultExcelInstanceNameKeyword = "%kwd_default_excel_instance%";
@@ -221,6 +223,7 @@ namespace taskt.Core
             SupportIECommand = false;
 
             ChangeItemsWithWheelWhenNotForcused = false;
+            DisplayNumberBeforeParameterDescription = true;
         }
 
         public string replaceClientKeyword(string targetString)

@@ -52,6 +52,8 @@ namespace taskt.UI.CustomControls
             var props = command.GetParameterProperties(renderComment);
             var controlList = new List<Control>();
 
+            var isDisplayParameterNumber = editor?.appSettings.ClientSettings.DisplayNumberBeforeParameterDescription ?? false;
+
             int count = 0;
             foreach (var prop in props)
             {
@@ -60,6 +62,11 @@ namespace taskt.UI.CustomControls
                 flowPanel.Controls.AddRange(ctrls.ToArray());
 
                 SetClickEventsToLabels(ctrls);
+
+                if (isDisplayParameterNumber)
+                {
+                    SetParameterNumberToLabels(ctrls, count);
+                }
 
                 controlList.Add(flowPanel);
                 count++;
@@ -79,6 +86,8 @@ namespace taskt.UI.CustomControls
         {
             var controlList = new List<Control>();
 
+            var isDisplayParameterNumber = editor?.appSettings.ClientSettings.DisplayNumberBeforeParameterDescription ?? false;
+
             int count = 0;
             foreach (var propertyName in propartiesName)
             {
@@ -87,6 +96,11 @@ namespace taskt.UI.CustomControls
                 flowPanel.Controls.AddRange(ctrls);
 
                 SetClickEventsToLabels(ctrls);
+
+                if (isDisplayParameterNumber)
+                {
+                    SetParameterNumberToLabels(ctrls, count);
+                }
 
                 controlList.Add(flowPanel);
 
@@ -1827,6 +1841,28 @@ namespace taskt.UI.CustomControls
                 {
                     lbl.Click += label_Click;
                     lbl.DoubleClick += label_DblClick;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Set Paramter Number
+        /// </summary>
+        /// <param name="ctrls"></param>
+        /// <param name="num">display number is num+1</param>
+        private static void SetParameterNumberToLabels(List<Control> ctrls, int num)
+        {
+            SetParameterNumberToLabels(ctrls.ToArray(), num);
+        }
+
+        private static void SetParameterNumberToLabels(Control[] ctrls, int num)
+        {
+            foreach (var c in ctrls)
+            {
+                if ((c is Label lbl) && (lbl.Name.StartsWith(LABEL_PREFIX)))
+                {
+                    lbl.Text = $"{num + 1}: {lbl.Text}";
+                    break;
                 }
             }
         }
