@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using OpenQA.Selenium;
@@ -624,6 +625,59 @@ namespace taskt.Core.Automation.Commands
                         throw new Exception("Attribute '" + attributeName + "' does not exists.");
                     }
             }
+        }
+
+        #endregion
+
+        #region WebElement methods
+
+        public static string CreateXPath(IWebElement elem)
+        {
+            string path = "";
+
+            var curElem = elem;
+
+            var pElem = curElem.FindElement(By.XPath("parent::*"));
+            while (true)
+            {
+                var cElems = pElem.FindElements(By.XPath($"{curElem.TagName.ToLower()}"));
+                if (cElems.Count > 1)
+                {
+                    int index = 1;
+                    foreach (var e in cElems)
+                    {
+                        if (e == curElem)
+                        {
+                            break;
+                        }
+                        index++;
+                    }
+                    path = $"/{curElem.TagName.ToLower()}[{index}]{path}";
+                }
+                else
+                {
+                    path = $"/{curElem.TagName.ToLower()}{path}";
+                }
+
+                // DGB
+                //Debug.WriteLine($"totyu: {path}");
+
+                if (curElem.TagName.ToLower() == "body")
+                {
+                    path = $"/html{path}";
+                    break;
+                }
+                else
+                {
+                    curElem = pElem;
+                    pElem = curElem.FindElement(By.XPath("parent::*"));
+                }
+            }
+
+            // DBG
+            //Debug.WriteLine($"XPath: {path}");
+
+            return path;
         }
 
         #endregion
