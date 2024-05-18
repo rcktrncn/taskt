@@ -633,9 +633,15 @@ namespace taskt.Core.Automation.Commands
 
         public static string CreateXPath(IWebElement elem)
         {
+            // MEMO: it's probably works fine. :-)
+
             string path = "";
 
             var curElem = elem;
+            var curElemId = curElem.ToString();
+
+            // DBG
+            //Debug.WriteLine($"curElem: {curElem.ToString()}, {curElem.GetHashCode()}");
 
             var pElem = curElem.FindElement(By.XPath("parent::*"));
             while (true)
@@ -646,7 +652,7 @@ namespace taskt.Core.Automation.Commands
                     int index = 1;
                     foreach (var e in cElems)
                     {
-                        if (e == curElem)
+                        if (e.ToString() == curElemId)
                         {
                             break;
                         }
@@ -670,6 +676,7 @@ namespace taskt.Core.Automation.Commands
                 else
                 {
                     curElem = pElem;
+                    curElemId = curElem.ToString();
                     pElem = curElem.FindElement(By.XPath("parent::*"));
                 }
             }
