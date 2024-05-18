@@ -47,6 +47,13 @@ namespace taskt.Core.Automation.Commands
         public string v_EncryptionOption { get; set; }
 
         [XmlAttribute]
+        [PropertyVirtualProperty(nameof(SelectionItemsControls), nameof(SelectionItemsControls.v_YesNoComboBox))]
+        [PropertyDescription("Use Paste from Clipboard")]
+        [PropertyIsOptional(true, "No")]
+        [Remarks("When entering keys in combination with the Ctrl key, etc., It will NOT work correctly.")]
+        public string v_UseClipBoard { get; set; }
+
+        [XmlAttribute]
         [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_CompareMethod))]
         public string v_CompareMethod { get; set; }
 
@@ -218,6 +225,11 @@ namespace taskt.Core.Automation.Commands
                     }
                     else
                     {
+                        if (this.ExpandValueOrUserVariableAsYesNo(nameof(v_UseClipBoard), engine))
+                        {
+                            ClipboardControls.SetClipboardText(textToSend);
+                            textToSend = "^v";  // Ctrl+V
+                        }
                         SendKeys.SendWait(textToSend);
                     }
 
