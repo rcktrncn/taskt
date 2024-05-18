@@ -37,7 +37,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_OutputJSONName))]
-        public string v_userVariableName { get; set; }
+        public string v_Result { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(FilePathControls), nameof(FilePathControls.v_WaitTime))]
@@ -67,7 +67,7 @@ namespace taskt.Core.Automation.Commands
             ScriptCommand readFile = new ReadTextFileCommand
             {
                 v_FilePath = filePath,
-                v_userVariableName = this.v_userVariableName
+                v_userVariableName = this.v_Result
             };
             readFile.RunCommand(engine);
         }

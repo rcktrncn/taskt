@@ -24,7 +24,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_OutputListName))]
-        public string v_applyToVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public ConvertJSONToListCommand()
         {
@@ -44,7 +44,7 @@ namespace taskt.Core.Automation.Commands
                     resultList.Add(result.Value.ToString());
                 }
                 //resultList.StoreInUserVariable(engine, v_applyToVariableName);
-                this.StoreListInUserVariable(resultList, nameof(v_applyToVariableName), engine);
+                this.StoreListInUserVariable(resultList, nameof(v_Result), engine);
             });
             Action<JArray> aryFunc = new Action<JArray>((ary) =>
             {
@@ -54,7 +54,7 @@ namespace taskt.Core.Automation.Commands
                     resultList.Add(result.ToString());
                 }
                 //resultList.StoreInUserVariable(engine, v_applyToVariableName);
-                this.StoreListInUserVariable(resultList, nameof(v_applyToVariableName), engine);
+                this.StoreListInUserVariable(resultList, nameof(v_Result), engine);
             });
             this.JSONProcess(nameof(v_InputValue), objFunc, aryFunc, engine);
         }

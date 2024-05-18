@@ -24,7 +24,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_OutputDataTableName))]
-        public string v_applyToVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public ConvertJSONToDataTableCommand()
         {
@@ -49,13 +49,13 @@ namespace taskt.Core.Automation.Commands
                     i++;
                 }
                 //resultDT.StoreInUserVariable(engine, v_applyToVariableName);
-                this.StoreDataTableInUserVariable(resultDT, nameof(v_applyToVariableName), engine);
+                this.StoreDataTableInUserVariable(resultDT, nameof(v_Result), engine);
             });
             Action<JArray> aryFunc = new Action<JArray>((ary) =>
             {
                 var resultDT = new DataTable();
                 //parseJSONArrayAsDataTable(ary, resultDT).StoreInUserVariable(engine, v_applyToVariableName);
-                this.StoreDataTableInUserVariable(parseJSONArrayAsDataTable(ary, resultDT), nameof(v_applyToVariableName), engine);
+                this.StoreDataTableInUserVariable(parseJSONArrayAsDataTable(ary, resultDT), nameof(v_Result), engine);
             });
             this.JSONProcess(nameof(v_InputValue), objFunc, aryFunc, engine);
         }

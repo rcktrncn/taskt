@@ -24,7 +24,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_OutputDictionaryName))]
-        public string v_applyToVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public ConvertJSONToDictionaryCommand()
         {
@@ -44,7 +44,7 @@ namespace taskt.Core.Automation.Commands
                     resultDic.Add(result.Key, result.Value.ToString());
                 }
                 //resultDic.StoreInUserVariable(engine, v_applyToVariableName);
-                this.StoreDictionaryInUserVariable(resultDic, nameof(v_applyToVariableName), engine);
+                this.StoreDictionaryInUserVariable(resultDic, nameof(v_Result), engine);
             });
             Action<JArray> aryFunc = new Action<JArray>((ary) =>
             {
@@ -54,7 +54,7 @@ namespace taskt.Core.Automation.Commands
                     resultDic.Add("key" + i.ToString(), ary[i].ToString());
                 }
                 //resultDic.StoreInUserVariable(engine, v_applyToVariableName);
-                this.StoreDictionaryInUserVariable(resultDic, nameof(v_applyToVariableName), engine);
+                this.StoreDictionaryInUserVariable(resultDic, nameof(v_Result), engine);
             });
             this.JSONProcess(nameof(v_InputValue), objFunc, aryFunc, engine);
         }

@@ -133,7 +133,7 @@ namespace taskt.Core.Automation.Commands
                 {
                     v_InputValue = this.v_InputValue,
                     v_JsonExtractor = row.Key,
-                    v_applyToVariableName = row.Value
+                    v_Result = row.Value
                 }.RunCommand(engine);
             }
         }

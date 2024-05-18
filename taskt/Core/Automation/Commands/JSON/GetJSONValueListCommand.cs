@@ -55,7 +55,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyInstanceType(PropertyInstanceType.InstanceType.List)]
         [PropertyValidationRule("Result", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "Result")]
-        public string v_applyToVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public GetJSONValueListCommand()
         {
@@ -158,7 +158,7 @@ namespace taskt.Core.Automation.Commands
             //requiredComplexVariable.VariableValue = resultList;
 
             //resultList.StoreInUserVariable(engine, v_applyToVariableName);
-            this.StoreListInUserVariable(resultList, nameof(v_applyToVariableName), engine);
+            this.StoreListInUserVariable(resultList, nameof(v_Result), engine);
         }
 
         public void lnkJsonPathHelper_Click(object sender, EventArgs e)

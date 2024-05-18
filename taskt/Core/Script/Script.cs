@@ -421,6 +421,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_91(doc);
             convertTo3_5_1_92(doc);
             convertTo3_5_1_93(doc);
+            convertTo3_5_1_96(doc);
 
             return doc;
         }
@@ -3243,6 +3244,32 @@ namespace taskt.Core.Script
                 }),
                 "v_SearchItem", "v_Value"
             );
+        }
+
+        private static void convertTo3_5_1_96(XDocument doc)
+        {
+            // JSON v_applyToVariableName -> v_Result
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "ConvertJSONToDataTableCommand":
+                        case "ConvertJSONToDictionaryCommand":
+                        case "ConvertJSONToListCommand":
+                        case "GetJSONValueListCommand":
+                        case "GetMultiJSONValueListCommand":
+                        case "ParseJSONArrayCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_applyToVariableName", "v_Result"
+            );
+
+            // ReadJSONFileCommand v_userVariableName -> v_Result
+            ChangeAttributeName(doc, "ReadJSONFileCommand", "v_userVariableName", "v_Result");
         }
 
         /// <summary>
