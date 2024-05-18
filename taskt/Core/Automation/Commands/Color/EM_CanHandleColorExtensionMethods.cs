@@ -13,8 +13,9 @@ namespace taskt.Core.Automation.Commands
         /// <param name="variable"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static Color ExpandUserVariableAsColor(this ICanHandleColor command, ScriptVariable variable)
+        public static Color ExpandUserVariableAsColor(ScriptVariable variable)
         {
+            // TODO: it's ok? not extension methods
             if (variable.VariableValue is Color color)
             {
                 return color;
@@ -47,7 +48,7 @@ namespace taskt.Core.Automation.Commands
             //}
             try
             {
-                return command.ExpandUserVariableAsColor(variableName.GetRawVariable(engine));
+                return ExpandUserVariableAsColor(variableName.GetRawVariable(engine));
             }
             catch
             {

@@ -13,8 +13,9 @@ namespace taskt.Core.Automation.Commands
         /// <param name="variable"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static Dictionary<string, string> ExpandUserVariableAsDictionary(this ICanHandleDictionary command, ScriptVariable variable)
+        public static Dictionary<string, string> ExpandUserVariableAsDictionary(ScriptVariable variable)
         {
+            // TODO: it's ok?
             if (variable.VariableValue is Dictionary<string, string> dictionary)
             {
                 return dictionary;
@@ -46,7 +47,7 @@ namespace taskt.Core.Automation.Commands
             //}
             try
             {
-                return command.ExpandUserVariableAsDictionary(variableName.GetRawVariable(engine));
+                return ExpandUserVariableAsDictionary(variableName.GetRawVariable(engine));
             }
             catch
             {

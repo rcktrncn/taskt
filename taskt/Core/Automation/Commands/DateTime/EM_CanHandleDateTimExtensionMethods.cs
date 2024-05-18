@@ -13,8 +13,9 @@ namespace taskt.Core.Automation.Commands
         /// <param name="variable"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static DateTime ExpandValueOrVariableAsDateTime(this ICanHandleDateTime command, ScriptVariable variable)
+        public static DateTime ExpandValueOrVariableAsDateTime(ScriptVariable variable)
         {
+            // TODO: it's ok?
             if (variable.VariableValue is DateTime time)
             {
                 return time;
@@ -47,7 +48,7 @@ namespace taskt.Core.Automation.Commands
             //}
             try
             {
-                return command.ExpandValueOrVariableAsDateTime(variableName.GetRawVariable(engine));
+                return ExpandValueOrVariableAsDateTime(variableName.GetRawVariable(engine));
             }
             catch
             {

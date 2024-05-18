@@ -13,8 +13,9 @@ namespace taskt.Core.Automation.Commands
         /// <param name="variable"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static List<string> ExpandUserVariableAsList(this ICanHandleList command, ScriptVariable variable)
+        public static List<string> ExpandUserVariableAsList(ScriptVariable variable)
         {
+            // TODO; it's OK?
             if (variable.VariableValue is List<string> list)
             {
                 return list;
@@ -47,7 +48,7 @@ namespace taskt.Core.Automation.Commands
             //}
             try
             {
-                return command.ExpandUserVariableAsList(variableName.GetRawVariable(engine));
+                return ExpandUserVariableAsList(variableName.GetRawVariable(engine));
             }
             catch
             {
