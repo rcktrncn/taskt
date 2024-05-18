@@ -180,25 +180,25 @@ namespace taskt.Core.Automation.Commands
         public static string v_SearchValue { get; }
         #endregion
 
-        /// <summary>
-        /// expand user variable as List&lt;string&gt;
-        /// </summary>
-        /// <param name="variableName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception">value is not List</exception>
-        public static List<string> ExpandUserVariableAsList(this string variableName, Core.Automation.Engine.AutomationEngineInstance engine)
-        {
-            Script.ScriptVariable v = variableName.GetRawVariable(engine);
-            if (v.VariableValue is List<string> list)
-            {
-                return list;
-            }
-            else
-            {
-                throw new Exception("Variable " + variableName + " is not supported List");
-            }
-        }
+        ///// <summary>
+        ///// expand user variable as List&lt;string&gt;
+        ///// </summary>
+        ///// <param name="variableName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception">value is not List</exception>
+        //public static List<string> ExpandUserVariableAsList(this string variableName, Core.Automation.Engine.AutomationEngineInstance engine)
+        //{
+        //    Script.ScriptVariable v = variableName.GetRawVariable(engine);
+        //    if (v.VariableValue is List<string> list)
+        //    {
+        //        return list;
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("Variable " + variableName + " is not supported List");
+        //    }
+        //}
 
         public static void StoreInUserVariable<Type>(this List<Type> value, Core.Automation.Engine.AutomationEngineInstance engine, string targetVariable)
         {
