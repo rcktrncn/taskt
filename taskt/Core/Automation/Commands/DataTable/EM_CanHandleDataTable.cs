@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="variable"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static DataTable ExpandUserVarialbeAsDataTable(this ICanHandleDataTable command, ScriptVariable variable)
+        public static DataTable ExpandUserVariableAsDataTable(this ICanHandleDataTable command, ScriptVariable variable)
         {
             if (variable.VariableValue is DataTable table)
             {
@@ -49,7 +49,7 @@ namespace taskt.Core.Automation.Commands
             //}
             try
             {
-                return command.ExpandUserVarialbeAsDataTable(variableName.GetRawVariable(engine));
+                return command.ExpandUserVariableAsDataTable(variableName.GetRawVariable(engine));
             }
             catch
             {
