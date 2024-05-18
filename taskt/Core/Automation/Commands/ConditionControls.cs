@@ -543,8 +543,11 @@ namespace taskt.Core.Automation.Commands
         {
             var param = DataTableControls.GetFieldValues(actionParamterTable, "Parameter Name", "Parameter Value", false);
 
-            var dt1 = param["DataTable1"].ExpandUserVariableAsDataTable(engine);
-            var dt2 = param["DataTable2"].ExpandUserVariableAsDataTable(engine);
+            var dt1 = EM_CanHandleDataTable.ExpandUserVariableAsDataTable(param["DataTable1"].GetRawVariable(engine));
+            var dt2 = EM_CanHandleDataTable.ExpandUserVariableAsDataTable(param["DataTable2"].GetRawVariable(engine));
+
+            //var dt1 = param["DataTable1"].ExpandUserVariableAsDataTable(engine);
+            //var dt2 = param["DataTable2"].ExpandUserVariableAsDataTable(engine);
 
             if ((dt1.Rows.Count == dt2.Rows.Count) && (dt1.Columns.Count == dt2.Columns.Count))
             {
