@@ -179,31 +179,30 @@ namespace taskt.Core.Automation.Commands
         [PropertyParameterOrder(5000)]
         public static string v_WhenGreaterRows { set; get; }
 
-        /// <summary>
-        /// Expand user variable as DataTable
-        /// </summary>
-        /// <param name="variableName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Value is not DataTable</exception>
-        public static DataTable ExpandUserVariableAsDataTable(this string variableName, Engine.AutomationEngineInstance engine)
-        {
-            Script.ScriptVariable v = variableName.GetRawVariable(engine);
-            if (v.VariableValue is DataTable table)
-            {
-                return table;
-            }
-            else
-            {
-                throw new Exception("Variable " + variableName + " is not DataTable");
-            }
-        }
+        ///// <summary>
+        ///// Expand user variable as DataTable
+        ///// </summary>
+        ///// <param name="variableName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception">Value is not DataTable</exception>
+        //public static DataTable ExpandUserVariableAsDataTable(this string variableName, Engine.AutomationEngineInstance engine)
+        //{
+        //    Script.ScriptVariable v = variableName.GetRawVariable(engine);
+        //    if (v.VariableValue is DataTable table)
+        //    {
+        //        return table;
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("Variable " + variableName + " is not DataTable");
+        //    }
+        //}
 
-        public static void StoreInUserVariable(this DataTable value, Engine.AutomationEngineInstance engine, string targetVariable)
-        {
-            ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
-        }
-
+        //public static void StoreInUserVariable(this DataTable value, Engine.AutomationEngineInstance engine, string targetVariable)
+        //{
+        //    ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
+        //}
 
         /// <summary>
         /// Convert parameter value to DataTable

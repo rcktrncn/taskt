@@ -1,10 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
 {
     public static class EM_CanHandleDictionary
     {
+        /// <summary>
+        /// Expand User Variable As Dictioanry
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="variable"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static Dictionary<string, string> ExpandUserVariableAsDictionary(ScriptVariable variable)
+        {
+            // TODO: it's ok?
+            if (variable.VariableValue is Dictionary<string, string> dictionary)
+            {
+                return dictionary;
+            }
+            else
+            {
+                throw new Exception($"Variable '{variable.VariableName}' is not Dictionary");
+            }
+        }
+
         /// <summary>
         /// Expand user variable as Dictionary&lt;string, string&gt;
         /// </summary>
@@ -15,12 +36,20 @@ namespace taskt.Core.Automation.Commands
         public static Dictionary<string, string> ExpandUserVariableAsDictionary(this ICanHandleDictionary command, string parameterName, Engine.AutomationEngineInstance engine)
         {
             var variableName = ((ScriptCommand)command).GetRawPropertyValueAsString(parameterName, "Dictionary Variable");
-            var v = variableName.GetRawVariable(engine);
-            if (v.VariableValue is Dictionary<string, string> dictionary)
+            //var v = variableName.GetRawVariable(engine);
+            //if (v.VariableValue is Dictionary<string, string> dictionary)
+            //{
+            //    return dictionary;
+            //}
+            //else
+            //{
+            //    throw new Exception($"Variable '{variableName}' is not Dictionary");
+            //}
+            try
             {
-                return dictionary;
+                return ExpandUserVariableAsDictionary(variableName.GetRawVariable(engine));
             }
-            else
+            catch
             {
                 throw new Exception($"Variable '{variableName}' is not Dictionary");
             }

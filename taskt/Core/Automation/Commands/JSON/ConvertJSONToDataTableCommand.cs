@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertJSONToDataTableCommand : ScriptCommand
+    public class ConvertJSONToDataTableCommand : ScriptCommand, ICanHandleDataTable
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
@@ -38,7 +38,7 @@ namespace taskt.Core.Automation.Commands
         {
             Action<JObject> objFunc = new Action<JObject>((obj) =>
             {
-                DataTable resultDT = new DataTable();
+                var resultDT = new DataTable();
 
                 resultDT.Rows.Add();
                 int i = 0;
@@ -48,12 +48,14 @@ namespace taskt.Core.Automation.Commands
                     resultDT.Rows[0][i] = result.Value.ToString();
                     i++;
                 }
-                resultDT.StoreInUserVariable(engine, v_applyToVariableName);
+                //resultDT.StoreInUserVariable(engine, v_applyToVariableName);
+                this.StoreDataTableInUserVariable(resultDT, nameof(v_applyToVariableName), engine);
             });
             Action<JArray> aryFunc = new Action<JArray>((ary) =>
             {
-                DataTable resultDT = new DataTable();
-                parseJSONArrayAsDataTable(ary, resultDT).StoreInUserVariable(engine, v_applyToVariableName);
+                var resultDT = new DataTable();
+                //parseJSONArrayAsDataTable(ary, resultDT).StoreInUserVariable(engine, v_applyToVariableName);
+                this.StoreDataTableInUserVariable(parseJSONArrayAsDataTable(ary, resultDT), nameof(v_applyToVariableName), engine);
             });
             this.JSONProcess(nameof(v_InputValue), objFunc, aryFunc, engine);
         }
