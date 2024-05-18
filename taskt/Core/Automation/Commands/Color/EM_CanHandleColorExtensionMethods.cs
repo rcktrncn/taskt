@@ -1,10 +1,30 @@
 ﻿using System;
 using System.Drawing;
+using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
 {
     public static class EM_CanHandleColorExtensionMethods
     {
+        /// <summary>
+        /// Expand User Variable as Color
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="variable"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static Color ExpandUserVariableAsColor(this ICanHandleColor command, ScriptVariable variable)
+        {
+            if (variable.VariableValue is Color color)
+            {
+                return color;
+            }
+            else
+            {
+                throw new Exception($"Variable '{variable.VariableName}' is not Color");
+            }
+        }
+
         /// <summary>
         /// expand variable as Color
         /// </summary>
@@ -16,12 +36,20 @@ namespace taskt.Core.Automation.Commands
         public static Color ExpandUserVariableAsColor(this ICanHandleColor command, string parameterName, Engine.AutomationEngineInstance engine)
         {
             var variableName = ((ScriptCommand)command).GetRawPropertyValueAsString(parameterName, "Color Variable");
-            var v = variableName.GetRawVariable(engine);
-            if (v.VariableValue is Color color)
+            //var v = variableName.GetRawVariable(engine);
+            //if (v.VariableValue is Color color)
+            //{
+            //    return color;
+            //}
+            //else
+            //{
+            //    throw new Exception($"Variable '{variableName}' is not Color");
+            //}
+            try
             {
-                return color;
+                return command.ExpandUserVariableAsColor(variableName.GetRawVariable(engine));
             }
-            else
+            catch
             {
                 throw new Exception($"Variable '{variableName}' is not Color");
             }
