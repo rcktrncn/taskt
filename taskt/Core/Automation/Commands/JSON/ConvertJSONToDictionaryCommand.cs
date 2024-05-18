@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertJSONToDictionaryCommand : ScriptCommand
+    public class ConvertJSONToDictionaryCommand : ScriptCommand, ICanHandleDictionary
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
@@ -38,21 +38,23 @@ namespace taskt.Core.Automation.Commands
         {
             Action<JObject> objFunc = new Action<JObject>((obj) =>
             {
-                Dictionary<string, string> resultDic = new Dictionary<string, string>();
+                var resultDic = new Dictionary<string, string>();
                 foreach (var result in obj)
                 {
                     resultDic.Add(result.Key, result.Value.ToString());
                 }
-                resultDic.StoreInUserVariable(engine, v_applyToVariableName);
+                //resultDic.StoreInUserVariable(engine, v_applyToVariableName);
+                this.StoreDictionaryInUserVariable(resultDic, nameof(v_applyToVariableName), engine);
             });
             Action<JArray> aryFunc = new Action<JArray>((ary) =>
             {
-                Dictionary<string, string> resultDic = new Dictionary<string, string>();
+                var resultDic = new Dictionary<string, string>();
                 for (int i = 0; i < ary.Count; i++)
                 {
                     resultDic.Add("key" + i.ToString(), ary[i].ToString());
                 }
-                resultDic.StoreInUserVariable(engine, v_applyToVariableName);
+                //resultDic.StoreInUserVariable(engine, v_applyToVariableName);
+                this.StoreDictionaryInUserVariable(resultDic, nameof(v_applyToVariableName), engine);
             });
             this.JSONProcess(nameof(v_InputValue), objFunc, aryFunc, engine);
         }
