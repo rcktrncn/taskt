@@ -514,8 +514,11 @@ namespace taskt.Core.Automation.Commands
         {
             var param = DataTableControls.GetFieldValues(actionParamterTable, "Parameter Name", "Parameter Value", false);
 
-            var dic1 = param["Dictionary1"].ExpandUserVariableAsDictinary(engine);
-            var dic2 = param["Dictionary2"].ExpandUserVariableAsDictinary(engine);
+            //var dic1 = param["Dictionary1"].ExpandUserVariableAsDictinary(engine);
+            //var dic2 = param["Dictionary2"].ExpandUserVariableAsDictinary(engine);
+
+            var dic1 = EM_CanHandleDictionary.ExpandUserVariableAsDictionary(param["Dictionary1"].GetRawVariable(engine));
+            var dic2 = EM_CanHandleDictionary.ExpandUserVariableAsDictionary(param["Dictionary2"].GetRawVariable(engine));
 
             if (dic1.Count == dic2.Count)
             {
