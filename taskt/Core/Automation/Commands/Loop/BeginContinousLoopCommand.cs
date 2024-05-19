@@ -19,10 +19,11 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        [PropertyDescription("Variable Name to Store Loop Times (First Time Value is 0)")]
+        [PropertyDescription("Variable Name to Store the Number of Loops (First Time Value is 0)")]
         [PropertyIsOptional(true)]
-        [PropertyValidationRule("Loop Times", PropertyValidationRule.ValidationRuleFlags.None)]
-        public string v_LoopTimes { get; set; }
+        [PropertyValidationRule("Number of Loops", PropertyValidationRule.ValidationRuleFlags.None)]
+        [PropertyDisplayText(true, "Number of Loops")]
+        public string v_NumberOfLoops { get; set; }
 
         public BeginContinousLoopCommand()
         {
@@ -37,11 +38,11 @@ namespace taskt.Core.Automation.Commands
             var loopCommand = (BeginContinousLoopCommand)parentCommand.ScriptCommand;
 
             Action<decimal> loopTimesAction;
-            if (!string.IsNullOrEmpty(v_LoopTimes))
+            if (!string.IsNullOrEmpty(v_NumberOfLoops))
             {
                 loopTimesAction = new Action<decimal>(num =>
                 {
-                    num.StoreInUserVariable(engine, v_LoopTimes);
+                    num.StoreInUserVariable(engine, v_NumberOfLoops);
                     SystemVariables.Update_LoopCurrentIndex(num);
                 });
             }
@@ -58,7 +59,7 @@ namespace taskt.Core.Automation.Commands
             decimal count = 0;
             while (true)
             {
-                loopTimesAction(count);
+                //loopTimesAction(count);
 
                 foreach (var cmd in parentCommand.AdditionalScriptCommands)
                 {
@@ -66,6 +67,8 @@ namespace taskt.Core.Automation.Commands
                     {
                         return;
                     }
+
+                    loopTimesAction(count); // update loop count
 
                     engine.ExecuteCommand(cmd);
 
