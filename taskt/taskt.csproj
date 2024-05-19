@@ -797,7 +797,7 @@
     <Compile Include="Core\Automation\Commands\If\BeginIfCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginContinousLoopCommand.cs" />
     <Compile Include="Core\Automation\Commands\_RemovedCommands\BeginExcelDatasetLoopCommand.cs" />
-    <Compile Include="Core\Automation\Commands\Loop\BeginListLoopCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Loop\BeginLoopForComplexDataTypesCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginNumberOfTimesLoopCommand.cs" />
     <Compile Include="Core\Automation\Commands\Window\ActivateWindowCommand.cs" />
     <Compile Include="Core\Automation\Attributes\ClassAttributes.cs" />

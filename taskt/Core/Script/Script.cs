@@ -83,7 +83,7 @@ namespace taskt.Core.Script
                 var command = srcCommand.Clone();
                 command.LineNumber = lineNumber;
 
-                if ((command is BeginNumberOfTimesLoopCommand) || (command is BeginContinousLoopCommand) || (command is BeginListLoopCommand) || (command is BeginIfCommand) || (command is BeginMultiIfCommand) || (command is TryCommand) || (command is BeginLoopCommand) || (command is BeginMultiLoopCommand))
+                if ((command is BeginNumberOfTimesLoopCommand) || (command is BeginContinousLoopCommand) || (command is BeginLoopForComplexDataTypesCommand) || (command is BeginIfCommand) || (command is BeginMultiIfCommand) || (command is TryCommand) || (command is BeginLoopCommand) || (command is BeginMultiLoopCommand))
                 {
                     if (subCommands.Count == 0)  //if this is the first loop
                     {
@@ -3325,6 +3325,9 @@ namespace taskt.Core.Script
             // JSON array index -> v_Index
             ChangeAttributeName(doc, "InsertJSONArrayItemCommand", "v_InsertIndex", "v_Index");
             ChangeAttributeName(doc, "RemoveJSONArrayItemCommand", "v_RemoveIndex", "v_Index");
+
+            // BeginListLoopCommand -> BeginLoopForComplexDataTypesCommand
+            ChangeCommandName(doc, "BeginListLoopCommand", "BeginLoopForComplexDataTypesCommand", "Loop Complex Data Types");
         }
 
         /// <summary>
