@@ -3300,6 +3300,14 @@ namespace taskt.Core.Script
 
             // CreateJsonVariableCommand v_JsonVariable -> v_Json
             ChangeAttributeName(doc, "CreateJSONVariableCommand", "v_JsonVariable", "v_Json");
+
+            // JSON v_***Value -> v_Value
+            ChangeAttributeName(doc, "AddJSONArrayItemCommand", "v_ArrayItem", "v_Value");
+            ChangeAttributeName(doc, "AddJSONObjectPropertyCommand", "v_PropertyValue", "v_Value");
+            ChangeAttributeName(doc, "CreateJSONVariableCommand", "v_JsonValue", "v_Value");
+            ChangeAttributeName(doc, "InsertJSONArrayItemCommand", "v_InsertItem", "v_Value");
+            ChangeAttributeName(doc, "InsertJSONObjectPropertyCommand", "v_PropertyValue", "v_Value");
+            ChangeAttributeName(doc, "SetJSONValueCommand", "v_ValueToSet", "v_Value");
         }
 
         /// <summary>

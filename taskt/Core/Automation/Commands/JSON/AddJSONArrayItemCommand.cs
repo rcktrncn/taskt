@@ -28,7 +28,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
-        public string v_ArrayItem { get; set; }
+        public string v_Value { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueType))]
@@ -52,7 +52,7 @@ namespace taskt.Core.Automation.Commands
                 }
                 JArray ary = (JArray)searchResult;
 
-                var addItem = this.GetJSONValue(nameof(v_ArrayItem), nameof(v_ValueType), "Add", engine);
+                var addItem = this.GetJSONValue(nameof(v_Value), nameof(v_ValueType), "Add", engine);
                 ary.Add(addItem);
             });
             this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), addItemFunc, addItemFunc, engine);

@@ -29,7 +29,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
         [PropertyDescription("Value to Set")]
-        public string v_ValueToSet { get; set; }
+        public string v_Value { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueType))]
@@ -48,7 +48,7 @@ namespace taskt.Core.Automation.Commands
         {
             Action<JToken> setValueFunc = new Action<JToken>((searchResult) =>
             {
-                var valueToSet = this.GetJSONValue(nameof(v_ValueToSet), nameof(v_ValueType), "Set", engine);
+                var valueToSet = this.GetJSONValue(nameof(v_Value), nameof(v_ValueType), "Set", engine);
                 searchResult.Replace(JToken.FromObject(valueToSet));
             });
             this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), setValueFunc, setValueFunc, engine);

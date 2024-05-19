@@ -42,7 +42,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
-        public string v_PropertyValue { get; set; }
+        public string v_Value { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueType))]
@@ -65,7 +65,7 @@ namespace taskt.Core.Automation.Commands
                     throw new Exception("Extraction Result is not JSON Object and can not Add JSON Property. Value: '" + searchResult.ToString() + "'");
                 }
                 
-                var propertyValue = this.GetJSONValue(nameof(v_PropertyValue), nameof(v_ValueType), "Insert", engine);
+                var propertyValue = this.GetJSONValue(nameof(v_Value), nameof(v_ValueType), "Insert", engine);
                 var propertyName = v_PropertyName.ExpandValueOrUserVariable(engine);
                 searchResult.Parent.AddAfterSelf(new JProperty(propertyName, propertyValue));
             });

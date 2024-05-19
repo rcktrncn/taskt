@@ -42,7 +42,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
-        public string v_PropertyValue { get; set; }
+        public string v_Value { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueType))]
@@ -66,7 +66,7 @@ namespace taskt.Core.Automation.Commands
                 }
                 JObject obj = (JObject)searchResult;
 
-                var propertyValue = this.GetJSONValue(nameof(v_PropertyValue), nameof(v_ValueType), "Add", engine);
+                var propertyValue = this.GetJSONValue(nameof(v_Value), nameof(v_ValueType), "Add", engine);
                 var propertyName = v_PropertyName.ExpandValueOrUserVariable(engine);
                 obj.Add(new JProperty(propertyName, propertyValue));
             });

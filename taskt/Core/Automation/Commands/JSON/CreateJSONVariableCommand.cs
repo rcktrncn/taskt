@@ -31,7 +31,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.MultiLineTextBox)]
         [PropertyShowSampleUsageInDescription(true)]
         [PropertyDisplayText(true, "JSON Value")]
-        public string v_JsonValue { get; set; }
+        public string v_Value { get; set; }
 
         public CreateJSONVariableCommand()
         {
@@ -43,7 +43,7 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var jsonText, _) = v_JsonValue.ExpandValueOrUserVariableAsJSON(engine);
+            (var jsonText, _) = v_Value.ExpandValueOrUserVariableAsJSON(engine);
             jsonText.StoreInUserVariable(engine, v_Json);
         }
     }
