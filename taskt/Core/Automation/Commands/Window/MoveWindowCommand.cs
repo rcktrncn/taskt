@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.Group("Window")]
     [Attributes.ClassAttributes.SubGruop("Window Actions")]
     [Attributes.ClassAttributes.CommandSettings("Move Window")]
     [Attributes.ClassAttributes.Description("This command moves a window to a specified location on screen.")]

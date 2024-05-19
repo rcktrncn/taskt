@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("File Operation Commands")]
+    [Attributes.ClassAttributes.Group("File Operation")]
     [Attributes.ClassAttributes.CommandSettings("Copy File")]
     [Attributes.ClassAttributes.Description("This command copies a file to a specified destination")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to copy a file to a new destination.")]

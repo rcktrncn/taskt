@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Text Commands")]
+    [Attributes.ClassAttributes.Group("Text")]
     [Attributes.ClassAttributes.SubGruop("File")]
     [Attributes.ClassAttributes.CommandSettings("Read Text File")]
     [Attributes.ClassAttributes.Description("This command allows you to read text file into a variable")]

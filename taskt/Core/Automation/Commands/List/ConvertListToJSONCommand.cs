@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("List Commands")]
+    [Attributes.ClassAttributes.Group("List")]
     [Attributes.ClassAttributes.SubGruop("Convert")]
     [Attributes.ClassAttributes.CommandSettings("Convert List To JSON")]
     [Attributes.ClassAttributes.Description("This command convert a JSON array to a list.")]

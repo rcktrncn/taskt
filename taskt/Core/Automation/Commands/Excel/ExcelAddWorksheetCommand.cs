@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Worksheet")]
     [Attributes.ClassAttributes.CommandSettings("Add Worksheet")]
     [Attributes.ClassAttributes.Description("This command adds a new Excel Worksheet.")]

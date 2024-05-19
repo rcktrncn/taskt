@@ -8,7 +8,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Image Commands")]
+    [Attributes.ClassAttributes.Group("Image")]
     [Attributes.ClassAttributes.CommandSettings("Take Screenshot")]
     [Attributes.ClassAttributes.Description("This command takes a screenshot and saves it to a location")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to take and save a screenshot.")]

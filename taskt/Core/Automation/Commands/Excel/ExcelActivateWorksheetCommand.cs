@@ -3,7 +3,7 @@
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Worksheet")]
     [Attributes.ClassAttributes.CommandSettings("Activate Worksheet")]
     [Attributes.ClassAttributes.Description("This command allows you to activate a specific worksheet in a workbook")]

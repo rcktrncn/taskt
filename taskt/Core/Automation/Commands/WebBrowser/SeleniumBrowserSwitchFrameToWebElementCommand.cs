@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Web Browser Commands")]
+    [Attributes.ClassAttributes.Group("Web Browser")]
     [Attributes.ClassAttributes.SubGruop("WebElement Action")]
     [Attributes.ClassAttributes.CommandSettings("Switch Frame To WebElement")]
     [Attributes.ClassAttributes.Description("This command allows you to Switch Frame to WebElement.")]

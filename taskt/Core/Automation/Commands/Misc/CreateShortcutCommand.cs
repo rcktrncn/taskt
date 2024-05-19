@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Misc Commands")]
+    [Attributes.ClassAttributes.Group("Misc")]
     [Attributes.ClassAttributes.SubGruop("Other")]
     [Attributes.ClassAttributes.CommandSettings("Create Shortcut")]
     [Attributes.ClassAttributes.Description("This command allow to create shortcut file")]

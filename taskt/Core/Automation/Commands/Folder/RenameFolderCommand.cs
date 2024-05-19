@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Folder Operation Commands")]
+    [Attributes.ClassAttributes.Group("Folder Operation")]
     [Attributes.ClassAttributes.CommandSettings("Rename Folder")]
     [Attributes.ClassAttributes.Description("This command renames a folder at a specified destination")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to rename an existing folder.")]

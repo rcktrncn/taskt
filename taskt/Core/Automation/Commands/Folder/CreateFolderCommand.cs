@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Folder Operation Commands")]
+    [Attributes.ClassAttributes.Group("Folder Operation")]
     [Attributes.ClassAttributes.CommandSettings("Create Folder")]
     [Attributes.ClassAttributes.Description("This command creates a folder in a specified destination")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to create a folder in a specific location.")]

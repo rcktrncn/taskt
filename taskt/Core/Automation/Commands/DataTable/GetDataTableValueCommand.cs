@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DataTable Commands")]
+    [Attributes.ClassAttributes.Group("DataTable")]
     [Attributes.ClassAttributes.SubGruop("DataTable Action")]
     [Attributes.ClassAttributes.CommandSettings("Get DataTable Value")]
     [Attributes.ClassAttributes.Description("This command allows you to get the DataTable value")]

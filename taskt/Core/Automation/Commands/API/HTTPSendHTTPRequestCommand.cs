@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("API Commands")]
+    [Attributes.ClassAttributes.Group("API")]
     [Attributes.ClassAttributes.CommandSettings("Send HTTP Request")]
     [Attributes.ClassAttributes.Description("This command downloads the HTML source of a web page for parsing")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to retrieve HTML of a web page without using browser automation.")]

@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("List Commands")]
+    [Attributes.ClassAttributes.Group("List")]
     [Attributes.ClassAttributes.SubGruop("List Actions")]
     [Attributes.ClassAttributes.CommandSettings("Copy List")]
     [Attributes.ClassAttributes.Description("This command allows you to list to copy.")]

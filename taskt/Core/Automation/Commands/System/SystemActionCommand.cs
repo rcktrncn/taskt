@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("System Commands")]
+    [Attributes.ClassAttributes.Group("System")]
     [Attributes.ClassAttributes.CommandSettings("System Action")]
     [Attributes.ClassAttributes.Description("This command allows you to perform an account action")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to perform an action such as logoff, restart, shutdown or restart.")]

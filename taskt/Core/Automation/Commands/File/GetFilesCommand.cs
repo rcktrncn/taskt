@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("File Operation Commands")]
+    [Attributes.ClassAttributes.Group("File Operation")]
     [Attributes.ClassAttributes.CommandSettings("Get Files")]
     [Attributes.ClassAttributes.Description("This command returns a list of file paths from a specified location")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to return a list of file paths from a specific location.")]

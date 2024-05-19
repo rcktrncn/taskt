@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Web Browser Commands")]
+    [Attributes.ClassAttributes.Group("Web Browser")]
     [Attributes.ClassAttributes.SubGruop("Search WebElement")]
     [Attributes.ClassAttributes.CommandSettings("Search WebElement From WebElement")]
     [Attributes.ClassAttributes.Description("This command allows you to search WebElement from WebElement.")]

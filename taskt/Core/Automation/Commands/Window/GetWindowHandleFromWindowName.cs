@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.Group("Window")]
     [Attributes.ClassAttributes.SubGruop("Window Actions")]
     [Attributes.ClassAttributes.CommandSettings("Get Window Handle From Window Name")]
     [Attributes.ClassAttributes.Description("This command allows you to Get Window Handle from Window Name.")]

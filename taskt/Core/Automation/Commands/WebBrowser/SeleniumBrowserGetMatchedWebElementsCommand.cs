@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Web Browser Commands")]
+    [Attributes.ClassAttributes.Group("Web Browser")]
     [Attributes.ClassAttributes.SubGruop("Search WebElement")]
     [Attributes.ClassAttributes.CommandSettings("Get Matched WebElements")]
     [Attributes.ClassAttributes.Description("This command allows you to get Matched WebElements HTML.")]

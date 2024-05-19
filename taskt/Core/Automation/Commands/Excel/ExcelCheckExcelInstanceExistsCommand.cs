@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Instance")]
     [Attributes.ClassAttributes.CommandSettings("Check Excel Instance Exists")]
     [Attributes.ClassAttributes.Description("This command returns existance of Excel instance.")]

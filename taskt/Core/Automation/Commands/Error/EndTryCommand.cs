@@ -4,7 +4,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Error Handling Commands")]
+    [Attributes.ClassAttributes.Group("Error Handling")]
     [Attributes.ClassAttributes.CommandSettings("End Try")]
     [Attributes.ClassAttributes.Description("This command specifies the end of a try/catch block.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to enclose your try/catch block.")]

@@ -12,7 +12,7 @@ using System.IO;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Image Commands")]
+    [Attributes.ClassAttributes.Group("Image")]
     [Attributes.ClassAttributes.CommandSettings("Image Recognition")]
     [Attributes.ClassAttributes.Description("This command attempts to find an existing image on screen.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to attempt to locate an image on screen.  You can subsequently take actions such as move the mouse to the location or perform a click.  This command generates a fingerprint from the comparison image and searches for it in on the desktop.")]

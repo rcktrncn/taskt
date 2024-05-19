@@ -8,7 +8,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Engine Commands")]
+    [Attributes.ClassAttributes.Group("Engine")]
     [Attributes.ClassAttributes.CommandSettings("Set Engine Delay")]
     [Attributes.ClassAttributes.Description("This command allows you to set delays between execution of commands in a running instance.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to change the execution speed between commands.")]

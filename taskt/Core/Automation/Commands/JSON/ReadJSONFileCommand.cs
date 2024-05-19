@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("JSON Commands")]
+    [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("File")]
     [Attributes.ClassAttributes.CommandSettings("Read JSON File")]
     [Attributes.ClassAttributes.Description("This command reads JSON data into a variable")]

@@ -6,7 +6,7 @@ namespace taskt.Core.Automation.Commands
 {
 
     [Serializable]
-    [Attributes.ClassAttributes.Group("Web Browser Commands")]
+    [Attributes.ClassAttributes.Group("Web Browser")]
     [Attributes.ClassAttributes.SubGruop("Instance")]
     [Attributes.ClassAttributes.CommandSettings("Get Web Browser Info")]
     [Attributes.ClassAttributes.Description("This command allows you to navigate a Selenium web browser session to a given URL or resource.")]

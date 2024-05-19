@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Data Commands")]
+    [Attributes.ClassAttributes.Group("Data")]
     [Attributes.ClassAttributes.Description("This command allows you to apply formatting to a string")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to apply specific formatting to text or a variable")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements actions against VariableList from the scripting engine.")]

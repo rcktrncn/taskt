@@ -8,7 +8,7 @@ using System.Linq;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.Group("Window")]
     [Attributes.ClassAttributes.SubGruop("Window Actions")]
     [Attributes.ClassAttributes.CommandSettings("Get Process Name From Window Name")]
     [Attributes.ClassAttributes.Description("This command allows you to Get Process Name from Window Name.")]

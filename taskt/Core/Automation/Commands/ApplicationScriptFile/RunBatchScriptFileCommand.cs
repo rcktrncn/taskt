@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Application/Script Commands")]
+    [Attributes.ClassAttributes.Group("Application/Script")]
     [Attributes.ClassAttributes.SubGruop("Windows Script File")]
     [Attributes.ClassAttributes.CommandSettings("Run Batch Script File")]
     [Attributes.ClassAttributes.Description("This command allows you to run a script or program and wait for it to exit before proceeding.")]

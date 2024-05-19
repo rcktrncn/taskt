@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Text Commands")]
+    [Attributes.ClassAttributes.Group("Text")]
     [Attributes.ClassAttributes.SubGruop("File")]
     [Attributes.ClassAttributes.CommandSettings("Write Text File")]
     [Attributes.ClassAttributes.Description("This command writes specified data to a text file")]

@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Misc Commands")]
+    [Attributes.ClassAttributes.Group("Misc")]
     [Attributes.ClassAttributes.SubGruop("Other")]
     [Attributes.ClassAttributes.CommandSettings("Play System Sound")]
     [Attributes.ClassAttributes.Description("This command allows you to Play System Sound.")]

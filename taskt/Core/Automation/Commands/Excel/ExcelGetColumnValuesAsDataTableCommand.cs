@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Column")]
     [Attributes.ClassAttributes.CommandSettings("Get Column Values As DataTable")]
     [Attributes.ClassAttributes.Description("This command get Column values as DataTable.")]

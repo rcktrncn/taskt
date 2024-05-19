@@ -8,7 +8,7 @@ namespace taskt.Core.Automation.Commands
 {
 
     [Serializable]
-    [Attributes.ClassAttributes.Group("UIAutomation Commands")]
+    [Attributes.ClassAttributes.Group("UIAutomation")]
     [Attributes.ClassAttributes.SubGruop("Get From UIElement")]
     [Attributes.ClassAttributes.CommandSettings("Get Children Elements Information")]
     [Attributes.ClassAttributes.Description("This command allows you to get Children UIElements Information from UIElement.")]

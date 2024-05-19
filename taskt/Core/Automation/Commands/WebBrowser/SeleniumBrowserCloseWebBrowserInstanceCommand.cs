@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Web Browser Commands")]
+    [Attributes.ClassAttributes.Group("Web Browser")]
     [Attributes.ClassAttributes.SubGruop("Instance")]
     [Attributes.ClassAttributes.CommandSettings("Close Web Browser Instance")]
     [Attributes.ClassAttributes.Description("This command allows you to close a Selenium web browser session.")]

@@ -9,7 +9,7 @@ using System.Linq;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Range")]
     [Attributes.ClassAttributes.CommandSettings("Get Range As Datatable")]
     [Attributes.ClassAttributes.Description("This command gets text from a specified Excel Range and put it into a DataTable.")]

@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DataTable Commands")]
+    [Attributes.ClassAttributes.Group("DataTable")]
     [Attributes.ClassAttributes.SubGruop("Column Action")]
     [Attributes.ClassAttributes.CommandSettings("Add DataTable Column")]
     [Attributes.ClassAttributes.Description("This command allows you to add a column to a DataTable")]

@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Application/Script Commands")]
+    [Attributes.ClassAttributes.Group("Application/Script")]
     [Attributes.ClassAttributes.SubGruop("Application")]
     [Attributes.ClassAttributes.CommandSettings("Start Application")]
     [Attributes.ClassAttributes.Description("This command allows you to start a program or a process.")]

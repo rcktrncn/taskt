@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Word Commands")]
+    [Attributes.ClassAttributes.Group("Word")]
     [Attributes.ClassAttributes.Description("This command appends a datatable to a word document.")]
     [Attributes.ClassAttributes.CommandSettings("Append DataTable")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to append a datatable to a specific document.")]

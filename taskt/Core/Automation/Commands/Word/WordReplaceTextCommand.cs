@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Word Commands")]
+    [Attributes.ClassAttributes.Group("Word")]
     [Attributes.ClassAttributes.Description("This command allows you to replace text in a Word document.")]
     [Attributes.ClassAttributes.CommandSettings("Replace Text")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to replace text in a document.")]

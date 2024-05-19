@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Remote Commands")]
+    [Attributes.ClassAttributes.Group("Remote")]
     [Attributes.ClassAttributes.CommandSettings("Remote Task")]
     [Attributes.ClassAttributes.Description("This command allows you to execute a task remotely on another taskt instance")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to execute a command on another client that has local listener enabled")]

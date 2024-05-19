@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("File Operation Commands")]
+    [Attributes.ClassAttributes.Group("File Operation")]
     [Attributes.ClassAttributes.CommandSettings("Rename File")]
     [Attributes.ClassAttributes.Description("This command renames a file at a specified destination")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to rename an existing file.")]

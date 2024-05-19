@@ -8,7 +8,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Web Browser Commands")]
+    [Attributes.ClassAttributes.Group("Web Browser")]
     [Attributes.ClassAttributes.SubGruop("Scraping")]
     [Attributes.ClassAttributes.CommandSettings("Get Table Value As DataTable")]
     [Attributes.ClassAttributes.Description("This command allows you to get a Table Values As DataTable.")]

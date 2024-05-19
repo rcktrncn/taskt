@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.Group("Window")]
     [Attributes.ClassAttributes.SubGruop("Window Actions")]
     [Attributes.ClassAttributes.CommandSettings("Activate Window")]
     [Attributes.ClassAttributes.Description("This command activates a window and brings it to the front.")]

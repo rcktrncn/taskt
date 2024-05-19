@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Row")]
     [Attributes.ClassAttributes.CommandSettings("Get Row Values As List")]
     [Attributes.ClassAttributes.Description("This command get Row values as List.")]

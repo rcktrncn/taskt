@@ -8,7 +8,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Key/Mouse Commands")]
+    [Attributes.ClassAttributes.Group("Key/Mouse")]
     [Attributes.ClassAttributes.SubGruop("Key")]
     [Attributes.ClassAttributes.CommandSettings("Send Advanced Keystrokes")]
     [Attributes.ClassAttributes.Description("Sends advanced keystrokes to a targeted window")]

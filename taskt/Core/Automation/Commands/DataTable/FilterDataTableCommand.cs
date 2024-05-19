@@ -10,7 +10,7 @@ using taskt.UI.CustomControls;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DataTable Commands")]
+    [Attributes.ClassAttributes.Group("DataTable")]
     [Attributes.ClassAttributes.SubGruop("Other")]
     [Attributes.ClassAttributes.Description("This command allows you filter a DataTable into a new Datatable")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get specific rows of a DataTable.")]

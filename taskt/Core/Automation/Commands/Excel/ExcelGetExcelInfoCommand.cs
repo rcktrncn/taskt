@@ -6,7 +6,7 @@ using Microsoft.Office.Interop.Excel;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Other")]
     [Attributes.ClassAttributes.CommandSettings("Get Excel Info")]
     [Attributes.ClassAttributes.Description("This command allows you to get current sheet name.")]

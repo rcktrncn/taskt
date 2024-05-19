@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Web Browser Commands")]
+    [Attributes.ClassAttributes.Group("Web Browser")]
     [Attributes.ClassAttributes.SubGruop("Web Browser Actions")]
     [Attributes.ClassAttributes.CommandSettings("Take Screenshot")]
     [Attributes.ClassAttributes.Description("This command allows you to take a screenshot in Selenium web browser session.")]

@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Text Commands")]
+    [Attributes.ClassAttributes.Group("Text")]
     [Attributes.ClassAttributes.SubGruop("Check/Get")]
     [Attributes.ClassAttributes.CommandSettings("Get Word Count")]
     [Attributes.ClassAttributes.Description("This command allows you to you to retrieve the word count of a Text or Variable.")]

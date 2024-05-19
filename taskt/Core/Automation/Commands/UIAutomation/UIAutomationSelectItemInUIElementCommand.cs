@@ -7,7 +7,7 @@ namespace taskt.Core.Automation.Commands
 {
 
     [Serializable]
-    [Attributes.ClassAttributes.Group("UIAutomation Commands")]
+    [Attributes.ClassAttributes.Group("UIAutomation")]
     [Attributes.ClassAttributes.SubGruop("UIElement Action")]
     [Attributes.ClassAttributes.CommandSettings("Select Item In UIElement")]
     [Attributes.ClassAttributes.Description("This command allows you to Select a Item in UIElement.")]

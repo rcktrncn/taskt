@@ -5,7 +5,7 @@ using taskt.Core.Automation.Engine;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Error Handling Commands")]
+    [Attributes.ClassAttributes.Group("Error Handling")]
     [Attributes.ClassAttributes.CommandSettings("Try")]
     [Attributes.ClassAttributes.Description("This command allows embedding commands and will automatically move to the 'catch' handler")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to handle potential errors that could occur.")]

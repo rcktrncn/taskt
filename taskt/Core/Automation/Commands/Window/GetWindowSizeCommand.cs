@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.Group("Window")]
     [Attributes.ClassAttributes.SubGruop("Window State")]
     [Attributes.ClassAttributes.CommandSettings("Get Window Size")]
     [Attributes.ClassAttributes.Description("This command returns window size.")]

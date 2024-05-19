@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("UIAutomation Commands")]
+    [Attributes.ClassAttributes.Group("UIAutomation")]
     [Attributes.ClassAttributes.SubGruop("Search UIElement")]
     [Attributes.ClassAttributes.CommandSettings("Check UIElement Exist")]
     [Attributes.ClassAttributes.Description("This command allows you to to check UIElement existence.")]

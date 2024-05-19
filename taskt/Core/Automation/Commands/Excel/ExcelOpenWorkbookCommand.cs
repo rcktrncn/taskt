@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("File/Book")]
     [Attributes.ClassAttributes.CommandSettings("Open Workbook")]
     [Attributes.ClassAttributes.Description("This command opens an Excel Workbook.")]

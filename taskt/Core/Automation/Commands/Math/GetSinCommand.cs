@@ -3,7 +3,7 @@
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Math Commands")]
+    [Attributes.ClassAttributes.Group("Math")]
     [Attributes.ClassAttributes.CommandSettings("Get Sin")]
     [Attributes.ClassAttributes.Description("This command allows you to get sin.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get sin.")]

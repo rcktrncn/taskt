@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DateTime Commands")]
+    [Attributes.ClassAttributes.Group("DateTime")]
     [Attributes.ClassAttributes.SubGruop("")]
     [Attributes.ClassAttributes.CommandSettings("Convert DateTime To Excel Serial")]
     [Attributes.ClassAttributes.Description("This command allows you to Convert DateTime To Excel Serial Value.")]

@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Variable Commands")]
+    [Attributes.ClassAttributes.Group("Variable")]
     [Attributes.ClassAttributes.CommandSettings("Get Variable Index")]
     [Attributes.ClassAttributes.Description("This command allows you to get Variable Index.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get Variable Index.")]

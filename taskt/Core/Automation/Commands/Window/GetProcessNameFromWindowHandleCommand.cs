@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.Group("Window")]
     [Attributes.ClassAttributes.SubGruop("Get From Window Handle")]
     [Attributes.ClassAttributes.CommandSettings("Get Process Name From Window Handle")]
     [Attributes.ClassAttributes.Description("This command returns process name.")]

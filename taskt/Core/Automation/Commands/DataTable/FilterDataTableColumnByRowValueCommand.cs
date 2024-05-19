@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DataTable Commands")]
+    [Attributes.ClassAttributes.Group("DataTable")]
     [Attributes.ClassAttributes.SubGruop("DataTable Action")]
     [Attributes.ClassAttributes.CommandSettings("Filter DataTable Column By Row Value")]
     [Attributes.ClassAttributes.Description("This command allows you to Filter Columns by reference to Row values.")]

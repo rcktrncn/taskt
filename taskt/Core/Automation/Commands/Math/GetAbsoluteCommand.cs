@@ -3,7 +3,7 @@
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Math Commands")]
+    [Attributes.ClassAttributes.Group("Math")]
     [Attributes.ClassAttributes.CommandSettings("Get Absolute")]
     [Attributes.ClassAttributes.Description("This command allows you to get abs.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get abs.")]

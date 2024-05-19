@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DataTable Commands")]
+    [Attributes.ClassAttributes.Group("DataTable")]
     [Attributes.ClassAttributes.SubGruop("Row Action")]
     [Attributes.ClassAttributes.CommandSettings("Set DataTable Row Values By Dictionary")]
     [Attributes.ClassAttributes.Description("This command allows you to set a DataTable Row values to a DataTable by a Dictionary")]

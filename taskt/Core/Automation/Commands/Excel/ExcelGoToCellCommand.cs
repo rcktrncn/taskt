@@ -3,7 +3,7 @@
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Cell")]
     [Attributes.ClassAttributes.CommandSettings("Go To Cell")]
     [Attributes.ClassAttributes.Description("This command moves to a specific cell.")]

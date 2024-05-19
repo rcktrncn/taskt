@@ -10,7 +10,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("File Operation Commands")]
+    [Attributes.ClassAttributes.Group("File Operation")]
     [Attributes.ClassAttributes.CommandSettings("Extract Zip File")]
     [Attributes.ClassAttributes.Description("This command extracts files from a compressed file")]
     [Attributes.ClassAttributes.UsesDescription("")]

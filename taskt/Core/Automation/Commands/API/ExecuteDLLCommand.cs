@@ -11,7 +11,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("API Commands")]
+    [Attributes.ClassAttributes.Group("API")]
     [Attributes.ClassAttributes.CommandSettings("Execute DLL")]
     [Attributes.ClassAttributes.Description("This command processes an HTML source object")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to parse and extract data from a successful **HTTP Request Command**")]

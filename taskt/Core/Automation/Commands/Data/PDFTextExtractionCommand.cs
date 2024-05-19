@@ -9,7 +9,7 @@ using taskt.UI.Forms;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Data Commands")]
+    [Attributes.ClassAttributes.Group("Data")]
     [Attributes.ClassAttributes.Description("")]
     [Attributes.ClassAttributes.UsesDescription("")]
     [Attributes.ClassAttributes.ImplementationDescription("")]

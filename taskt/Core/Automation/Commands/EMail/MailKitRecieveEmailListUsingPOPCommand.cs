@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("EMail Commands")]
+    [Attributes.ClassAttributes.Group("EMail")]
     [Attributes.ClassAttributes.SubGruop("")]
     [Attributes.ClassAttributes.CommandSettings("Recieve EMailList Using POP")]
     [Attributes.ClassAttributes.Description("This command allows you to get EMailList(EMails) using POP protocol.")]

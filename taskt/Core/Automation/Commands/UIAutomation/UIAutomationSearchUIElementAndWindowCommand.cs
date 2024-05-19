@@ -8,7 +8,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("UIAutomation Commands")]
+    [Attributes.ClassAttributes.Group("UIAutomation")]
     [Attributes.ClassAttributes.SubGruop("Search UIElement & Window")]
     [Attributes.ClassAttributes.CommandSettings("Search UIElement And Window")]
     [Attributes.ClassAttributes.Description("This command allows you to get UIElement from Window Name.")]

@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DataTable Commands")]
+    [Attributes.ClassAttributes.Group("DataTable")]
     [Attributes.ClassAttributes.SubGruop("DataTable Action")]
     [Attributes.ClassAttributes.CommandSettings("Copy DataTable")]
     [Attributes.ClassAttributes.Description("This command allows you to copy a DataTable")]

@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Key/Mouse Commands")]
+    [Attributes.ClassAttributes.Group("Key/Mouse")]
     [Attributes.ClassAttributes.SubGruop("Mouse")]
     [Attributes.ClassAttributes.CommandSettings("Move Mouse")]
     [Attributes.ClassAttributes.Description("Simulates mouse movements")]

@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("File/Book")]
     [Attributes.ClassAttributes.CommandSettings("Create DataTable From Excel File")]
     [Attributes.ClassAttributes.Description("This command Open a File and Get Cell Values as a DataTable")]

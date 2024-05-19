@@ -9,7 +9,7 @@ using taskt.UI.Forms;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("IE Browser Commands")]
+    [Attributes.ClassAttributes.Group("IE Browser")]
     [Attributes.ClassAttributes.Description("This command allows you to close the associated IE web browser")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements the 'InternetExplorer' application object from SHDocVw.dll to achieve automation.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]

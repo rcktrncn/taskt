@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("List Commands")]
+    [Attributes.ClassAttributes.Group("List")]
     [Attributes.ClassAttributes.SubGruop("List Item")]
     [Attributes.ClassAttributes.CommandSettings("Check List Item Exists")]
     [Attributes.ClassAttributes.Description("This command allows you want to check list has a value you specify")]

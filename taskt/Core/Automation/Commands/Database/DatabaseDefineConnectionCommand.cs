@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
 
 
     [Serializable]
-    [Attributes.ClassAttributes.Group("Database Commands")]
+    [Attributes.ClassAttributes.Group("Database")]
     [Attributes.ClassAttributes.Description("This command allows you to define a connection to an OLEDB data source")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to create a new connection to a database.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements 'OLEDB' to achieve automation.")]

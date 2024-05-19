@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Column")]
     [Attributes.ClassAttributes.CommandSettings("Set Column Values From List")]
     [Attributes.ClassAttributes.Description("This command set Column values from List.")]

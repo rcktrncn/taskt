@@ -12,7 +12,7 @@ using taskt.UI.CustomControls;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Database Commands")]
+    [Attributes.ClassAttributes.Group("Database")]
     [Attributes.ClassAttributes.Description("This command allows you to perform a database query and apply the result to a dataset")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to select data from a database.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements 'OLEDB' to achieve automation.")]

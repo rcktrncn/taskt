@@ -8,7 +8,7 @@ using taskt.UI.CustomControls;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Application/Script Commands")]
+    [Attributes.ClassAttributes.Group("Application/Script")]
     [Attributes.ClassAttributes.SubGruop("Application")]
     [Attributes.ClassAttributes.CommandSettings("Stop Application")]
     [Attributes.ClassAttributes.Description("This command allows you to Stop a Application.")]

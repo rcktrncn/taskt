@@ -3,7 +3,7 @@
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Misc Commands")]
+    [Attributes.ClassAttributes.Group("Misc")]
     [Attributes.ClassAttributes.SubGruop("Clipboard")]
     [Attributes.ClassAttributes.CommandSettings("Clear Clipboard Text")]
     [Attributes.ClassAttributes.Description("This command allows you to clear text to the clipboard.")]

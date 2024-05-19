@@ -6,7 +6,7 @@ namespace taskt.Core.Automation.Commands
 {
 
     [Serializable]
-    [Attributes.ClassAttributes.Group("Variable Commands")]
+    [Attributes.ClassAttributes.Group("Variable")]
     [Attributes.ClassAttributes.CommandSettings("New Variable")]
     [Attributes.ClassAttributes.Description("This command allows you to explicitly add a variable if you are not using **Set Variable* with the setting **Create Missing Variables** at runtime.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to modify the value of variables.  You can even use variables to modify other variables.")]

@@ -9,7 +9,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Cell")]
     [Attributes.ClassAttributes.CommandSettings("Delete Cell")]
     [Attributes.ClassAttributes.Description("This command allows you to delete a specified cell in Excel")]

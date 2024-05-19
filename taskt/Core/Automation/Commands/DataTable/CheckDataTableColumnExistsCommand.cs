@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DataTable Commands")]
+    [Attributes.ClassAttributes.Group("DataTable")]
     [Attributes.ClassAttributes.SubGruop("Column Action")]
     [Attributes.ClassAttributes.CommandSettings("Check DataTable Column Exists")]
     [Attributes.ClassAttributes.Description("This command allows you to check the column name existance")]

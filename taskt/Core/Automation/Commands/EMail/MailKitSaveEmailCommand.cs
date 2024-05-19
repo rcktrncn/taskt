@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("EMail Commands")]
+    [Attributes.ClassAttributes.Group("EMail")]
     [Attributes.ClassAttributes.SubGruop("")]
     [Attributes.ClassAttributes.CommandSettings("Save EMail")]
     [Attributes.ClassAttributes.Description("This command allows you to Save EMail.")]

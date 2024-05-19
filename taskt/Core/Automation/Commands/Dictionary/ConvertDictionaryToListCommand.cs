@@ -6,7 +6,7 @@ using System.Linq;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Dictionary Commands")]
+    [Attributes.ClassAttributes.Group("Dictionary")]
     [Attributes.ClassAttributes.SubGruop("Convert")]
     [Attributes.ClassAttributes.CommandSettings("Convert Dictionary To List")]
     [Attributes.ClassAttributes.Description("This command allows you to get List from Dictionary")]

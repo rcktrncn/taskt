@@ -7,7 +7,7 @@ using taskt.UI.Forms;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Loop Commands")]
+    [Attributes.ClassAttributes.Group("Loop")]
     [Attributes.ClassAttributes.Description("This command signifies the current loop should exit and resume work past the point of the current loop.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to signify that looping should end and commands outside the loop should resume execution.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command is used by the engine to exit a loop")]

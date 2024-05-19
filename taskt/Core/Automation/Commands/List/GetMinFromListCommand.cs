@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("List Commands")]
+    [Attributes.ClassAttributes.Group("List")]
     [Attributes.ClassAttributes.SubGruop("Math")]
     [Attributes.ClassAttributes.CommandSettings("Get Min From List")]
     [Attributes.ClassAttributes.Description("This command allows you to get min value from a list.")]

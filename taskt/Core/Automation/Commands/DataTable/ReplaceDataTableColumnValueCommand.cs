@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DataTable Commands")]
+    [Attributes.ClassAttributes.Group("DataTable")]
     [Attributes.ClassAttributes.SubGruop("DataTable Action")]
     [Attributes.ClassAttributes.CommandSettings("Replace DataTable Column Value")]
     [Attributes.ClassAttributes.Description("This command allows you to Replace Column values.")]

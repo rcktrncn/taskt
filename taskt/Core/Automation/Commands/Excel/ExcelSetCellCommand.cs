@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Cell")]
     [Attributes.ClassAttributes.CommandSettings("Set Cell")]
     [Attributes.ClassAttributes.Description("This command sets the value of a cell.")]

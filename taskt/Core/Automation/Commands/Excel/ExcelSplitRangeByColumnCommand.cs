@@ -11,7 +11,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Range")]
     [Attributes.ClassAttributes.CommandSettings("Split Range By Column")]
     [Attributes.ClassAttributes.Description("This command gets text from a specified Excel Range and splits it into separate ranges by column.")]

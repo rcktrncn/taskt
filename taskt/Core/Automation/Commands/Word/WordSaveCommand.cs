@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Word Commands")]
+    [Attributes.ClassAttributes.Group("Word")]
     [Attributes.ClassAttributes.Description("This command allows you to save a Word document.")]
     [Attributes.ClassAttributes.CommandSettings("Save Document")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to save changes to a document.")]

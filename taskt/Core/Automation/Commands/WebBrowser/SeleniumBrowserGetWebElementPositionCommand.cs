@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Web Browser Commands")]
+    [Attributes.ClassAttributes.Group("Web Browser")]
     [Attributes.ClassAttributes.SubGruop("Get From WebElement")]
     [Attributes.ClassAttributes.CommandSettings("Get WebElement Position")]
     [Attributes.ClassAttributes.Description("This command allows you to Get WebElement Position.")]

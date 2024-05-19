@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Engine Commands")]
+    [Attributes.ClassAttributes.Group("Engine")]
     [Attributes.ClassAttributes.CommandSettings("Show Engine Context")]
     [Attributes.ClassAttributes.Description("This command allows you to show a message to the user.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to present or display a value on screen to the user.")]

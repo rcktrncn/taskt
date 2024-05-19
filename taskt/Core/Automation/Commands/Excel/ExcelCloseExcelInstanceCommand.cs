@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Instance")]
     [Attributes.ClassAttributes.CommandSettings("Close Excel Instance")]
     [Attributes.ClassAttributes.Description("This command allows you to close Excel instance.")]

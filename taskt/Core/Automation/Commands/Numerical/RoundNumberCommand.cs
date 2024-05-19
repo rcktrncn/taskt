@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Numerical Commands")]
+    [Attributes.ClassAttributes.Group("Numerical")]
     [Attributes.ClassAttributes.CommandSettings("Round Number")]
     [Attributes.ClassAttributes.Description("This command allows you to Round up, down, or round off numbers.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to Round up, down, or round off numbers.")]

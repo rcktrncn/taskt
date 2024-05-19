@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("JSON Commands")]
+    [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("Action")]
     [Attributes.ClassAttributes.CommandSettings("Remove JSON Array Item")]
     [Attributes.ClassAttributes.Description("This command allows you to remove item to JSON Array.")]

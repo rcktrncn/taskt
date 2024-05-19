@@ -7,7 +7,7 @@ namespace taskt.Core.Automation.Commands
 {
 
     [Serializable]
-    [Attributes.ClassAttributes.Group("UIAutomation Commands")]
+    [Attributes.ClassAttributes.Group("UIAutomation")]
     [Attributes.ClassAttributes.SubGruop("UIElement Action")]
     [Attributes.ClassAttributes.CommandSettings("Expand Collapse Items In UIElement")]
     [Attributes.ClassAttributes.Description("This command allows you to Expand or Collapse Items in UIElement.")]

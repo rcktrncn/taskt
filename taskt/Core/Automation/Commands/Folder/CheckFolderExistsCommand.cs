@@ -6,7 +6,7 @@ namespace taskt.Core.Automation.Commands
 {
 
     [Serializable]
-    [Attributes.ClassAttributes.Group("Folder Operation Commands")]
+    [Attributes.ClassAttributes.Group("Folder Operation")]
     [Attributes.ClassAttributes.CommandSettings("Check Folder Exists")]
     [Attributes.ClassAttributes.Description("This command returns existence of folder paths from a specified location")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to return a existence of file paths from a specific location.")]

@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("StopWatch Commands")]
+    [Attributes.ClassAttributes.Group("StopWatch")]
     [Attributes.ClassAttributes.CommandSettings("StopWatch")]
     [Attributes.ClassAttributes.Description("This command allows you to stop a program or a process.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to close an application by its name such as 'chrome'. Alternatively, you may use the Close Window or Thick App Command instead.")]

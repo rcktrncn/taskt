@@ -7,7 +7,7 @@ using System.Linq;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.Group("Window")]
     [Attributes.ClassAttributes.SubGruop("Window State")]
     [Attributes.ClassAttributes.CommandSettings("Get Window Names")]
     [Attributes.ClassAttributes.Description("This command returns window names.")]

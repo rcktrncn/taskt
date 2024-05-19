@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Cell")]
     [Attributes.ClassAttributes.CommandSettings("Check Cell Value Exists")]
     [Attributes.ClassAttributes.Description("This command checks existance value from a specified Excel Cell.")]

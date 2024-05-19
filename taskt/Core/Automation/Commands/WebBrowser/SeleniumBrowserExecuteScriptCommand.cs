@@ -6,7 +6,7 @@ namespace taskt.Core.Automation.Commands
 {
 
     [Serializable]
-    [Attributes.ClassAttributes.Group("Web Browser Commands")]
+    [Attributes.ClassAttributes.Group("Web Browser")]
     [Attributes.ClassAttributes.SubGruop("Web Browser Actions")]
     [Attributes.ClassAttributes.CommandSettings("Execute Script")]
     [Attributes.ClassAttributes.Description("This command allows you to execute a script in a Selenium web browser session.")]

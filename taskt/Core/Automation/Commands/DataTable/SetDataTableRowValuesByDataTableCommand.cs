@@ -2,12 +2,11 @@
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
-using OpenQA.Selenium.DevTools.V118.Overlay;
 
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DataTable Commands")]
+    [Attributes.ClassAttributes.Group("DataTable")]
     [Attributes.ClassAttributes.SubGruop("Row Action")]
     [Attributes.ClassAttributes.CommandSettings("Set DataTable Row Values By DataTable")]
     [Attributes.ClassAttributes.Description("This command allows you to set a DataTable Row values to a DataTable by a DataTable")]

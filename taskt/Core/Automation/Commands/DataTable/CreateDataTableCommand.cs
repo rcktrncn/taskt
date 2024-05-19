@@ -8,7 +8,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DataTable Commands")]
+    [Attributes.ClassAttributes.Group("DataTable")]
     [Attributes.ClassAttributes.SubGruop("DataTable Action")]
     [Attributes.ClassAttributes.CommandSettings("Create DataTable")]
     [Attributes.ClassAttributes.Description("This command created a DataTable with the column names provided")]

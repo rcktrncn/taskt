@@ -8,7 +8,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Text Commands")]
+    [Attributes.ClassAttributes.Group("Text")]
     [Attributes.ClassAttributes.SubGruop("Action")]
     [Attributes.ClassAttributes.CommandSettings("Split Text")]
     [Attributes.ClassAttributes.Description("This command allows you to split a Text")]

@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.Group("Window")]
     [Attributes.ClassAttributes.SubGruop("Get From Window Handle")]
     [Attributes.ClassAttributes.CommandSettings("Check Window Handle Exists")]
     [Attributes.ClassAttributes.Description("This command returns a existence of Window Handle.")]

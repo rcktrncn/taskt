@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.Group("Window")]
     [Attributes.ClassAttributes.SubGruop("Window Handle Actions")]
     [Attributes.ClassAttributes.CommandSettings("Resize Window By Window Handle")]
     [Attributes.ClassAttributes.Description("This command resizes a window to a specified size.")]

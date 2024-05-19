@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.Group("Window")]
     [Attributes.ClassAttributes.SubGruop("Window Actions")]
     [Attributes.ClassAttributes.CommandSettings("Close Window")]
     [Attributes.ClassAttributes.Description("This command closes an open window.")]

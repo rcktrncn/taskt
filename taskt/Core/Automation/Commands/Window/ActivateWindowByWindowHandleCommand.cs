@@ -3,7 +3,7 @@
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.Group("Window")]
     [Attributes.ClassAttributes.SubGruop("Window Handle Actions")]
     [Attributes.ClassAttributes.CommandSettings("Activate Window By Window Handle")]
     [Attributes.ClassAttributes.Description("This command activates a window and brings it to the front.")]

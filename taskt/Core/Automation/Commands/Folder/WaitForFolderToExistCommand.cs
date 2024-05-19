@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Folder Operation Commands")]
+    [Attributes.ClassAttributes.Group("Folder Operation")]
     [Attributes.ClassAttributes.CommandSettings("Wait For Folder To Exists")]
     [Attributes.ClassAttributes.Description("This command waits for a folder to exist at a specified destination")]
     [Attributes.ClassAttributes.UsesDescription("Use this command to wait for a folder to exist before proceeding.")]

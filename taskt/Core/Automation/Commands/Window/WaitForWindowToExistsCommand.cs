@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Window Commands")]
+    [Attributes.ClassAttributes.Group("Window")]
     [Attributes.ClassAttributes.SubGruop("Window Actions")]
     [Attributes.ClassAttributes.CommandSettings("Wait For Window To Exists")]
     [Attributes.ClassAttributes.Description("This command waits for a window to exist.")]

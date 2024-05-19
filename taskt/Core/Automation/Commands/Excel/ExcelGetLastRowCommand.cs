@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Row")]
     [Attributes.ClassAttributes.CommandSettings("Get Last Row Index")]
     [Attributes.ClassAttributes.Description("This command allows you to find the last row in a used range in an Excel Workbook.")]

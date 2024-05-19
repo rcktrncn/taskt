@@ -11,7 +11,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Range")]
     [Attributes.ClassAttributes.CommandSettings("Write Range")]
     [Attributes.ClassAttributes.Description("This command writes a datatable to an excel sheet starting from the given cell address.")]

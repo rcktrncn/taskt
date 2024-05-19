@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("UIAutomation Commands")]
+    [Attributes.ClassAttributes.Group("UIAutomation")]
     [Attributes.ClassAttributes.SubGruop("Search Window")]
     [Attributes.ClassAttributes.CommandSettings("Search UIElement From Window")]
     [Attributes.ClassAttributes.Description("This command allows you to get UIElement from Window Name using by XPath.")]

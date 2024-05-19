@@ -6,7 +6,7 @@ using System.Linq;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("EMail Commands")]
+    [Attributes.ClassAttributes.Group("EMail")]
     [Attributes.ClassAttributes.SubGruop("")]
     [Attributes.ClassAttributes.CommandSettings("Get EMail Attachments Name")]
     [Attributes.ClassAttributes.Description("This command allows you to get EMail Attachment File Name.")]

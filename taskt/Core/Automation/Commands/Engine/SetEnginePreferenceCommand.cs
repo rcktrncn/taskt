@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Engine Commands")]
+    [Attributes.ClassAttributes.Group("Engine")]
     [Attributes.ClassAttributes.CommandSettings("Set Engine Preference")]
     [Attributes.ClassAttributes.Description("This command allows you to set preferences for engine behavior.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to change the engine behavior.")]

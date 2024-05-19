@@ -8,7 +8,7 @@ namespace taskt.Core.Automation.Commands
 {
 
     [Serializable]
-    [Attributes.ClassAttributes.Group("File Operation Commands")]
+    [Attributes.ClassAttributes.Group("File Operation")]
     [Attributes.ClassAttributes.CommandSettings("Extraction File Path")]
     [Attributes.ClassAttributes.Description("This command allows you to extract from file path.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to extract from file path.")]

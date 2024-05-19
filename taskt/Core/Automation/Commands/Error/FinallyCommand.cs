@@ -4,7 +4,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Error Handling Commands")]
+    [Attributes.ClassAttributes.Group("Error Handling")]
     [Attributes.ClassAttributes.CommandSettings("Finally")]
     [Attributes.ClassAttributes.Description("This command specifies execution that should occur whether or not an error occured")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to always execute a specific command before leaving the try/catch block")]

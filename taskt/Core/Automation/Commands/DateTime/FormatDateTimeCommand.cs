@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DateTime Commands")]
+    [Attributes.ClassAttributes.Group("DateTime")]
     [Attributes.ClassAttributes.SubGruop("")]
     [Attributes.ClassAttributes.CommandSettings("Format DateTime")]
     [Attributes.ClassAttributes.Description("This command allows you to Format DateTime Text.")]

@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Misc Commands")]
+    [Attributes.ClassAttributes.Group("Misc")]
     [Attributes.ClassAttributes.SubGruop("Network/Internet")]
     [Attributes.ClassAttributes.CommandSettings("Ping")]
     [Attributes.ClassAttributes.Description("This command allows you to add an in-line comment to the script.")]

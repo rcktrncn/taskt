@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Engine Commands")]
+    [Attributes.ClassAttributes.Group("Engine")]
     [Attributes.ClassAttributes.CommandSettings("Error Handling")]
     [Attributes.ClassAttributes.Description("This command specifies what to do  after an error is encountered.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to define how your script should behave when an error is encountered.")]

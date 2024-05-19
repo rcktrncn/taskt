@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Numerical Commands")]
+    [Attributes.ClassAttributes.Group("Numerical")]
     [Attributes.ClassAttributes.CommandSettings("Format Number")]
     [Attributes.ClassAttributes.Description("This command allows you to Format Number.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to Format Number.")]

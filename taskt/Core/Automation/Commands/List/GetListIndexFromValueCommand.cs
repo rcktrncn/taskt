@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("List Commands")]
+    [Attributes.ClassAttributes.Group("List")]
     [Attributes.ClassAttributes.SubGruop("Other")]
     [Attributes.ClassAttributes.CommandSettings("Get List Index From Value")]
     [Attributes.ClassAttributes.Description("This command allows you want to get list index from value")]

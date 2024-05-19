@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Row")]
     [Attributes.ClassAttributes.CommandSettings("Append Row")]
     [Attributes.ClassAttributes.Description("Append to last row of sheet.")]
