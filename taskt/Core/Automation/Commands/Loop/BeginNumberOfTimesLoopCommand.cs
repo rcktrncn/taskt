@@ -137,9 +137,7 @@ namespace taskt.Core.Automation.Commands
 
                 // (i + 1).ToString().StoreInUserVariable(engine, "Loop.CurrentIndex");
 
-                numbefOfLoopsAction(count);
-                loopCountAction(i + 1);
-                engine.ReportProgress("Starting Loop Number " + (i + 1) + "/" + loopTimes + " From Line " + loopCommand.LineNumber);
+                engine.ReportProgress($"Starting Loop Number {(i + 1)}/{loopTimes} From Line {loopCommand.LineNumber}");
 
                 foreach (var cmd in parentCommand.AdditionalScriptCommands)
                 {
@@ -149,25 +147,27 @@ namespace taskt.Core.Automation.Commands
                     }
 
                     //(i + 1).ToString().StoreInUserVariable(engine, "Loop.CurrentIndex");
-                    SystemVariables.Update_LoopCurrentIndex(i + 1);
+                    //SystemVariables.Update_LoopCurrentIndex(i + 1);
+                    numbefOfLoopsAction(count);
+                    loopCountAction(i + 1);
 
                     engine.ExecuteCommand(cmd);
 
                     if (engine.CurrentLoopCancelled)
                     {
-                        engine.ReportProgress("Exiting Loop From Line " + loopCommand.LineNumber);
+                        engine.ReportProgress($"Exiting Loop From Line {loopCommand.LineNumber}");
                         engine.CurrentLoopCancelled = false;
                         return;
                     }
 
                     if (engine.CurrentLoopContinuing)
                     {
-                        engine.ReportProgress("Continuing Next Loop From Line " + loopCommand.LineNumber);
+                        engine.ReportProgress($"Continuing Next Loop From Line {loopCommand.LineNumber}");
                         engine.CurrentLoopContinuing = false;
                         break;
                     }
                 }
-                engine.ReportProgress("Finished Loop From Line " + loopCommand.LineNumber);
+                engine.ReportProgress($"Finished Loop From Line {loopCommand.LineNumber}");
                 count++;
             }
         }
