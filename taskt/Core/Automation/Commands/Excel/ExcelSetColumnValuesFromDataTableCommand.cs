@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelSetColumnValuesFromDataTableCommand : AExcelColumnRangeSetCommands, ICanHandleDataTable
+    public sealed class ExcelSetColumnValuesFromDataTableCommand : AExcelColumnRangeSetCommands, ICanHandleDataTable
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]

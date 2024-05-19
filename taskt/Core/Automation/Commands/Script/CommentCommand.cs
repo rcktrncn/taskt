@@ -10,7 +10,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.ImplementationDescription("This command is for visual purposes only")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_comment))]
     [Attributes.ClassAttributes.EnableAutomateRender(true, true)]
-    public class CommentCommand : ScriptCommand
+    public sealed class CommentCommand : ScriptCommand
     {
         public CommentCommand()
         {

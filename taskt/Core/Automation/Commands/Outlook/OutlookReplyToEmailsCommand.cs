@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to reply to emails with your currenty logged in outlook account")]
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_smtp))]
-    public class OutlookReplyToEmailsCommand : ScriptCommand
+    public sealed class OutlookReplyToEmailsCommand : ScriptCommand
     {
         [XmlAttribute]
         [Attributes.PropertyAttributes.PropertyDescription("Indicate whether to Reply or Reply All")]

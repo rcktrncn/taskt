@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Serialization;
 using System.Drawing;
-using System.Windows.Forms;
-using taskt.UI.CustomControls;
-using taskt.Core.Automation.Attributes.PropertyAttributes;
-using taskt.UI.Forms.ScriptBuilder.CommandEditor;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.UI.CustomControls;
+using taskt.UI.Forms.ScriptBuilder.CommandEditor;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -19,7 +19,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_camera))]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ImageRecognitionCommand : ScriptCommand
+    public sealed class ImageRecognitionCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyDescription("Please Specify the Search Image")]

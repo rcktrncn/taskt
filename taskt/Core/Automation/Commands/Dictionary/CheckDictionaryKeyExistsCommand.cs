@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class CheckDictionaryKeyExistsCommand : ADictionaryKeyCommands, IDictionaryGetFromDictionaryProperties
+    public sealed class CheckDictionaryKeyExistsCommand : ADictionaryKeyCommands, IDictionaryGetFromDictionaryProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]

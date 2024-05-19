@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_files))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetFilesCommand : ScriptCommand, ICanHandleList
+    public sealed class GetFilesCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         //[PropertyDescription("Path to the Source Folder")]

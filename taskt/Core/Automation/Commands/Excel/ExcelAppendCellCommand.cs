@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelAppendCellCommand : AExcelColumnSpecifiedCommands
+    public sealed class ExcelAppendCellCommand : AExcelColumnSpecifiedCommands
     {
         //[XmlAttribute]
         //[PropertyDescription("Please Enter the instance name")]

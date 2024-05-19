@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get specific rows of a DataTable.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command attempts to filter a Datatable into a new Datatable")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
-    public class FilterDataTableCommand : ADataTableCreateFromDataTableCommands
+    public sealed class FilterDataTableCommand : ADataTableCreateFromDataTableCommands
     {
         [XmlAttribute]
         [PropertyDescription("Please indicate the DataTable Variable Name")]

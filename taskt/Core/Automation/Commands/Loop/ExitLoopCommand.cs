@@ -12,7 +12,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command to signify that looping should end and commands outside the loop should resume execution.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command is used by the engine to exit a loop")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_exitloop))]
-    public class ExitLoopCommand : ScriptCommand
+    public sealed class ExitLoopCommand : ScriptCommand
     {
         public ExitLoopCommand()
         {

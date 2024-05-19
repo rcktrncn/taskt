@@ -12,7 +12,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_files))]
     [Attributes.ClassAttributes.EnableAutomateRender(true, true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ClearClipboardTextCommand : ScriptCommand
+    public sealed class ClearClipboardTextCommand : ScriptCommand
     {
         public ClearClipboardTextCommand()
         {

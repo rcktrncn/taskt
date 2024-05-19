@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.EnableAutomateRender(true, true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
 
-    public class StopCurrentScriptFileCommand : ScriptCommand
+    public sealed class StopCurrentScriptFileCommand : ScriptCommand
     {
         public StopCurrentScriptFileCommand()
         {

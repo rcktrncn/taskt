@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command to select data from a database.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements 'OLEDB' to achieve automation.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_database))]
-    public class DatabaseExecuteQueryCommand : ScriptCommand, ICanHandleDataTable, IHaveDataTableElements
+    public sealed class DatabaseExecuteQueryCommand : ScriptCommand, ICanHandleDataTable, IHaveDataTableElements
     {
         [XmlAttribute]
         [Attributes.PropertyAttributes.PropertyDescription("Please Enter the instance name")]

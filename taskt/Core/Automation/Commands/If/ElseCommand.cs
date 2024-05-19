@@ -12,7 +12,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to signify the exit point of your if scenario")]
     [Attributes.ClassAttributes.ImplementationDescription("TBD")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_else))]
-    public class ElseCommand : ScriptCommand
+    public sealed class ElseCommand : ScriptCommand
     {
         public ElseCommand()
         {

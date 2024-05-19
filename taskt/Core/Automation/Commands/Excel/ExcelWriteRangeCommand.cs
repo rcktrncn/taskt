@@ -18,7 +18,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to set a value to a specific cell.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements Excel Interop to achieve automation.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
-    public class ExcelWriteRangeCommand : AExcelInstanceCommands
+    public sealed class ExcelWriteRangeCommand : AExcelInstanceCommands
     {
         //[XmlAttribute]
         //[PropertyDescription("Please Enter the instance name")]

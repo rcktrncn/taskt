@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetJSONValueListCommand : ScriptCommand, ICanHandleList
+    public sealed class GetJSONValueListCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyDescription("Supply the JSON text or variable requiring extraction")]

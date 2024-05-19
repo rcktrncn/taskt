@@ -18,7 +18,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to split a range into separate ranges.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements 'Excel Interop' to achieve automation.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
-    public class ExcelSplitRangeByColumnCommand : AExcelInstanceCommands
+    public sealed class ExcelSplitRangeByColumnCommand : AExcelInstanceCommands
     {
         //[XmlAttribute]
         //[PropertyDescription("Please Enter the instance name")]

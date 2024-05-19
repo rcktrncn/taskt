@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertColorCommand : ScriptCommand, ICanHandleColor, IDictionaryResultProperties, IDataTableResultProperties
+    public sealed class ConvertColorCommand : ScriptCommand, ICanHandleColor, IDictionaryResultProperties, IDataTableResultProperties
     {
         [XmlAttribute]
         [PropertyDescription("Color Variable Name")]

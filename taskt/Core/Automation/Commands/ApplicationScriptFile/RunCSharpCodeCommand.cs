@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_script))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class RunCSharpCodeCommand : ScriptCommand
+    public sealed class RunCSharpCodeCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyDescription("C# Code")]

@@ -1,17 +1,12 @@
-﻿using System;
+﻿using MSHTML;
+using SHDocVw;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using Newtonsoft.Json;
-using OpenQA.Selenium;
 using taskt.UI.CustomControls;
-using taskt.UI.Forms;
-using SHDocVw;
-using MSHTML;
-using taskt.Core.Automation.User32;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -20,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.Description("This command allows you to manipulate (get or set) elements within the HTML document of the associated IE web browser.  Features an assisting element capture form")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements the 'InternetExplorer' application object from SHDocVw.dll and MSHTML.dll to achieve automation.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
-    public class IEBrowserElementActionCommand : ScriptCommand
+    public sealed class IEBrowserElementActionCommand : ScriptCommand
     {
         [XmlAttribute]
         [Attributes.PropertyAttributes.PropertyDescription("Please Enter the instance name")]
