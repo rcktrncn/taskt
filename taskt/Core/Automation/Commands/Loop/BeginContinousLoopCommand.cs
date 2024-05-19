@@ -54,7 +54,7 @@ namespace taskt.Core.Automation.Commands
                 });
             }
 
-            engine.ReportProgress("Starting Continous Loop From Line " + loopCommand.LineNumber);
+            engine.ReportProgress($"Starting Continous Loop From Line {loopCommand.LineNumber}");
 
             decimal count = 0;
             while (true)
@@ -74,14 +74,14 @@ namespace taskt.Core.Automation.Commands
 
                     if (engine.CurrentLoopCancelled)
                     {
-                        engine.ReportProgress("Exiting Loop From Line " + loopCommand.LineNumber);
+                        engine.ReportProgress($"Exiting Loop From Line {loopCommand.LineNumber}");
                         engine.CurrentLoopCancelled = false;
                         return;
                     }
 
                     if (engine.CurrentLoopContinuing)
                     {
-                        engine.ReportProgress("Continuing Next Loop From Line " + loopCommand.LineNumber);
+                        engine.ReportProgress($"Continuing Next Loop From Line {loopCommand.LineNumber}");
                         engine.CurrentLoopContinuing = false;
                         break;
                     }
