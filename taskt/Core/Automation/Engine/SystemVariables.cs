@@ -261,6 +261,15 @@ namespace taskt.Core.Automation.Engine
         }
 
         /// <summary>
+        /// update Loop.CurrentIndex value
+        /// </summary>
+        /// <param name="value"></param>
+        public static void Update_LoopCurrentIndex(decimal value)
+        {
+            Loop_CurrentIndex.VariableValue = value.ToString();
+        }
+
+        /// <summary>
         /// update Error System variables
         /// </summary>
         /// <param name="command"></param>
