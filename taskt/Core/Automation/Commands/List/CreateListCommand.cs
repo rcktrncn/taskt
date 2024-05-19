@@ -37,6 +37,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**1**", "Set **1**")]
         [PropertyDetailSampleUsage("**ABC**", "Set **ABC**")]
         [PropertyDetailSampleUsage("**{{{vValue}}}**", "Set Value of Variable **vValue**")]
+        [PropertyParameterOrder(6000)]
         public DataTable v_ListValues { get; set; }
 
         public CreateListCommand()
