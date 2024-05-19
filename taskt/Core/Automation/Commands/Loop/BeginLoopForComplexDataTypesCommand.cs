@@ -169,17 +169,17 @@ namespace taskt.Core.Automation.Commands
         //    return "Loop List Variable '" + v_LoopParameter + "'";
         //}
 
-        public override bool IsValidate(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
-        {
-            base.IsValidate(editor);
+        //public override bool IsValidate(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
+        //{
+        //    base.IsValidate(editor);
 
-            if (String.IsNullOrEmpty(this.v_LoopParameter))
-            {
-                this.validationResult += "List variable is empty.\n";
-                this.IsValid = false;
-            }
+        //    if (string.IsNullOrEmpty(this.v_LoopParameter))
+        //    {
+        //        this.validationResult += "List variable is empty.\n";
+        //        this.IsValid = false;
+        //    }
 
-            return this.IsValid;
-        }
+        //    return this.IsValid;
+        //}
     }
 }

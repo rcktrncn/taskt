@@ -195,27 +195,27 @@ namespace taskt.Core.Automation.Commands
         //    }
         //}
 
-        public override bool IsValidate(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
-        {
-            base.IsValidate(editor);
+        //public override bool IsValidate(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
+        //{
+        //    base.IsValidate(editor);
 
-            if (string.IsNullOrEmpty(this.v_LoopParameter))
-            {
-                this.validationResult += "Times is empty.\n";
-            }
-            else
-            {
-                if (int.TryParse(this.v_LoopParameter, out int v))
-                {
-                    if (v < 0)
-                    {
-                        this.validationResult += "Specify a value of 0 or more for Times.\n";
-                        this.IsValid = false;
-                    }
-                }
-            }
+        //    if (string.IsNullOrEmpty(this.v_LoopParameter))
+        //    {
+        //        this.validationResult += "Times is empty.\n";
+        //    }
+        //    else
+        //    {
+        //        if (int.TryParse(this.v_LoopParameter, out int v))
+        //        {
+        //            if (v < 0)
+        //            {
+        //                this.validationResult += "Specify a value of 0 or more for Times.\n";
+        //                this.IsValid = false;
+        //            }
+        //        }
+        //    }
 
-            return this.IsValid;
-        }
+        //    return this.IsValid;
+        //}
     }
 }
