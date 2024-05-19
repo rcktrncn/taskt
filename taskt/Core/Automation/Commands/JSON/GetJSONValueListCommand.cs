@@ -30,7 +30,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyInstanceType(PropertyInstanceType.InstanceType.JSON)]
         [PropertyValidationRule("JSON", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "JSON")]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Specify a JSON extractor (JSONPath)")]
@@ -75,7 +75,7 @@ namespace taskt.Core.Automation.Commands
             }
 
             //get variablized input
-            var jsonText = v_InputValue.ExpandValueOrUserVariable(engine).Trim();
+            var jsonText = v_Json.ExpandValueOrUserVariable(engine).Trim();
 
             //get variablized token
             var jsonSearchToken = v_JsonExtractor.ExpandValueOrUserVariable(engine);

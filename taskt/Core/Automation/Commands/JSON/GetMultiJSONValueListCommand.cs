@@ -28,7 +28,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyInstanceType(PropertyInstanceType.InstanceType.JSON)]
         [PropertyValidationRule("JSON", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "JSON")]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlElement]
         [PropertyDescription("Please Assign Objects for Parsing.")]
@@ -131,7 +131,7 @@ namespace taskt.Core.Automation.Commands
             {
                 new GetJSONValueListCommand
                 {
-                    v_InputValue = this.v_InputValue,
+                    v_Json = this.v_Json,
                     v_JsonExtractor = row.Key,
                     v_Result = row.Value
                 }.RunCommand(engine);

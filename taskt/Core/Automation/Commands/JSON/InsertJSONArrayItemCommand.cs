@@ -19,7 +19,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
@@ -83,7 +83,7 @@ namespace taskt.Core.Automation.Commands
 
                 ary.Insert(index, JToken.FromObject(insertItem));
             });
-            this.JSONModifyByJSONPath(nameof(v_InputValue), nameof(v_JsonExtractor), addItemFunc, addItemFunc, engine);
+            this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), addItemFunc, addItemFunc, engine);
         }
     }
 }

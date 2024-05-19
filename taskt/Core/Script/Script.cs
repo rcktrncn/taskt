@@ -3270,6 +3270,36 @@ namespace taskt.Core.Script
 
             // ReadJSONFileCommand v_userVariableName -> v_Result
             ChangeAttributeName(doc, "ReadJSONFileCommand", "v_userVariableName", "v_Result");
+
+            // JSON v_InputValue -> v_Json
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "AddJSONArrayItemCommand":
+                        case "AddJSONObjectPropertyCommand":
+                        case "ConvertJSONToDataTableCommand":
+                        case "ConvertJSONToDictionaryCommand":
+                        case "ConvertJSONToListCommand":
+                        case "GetJSONValueListCommand":
+                        case "GetMultiJSONValueListCommand":
+                        case "InsertJSONArrayItemCommand":
+                        case "InsertJSONObjectPropertyCommand":
+                        case "ParseJSONArrayCommand":
+                        case "RemoveJSONArrayItemCommand":
+                        case "RemoveJSONPropertyCommand":
+                        case "SetJSONValueCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_InputValue", "v_Json"
+            );
+
+            // CreateJsonVariableCommand v_JsonVariable -> v_Json
+            ChangeAttributeName(doc, "CreateJSONVariableCommand", "v_JsonVariable", "v_Json");
         }
 
         /// <summary>

@@ -25,7 +25,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyShowSampleUsageInDescription(true)]
         [PropertyValidationRule("JSON", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "JSON")]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Please select the variable to receive the List")]
@@ -50,7 +50,7 @@ namespace taskt.Core.Automation.Commands
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
             //get variablized input
-            var variableInput = v_InputValue.ExpandValueOrUserVariable(engine);
+            var variableInput = v_Json.ExpandValueOrUserVariable(engine);
 
             //create objects
             Newtonsoft.Json.Linq.JArray arr;

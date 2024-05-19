@@ -18,7 +18,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_OutputJSONName))]
-        public string v_JsonVariable { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("JSON Value")]
@@ -44,7 +44,7 @@ namespace taskt.Core.Automation.Commands
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
             (var jsonText, _) = v_JsonValue.ExpandValueOrUserVariableAsJSON(engine);
-            jsonText.StoreInUserVariable(engine, v_JsonVariable);
+            jsonText.StoreInUserVariable(engine, v_Json);
         }
     }
 }

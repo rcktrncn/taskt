@@ -20,7 +20,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
         [PropertyDescription("JSON Object Variable Name")]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
@@ -69,7 +69,7 @@ namespace taskt.Core.Automation.Commands
                 var propertyName = v_PropertyName.ExpandValueOrUserVariable(engine);
                 searchResult.Parent.AddAfterSelf(new JProperty(propertyName, propertyValue));
             });
-            this.JSONModifyByJSONPath(nameof(v_InputValue), nameof(v_JsonExtractor), addPropertyFunc, addPropertyFunc, engine);
+            this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), addPropertyFunc, addPropertyFunc, engine);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
@@ -51,7 +51,7 @@ namespace taskt.Core.Automation.Commands
                 var valueToSet = this.GetJSONValue(nameof(v_ValueToSet), nameof(v_ValueType), "Set", engine);
                 searchResult.Replace(JToken.FromObject(valueToSet));
             });
-            this.JSONModifyByJSONPath(nameof(v_InputValue), nameof(v_JsonExtractor), setValueFunc, setValueFunc, engine);
+            this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), setValueFunc, setValueFunc, engine);
         }
     }
 }

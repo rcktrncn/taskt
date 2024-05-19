@@ -20,7 +20,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
         [PropertyDescription("JSON Object Variable Name")]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
@@ -52,7 +52,7 @@ namespace taskt.Core.Automation.Commands
                     throw new Exception("Strange Search Result. Fail Remove. Value: '" + searchResult.ToString() + "'");
                 }
             });
-            this.JSONModifyByJSONPath(nameof(v_InputValue), nameof(v_JsonExtractor), removeFunc, removeFunc, engine);
+            this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), removeFunc, removeFunc, engine);
         }
     }
 }

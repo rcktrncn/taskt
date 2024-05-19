@@ -20,7 +20,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_OutputDataTableName))]
@@ -57,7 +57,7 @@ namespace taskt.Core.Automation.Commands
                 //parseJSONArrayAsDataTable(ary, resultDT).StoreInUserVariable(engine, v_applyToVariableName);
                 this.StoreDataTableInUserVariable(parseJSONArrayAsDataTable(ary, resultDT), nameof(v_Result), engine);
             });
-            this.JSONProcess(nameof(v_InputValue), objFunc, aryFunc, engine);
+            this.JSONProcess(nameof(v_Json), objFunc, aryFunc, engine);
         }
 
         private static DataTable parseJSONArrayAsDataTable(JArray arr, DataTable DT)

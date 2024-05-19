@@ -20,7 +20,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
         [PropertyDescription("JSON Array Variable Name")]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
@@ -55,7 +55,7 @@ namespace taskt.Core.Automation.Commands
                 var addItem = this.GetJSONValue(nameof(v_ArrayItem), nameof(v_ValueType), "Add", engine);
                 ary.Add(addItem);
             });
-            this.JSONModifyByJSONPath(nameof(v_InputValue), nameof(v_JsonExtractor), addItemFunc, addItemFunc, engine);
+            this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), addItemFunc, addItemFunc, engine);
         }
     }
 }

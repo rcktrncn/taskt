@@ -20,7 +20,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_OutputListName))]
@@ -56,7 +56,7 @@ namespace taskt.Core.Automation.Commands
                 //resultList.StoreInUserVariable(engine, v_applyToVariableName);
                 this.StoreListInUserVariable(resultList, nameof(v_Result), engine);
             });
-            this.JSONProcess(nameof(v_InputValue), objFunc, aryFunc, engine);
+            this.JSONProcess(nameof(v_Json), objFunc, aryFunc, engine);
         }
     }
 }
