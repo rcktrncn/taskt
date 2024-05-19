@@ -40,7 +40,7 @@ namespace taskt.Core.Automation.Commands
         //[PropertyTextBoxSetting(1, false)]
         //[PropertyShowSampleUsageInDescription(true)]
         //[PropertyDisplayText(true, "Index")]
-        public string v_InsertIndex { get; set; }
+        public string v_Index { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
@@ -70,11 +70,11 @@ namespace taskt.Core.Automation.Commands
 
                 var insertItem = this.GetJSONValue(nameof(v_Value), nameof(v_ValueType), "Insert", engine);
 
-                if (String.IsNullOrEmpty(v_InsertIndex))
+                if (String.IsNullOrEmpty(v_Index))
                 {
-                    v_InsertIndex = ary.Count.ToString();
+                    v_Index = ary.Count.ToString();
                 }
-                var index = this.ExpandValueOrUserVariableAsInteger(nameof(v_InsertIndex), engine);
+                var index = this.ExpandValueOrUserVariableAsInteger(nameof(v_Index), engine);
 
                 if ((index < 0) && (index > ary.Count))
                 {

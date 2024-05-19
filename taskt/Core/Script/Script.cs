@@ -3303,11 +3303,28 @@ namespace taskt.Core.Script
 
             // JSON v_***Value -> v_Value
             ChangeAttributeName(doc, "AddJSONArrayItemCommand", "v_ArrayItem", "v_Value");
-            ChangeAttributeName(doc, "AddJSONObjectPropertyCommand", "v_PropertyValue", "v_Value");
             ChangeAttributeName(doc, "CreateJSONVariableCommand", "v_JsonValue", "v_Value");
             ChangeAttributeName(doc, "InsertJSONArrayItemCommand", "v_InsertItem", "v_Value");
-            ChangeAttributeName(doc, "InsertJSONObjectPropertyCommand", "v_PropertyValue", "v_Value");
             ChangeAttributeName(doc, "SetJSONValueCommand", "v_ValueToSet", "v_Value");
+
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "AddJSONObjectPropertyCommand":
+                        case "InsertJSONObjectPropertyCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_PropertyValue", "v_Value"
+            );
+
+            // JSON array index -> v_Index
+            ChangeAttributeName(doc, "InsertJSONArrayItemCommand", "v_InsertIndex", "v_Index");
+            ChangeAttributeName(doc, "RemoveJSONArrayItemCommand", "v_RemoveIndex", "v_Index");
         }
 
         /// <summary>

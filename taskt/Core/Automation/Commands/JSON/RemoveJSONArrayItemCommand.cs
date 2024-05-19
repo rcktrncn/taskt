@@ -40,7 +40,7 @@ namespace taskt.Core.Automation.Commands
         //[PropertyShowSampleUsageInDescription(true)]
         //[PropertyDisplayText(true, "Index")]
         //[PropertyValidationRule("Index", PropertyValidationRule.ValidationRuleFlags.Empty)]
-        public string v_RemoveIndex { get; set; }
+        public string v_Index { get; set; }
 
         public RemoveJSONArrayItemCommand()
         {
@@ -60,7 +60,7 @@ namespace taskt.Core.Automation.Commands
                 }
                 JArray ary = (JArray)searchResult;
 
-                var index = this.ExpandValueOrUserVariableAsInteger(nameof(v_RemoveIndex), engine);
+                var index = this.ExpandValueOrUserVariableAsInteger(nameof(v_Index), engine);
 
                 if ((index < 0) && (index > ary.Count))
                 {
