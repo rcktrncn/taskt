@@ -4,11 +4,12 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using taskt.Core;
-using taskt.Core.Automation.Commands;
+using taskt.Core.Automation.Attributes.ClassAttributes;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Automation.Commands;
 using static taskt.Core.Automation.Commands.PropertyControls;
 using static taskt.Core.Automation.Engine.SystemVariables;
 
@@ -1899,14 +1900,29 @@ namespace taskt.UI.CustomControls
             //Loop through each class
             foreach (var commandClass in commandClasses)
             {
-                var groupingAttribute = commandClass.GetCustomAttributes(typeof(Core.Automation.Attributes.ClassAttributes.Group), true);
+                //var groupingAttribute = commandClass.GetCustomAttributes(typeof(Core.Automation.Attributes.ClassAttributes.Group), true);
+                var groupingAttribute = commandClass.GetCustomAttribute<Core.Automation.Attributes.ClassAttributes.Group>();
                 string groupAttribute = "";
-                if (groupingAttribute.Length > 0)
+                //if (groupingAttribute.Length > 0)
+                if (groupingAttribute != null)
                 {
-                    var attributeFound = (Core.Automation.Attributes.ClassAttributes.Group)groupingAttribute[0];
-                    groupAttribute = attributeFound.groupName;
+                    //var attributeFound = (Core.Automation.Attributes.ClassAttributes.Group)groupingAttribute[0];
+                    //groupAttribute = attributeFound.groupName;
+                    var attr = groupingAttribute.groupName;
+                    var idx = attr.LastIndexOf(" Commands");
+                    if (idx > 0)
+                    {
+                        var t = attr.Substring(0, idx);
+                        groupAttribute = attr;
+                    }
+                    else
+                    {
+                        groupAttribute = $"{attr} Commands";
+                    }
                 }
-                var subGroupAttr = (Core.Automation.Attributes.ClassAttributes.SubGruop)commandClass.GetCustomAttribute(typeof(Core.Automation.Attributes.ClassAttributes.SubGruop));
+
+                //var subGroupAttr = (Core.Automation.Attributes.ClassAttributes.SubGruop)commandClass.GetCustomAttribute(typeof(Core.Automation.Attributes.ClassAttributes.SubGruop));
+                var subGroupAttr = commandClass.GetCustomAttribute<SubGruop>();
                 string subGroupName = (subGroupAttr != null) ? subGroupAttr.subGruopName : "";
 
                 //Instantiate Class
@@ -1934,7 +1950,6 @@ namespace taskt.UI.CustomControls
             }
 
             return commandList;
-
         }
     }
 }
