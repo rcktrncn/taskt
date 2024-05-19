@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Automation.Engine;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -20,6 +21,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
         [PropertyDescription("Variable Name to Store Loop Times (First Time Value is 0)")]
         [PropertyIsOptional(true)]
+        [PropertyValidationRule("Loop Times", PropertyValidationRule.ValidationRuleFlags.None)]
         public string v_LoopTimes { get; set; }
 
         public BeginContinousLoopCommand()
@@ -40,13 +42,14 @@ namespace taskt.Core.Automation.Commands
                 loopTimesAction = new Action<decimal>(num =>
                 {
                     num.StoreInUserVariable(engine, v_LoopTimes);
+                    SystemVariables.Update_LoopCurrentIndex(num);
                 });
             }
             else
             {
                 loopTimesAction = new Action<decimal>(num =>
                 {
-                    // nothing
+                    SystemVariables.Update_LoopCurrentIndex(num);
                 });
             }
 
