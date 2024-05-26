@@ -1,7 +1,7 @@
 ﻿namespace taskt.Core.Automation.Commands
 {
-    public interface ICanHandleJSON
+    public interface ICanHandleJSON : ICanHandleJSONArray, ICanHandleJSONObject
     {
-        // nothing
+        // only imple
     }
 }

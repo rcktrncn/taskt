@@ -19,30 +19,13 @@ namespace taskt.Core.Automation.Commands
         /// <returns>(jsonText, jsonType)</returns>
         public static (string, JSONType) DetectJSONType(string json)
         {
-            json = json.Trim();
-            if (json.StartsWith("{") && json.EndsWith("}"))
+            if (EM_CanHandleJSONObjectExtensionMethods.IsJSONObject(json, out (string str, JObject json) to))
             {
-                try
-                {
-                    JObject.Parse(json);
-                    return (json, JSONType.Object);
-                }
-                catch
-                {
-                    return ("", JSONType.NotJSON);
-                }
+                return (to.str, JSONType.Object);
             }
-            else if (json.StartsWith("[") && json.EndsWith("]"))
+            else if (EM_CanHandleJSONArrayExtentionMethods.IsJSONArray(json, out (string str, JArray json) ta))
             {
-                try
-                {
-                    JArray.Parse(json);
-                    return (json, JSONType.Array);
-                }
-                catch
-                {
-                    return ("", JSONType.NotJSON);
-                }
+                return (ta.str, JSONType.Array);
             }
             else
             {
@@ -72,17 +55,17 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
-        /// <summary>
-        /// Store JSON in User Variable
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="list"></param>
-        /// <param name="parameterName"></param>
-        /// <param name="engine"></param>
-        public static void StoreJSONInUserVariable(this ICanHandleJSON command, string json, string parameterName, Engine.AutomationEngineInstance engine)
-        {
-            var variableName = ((ScriptCommand)command).GetRawPropertyValueAsString(parameterName, "JSON Variable");
-            ExtensionMethods.StoreInUserVariable(variableName, json, engine);
-        }
+        ///// <summary>
+        ///// Store JSON in User Variable
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="list"></param>
+        ///// <param name="parameterName"></param>
+        ///// <param name="engine"></param>
+        //public static void StoreJSONInUserVariable(this ICanHandleJSON command, string json, string parameterName, Engine.AutomationEngineInstance engine)
+        //{
+        //    var variableName = ((ScriptCommand)command).GetRawPropertyValueAsString(parameterName, "JSON Variable");
+        //    ExtensionMethods.StoreInUserVariable(variableName, json, engine);
+        //}
     }
 }
