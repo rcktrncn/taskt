@@ -56,7 +56,7 @@ namespace taskt.Core.Automation.Commands
             }
             else
             {
-                throw new Exception($"Variable '{variable.VariableName}' is not JSONArray");
+                throw new Exception($"Variable '{variable.VariableName}' is not JSONArray.");
             }
         }
 
@@ -76,7 +76,7 @@ namespace taskt.Core.Automation.Commands
             }
             catch
             {
-                throw new Exception($"Variable '{variableName}' is not JSON");
+                throw new Exception($"Variable '{variableName}' is not JSON.");
             }
         }
 
