@@ -7,6 +7,27 @@ namespace taskt.Core.Automation.Commands
     public static class EM_CanHandleColorExtensionMethods
     {
         /// <summary>
+        /// Check object is Color
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public static bool IsColor(object value, out Color c)
+        {
+            // TODO: it's ok? not extension methods
+            c = default;
+            if (value is Color x)
+            {
+                c = x;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Expand User Variable as Color
         /// </summary>
         /// <param name="command"></param>
@@ -16,7 +37,7 @@ namespace taskt.Core.Automation.Commands
         public static Color ExpandUserVariableAsColor(ScriptVariable variable)
         {
             // TODO: it's ok? not extension methods
-            if (variable.VariableValue is Color color)
+            if (IsColor(variable.VariableValue, out Color color))
             {
                 return color;
             }

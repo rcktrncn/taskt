@@ -7,6 +7,27 @@ namespace taskt.Core.Automation.Commands
     public static class EM_CanHandleDateTimExtensionMethods
     {
         /// <summary>
+        /// Check object is DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static bool IsDateTime(object value, out DateTime date)
+        {
+            // TODO: it's ok?
+            date = default;
+            if (value is DateTime dt)
+            {
+                date = dt;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Expand User Variable As DateTime
         /// </summary>
         /// <param name="command"></param>
@@ -16,7 +37,7 @@ namespace taskt.Core.Automation.Commands
         public static DateTime ExpandValueOrVariableAsDateTime(ScriptVariable variable)
         {
             // TODO: it's ok?
-            if (variable.VariableValue is DateTime time)
+            if (IsDateTime(variable.VariableValue, out DateTime time))
             {
                 return time;
             }

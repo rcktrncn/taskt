@@ -6,6 +6,21 @@ namespace taskt.Core.Automation.Commands
 {
     public static class EM_CanHandleDictionary
     {
+        public static bool IsDictionary(object value, out Dictionary<string, string> dic)
+        {
+            // TODO: it's OK?
+            dic = default;
+            if (dic is Dictionary<string, string> d)
+            {
+                dic = d;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// Expand User Variable As Dictioanry
         /// </summary>
@@ -16,7 +31,7 @@ namespace taskt.Core.Automation.Commands
         public static Dictionary<string, string> ExpandUserVariableAsDictionary(ScriptVariable variable)
         {
             // TODO: it's ok?
-            if (variable.VariableValue is Dictionary<string, string> dictionary)
+            if (IsDictionary(variable.VariableValue, out Dictionary<string, string> dictionary))
             {
                 return dictionary;
             }

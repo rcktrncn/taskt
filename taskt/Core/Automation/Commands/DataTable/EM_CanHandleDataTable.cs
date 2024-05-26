@@ -9,6 +9,27 @@ namespace taskt.Core.Automation.Commands
     public static class EM_CanHandleDataTable
     {
         /// <summary>
+        /// Check object is DataTable
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static bool IsDataTable(object value, out DataTable table)
+        {
+            // TODO: it's ok?
+            table = default;
+            if (value is DataTable t)
+            {
+                table = t;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Expand User Variable As DataTable
         /// </summary>
         /// <param name="command"></param>
@@ -18,7 +39,7 @@ namespace taskt.Core.Automation.Commands
         public static DataTable ExpandUserVariableAsDataTable(ScriptVariable variable)
         {
             // TODO: it's ok?
-            if (variable.VariableValue is DataTable table)
+            if (IsDataTable(variable.VariableValue, out DataTable table))
             {
                 return table;
             }

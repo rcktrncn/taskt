@@ -7,6 +7,27 @@ namespace taskt.Core.Automation.Commands
     public static class EM_CanHandleListExtensionMethods
     {
         /// <summary>
+        /// check object is List
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static bool IsList(object value, out List<string> list)
+        {
+            // TODO: it's ok?
+            list = default;
+            if (value is List<string> lst)
+            {
+                list = lst;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Expand User Variable As List
         /// </summary>
         /// <param name="command"></param>
@@ -16,7 +37,7 @@ namespace taskt.Core.Automation.Commands
         public static List<string> ExpandUserVariableAsList(ScriptVariable variable)
         {
             // TODO; it's OK?
-            if (variable.VariableValue is List<string> list)
+            if (IsList(variable.VariableValue, out List<string> list))
             {
                 return list;
             }
