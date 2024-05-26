@@ -12,12 +12,12 @@ using Application = Microsoft.Office.Interop.Outlook.Application;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Outlook Commands")]
+    [Attributes.ClassAttributes.Group("Outlook")]
     [Attributes.ClassAttributes.Description("This command allows you to forward emails with outlook")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to forward emails with your currenty logged in outlook account")]
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_smtp))]
-    public class OutlookForwardEmailsCommand : ScriptCommand
+    public sealed class OutlookForwardEmailsCommand : ScriptCommand
     {
         [XmlAttribute]
         [Attributes.PropertyAttributes.PropertyDescription("Provide the source mail folder name")]

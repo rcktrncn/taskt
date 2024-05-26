@@ -9,7 +9,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("List Commands")]
+    [Attributes.ClassAttributes.Group("List")]
     [Attributes.ClassAttributes.SubGruop("List Actions")]
     [Attributes.ClassAttributes.CommandSettings("Create List")]
     [Attributes.ClassAttributes.Description("This command allows you to create new List")]
@@ -18,7 +18,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class CreateListCommand : AListInputListCommands, IHaveDataTableElements
+    public sealed class CreateListCommand : AListInputListCommands, IHaveDataTableElements
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_OutputListName))]
@@ -37,6 +37,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**1**", "Set **1**")]
         [PropertyDetailSampleUsage("**ABC**", "Set **ABC**")]
         [PropertyDetailSampleUsage("**{{{vValue}}}**", "Set Value of Variable **vValue**")]
+        [PropertyParameterOrder(6000)]
         public DataTable v_ListValues { get; set; }
 
         public CreateListCommand()

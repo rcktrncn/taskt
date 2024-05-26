@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("JSON Commands")]
+    [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("Action")]
     [Attributes.ClassAttributes.CommandSettings("Remove JSON Array Item")]
     [Attributes.ClassAttributes.Description("This command allows you to remove item to JSON Array.")]
@@ -15,12 +15,12 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class RemoveJSONArrayItemCommand : ScriptCommand
+    public sealed class RemoveJSONArrayItemCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
         [PropertyDescription("JSON Array Variable Name")]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
@@ -40,7 +40,7 @@ namespace taskt.Core.Automation.Commands
         //[PropertyShowSampleUsageInDescription(true)]
         //[PropertyDisplayText(true, "Index")]
         //[PropertyValidationRule("Index", PropertyValidationRule.ValidationRuleFlags.Empty)]
-        public string v_RemoveIndex { get; set; }
+        public string v_Index { get; set; }
 
         public RemoveJSONArrayItemCommand()
         {
@@ -60,7 +60,7 @@ namespace taskt.Core.Automation.Commands
                 }
                 JArray ary = (JArray)searchResult;
 
-                var index = this.ExpandValueOrUserVariableAsInteger(nameof(v_RemoveIndex), engine);
+                var index = this.ExpandValueOrUserVariableAsInteger(nameof(v_Index), engine);
 
                 if ((index < 0) && (index > ary.Count))
                 {
@@ -69,7 +69,7 @@ namespace taskt.Core.Automation.Commands
 
                 ary.RemoveAt(index);
             });
-            this.JSONModifyByJSONPath(nameof(v_InputValue), nameof(v_JsonExtractor), removeItemFunc, removeItemFunc, engine);
+            this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), removeItemFunc, removeItemFunc, engine);
         }
     }
 }

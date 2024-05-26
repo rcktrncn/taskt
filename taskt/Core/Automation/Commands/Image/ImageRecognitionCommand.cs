@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Serialization;
 using System.Drawing;
-using System.Windows.Forms;
-using taskt.UI.CustomControls;
-using taskt.Core.Automation.Attributes.PropertyAttributes;
-using taskt.UI.Forms.ScriptBuilder.CommandEditor;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.UI.CustomControls;
+using taskt.UI.Forms.ScriptBuilder.CommandEditor;
 
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Image Commands")]
+    [Attributes.ClassAttributes.Group("Image")]
     [Attributes.ClassAttributes.CommandSettings("Image Recognition")]
     [Attributes.ClassAttributes.Description("This command attempts to find an existing image on screen.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to attempt to locate an image on screen.  You can subsequently take actions such as move the mouse to the location or perform a click.  This command generates a fingerprint from the comparison image and searches for it in on the desktop.")]
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_camera))]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ImageRecognitionCommand : ScriptCommand
+    public sealed class ImageRecognitionCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyDescription("Please Specify the Search Image")]

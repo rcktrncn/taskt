@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("List Commands")]
+    [Attributes.ClassAttributes.Group("List")]
     [Attributes.ClassAttributes.SubGruop("List Item")]
     [Attributes.ClassAttributes.CommandSettings("Add List Item")]
     [Attributes.ClassAttributes.Description("This command allows you to add list item.")]
@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class AddListItemCommand : AListBothListCommands
+    public sealed class AddListItemCommand : AListBothListCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_BothListName))]

@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Numerical Commands")]
+    [Attributes.ClassAttributes.Group("Numerical")]
     [Attributes.ClassAttributes.CommandSettings("Create Numerical Variable")]
     [Attributes.ClassAttributes.Description("This command allows you to create Number Variable.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to create Number Variable.")]
@@ -13,7 +13,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
-    public class CreateNumericalVariableCommand : ScriptCommand
+    public sealed class CreateNumericalVariableCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(NumberControls), nameof(NumberControls.v_OutputNumericalVariableName))]

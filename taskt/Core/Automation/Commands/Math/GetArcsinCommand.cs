@@ -3,7 +3,7 @@
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Math Commands")]
+    [Attributes.ClassAttributes.Group("Math")]
     [Attributes.ClassAttributes.CommandSettings("Get Arcsin")]
     [Attributes.ClassAttributes.Description("This command allows you to get arcsin.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get arcsin.")]
@@ -11,7 +11,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
-    public class GetArcsinCommand : AInverseTrignometricCommands
+    public sealed class GetArcsinCommand : AInverseTrignometricCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(NumberControls), nameof(NumberControls.v_Value))]

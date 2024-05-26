@@ -12,13 +12,13 @@ using Application = Microsoft.Office.Interop.Outlook.Application;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Outlook Commands")]
+    [Attributes.ClassAttributes.Group("Outlook")]
     [Attributes.ClassAttributes.Description("This command allows you to move/copy emails with outlook")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to move/copy emails with your currenty logged in outlook account")]
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_smtp))]
 
-    public class OutlookMoveEmailsCommand : ScriptCommand
+    public sealed class OutlookMoveEmailsCommand : ScriptCommand
     {
         [XmlAttribute]
         [Attributes.PropertyAttributes.PropertyDescription("Indicate whether to Move or Copy the emails")]

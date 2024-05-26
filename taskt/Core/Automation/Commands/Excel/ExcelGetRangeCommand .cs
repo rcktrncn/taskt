@@ -9,14 +9,14 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Range")]
     [Attributes.ClassAttributes.CommandSettings("Get Range")]
     [Attributes.ClassAttributes.Description("This command gets text from a specified Excel Range.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get a value from a specific cell.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements 'Excel Interop' to achieve automation.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
-    public class ExcelGetRangeCommand : AExcelInstanceCommands
+    public sealed class ExcelGetRangeCommand : AExcelInstanceCommands
     {
         //[XmlAttribute]
         //[PropertyDescription("Please Enter the instance name")]

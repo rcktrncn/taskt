@@ -13,17 +13,17 @@
 //limitations under the License.
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
-using System.Data;
-using System.IO;
+using System.Xml.Serialization;
 using taskt.Core.Automation.Commands;
-using System.Reflection;
 using taskt.Core.Automation.Engine;
-using System.Text.RegularExpressions;
 
 namespace taskt.Core.Script
 {
@@ -83,7 +83,7 @@ namespace taskt.Core.Script
                 var command = srcCommand.Clone();
                 command.LineNumber = lineNumber;
 
-                if ((command is BeginNumberOfTimesLoopCommand) || (command is BeginContinousLoopCommand) || (command is BeginListLoopCommand) || (command is BeginIfCommand) || (command is BeginMultiIfCommand) || (command is TryCommand) || (command is BeginLoopCommand) || (command is BeginMultiLoopCommand))
+                if ((command is BeginNumberOfTimesLoopCommand) || (command is BeginContinousLoopCommand) || (command is BeginLoopForComplexDataTypesCommand) || (command is BeginIfCommand) || (command is BeginMultiIfCommand) || (command is TryCommand) || (command is BeginLoopCommand) || (command is BeginMultiLoopCommand))
                 {
                     if (subCommands.Count == 0)  //if this is the first loop
                     {
@@ -421,6 +421,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_91(doc);
             convertTo3_5_1_92(doc);
             convertTo3_5_1_93(doc);
+            convertTo3_5_1_96(doc);
 
             return doc;
         }
@@ -3243,6 +3244,90 @@ namespace taskt.Core.Script
                 }),
                 "v_SearchItem", "v_Value"
             );
+        }
+
+        private static void convertTo3_5_1_96(XDocument doc)
+        {
+            // JSON v_applyToVariableName -> v_Result
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "ConvertJSONToDataTableCommand":
+                        case "ConvertJSONToDictionaryCommand":
+                        case "ConvertJSONToListCommand":
+                        case "GetJSONValueListCommand":
+                        case "GetMultiJSONValueListCommand":
+                        case "ParseJSONArrayCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_applyToVariableName", "v_Result"
+            );
+
+            // ReadJSONFileCommand v_userVariableName -> v_Result
+            ChangeAttributeName(doc, "ReadJSONFileCommand", "v_userVariableName", "v_Result");
+
+            // JSON v_InputValue -> v_Json
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "AddJSONArrayItemCommand":
+                        case "AddJSONObjectPropertyCommand":
+                        case "ConvertJSONToDataTableCommand":
+                        case "ConvertJSONToDictionaryCommand":
+                        case "ConvertJSONToListCommand":
+                        case "GetJSONValueListCommand":
+                        case "GetMultiJSONValueListCommand":
+                        case "InsertJSONArrayItemCommand":
+                        case "InsertJSONObjectPropertyCommand":
+                        case "ParseJSONArrayCommand":
+                        case "RemoveJSONArrayItemCommand":
+                        case "RemoveJSONPropertyCommand":
+                        case "SetJSONValueCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_InputValue", "v_Json"
+            );
+
+            // CreateJsonVariableCommand v_JsonVariable -> v_Json
+            ChangeAttributeName(doc, "CreateJSONVariableCommand", "v_JsonVariable", "v_Json");
+
+            // JSON v_***Value -> v_Value
+            ChangeAttributeName(doc, "AddJSONArrayItemCommand", "v_ArrayItem", "v_Value");
+            ChangeAttributeName(doc, "CreateJSONVariableCommand", "v_JsonValue", "v_Value");
+            ChangeAttributeName(doc, "InsertJSONArrayItemCommand", "v_InsertItem", "v_Value");
+            ChangeAttributeName(doc, "SetJSONValueCommand", "v_ValueToSet", "v_Value");
+
+            ChangeAttributeName(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "AddJSONObjectPropertyCommand":
+                        case "InsertJSONObjectPropertyCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                "v_PropertyValue", "v_Value"
+            );
+
+            // JSON array index -> v_Index
+            ChangeAttributeName(doc, "InsertJSONArrayItemCommand", "v_InsertIndex", "v_Index");
+            ChangeAttributeName(doc, "RemoveJSONArrayItemCommand", "v_RemoveIndex", "v_Index");
+
+            // BeginListLoopCommand -> BeginLoopForComplexDataTypesCommand
+            ChangeCommandName(doc, "BeginListLoopCommand", "BeginLoopForComplexDataTypesCommand", "Loop Complex Data Types");
         }
 
         /// <summary>

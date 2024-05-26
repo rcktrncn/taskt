@@ -8,7 +8,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("List Commands")]
+    [Attributes.ClassAttributes.Group("List")]
     [Attributes.ClassAttributes.SubGruop("Convert")]
     [Attributes.ClassAttributes.CommandSettings("Convert List To DataTable")]
     [Attributes.ClassAttributes.Description("This command convert a List to a DataTable.")]
@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertListToDataTableCommand : AListGetFromListCommands, IDataTableResultProperties, ICanHandleList
+    public sealed class ConvertListToDataTableCommand : AListGetFromListCommands, IDataTableResultProperties, ICanHandleList
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]

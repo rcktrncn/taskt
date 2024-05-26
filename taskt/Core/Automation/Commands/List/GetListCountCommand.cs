@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("List Commands")]
+    [Attributes.ClassAttributes.Group("List")]
     [Attributes.ClassAttributes.SubGruop("List Item")]
     [Attributes.ClassAttributes.CommandSettings("Get List Count")]
     [Attributes.ClassAttributes.Description("This command allows you to get the item count of a List")]
@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetListCountCommand : AListGetFromListCommands
+    public sealed class GetListCountCommand : AListGetFromListCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]

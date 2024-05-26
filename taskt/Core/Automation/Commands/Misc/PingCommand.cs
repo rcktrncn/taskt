@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Misc Commands")]
+    [Attributes.ClassAttributes.Group("Misc")]
     [Attributes.ClassAttributes.SubGruop("Network/Internet")]
     [Attributes.ClassAttributes.CommandSettings("Ping")]
     [Attributes.ClassAttributes.Description("This command allows you to add an in-line comment to the script.")]
@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class PingCommand : ScriptCommand
+    public sealed class PingCommand : ScriptCommand
     {
 
         [XmlAttribute]

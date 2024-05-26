@@ -12,12 +12,12 @@ using Application = Microsoft.Office.Interop.Outlook.Application;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Outlook Commands")]
+    [Attributes.ClassAttributes.Group("Outlook")]
     [Attributes.ClassAttributes.Description("This command allows you to reply to emails with outlook")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to reply to emails with your currenty logged in outlook account")]
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_smtp))]
-    public class OutlookReplyToEmailsCommand : ScriptCommand
+    public sealed class OutlookReplyToEmailsCommand : ScriptCommand
     {
         [XmlAttribute]
         [Attributes.PropertyAttributes.PropertyDescription("Indicate whether to Reply or Reply All")]

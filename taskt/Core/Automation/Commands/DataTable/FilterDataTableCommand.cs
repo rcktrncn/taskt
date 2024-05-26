@@ -10,13 +10,13 @@ using taskt.UI.CustomControls;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("DataTable Commands")]
+    [Attributes.ClassAttributes.Group("DataTable")]
     [Attributes.ClassAttributes.SubGruop("Other")]
     [Attributes.ClassAttributes.Description("This command allows you filter a DataTable into a new Datatable")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get specific rows of a DataTable.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command attempts to filter a Datatable into a new Datatable")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
-    public class FilterDataTableCommand : ADataTableCreateFromDataTableCommands
+    public sealed class FilterDataTableCommand : ADataTableCreateFromDataTableCommands
     {
         [XmlAttribute]
         [PropertyDescription("Please indicate the DataTable Variable Name")]

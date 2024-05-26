@@ -432,6 +432,15 @@
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetActionProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetCopyRenameProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetProperties.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJContainerExtentionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJSONArrayExtentionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJSONExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJSONObjectExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\ICanHandleJContainer.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\ICanHandleJSON.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\ICanHandleJSONArray.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\ICanHandleJSONObject.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\ILJSONInputJSONProperties.cs" />
     <Compile Include="Core\Automation\Commands\List\AListBothListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListCreateFromListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListGetFromListCommands.cs" />
@@ -535,7 +544,9 @@
     <Compile Include="Core\Automation\Commands\_General\ILReplaceValueProperties.cs" />
     <Compile Include="Core\Automation\Commands\_General\RECT.cs" />
     <Compile Include="Core\Automation\Engine\EM_AppInstancesPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Engine\EM_ScriptVariablePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Engine\IAppInstancesProperties.cs" />
+    <Compile Include="Core\Automation\Engine\IScriptVariableListProperties.cs" />
     <Compile Include="Core\Automation\Engine\SystemVariables.cs" />
     <Compile Include="Core\Automation\Commands\FormUIControls.cs" />
     <Compile Include="Core\Update\ApplicationUpdate.cs" />
@@ -797,7 +808,7 @@
     <Compile Include="Core\Automation\Commands\If\BeginIfCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginContinousLoopCommand.cs" />
     <Compile Include="Core\Automation\Commands\_RemovedCommands\BeginExcelDatasetLoopCommand.cs" />
-    <Compile Include="Core\Automation\Commands\Loop\BeginListLoopCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Loop\BeginLoopForComplexDataTypesCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginNumberOfTimesLoopCommand.cs" />
     <Compile Include="Core\Automation\Commands\Window\ActivateWindowCommand.cs" />
     <Compile Include="Core\Automation\Attributes\ClassAttributes.cs" />
@@ -844,7 +855,7 @@
     <Compile Include="Core\Automation\Commands\Window\CloseWindowCommand.cs" />
     <Compile Include="Core\Automation\Commands\Script\CommentCommand.cs" />
     <Compile Include="Core\Automation\Commands\DialogMessage\ShowMessageCommand.cs" />
-    <Compile Include="Core\Automation\Commands\JSON\ParseJSONArray.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\ParseJSONArrayCommand.cs" />
     <Compile Include="Core\Automation\Commands\NLG\NLGCreateNLGInstanceCommand.cs" />
     <Compile Include="Core\Automation\Commands\API\HTTPExecuteRESTAPICommand.cs" />
     <Compile Include="Core\Automation\Commands\ScriptCommand.cs" />

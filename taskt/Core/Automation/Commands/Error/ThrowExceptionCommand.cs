@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Error Handling Commands")]
+    [Attributes.ClassAttributes.Group("Error Handling")]
     [Attributes.ClassAttributes.CommandSettings("Throw Exception")]
     [Attributes.ClassAttributes.Description("This command allows you to throw an exception error.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to throw an exception error")]
@@ -13,7 +13,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_try))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ThrowExceptionCommand : ScriptCommand
+    public sealed class ThrowExceptionCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_MultiLinesTextBox))]

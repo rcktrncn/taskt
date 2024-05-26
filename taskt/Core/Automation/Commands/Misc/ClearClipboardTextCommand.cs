@@ -3,7 +3,7 @@
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Misc Commands")]
+    [Attributes.ClassAttributes.Group("Misc")]
     [Attributes.ClassAttributes.SubGruop("Clipboard")]
     [Attributes.ClassAttributes.CommandSettings("Clear Clipboard Text")]
     [Attributes.ClassAttributes.Description("This command allows you to clear text to the clipboard.")]
@@ -12,7 +12,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_files))]
     [Attributes.ClassAttributes.EnableAutomateRender(true, true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ClearClipboardTextCommand : ScriptCommand
+    public sealed class ClearClipboardTextCommand : ScriptCommand
     {
         public ClearClipboardTextCommand()
         {

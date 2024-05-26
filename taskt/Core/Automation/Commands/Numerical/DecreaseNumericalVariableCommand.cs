@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Numerical Commands")]
+    [Attributes.ClassAttributes.Group("Numerical")]
     [Attributes.ClassAttributes.CommandSettings("Decrease Numerical Variable")]
     [Attributes.ClassAttributes.Description("This command allows you to Decrease Value in Numerical Variable.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to Decrease Value in Numerical Variable.")]
@@ -13,7 +13,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class DecreaseNumericalVariableCommand : ScriptCommand
+    public sealed class DecreaseNumericalVariableCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(NumberControls), nameof(NumberControls.v_BothNumericalVariableName))]

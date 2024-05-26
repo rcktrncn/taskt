@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Dictionary Commands")]
+    [Attributes.ClassAttributes.Group("Dictionary")]
     [Attributes.ClassAttributes.SubGruop("Dictionary Item")]
     [Attributes.ClassAttributes.CommandSettings("Get Dictionary Value")]
     [Attributes.ClassAttributes.Description("This command allows you to get value in Dictionary")]
@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetDictionaryValueCommand : ADictionaryKeyActionCommands, IDictionaryGetFromDictionaryProperties
+    public sealed class GetDictionaryValueCommand : ADictionaryKeyActionCommands, IDictionaryGetFromDictionaryProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_InputDictionaryName))]

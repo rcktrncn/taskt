@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Color Commands")]
+    [Attributes.ClassAttributes.Group("Color")]
     [Attributes.ClassAttributes.SubGruop("")]
     [Attributes.ClassAttributes.CommandSettings("Create Color From Excel Color")]
     [Attributes.ClassAttributes.Description("This command allows you to create Color from Excel Color.")]
@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class CreateColorFromExcelColorCommand : AColorCreateCommands
+    public sealed class CreateColorFromExcelColorCommand : AColorCreateCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ColorControls), nameof(ColorControls.v_InputColorVariableName))]

@@ -9,7 +9,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("JSON Commands")]
+    [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("Get/Set")]
     [Attributes.ClassAttributes.Description("This command allows you to parse a JSON object into a list.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to extract data from a JSON object")]
@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetJSONValueListCommand : ScriptCommand, ICanHandleList
+    public sealed class GetJSONValueListCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyDescription("Supply the JSON text or variable requiring extraction")]
@@ -30,7 +30,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyInstanceType(PropertyInstanceType.InstanceType.JSON)]
         [PropertyValidationRule("JSON", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "JSON")]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Specify a JSON extractor (JSONPath)")]
@@ -55,7 +55,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyInstanceType(PropertyInstanceType.InstanceType.List)]
         [PropertyValidationRule("Result", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "Result")]
-        public string v_applyToVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public GetJSONValueListCommand()
         {
@@ -75,7 +75,7 @@ namespace taskt.Core.Automation.Commands
             }
 
             //get variablized input
-            var jsonText = v_InputValue.ExpandValueOrUserVariable(engine).Trim();
+            var jsonText = v_Json.ExpandValueOrUserVariable(engine).Trim();
 
             //get variablized token
             var jsonSearchToken = v_JsonExtractor.ExpandValueOrUserVariable(engine);
@@ -158,7 +158,7 @@ namespace taskt.Core.Automation.Commands
             //requiredComplexVariable.VariableValue = resultList;
 
             //resultList.StoreInUserVariable(engine, v_applyToVariableName);
-            this.StoreListInUserVariable(resultList, nameof(v_applyToVariableName), engine);
+            this.StoreListInUserVariable(resultList, nameof(v_Result), engine);
         }
 
         public void lnkJsonPathHelper_Click(object sender, EventArgs e)

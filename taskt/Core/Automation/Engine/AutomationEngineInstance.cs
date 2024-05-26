@@ -12,7 +12,7 @@ using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Engine
 {
-    public class AutomationEngineInstance : IAppInstancesProperties
+    public class AutomationEngineInstance : IAppInstancesProperties, IScriptVariableListProperties
     {
         /// <summary>
         /// script variable list
@@ -328,7 +328,7 @@ namespace taskt.Core.Automation.Engine
             try
             {
                 //determine type of command
-                if ((parentCommand is BeginNumberOfTimesLoopCommand) || (parentCommand is BeginContinousLoopCommand) || (parentCommand is BeginListLoopCommand) || (parentCommand is BeginIfCommand) || (parentCommand is BeginMultiIfCommand) || (parentCommand is TryCommand) || (parentCommand is BeginLoopCommand) || (parentCommand is BeginMultiLoopCommand))
+                if ((parentCommand is BeginNumberOfTimesLoopCommand) || (parentCommand is BeginContinousLoopCommand) || (parentCommand is BeginLoopForComplexDataTypesCommand) || (parentCommand is BeginIfCommand) || (parentCommand is BeginMultiIfCommand) || (parentCommand is TryCommand) || (parentCommand is BeginLoopCommand) || (parentCommand is BeginMultiLoopCommand))
                 {
                     //run the command and pass bgw/command as this command will recursively call this method for sub commands
                     parentCommand.RunCommand(this, command);

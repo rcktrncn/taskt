@@ -9,12 +9,12 @@ using taskt.UI.CustomControls;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Data Commands")]
+    [Attributes.ClassAttributes.Group("Data")]
     [Attributes.ClassAttributes.Description("This command allows you to build a date and apply it to a variable.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to perform a date calculation.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements actions against VariableList from the scripting engine.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
-    public class DateCalculationCommand : ScriptCommand
+    public sealed class DateCalculationCommand : ScriptCommand
     {
         [XmlAttribute]
         [Attributes.PropertyAttributes.PropertyDescription("Please supply the date value or variable")]

@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("List Commands")]
+    [Attributes.ClassAttributes.Group("List")]
     [Attributes.ClassAttributes.SubGruop("List Actions")]
     [Attributes.ClassAttributes.CommandSettings("Reverse List")]
     [Attributes.ClassAttributes.Description("This command allows you to reverse list.")]
@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ReverseListCommand : AListCreateFromListCommands
+    public sealed class ReverseListCommand : AListCreateFromListCommands
     {
         [XmlAttribute]
         //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]

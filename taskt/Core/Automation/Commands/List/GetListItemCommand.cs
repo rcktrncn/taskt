@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("List Commands")]
+    [Attributes.ClassAttributes.Group("List")]
     [Attributes.ClassAttributes.SubGruop("List Item")]
     [Attributes.ClassAttributes.CommandSettings("Get List Item")]
     [Attributes.ClassAttributes.Description("This command allows you to get an item from a List")]
@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetListItemCommand : AListIndexCommands, ILResultProperties
+    public sealed class GetListItemCommand : AListIndexCommands, ILResultProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]

@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("List Commands")]
+    [Attributes.ClassAttributes.Group("List")]
     [Attributes.ClassAttributes.SubGruop("Math")]
     [Attributes.ClassAttributes.CommandSettings("Get Variance From List")]
     [Attributes.ClassAttributes.Description("This command allows you to get variance value from a list.")]
@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetVarianceFromListCommand : AListGetMathResultFromListCommands
+    public sealed class GetVarianceFromListCommand : AListGetMathResultFromListCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_InputListName))]

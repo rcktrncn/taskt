@@ -7,7 +7,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Application/Script Commands")]
+    [Attributes.ClassAttributes.Group("Application/Script")]
     [Attributes.ClassAttributes.SubGruop("Windows Script File")]
     [Attributes.ClassAttributes.CommandSettings("Run CSharp Code")]
     [Attributes.ClassAttributes.Description("This command allows you to run C# code from the input")]
@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_script))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class RunCSharpCodeCommand : ScriptCommand
+    public sealed class RunCSharpCodeCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyDescription("C# Code")]

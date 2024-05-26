@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("JSON Commands")]
+    [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("Action")]
     [Attributes.ClassAttributes.CommandSettings("Create JSON Variable")]
     [Attributes.ClassAttributes.Description("This command allows you to create JSON Variable.")]
@@ -14,11 +14,11 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class CreateJSONVariableCommand : ScriptCommand
+    public sealed class CreateJSONVariableCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_OutputJSONName))]
-        public string v_JsonVariable { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("JSON Value")]
@@ -31,7 +31,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.MultiLineTextBox)]
         [PropertyShowSampleUsageInDescription(true)]
         [PropertyDisplayText(true, "JSON Value")]
-        public string v_JsonValue { get; set; }
+        public string v_Value { get; set; }
 
         public CreateJSONVariableCommand()
         {
@@ -43,8 +43,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            (var jsonText, _) = v_JsonValue.ExpandValueOrUserVariableAsJSON(engine);
-            jsonText.StoreInUserVariable(engine, v_JsonVariable);
+            (var jsonText, _) = v_Value.ExpandValueOrUserVariableAsJSON(engine);
+            jsonText.StoreInUserVariable(engine, v_Json);
         }
     }
 }

@@ -9,14 +9,14 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Row")]
     [Attributes.ClassAttributes.CommandSettings("Delete Row")]
     [Attributes.ClassAttributes.Description("This command allows you to delete a specified row in Excel")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to delete an entire row from the current sheet.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements Excel Interop to achieve automation.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
-    public class ExcelDeleteRowCommand : AExcelInstanceCommands
+    public sealed class ExcelDeleteRowCommand : AExcelInstanceCommands
     {
         //[XmlAttribute]
         //[PropertyDescription("Please Enter the instance name")]

@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("JSON Commands")]
+    [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("Convert")]
     [Attributes.ClassAttributes.CommandSettings("Convert JSON To DataTable")]
     [Attributes.ClassAttributes.Description("This command allows you to convert JSON to DataTable.")]
@@ -16,15 +16,15 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ConvertJSONToDataTableCommand : ScriptCommand
+    public sealed class ConvertJSONToDataTableCommand : ScriptCommand, ICanHandleDataTable
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DataTableControls), nameof(DataTableControls.v_OutputDataTableName))]
-        public string v_applyToVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public ConvertJSONToDataTableCommand()
         {
@@ -38,7 +38,7 @@ namespace taskt.Core.Automation.Commands
         {
             Action<JObject> objFunc = new Action<JObject>((obj) =>
             {
-                DataTable resultDT = new DataTable();
+                var resultDT = new DataTable();
 
                 resultDT.Rows.Add();
                 int i = 0;
@@ -48,14 +48,16 @@ namespace taskt.Core.Automation.Commands
                     resultDT.Rows[0][i] = result.Value.ToString();
                     i++;
                 }
-                resultDT.StoreInUserVariable(engine, v_applyToVariableName);
+                //resultDT.StoreInUserVariable(engine, v_applyToVariableName);
+                this.StoreDataTableInUserVariable(resultDT, nameof(v_Result), engine);
             });
             Action<JArray> aryFunc = new Action<JArray>((ary) =>
             {
-                DataTable resultDT = new DataTable();
-                parseJSONArrayAsDataTable(ary, resultDT).StoreInUserVariable(engine, v_applyToVariableName);
+                var resultDT = new DataTable();
+                //parseJSONArrayAsDataTable(ary, resultDT).StoreInUserVariable(engine, v_applyToVariableName);
+                this.StoreDataTableInUserVariable(parseJSONArrayAsDataTable(ary, resultDT), nameof(v_Result), engine);
             });
-            this.JSONProcess(nameof(v_InputValue), objFunc, aryFunc, engine);
+            this.JSONProcess(nameof(v_Json), objFunc, aryFunc, engine);
         }
 
         private static DataTable parseJSONArrayAsDataTable(JArray arr, DataTable DT)

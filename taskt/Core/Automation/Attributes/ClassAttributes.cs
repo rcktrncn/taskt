@@ -15,7 +15,7 @@
 namespace taskt.Core.Automation.Attributes.ClassAttributes
 {
     [System.AttributeUsage(System.AttributeTargets.Class)]
-    public class Group : System.Attribute
+    public sealed class Group : System.Attribute
     {
         public string groupName;
         public Group(string name)
@@ -24,7 +24,7 @@ namespace taskt.Core.Automation.Attributes.ClassAttributes
         }
     }
     [System.AttributeUsage(System.AttributeTargets.Class)]
-    public class Description : System.Attribute
+    public sealed class Description : System.Attribute
     {
         public string commandFunctionalDescription;
         public Description(string desc)
@@ -33,7 +33,7 @@ namespace taskt.Core.Automation.Attributes.ClassAttributes
         }
     }
     [System.AttributeUsage(System.AttributeTargets.Class)]
-    public class ImplementationDescription : System.Attribute
+    public sealed class ImplementationDescription : System.Attribute
     {
         public string commandImplementationDescription;
         public ImplementationDescription(string desc)
@@ -42,7 +42,7 @@ namespace taskt.Core.Automation.Attributes.ClassAttributes
         }
     }
     [System.AttributeUsage(System.AttributeTargets.Class)]
-    public class UsesDescription : System.Attribute
+    public sealed class UsesDescription : System.Attribute
     {
         public string usesDescription;
         public UsesDescription(string desc)
@@ -51,7 +51,7 @@ namespace taskt.Core.Automation.Attributes.ClassAttributes
         }
     }
     [System.AttributeUsage(System.AttributeTargets.Class)]
-    public class SubGruop : System.Attribute
+    public sealed class SubGruop : System.Attribute
     {
         public string subGruopName = "";
         public SubGruop(string group)
@@ -60,7 +60,7 @@ namespace taskt.Core.Automation.Attributes.ClassAttributes
         }
     }
     [System.AttributeUsage(System.AttributeTargets.Class)]
-    public class EnableAutomateDisplayText : System.Attribute
+    public sealed class EnableAutomateDisplayText : System.Attribute
     {
         public bool enableAutomateDisplayText = false;
         public EnableAutomateDisplayText(bool enableAutomateDisplayText)
@@ -69,7 +69,7 @@ namespace taskt.Core.Automation.Attributes.ClassAttributes
         }
     }
     [System.AttributeUsage(System.AttributeTargets.Class)]
-    public class EnableAutomateRender : System.Attribute
+    public sealed class EnableAutomateRender : System.Attribute
     {
         public bool enableAutomateRender = false;
         public bool forceRenderComment = false;
@@ -80,7 +80,7 @@ namespace taskt.Core.Automation.Attributes.ClassAttributes
         }
     }
     [System.AttributeUsage(System.AttributeTargets.Class)]
-    public class CommandSettings : System.Attribute
+    public sealed class CommandSettings : System.Attribute
     {
         public string selectionName = "";
         public bool commandEnable = true;
@@ -98,7 +98,7 @@ namespace taskt.Core.Automation.Attributes.ClassAttributes
         }
     }
     [System.AttributeUsage(System.AttributeTargets.Class)]
-    public class CommandIcon : System.Attribute
+    public sealed class CommandIcon : System.Attribute
     {
         public string iconName = nameof(Properties.Resources.command_files);
         

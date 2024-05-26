@@ -10,7 +10,7 @@ using OpenQA.Selenium;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Variable Commands")]
+    [Attributes.ClassAttributes.Group("Variable")]
     [Attributes.ClassAttributes.CommandSettings("Get Variable Type")]
     [Attributes.ClassAttributes.Description("This command allows you to get variable type.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get variable type.")]
@@ -18,7 +18,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetVariableTypeCommand : ScriptCommand
+    public sealed class GetVariableTypeCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(VariableNameControls), nameof(VariableNameControls.v_VariableName))]

@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Dialog/Message Commands")]
+    [Attributes.ClassAttributes.Group("Dialog/Message")]
     [Attributes.ClassAttributes.CommandSettings("Show File Dialog")]
     [Attributes.ClassAttributes.Description("Show OpenFileDialog or SaveFileDialog")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to select file to save or open.")]
@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_input))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ShowFileDialogCommand : ScriptCommand
+    public sealed class ShowFileDialogCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]

@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("JSON Commands")]
+    [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("Action")]
     [Attributes.ClassAttributes.CommandSettings("Add JSON Array Item")]
     [Attributes.ClassAttributes.Description("This command allows you to add item to JSON Array.")]
@@ -15,12 +15,12 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class AddJSONArrayItemCommand : ScriptCommand
+    public sealed class AddJSONArrayItemCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
         [PropertyDescription("JSON Array Variable Name")]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
@@ -28,7 +28,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
-        public string v_ArrayItem { get; set; }
+        public string v_Value { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueType))]
@@ -52,10 +52,10 @@ namespace taskt.Core.Automation.Commands
                 }
                 JArray ary = (JArray)searchResult;
 
-                var addItem = this.GetJSONValue(nameof(v_ArrayItem), nameof(v_ValueType), "Add", engine);
+                var addItem = this.GetJSONValue(nameof(v_Value), nameof(v_ValueType), "Add", engine);
                 ary.Add(addItem);
             });
-            this.JSONModifyByJSONPath(nameof(v_InputValue), nameof(v_JsonExtractor), addItemFunc, addItemFunc, engine);
+            this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), addItemFunc, addItemFunc, engine);
         }
     }
 }

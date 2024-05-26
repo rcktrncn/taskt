@@ -13,7 +13,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
 
     #region Parameter Order
     [AttributeUsage(AttributeTargets.Property)]
-    public class PropertyParameterOrder : Attribute
+    public sealed class PropertyParameterOrder : Attribute
     {
         public int order = 3000;
         public PropertyParameterOrder()
@@ -32,7 +32,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
 
     #region Virtual Property
     [AttributeUsage(AttributeTargets.Property)]
-    public class PropertyVirtualProperty : Attribute
+    public sealed class PropertyVirtualProperty : Attribute
     {
         public string className;
         public string propertyName;
@@ -51,7 +51,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
 
     #region Intermediate/Raw
     [AttributeUsage(AttributeTargets.Property)]
-    public class PropertyIntermediateConvert : Attribute
+    public sealed class PropertyIntermediateConvert : Attribute
     {
         public string intermediateMethod = "";
         public string rawMethod = "";
@@ -69,7 +69,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
 
     #region to Label, Document
     [AttributeUsage(AttributeTargets.Property)]
-    public class InputSpecification : Attribute
+    public sealed class InputSpecification : Attribute
     {
         public string inputSpecification;
         public bool autoGenerate = false;
@@ -88,7 +88,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class SampleUsage : Attribute
+    public sealed class SampleUsage : Attribute
     {
         public string sampleUsage;
         public SampleUsage(string desc)
@@ -98,7 +98,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
     }
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    public class PropertyDetailSampleUsage : Attribute
+    public sealed class PropertyDetailSampleUsage : Attribute
     {
         public string sampleUsage = "";
         public string means = "";
@@ -130,7 +130,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class PropertyDetailSampleUsageBehavior : Attribute
+    public sealed class PropertyDetailSampleUsageBehavior : Attribute
     {
         public MultiAttributesBehavior behavior = MultiAttributesBehavior.Merge;
 
@@ -145,7 +145,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class Remarks : Attribute
+    public sealed class Remarks : Attribute
     {
         public string remarks;
         public Remarks(string desc)
@@ -212,7 +212,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class PropertyAddtionalParameterInfoBehavior : Attribute
+    public sealed class PropertyAddtionalParameterInfoBehavior : Attribute
     {
         public MultiAttributesBehavior behavior = MultiAttributesBehavior.Merge;
 
@@ -245,7 +245,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class PropertyUIHelperBehavior : Attribute
+    public sealed class PropertyUIHelperBehavior : Attribute
     {
         public MultiAttributesBehavior behavior = MultiAttributesBehavior.Merge;
 
@@ -274,7 +274,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class PropertyCustomUIHelperBehavior : Attribute
+    public sealed class PropertyCustomUIHelperBehavior : Attribute
     {
         public MultiAttributesBehavior behavior = MultiAttributesBehavior.Merge;
 
@@ -289,7 +289,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class PropertyAvailableSystemVariableBehavior : Attribute
+    public sealed class PropertyAvailableSystemVariableBehavior : Attribute
     {
         public MultiAttributesBehavior behavior = MultiAttributesBehavior.Merge;
         
@@ -304,7 +304,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
     }
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    public class PropertyAvailableSystemVariable : Attribute
+    public sealed class PropertyAvailableSystemVariable : Attribute
     {
         public Engine.SystemVariables.LimitedSystemVariableNames variable = Engine.SystemVariables.LimitedSystemVariableNames.None;
         public PropertyAvailableSystemVariable()
@@ -659,7 +659,7 @@ namespace taskt.Core.Automation.Attributes.PropertyAttributes
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class PropertyUISelectionOptionBehavior : Attribute
+    public sealed class PropertyUISelectionOptionBehavior : Attribute
     {
         public MultiAttributesBehavior behavior = MultiAttributesBehavior.Merge;
 

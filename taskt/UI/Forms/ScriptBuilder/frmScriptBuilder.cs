@@ -1553,7 +1553,7 @@ namespace taskt.UI.Forms.ScriptBuilder
             // insert comment above if, loop, try
             if (appSettings.ClientSettings.InsertCommentIfLoopAbove)
             {
-                if ((selectedCommand is BeginListLoopCommand) || (selectedCommand is BeginContinousLoopCommand) || (selectedCommand is BeginNumberOfTimesLoopCommand) || (selectedCommand is BeginLoopCommand) || (selectedCommand is BeginMultiLoopCommand))
+                if ((selectedCommand is BeginLoopForComplexDataTypesCommand) || (selectedCommand is BeginContinousLoopCommand) || (selectedCommand is BeginNumberOfTimesLoopCommand) || (selectedCommand is BeginLoopCommand) || (selectedCommand is BeginMultiLoopCommand))
                 {
                     lstScriptActions.Items.Insert(insertionIndex, CreateScriptCommandListViewItem(new CommentCommand() { v_Comment = "Please enter a description of the loop here" }));
                     insertionIndex++;
@@ -1576,7 +1576,7 @@ namespace taskt.UI.Forms.ScriptBuilder
             var focusIndex = insertionIndex;
 
             //special types also get a following command and comment
-            if ((selectedCommand is BeginListLoopCommand) || (selectedCommand is BeginContinousLoopCommand) || (selectedCommand is BeginNumberOfTimesLoopCommand) || (selectedCommand is BeginLoopCommand) || (selectedCommand is BeginMultiLoopCommand))
+            if ((selectedCommand is BeginLoopForComplexDataTypesCommand) || (selectedCommand is BeginContinousLoopCommand) || (selectedCommand is BeginNumberOfTimesLoopCommand) || (selectedCommand is BeginLoopCommand) || (selectedCommand is BeginMultiLoopCommand))
             {
                 lstScriptActions.Items.Insert(insertionIndex + 1, CreateScriptCommandListViewItem(new CommentCommand() { v_Comment = "Items in this section will run within the loop" }));
                 lstScriptActions.Items.Insert(insertionIndex + 2, CreateScriptCommandListViewItem(new EndLoopCommand()));
@@ -1643,7 +1643,7 @@ namespace taskt.UI.Forms.ScriptBuilder
                     continue;
                 }
 
-                if ((rowItem.Tag is BeginIfCommand) || (rowItem.Tag is BeginMultiIfCommand) || (rowItem.Tag is BeginListLoopCommand) || (rowItem.Tag is BeginContinousLoopCommand) || (rowItem.Tag is BeginNumberOfTimesLoopCommand) || (rowItem.Tag is TryCommand) || (rowItem.Tag is BeginLoopCommand) || (rowItem.Tag is BeginMultiLoopCommand))
+                if ((rowItem.Tag is BeginIfCommand) || (rowItem.Tag is BeginMultiIfCommand) || (rowItem.Tag is BeginLoopForComplexDataTypesCommand) || (rowItem.Tag is BeginContinousLoopCommand) || (rowItem.Tag is BeginNumberOfTimesLoopCommand) || (rowItem.Tag is TryCommand) || (rowItem.Tag is BeginLoopCommand) || (rowItem.Tag is BeginMultiLoopCommand))
                 {
                     indent += 2;
                     rowItem.IndentCount = indent;
@@ -2934,7 +2934,7 @@ namespace taskt.UI.Forms.ScriptBuilder
             int tryCatchValidationCount = 0;
             foreach (ListViewItem item in lstScriptActions.Items)
             {
-                if ((item.Tag is BeginListLoopCommand) || (item.Tag is BeginContinousLoopCommand) ||(item.Tag is BeginNumberOfTimesLoopCommand) || (item.Tag is BeginLoopCommand) || (item.Tag is BeginMultiLoopCommand))
+                if ((item.Tag is BeginLoopForComplexDataTypesCommand) || (item.Tag is BeginContinousLoopCommand) ||(item.Tag is BeginNumberOfTimesLoopCommand) || (item.Tag is BeginLoopCommand) || (item.Tag is BeginMultiLoopCommand))
                 {
                     beginLoopValidationCount++;
                 }

@@ -2,11 +2,53 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
 {
     public static class EM_CanHandleDataTable
     {
+        /// <summary>
+        /// Check object is DataTable
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static bool IsDataTable(object value, out DataTable table)
+        {
+            // TODO: it's ok?
+            table = default;
+            if (value is DataTable t)
+            {
+                table = t;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Expand User Variable As DataTable
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="variable"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static DataTable ExpandUserVariableAsDataTable(ScriptVariable variable)
+        {
+            // TODO: it's ok?
+            if (IsDataTable(variable.VariableValue, out DataTable table))
+            {
+                return table;
+            }
+            else
+            {
+                throw new Exception($"Variable '{variable.VariableName}' is not DataTable");
+            }
+        }
+
         /// <summary>
         /// expand user variable as DataTable
         /// </summary>
@@ -18,12 +60,20 @@ namespace taskt.Core.Automation.Commands
         public static DataTable ExpandUserVariableAsDataTable(this ICanHandleDataTable command, string parameterName, Engine.AutomationEngineInstance engine)
         {
             var variableName = ((ScriptCommand)command).GetRawPropertyValueAsString(parameterName, "DataTable Variable");
-            var v = variableName.GetRawVariable(engine);
-            if (v.VariableValue is DataTable table)
+            //var v = variableName.GetRawVariable(engine);
+            //if (v.VariableValue is DataTable table)
+            //{
+            //    return table;
+            //}
+            //else
+            //{
+            //    throw new Exception($"Variable '{variableName}' is not DataTable");
+            //}
+            try
             {
-                return table;
+                return ExpandUserVariableAsDataTable(variableName.GetRawVariable(engine));
             }
-            else
+            catch
             {
                 throw new Exception($"Variable '{variableName}' is not DataTable");
             }

@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("File/Book")]
     [Attributes.ClassAttributes.CommandSettings("Create Dictionary From Excel File")]
     [Attributes.ClassAttributes.Description("This command Open a File and Get Cell Values as a Dictionary")]
@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_dictionary))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelCreateDictionaryFromExcelFile : ScriptCommand, ICanHandleDictionary, ICanHandleList
+    public sealed class ExcelCreateDictionaryFromExcelFile : ScriptCommand, ICanHandleDictionary, ICanHandleList
     {
         [XmlAttribute]
         //[PropertyDescription("Please Enter the Dictionary Variable Name")]

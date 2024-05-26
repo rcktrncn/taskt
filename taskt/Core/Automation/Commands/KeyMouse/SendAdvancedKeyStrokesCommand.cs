@@ -8,7 +8,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Key/Mouse Commands")]
+    [Attributes.ClassAttributes.Group("Key/Mouse")]
     [Attributes.ClassAttributes.SubGruop("Key")]
     [Attributes.ClassAttributes.CommandSettings("Send Advanced Keystrokes")]
     [Attributes.ClassAttributes.Description("Sends advanced keystrokes to a targeted window")]
@@ -17,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_input))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class SendAdvancedKeyStrokesCommand : ScriptCommand, IHaveDataTableElements
+    public sealed class SendAdvancedKeyStrokesCommand : ScriptCommand, IHaveDataTableElements
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_WindowName))]

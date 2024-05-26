@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("File/Book")]
     [Attributes.ClassAttributes.CommandSettings("Create DataTable From Excel File")]
     [Attributes.ClassAttributes.Description("This command Open a File and Get Cell Values as a DataTable")]
@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelCreateDataTableFromExcelFile : ScriptCommand
+    public sealed class ExcelCreateDataTableFromExcelFile : ScriptCommand
     {
         [XmlAttribute]
         //[PropertyDescription("Please create a DataTable Variable Name")]

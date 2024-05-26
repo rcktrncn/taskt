@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("JSON Commands")]
+    [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("Action")]
     [Attributes.ClassAttributes.CommandSettings("Add JSON Object Property")]
     [Attributes.ClassAttributes.Description("This command allows you to add property to JSON Object.")]
@@ -15,12 +15,12 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class AddJSONObjectPropertyCommand : ScriptCommand
+    public sealed class AddJSONObjectPropertyCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
         [PropertyDescription("JSON Object Variable Name")]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
@@ -42,7 +42,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
-        public string v_PropertyValue { get; set; }
+        public string v_Value { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueType))]
@@ -66,11 +66,11 @@ namespace taskt.Core.Automation.Commands
                 }
                 JObject obj = (JObject)searchResult;
 
-                var propertyValue = this.GetJSONValue(nameof(v_PropertyValue), nameof(v_ValueType), "Add", engine);
+                var propertyValue = this.GetJSONValue(nameof(v_Value), nameof(v_ValueType), "Add", engine);
                 var propertyName = v_PropertyName.ExpandValueOrUserVariable(engine);
                 obj.Add(new JProperty(propertyName, propertyValue));
             });
-            this.JSONModifyByJSONPath(nameof(v_InputValue), nameof(v_JsonExtractor), addPropertyFunc, addPropertyFunc, engine);
+            this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), addPropertyFunc, addPropertyFunc, engine);
         }
     }
 }

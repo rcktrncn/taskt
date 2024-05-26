@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("JSON Commands")]
+    [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("File")]
     [Attributes.ClassAttributes.CommandSettings("Read JSON File")]
     [Attributes.ClassAttributes.Description("This command reads JSON data into a variable")]
@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ReadJSONFileCommand : ScriptCommand
+    public sealed class ReadJSONFileCommand : ScriptCommand
     {
         [XmlAttribute]
         //[PropertyDescription("Path to the File")]
@@ -37,7 +37,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_OutputJSONName))]
-        public string v_userVariableName { get; set; }
+        public string v_Result { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(FilePathControls), nameof(FilePathControls.v_WaitTime))]
@@ -67,7 +67,7 @@ namespace taskt.Core.Automation.Commands
             ScriptCommand readFile = new ReadTextFileCommand
             {
                 v_FilePath = filePath,
-                v_userVariableName = this.v_userVariableName
+                v_userVariableName = this.v_Result
             };
             readFile.RunCommand(engine);
         }

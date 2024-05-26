@@ -490,8 +490,11 @@ namespace taskt.Core.Automation.Commands
         {
             var param = DataTableControls.GetFieldValues(actionParamterTable, "Parameter Name", "Parameter Value", false);
 
-            var list1 = param["List1"].ExpandUserVariableAsList(engine);
-            var list2 = param["List2"].ExpandUserVariableAsList(engine);
+            //var list1 = param["List1"].ExpandUserVariableAsList(engine);
+            //var list2 = param["List2"].ExpandUserVariableAsList(engine);
+
+            var list1 = EM_CanHandleListExtensionMethods.ExpandUserVariableAsList(param["List1"].GetRawVariable(engine));
+            var list2 = EM_CanHandleListExtensionMethods.ExpandUserVariableAsList(param["List2"].GetRawVariable(engine));
 
             if (list1.Count == list2.Count)
             {
@@ -514,8 +517,11 @@ namespace taskt.Core.Automation.Commands
         {
             var param = DataTableControls.GetFieldValues(actionParamterTable, "Parameter Name", "Parameter Value", false);
 
-            var dic1 = param["Dictionary1"].ExpandUserVariableAsDictinary(engine);
-            var dic2 = param["Dictionary2"].ExpandUserVariableAsDictinary(engine);
+            //var dic1 = param["Dictionary1"].ExpandUserVariableAsDictinary(engine);
+            //var dic2 = param["Dictionary2"].ExpandUserVariableAsDictinary(engine);
+
+            var dic1 = EM_CanHandleDictionary.ExpandUserVariableAsDictionary(param["Dictionary1"].GetRawVariable(engine));
+            var dic2 = EM_CanHandleDictionary.ExpandUserVariableAsDictionary(param["Dictionary2"].GetRawVariable(engine));
 
             if (dic1.Count == dic2.Count)
             {
@@ -543,8 +549,11 @@ namespace taskt.Core.Automation.Commands
         {
             var param = DataTableControls.GetFieldValues(actionParamterTable, "Parameter Name", "Parameter Value", false);
 
-            var dt1 = param["DataTable1"].ExpandUserVariableAsDataTable(engine);
-            var dt2 = param["DataTable2"].ExpandUserVariableAsDataTable(engine);
+            var dt1 = EM_CanHandleDataTable.ExpandUserVariableAsDataTable(param["DataTable1"].GetRawVariable(engine));
+            var dt2 = EM_CanHandleDataTable.ExpandUserVariableAsDataTable(param["DataTable2"].GetRawVariable(engine));
+
+            //var dt1 = param["DataTable1"].ExpandUserVariableAsDataTable(engine);
+            //var dt2 = param["DataTable2"].ExpandUserVariableAsDataTable(engine);
 
             if ((dt1.Rows.Count == dt2.Rows.Count) && (dt1.Columns.Count == dt2.Columns.Count))
             {

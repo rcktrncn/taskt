@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("JSON Commands")]
+    [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("Action")]
     [Attributes.ClassAttributes.CommandSettings("Insert JSON Array Item")]
     [Attributes.ClassAttributes.Description("This command allows you to insert item to JSON Array.")]
@@ -15,11 +15,11 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class InsertJSONArrayItemCommand : ScriptCommand
+    public sealed class InsertJSONArrayItemCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
@@ -40,11 +40,11 @@ namespace taskt.Core.Automation.Commands
         //[PropertyTextBoxSetting(1, false)]
         //[PropertyShowSampleUsageInDescription(true)]
         //[PropertyDisplayText(true, "Index")]
-        public string v_InsertIndex { get; set; }
+        public string v_Index { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
-        public string v_InsertItem { get; set; }
+        public string v_Value { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueType))]
@@ -68,13 +68,13 @@ namespace taskt.Core.Automation.Commands
                 }
                 JArray ary = (JArray)searchResult;
 
-                var insertItem = this.GetJSONValue(nameof(v_InsertItem), nameof(v_ValueType), "Insert", engine);
+                var insertItem = this.GetJSONValue(nameof(v_Value), nameof(v_ValueType), "Insert", engine);
 
-                if (String.IsNullOrEmpty(v_InsertIndex))
+                if (String.IsNullOrEmpty(v_Index))
                 {
-                    v_InsertIndex = ary.Count.ToString();
+                    v_Index = ary.Count.ToString();
                 }
-                var index = this.ExpandValueOrUserVariableAsInteger(nameof(v_InsertIndex), engine);
+                var index = this.ExpandValueOrUserVariableAsInteger(nameof(v_Index), engine);
 
                 if ((index < 0) && (index > ary.Count))
                 {
@@ -83,7 +83,7 @@ namespace taskt.Core.Automation.Commands
 
                 ary.Insert(index, JToken.FromObject(insertItem));
             });
-            this.JSONModifyByJSONPath(nameof(v_InputValue), nameof(v_JsonExtractor), addItemFunc, addItemFunc, engine);
+            this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), addItemFunc, addItemFunc, engine);
         }
     }
 }

@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Column")]
     [Attributes.ClassAttributes.CommandSettings("Set Column Values From Dictionary")]
     [Attributes.ClassAttributes.Description("This command set Column values from Ditionary.")]
@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelSetColumnValuesFromDictionaryCommand : AExcelColumnRangeSetCommands, ICanHandleDictionary
+    public sealed class ExcelSetColumnValuesFromDictionaryCommand : AExcelColumnRangeSetCommands, ICanHandleDictionary
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]

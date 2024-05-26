@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Excel Commands")]
+    [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Column")]
     [Attributes.ClassAttributes.CommandSettings("Set Column Values From DataTable")]
     [Attributes.ClassAttributes.Description("This command set Column values from DataTable.")]
@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ExcelSetColumnValuesFromDataTableCommand : AExcelColumnRangeSetCommands, ICanHandleDataTable
+    public sealed class ExcelSetColumnValuesFromDataTableCommand : AExcelColumnRangeSetCommands, ICanHandleDataTable
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_InputInstanceName))]

@@ -155,30 +155,30 @@ namespace taskt.Core.Automation.Commands
         [PropertyParameterOrder(5000)]
         public static string v_Value { get; }
 
-        /// <summary>
-        /// Expand user variable as Dictionary&lt;string, string&gt;
-        /// </summary>
-        /// <param name="variableName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception">Value is not Dictionary</exception>
-        public static Dictionary<string, string> ExpandUserVariableAsDictinary(this string variableName, Engine.AutomationEngineInstance engine)
-        {
-            Script.ScriptVariable v = variableName.GetRawVariable(engine);
-            if (v.VariableValue is Dictionary<string, string> dictionary)
-            {
-                return dictionary;
-            }
-            else
-            {
-                throw new Exception("Variable " + variableName + " is not Dictionary");
-            }
-        }
+        ///// <summary>
+        ///// Expand user variable as Dictionary&lt;string, string&gt;
+        ///// </summary>
+        ///// <param name="variableName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception">Value is not Dictionary</exception>
+        //public static Dictionary<string, string> ExpandUserVariableAsDictinary(this string variableName, Engine.AutomationEngineInstance engine)
+        //{
+        //    Script.ScriptVariable v = variableName.GetRawVariable(engine);
+        //    if (v.VariableValue is Dictionary<string, string> dictionary)
+        //    {
+        //        return dictionary;
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("Variable " + variableName + " is not Dictionary");
+        //    }
+        //}
 
-        public static void StoreInUserVariable(this Dictionary<string, string> value, Engine.AutomationEngineInstance engine, string targetVariable)
-        {
-            ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
-        }
+        //public static void StoreInUserVariable(this Dictionary<string, string> value, Engine.AutomationEngineInstance engine, string targetVariable)
+        //{
+        //    ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
+        //}
 
         ///// <summary>
         ///// expand user variables as Dictionary&lt;string, string&gt; and key name from property names. It supports current position to key.

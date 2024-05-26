@@ -6,7 +6,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("JSON Commands")]
+    [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("Convert")]
     [Attributes.ClassAttributes.Description("This command allows you to parse a JSON Array into a list.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to extract data from a JSON object")]
@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class ParseJSONArrayCommand : ScriptCommand, ICanHandleList
+    public sealed class ParseJSONArrayCommand : ScriptCommand, ICanHandleList
     {
         [XmlAttribute]
         [PropertyDescription("Supply the JSON Array or Variable")]
@@ -25,7 +25,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyShowSampleUsageInDescription(true)]
         [PropertyValidationRule("JSON", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "JSON")]
-        public string v_InputValue { get; set; }
+        public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyDescription("Please select the variable to receive the List")]
@@ -37,7 +37,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyIsVariablesList(true)]
         [PropertyValidationRule("List", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "List")]
-        public string v_applyToVariableName { get; set; }
+        public string v_Result { get; set; }
 
         public ParseJSONArrayCommand()
         {
@@ -50,7 +50,7 @@ namespace taskt.Core.Automation.Commands
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
             //get variablized input
-            var variableInput = v_InputValue.ExpandValueOrUserVariable(engine);
+            var variableInput = v_Json.ExpandValueOrUserVariable(engine);
 
             //create objects
             Newtonsoft.Json.Linq.JArray arr;
@@ -73,7 +73,7 @@ namespace taskt.Core.Automation.Commands
             }
 
             //resultList.StoreInUserVariable(engine, v_applyToVariableName);
-            this.StoreListInUserVariable(resultList, nameof(v_applyToVariableName), engine);
+            this.StoreListInUserVariable(resultList, nameof(v_Result), engine);
         }
     }
 }

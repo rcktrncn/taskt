@@ -5,7 +5,7 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
-    [Attributes.ClassAttributes.Group("Math Commands")]
+    [Attributes.ClassAttributes.Group("Math")]
     [Attributes.ClassAttributes.CommandSettings("Get Arctan")]
     [Attributes.ClassAttributes.Description("This command allows you to get arctan.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get arctan.")]
@@ -13,7 +13,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
-    public class GetArctanCommand : ATrignometricCommands
+    public sealed class GetArctanCommand : ATrignometricCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(NumberControls), nameof(NumberControls.v_Value))]

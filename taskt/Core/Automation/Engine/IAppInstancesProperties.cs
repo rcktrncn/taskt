@@ -7,6 +7,9 @@ namespace taskt.Core.Automation.Engine
     /// </summary>
     public interface IAppInstancesProperties
     {
+        /// <summary>
+        /// App Instances
+        /// </summary>
         Dictionary<string, object> AppInstances { get; set; }
     }
 }
