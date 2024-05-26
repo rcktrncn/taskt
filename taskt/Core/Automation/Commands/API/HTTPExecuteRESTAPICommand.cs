@@ -235,7 +235,7 @@ namespace taskt.Core.Automation.Commands
      
             
             //execute client request
-            RestResponse response = client.Execute(request);
+            var response = client.Execute<RestResponse>(request);
             var content = response.Content;
 
             //add service response for tracking

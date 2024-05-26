@@ -547,9 +547,9 @@ namespace taskt.Core.Server
                 request.Resource = "/RestartTaskt";
             }
 
-            request.Timeout = int.Parse(timeout);
+            request.Timeout = new TimeSpan(int.Parse(timeout));
 
-            var resp = client.Execute(request);
+            var resp = client.Execute<RestResponse>(request);
 
             string content;
             if (resp.ErrorMessage is null)
