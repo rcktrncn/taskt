@@ -12,7 +12,7 @@ using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Engine
 {
-    public class AutomationEngineInstance : IAppInstancesProperties
+    public class AutomationEngineInstance : IAppInstancesProperties, IScriptVariableListProperties
     {
         /// <summary>
         /// script variable list
