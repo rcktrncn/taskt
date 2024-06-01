@@ -432,6 +432,8 @@
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetActionProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetCopyRenameProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetProperties.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\AJSONGetFromJSONCommands.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\AJSONInputJSONCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJContainerExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJSONArrayExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJSONExtensionMethods.cs" />
