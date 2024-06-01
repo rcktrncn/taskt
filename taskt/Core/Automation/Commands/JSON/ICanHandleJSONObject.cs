@@ -1,6 +1,9 @@
 ﻿namespace taskt.Core.Automation.Commands
 {
-    public interface ICanHandleJSONObject : ICanHandleJContainer, ILExpandableProperties
+    /// <summary>
+    /// can handle JSON Object
+    /// </summary>
+    public interface ICanHandleJSONObject : ICanHandleJSON
     {
         // nothing
     }

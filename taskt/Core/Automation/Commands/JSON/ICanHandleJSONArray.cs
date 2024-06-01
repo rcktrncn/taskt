@@ -1,6 +1,9 @@
 ﻿namespace taskt.Core.Automation.Commands
 {
-    public interface ICanHandleJSONArray : ICanHandleJContainer, ILExpandableProperties
+    /// <summary>
+    /// can handle JSON Array
+    /// </summary>
+    public interface ICanHandleJSONArray : ICanHandleJSON
     {
         // nothing
     }

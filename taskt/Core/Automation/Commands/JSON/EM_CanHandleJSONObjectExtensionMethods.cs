@@ -89,7 +89,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="engine"></param>
         public static void StoreJSONObjectInUserVariable(this ICanHandleJSONObject command, JObject json, string parameterName, Engine.AutomationEngineInstance engine)
         {
-            command.StoreJSONInUserVariable(json, parameterName, engine);
+            command.StoreJSONObjectInUserVariable(json.ToString(), parameterName, engine);
         }
 
         /// <summary>
@@ -101,7 +101,14 @@ namespace taskt.Core.Automation.Commands
         /// <param name="engine"></param>
         public static void StoreJSONObjectInUserVariable(this ICanHandleJSONObject command, string json, string parameterName, Engine.AutomationEngineInstance engine)
         {
-            command.StoreJSONInUserVariable(json, parameterName, engine);
+            if (IsJSONObject(json.Trim(), engine, out (string str, JObject _ ) r))
+            {
+                r.str.StoreInUserVariable(engine, parameterName);
+            }
+            else
+            {
+                throw new Exception($"This value is not JSON Object. Value: '{json}'");
+            }
         }
     }
 }

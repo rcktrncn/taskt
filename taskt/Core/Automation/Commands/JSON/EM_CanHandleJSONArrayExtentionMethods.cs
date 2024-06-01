@@ -89,7 +89,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="engine"></param>
         public static void StoreJSONArrayInUserVariable(this ICanHandleJSONArray command, JArray json, string parameterName, Engine.AutomationEngineInstance engine)
         {
-            command.StoreJSONInUserVariable(json, parameterName, engine);
+            command.StoreJSONArrayInUserVariable(json.ToString(), parameterName, engine);
         }
 
         /// <summary>
@@ -101,7 +101,14 @@ namespace taskt.Core.Automation.Commands
         /// <param name="engine"></param>
         public static void StoreJSONArrayInUserVariable(this ICanHandleJSONArray command, string json, string parameterName, Engine.AutomationEngineInstance engine)
         {
-            command.StoreJSONInUserVariable(json, parameterName, engine);
+            if (IsJSONArray(json.Trim(), engine, out (string str, JArray _) r))
+            {
+                r.str.StoreInUserVariable(engine, parameterName);
+            }
+            else
+            {
+                throw new Exception($"This value is not JSON Array. Value: '{json}'");
+            }
         }
     }
 }

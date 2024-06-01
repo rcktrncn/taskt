@@ -1,9 +1,9 @@
 ﻿namespace taskt.Core.Automation.Commands
 {
     /// <summary>
-    /// base of JSONObject, JSONArray
+    /// both JSONObject and JSONArray
     /// </summary>
-    public interface ICanHandleJContainer
+    public interface ICanHandleJContainer : ICanHandleJSONArray, ICanHandleJSONObject
     {
         // nothing
     }
