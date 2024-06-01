@@ -28,6 +28,17 @@ namespace taskt.Core.Automation.Commands
         }
 
         /// <summary>
+        /// Create New Empty List
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        public static List<string> CreateEmptyList()
+        {
+            // todo: is it ok?
+            return new List<string>();
+        }
+
+        /// <summary>
         /// Expand User Variable As List
         /// </summary>
         /// <param name="command"></param>

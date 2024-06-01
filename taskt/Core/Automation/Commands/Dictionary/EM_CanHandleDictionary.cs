@@ -6,6 +6,12 @@ namespace taskt.Core.Automation.Commands
 {
     public static class EM_CanHandleDictionary
     {
+        /// <summary>
+        /// check object is Dictionary
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="dic"></param>
+        /// <returns></returns>
         public static bool IsDictionary(object value, out Dictionary<string, string> dic)
         {
             // TODO: it's OK?
@@ -19,6 +25,16 @@ namespace taskt.Core.Automation.Commands
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// create new Empty Dictioanry
+        /// </summary>
+        /// <returns></returns>
+        public static Dictionary<string, string> CreateEmptyDictionary()
+        {
+            // todo: is it ok?
+            return new Dictionary<string, string>();
         }
 
         /// <summary>
