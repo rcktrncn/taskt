@@ -16,20 +16,20 @@ namespace taskt.Core.Automation.Commands
         /// Detect JSON Type
         /// </summary>
         /// <param name="json"></param>
-        /// <returns>(jsonText, jsonType)</returns>
-        public static (string, JSONType) DetectJSONType(string json, Engine.AutomationEngineInstance engine)
+        /// <returns>(jsonText, JContainer, jsonType)</returns>
+        public static (string, JContainer, JSONType) DetectJSONType(string json, Engine.AutomationEngineInstance engine)
         {
             if (EM_CanHandleJSONObjectExtensionMethods.IsJSONObject(json, engine, out (string str, JObject json) to))
             {
-                return (to.str, JSONType.Object);
+                return (to.str, to.json, JSONType.Object);
             }
             else if (EM_CanHandleJSONArrayExtentionMethods.IsJSONArray(json, engine, out (string str, JArray json) ta))
             {
-                return (ta.str, JSONType.Array);
+                return (ta.str, ta.json, JSONType.Array);
             }
             else
             {
-                return ("", JSONType.NotJSON);
+                return ("", null, JSONType.NotJSON);
             }
         }
 
@@ -39,19 +39,19 @@ namespace taskt.Core.Automation.Commands
         /// <param name="command"></param>
         /// <param name="parameterName"></param>
         /// <param name="engine"></param>
-        /// <returns>(jsonText, jsonType)</returns>
-        public static (string, string) ExpandValueOrUserVariableAsJSON(this ICanHandleJSON command, string parameterName, Engine.AutomationEngineInstance engine)
+        /// <returns>(jsonText, JContainer, jsonType)</returns>
+        public static (string, JContainer, string) ExpandValueOrUserVariableAsJSON(this ICanHandleJContainer command, string parameterName, Engine.AutomationEngineInstance engine)
         {
             var text = ((ScriptCommand)command).ExpandValueOrUserVariable(parameterName, "JSON", engine);
-            (var jsonText, var jsonType) = DetectJSONType(text, engine);
+            (var jsonText, var jCon, var jsonType) = DetectJSONType(text, engine);
             switch (jsonType)
             {
                 case JSONType.Object:
                 case JSONType.Array:
-                    return (jsonText, jsonType.ToString().ToLower());
+                    return (jsonText, jCon, jsonType.ToString().ToLower());
 
                 default:
-                    throw new Exception($"Specified Text is Not JSON.");
+                    throw new Exception($"Specified Value or User Variable is Not JSON.");
             }
         }
     }
