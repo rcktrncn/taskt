@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
@@ -16,47 +15,62 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class ConvertJSONToDictionaryCommand : ScriptCommand, ICanHandleDictionary
+    public sealed class ConvertJSONToDictionaryCommand : AJSONGetFromJSONCommands, IDictionaryResultProperties, ICanHandleJContainer
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
-        public string v_Json { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
+        //public string v_Json { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_OutputDictionaryName))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public ConvertJSONToDictionaryCommand()
         {
-            //this.CommandName = "ConvertJSONToDictionaryCommand";
-            //this.SelectionName = "Convert JSON To Dictionary";
-            //this.CommandEnabled = true;
-            //this.CustomRendering = true;
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            Action<JObject> objFunc = new Action<JObject>((obj) =>
+            //Action<JObject> objFunc = new Action<JObject>((obj) =>
+            //{
+            //    var resultDic = new Dictionary<string, string>();
+            //    foreach (var result in obj)
+            //    {
+            //        resultDic.Add(result.Key, result.Value.ToString());
+            //    }
+            //    //resultDic.StoreInUserVariable(engine, v_applyToVariableName);
+            //    this.StoreDictionaryInUserVariable(resultDic, nameof(v_Result), engine);
+            //});
+            //Action<JArray> aryFunc = new Action<JArray>((ary) =>
+            //{
+            //    var resultDic = new Dictionary<string, string>();
+            //    for (int i = 0; i < ary.Count; i++)
+            //    {
+            //        resultDic.Add("key" + i.ToString(), ary[i].ToString());
+            //    }
+            //    //resultDic.StoreInUserVariable(engine, v_applyToVariableName);
+            //    this.StoreDictionaryInUserVariable(resultDic, nameof(v_Result), engine);
+            //});
+            //this.JSONProcess(nameof(v_Json), objFunc, aryFunc, engine);
+
+            (_, var jCon, _) = this.ExpandValueOrUserVariableAsJSON(nameof(v_Json), engine);
+            var res = this.CreateEmptyDictionary();
+            if (jCon is JObject obj)
             {
-                var resultDic = new Dictionary<string, string>();
-                foreach (var result in obj)
+                foreach(var item in obj)
                 {
-                    resultDic.Add(result.Key, result.Value.ToString());
+                    res.Add(item.Key, item.Value.ToString());
                 }
-                //resultDic.StoreInUserVariable(engine, v_applyToVariableName);
-                this.StoreDictionaryInUserVariable(resultDic, nameof(v_Result), engine);
-            });
-            Action<JArray> aryFunc = new Action<JArray>((ary) =>
+            }
+            else if (jCon is JArray ary)
             {
-                var resultDic = new Dictionary<string, string>();
-                for (int i = 0; i < ary.Count; i++)
+                int i = 0;
+                foreach (var item in ary)
                 {
-                    resultDic.Add("key" + i.ToString(), ary[i].ToString());
+                    res.Add($"key{i}", item.ToString());
                 }
-                //resultDic.StoreInUserVariable(engine, v_applyToVariableName);
-                this.StoreDictionaryInUserVariable(resultDic, nameof(v_Result), engine);
-            });
-            this.JSONProcess(nameof(v_Json), objFunc, aryFunc, engine);
+            }
+            this.StoreDictionaryInUserVariable(res, engine);
         }
     }
 }
