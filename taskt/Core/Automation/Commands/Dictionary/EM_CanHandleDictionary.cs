@@ -31,7 +31,7 @@ namespace taskt.Core.Automation.Commands
         /// create new Empty Dictioanry
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string, string> CreateEmptyDictionary()
+        public static Dictionary<string, string> CreateEmptyDictionary(this ICanHandleDictionary command)
         {
             // todo: is it ok?
             return new Dictionary<string, string>();

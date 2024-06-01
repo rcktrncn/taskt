@@ -33,7 +33,7 @@ namespace taskt.Core.Automation.Commands
         /// Create new Empty DataTable
         /// </summary>
         /// <returns></returns>
-        public static DataTable CreateEmptyDataTable()
+        public static DataTable CreateEmptyDataTable(this ICanHandleDataTable command)
         {
             // TODO: is it ok?
             return new DataTable();

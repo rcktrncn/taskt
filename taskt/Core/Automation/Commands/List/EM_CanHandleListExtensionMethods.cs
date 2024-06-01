@@ -32,7 +32,7 @@ namespace taskt.Core.Automation.Commands
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        public static List<string> CreateEmptyList()
+        public static List<string> CreateEmptyList(this ICanHandleList command)
         {
             // todo: is it ok?
             return new List<string>();
