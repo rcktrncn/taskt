@@ -438,10 +438,12 @@
     <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJSONArrayExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJSONExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJSONObjectExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\EM_JsonInputJContainerExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\ICanHandleJContainer.cs" />
     <Compile Include="Core\Automation\Commands\JSON\ICanHandleJSON.cs" />
     <Compile Include="Core\Automation\Commands\JSON\ICanHandleJSONArray.cs" />
     <Compile Include="Core\Automation\Commands\JSON\ICanHandleJSONObject.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\IJsonInputJContainer.cs" />
     <Compile Include="Core\Automation\Commands\JSON\ILJSONInputJSONProperties.cs" />
     <Compile Include="Core\Automation\Commands\List\AListBothListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListCreateFromListCommands.cs" />
