@@ -67,7 +67,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="parameterName"></param>
         /// <param name="engine"></param>
         /// <returns></returns>
-        public static (string, JArray) ExpandValueOrUserVariableAsJSONObject(this ICanHandleJSONArray command, string parameterName, Engine.AutomationEngineInstance engine)
+        public static (string, JArray) ExpandValueOrUserVariableAsJSONArray(this ICanHandleJSONArray command, string parameterName, Engine.AutomationEngineInstance engine)
         {
             var variableName = ((ScriptCommand)command).GetRawPropertyValueAsString(parameterName, "JSON");
             try
