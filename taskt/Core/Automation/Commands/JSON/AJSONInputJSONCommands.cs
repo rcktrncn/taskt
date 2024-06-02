@@ -11,6 +11,6 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
         [PropertyParameterOrder(5000)]
-        public string v_Json { get; set; }
+        public virtual string v_Json { get; set; }
     }
 }
