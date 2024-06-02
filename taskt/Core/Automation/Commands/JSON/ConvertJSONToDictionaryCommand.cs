@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class ConvertJSONToDictionaryCommand : AJSONGetFromJSONCommands, IDictionaryResultProperties, ICanHandleJContainer
+    public sealed class ConvertJSONToDictionaryCommand : AJSONGetFromJContainerCommands, IDictionaryResultProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
@@ -53,7 +53,8 @@ namespace taskt.Core.Automation.Commands
             //});
             //this.JSONProcess(nameof(v_Json), objFunc, aryFunc, engine);
 
-            (_, var jCon, _) = this.ExpandValueOrUserVariableAsJSON(nameof(v_Json), engine);
+            //(_, var jCon, _) = this.ExpandValueOrUserVariableAsJSON(nameof(v_Json), engine);
+            (_, var jCon, _) = this.ExpandValueOrUserVariableAsJSON(engine);
             var res = this.CreateEmptyDictionary();
             if (jCon is JObject obj)
             {
