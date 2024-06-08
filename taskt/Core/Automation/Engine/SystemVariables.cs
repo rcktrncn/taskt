@@ -33,6 +33,7 @@ namespace taskt.Core.Automation.Engine
         public static readonly ScriptVariable DateTime_Now_Minute = new ScriptVariable { VariableName = "DateTime.Now.Minute", VariableValue = "" };
         public static readonly ScriptVariable DateTime_Now_Second = new ScriptVariable { VariableName = "DateTime.Now.Second", VariableValue = "" };
         public static readonly ScriptVariable DateTime_Now_FileSafe = new ScriptVariable { VariableName = "DateTime.Now.FileSafe", VariableValue = "" };
+        public static readonly ScriptVariable DateTime_Now_FileSafeLong = new ScriptVariable { VariableName = "DateTime.Now.FileSafeLong", VariableValue = "" };
 
         public static readonly ScriptVariable System_InputLanguage = new ScriptVariable { VariableName = "System.InputLanguage", VariableValue = InputLanguage.CurrentInputLanguage.Culture.Name };
         public static readonly ScriptVariable System_KeyboardLayout = new ScriptVariable { VariableName = "System.KeyboardLayout", VariableValue = InputLanguage.CurrentInputLanguage.LayoutName };
@@ -157,6 +158,7 @@ namespace taskt.Core.Automation.Engine
             DateTime_Now_Minute,
             DateTime_Now_Second,
             DateTime_Now_FileSafe,
+            DateTime_Now_FileSafeLong,
 
             // system
             System_InputLanguage,
@@ -217,7 +219,8 @@ namespace taskt.Core.Automation.Engine
             DateTime_Now_Hour.VariableValue = DateTime.Now.ToString("HH");
             DateTime_Now_Minute.VariableValue = DateTime.Now.ToString("mm");
             DateTime_Now_Second.VariableValue = DateTime.Now.ToString("ss");
-            DateTime_Now_FileSafe.VariableValue = DateTime.Now.ToString("MM-dd-yy hh.mm.ss");
+            DateTime_Now_FileSafe.VariableValue = DateTime.Now.ToString("MM-dd-yy HH.mm.ss");
+            DateTime_Now_FileSafeLong.VariableValue = DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss");
 
             Env_ActiveWindowTitle.VariableValue = WindowControls.GetActiveWindowTitle();
 
