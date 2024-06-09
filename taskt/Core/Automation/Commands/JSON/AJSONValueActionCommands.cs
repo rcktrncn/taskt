@@ -6,7 +6,7 @@ namespace taskt.Core.Automation.Commands
     /// <summary>
     /// for JSON Value Action commands
     /// </summary>
-    public abstract class AJSONValueActionCommands : AJSONGetFromJContainerCommands, IJSONValueActionProperties
+    public abstract class AJSONValueActionCommands : AJSONInputJSONCommands, IJSONValueActionProperties
     {
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
         [PropertyParameterOrder(10000)]

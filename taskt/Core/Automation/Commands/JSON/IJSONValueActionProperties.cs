@@ -3,7 +3,7 @@
     /// <summary>
     /// JSON Value Action properties
     /// </summary>
-    public interface IJSONValueActionProperties : IJsonInputJContainer, ILJSONValueProperties
+    public interface IJSONValueActionProperties : ILJSONInputJSONProperties, ILJSONValueProperties, ICanHandleJContainer
     {
         // only imple
     }
