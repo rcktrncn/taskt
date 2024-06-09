@@ -10,9 +10,9 @@ namespace taskt.Core.Automation.Commands
         /// </summary>
         /// <param name="command"></param>
         /// <param name="engine"></param>
-        /// <returns>(JToken, type)</returns>
+        /// <returns>(JContainer(all JSON), JToken, type)</returns>
         /// <exception cref="Exception"></exception>
-        public static (JToken, string) ExpandValueOrUserVariableAsJSONByJSONPath(this IJSONJSONPathProperties command, Engine.AutomationEngineInstance engine)
+        public static (JContainer, JToken, string) ExpandValueOrUserVariableAsJSONByJSONPath(this IJSONJSONPathProperties command, Engine.AutomationEngineInstance engine)
         {
             (_, var json, _) = command.ExpandValueOrUserVariableAsJSON(engine);
             var path = ((ScriptCommand)command).ExpandValueOrUserVariable(nameof(command.v_JsonExtractor), "JSONPath", engine);
@@ -20,15 +20,15 @@ namespace taskt.Core.Automation.Commands
             var token = json.SelectToken(path);
             if (token is JObject obj)
             {
-                return (obj, "object");
+                return (json, obj, "object");
             }
             else if (token is JArray ary)
             {
-                return (ary, "array");
+                return (json, ary, "array");
             }
             else if (token is JValue v)
             {
-                return (v, "value");
+                return (json, v, "value");
             }
             else
             {
