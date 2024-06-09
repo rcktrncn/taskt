@@ -121,6 +121,24 @@ namespace taskt.Core.Automation.Commands
         public static string v_ValueType { get; }
 
         /// <summary>
+        /// Value type to Add JSON (only Auto, Object, and Array)
+        /// </summary>
+        [PropertyDescription("Value Type to Add")]
+        [InputSpecification("", true)]
+        [Remarks("")]
+        [PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
+        [PropertyUISelectionOption("Auto")]
+        [PropertyUISelectionOption("Object")]
+        [PropertyUISelectionOption("Array")]
+        [PropertyDetailSampleUsage("**Auto**", "Automatically determines the Value Type")]
+        [PropertyDetailSampleUsage("**Object**", "Specify JSON Object for Value Type")]
+        [PropertyDetailSampleUsage("**Array**", "Specify Array Object for Value Type")]
+        [PropertyIsOptional(true, "Auto")]
+        [PropertyDisplayText(true, "Value Type")]
+        [PropertyParameterOrder(5000)]
+        public static string v_ValueTypeSimple { get; }
+
+        /// <summary>
         /// value to add property
         /// </summary>
         [PropertyDescription("Value to Add")]
