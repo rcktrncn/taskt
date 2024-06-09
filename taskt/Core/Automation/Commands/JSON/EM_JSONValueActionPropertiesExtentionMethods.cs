@@ -6,13 +6,13 @@ namespace taskt.Core.Automation.Commands
     public static class EM_JSONValueActionPropertiesExtentionMethods
     {
         /// <summary>
-        /// Expand Value or Variable Value In JSON Value
+        /// Expand Value or Variable Value As JSON In JSON Value
         /// </summary>
         /// <param name="command"></param>
         /// <param name="engine"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static (string, JContainer) ExpandValueOrVariableValueInJSONValue(this IJSONValueActionProperties command, Engine.AutomationEngineInstance engine)
+        public static (string, JContainer) ExpandValueOrVariableValueAsJSONInJSONValue(this IJSONValueActionProperties command, Engine.AutomationEngineInstance engine)
         {
             (var str, var json, _) = command.ExpandValueOrUserVariableAsJSON(nameof(command.v_Value), engine);
             var t = ((ScriptCommand)command).ExpandValueOrUserVariableAsSelectionItem(nameof(command.v_ValueType), engine);

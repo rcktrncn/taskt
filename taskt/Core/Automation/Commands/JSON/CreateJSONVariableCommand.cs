@@ -53,7 +53,7 @@ namespace taskt.Core.Automation.Commands
         {
             //(var jsonText, _) = v_Value.ExpandValueOrUserVariableAsJSON(engine);
             //jsonText.StoreInUserVariable(engine, v_Json);
-            (var jsonText, _) = this.ExpandValueOrVariableValueInJSONValue(engine);
+            (var jsonText, _) = this.ExpandValueOrVariableValueAsJSONInJSONValue(engine);
             jsonText.StoreInUserVariable(engine, v_Json);
         }
     }
