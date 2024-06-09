@@ -6,7 +6,7 @@ namespace taskt.Core.Automation.Commands
     /// <summary>
     /// for Add something to JContainer commands
     /// </summary>
-    public abstract class AJSONAddJContainerCommands : AJSONJSONPathCommands, ILJSONValueProperties
+    public abstract class AJSONAddJContainerCommands : AJSONJSONPathCommands, IJSONValueActionProperties
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
