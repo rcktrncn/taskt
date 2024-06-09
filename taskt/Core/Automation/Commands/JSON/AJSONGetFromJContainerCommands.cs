@@ -3,7 +3,7 @@
     /// <summary>
     /// for Get From JContainer(Object or Array) commands
     /// </summary>
-    public abstract class AJSONGetFromJContainerCommands : AJSONGetFromJSONCommands, IJsonInputJContainer
+    public abstract class AJSONGetFromJContainerCommands : AJSONGetFromJSONCommands, IJSONInputJContainer
     {
         // nothing
     }

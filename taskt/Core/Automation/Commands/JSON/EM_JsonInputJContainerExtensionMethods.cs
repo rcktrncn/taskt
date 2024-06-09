@@ -2,7 +2,7 @@
 
 namespace taskt.Core.Automation.Commands
 {
-    public static class EM_JsonInputJContainerExtensionMethods
+    public static class EM_JSONInputJContainerExtensionMethods
     {
         /// <summary>
         /// Expand Value or User Variable as JSON
@@ -10,7 +10,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="command"></param>
         /// <param name="engine"></param>
         /// <returns></returns>
-        public static (string, JContainer, string) ExpandValueOrUserVariableAsJSON(this IJsonInputJContainer command, Engine.AutomationEngineInstance engine)
+        public static (string, JContainer, string) ExpandValueOrUserVariableAsJSON(this IJSONInputJContainer command, Engine.AutomationEngineInstance engine)
         {
             return command.ExpandValueOrUserVariableAsJSON(nameof(command.v_Json), engine);
         }
