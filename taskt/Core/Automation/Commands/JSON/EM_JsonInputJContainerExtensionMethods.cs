@@ -9,7 +9,7 @@ namespace taskt.Core.Automation.Commands
         /// </summary>
         /// <param name="command"></param>
         /// <param name="engine"></param>
-        /// <returns></returns>
+        /// <returns>(jsonText, JContainer, jsonType)</returns>
         public static (string, JContainer, string) ExpandValueOrUserVariableAsJSON(this IJSONInputJContainer command, Engine.AutomationEngineInstance engine)
         {
             return command.ExpandValueOrUserVariableAsJSON(nameof(command.v_Json), engine);
