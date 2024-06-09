@@ -10,11 +10,11 @@ namespace taskt.Core.Automation.Commands
     {
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
         [PropertyParameterOrder(10000)]
-        public string v_Value { get; set; }
+        public virtual string v_Value { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueType))]
         [PropertyParameterOrder(11000)]
-        public string v_ValueType { get; set; }
+        public virtual string v_ValueType { get; set; }
     }
 }
