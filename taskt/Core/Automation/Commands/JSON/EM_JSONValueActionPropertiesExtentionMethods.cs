@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
         /// <exception cref="Exception"></exception>
         public static (string, JContainer) ExpandValueOrVariableValueInJSONValue(this IJSONValueActionProperties command, Engine.AutomationEngineInstance engine)
         {
-            (var str, var json, var tp) = command.ExpandValueOrUserVariableAsJSON(nameof(command.v_Value), engine);
+            (var str, var json, _) = command.ExpandValueOrUserVariableAsJSON(nameof(command.v_Value), engine);
             var t = ((ScriptCommand)command).ExpandValueOrUserVariableAsSelectionItem(nameof(command.v_ValueType), engine);
             switch (t)
             {
@@ -42,8 +42,7 @@ namespace taskt.Core.Automation.Commands
                     }
 
                 default:
-                    // TODO: it's not ok but...
-                    return (str, json);
+                    throw new Exception($"Spceified Value is NOT JSON. Value: '{str}'");
             }
         }
     }
