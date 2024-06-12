@@ -57,7 +57,7 @@ namespace taskt.Core.Automation.Commands
             //});
             //this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), addItemFunc, addItemFunc, engine);
 
-            (var root, var json, _) = this.ExpandValueOrUserVariableAsJSONByJSONPath(engine);
+            (var root, var json, _) = this.ExpandUserVariableAsJSONByJSONPath(engine);
             if (json is JArray ary)
             {
                 var v = this.ExpandValueOrVariableValueAsJSONSupportedValueInJSONValue(engine);
