@@ -21,7 +21,7 @@ namespace taskt.Core.Automation.Engine
         /// Check ScriptVariable Exists
         /// </summary>
         /// <param name="engine"></param>
-        /// <param name="variableName"></param>
+        /// <param name="variableName">no wrapped variable marker</param>
         /// <param name="v"></param>
         /// <returns></returns>
         public static bool CheckScriptVariableExists(this IScriptVariableListProperties engine, string variableName, out ScriptVariable v)
