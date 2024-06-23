@@ -440,7 +440,6 @@
     <Compile Include="Core\Automation\Commands\JSON\AJSONValueActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJContainerExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJSONArrayExtentionMethods.cs" />
-    <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJSONExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJSONObjectExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_JSONInputJContainerExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_JSONJSONPathPropertiesExtensionMethods.cs" />
