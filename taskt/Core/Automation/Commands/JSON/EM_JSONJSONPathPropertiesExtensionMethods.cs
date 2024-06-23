@@ -81,5 +81,15 @@ namespace taskt.Core.Automation.Commands
                 throw new Exception($"Nothing found in JSONPath. Path: '{command.v_JsonExtractor}', ExtractPath: '{path}'");
             }
         }
+
+        /// <summary>
+        /// store JSON in User variable
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="engine"></param>
+        public static void StoreJSONInUserVariable(this IJSONJSONPathProperties command, JContainer json, Engine.AutomationEngineInstance engine)
+        {
+            json.ToString().StoreInUserVariable(engine, command.v_Json);
+        }
     }
 }
