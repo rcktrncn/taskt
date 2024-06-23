@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands
         {
             // TODO: it's OK?
             dic = default;
-            if (dic is Dictionary<string, string> d)
+            if (value is Dictionary<string, string> d)
             {
                 dic = d;
                 return true;
