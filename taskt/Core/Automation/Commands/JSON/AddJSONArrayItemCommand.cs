@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class AddJSONArrayItemCommand : AJSONAddJContainerCommands
+    public sealed class AddJSONArrayItemCommand : AJSONAddInsertSetJContainerCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]

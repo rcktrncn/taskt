@@ -4,9 +4,9 @@ using taskt.Core.Automation.Attributes.PropertyAttributes;
 namespace taskt.Core.Automation.Commands
 {
     /// <summary>
-    /// for Add something to JContainer commands
+    /// for Add/Insert/Set something to JContainer commands
     /// </summary>
-    public abstract class AJSONAddJContainerCommands : AJSONJSONPathCommands, IJSONValueActionProperties
+    public abstract class AJSONAddInsertSetJContainerCommands : AJSONJSONPathCommands, IJSONValueActionProperties
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
