@@ -68,6 +68,10 @@ namespace taskt.Core.Automation.Commands
             {
                 return (json, v, "value");
             }
+            else if (token is JProperty prop)
+            {
+                return (json, prop, "property");
+            }
             else
             {
                 throw new Exception($"Nothing found in JSONPath. Path: '{command.v_JsonExtractor}', ExtractPath: '{path}'");
