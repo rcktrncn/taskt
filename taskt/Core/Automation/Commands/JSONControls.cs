@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Newtonsoft.Json.Linq;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using taskt.UI.CustomControls;
 
