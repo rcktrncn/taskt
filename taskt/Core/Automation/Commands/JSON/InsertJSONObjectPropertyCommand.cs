@@ -15,16 +15,16 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class InsertJSONObjectPropertyCommand : ScriptCommand
+    public sealed class InsertJSONObjectPropertyCommand : AJSONAddJContainerCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
-        [PropertyDescription("JSON Object Variable Name")]
-        public string v_Json { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
+        //[PropertyDescription("JSON Object Variable Name")]
+        //public string v_Json { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
-        public string v_JsonExtractor { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
+        //public string v_JsonExtractor { get; set; }
 
         [XmlAttribute]
         //[PropertyDescription("Property Name to Insert")]
@@ -38,15 +38,16 @@ namespace taskt.Core.Automation.Commands
         //[PropertyValidationRule("Property Name", PropertyValidationRule.ValidationRuleFlags.Empty)]
         //[PropertyDisplayText(true, "Property Name")]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_PropertyName))]
+        [PropertyParameterOrder(8000)]
         public string v_PropertyName { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
-        public string v_Value { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueToAdd))]
+        //public string v_Value { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueType))]
-        public string v_ValueType { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ValueType))]
+        //public string v_ValueType { get; set; }
 
         public InsertJSONObjectPropertyCommand()
         {
@@ -58,18 +59,39 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            Action<JToken> addPropertyFunc = new Action<JToken>((searchResult) =>
+            //Action<JToken> addPropertyFunc = new Action<JToken>((searchResult) =>
+            //{
+            //    if (!(searchResult.Parent is JProperty))
+            //    {
+            //        throw new Exception("Extraction Result is not JSON Object and can not Add JSON Property. Value: '" + searchResult.ToString() + "'");
+            //    }
+
+            //    var propertyValue = this.GetJSONValue(nameof(v_Value), nameof(v_ValueType), "Insert", engine);
+            //    var propertyName = v_PropertyName.ExpandValueOrUserVariable(engine);
+            //    searchResult.Parent.AddAfterSelf(new JProperty(propertyName, propertyValue));
+            //});
+            //this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), addPropertyFunc, addPropertyFunc, engine);
+            (var root, var json, _) = this.ExpandUserVariableAsJSONByJSONPath(engine);
+
+            var p = this.ExpandValueOrUserVariable(nameof(v_PropertyName), "Property Name", engine);
+            var v = this.ExpandValueOrVariableValueAsJSONSupportedValueInJSONValue(engine);
+
+            if (json is JObject obj)
             {
-                if (!(searchResult.Parent is JProperty))
-                {
-                    throw new Exception("Extraction Result is not JSON Object and can not Add JSON Property. Value: '" + searchResult.ToString() + "'");
-                }
-                
-                var propertyValue = this.GetJSONValue(nameof(v_Value), nameof(v_ValueType), "Insert", engine);
-                var propertyName = v_PropertyName.ExpandValueOrUserVariable(engine);
-                searchResult.Parent.AddAfterSelf(new JProperty(propertyName, propertyValue));
-            });
-            this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), addPropertyFunc, addPropertyFunc, engine);
+                // json is JObject -> Add
+                obj.Add(p, v);
+                root.ToString().StoreInUserVariable(engine, v_Json);
+            }
+            else if (json?.Parent is JProperty)
+            {
+                // json is JProperty -> insert
+                json.Parent.AddAfterSelf(new JProperty(p, v));
+                root.ToString().StoreInUserVariable(engine, v_Json);
+            }
+            else
+            {
+                throw new Exception($"Extraction Result is NOT JSON Object or JSON Object Property. Result: '{json}', JSONPath: '{v_JsonExtractor}'");
+            }
         }
     }
 }
