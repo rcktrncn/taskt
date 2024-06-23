@@ -89,8 +89,9 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**{{{vPath}}}**", PropertyDetailSampleUsage.ValueType.VariableValue, "JSON Extractor")]
         [Remarks("See this URL for details. https://github.com/json-path/JsonPath")]
         [PropertyShowSampleUsageInDescription(true)]
+        [PropertyIsOptional(true, "$")]
         [PropertyCustomUIHelper("JSONPath Helper", nameof(JSONControls) + "+" + nameof(lnkJsonPathHelper_Click))]
-        [PropertyValidationRule("JSON Extractor", PropertyValidationRule.ValidationRuleFlags.Empty)]
+        [PropertyValidationRule("JSON Extractor", PropertyValidationRule.ValidationRuleFlags.None)]
         [PropertyDisplayText(true, "Extractor")]
         [PropertyParameterOrder(5000)]
         public static string v_JSONPath { get; }
