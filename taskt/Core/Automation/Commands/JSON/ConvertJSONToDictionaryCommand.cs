@@ -21,6 +21,9 @@ namespace taskt.Core.Automation.Commands
         //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
         //public string v_Json { get; set; }
 
+        //[XmlAttribute]
+        //public string v_JsonExtractor { get; set; }
+
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(DictionaryControls), nameof(DictionaryControls.v_OutputDictionaryName))]
         public override string v_Result { get; set; }
@@ -54,7 +57,9 @@ namespace taskt.Core.Automation.Commands
             //this.JSONProcess(nameof(v_Json), objFunc, aryFunc, engine);
 
             //(_, var jCon, _) = this.ExpandValueOrUserVariableAsJSON(nameof(v_Json), engine);
-            (_, var jCon, _) = this.ExpandValueOrUserVariableAsJSON(engine);
+            //(_, var jCon, _) = this.ExpandValueOrUserVariableAsJSON(engine);
+            (_, var jCon, _) = this.ExpandUserVariableAsJSONByJSONPath(engine);
+
             var res = this.CreateEmptyDictionary();
             if (jCon is JObject obj)
             {
@@ -70,6 +75,10 @@ namespace taskt.Core.Automation.Commands
                 {
                     res.Add($"key{i}", item.ToString());
                 }
+            }
+            else
+            {
+                throw new Exception($"Extraction Result is NOT Supported Type. Result: '{jCon}', JSONPath: '{v_JsonExtractor}'");
             }
             this.StoreDictionaryInUserVariable(res, engine);
         }
