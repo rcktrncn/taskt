@@ -53,6 +53,10 @@ namespace taskt.Core.Automation.Commands
             }
 
             (_, var json, _) = command.ExpandValueOrUserVariableAsJSON(engine);
+            if (string.IsNullOrEmpty(command.v_JsonExtractor))
+            {
+                command.v_JsonExtractor = "$";
+            }
             var path = ((ScriptCommand)command).ExpandValueOrUserVariable(nameof(command.v_JsonExtractor), "JSONPath", engine);
 
             var token = json.SelectToken(path);
