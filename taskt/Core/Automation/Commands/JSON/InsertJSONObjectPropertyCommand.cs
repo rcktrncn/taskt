@@ -86,7 +86,8 @@ namespace taskt.Core.Automation.Commands
             {
                 // json is JProperty -> insert
                 json.Parent.AddAfterSelf(new JProperty(p, v));
-                root.ToString().StoreInUserVariable(engine, v_Json);
+                //root.ToString().StoreInUserVariable(engine, v_Json);
+                this.StoreJSONInUserVariable(root, engine);
             }
             else
             {

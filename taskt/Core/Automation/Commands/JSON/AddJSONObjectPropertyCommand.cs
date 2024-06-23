@@ -69,7 +69,8 @@ namespace taskt.Core.Automation.Commands
                 var v = this.ExpandValueOrVariableValueAsJSONSupportedValueInJSONValue(engine);
                 var key = this.ExpandValueOrUserVariable(nameof(v_PropertyName), "Property", engine);
                 obj.Add(new JProperty(key, v));
-                root.ToString().StoreInUserVariable(engine, v_Json);
+                //root.ToString().StoreInUserVariable(engine, v_Json);
+                this.StoreJSONInUserVariable(root, engine);
             }
             else
             {

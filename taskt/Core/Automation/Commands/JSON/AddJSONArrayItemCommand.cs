@@ -62,7 +62,8 @@ namespace taskt.Core.Automation.Commands
             {
                 var v = this.ExpandValueOrVariableValueAsJSONSupportedValueInJSONValue(engine);
                 ary.Add(v);
-                root.ToString().StoreInUserVariable(engine, v_Json);
+                //root.ToString().StoreInUserVariable(engine, v_Json);
+                this.StoreJSONInUserVariable(root, engine);
             }
             else
             {

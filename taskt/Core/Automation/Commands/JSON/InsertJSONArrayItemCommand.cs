@@ -114,7 +114,8 @@ namespace taskt.Core.Automation.Commands
                     // insert
                     ary.Insert(index, v);
                 }
-                root.ToString().StoreInUserVariable(engine, v_Json);
+                //root.ToString().StoreInUserVariable(engine, v_Json);
+                this.StoreJSONInUserVariable(root, engine);
             }
             else
             {
