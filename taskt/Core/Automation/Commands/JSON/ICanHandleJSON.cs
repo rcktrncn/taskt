@@ -1,6 +1,6 @@
 ﻿namespace taskt.Core.Automation.Commands
 {
-    public interface ICanHandleJSON : ICanHandleJSONArray, ICanHandleJSONObject
+    public interface ICanHandleJSON : ILExpandableProperties
     {
         // only imple
     }

@@ -12,12 +12,12 @@ namespace taskt.Core.Automation.Commands
         /// <param name="value"></param>
         /// <param name="json"></param>
         /// <returns></returns>
-        public static bool IsJSONObject(object value, out (string str, JObject json) r)
+        public static bool IsJSONObject(object value, Engine.AutomationEngineInstance engine, out (string str, JObject json) r)
         {
             r = ("", default);
             if (value is string str)
             {
-                str = str.Trim();
+                str = str.Trim().ExpandValueOrUserVariable(engine);
                 if (str.StartsWith("{") && str.EndsWith("}"))
                 {
                     try
@@ -48,9 +48,9 @@ namespace taskt.Core.Automation.Commands
         /// <param name="variable"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static (string, JObject) ExpandValueOrUserVariableAsJSONObject(ScriptVariable variable)
+        public static (string, JObject) ExpandValueOrUserVariableAsJSONObject(ScriptVariable variable, Engine.AutomationEngineInstance engine)
         {
-            if (IsJSONObject(variable.VariableValue, out (string, JObject) r))
+            if (IsJSONObject(variable.VariableValue, engine, out (string, JObject) r))
             {
                 return r;
             }
@@ -72,7 +72,7 @@ namespace taskt.Core.Automation.Commands
             var variableName = ((ScriptCommand)command).GetRawPropertyValueAsString(parameterName, "JSON");
             try
             {
-                return ExpandValueOrUserVariableAsJSONObject(variableName.GetRawVariable(engine));
+                return ExpandValueOrUserVariableAsJSONObject(variableName.GetRawVariable(engine), engine);
             }
             catch
             {
@@ -89,7 +89,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="engine"></param>
         public static void StoreJSONObjectInUserVariable(this ICanHandleJSONObject command, JObject json, string parameterName, Engine.AutomationEngineInstance engine)
         {
-            command.StoreJSONInUserVariable(json, parameterName, engine);
+            command.StoreJSONObjectInUserVariable(json.ToString(), parameterName, engine);
         }
 
         /// <summary>
@@ -101,7 +101,14 @@ namespace taskt.Core.Automation.Commands
         /// <param name="engine"></param>
         public static void StoreJSONObjectInUserVariable(this ICanHandleJSONObject command, string json, string parameterName, Engine.AutomationEngineInstance engine)
         {
-            command.StoreJSONInUserVariable(json, parameterName, engine);
+            if (IsJSONObject(json.Trim(), engine, out (string str, JObject _ ) r))
+            {
+                r.str.StoreInUserVariable(engine, parameterName);
+            }
+            else
+            {
+                throw new Exception($"This value is not JSON Object. Value: '{json}'");
+            }
         }
     }
 }

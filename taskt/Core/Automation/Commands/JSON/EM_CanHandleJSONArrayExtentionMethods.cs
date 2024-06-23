@@ -12,12 +12,12 @@ namespace taskt.Core.Automation.Commands
         /// <param name="value"></param>
         /// <param name="json"></param>
         /// <returns></returns>
-        public static bool IsJSONArray(object value, out (string str, JArray json) r)
+        public static bool IsJSONArray(object value, Engine.AutomationEngineInstance engine, out (string str, JArray json) r)
         {
             r = ("", default);
             if (value is string str)
             {
-                str = str.Trim();
+                str = str.Trim().ExpandValueOrUserVariable(engine);
                 if (str.StartsWith("[") && str.EndsWith("]"))
                 {
                     try
@@ -48,9 +48,9 @@ namespace taskt.Core.Automation.Commands
         /// <param name="variable"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static (string, JArray) ExpandValueOrUserVariableAsJSONArray(ScriptVariable variable)
+        public static (string, JArray) ExpandValueOrUserVariableAsJSONArray(ScriptVariable variable, Engine.AutomationEngineInstance engine)
         {
-            if (IsJSONArray(variable.VariableValue, out (string, JArray) r))
+            if (IsJSONArray(variable.VariableValue, engine, out (string, JArray) r))
             {
                 return r;
             }
@@ -67,12 +67,12 @@ namespace taskt.Core.Automation.Commands
         /// <param name="parameterName"></param>
         /// <param name="engine"></param>
         /// <returns></returns>
-        public static (string, JArray) ExpandValueOrUserVariableAsJSONObject(this ICanHandleJSONArray command, string parameterName, Engine.AutomationEngineInstance engine)
+        public static (string, JArray) ExpandValueOrUserVariableAsJSONArray(this ICanHandleJSONArray command, string parameterName, Engine.AutomationEngineInstance engine)
         {
             var variableName = ((ScriptCommand)command).GetRawPropertyValueAsString(parameterName, "JSON");
             try
             {
-                return ExpandValueOrUserVariableAsJSONArray(variableName.GetRawVariable(engine));
+                return ExpandValueOrUserVariableAsJSONArray(variableName.GetRawVariable(engine), engine);
             }
             catch
             {
@@ -89,7 +89,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="engine"></param>
         public static void StoreJSONArrayInUserVariable(this ICanHandleJSONArray command, JArray json, string parameterName, Engine.AutomationEngineInstance engine)
         {
-            command.StoreJSONInUserVariable(json, parameterName, engine);
+            command.StoreJSONArrayInUserVariable(json.ToString(), parameterName, engine);
         }
 
         /// <summary>
@@ -101,7 +101,14 @@ namespace taskt.Core.Automation.Commands
         /// <param name="engine"></param>
         public static void StoreJSONArrayInUserVariable(this ICanHandleJSONArray command, string json, string parameterName, Engine.AutomationEngineInstance engine)
         {
-            command.StoreJSONInUserVariable(json, parameterName, engine);
+            if (IsJSONArray(json.Trim(), engine, out (string str, JArray _) r))
+            {
+                r.str.StoreInUserVariable(engine, parameterName);
+            }
+            else
+            {
+                throw new Exception($"This value is not JSON Array. Value: '{json}'");
+            }
         }
     }
 }

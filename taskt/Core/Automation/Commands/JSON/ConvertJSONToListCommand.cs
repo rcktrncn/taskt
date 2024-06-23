@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Serialization;
 using Newtonsoft.Json.Linq;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
@@ -16,47 +15,71 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class ConvertJSONToListCommand : ScriptCommand, ICanHandleList
+    public sealed class ConvertJSONToListCommand : AJSONGetFromJContainerCommands, IListResultProperties
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
-        public string v_Json { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_InputJSONName))]
+        //public string v_Json { get; set; }
+
+        //[XmlAttribute]
+        //public string v_JsonExtractor { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_OutputListName))]
-        public string v_Result { get; set; }
+        public override string v_Result { get; set; }
 
         public ConvertJSONToListCommand()
         {
-            //this.CommandName = "ConvertJSONToListCommand";
-            //this.SelectionName = "Convert JSON To List";
-            //this.CommandEnabled = true;
-            //this.CustomRendering = true;
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            Action<JObject> objFunc = new Action<JObject>((obj) =>
+            //Action<JObject> objFunc = new Action<JObject>((obj) =>
+            //{
+            //    List<string> resultList = new List<string>();
+            //    foreach (var result in obj)
+            //    {
+            //        resultList.Add(result.Value.ToString());
+            //    }
+            //    //resultList.StoreInUserVariable(engine, v_applyToVariableName);
+            //    this.StoreListInUserVariable(resultList, nameof(v_Result), engine);
+            //});
+            //Action<JArray> aryFunc = new Action<JArray>((ary) =>
+            //{
+            //    List<string> resultList = new List<string>();
+            //    foreach (var result in ary)
+            //    {
+            //        resultList.Add(result.ToString());
+            //    }
+            //    //resultList.StoreInUserVariable(engine, v_applyToVariableName);
+            //    this.StoreListInUserVariable(resultList, nameof(v_Result), engine);
+            //});
+            //this.JSONProcess(nameof(v_Json), objFunc, aryFunc, engine);
+
+            //(_, var jCon, _) = this.ExpandValueOrUserVariableAsJSON(nameof(v_Json), engine);
+            //(_, var jCon, _) = this.ExpandValueOrUserVariableAsJSON(engine);
+            (_, var jCon, _) = this.ExpandUserVariableAsJSONByJSONPath(engine);
+
+            var res = this.CreateEmptyList();
+            if (jCon is JObject obj)
             {
-                List<string> resultList = new List<string>();
-                foreach (var result in obj)
+                foreach(var item in obj)
                 {
-                    resultList.Add(result.Value.ToString());
+                    res.Add(item.Value.ToString());
                 }
-                //resultList.StoreInUserVariable(engine, v_applyToVariableName);
-                this.StoreListInUserVariable(resultList, nameof(v_Result), engine);
-            });
-            Action<JArray> aryFunc = new Action<JArray>((ary) =>
+            }
+            else if (jCon is JArray ary)
             {
-                List<string> resultList = new List<string>();
-                foreach (var result in ary)
+                foreach(var item in ary)
                 {
-                    resultList.Add(result.ToString());
+                    res.Add(item.ToString());
                 }
-                //resultList.StoreInUserVariable(engine, v_applyToVariableName);
-                this.StoreListInUserVariable(resultList, nameof(v_Result), engine);
-            });
-            this.JSONProcess(nameof(v_Json), objFunc, aryFunc, engine);
+            }
+            else
+            {
+                throw new Exception($"Extraction Result is NOT Supported Type. Result: '{jCon}', JSONPath: '{v_JsonExtractor}'");
+            }
+            this.StoreListInUserVariable(res, engine);
         }
     }
 }

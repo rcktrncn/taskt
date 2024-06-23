@@ -15,16 +15,16 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class RemoveJSONPropertyCommand : ScriptCommand
+    public sealed class RemoveJSONPropertyCommand : AJSONJSONPathCommands
     {
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
-        [PropertyDescription("JSON Object Variable Name")]
-        public string v_Json { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
+        //[PropertyDescription("JSON Object Variable Name")]
+        //public string v_Json { get; set; }
 
-        [XmlAttribute]
-        [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
-        public string v_JsonExtractor { get; set; }
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
+        //public string v_JsonExtractor { get; set; }
 
         public RemoveJSONPropertyCommand()
         {
@@ -36,23 +36,41 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            Action<JToken> removeFunc = new Action<JToken>((searchResult) =>
+            //Action<JToken> removeFunc = new Action<JToken>((searchResult) =>
+            //{
+            //    var p = searchResult.Parent;
+            //    if (p is JProperty prop)
+            //    {
+            //        prop.Remove();
+            //    }
+            //    else if (p is JArray ary)
+            //    {
+            //        ary.Remove(searchResult);
+            //    }
+            //    else
+            //    {
+            //        throw new Exception("Strange Search Result. Fail Remove. Value: '" + searchResult.ToString() + "'");
+            //    }
+            //});
+            //this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), removeFunc, removeFunc, engine);
+
+            (var root, var json, _) = this.ExpandUserVariableAsJSONByJSONPath(engine);
+
+            var p = json?.Parent;
+            if (p is JProperty prop)
             {
-                var p = searchResult.Parent;
-                if (p is JProperty prop)
-                {
-                    prop.Remove();
-                }
-                else if (p is JArray ary)
-                {
-                    ary.Remove(searchResult);
-                }
-                else
-                {
-                    throw new Exception("Strange Search Result. Fail Remove. Value: '" + searchResult.ToString() + "'");
-                }
-            });
-            this.JSONModifyByJSONPath(nameof(v_Json), nameof(v_JsonExtractor), removeFunc, removeFunc, engine);
+                prop.Remove();
+                this.StoreJSONInUserVariable(root, engine);
+            }
+            else if (p is JArray ary)
+            {
+                ary.Remove(json);
+                this.StoreJSONInUserVariable(root, engine);
+            }
+            else
+            {
+                throw new Exception($"Search Result is not supported Value. Result: '{json}', JSONPath: '{v_JsonExtractor}'");
+            }
         }
     }
 }

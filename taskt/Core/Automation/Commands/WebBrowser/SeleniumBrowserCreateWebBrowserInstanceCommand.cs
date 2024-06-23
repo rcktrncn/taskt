@@ -171,11 +171,13 @@ namespace taskt.Core.Automation.Commands
                 OpenQA.Selenium.Firefox.FirefoxOptions options = new OpenQA.Selenium.Firefox.FirefoxOptions();
                 if (!string.IsNullOrEmpty(browserPath))
                 {
-                    options.BrowserExecutableLocation = browserPath;
+                    //options.BrowserExecutableLocation = browserPath;
+                    options.BinaryLocation = browserPath;
                 }
                 else
                 {
-                    options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
+                    //options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
+                    options.BinaryLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
                 }
 
                 if (!string.IsNullOrEmpty(webDriverPath))
