@@ -390,6 +390,10 @@ namespace taskt.Core
 
             //create kebob destination and command file nmae
             var kebobDestination = groupName.Replace(" ", "-").Replace("/", "-").ToLower();
+            if (!kebobDestination.EndsWith("-commands"))
+            {
+                kebobDestination += "-commands";
+            }
             var kebobFileName = commandName.Replace(" ", "-").Replace("/", "-").ToLower() + "-command.md";
 
             //create directory if required
