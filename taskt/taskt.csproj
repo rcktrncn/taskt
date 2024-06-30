@@ -876,7 +876,7 @@
     <Compile Include="Core\Automation\Commands\Window\CloseWindowCommand.cs" />
     <Compile Include="Core\Automation\Commands\Script\CommentCommand.cs" />
     <Compile Include="Core\Automation\Commands\DialogMessage\ShowMessageCommand.cs" />
-    <Compile Include="Core\Automation\Commands\JSON\ParseJSONArrayCommand.cs" />
+    <Compile Include="Core\Automation\Commands\_RemovedCommands\ParseJSONArrayCommand.cs" />
     <Compile Include="Core\Automation\Commands\NLG\NLGCreateNLGInstanceCommand.cs" />
     <Compile Include="Core\Automation\Commands\API\HTTPExecuteRESTAPICommand.cs" />
     <Compile Include="Core\Automation\Commands\ScriptCommand.cs" />
