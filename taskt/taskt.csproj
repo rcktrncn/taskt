@@ -1241,12 +1241,6 @@
     <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmAbout.Designer.cs">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmBrowserElementBuilder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\Supplement Forms\frmBrowserElementBuilder.Designer.cs">
-      <DependentUpon>frmBrowserElementBuilder.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Forms\ScriptBuilder\Supplemental\frmScriptVariables.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1319,9 +1313,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmAddVariable.resx">
       <DependentUpon>frmAddVariable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Supplement Forms\frmBrowserElementBuilder.resx">
-      <DependentUpon>frmBrowserElementBuilder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\frmCommandEditor.resx">
       <DependentUpon>frmCommandEditor.cs</DependentUpon>
