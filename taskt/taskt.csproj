@@ -440,6 +440,7 @@
     <Compile Include="Core\Automation\Commands\JSON\AJSONGetFromJSONCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONInputJSONCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONJSONPathCommands.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\AJSONSetValueOfJContainerCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONValueActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJContainerExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJSONArrayExtentionMethods.cs" />
@@ -448,6 +449,8 @@
     <Compile Include="Core\Automation\Commands\JSON\EM_JSONJSONPathPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_JSONValueActionPropertiesExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\GetJSONValueFromJSONArrayCommand.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\SetJSONValueOfJSONArrayCommand.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\SetJSONValueOfJSONObjectCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\GetJSONValueFromJSONObjectCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\ICanHandleJContainer.cs" />
     <Compile Include="Core\Automation\Commands\JSON\ICanHandleJSON.cs" />
