@@ -91,8 +91,8 @@ namespace taskt.Core.Automation.Commands
                 else
                 {
                     ary.RemoveAt(index);
+                    this.StoreJSONInUserVariable(root, engine);
                 }
-                this.StoreJSONInUserVariable(root, engine);
             }
             else
             {

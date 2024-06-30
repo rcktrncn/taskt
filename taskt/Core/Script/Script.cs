@@ -422,6 +422,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_92(doc);
             convertTo3_5_1_93(doc);
             convertTo3_5_1_96(doc);
+            convertTo3_5_1_98(doc);
 
             return doc;
         }
@@ -3328,6 +3329,49 @@ namespace taskt.Core.Script
 
             // BeginListLoopCommand -> BeginLoopForComplexDataTypesCommand
             ChangeCommandName(doc, "BeginListLoopCommand", "BeginLoopForComplexDataTypesCommand", "Loop Complex Data Types");
+        }
+
+        private static void convertTo3_5_1_98(XDocument doc)
+        {
+            // RemoveJSONProperty -> RemoveJSONObjectProperty
+            ChangeCommandName(doc, "RemoveJSONPropertyCommand", "RemoveJSONObjectPropertyCommand", "Remove JSON Object Property");
+
+            // GetJSONValueList -> ConvertJSONToList
+            ChangeCommandName(doc, "GetJSONValueListCommand", "ConvertJSONToListCommand", "Convert JSON To List");
+
+            // separate JSONPath
+            var rmv = GetCommands(doc, "RemoveJSONObjectPropertyCommand");
+            foreach(var c in rmv)
+            {
+                var attrPath = c.Attribute("v_JsonExtractor");
+                var attrProp = c.Attribute("v_PropertyName");
+                var path = attrPath?.Value ?? "";
+                var prop = attrProp?.Value ?? "";
+
+                if (string.IsNullOrEmpty(prop) && !string.IsNullOrEmpty(path))
+                {
+                    var idx = path.LastIndexOf('.');
+                    var newProp = path.Substring(idx + 1);
+                    var newPath = path.Substring(0, idx);
+                    
+                    if (attrProp != null)
+                    {
+                        attrProp.SetValue(newProp);
+                    }
+                    else
+                    {
+                        c.Add(new XAttribute("v_PropertyName", newProp));
+                    }
+                    if (attrPath != null)
+                    {
+                        attrPath.SetValue(newPath);
+                    }
+                    else
+                    {
+                        c.Add(new XAttribute("v_JsonExtractor", newPath));
+                    }
+                }
+            }
         }
 
         /// <summary>

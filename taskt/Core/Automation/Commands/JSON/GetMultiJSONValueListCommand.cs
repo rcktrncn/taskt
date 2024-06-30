@@ -129,7 +129,14 @@ namespace taskt.Core.Automation.Commands
             var table = DataTableControls.GetFieldValues(v_ParseObjects, "Json Selector", "Output Variable", false);
             foreach(var row in table)
             {
-                new GetJSONValueListCommand
+                //new GetJSONValueListCommand
+                //{
+                //    v_Json = this.v_Json,
+                //    v_JsonExtractor = row.Key,
+                //    v_Result = row.Value
+                //}.RunCommand(engine);
+
+                new ConvertJSONToListCommand
                 {
                     v_Json = this.v_Json,
                     v_JsonExtractor = row.Key,

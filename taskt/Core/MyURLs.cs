@@ -50,7 +50,12 @@
         public static string GetWikiURL(string commandName, string groupName)
         {
             string page = commandName.ToLower().Replace(" ", "-").Replace("/", "-") + "-command.md";
-            string parent = groupName.ToLower().Replace(" ", "-").Replace("/", "-");
+            groupName = groupName.ToLower();
+            if (!groupName.EndsWith("-commands"))
+            {
+                groupName += "-commands";
+            }
+            string parent = groupName.Replace(" ", "-").Replace("/", "-");
             return WikiBaseURL + parent + "/" + page;
         }
     }

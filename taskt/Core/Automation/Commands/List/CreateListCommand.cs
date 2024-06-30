@@ -52,7 +52,12 @@ namespace taskt.Core.Automation.Commands
         {
             var newList = new List<string>();
 
-            newList.AddRange(v_ListValues.AsEnumerable().Select(r => r["Values"]?.ToString() ?? "").ToArray());
+            //newList.AddRange(v_ListValues.AsEnumerable().Select(r => r["Values"]?.ToString() ?? "").ToArray());
+            var ary = v_ListValues.AsEnumerable().Select(r => r["Values"]?.ToString() ?? "").ToArray();
+            foreach(var v in ary)
+            {
+                newList.Add(v.ExpandValueOrUserVariable(engine));
+            }
 
             //newList.StoreInUserVariable(engine, v_List);
             this.StoreListInUserVariable(newList, nameof(v_List), engine);
