@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class InsertJSONObjectPropertyCommand : AJSONAddInsertSetJContainerCommands
+    public sealed class InsertJSONObjectPropertyCommand : AJSONInsertValueToJContainerCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]

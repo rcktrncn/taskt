@@ -440,6 +440,7 @@
     <Compile Include="Core\Automation\Commands\JSON\AJSONGetFromJSONCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONInputJSONCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONJSONPathCommands.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\AJSONInsertValueToJContainerCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONSetValueOfJContainerCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONValueActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_CanHandleJContainerExtentionMethods.cs" />
