@@ -1725,16 +1725,26 @@ namespace taskt.UI.CustomControls
 
                         if (targetDGV.SelectedCells[0].ColumnIndex == 0)
                         {
-                            if (targetDGV.Tag == null)
+                            // TODO: column a is editable in CreateList etc.
+
+                            if ((targetDGV.Columns[0].ReadOnly) ||
+                                (targetDGV.Tag == null) ||
+                                (targetDGV.Tag.ToString() != "column-a-editable"))
+                            //if (targetDGV.Columns[0].ReadOnly)
                             {
                                 MessageBox.Show("Invalid Cell Selected!", "Invalid Cell Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return;
                             }
-                            else if (targetDGV.Tag.ToString() != "column-a-editable")
-                            {
-                                MessageBox.Show("Invalid Cell Selected!", "Invalid Cell Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
+                            //else if (targetDGV.Tag == null)
+                            //{
+                            //    MessageBox.Show("Invalid Cell Selected!", "Invalid Cell Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            //    return;
+                            //}
+                            //else if (targetDGV.Tag.ToString() != "column-a-editable")
+                            //{
+                            //    MessageBox.Show("Invalid Cell Selected!", "Invalid Cell Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            //    return;
+                            //}
                         }
 
                         var source = (DataTable)targetDGV.DataSource;
