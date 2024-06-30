@@ -3336,6 +3336,9 @@ namespace taskt.Core.Script
             // RemoveJSONProperty -> RemoveJSONObjectProperty
             ChangeCommandName(doc, "RemoveJSONPropertyCommand", "RemoveJSONObjectPropertyCommand", "Remove JSON Object Property");
 
+            // GetJSONValueList -> ConvertJSONToList
+            ChangeCommandName(doc, "GetJSONValueListCommand", "ConvertJSONToListCommand", "Convert JSON To List");
+
             // separate JSONPath
             var rmv = GetCommands(doc, "RemoveJSONObjectPropertyCommand");
             foreach(var c in rmv)
