@@ -26,6 +26,11 @@ namespace taskt.Core.Automation.Commands
         //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_JSONPath))]
         //public string v_JsonExtractor { get; set; }
 
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_PropertyName))]
+        [PropertyParameterOrder(7000)]
+        public string v_PropertyName { get; set; }
+
         public RemoveJSONPropertyCommand()
         {
             //this.CommandName = "Remove JSON Property";
@@ -56,16 +61,29 @@ namespace taskt.Core.Automation.Commands
 
             (var root, var json, _) = this.ExpandUserVariableAsJSONByJSONPath(engine);
 
-            var p = json?.Parent;
-            if (p is JProperty prop)
+            //var p = json?.Parent;
+            //if (p is JProperty prop)
+            //{
+            //    prop.Remove();
+            //    this.StoreJSONInUserVariable(root, engine);
+            //}
+            //else if (p is JArray ary)
+            //{
+            //    ary.Remove(json);
+            //    this.StoreJSONInUserVariable(root, engine);
+            //}
+            if (json is JObject obj)
             {
-                prop.Remove();
-                this.StoreJSONInUserVariable(root, engine);
-            }
-            else if (p is JArray ary)
-            {
-                ary.Remove(json);
-                this.StoreJSONInUserVariable(root, engine);
+                var propName = this.ExpandValueOrUserVariable(nameof(v_PropertyName), "Property Name", engine);
+                if (obj.ContainsKey(propName))
+                {
+                    obj.Remove(propName);
+                    this.StoreJSONInUserVariable(root, engine);
+                }
+                else
+                {
+                    throw new Exception($"Specified property does not Exists. Property: '{v_PropertyName}', Expand: '{propName}'");
+                }
             }
             else
             {
