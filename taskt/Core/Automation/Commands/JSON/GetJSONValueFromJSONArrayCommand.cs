@@ -26,6 +26,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_ArrayIndex))]
         [PropertyIsOptional(false, "")]
+        [PropertyValidationRule("Index", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyParameterOrder(7000)]
         public string v_ArrayIndex { get; set; }
 
