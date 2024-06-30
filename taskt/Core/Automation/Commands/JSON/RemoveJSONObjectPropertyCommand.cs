@@ -8,14 +8,14 @@ namespace taskt.Core.Automation.Commands
     [Serializable]
     [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("Action")]
-    [Attributes.ClassAttributes.CommandSettings("Remove JSON Property")]
+    [Attributes.ClassAttributes.CommandSettings("Remove JSON Object Property")]
     [Attributes.ClassAttributes.Description("This command allows you to remove a property in JSON")]
     [Attributes.ClassAttributes.UsesDescription("")]
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class RemoveJSONPropertyCommand : AJSONJSONPathCommands
+    public sealed class RemoveJSONObjectPropertyCommand : AJSONJSONPathCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(JSONControls), nameof(JSONControls.v_BothJSONName))]
@@ -31,7 +31,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyParameterOrder(7000)]
         public string v_PropertyName { get; set; }
 
-        public RemoveJSONPropertyCommand()
+        public RemoveJSONObjectPropertyCommand()
         {
             //this.CommandName = "Remove JSON Property";
             //this.SelectionName = "Remove JSON Property";

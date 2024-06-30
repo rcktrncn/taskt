@@ -634,7 +634,7 @@
     <Compile Include="Core\Automation\Commands\JSON\InsertJSONArrayItemCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AddJSONArrayItemCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\InsertJSONObjectPropertyCommand.cs" />
-    <Compile Include="Core\Automation\Commands\JSON\RemoveJSONPropertyCommand.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\RemoveJSONObjectPropertyCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\CreateJSONVariableCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AddJSONObjectPropertyCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\SetJSONValueCommand.cs" />
