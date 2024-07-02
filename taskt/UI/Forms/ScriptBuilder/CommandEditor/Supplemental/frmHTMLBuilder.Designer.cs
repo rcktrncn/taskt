@@ -30,15 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHTMLBuilder));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.webBrowserHTML = new System.Windows.Forms.WebBrowser();
             this.flwAcceptIcons = new System.Windows.Forms.FlowLayoutPanel();
             this.uiBtnOK = new taskt.UI.CustomControls.UIPictureButton();
             this.uiBtnCancel = new taskt.UI.CustomControls.UIPictureButton();
+            this.btnRender = new System.Windows.Forms.Button();
             this.rtbHTML = new System.Windows.Forms.RichTextBox();
+            this.webBrowserHTML = new Microsoft.Web.WebView2.WinForms.WebView2();
             this.tableLayoutPanel1.SuspendLayout();
             this.flwAcceptIcons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiBtnOK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiBtnCancel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.webBrowserHTML)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -47,9 +49,9 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.webBrowserHTML, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.flwAcceptIcons, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.rtbHTML, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.webBrowserHTML, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -59,20 +61,12 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1620, 643);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // webBrowserHTML
-            // 
-            this.webBrowserHTML.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowserHTML.Location = new System.Drawing.Point(813, 3);
-            this.webBrowserHTML.MinimumSize = new System.Drawing.Size(20, 18);
-            this.webBrowserHTML.Name = "webBrowserHTML";
-            this.webBrowserHTML.Size = new System.Drawing.Size(804, 582);
-            this.webBrowserHTML.TabIndex = 0;
-            // 
             // flwAcceptIcons
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.flwAcceptIcons, 2);
             this.flwAcceptIcons.Controls.Add(this.uiBtnOK);
             this.flwAcceptIcons.Controls.Add(this.uiBtnCancel);
+            this.flwAcceptIcons.Controls.Add(this.btnRender);
             this.flwAcceptIcons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flwAcceptIcons.Location = new System.Drawing.Point(3, 591);
             this.flwAcceptIcons.Name = "flwAcceptIcons";
@@ -113,6 +107,16 @@
             this.uiBtnCancel.Text = "Close";
             this.uiBtnCancel.Click += new System.EventHandler(this.uiBtnCancel_Click);
             // 
+            // btnRender
+            // 
+            this.btnRender.Location = new System.Drawing.Point(111, 3);
+            this.btnRender.Name = "btnRender";
+            this.btnRender.Size = new System.Drawing.Size(100, 44);
+            this.btnRender.TabIndex = 20;
+            this.btnRender.Text = "Render =>";
+            this.btnRender.UseVisualStyleBackColor = true;
+            this.btnRender.Click += new System.EventHandler(this.btnRender_Click);
+            // 
             // rtbHTML
             // 
             this.rtbHTML.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -123,7 +127,20 @@
             this.rtbHTML.Size = new System.Drawing.Size(804, 582);
             this.rtbHTML.TabIndex = 3;
             this.rtbHTML.Text = "";
-            this.rtbHTML.TextChanged += new System.EventHandler(this.rtbHTML_TextChanged);
+            // 
+            // webBrowserHTML
+            // 
+            this.webBrowserHTML.AllowExternalDrop = true;
+            this.webBrowserHTML.CreationProperties = null;
+            this.webBrowserHTML.DefaultBackgroundColor = System.Drawing.Color.White;
+            this.webBrowserHTML.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowserHTML.Location = new System.Drawing.Point(813, 3);
+            this.webBrowserHTML.Name = "webBrowserHTML";
+            this.webBrowserHTML.Size = new System.Drawing.Size(804, 582);
+            this.webBrowserHTML.TabIndex = 4;
+            this.webBrowserHTML.ZoomFactor = 1D;
+            this.webBrowserHTML.NavigationStarting += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs>(this.webBrowserHTML_NavigationStarting);
+            this.webBrowserHTML.NavigationCompleted += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs>(this.webBrowserHTML_NavigationCompleted);
             // 
             // frmHTMLBuilder
             // 
@@ -134,11 +151,13 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmHTMLBuilder";
             this.Text = "HTML Builder";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmHTMLBuilder_FormClosing);
             this.Load += new System.EventHandler(this.frmHTMLBuilder_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.flwAcceptIcons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.uiBtnOK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiBtnCancel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.webBrowserHTML)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -146,10 +165,11 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.WebBrowser webBrowserHTML;
         private System.Windows.Forms.FlowLayoutPanel flwAcceptIcons;
         private CustomControls.UIPictureButton uiBtnOK;
         private CustomControls.UIPictureButton uiBtnCancel;
         public System.Windows.Forms.RichTextBox rtbHTML;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webBrowserHTML;
+        private System.Windows.Forms.Button btnRender;
     }
 }
