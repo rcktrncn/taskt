@@ -75,6 +75,10 @@ namespace taskt.Core.Automation.Commands
                     res.Add(item.ToString());
                 }
             }
+            else if (jCon is JValue v)
+            {
+                res.Add(v.ToString());
+            }
             else
             {
                 throw new Exception($"Extraction Result is NOT Supported Type. Result: '{jCon}', JSONPath: '{v_JsonExtractor}'");
