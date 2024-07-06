@@ -40,7 +40,7 @@ namespace taskt.Core.Automation.Commands
     <h5><b>Directions:</b> This a sample data collection form that can be presented to a user.  You can add and implement as many fields as you need or choose standard form inputs. Note, each field will require a <b>v_applyToVariable</b> attribute specifying which variable should contain the respective value for the input field.</h5>
 
     <hr />
-    <form>
+    <!-- <form> -->
       <div>
         <div>
           <label for=""inputEmail4"">Email</label>
@@ -91,9 +91,9 @@ namespace taskt.Core.Automation.Commands
           <option>5</option>
         </select>
       </div>
-      <p><button onclick=""window.external.Ok();"">Ok</button><br />
-      <button onclick=""window.external.Cancel();"">Close</button></p>
-    </form>
+      <p><button onclick=""chrome.webview.hostObjects.fm.Ok();"">Ok</button><br />
+      <button onclick=""chrome.webview.hostObjects.fm.Cancel();"">Close</button></p>
+    <!-- </form> -->
   </div>
 </body>
 </html>")]

@@ -6,7 +6,9 @@ using taskt.Core.IO;
 
 namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 {
+    /* This attribute is required to call C# code from WebView */
     [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+
     public partial class frmHTMLBuilder : Form
     {
         public frmHTMLBuilder()

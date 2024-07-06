@@ -11,6 +11,7 @@
 //WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and
 //limitations under the License.
+using Org.BouncyCastle.Utilities.Bzip2;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -472,9 +473,13 @@ namespace taskt.UI.Forms.ScriptEngine
 
                     if (inputForm.Result == DialogResult.OK)
                     {
-                        var variables = inputForm.GetVariablesFromHTML("input");
+                        //var variables = inputForm.GetVariablesFromHTML("input");
 
-                        variables.AddRange(inputForm.GetVariablesFromHTML("select"));
+                        //variables.AddRange(inputForm.GetVariablesFromHTML("select"));
+
+                        var t = inputForm.GetVariablesFromHTML();
+                        t.Wait();
+                        var variables = inputForm.variablesList;
 
                         return variables;
                     }

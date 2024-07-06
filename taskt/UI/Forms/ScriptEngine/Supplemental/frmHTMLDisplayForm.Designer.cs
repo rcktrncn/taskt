@@ -29,35 +29,42 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHTMLDisplayForm));
-            this.webBrowserHTML = new System.Windows.Forms.WebBrowser();
+            this.webBrowserHTML = new Microsoft.Web.WebView2.WinForms.WebView2();
+            ((System.ComponentModel.ISupportInitialize)(this.webBrowserHTML)).BeginInit();
             this.SuspendLayout();
             // 
             // webBrowserHTML
             // 
+            this.webBrowserHTML.AllowExternalDrop = true;
+            this.webBrowserHTML.CreationProperties = null;
+            this.webBrowserHTML.DefaultBackgroundColor = System.Drawing.Color.White;
             this.webBrowserHTML.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowserHTML.Location = new System.Drawing.Point(0, 0);
-            this.webBrowserHTML.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowserHTML.Name = "webBrowserHTML";
-            this.webBrowserHTML.Size = new System.Drawing.Size(1262, 801);
+            this.webBrowserHTML.Size = new System.Drawing.Size(1262, 739);
             this.webBrowserHTML.TabIndex = 0;
+            this.webBrowserHTML.ZoomFactor = 1D;
+            this.webBrowserHTML.NavigationStarting += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs>(this.webBrowserHTML_NavigationStarting);
+            this.webBrowserHTML.NavigationCompleted += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs>(this.webBrowserHTML_NavigationCompleted);
             // 
             // frmHTMLDisplayForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1262, 801);
+            this.ClientSize = new System.Drawing.Size(1262, 739);
             this.Controls.Add(this.webBrowserHTML);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmHTMLDisplayForm";
             this.Text = "taskt - input window";
             this.Load += new System.EventHandler(this.frmHTMLDisplayForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.webBrowserHTML)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.WebBrowser webBrowserHTML;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webBrowserHTML;
     }
 }
