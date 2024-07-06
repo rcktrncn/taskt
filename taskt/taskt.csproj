@@ -450,6 +450,7 @@
     <Compile Include="Core\Automation\Commands\JSON\EM_JSONJSONPathPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\EM_JSONValueActionPropertiesExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\GetJSONValueFromJSONArrayCommand.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\GetJSONValueCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\SetJSONValueOfJSONArrayCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\SetJSONValueOfJSONObjectCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\GetJSONValueFromJSONObjectCommand.cs" />
