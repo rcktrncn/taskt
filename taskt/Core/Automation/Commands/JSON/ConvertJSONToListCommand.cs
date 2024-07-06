@@ -9,7 +9,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.Group("JSON")]
     [Attributes.ClassAttributes.SubGruop("Convert")]
     [Attributes.ClassAttributes.CommandSettings("Convert JSON To List")]
-    [Attributes.ClassAttributes.Description("This command allows you to convert JSON Array into a List.")]
+    [Attributes.ClassAttributes.Description("This command allows you to convert JSON to List.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to convert JSON Array into a List")]
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_function))]
