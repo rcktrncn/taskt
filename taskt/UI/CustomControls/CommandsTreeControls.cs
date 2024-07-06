@@ -303,6 +303,11 @@ namespace taskt.UI.CustomControls
 
         public static void FocusCommand(string group, string command, TreeView tvCommands)
         {
+            if (!group.EndsWith(" Commands"))
+            {
+                group += " Commands";
+            }
+
             TreeNode parentNode = null;
             foreach (TreeNode node in tvCommands.Nodes)
             {
