@@ -23,8 +23,6 @@ namespace taskt.Core.Automation.Commands
         [PropertyUISelectionOption("Start Variable Marker")]
         [PropertyUISelectionOption("End Variable Marker")]
         [PropertyUISelectionOption("Engine Delay")]
-        // TODO: remove this item
-        [PropertyUISelectionOption("Current Window Keyword")]
         [PropertyValidationRule("Parameter Type", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "Parameter Type")]
         [PropertySelectionChangeEvent(nameof(cmbPreferenceCombobox_SelectedChanged))]
@@ -83,10 +81,6 @@ namespace taskt.Core.Automation.Commands
                     {
                         throw new Exception("Engine Delay is not Number. Value: '" + parameterValue + "'");
                     }
-                    break;
-
-                case "current window keyword":
-                    engine.engineSettings.CurrentWindowKeyword = parameterValue;
                     break;
             }
         }

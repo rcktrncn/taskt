@@ -662,19 +662,7 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         private static Func<List<(IntPtr, string)>> GetWindowSearchMethod(string window, string searchMethod, string matchType, int index, Engine.AutomationEngineInstance engine)
         {
-            if (window == engine.engineSettings.CurrentWindowKeyword)
-            {
-                // current window keyword
-                var whnd = GetActiveWindowHandle();
-                var title = GetWindowTitle(whnd);
-
-                return new Func<List<(IntPtr, string)>>(() =>
-                {
-                    return new List<(IntPtr, string)>() { (whnd, title) };
-                });
-            }
-            else if ((window == engine.engineSettings.DesktopKeyword) ||
-                     (window == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_Desktop.VariableName, engine)))
+            if (window == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_Desktop.VariableName, engine))
             {
                 // Desktop
                 var whnd = GetDesktopWindow();
@@ -683,8 +671,7 @@ namespace taskt.Core.Automation.Commands
                     return new List<(IntPtr, string)>() { (whnd, "") };
                 });
             }
-            else if ((window == engine.engineSettings.AllWindowsKeyword) ||
-                     (window == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_AllWindows.VariableName, engine)))
+            else if (window == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_AllWindows.VariableName, engine))
             {
                 // all windows & match-type
                 return new Func<List<(IntPtr, string)>>(() =>
@@ -733,7 +720,7 @@ namespace taskt.Core.Automation.Commands
         /// <exception cref="Exception"></exception>
         public static IntPtr FindWindowHandle(string windowName, string searchMethod, Automation.Engine.AutomationEngineInstance engine)
         {
-            if (windowName == engine.engineSettings.CurrentWindowKeyword)
+            if (windowName == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentWindowName.VariableName, engine))
             {
                 return GetActiveWindowHandle();
             }
@@ -1247,10 +1234,7 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         private static string ExpandValueOrUserVariableAsWindowName(this string value, Engine.AutomationEngineInstance engine)
         {
-            if ((value == engine.engineSettings.CurrentWindowKeyword) || 
-                (value == engine.engineSettings.AllWindowsKeyword) ||
-                (value == engine.engineSettings.DesktopKeyword) ||
-                (value == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_AllWindows.VariableName, engine)) ||
+            if ((value == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_AllWindows.VariableName, engine)) ||
                 (value == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_Desktop.VariableName, engine)))
             {
                 return value;

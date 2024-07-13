@@ -412,9 +412,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             {
                 return true;
             }
-            else if ((bottomCommand.v_WindowName == appSettings.EngineSettings.CurrentWindowKeyword) || 
-                    //(bottomCommand.v_WindowName == appSettings.EngineSettings.wrapVariableMarker("Env.ActiveWindowTitle")))
-                    (bottomCommand.v_WindowName == VariableNameControls.GetWrappedVariableName(Core.Automation.Engine.SystemVariables.Env_ActiveWindowTitle.VariableName, appSettings)) ||
+            else if ((bottomCommand.v_WindowName == VariableNameControls.GetWrappedVariableName(Core.Automation.Engine.SystemVariables.Env_ActiveWindowTitle.VariableName, appSettings)) ||
                     (bottomCommand.v_WindowName == VariableNameControls.GetWrappedVariableName(Core.Automation.Engine.SystemVariables.Window_CurrentWindowName.VariableName, appSettings)))
             {
                 return true;
