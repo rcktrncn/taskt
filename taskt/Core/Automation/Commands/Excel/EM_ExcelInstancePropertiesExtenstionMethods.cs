@@ -113,18 +113,15 @@ namespace taskt.Core.Automation.Commands
         {
             (var ins, var currentSheet) = command.ExpandValueOrVariableAsExcelInstanceAndCurrentWorksheet(engine);
 
-            if ((sheetName == VariableNameControls.GetWrappedVariableName(Engine.SystemVariables.Excel_CurrentWorkSheet.VariableName, engine)) ||
-                (sheetName == engine.engineSettings.CurrentWorksheetKeyword))
+            if (sheetName == VariableNameControls.GetWrappedVariableName(Engine.SystemVariables.Excel_CurrentWorkSheet.VariableName, engine))
             {
                 return currentSheet;
             }
-            else if ((sheetName == VariableNameControls.GetWrappedVariableName(Engine.SystemVariables.Excel_NextWorkSheet.VariableName, engine)) ||
-                    (sheetName == engine.engineSettings.NextWorksheetKeyword))
+            else if (sheetName == VariableNameControls.GetWrappedVariableName(Engine.SystemVariables.Excel_NextWorkSheet.VariableName, engine))
             {
                 return GetNextWorksheet(ins, currentSheet);
             }
-            else if ((sheetName == VariableNameControls.GetWrappedVariableName(Engine.SystemVariables.Excel_PreviousWorkSheet.VariableName, engine)) ||
-                    (sheetName == engine.engineSettings.PreviousWorksheetKeyword))
+            else if (sheetName == VariableNameControls.GetWrappedVariableName(Engine.SystemVariables.Excel_PreviousWorkSheet.VariableName, engine))
             {
                 return GetPreviousWorksheet(ins, currentSheet);
             }
