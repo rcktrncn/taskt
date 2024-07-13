@@ -3,12 +3,13 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Linq;
 using taskt.Core.IO;
 using taskt.Core.Script;
+
 
 namespace taskt.UI.Forms.ScriptEngine.Supplemental
 {
@@ -20,7 +21,7 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
         public DialogResult Result { get; set; }
         public string TemplateHTML { get; set; }
 
-        public List<Core.Script.ScriptVariable> variablesList { private set; get; }
+        public List<ScriptVariable> variablesList { private set; get; }
 
         public frmHTMLDisplayForm()
         {
@@ -44,17 +45,35 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
             this.TopMost = true;
         }
 
+        private void webBrowserHTML_NavigationStarting(object sender, CoreWebView2NavigationStartingEventArgs e)
+        {
+            webBrowserHTML.Enabled = false;
+        }
+
+        private void webBrowserHTML_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            webBrowserHTML.Enabled = true;
+        }
+
+        /// <summary>
+        /// Call from WebView2, OK button
+        /// </summary>
         public async void OK()
         {
             //Todo: figure out why return DialogResult not working for some reason
 
-            var t = GetVariablesFromHTML();
-            t.Wait();
+            this.variablesList = new List<ScriptVariable>();
+
+            // input tags
+            await GetValueAndVariableNameFromInputElements();
 
             Result = DialogResult.OK;
             this.Close();
         }
 
+        /// <summary>
+        /// Call from WebView2, Cancel button
+        /// </summary>
         public void Cancel()
         {
             //Todo: figure out why return DialogResult not working for some reason
@@ -63,15 +82,12 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
             this.Close();
         }
 
-        public async Task GetVariablesFromHTML()
+        /// <summary>
+        /// get value and variable name from Input Elements
+        /// </summary>
+        /// <returns></returns>
+        private async Task GetValueAndVariableNameFromInputElements()
         {
-            this.variablesList = new List<Core.Script.ScriptVariable>();
-
-            await GetVariablesFromInput();
-        }
-
-        private async Task GetVariablesFromInput()
-        {   
             // func id
             var rnd = new Random();
             var func_id = rnd.Next();
@@ -79,97 +95,68 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
             // js code
             var inputJS = @"
 function getInputValues_" + func_id + @"() {
-    let ret = '[';
-    const elems = document.querySelectorAll('input');
-    for (let i = 0; i < elems.length; i++) {
+    let ret = [];
+    const elems = document.querySelectorAll('input, textarea, select');
+
+    const inputFunc = (elem, name, ary) => {
+        const attr = elem.getAttribute('type');
+        if (attr == 'checkbox')
+        {
+            ary.push({ name: name, value: elem.checked });
+        }
+        else
+        {
+            ary.push({ name: name, value: elem.value });
+        }
+    }
+
+    for (let i = 0; i < elems.length; i++)
+    {
         const elem = elems[i];
-        const name = elem.getAttribute('v_applyToVariable');
-        if (name != '') {
-            const attr = elem.getAttribute('type');
-            if (attr == 'checkbox') {
-                 const c = elem.getAttribute('checked');
-                 ret += '{ ""' + name + '"": ""' + c + '"" },';
+        if (elem.tagName  = 'input') {
+            const applyVar = elem.getAttribute('v_applyToVariable');
+            if (applyVar != null)
+            {
+                inputFunc(elem, applyVar, ret);
             }
-            else {
-                 const v = elem.value;
-                 ret += '{ ""' + name + '"": ""' + v + '"" },';
+            const dataVar = elem.getAttribute('data-variable');
+            if (dataVar != null) {
+                inputFunc(elem, dataVar, ret);
+            }
+        }
+        else {
+            const applyVar = elem.getAttribute('v_applyToVariable');
+            if (applyVar != null) {
+                ret.push({ name: applyVar, value: elem.value });
+            }
+            const dataVar = elem.getAttribute('data-variable');
+            if (dataVar != null) {
+                ret.push({ name: dataVar, value: elem.value });
             }
         }
     }
-    ret = ret.substring(0, ret.length - 1) + ']';
-    return ret;
+    return JSON.stringify(ret);
 }" + @"
-getInputValues_" + func_id + "()";
+getInputValues_" + func_id + "();";
 
-            
-            // parse result
+            Console.WriteLine(inputJS);
+
             var jsonText = await webBrowserHTML.ExecuteScriptAsync(inputJS);
-            var ary = JArray.Parse(jsonText);
 
-            Console.WriteLine($"!!! {jsonText}");
+            var parsedJsonText = jsonText.Replace("\\\"", "\"");
+            parsedJsonText = parsedJsonText.Substring(1, parsedJsonText.Length - 2);
 
-            //foreach(JObject item in ary)
-            //{
-            //    this.variablesList.Add(new Core.Script.ScriptVariable()
-            //    {
-            //        VariableName = item["name"].ToString(),
-            //        VariableValue = item["value"].ToString(),
-            //    });
-            //}
-
+            var ary = JArray.Parse(parsedJsonText);
             AddVariablesList(ary);
-
-            //HtmlElementCollection collection = webBrowserHTML.Document.GetElementsByTagName(tagSearch);
-            //for (int i = 0; i < collection.Count; i++)
-            //{
-            //    var variableName = collection[i].GetAttribute("v_applyToVariable");
-
-            //    if (!string.IsNullOrEmpty(variableName))
-            //    {
-            //        var parentElement = collection[i];
-            //        if (tagSearch == "select")
-            //        {
-            //            foreach (HtmlElement item in parentElement.Children)
-            //            {
-            //                if (item.GetAttribute("selected") == "True")
-            //                {
-            //                    varList.Add(new Core.Script.ScriptVariable() { VariableName = variableName, VariableValue = item.InnerText });
-            //                }
-            //            }
-            //        }
-            //        else
-            //        {
-            //            if (parentElement.GetAttribute("type") == "checkbox")
-            //            {
-            //                var inputValue = collection[i].GetAttribute("checked");
-            //                varList.Add(new Core.Script.ScriptVariable() { VariableName = variableName, VariableValue = inputValue });
-            //            }
-            //            else
-            //            {
-            //                var inputValue = collection[i].GetAttribute("value");
-            //                varList.Add(new Core.Script.ScriptVariable() { VariableName = variableName, VariableValue = inputValue });
-            //            }
-            //        }
-            //    }
-            //}
-            //return varList;
         }
 
         private void AddVariablesList(JArray ary)
         {
-            foreach(JObject item in ary)
+            foreach(JObject item in ary.Cast<JObject>())
             {
                 var name = item["name"].ToString();
 
-                ScriptVariable existsVar = null;
-                foreach(var v in variablesList)
-                {
-                    if (v.VariableName == name)
-                    {
-                        existsVar = v;
-                        break;
-                    }
-                }
+                var existsVar = variablesList.FirstOrDefault(v => v.VariableName == name);
                 if (existsVar != null)
                 {
                     existsVar.VariableValue = item["value"].ToString();
@@ -183,16 +170,6 @@ getInputValues_" + func_id + "()";
                     });
                 }
             }
-        }
-
-        private void webBrowserHTML_NavigationStarting(object sender, CoreWebView2NavigationStartingEventArgs e)
-        {
-            webBrowserHTML.Enabled = false;
-        }
-
-        private void webBrowserHTML_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
-        {
-            webBrowserHTML.Enabled = true;
         }
     }
 }

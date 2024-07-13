@@ -41,7 +41,7 @@
             this.webBrowserHTML.Dock = System.Windows.Forms.DockStyle.Fill;
             this.webBrowserHTML.Location = new System.Drawing.Point(0, 0);
             this.webBrowserHTML.Name = "webBrowserHTML";
-            this.webBrowserHTML.Size = new System.Drawing.Size(1262, 739);
+            this.webBrowserHTML.Size = new System.Drawing.Size(784, 561);
             this.webBrowserHTML.TabIndex = 0;
             this.webBrowserHTML.ZoomFactor = 1D;
             this.webBrowserHTML.NavigationStarting += new System.EventHandler<Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs>(this.webBrowserHTML_NavigationStarting);
@@ -52,7 +52,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1262, 739);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.webBrowserHTML);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmHTMLDisplayForm";

@@ -477,8 +477,11 @@ namespace taskt.UI.Forms.ScriptEngine
 
                         //variables.AddRange(inputForm.GetVariablesFromHTML("select"));
 
-                        var t = inputForm.GetVariablesFromHTML();
-                        t.Wait();
+                        //var t = inputForm.GetVariablesFromHTML();
+                        //t.Wait();
+
+                        //inputForm.GetVariablesFromHTML();
+
                         var variables = inputForm.variablesList;
 
                         return variables;
