@@ -106,6 +106,15 @@ namespace taskt.Core.Automation.Commands
         [PropertyDisplayText(false, "")]
         public string v_WebDriverPath { get; set; }
 
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(SelectionItemsControls), nameof(SelectionItemsControls.v_YesNoComboBox))]
+        [PropertyDescription("Use Headless")]
+        [PropertyIsOptional(true, "No")]
+        [PropertyFirstValue("No")]
+        [PropertyDisplayText(false, "")]
+        [Remarks("Headless mode does not show WebBrowser window")]
+        public string v_HeadlessMode { get; set; }
+
         public SeleniumBrowserCreateWebBrowserInstanceCommand()
         {
             //this.CommandName = "SeleniumBrowserCreateCommand";
@@ -140,6 +149,11 @@ namespace taskt.Core.Automation.Commands
                     options.AddArguments(convertedOptions);
                 }
 
+                if (this.ExpandValueOrUserVariableAsYesNo(nameof(v_HeadlessMode), engine))
+                {
+                    options.AddArgument("--headless");
+                }
+
                 if (!string.IsNullOrEmpty(webDriverPath))
                 {
                     driverService = OpenQA.Selenium.Chrome.ChromeDriverService.CreateDefaultService(System.IO.Path.GetDirectoryName(webDriverPath), System.IO.Path.GetFileName(webDriverPath));
@@ -154,6 +168,17 @@ namespace taskt.Core.Automation.Commands
             else if (seleniumEngine == "edge")
             {
                 OpenQA.Selenium.Edge.EdgeOptions options = new OpenQA.Selenium.Edge.EdgeOptions();
+
+                if (!string.IsNullOrEmpty(v_SeleniumOptions))
+                {
+                    var convertedOptions = v_SeleniumOptions.ExpandValueOrUserVariable(engine);
+                    options.AddArguments(convertedOptions);
+                }
+
+                if (this.ExpandValueOrUserVariableAsYesNo(nameof(v_HeadlessMode), engine))
+                {
+                    options.AddArgument("--headless");
+                }
 
                 if (!string.IsNullOrEmpty(webDriverPath))
                 {
@@ -178,6 +203,17 @@ namespace taskt.Core.Automation.Commands
                 {
                     //options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
                     options.BinaryLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
+                }
+
+                if (!string.IsNullOrEmpty(v_SeleniumOptions))
+                {
+                    var convertedOptions = v_SeleniumOptions.ExpandValueOrUserVariable(engine);
+                    options.AddArguments(convertedOptions);
+                }
+
+                if (this.ExpandValueOrUserVariableAsYesNo(nameof(v_HeadlessMode), engine))
+                {
+                    options.AddArgument("-headless");
                 }
 
                 if (!string.IsNullOrEmpty(webDriverPath))
