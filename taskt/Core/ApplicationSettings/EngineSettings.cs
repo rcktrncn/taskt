@@ -53,17 +53,17 @@ namespace taskt.Core
         public int MaxUIElementInpectDepth { get; set; }
         public int MaxUIElementInspectSiblingNodes { get; set; }
 
-        private static readonly string InterStartVariableMaker = "{{{";
-        private static readonly string InterEndVariableMaker = "}}}";
-        private static readonly string InterCurrentWindowKeyword = "%kwd_current_window%";
-        private static readonly string InterDesktopKeyword = "%kwd_desktop%";
-        private static readonly string InterAllWindowsKeyword = "%kwd_all_windows%";
-        private static readonly string InterCurrentWindowPositionKeyword = "%kwd_current_position%";
-        private static readonly string InterCurrentWindowXPositionKeyword = "%kwd_current_xposition%";
-        private static readonly string InterCurrentWindowYPositionKeyword = "%kwd_current_yposition%";
-        private static readonly string InterCurrentWorksheetKeyword = "%kwd_current_worksheet%";
-        private static readonly string InterNextWorksheetKeyword = "%kwd_next_worksheet%";
-        private static readonly string InterPreviousWorksheetKeyword = "%kwd_previous_worksheet%";
+        //private static readonly string InterStartVariableMaker = "{{{";
+        //private static readonly string InterEndVariableMaker = "}}}";
+        //private static readonly string InterCurrentWindowKeyword = "%kwd_current_window%";
+        //private static readonly string InterDesktopKeyword = "%kwd_desktop%";
+        //private static readonly string InterAllWindowsKeyword = "%kwd_all_windows%";
+        //private static readonly string InterCurrentWindowPositionKeyword = "%kwd_current_position%";
+        //private static readonly string InterCurrentWindowXPositionKeyword = "%kwd_current_xposition%";
+        //private static readonly string InterCurrentWindowYPositionKeyword = "%kwd_current_yposition%";
+        //private static readonly string InterCurrentWorksheetKeyword = "%kwd_current_worksheet%";
+        //private static readonly string InterNextWorksheetKeyword = "%kwd_next_worksheet%";
+        //private static readonly string InterPreviousWorksheetKeyword = "%kwd_previous_worksheet%";
 
         //private static readonly string[] m_KeyNameList = new string[]
         //{
@@ -138,20 +138,20 @@ namespace taskt.Core
         //    return m_DisallowVariableCharList;
         //}
 
-        // TODO: fix it...
-        public string replaceEngineKeyword(string targetString)
-        {
-            return targetString.Replace(InterStartVariableMaker, this.VariableStartMarker)
-                    .Replace(InterEndVariableMaker, this.VariableEndMarker)
-                    //.Replace(InterCurrentWindowKeyword, taskt.Core.Automation.Commands.VariableNameControls.GetWrappedVariableName(taskt.Core.Automation.Engine.SystemVariables.Window_CurrentWindowName.VariableName, this))
-                    .Replace(InterCurrentWindowKeyword, this.CurrentWindowKeyword)
-                    .Replace(InterCurrentWindowPositionKeyword, this.CurrentWindowPositionKeyword)
-                    .Replace(InterCurrentWindowXPositionKeyword, this.CurrentWindowXPositionKeyword)
-                    .Replace(InterCurrentWindowYPositionKeyword, this.CurrentWindowYPositionKeyword)
-                    .Replace(InterCurrentWorksheetKeyword, this.CurrentWorksheetKeyword)
-                    .Replace(InterNextWorksheetKeyword, this.NextWorksheetKeyword)
-                    .Replace(InterPreviousWorksheetKeyword, this.PreviousWorksheetKeyword);
-        }
+        //// TODO: fix it...
+        //public string replaceEngineKeyword(string targetString)
+        //{
+        //    return targetString.Replace(InterStartVariableMaker, this.VariableStartMarker)
+        //            .Replace(InterEndVariableMaker, this.VariableEndMarker)
+        //            //.Replace(InterCurrentWindowKeyword, taskt.Core.Automation.Commands.VariableNameControls.GetWrappedVariableName(taskt.Core.Automation.Engine.SystemVariables.Window_CurrentWindowName.VariableName, this))
+        //            .Replace(InterCurrentWindowKeyword, this.CurrentWindowKeyword)
+        //            .Replace(InterCurrentWindowPositionKeyword, this.CurrentWindowPositionKeyword)
+        //            .Replace(InterCurrentWindowXPositionKeyword, this.CurrentWindowXPositionKeyword)
+        //            .Replace(InterCurrentWindowYPositionKeyword, this.CurrentWindowYPositionKeyword)
+        //            .Replace(InterCurrentWorksheetKeyword, this.CurrentWorksheetKeyword)
+        //            .Replace(InterNextWorksheetKeyword, this.NextWorksheetKeyword)
+        //            .Replace(InterPreviousWorksheetKeyword, this.PreviousWorksheetKeyword);
+        //}
 
         public string convertToIntermediate(string targetString)
         {
@@ -165,59 +165,59 @@ namespace taskt.Core
                     .Replace("\u2984", this.VariableEndMarker);
         }
 
-        public string convertToIntermediateExcelSheet(string targetString)
-        {
-            return convertToIntermediate(
-                    targetString.Replace(this.CurrentWorksheetKeyword, wrapIntermediateKeyword(InterCurrentWorksheetKeyword))
-                        .Replace(this.NextWorksheetKeyword, wrapIntermediateKeyword(InterNextWorksheetKeyword))
-                        .Replace(this.PreviousWorksheetKeyword, wrapIntermediateKeyword(InterPreviousWorksheetKeyword))
-                    );
-        }
+        //public string convertToIntermediateExcelSheet(string targetString)
+        //{
+        //    return convertToIntermediate(
+        //            targetString.Replace(this.CurrentWorksheetKeyword, wrapIntermediateKeyword(InterCurrentWorksheetKeyword))
+        //                .Replace(this.NextWorksheetKeyword, wrapIntermediateKeyword(InterNextWorksheetKeyword))
+        //                .Replace(this.PreviousWorksheetKeyword, wrapIntermediateKeyword(InterPreviousWorksheetKeyword))
+        //            );
+        //}
 
-        public string convertToRawExcelSheet(string targetString)
-        {
-            return convertToRaw(
-                    targetString.Replace(wrapIntermediateKeyword(InterCurrentWorksheetKeyword), this.CurrentWorksheetKeyword)
-                        .Replace(wrapIntermediateKeyword(InterNextWorksheetKeyword), this.NextWorksheetKeyword)
-                        .Replace(wrapIntermediateKeyword(InterPreviousWorksheetKeyword), this.PreviousWorksheetKeyword)
-                );
-        }
+        //public string convertToRawExcelSheet(string targetString)
+        //{
+        //    return convertToRaw(
+        //            targetString.Replace(wrapIntermediateKeyword(InterCurrentWorksheetKeyword), this.CurrentWorksheetKeyword)
+        //                .Replace(wrapIntermediateKeyword(InterNextWorksheetKeyword), this.NextWorksheetKeyword)
+        //                .Replace(wrapIntermediateKeyword(InterPreviousWorksheetKeyword), this.PreviousWorksheetKeyword)
+        //        );
+        //}
 
-        public string convertToIntermediateWindowName(string targetString)
-        {
-            return convertToIntermediate(
-                    targetString.Replace(this.CurrentWindowKeyword, wrapIntermediateKeyword(InterCurrentWindowKeyword))
-                        .Replace(this.DesktopKeyword, wrapIntermediateKeyword(InterDesktopKeyword))
-                        .Replace(this.AllWindowsKeyword, wrapIntermediateKeyword(InterAllWindowsKeyword))
-                );
-        }
+        //public string convertToIntermediateWindowName(string targetString)
+        //{
+        //    return convertToIntermediate(
+        //            targetString.Replace(this.CurrentWindowKeyword, wrapIntermediateKeyword(InterCurrentWindowKeyword))
+        //                .Replace(this.DesktopKeyword, wrapIntermediateKeyword(InterDesktopKeyword))
+        //                .Replace(this.AllWindowsKeyword, wrapIntermediateKeyword(InterAllWindowsKeyword))
+        //        );
+        //}
 
-        public string convertToRawWindowName(string targetString)
-        {
-            return convertToRaw(
-                    targetString.Replace(wrapIntermediateKeyword(InterCurrentWindowKeyword), this.CurrentWindowKeyword)
-                        .Replace(wrapIntermediateKeyword(InterDesktopKeyword), this.DesktopKeyword)
-                        .Replace(wrapIntermediateKeyword(InterAllWindowsKeyword), this.AllWindowsKeyword)
-                );
-        }
+        //public string convertToRawWindowName(string targetString)
+        //{
+        //    return convertToRaw(
+        //            targetString.Replace(wrapIntermediateKeyword(InterCurrentWindowKeyword), this.CurrentWindowKeyword)
+        //                .Replace(wrapIntermediateKeyword(InterDesktopKeyword), this.DesktopKeyword)
+        //                .Replace(wrapIntermediateKeyword(InterAllWindowsKeyword), this.AllWindowsKeyword)
+        //        );
+        //}
 
-        public string convertToIntermediateWindowPosition(string targetString)
-        {
-            return convertToIntermediate(
-                    targetString.Replace(this.CurrentWindowPositionKeyword, wrapIntermediateKeyword(InterCurrentWindowPositionKeyword))
-                        .Replace(this.CurrentWindowXPositionKeyword, wrapIntermediateKeyword(InterCurrentWindowXPositionKeyword))
-                        .Replace(this.CurrentWindowYPositionKeyword, wrapIntermediateKeyword(InterCurrentWindowYPositionKeyword))
-                );
-        }
+        //public string convertToIntermediateWindowPosition(string targetString)
+        //{
+        //    return convertToIntermediate(
+        //            targetString.Replace(this.CurrentWindowPositionKeyword, wrapIntermediateKeyword(InterCurrentWindowPositionKeyword))
+        //                .Replace(this.CurrentWindowXPositionKeyword, wrapIntermediateKeyword(InterCurrentWindowXPositionKeyword))
+        //                .Replace(this.CurrentWindowYPositionKeyword, wrapIntermediateKeyword(InterCurrentWindowYPositionKeyword))
+        //        );
+        //}
 
-        public string convertToRawWindowPosition(string targetString)
-        {
-            return convertToRaw(
-                    targetString.Replace(wrapIntermediateKeyword(InterCurrentWindowPositionKeyword), this.CurrentWindowPositionKeyword)
-                        .Replace(wrapIntermediateKeyword(InterCurrentWindowXPositionKeyword), this.CurrentWindowXPositionKeyword)
-                        .Replace(wrapIntermediateKeyword(InterCurrentWindowYPositionKeyword), this.CurrentWindowYPositionKeyword)
-                );
-        }
+        //public string convertToRawWindowPosition(string targetString)
+        //{
+        //    return convertToRaw(
+        //            targetString.Replace(wrapIntermediateKeyword(InterCurrentWindowPositionKeyword), this.CurrentWindowPositionKeyword)
+        //                .Replace(wrapIntermediateKeyword(InterCurrentWindowXPositionKeyword), this.CurrentWindowXPositionKeyword)
+        //                .Replace(wrapIntermediateKeyword(InterCurrentWindowYPositionKeyword), this.CurrentWindowYPositionKeyword)
+        //        );
+        //}
 
         public string convertToIntermediateVariableParser(string targetString, List<Core.Script.ScriptVariable> variables)
         {
@@ -255,10 +255,10 @@ namespace taskt.Core
         //    return "\u2983" + variableName + "\u2984";
         //}
 
-        private static string wrapIntermediateKeyword(string kw)
-        {
-            return "\U0001D542" + kw + "\U0001D54E";
-        }
+        //private static string wrapIntermediateKeyword(string kw)
+        //{
+        //    return "\U0001D542" + kw + "\U0001D54E";
+        //}
 
         //public bool isValidVariableName(string vName)
         //{

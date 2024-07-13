@@ -472,6 +472,7 @@
     <Compile Include="Core\Automation\Commands\JSON\IJSONValueActionProperties.cs" />
     <Compile Include="Core\Automation\Commands\JSON\ILJSONInputJSONProperties.cs" />
     <Compile Include="Core\Automation\Commands\JSON\ILJSONValueProperties.cs" />
+    <Compile Include="Core\Automation\Commands\InternalKeywordsControls.cs" />
     <Compile Include="Core\Automation\Commands\List\AListBothListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListCreateFromListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListGetFromListCommands.cs" />

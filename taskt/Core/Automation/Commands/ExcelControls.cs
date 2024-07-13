@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Automation.Engine;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -84,7 +85,6 @@ namespace taskt.Core.Automation.Commands
         [PropertyValidationRule("Sheet", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "Sheet")]
         [PropertyAvailableSystemVariable(Engine.SystemVariables.LimitedSystemVariableNames.Excel_Worksheet)]
-        [PropertyIntermediateConvert(nameof(ApplicationSettings.EngineSettings.convertToIntermediateExcelSheet), nameof(ApplicationSettings.EngineSettings.convertToRawExcelSheet))]
         [PropertyParameterOrder(5000)]
         public static string v_SheetName { get; }
 
@@ -322,6 +322,36 @@ namespace taskt.Core.Automation.Commands
         [PropertyDisplayText(true, "Value")]
         [PropertyParameterOrder(5000)]
         public static string v_ValueToSet { get; }
+        #endregion
+
+        #region keyword convert method
+
+        /// <summary>
+        /// Replace Internal Keywords to SystemVariable Names
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <param name="engine"></param>
+        /// <returns></returns>
+        public static string ReplaceKeywordsToSystemVariable(string txt, Engine.AutomationEngineInstance engine)
+        {
+            return txt.Replace(INTERNAL_EXCEL_CURRENT_WORKSHEET_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Excel_CurrentWorkSheet.VariableName, engine))
+                        .Replace(INTERNAL_EXCEL_NEXT_WORKSHEET_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Excel_NextWorkSheet.VariableName, engine))
+                        .Replace(INTERNAL_EXCEL_PREVIOUS_WORKSHEET_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Excel_PreviousWorkSheet.VariableName, engine));
+        }
+
+        /// <summary>
+        /// Replace Internal Keywords to SystemVariable Names
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        public static string ReplaceKeywordsToSystemVariable(string txt, ApplicationSettings settings)
+        {
+            return txt.Replace(INTERNAL_EXCEL_CURRENT_WORKSHEET_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Excel_CurrentWorkSheet.VariableName, settings))
+                        .Replace(INTERNAL_EXCEL_NEXT_WORKSHEET_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Excel_NextWorkSheet.VariableName, settings))
+                        .Replace(INTERNAL_EXCEL_PREVIOUS_WORKSHEET_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Excel_PreviousWorkSheet.VariableName, settings));
+        }
+
         #endregion
 
         #region instance, worksheet methods

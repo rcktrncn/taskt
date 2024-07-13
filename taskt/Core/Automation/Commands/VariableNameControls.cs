@@ -15,6 +15,14 @@ namespace taskt.Core.Automation.Commands
         /// inner variable name prefix
         /// </summary>
         private const string INNER_VARIABLE_PREFIX = "__INNER_";
+        /// <summary>
+        /// inner variable start marker
+        /// </summary>
+        private const string INTERNAL_VARIABLE_START_MARKER_KEYWORD = "{{{";
+        /// <summary>
+        /// inner variable end marker
+        /// </summary>
+        private const string INTERNAL_VARIABLE_END_MARKER_KEYWORD = "}}}";
 
         /// <summary>
         /// disallow variable name character list
@@ -261,6 +269,22 @@ namespace taskt.Core.Automation.Commands
             //}
             return true;
         }
+        #endregion
+
+        #region keywords methods
+
+        public static string ReplaceKeywordsToSystemVariable(string txt, Engine.AutomationEngineInstance engine)
+        {
+            return txt.Replace(INTERNAL_VARIABLE_START_MARKER_KEYWORD, engine.engineSettings.VariableStartMarker)
+                        .Replace(INTERNAL_VARIABLE_END_MARKER_KEYWORD, engine.engineSettings.VariableEndMarker);
+        }
+
+        public static string ReplaceKeywordsToSystemVariable(string txt, ApplicationSettings settings)
+        {
+            return txt.Replace(INTERNAL_VARIABLE_START_MARKER_KEYWORD, settings.EngineSettings.VariableStartMarker)
+                        .Replace(INTERNAL_VARIABLE_END_MARKER_KEYWORD, settings.EngineSettings.VariableEndMarker);
+        }
+
         #endregion
 
         #region inner variable methods

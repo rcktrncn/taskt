@@ -319,9 +319,11 @@ namespace taskt.Core
                     {
                         var searchKey = pInfo.searchKey.Replace("\t", " &amp; ");
                         var desc = pInfo.description;
-                        var sample = settings.EngineSettings.replaceEngineKeyword(pInfo.sampleUsage);
-                        var rmk = settings.EngineSettings.replaceEngineKeyword(pInfo.remarks);
-                        sb.AppendLine("|" + searchKey + "|" + desc + "|" + sample + "|" + rmk + "|");
+                        //var sample = settings.EngineSettings.replaceEngineKeyword(pInfo.sampleUsage);
+                        //var rmk = settings.EngineSettings.replaceEngineKeyword(pInfo.remarks);
+                        var sample = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(pInfo.sampleUsage, settings);
+                        var remark = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(pInfo.remarks, settings);
+                        sb.AppendLine("|" + searchKey + "|" + desc + "|" + sample + "|" + remark + "|");
                     }
                 }
 
@@ -339,16 +341,19 @@ namespace taskt.Core
                     
                     foreach(var s in sampleUsages)
                     {
-                        var smp = s.sampleUsage.Replace(WindowControls.INTERNAL_CURRENT_WINDOW_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentWindowName.VariableName, settings))
-                            .Replace(WindowControls.INTERNAL_CURRENT_WINDOW_POSITION_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentPosition.VariableName, settings))
-                            .Replace(WindowControls.INTERNAL_CURRENT_WINDOW_X_POSITION_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentXPosition.VariableName, settings))
-                            .Replace(WindowControls.INTERNAL_CURRENT_WINDOW_Y_POSITION_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentYPosition.VariableName, settings))
-                            .Replace(WindowControls.INTERNAL_CURRENT_WINDOW_SIZE_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentSize.VariableName, settings))
-                            .Replace(WindowControls.INTERNAL_CURRENT_WINDOW_WIDTH_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentWidth.VariableName, settings))
-                            .Replace(WindowControls.INTERNAL_CURRENT_WINDOW_HEIGHT_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentHeight.VariableName, settings))
-                            .Replace(ExcelControls.INTERNAL_EXCEL_CURRENT_WORKSHEET_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Excel_CurrentWorkSheet.VariableName, settings));
+                        //var smp = s.sampleUsage.Replace(WindowControls.INTERNAL_CURRENT_WINDOW_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentWindowName.VariableName, settings))
+                        //    .Replace(WindowControls.INTERNAL_CURRENT_WINDOW_POSITION_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentPosition.VariableName, settings))
+                        //    .Replace(WindowControls.INTERNAL_CURRENT_WINDOW_X_POSITION_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentXPosition.VariableName, settings))
+                        //    .Replace(WindowControls.INTERNAL_CURRENT_WINDOW_Y_POSITION_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentYPosition.VariableName, settings))
+                        //    .Replace(WindowControls.INTERNAL_CURRENT_WINDOW_SIZE_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentSize.VariableName, settings))
+                        //    .Replace(WindowControls.INTERNAL_CURRENT_WINDOW_WIDTH_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentWidth.VariableName, settings))
+                        //    .Replace(WindowControls.INTERNAL_CURRENT_WINDOW_HEIGHT_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Window_CurrentHeight.VariableName, settings))
+                        //    .Replace(ExcelControls.INTERNAL_EXCEL_CURRENT_WORKSHEET_KEYWORD, VariableNameControls.GetWrappedVariableName(Automation.Engine.SystemVariables.Excel_CurrentWorkSheet.VariableName, settings));
 
-                        sb.AppendLine("| " + ConvertMDToHTML(settings.replaceApplicationKeyword(smp)) + " | " + GetSampleUsageMeansText(s, settings) + " |");
+                        var smp = s.sampleUsage;
+
+                        //sb.AppendLine("| " + ConvertMDToHTML(settings.replaceApplicationKeyword(smp)) + " | " + GetSampleUsageMeansText(s, settings) + " |");
+                        sb.AppendLine("| " + ConvertMDToHTML(InternalKeywordsControls.ReplaceKeywordsToSystemVariable(smp, settings)) + " | " + GetSampleUsageMeansText(s, settings) + " |");
                         //sampleUsageTabe += "| " + ConvertMDToHTML(settings.replaceApplicationKeyword(s.sampleUsage)) + " | " + GetSampleUsageMeansText(s, settings) + " |\n";
                     }
                     //sb.AppendLine(ConvertMDToHTML(sampleUsageTabe));
@@ -419,7 +424,8 @@ namespace taskt.Core
 
             if (attrInput != null)
             {
-                var txt = settings.EngineSettings.replaceEngineKeyword(attrInput.inputSpecification);
+                //var txt = settings.EngineSettings.replaceEngineKeyword(attrInput.inputSpecification);
+                var txt = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(attrInput.inputSpecification, settings);
                 if (attrInput.autoGenerate)
                 {
                     if (txt == "")
@@ -519,12 +525,14 @@ namespace taskt.Core
                     break;
 
                 case PropertyDetailSampleUsage.ValueType.VariableValue:
-                    string vName = settings.replaceApplicationKeyword(smp.sampleUsage).Replace(settings.EngineSettings.VariableStartMarker, "").Replace(settings.EngineSettings.VariableEndMarker, "");
+                    //string vName = settings.replaceApplicationKeyword(smp.sampleUsage).Replace(settings.EngineSettings.VariableStartMarker, "").Replace(settings.EngineSettings.VariableEndMarker, "");
+                    string vName = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(smp.sampleUsage, settings).Replace(settings.EngineSettings.VariableStartMarker, "").Replace(settings.EngineSettings.VariableEndMarker, "");
                     ret = "Specify Value of Variable " + vName;
                     break;
 
                 case PropertyDetailSampleUsage.ValueType.VariableName:
-                    string vName2 = settings.replaceApplicationKeyword(smp.sampleUsage).Replace(settings.EngineSettings.VariableStartMarker, "").Replace(settings.EngineSettings.VariableEndMarker, "");
+                    //string vName2 = settings.replaceApplicationKeyword(smp.sampleUsage).Replace(settings.EngineSettings.VariableStartMarker, "").Replace(settings.EngineSettings.VariableEndMarker, "");
+                    string vName2 = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(smp.sampleUsage, settings).Replace(settings.EngineSettings.VariableStartMarker, "").Replace(settings.EngineSettings.VariableEndMarker, "");
                     ret = "Specify Variable Name " + vName2;
                     break;
             }
