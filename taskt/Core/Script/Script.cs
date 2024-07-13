@@ -11,6 +11,7 @@
 //WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and
 //limitations under the License.
+using MSHTML;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -423,7 +424,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_93(doc);
             convertTo3_5_1_96(doc);
             convertTo3_5_1_98(doc);
-
+            convertTo3_5_2_0(doc);
             return doc;
         }
 
@@ -3371,6 +3372,21 @@ namespace taskt.Core.Script
                         c.Add(new XAttribute("v_JsonExtractor", newPath));
                     }
                 }
+            }
+        }
+
+        private static void convertTo3_5_2_0(XDocument doc)
+        {
+            var htmlCommands = GetCommands(doc, "ShowHTMLInputDialogCommand");
+            foreach(var cmd in htmlCommands)
+            {
+                var html = cmd.Attribute("v_InputHTML").Value;
+                html = html.Replace("window.external.Ok()", "chrome.webview.hostObjects.fm.OK()")
+                        .Replace("window.external.Cancel()", "chrome.webview.hostObjects.fm.Cancel()");
+
+                cmd.SetAttributeValue("v_InputHTML", html);
+
+                // MEMO: i want to remove form tags, but i don't know how to do it.
             }
         }
 
