@@ -57,6 +57,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmHTMLDisplayForm";
             this.Text = "taskt - input window";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmHTMLDisplayForm_FormClosing);
             this.Load += new System.EventHandler(this.frmHTMLDisplayForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.webBrowserHTML)).EndInit();
             this.ResumeLayout(false);

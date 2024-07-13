@@ -45,6 +45,10 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
             this.TopMost = true;
         }
 
+        private async void frmHTMLDisplayForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            await webBrowserHTML.CoreWebView2.Profile.ClearBrowsingDataAsync();
+        }
         private void webBrowserHTML_NavigationStarting(object sender, CoreWebView2NavigationStartingEventArgs e)
         {
             webBrowserHTML.Enabled = false;
