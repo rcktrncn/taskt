@@ -1,35 +1,83 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Core;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using taskt.Core.IO;
+using taskt.Core.Script;
+
 
 namespace taskt.UI.Forms.ScriptEngine.Supplemental
 {
-    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    /* This attribute is required to call C# code from WebView2 */
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ComVisible(true)]
     public partial class frmHTMLDisplayForm : Form
     {
         public DialogResult Result { get; set; }
         public string TemplateHTML { get; set; }
+
+        public List<ScriptVariable> variablesList { private set; get; }
+
         public frmHTMLDisplayForm()
         {
             InitializeComponent();
         }
 
-        private void frmHTMLDisplayForm_Load(object sender, EventArgs e)
+        private async void frmHTMLDisplayForm_Load(object sender, EventArgs e)
         {
-            webBrowserHTML.ScriptErrorsSuppressed = true;
-            webBrowserHTML.ObjectForScripting = this;
-            webBrowserHTML.DocumentText = TemplateHTML;
+            //webBrowserHTML.ScriptErrorsSuppressed = true;
+            //webBrowserHTML.ObjectForScripting = this;
+            //webBrowserHTML.DocumentText = TemplateHTML;
+
+            var udfPath = Path.Combine(Folders.GetSettingsFolderPath(), "webview2");
+            var webView2Environment = await CoreWebView2Environment.CreateAsync(userDataFolder: udfPath);
+            await webBrowserHTML.EnsureCoreWebView2Async(webView2Environment);
+
+            webBrowserHTML.CoreWebView2.AddHostObjectToScript("fm", this);
+
+            webBrowserHTML.NavigateToString(TemplateHTML);
+
             this.TopMost = true;
         }
 
-        public void OK()
+        private async void frmHTMLDisplayForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            await webBrowserHTML.CoreWebView2.Profile.ClearBrowsingDataAsync();
+        }
+        private void webBrowserHTML_NavigationStarting(object sender, CoreWebView2NavigationStartingEventArgs e)
+        {
+            webBrowserHTML.Enabled = false;
+        }
+
+        private void webBrowserHTML_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        {
+            webBrowserHTML.Enabled = true;
+        }
+
+        /// <summary>
+        /// Call from WebView2, OK button
+        /// </summary>
+        public async void OK()
         {
             //Todo: figure out why return DialogResult not working for some reason
+
+            this.variablesList = new List<ScriptVariable>();
+
+            // input tags
+            await GetValueAndVariableNameFromInputElements();
 
             Result = DialogResult.OK;
             this.Close();
         }
 
+        /// <summary>
+        /// Call from WebView2, Cancel button
+        /// </summary>
         public void Cancel()
         {
             //Todo: figure out why return DialogResult not working for some reason
@@ -38,44 +86,94 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
             this.Close();
         }
 
-        public List<Core.Script.ScriptVariable> GetVariablesFromHTML(string tagSearch)
+        /// <summary>
+        /// get value and variable name from Input Elements
+        /// </summary>
+        /// <returns></returns>
+        private async Task GetValueAndVariableNameFromInputElements()
         {
-            var varList = new List<Core.Script.ScriptVariable>();
-  
-            HtmlElementCollection collection = webBrowserHTML.Document.GetElementsByTagName(tagSearch);
-            for (int i = 0; i < collection.Count; i++)
-            {
-                var variableName = collection[i].GetAttribute("v_applyToVariable");
+            // func id
+            var rnd = new Random();
+            var func_id = rnd.Next();
 
-                if (!string.IsNullOrEmpty(variableName))
+            // js code
+            var inputJS = @"
+function getInputValues_" + func_id + @"() {
+    let ret = [];
+    const elems = document.querySelectorAll('input, textarea, select');
+
+    const inputFunc = (elem, name, ary) => {
+        const attr = elem.getAttribute('type');
+        if (attr == 'checkbox')
+        {
+            ary.push({ name: name, value: elem.checked });
+        }
+        else
+        {
+            ary.push({ name: name, value: elem.value });
+        }
+    }
+
+    for (let i = 0; i < elems.length; i++)
+    {
+        const elem = elems[i];
+        if (elem.tagName  = 'input') {
+            const applyVar = elem.getAttribute('v_applyToVariable');
+            if (applyVar != null)
+            {
+                inputFunc(elem, applyVar, ret);
+            }
+            const dataVar = elem.getAttribute('data-variable');
+            if (dataVar != null) {
+                inputFunc(elem, dataVar, ret);
+            }
+        }
+        else {
+            const applyVar = elem.getAttribute('v_applyToVariable');
+            if (applyVar != null) {
+                ret.push({ name: applyVar, value: elem.value });
+            }
+            const dataVar = elem.getAttribute('data-variable');
+            if (dataVar != null) {
+                ret.push({ name: dataVar, value: elem.value });
+            }
+        }
+    }
+    return JSON.stringify(ret);
+}" + @"
+getInputValues_" + func_id + "();";
+
+            Console.WriteLine(inputJS);
+
+            var jsonText = await webBrowserHTML.ExecuteScriptAsync(inputJS);
+
+            var parsedJsonText = jsonText.Replace("\\\"", "\"");
+            parsedJsonText = parsedJsonText.Substring(1, parsedJsonText.Length - 2);
+
+            var ary = JArray.Parse(parsedJsonText);
+            AddVariablesList(ary);
+        }
+
+        private void AddVariablesList(JArray ary)
+        {
+            foreach(JObject item in ary.Cast<JObject>())
+            {
+                var name = item["name"].ToString();
+
+                var existsVar = variablesList.FirstOrDefault(v => v.VariableName == name);
+                if (existsVar != null)
                 {
-                    var parentElement = collection[i];
-                    if (tagSearch == "select")
+                    existsVar.VariableValue = item["value"].ToString();
+                }
+                else
+                {
+                    variablesList.Add(new ScriptVariable()
                     {
-                        foreach (HtmlElement item in parentElement.Children)
-                        {
-                            if (item.GetAttribute("selected") == "True")
-                            {
-                                varList.Add(new Core.Script.ScriptVariable() { VariableName = variableName, VariableValue = item.InnerText });
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (parentElement.GetAttribute("type") == "checkbox")
-                        {
-                            var inputValue = collection[i].GetAttribute("checked");
-                            varList.Add(new Core.Script.ScriptVariable() { VariableName = variableName, VariableValue = inputValue });
-                        }
-                        else
-                        {
-                            var inputValue = collection[i].GetAttribute("value");
-                            varList.Add(new Core.Script.ScriptVariable() { VariableName = variableName, VariableValue = inputValue });
-                        }
-                    }
+                        VariableName = name,
+                        VariableValue = item["value"].ToString(),
+                    });
                 }
             }
-            return varList;
         }
     }
 }
