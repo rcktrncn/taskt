@@ -180,7 +180,7 @@ Similarly, The <b>Cancel</b> button should call <b>chrome.webview.hostObjects.fm
                     }
 
                     // DBG
-                    var x = engine.VariableList;
+                    //var x = engine.VariableList;
                 }
                 else if (errorOnClose == "Error On Close")
                 {
