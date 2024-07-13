@@ -444,19 +444,19 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             createLabel("lblTitle", "Keyword", FontSize.Large, true);
 
             createLabel("lblAttention", "IMPORTANT", FontSize.NormalBold, true);
-            createLabel("lblAttentionText", "These keywords will eventually be discontinued.\rPlease use system variables from now on.", FontSize.Normal, true);
+            createLabel("lblAttentionText", "These keywords are no longer supported.\rPlease use System Variables from now on.", FontSize.Normal, true);
 
             createLabel("lblWindowKeyword", "Window Keyword", FontSize.NormalBold, true);
 
-            createLabel("lblCurrentWindow", "Current Window Keyword", FontSize.Small, true);
+            createLabel("lblCurrentWindow", "Current Window Keyword : Currently Window.CurrentWindowName", FontSize.Small, true);
             createTextBox("txtCurrentWindow", 400, newAppSettings.EngineSettings, "CurrentWindowKeyword", true);
 
             createLabel("lblExcelKeyword", "Excel Keyword", FontSize.NormalBold, true);
-            createLabel("lblCurrentSheet", "Current Worksheet Keyword", FontSize.Small, true);
+            createLabel("lblCurrentSheet", "Current Worksheet Keyword : Currently Excel.CurrentWorksheet", FontSize.Small, true);
             createTextBox("txtCurrentSheet", 400, newAppSettings.EngineSettings, "CurrentWorksheetKeyword", true);
-            createLabel("lblNextSheet", "Next Worksheet Keyword", FontSize.Small, true);
+            createLabel("lblNextSheet", "Next Worksheet Keyword : Currently Excel.NextWorksheet", FontSize.Small, true);
             createTextBox("txtNextSheet", 400, newAppSettings.EngineSettings, "NextWorksheetKeyword", true);
-            createLabel("lblPreviousSheet", "Previous Worksheet Keyword", FontSize.Small, true);
+            createLabel("lblPreviousSheet", "Previous Worksheet Keyword : Currently Excel.PreviousWorksheet", FontSize.Small, true);
             createTextBox("txtPreviousSheet", 400, newAppSettings.EngineSettings, "PreviousWorksheetKeyword", true);
         }
 
