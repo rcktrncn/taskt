@@ -21,14 +21,11 @@ namespace taskt.Core.Automation.Commands
             var rect = WindowControls.GetWindowRect(whnd);
 
             if ((v == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentPosition.VariableName, engine)) ||
-                (v == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentXPosition.VariableName, engine)) ||
-                (v == engine.engineSettings.CurrentWindowPositionKeyword) ||
-                (v == engine.engineSettings.CurrentWindowXPositionKeyword))
+                (v == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentXPosition.VariableName, engine)))
             {
                 return rect.left;
             }
-            else if ((v == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentYPosition.VariableName, engine)) ||
-                        (v == engine.engineSettings.CurrentWindowYPositionKeyword))
+            else if (v == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentYPosition.VariableName, engine))
             {
                 return rect.top;
             }
@@ -51,14 +48,11 @@ namespace taskt.Core.Automation.Commands
             var rect = WindowControls.GetWindowRect(whnd);
 
             if ((v == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentPosition.VariableName, engine)) ||
-                (v == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentYPosition.VariableName, engine)) ||
-                (v == engine.engineSettings.CurrentWindowPositionKeyword) ||
-                (v == engine.engineSettings.CurrentWindowYPositionKeyword))
+                (v == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentYPosition.VariableName, engine)))
             {
                 return rect.top;
             }
-            else if ((v == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentXPosition.VariableName, engine)) ||
-                        (v == engine.engineSettings.CurrentWindowXPositionKeyword))
+            else if (v == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentXPosition.VariableName, engine))
             {
                 return rect.left;
             }
