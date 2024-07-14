@@ -566,6 +566,7 @@
     <Compile Include="Core\Automation\Commands\_General\EM_CommandIDPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\_General\EM_HaveDataTablePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\_General\ICommandIDProperties.cs" />
+    <Compile Include="Core\Automation\Commands\_General\IHaveAdditionalCommands.cs" />
     <Compile Include="Core\Automation\Commands\_General\IHaveDataTableElements.cs" />
     <Compile Include="Core\Automation\Commands\_General\ILExpandableProperties.cs" />
     <Compile Include="Core\Automation\Commands\_General\ILFilterValueProperties.cs" />
