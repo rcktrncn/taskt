@@ -327,15 +327,19 @@ namespace taskt.Core.Automation.Engine
             //handle any errors
             try
             {
-                //determine type of command
-                if ((parentCommand is BeginNumberOfTimesLoopCommand) || (parentCommand is BeginContinousLoopCommand) || (parentCommand is BeginLoopForComplexDataTypesCommand) || (parentCommand is BeginIfCommand) || (parentCommand is BeginMultiIfCommand) || (parentCommand is TryCommand) || (parentCommand is BeginLoopCommand) || (parentCommand is BeginMultiLoopCommand))
+                ////determine type of command
+                //if ((parentCommand is BeginNumberOfTimesLoopCommand) || (parentCommand is BeginContinousLoopCommand) || (parentCommand is BeginLoopForComplexDataTypesCommand) || (parentCommand is BeginIfCommand) || (parentCommand is BeginMultiIfCommand) || (parentCommand is TryCommand) || (parentCommand is BeginLoopCommand) || (parentCommand is BeginMultiLoopCommand))
+                //{
+                //    //run the command and pass bgw/command as this command will recursively call this method for sub commands
+                //    parentCommand.RunCommand(this, command);
+                //}
+                //else if (parentCommand is SequenceCommand)
+                //{
+                //    // todo: execute runcommand
+                //    parentCommand.RunCommand(this, command);
+                //}
+                if (parentCommand is IHaveAdditionalCommands)
                 {
-                    //run the command and pass bgw/command as this command will recursively call this method for sub commands
-                    parentCommand.RunCommand(this, command);
-                }
-                else if (parentCommand is SequenceCommand)
-                {
-                    // todo: execute runcommand
                     parentCommand.RunCommand(this, command);
                 }
                 else
