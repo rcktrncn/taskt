@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
 
-    public sealed class BeginNumberOfTimesLoopCommand : ScriptCommand
+    public sealed class BeginNumberOfTimesLoopCommand : ScriptCommand, IHaveLoopAdditionalCommands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
