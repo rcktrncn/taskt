@@ -497,7 +497,7 @@ namespace taskt.UI.CustomControls
             if ((editor?.creationMode ?? Forms.ScriptBuilder.CommandEditor.frmCommandEditor.CreationMode.Edit) == Forms.ScriptBuilder.CommandEditor.frmCommandEditor.CreationMode.Add)
             {
                 //propInfo?.SetValue(command, editor.appSettings.replaceApplicationKeyword(firstValue));
-                propInfo?.SetValue(command, InternalKeywordsControls.ReplaceKeywordsToSystemVariable(firstValue, editor.appSettings));
+                propInfo?.SetValue(command, InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(firstValue, editor.appSettings));
             }
 
             return inputBox;
@@ -544,7 +544,7 @@ namespace taskt.UI.CustomControls
             if ((editor?.creationMode ?? Forms.ScriptBuilder.CommandEditor.frmCommandEditor.CreationMode.Edit) == Forms.ScriptBuilder.CommandEditor.frmCommandEditor.CreationMode.Add)
             {
                 //string convValue = editor.appSettings.replaceApplicationKeyword(firstValue);
-                string convValue = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(firstValue, editor.appSettings);
+                string convValue = InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(firstValue, editor.appSettings);
                 if ((convValue != "") && (bool.TryParse(convValue, out bool b)))
                 {
                     propInfo?.SetValue(command, b);
@@ -672,7 +672,7 @@ namespace taskt.UI.CustomControls
             if ((editor?.creationMode ?? Forms.ScriptBuilder.CommandEditor.frmCommandEditor.CreationMode.Edit) == Forms.ScriptBuilder.CommandEditor.frmCommandEditor.CreationMode.Add)
             {
                 //propInfo?.SetValue(command, editor.appSettings.replaceApplicationKeyword(firstValue));
-                propInfo?.SetValue(command, InternalKeywordsControls.ReplaceKeywordsToSystemVariable(firstValue, editor.appSettings));
+                propInfo?.SetValue(command, InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(firstValue, editor.appSettings));
             }
 
             // Mouse Wheel option
@@ -1187,7 +1187,7 @@ namespace taskt.UI.CustomControls
             var attrDescription = GetCustomAttributeWithVirtual<PropertyDescription>(propInfo, virtualPropertyInfo) ?? new PropertyDescription(propertyName);
 
             //string labelText = setting.replaceApplicationKeyword(attrDescription.propertyDescription);
-            string labelText = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(attrDescription.propertyDescription, setting);
+            string labelText = InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(attrDescription.propertyDescription, setting);
 
             // polite text
             if (setting.ClientSettings.ShowPoliteTextInDescription)
@@ -1339,7 +1339,7 @@ namespace taskt.UI.CustomControls
             //            .Replace(ExcelControls.INTERNAL_EXCEL_CURRENT_WORKSHEET_KEYWORD, VariableNameControls.GetWrappedVariableName(Excel_CurrentWorkSheet.VariableName, setting));
 
             //var replacedSample = setting.replaceApplicationKeyword(Markdig.Markdown.ToPlainText(sample).Trim());
-            var replacedSample = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(Markdig.Markdown.ToPlainText(sample).Trim(), setting);
+            var replacedSample = InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(Markdig.Markdown.ToPlainText(sample).Trim(), setting);
 
             if (planeText)
             {

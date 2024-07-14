@@ -42,7 +42,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             //lblDefineNameDescription.Text = lblDefineNameDescription.Tag.ToString().Replace("{{{", appSettings.EngineSettings.VariableStartMarker)
             //        .Replace("}}}", appSettings.EngineSettings.VariableEndMarker);
             //lblDefineNameDescription.Text = appSettings.replaceApplicationKeyword(lblDefineNameDescription.Tag.ToString());
-            lblDefineNameDescription.Text = Core.Automation.Commands.InternalKeywordsControls.ReplaceKeywordsToSystemVariable(lblDefineNameDescription.Tag.ToString(), appSettings);
+            lblDefineNameDescription.Text = Core.Automation.Commands.InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(lblDefineNameDescription.Tag.ToString(), appSettings);
         }
 
         private void uiBtnOk_Click(object sender, EventArgs e)

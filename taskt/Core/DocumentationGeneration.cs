@@ -321,8 +321,8 @@ namespace taskt.Core
                         var desc = pInfo.description;
                         //var sample = settings.EngineSettings.replaceEngineKeyword(pInfo.sampleUsage);
                         //var rmk = settings.EngineSettings.replaceEngineKeyword(pInfo.remarks);
-                        var sample = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(pInfo.sampleUsage, settings);
-                        var remark = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(pInfo.remarks, settings);
+                        var sample = InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(pInfo.sampleUsage, settings);
+                        var remark = InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(pInfo.remarks, settings);
                         sb.AppendLine("|" + searchKey + "|" + desc + "|" + sample + "|" + remark + "|");
                     }
                 }
@@ -353,7 +353,7 @@ namespace taskt.Core
                         var smp = s.sampleUsage;
 
                         //sb.AppendLine("| " + ConvertMDToHTML(settings.replaceApplicationKeyword(smp)) + " | " + GetSampleUsageMeansText(s, settings) + " |");
-                        sb.AppendLine("| " + ConvertMDToHTML(InternalKeywordsControls.ReplaceKeywordsToSystemVariable(smp, settings)) + " | " + GetSampleUsageMeansText(s, settings) + " |");
+                        sb.AppendLine("| " + ConvertMDToHTML(InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(smp, settings)) + " | " + GetSampleUsageMeansText(s, settings) + " |");
                         //sampleUsageTabe += "| " + ConvertMDToHTML(settings.replaceApplicationKeyword(s.sampleUsage)) + " | " + GetSampleUsageMeansText(s, settings) + " |\n";
                     }
                     //sb.AppendLine(ConvertMDToHTML(sampleUsageTabe));
@@ -425,7 +425,7 @@ namespace taskt.Core
             if (attrInput != null)
             {
                 //var txt = settings.EngineSettings.replaceEngineKeyword(attrInput.inputSpecification);
-                var txt = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(attrInput.inputSpecification, settings);
+                var txt = InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(attrInput.inputSpecification, settings);
                 if (attrInput.autoGenerate)
                 {
                     if (txt == "")
@@ -526,13 +526,13 @@ namespace taskt.Core
 
                 case PropertyDetailSampleUsage.ValueType.VariableValue:
                     //string vName = settings.replaceApplicationKeyword(smp.sampleUsage).Replace(settings.EngineSettings.VariableStartMarker, "").Replace(settings.EngineSettings.VariableEndMarker, "");
-                    string vName = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(smp.sampleUsage, settings).Replace(settings.EngineSettings.VariableStartMarker, "").Replace(settings.EngineSettings.VariableEndMarker, "");
+                    string vName = InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(smp.sampleUsage, settings).Replace(settings.EngineSettings.VariableStartMarker, "").Replace(settings.EngineSettings.VariableEndMarker, "");
                     ret = "Specify Value of Variable " + vName;
                     break;
 
                 case PropertyDetailSampleUsage.ValueType.VariableName:
                     //string vName2 = settings.replaceApplicationKeyword(smp.sampleUsage).Replace(settings.EngineSettings.VariableStartMarker, "").Replace(settings.EngineSettings.VariableEndMarker, "");
-                    string vName2 = InternalKeywordsControls.ReplaceKeywordsToSystemVariable(smp.sampleUsage, settings).Replace(settings.EngineSettings.VariableStartMarker, "").Replace(settings.EngineSettings.VariableEndMarker, "");
+                    string vName2 = InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(smp.sampleUsage, settings).Replace(settings.EngineSettings.VariableStartMarker, "").Replace(settings.EngineSettings.VariableEndMarker, "");
                     ret = "Specify Variable Name " + vName2;
                     break;
             }
@@ -607,7 +607,8 @@ namespace taskt.Core
 
         private static string GetRemarksText(PropertyInfo propInfo, PropertyInfo virtualPropInfo, ApplicationSettings settings)
         {
-            string rm = settings.ClientSettings.replaceClientKeyword(GetCustomAttributeWithVirtual<Remarks>(propInfo, virtualPropInfo)?.remarks ?? "");
+            //string rm = settings.ClientSettings.replaceClientKeyword(GetCustomAttributeWithVirtual<Remarks>(propInfo, virtualPropInfo)?.remarks ?? "");
+            string rm = InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(GetCustomAttributeWithVirtual<Remarks>(propInfo, virtualPropInfo)?.remarks ?? "", settings);
 
             // is optional
             var isOpt = GetCustomAttributeWithVirtual<PropertyIsOptional>(propInfo, virtualPropInfo) ?? new PropertyIsOptional();
