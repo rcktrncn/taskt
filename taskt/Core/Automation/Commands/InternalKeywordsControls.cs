@@ -3,7 +3,7 @@
     public static class InternalKeywordsControls
     {
         /// <summary>
-        /// Replace Internal Keywords to SystemVariable Names
+        /// Replace Internal Keywords to SystemVariable Names (not support Variable Marker)
         /// </summary>
         /// <param name="txt"></param>
         /// <param name="engine"></param>
@@ -24,6 +24,7 @@
         /// <returns></returns>
         public static string ReplaceKeywordsToSystemVariable(string txt, ApplicationSettings settings)
         {
+            txt = settings.ClientSettings.replaceClientKeyword(txt);
             txt = VariableNameControls.ReplaceKeywordsToSystemVariable(txt, settings);
             txt = WindowControls.ReplaceKeywordsToSystemVariable(txt, settings);
             txt = ExcelControls.ReplaceKeywordsToSystemVariable(txt, settings);
