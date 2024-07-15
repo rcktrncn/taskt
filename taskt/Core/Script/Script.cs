@@ -105,7 +105,7 @@ namespace taskt.Core.Script
                     }
                 }
                 //else if ((command is EndLoopCommand) || (command is EndIfCommand) || (command is EndTryCommand))  //if current loop scenario is ending
-                if (command is IEndOfStacturedCommand)
+                else if (command is IEndOfStacturedCommand)
                 {
                     //get reference to previous node
                     var parentCommand = subCommands[subCommands.Count - 1];
