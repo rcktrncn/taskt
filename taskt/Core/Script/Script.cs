@@ -84,7 +84,8 @@ namespace taskt.Core.Script
                 var command = srcCommand.Clone();
                 command.LineNumber = lineNumber;
 
-                if ((command is BeginNumberOfTimesLoopCommand) || (command is BeginContinousLoopCommand) || (command is BeginLoopForComplexDataTypesCommand) || (command is BeginIfCommand) || (command is BeginMultiIfCommand) || (command is TryCommand) || (command is BeginLoopCommand) || (command is BeginMultiLoopCommand))
+                //if ((command is BeginNumberOfTimesLoopCommand) || (command is BeginContinousLoopCommand) || (command is BeginLoopForComplexDataTypesCommand) || (command is BeginIfCommand) || (command is BeginMultiIfCommand) || (command is TryCommand) || (command is BeginLoopCommand) || (command is BeginMultiLoopCommand))
+                if ((command is IHaveErrorAdditionalCommands) || (command is IHaveIfAdditionalCommands) || (command is IHaveLoopAdditionalCommands))
                 {
                     if (subCommands.Count == 0)  //if this is the first loop
                     {
@@ -103,7 +104,8 @@ namespace taskt.Core.Script
                         subCommands.Add(nextNodeParent);
                     }
                 }
-                else if ((command is EndLoopCommand) || (command is EndIfCommand) || (command is EndTryCommand))  //if current loop scenario is ending
+                //else if ((command is EndLoopCommand) || (command is EndIfCommand) || (command is EndTryCommand))  //if current loop scenario is ending
+                if (command is IEndOfStacturedCommand)
                 {
                     //get reference to previous node
                     var parentCommand = subCommands[subCommands.Count - 1];

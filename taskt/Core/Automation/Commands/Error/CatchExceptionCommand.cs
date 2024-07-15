@@ -12,7 +12,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_try))]
     [Attributes.ClassAttributes.EnableAutomateRender(true, true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class CatchExceptionCommand : ScriptCommand
+    public sealed class CatchExceptionCommand : ScriptCommand, IDelimitersOfStructuredCommands
     {
         public string ErrorMessage { get; set; }
         public string StackTrace { get; set; }
