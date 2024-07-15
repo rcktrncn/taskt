@@ -165,7 +165,8 @@ namespace taskt.Core.Automation.Commands
                 engine.ReportProgress($"Finished Loop From Line {loopCommand.LineNumber}");
             });
 
-            var dummyAction = new Action<int>(cnt => { });
+            //DBG
+            //var dummyAction = new Action<int>(cnt => { });
 
             if (this.ExpandValueOrUserVariableAsYesNo(nameof(v_ReverseLoop), engine))
             {
