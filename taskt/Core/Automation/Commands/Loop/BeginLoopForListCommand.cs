@@ -33,8 +33,8 @@ namespace taskt.Core.Automation.Commands
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
         [PropertyDescription("Variable Name to Store List Index")]
         [PropertyIsOptional(true)]
-        [PropertyValidationRule("List Value", PropertyValidationRule.ValidationRuleFlags.None)]
-        [PropertyDisplayText(true, "List Value")]
+        [PropertyValidationRule("List Index", PropertyValidationRule.ValidationRuleFlags.None)]
+        [PropertyDisplayText(true, "List Index")]
         [PropertyParameterOrder(6001)]
         public string v_Index { get; set; }
 
