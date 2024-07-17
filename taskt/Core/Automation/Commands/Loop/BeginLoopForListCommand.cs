@@ -74,7 +74,7 @@ namespace taskt.Core.Automation.Commands
         {
             var loopCommand = (BeginLoopForListCommand)parentCommand.ScriptCommand;
 
-            var list = v_List.GetRawVariable(engine);
+            var rawVariable = v_List.GetRawVariable(engine);
             var listToLoop = this.ExpandUserVariableAsList(engine);
             int loopTimes = listToLoop.Count;
 
@@ -128,7 +128,7 @@ namespace taskt.Core.Automation.Commands
             int count = 0;  // loop counter
             var loopBodyProcess = new Action<int>(index =>
             {
-                list.CurrentPosition = index;
+                rawVariable.CurrentPosition = index;
 
                 engine.ReportProgress($"Starting Loop Number {(count + 1)}/{loopTimes} From Line {loopCommand.LineNumber}");
 
