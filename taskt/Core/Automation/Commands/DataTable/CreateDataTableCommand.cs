@@ -60,7 +60,8 @@ namespace taskt.Core.Automation.Commands
             var nameList = new List<string>();
 
             // check column name is empty
-            for (int i = v_ColumnNameDataTable.Rows.Count - 1; i >= 0 ; i--)
+            //for (int i = v_ColumnNameDataTable.Rows.Count - 1; i >= 0 ; i--)
+            for (int i = 0; i < v_ColumnNameDataTable.Rows.Count; i++)
             {
                 var name = v_ColumnNameDataTable.Rows[i].Field<string>("Column Name") ?? "";
                 if (!string.IsNullOrEmpty(name))
