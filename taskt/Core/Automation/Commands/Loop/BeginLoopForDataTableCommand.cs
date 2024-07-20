@@ -163,25 +163,25 @@ namespace taskt.Core.Automation.Commands
             {
                 rowFirstValue = tableToLoop.Rows.Count - 1;
                 rowCondition = new Func<int, bool>(row => (row >= 0));
-                rowNextValue = new Func<int, int>(row => (row - 1));
+                rowNextValue = new Func<int, int>(row => (--row));
             }
             else
             {
                 rowFirstValue = 0;
                 rowCondition = new Func<int, bool>(row => (row < tableToLoop.Rows.Count));
-                rowNextValue = new Func<int, int>(row => (row + 1));
+                rowNextValue = new Func<int, int>(row => (++row));
             }
             if (this.ExpandValueOrUserVariableAsYesNo(nameof(v_ColumnReverseLoop), engine))
             {
                 columnFirstValue = tableToLoop.Columns.Count - 1;
                 columnCondition = new Func<int, bool>(column => (column >= 0));
-                columnNextValue = new Func<int, int>(column => (column - 1));
+                columnNextValue = new Func<int, int>(column => (--column));
             }
             else
             {
                 columnFirstValue = 0;
                 columnCondition = new Func<int, bool>(column => (column < tableToLoop.Columns.Count));
-                columnNextValue = new Func<int, int>(column => (column + 1));
+                columnNextValue = new Func<int, int>(column => (++column));
             }
 
             Action<int> loopTimesAction;
