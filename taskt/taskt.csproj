@@ -496,6 +496,7 @@
     <Compile Include="Core\Automation\Commands\List\IListResultProperties.cs" />
     <Compile Include="Core\Automation\Commands\List\ILListCreateFromListProperties.cs" />
     <Compile Include="Core\Automation\Commands\List\ILListProperties.cs" />
+    <Compile Include="Core\Automation\Commands\Loop\BeginLoopForDataTableCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginLoopForDictionaryCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginLoopForListCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\IHaveLoopAdditionalCommands.cs" />
