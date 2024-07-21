@@ -498,6 +498,8 @@
     <Compile Include="Core\Automation\Commands\List\ILListProperties.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginLoopForDataTableColumnAsDataTableCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginLoopForDataTableColumnAsListCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Loop\BeginLoopForDataTableRowAsDataTableCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Loop\BeginLoopForDataTableRowAsDictionaryCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginLoopForDataTableCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginLoopForDictionaryCommand.cs" />
     <Compile Include="Core\Automation\Commands\Loop\BeginLoopForListCommand.cs" />
