@@ -84,6 +84,26 @@ namespace taskt.Core.Automation.Commands
             var tableToLoop = this.ExpandUserVariableAsDataTable(engine);
             var loopTimes = tableToLoop.Columns.Count;
 
+            Action<int> listVariableAction;
+            if (string.IsNullOrEmpty(v_Result))
+            {
+                listVariableAction = new Action<int>((column) => { });  // nothing
+            }
+            else
+            {
+                listVariableAction = new Action<int>((column) =>
+                {
+                    var cnvList = new ConvertDataTableColumnToListCommand()
+                    {
+                        v_DataTable = this.v_DataTable,
+                        v_ColumnIndex = column.ToString(),
+                        v_ColumnType = "index",
+                        v_Result = this.v_Result,
+                    };
+                    cnvList.RunCommand(engine);
+                });
+            }
+
             Action<int> tableColumnIndexAction;
             if (string.IsNullOrEmpty(v_ColumnIndex))
             {
@@ -144,14 +164,15 @@ namespace taskt.Core.Automation.Commands
                     }
 
                     // store variables value
-                    var convColumnList = new ConvertDataTableColumnToListCommand()
-                    {
-                        v_DataTable = this.v_DataTable,
-                        v_ColumnIndex = column.ToString(),
-                        v_ColumnType = "index",
-                        v_Result = this.v_Result,
-                    };
-                    convColumnList.RunCommand(engine);
+                    //var convColumnList = new ConvertDataTableColumnToListCommand()
+                    //{
+                    //    v_DataTable = this.v_DataTable,
+                    //    v_ColumnIndex = column.ToString(),
+                    //    v_ColumnType = "index",
+                    //    v_Result = this.v_Result,
+                    //};
+                    //convColumnList.RunCommand(engine);
+                    listVariableAction(column);
 
                     tableColumnIndexAction(column);
                     tableColumnNameAction(tableToLoop.Columns[column].ColumnName);
