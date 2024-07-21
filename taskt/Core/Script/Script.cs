@@ -427,6 +427,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_96(doc);
             convertTo3_5_1_98(doc);
             convertTo3_5_2_0(doc);
+            convertTo3_5_2_1(doc);
             return doc;
         }
 
@@ -3339,8 +3340,9 @@ namespace taskt.Core.Script
             // RemoveJSONProperty -> RemoveJSONObjectProperty
             ChangeCommandName(doc, "RemoveJSONPropertyCommand", "RemoveJSONObjectPropertyCommand", "Remove JSON Object Property");
 
+            // stop v3.5.2.1
             // GetJSONValueList -> ConvertJSONToList
-            ChangeCommandName(doc, "GetJSONValueListCommand", "ConvertJSONToListCommand", "Convert JSON To List");
+            //ChangeCommandName(doc, "GetJSONValueListCommand", "ConvertJSONToListCommand", "Convert JSON To List");
 
             // separate JSONPath
             var rmv = GetCommands(doc, "RemoveJSONObjectPropertyCommand");
@@ -3390,6 +3392,12 @@ namespace taskt.Core.Script
 
                 // MEMO: i want to remove form tags, but i don't know how to do it.
             }
+        }
+
+        private static void convertTo3_5_2_1(XDocument doc)
+        {
+            // GetJSONValueListCommand -> GetJSONValuesAsListCommand
+            ChangeCommandName(doc, "GetJSONValueListCommand", "GetJSONValuesAsListCommand", "Get JSON Values As List");
         }
 
         /// <summary>

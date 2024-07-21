@@ -966,7 +966,7 @@
     <Compile Include="Core\Automation\Commands\Text\GetWordCountCommand.cs" />
     <Compile Include="Core\Automation\Commands\Text\GetWordLengthCommand.cs" />
     <Compile Include="Core\Automation\Commands\Data\LogDataCommand.cs" />
-    <Compile Include="Core\Automation\Commands\JSON\GetJSONValueListCommand.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\GetJSONValuesAsListCommand.cs" />
     <Compile Include="Core\Automation\Commands\Data\PDFTextExtractionCommand.cs" />
     <Compile Include="Core\Automation\Commands\Text\ReplaceTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\Text\SplitTextCommand.cs" />
