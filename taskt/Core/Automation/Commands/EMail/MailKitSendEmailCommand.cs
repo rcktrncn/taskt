@@ -132,7 +132,7 @@ namespace taskt.Core.Automation.Commands
 
             // auth
             string user = v_SMTPUserName.ExpandValueOrUserVariable(engine);
-            if (String.IsNullOrEmpty(user))
+            if (string.IsNullOrEmpty(user))
             {
                 user = from;
             }
@@ -150,7 +150,7 @@ namespace taskt.Core.Automation.Commands
                 message.To.Add(new MimeKit.MailboxAddress(address, address));
             }
             
-            if (!String.IsNullOrEmpty(cc))
+            if (!string.IsNullOrEmpty(cc))
             {
                 var ccArray = cc.Split(';');
                 foreach(string address in ccArray)
@@ -159,7 +159,7 @@ namespace taskt.Core.Automation.Commands
                 }
             }
 
-            if (!String.IsNullOrEmpty(bcc))
+            if (!string.IsNullOrEmpty(bcc))
             {
                 var bccArray = bcc.Split(';');
                 foreach (string address in bccArray)
@@ -173,7 +173,7 @@ namespace taskt.Core.Automation.Commands
             // has attachment file?
             if (!string.IsNullOrEmpty(attachmentFilePath))
             {
-                if (!System.IO.File.Exists(pass))
+                if (!System.IO.File.Exists(attachmentFilePath))
                 {
                     throw new Exception("Attachment File '" + v_SMTPAttachment + "' does not Exists");
                 }

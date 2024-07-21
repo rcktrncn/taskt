@@ -76,6 +76,10 @@ namespace taskt.Core.Automation.Commands
                     res.Add($"key{i}", item.ToString());
                 }
             }
+            else if (jCon is JValue va)
+            {
+                res.Add("key0", va.ToString());
+            }
             else
             {
                 throw new Exception($"Extraction Result is NOT Supported Type. Result: '{jCon}', JSONPath: '{v_JsonExtractor}'");

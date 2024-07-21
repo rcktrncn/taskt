@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using taskt.UI.CustomControls;
-using taskt.UI.Forms;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -12,7 +11,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to signify the exit point of your if scenario")]
     [Attributes.ClassAttributes.ImplementationDescription("TBD")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_else))]
-    public sealed class ElseCommand : ScriptCommand
+    public sealed class ElseCommand : ScriptCommand, IDelimitersOfStructuredCommands
     {
         public ElseCommand()
         {

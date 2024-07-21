@@ -163,12 +163,12 @@ namespace taskt.Core
 
         public bool DisplayNumberBeforeParameterDescription { get; set; }
 
-        private static readonly string InterDefaultBrowserInstanceNameKeyword = "%kwd_default_browser_instance%";
-        private static readonly string InterDefaultStopWatchInstanceNameKeyword = "%kwd_default_stopwatch_instance%";
-        private static readonly string InterDefaultExcelInstanceNameKeyword = "%kwd_default_excel_instance%";
-        private static readonly string InterDefaultWordInstanceNameKeyword = "%kwd_default_word_instance%";
-        private static readonly string InterDefaultDBInstanceNameKeyword = "%kwd_default_db_instance%";
-        private static readonly string InterDefaultNLGInstanceNameKeyword = "%kwd_default_nlg_instance%";
+        //private static readonly string InterDefaultBrowserInstanceNameKeyword = "%kwd_default_browser_instance%";
+        //private static readonly string InterDefaultStopWatchInstanceNameKeyword = "%kwd_default_stopwatch_instance%";
+        //private static readonly string InterDefaultExcelInstanceNameKeyword = "%kwd_default_excel_instance%";
+        //private static readonly string InterDefaultWordInstanceNameKeyword = "%kwd_default_word_instance%";
+        //private static readonly string InterDefaultDBInstanceNameKeyword = "%kwd_default_db_instance%";
+        //private static readonly string InterDefaultNLGInstanceNameKeyword = "%kwd_default_nlg_instance%";
 
         public ClientSettings()
         {
@@ -226,14 +226,14 @@ namespace taskt.Core
             DisplayNumberBeforeParameterDescription = true;
         }
 
-        public string replaceClientKeyword(string targetString)
-        {
-            return targetString.Replace(InterDefaultBrowserInstanceNameKeyword, this.DefaultBrowserInstanceName)
-                    .Replace(InterDefaultStopWatchInstanceNameKeyword, this.DefaultStopWatchInstanceName)
-                    .Replace(InterDefaultExcelInstanceNameKeyword, this.DefaultExcelInstanceName)
-                    .Replace(InterDefaultWordInstanceNameKeyword, this.DefaultWordInstanceName)
-                    .Replace(InterDefaultDBInstanceNameKeyword, this.DefaultDBInstanceName)
-                    .Replace(InterDefaultNLGInstanceNameKeyword, this.DefaultNLGInstanceName);
-        }
+        //public string replaceClientKeyword(string targetString)
+        //{
+        //    return targetString.Replace(InterDefaultBrowserInstanceNameKeyword, this.DefaultBrowserInstanceName)
+        //            .Replace(InterDefaultStopWatchInstanceNameKeyword, this.DefaultStopWatchInstanceName)
+        //            .Replace(InterDefaultExcelInstanceNameKeyword, this.DefaultExcelInstanceName)
+        //            .Replace(InterDefaultWordInstanceNameKeyword, this.DefaultWordInstanceName)
+        //            .Replace(InterDefaultDBInstanceNameKeyword, this.DefaultDBInstanceName)
+        //            .Replace(InterDefaultNLGInstanceNameKeyword, this.DefaultNLGInstanceName);
+        //}
     }
 }

@@ -4,7 +4,6 @@ using System.Xml.Serialization;
 using System.Data;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using taskt.UI.Forms;
 using taskt.UI.CustomControls;
 
 namespace taskt.Core.Automation.Commands
@@ -15,7 +14,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to check if a statement is 'true' or 'false' and subsequently take an action based on either condition. Any 'BeginIf' command must have a following 'EndIf' command.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command evaluates supplied arguments and if evaluated to true runs sub elements")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_begin_multi_if))]
-    public sealed class BeginMultiIfCommand : ScriptCommand, IHaveDataTableElements
+    public sealed class BeginMultiIfCommand : ScriptCommand, IHaveDataTableElements, IHaveIfAdditionalCommands
     {
         [XmlElement]
         [Attributes.PropertyAttributes.PropertyDescription("Multiple If Conditions - All Must Be True")]

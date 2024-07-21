@@ -84,7 +84,8 @@ namespace taskt.Core.Script
                 var command = srcCommand.Clone();
                 command.LineNumber = lineNumber;
 
-                if ((command is BeginNumberOfTimesLoopCommand) || (command is BeginContinousLoopCommand) || (command is BeginLoopForComplexDataTypesCommand) || (command is BeginIfCommand) || (command is BeginMultiIfCommand) || (command is TryCommand) || (command is BeginLoopCommand) || (command is BeginMultiLoopCommand))
+                //if ((command is BeginNumberOfTimesLoopCommand) || (command is BeginContinousLoopCommand) || (command is BeginLoopForComplexDataTypesCommand) || (command is BeginIfCommand) || (command is BeginMultiIfCommand) || (command is TryCommand) || (command is BeginLoopCommand) || (command is BeginMultiLoopCommand))
+                if ((command is IHaveErrorAdditionalCommands) || (command is IHaveIfAdditionalCommands) || (command is IHaveLoopAdditionalCommands))
                 {
                     if (subCommands.Count == 0)  //if this is the first loop
                     {
@@ -103,7 +104,8 @@ namespace taskt.Core.Script
                         subCommands.Add(nextNodeParent);
                     }
                 }
-                else if ((command is EndLoopCommand) || (command is EndIfCommand) || (command is EndTryCommand))  //if current loop scenario is ending
+                //else if ((command is EndLoopCommand) || (command is EndIfCommand) || (command is EndTryCommand))  //if current loop scenario is ending
+                else if (command is IEndOfStacturedCommand)
                 {
                     //get reference to previous node
                     var parentCommand = subCommands[subCommands.Count - 1];
@@ -425,6 +427,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_96(doc);
             convertTo3_5_1_98(doc);
             convertTo3_5_2_0(doc);
+            convertTo3_5_2_1(doc);
             return doc;
         }
 
@@ -3337,8 +3340,9 @@ namespace taskt.Core.Script
             // RemoveJSONProperty -> RemoveJSONObjectProperty
             ChangeCommandName(doc, "RemoveJSONPropertyCommand", "RemoveJSONObjectPropertyCommand", "Remove JSON Object Property");
 
+            // stop v3.5.2.1
             // GetJSONValueList -> ConvertJSONToList
-            ChangeCommandName(doc, "GetJSONValueListCommand", "ConvertJSONToListCommand", "Convert JSON To List");
+            //ChangeCommandName(doc, "GetJSONValueListCommand", "ConvertJSONToListCommand", "Convert JSON To List");
 
             // separate JSONPath
             var rmv = GetCommands(doc, "RemoveJSONObjectPropertyCommand");
@@ -3388,6 +3392,12 @@ namespace taskt.Core.Script
 
                 // MEMO: i want to remove form tags, but i don't know how to do it.
             }
+        }
+
+        private static void convertTo3_5_2_1(XDocument doc)
+        {
+            // GetJSONValueListCommand -> GetJSONValuesAsListCommand
+            ChangeCommandName(doc, "GetJSONValueListCommand", "GetJSONValuesAsListCommand", "Get JSON Values As List");
         }
 
         /// <summary>

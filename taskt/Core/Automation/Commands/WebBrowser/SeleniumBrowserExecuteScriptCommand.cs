@@ -129,7 +129,7 @@ namespace taskt.Core.Automation.Commands
             OpenQA.Selenium.IJavaScriptExecutor js = (OpenQA.Selenium.IJavaScriptExecutor)seleniumInstance;
 
             object result;
-            if (String.IsNullOrEmpty(args))
+            if (string.IsNullOrEmpty(args))
             {
                 if (timeOut > 1)
                 {

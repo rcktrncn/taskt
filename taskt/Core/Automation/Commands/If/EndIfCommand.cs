@@ -12,7 +12,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to signify the exit point of your if scenario")]
     [Attributes.ClassAttributes.ImplementationDescription("This command is used by the serializer to signify the end point of an if.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_end_if))]
-    public sealed class EndIfCommand : ScriptCommand
+    public sealed class EndIfCommand : ScriptCommand, IEndOfStacturedCommand
     {
         public EndIfCommand()
         {

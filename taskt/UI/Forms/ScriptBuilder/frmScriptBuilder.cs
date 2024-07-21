@@ -1553,17 +1553,20 @@ namespace taskt.UI.Forms.ScriptBuilder
             // insert comment above if, loop, try
             if (appSettings.ClientSettings.InsertCommentIfLoopAbove)
             {
-                if ((selectedCommand is BeginLoopForComplexDataTypesCommand) || (selectedCommand is BeginContinousLoopCommand) || (selectedCommand is BeginNumberOfTimesLoopCommand) || (selectedCommand is BeginLoopCommand) || (selectedCommand is BeginMultiLoopCommand))
+                //if ((selectedCommand is BeginLoopForComplexDataTypesCommand) || (selectedCommand is BeginContinousLoopCommand) || (selectedCommand is BeginNumberOfTimesLoopCommand) || (selectedCommand is BeginLoopCommand) || (selectedCommand is BeginMultiLoopCommand))
+                if (selectedCommand is IHaveLoopAdditionalCommands)
                 {
                     lstScriptActions.Items.Insert(insertionIndex, CreateScriptCommandListViewItem(new CommentCommand() { v_Comment = "Please enter a description of the loop here" }));
                     insertionIndex++;
                 }
-                else if((selectedCommand is BeginIfCommand) || (selectedCommand is BeginMultiIfCommand))
+                //else if((selectedCommand is BeginIfCommand) || (selectedCommand is BeginMultiIfCommand))
+                else if (selectedCommand is IHaveIfAdditionalCommands)
                 {
                     lstScriptActions.Items.Insert(insertionIndex, CreateScriptCommandListViewItem(new CommentCommand() { v_Comment = "Please enter a description of the if here" }));
                     insertionIndex++;
                 }
-                else if(selectedCommand is TryCommand)
+                //else if(selectedCommand is TryCommand)
+                else if (selectedCommand is IHaveErrorAdditionalCommands)
                 {
                     lstScriptActions.Items.Insert(insertionIndex, CreateScriptCommandListViewItem(new CommentCommand() { v_Comment = "Please enter a description of the error handling here" }));
                     insertionIndex++;
@@ -1576,13 +1579,15 @@ namespace taskt.UI.Forms.ScriptBuilder
             var focusIndex = insertionIndex;
 
             //special types also get a following command and comment
-            if ((selectedCommand is BeginLoopForComplexDataTypesCommand) || (selectedCommand is BeginContinousLoopCommand) || (selectedCommand is BeginNumberOfTimesLoopCommand) || (selectedCommand is BeginLoopCommand) || (selectedCommand is BeginMultiLoopCommand))
+            //if ((selectedCommand is BeginLoopForComplexDataTypesCommand) || (selectedCommand is BeginContinousLoopCommand) || (selectedCommand is BeginNumberOfTimesLoopCommand) || (selectedCommand is BeginLoopCommand) || (selectedCommand is BeginMultiLoopCommand))
+            if (selectedCommand is IHaveLoopAdditionalCommands)
             {
                 lstScriptActions.Items.Insert(insertionIndex + 1, CreateScriptCommandListViewItem(new CommentCommand() { v_Comment = "Items in this section will run within the loop" }));
                 lstScriptActions.Items.Insert(insertionIndex + 2, CreateScriptCommandListViewItem(new EndLoopCommand()));
                 focusIndex++;
             }
-            else if ((selectedCommand is BeginIfCommand) || (selectedCommand is BeginMultiIfCommand))
+            //else if ((selectedCommand is BeginIfCommand) || (selectedCommand is BeginMultiIfCommand))
+            else if (selectedCommand is IHaveIfAdditionalCommands)
             {
                 if (appSettings.ClientSettings.InsertElseAutomatically)
                 {
@@ -1598,7 +1603,8 @@ namespace taskt.UI.Forms.ScriptBuilder
                 }
                 focusIndex++;
             }
-            else if (selectedCommand is TryCommand)
+            //else if (selectedCommand is TryCommand)
+            else if (selectedCommand is IHaveErrorAdditionalCommands)
             {
                 lstScriptActions.Items.Insert(insertionIndex + 1, CreateScriptCommandListViewItem(new CommentCommand() { v_Comment = "Items in this section will be handled if error occurs" }));
                 lstScriptActions.Items.Insert(insertionIndex + 2, CreateScriptCommandListViewItem(new CatchExceptionCommand() { v_Comment = "Items in this section will run if error occurs" }));
@@ -1643,13 +1649,17 @@ namespace taskt.UI.Forms.ScriptBuilder
                     continue;
                 }
 
-                if ((rowItem.Tag is BeginIfCommand) || (rowItem.Tag is BeginMultiIfCommand) || (rowItem.Tag is BeginLoopForComplexDataTypesCommand) || (rowItem.Tag is BeginContinousLoopCommand) || (rowItem.Tag is BeginNumberOfTimesLoopCommand) || (rowItem.Tag is TryCommand) || (rowItem.Tag is BeginLoopCommand) || (rowItem.Tag is BeginMultiLoopCommand))
+                var cmd = (ScriptCommand)rowItem.Tag;
+
+                //if ((rowItem.Tag is BeginIfCommand) || (rowItem.Tag is BeginMultiIfCommand) || (rowItem.Tag is BeginLoopForComplexDataTypesCommand) || (rowItem.Tag is BeginContinousLoopCommand) || (rowItem.Tag is BeginNumberOfTimesLoopCommand) || (rowItem.Tag is TryCommand) || (rowItem.Tag is BeginLoopCommand) || (rowItem.Tag is BeginMultiLoopCommand))
+                if ((cmd is IHaveErrorAdditionalCommands) || (cmd is IHaveIfAdditionalCommands) || (cmd is IHaveLoopAdditionalCommands))
                 {
                     indent += 2;
                     rowItem.IndentCount = indent;
                     indent += 2;
                 }
-                else if ((rowItem.Tag is EndLoopCommand) || (rowItem.Tag is EndIfCommand) || (rowItem.Tag is EndTryCommand))
+                //else if ((rowItem.Tag is EndLoopCommand) || (rowItem.Tag is EndIfCommand) || (rowItem.Tag is EndTryCommand))
+                else if (cmd is IEndOfStacturedCommand)
                 {
                     indent -= 2;
                     if (indent < 0) indent = 0;
@@ -1657,7 +1667,8 @@ namespace taskt.UI.Forms.ScriptBuilder
                     indent -= 2;
                     if (indent < 0) indent = 0;
                 }
-                else if ((rowItem.Tag is ElseCommand) || (rowItem.Tag is CatchExceptionCommand) || (rowItem.Tag is FinallyCommand))
+                //else if ((rowItem.Tag is ElseCommand) || (rowItem.Tag is CatchExceptionCommand) || (rowItem.Tag is FinallyCommand))
+                else if (cmd is IDelimitersOfStructuredCommands)
                 {
                     indent -= 2;
                     if (indent < 0) indent = 0;
@@ -2934,30 +2945,39 @@ namespace taskt.UI.Forms.ScriptBuilder
             int tryCatchValidationCount = 0;
             foreach (ListViewItem item in lstScriptActions.Items)
             {
-                if ((item.Tag is BeginLoopForComplexDataTypesCommand) || (item.Tag is BeginContinousLoopCommand) ||(item.Tag is BeginNumberOfTimesLoopCommand) || (item.Tag is BeginLoopCommand) || (item.Tag is BeginMultiLoopCommand))
+                var cmd = (ScriptCommand)item.Tag;
+
+                //if ((item.Tag is BeginLoopForComplexDataTypesCommand) || (item.Tag is BeginContinousLoopCommand) ||(item.Tag is BeginNumberOfTimesLoopCommand) || (item.Tag is BeginLoopCommand) || (item.Tag is BeginMultiLoopCommand))
+                if ((cmd is IHaveErrorAdditionalCommands) || (cmd is IHaveIfAdditionalCommands) || (cmd is IHaveLoopAdditionalCommands))
                 {
                     beginLoopValidationCount++;
                 }
-                else if (item.Tag is EndLoopCommand)
+                else if (cmd is IEndOfStacturedCommand)
                 {
                     beginLoopValidationCount--;
                 }
-                else if ((item.Tag is BeginIfCommand) || (item.Tag is BeginMultiIfCommand))
-                {
-                    beginIfValidationCount++;
-                }
-                else if (item.Tag is EndIfCommand)
-                {
-                    beginIfValidationCount--;
-                }
-                else if(item.Tag is TryCommand)
-                {
-                    tryCatchValidationCount++;
-                }
-                else if (item.Tag is EndTryCommand)
-                {
-                    tryCatchValidationCount--;
-                }
+                //else if (item.Tag is EndLoopCommand)
+                //{
+                //    beginLoopValidationCount--;
+                //}
+                //else if ((item.Tag is BeginIfCommand) || (item.Tag is BeginMultiIfCommand))
+                //else if (cmd is IHaveIfAdditionalCommands)
+                //{
+                //    beginIfValidationCount++;
+                //}
+                //else if (item.Tag is EndIfCommand)
+                //{
+                //    beginIfValidationCount--;
+                //}
+                //else if(item.Tag is TryCommand)
+                //else if (cmd is IHaveErrorAdditionalCommands)
+                //{
+                //    tryCatchValidationCount++;
+                //}
+                //else if (item.Tag is EndTryCommand)
+                //{
+                //    tryCatchValidationCount--;
+                //}
 
                 if (tryCatchValidationCount < 0)
                 {

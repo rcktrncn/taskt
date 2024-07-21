@@ -56,6 +56,10 @@ namespace taskt.Core.Automation.Commands
         /// internal current window height keyword
         /// </summary>
         public const string INTERNAL_CURRENT_WINDOW_HEIGHT_KEYWORD = "%kwd_current_window_height%";
+        /// <summary>
+        /// internal current window handle keyword
+        /// </summary>
+        public const string INTERNAL_CURRENT_WINDOW_HANDLE_KEYWORD = "%kwd_current_window_handle%";
         #endregion
 
         #region virtualproperty
@@ -73,7 +77,6 @@ namespace taskt.Core.Automation.Commands
         [PropertyCustomUIHelper("Up-to-date", nameof(WindowControls) + "+" + nameof(WindowControls.lnkWindowNameUpToDate_Click))]
         [PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
         [PropertyShowSampleUsageInDescription(true)]
-        [PropertyIntermediateConvert(nameof(ApplicationSettings.EngineSettings.convertToIntermediateWindowName), nameof(ApplicationSettings.EngineSettings.convertToRawWindowName))]
         [PropertyValidationRule("Window Name", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "Name")]
         [PropertyParameterOrder(5000)]
@@ -269,7 +272,6 @@ namespace taskt.Core.Automation.Commands
         [PropertyTextBoxSetting(1, false)]
         [PropertyAvailableSystemVariable(SystemVariables.LimitedSystemVariableNames.Window_Position)]
         [PropertyDisplayText(true, "X Position")]
-        [PropertyIntermediateConvert(nameof(ApplicationSettings.EngineSettings.convertToIntermediateWindowPosition), nameof(ApplicationSettings.EngineSettings.convertToRawWindowPosition))]
         [PropertyParameterOrder(5000)]
         public static string v_InputXPosition { get; }
 
@@ -290,7 +292,6 @@ namespace taskt.Core.Automation.Commands
         [PropertyTextBoxSetting(1, false)]
         [PropertyAvailableSystemVariable(SystemVariables.LimitedSystemVariableNames.Window_Position)]
         [PropertyDisplayText(true, "Y Position")]
-        [PropertyIntermediateConvert(nameof(ApplicationSettings.EngineSettings.convertToIntermediateWindowPosition), nameof(ApplicationSettings.EngineSettings.convertToRawWindowPosition))]
         [PropertyParameterOrder(5000)]
         public static string v_InputYPosition { get; }
 
@@ -662,19 +663,7 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         private static Func<List<(IntPtr, string)>> GetWindowSearchMethod(string window, string searchMethod, string matchType, int index, Engine.AutomationEngineInstance engine)
         {
-            if (window == engine.engineSettings.CurrentWindowKeyword)
-            {
-                // current window keyword
-                var whnd = GetActiveWindowHandle();
-                var title = GetWindowTitle(whnd);
-
-                return new Func<List<(IntPtr, string)>>(() =>
-                {
-                    return new List<(IntPtr, string)>() { (whnd, title) };
-                });
-            }
-            else if ((window == engine.engineSettings.DesktopKeyword) ||
-                     (window == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_Desktop.VariableName, engine)))
+            if (window == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_Desktop.VariableName, engine))
             {
                 // Desktop
                 var whnd = GetDesktopWindow();
@@ -683,8 +672,7 @@ namespace taskt.Core.Automation.Commands
                     return new List<(IntPtr, string)>() { (whnd, "") };
                 });
             }
-            else if ((window == engine.engineSettings.AllWindowsKeyword) ||
-                     (window == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_AllWindows.VariableName, engine)))
+            else if (window == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_AllWindows.VariableName, engine))
             {
                 // all windows & match-type
                 return new Func<List<(IntPtr, string)>>(() =>
@@ -733,7 +721,7 @@ namespace taskt.Core.Automation.Commands
         /// <exception cref="Exception"></exception>
         public static IntPtr FindWindowHandle(string windowName, string searchMethod, Automation.Engine.AutomationEngineInstance engine)
         {
-            if (windowName == engine.engineSettings.CurrentWindowKeyword)
+            if (windowName == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentWindowName.VariableName, engine))
             {
                 return GetActiveWindowHandle();
             }
@@ -1247,10 +1235,7 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         private static string ExpandValueOrUserVariableAsWindowName(this string value, Engine.AutomationEngineInstance engine)
         {
-            if ((value == engine.engineSettings.CurrentWindowKeyword) || 
-                (value == engine.engineSettings.AllWindowsKeyword) ||
-                (value == engine.engineSettings.DesktopKeyword) ||
-                (value == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_AllWindows.VariableName, engine)) ||
+            if ((value == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_AllWindows.VariableName, engine)) ||
                 (value == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_Desktop.VariableName, engine)))
             {
                 return value;
@@ -1365,6 +1350,49 @@ namespace taskt.Core.Automation.Commands
             FormUIControls.SetVisibleParameterControlGroup(controlsList, indexParameterName, (item == "index"));
         }
 
+        #endregion
+
+        #region convert internal keywords
+
+        /// <summary>
+        /// Replace Internal Keywords to SystemVariable Names
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <param name="engine"></param>
+        /// <returns></returns>
+        public static string ReplaceKeywordsToSystemVariable(string txt, Engine.AutomationEngineInstance engine)
+        {
+            return txt.Replace(INTERNAL_CURRENT_WINDOW_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentWindowName.VariableName, engine))
+                        .Replace(INTERNAL_ALL_WINDOWS_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_AllWindows.VariableName, engine))
+                        .Replace(INTERNAL_DESKTOP_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_Desktop.VariableName, engine))
+                        .Replace(INTERNAL_CURRENT_WINDOW_SIZE_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentSize.VariableName, engine))
+                        .Replace(INTERNAL_CURRENT_WINDOW_WIDTH_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentWidth.VariableName, engine))
+                        .Replace(INTERNAL_CURRENT_WINDOW_HEIGHT_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentHeight.VariableName, engine))
+                        .Replace(INTERNAL_CURRENT_WINDOW_POSITION_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentPosition.VariableName, engine))
+                        .Replace(INTERNAL_CURRENT_WINDOW_X_POSITION_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentXPosition.VariableName, engine))
+                        .Replace(INTERNAL_CURRENT_WINDOW_Y_POSITION_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentYPosition.VariableName, engine))
+                        .Replace(INTERNAL_CURRENT_WINDOW_HANDLE_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentWindowHandle.VariableName, engine));
+        }
+
+        /// <summary>
+        /// Replace Internal Keywords to SystemVariable Names
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        public static string ReplaceKeywordsToSystemVariable(string txt, ApplicationSettings settings)
+        {
+            return txt.Replace(INTERNAL_CURRENT_WINDOW_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentWindowName.VariableName, settings))
+                        .Replace(INTERNAL_ALL_WINDOWS_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_AllWindows.VariableName, settings))
+                        .Replace(INTERNAL_DESKTOP_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_Desktop.VariableName, settings))
+                        .Replace(INTERNAL_CURRENT_WINDOW_SIZE_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentSize.VariableName, settings))
+                        .Replace(INTERNAL_CURRENT_WINDOW_WIDTH_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentWidth.VariableName, settings))
+                        .Replace(INTERNAL_CURRENT_WINDOW_HEIGHT_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentHeight.VariableName, settings))
+                        .Replace(INTERNAL_CURRENT_WINDOW_POSITION_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentPosition.VariableName, settings))
+                        .Replace(INTERNAL_CURRENT_WINDOW_X_POSITION_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentXPosition.VariableName, settings))
+                        .Replace(INTERNAL_CURRENT_WINDOW_Y_POSITION_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentYPosition.VariableName, settings))
+                        .Replace(INTERNAL_CURRENT_WINDOW_HANDLE_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentWindowHandle.VariableName, settings));
+        }
         #endregion
     }
 }

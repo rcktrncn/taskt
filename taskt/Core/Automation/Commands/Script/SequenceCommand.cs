@@ -12,7 +12,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.ImplementationDescription("This command implements many commands in a list.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_sequence))]
     [Attributes.ClassAttributes.EnableAutomateRender(true, true)]
-    public sealed class SequenceCommand : ScriptCommand
+    public sealed class SequenceCommand : ScriptCommand, IHaveSequenceAdditionalCommands
     {
         public List<ScriptCommand> v_scriptActions = new List<ScriptCommand>();
 

@@ -81,6 +81,12 @@ namespace taskt.Core.Automation.Commands
             {
                 ParseJSONArrayAsDataTable(ary, res);
             }
+            else if (jCon is JValue va)
+            {
+                res.Columns.Add("column0");
+                res.Rows.Add();
+                res.Rows[0][0] = va.ToString();
+            }
             else
             {
                 throw new Exception($"Extraction Result is NOT Supported Type. Result: '{jCon}', JSONPath: '{v_JsonExtractor}'");
@@ -142,7 +148,7 @@ namespace taskt.Core.Automation.Commands
                 DT.Rows.Add();
                 for (int i = 0; i < arr.Count; i++)
                 {
-                    DT.Columns.Add("column" + i.ToString());
+                    DT.Columns.Add($"column{i}");
                     DT.Rows[0][i] = arr[i].ToString();
                 }
             }

@@ -17,7 +17,6 @@ namespace taskt.Core
         public LocalListenerSettings ListenerSettings { get; set; } = new LocalListenerSettings();
         public ApplicationSettings()
         {
-
         }
 
         public void Save(ApplicationSettings appSettings)
@@ -122,9 +121,9 @@ namespace taskt.Core
             return appSettings;
         }
 
-        public string replaceApplicationKeyword(string targetString)
-        {
-            return this.ClientSettings.replaceClientKeyword(this.EngineSettings.replaceEngineKeyword(targetString));
-        }
+        //public string replaceApplicationKeyword(string targetString)
+        //{
+        //    return this.ClientSettings.replaceClientKeyword(this.EngineSettings.replaceEngineKeyword(targetString));
+        //}
     }
 }
