@@ -3059,6 +3059,7 @@ namespace taskt.UI.Forms.ScriptBuilder
             try
             {
                 scriptInfo.TasktVersion = Application.ProductVersion;
+                scriptInfo.Revision++;
                 var exportedScript = Core.Script.Script.SerializeScript(lstScriptActions.Items, scriptVariables, scriptInfo, appSettings.EngineSettings, scriptSerializer, this.ScriptFilePath);
                 //show success dialog
                 Notify("File has been saved successfully!");

@@ -18,6 +18,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             txtScriptDescription.DataBindings.Add("Text", infos, "Description", false, DataSourceUpdateMode.OnPropertyChanged);
             txtTasktVersion.Text = infos.TasktVersion;
             txtRunTimes.Text = infos.RunTimes.ToString();
+            txtScriptRevision.Text = infos.Revision.ToString();
             txtLastRun.Text = infos.LastRunTime.ToString();
         }
 
