@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -2728,6 +2729,18 @@ namespace taskt.UI.Forms.ScriptBuilder
 
                 //get deserialized script
                 Script deserializedScript = Core.Script.Script.DeserializeFile(filePath, appSettings.EngineSettings, scriptSerializer);
+
+                // check script created taskt version
+                var info = FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                var myVer = new Version(info.ProductVersion);
+                var scriptVer = new Version(deserializedScript.Info.TasktVersion);
+                if (myVer < scriptVer)
+                {
+                    using (var fm = new General.frmDialog($"This script file was created with version {deserializedScript.Info.TasktVersion}. It may not work correctly with the taskt version {info.ProductVersion} that you are currently using.", "Script Warning", General.frmDialog.DialogType.OkOnly, 0))
+                    {
+                        fm.ShowDialog();
+                    }
+                }
 
                 if (deserializedScript.Commands.Count == 0)
                 {
