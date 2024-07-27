@@ -341,6 +341,7 @@
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableGetFromDataTableRowCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableInputDataTableCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableRowCommands.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ExportDataTableAsTextFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_CanHandleDataTable.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableColumnPositionPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_DataTableColumnPropertiesExtensionMethods.cs" />
@@ -374,6 +375,7 @@
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryKeyActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryKeyCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryInputDictionaryCommands.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\ExportDictionaryAsTextFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_CanHandleDictionary.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DicitionaryCreateFromDictionaryExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryKeyPropertiesExtensionMethods.cs" />
@@ -489,6 +491,7 @@
     <Compile Include="Core\Automation\Commands\List\EM_ListIndexPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_ListPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_ListResultPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\List\ExportListAsTextFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\List\ICanHandleList.cs" />
     <Compile Include="Core\Automation\Commands\List\IListGetFromListProperties.cs" />
     <Compile Include="Core\Automation\Commands\List\IListGetFromValueProperties.cs" />
