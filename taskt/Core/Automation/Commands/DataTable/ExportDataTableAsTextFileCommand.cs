@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
-using System.Data;
 
 namespace taskt.Core.Automation.Commands
 {
