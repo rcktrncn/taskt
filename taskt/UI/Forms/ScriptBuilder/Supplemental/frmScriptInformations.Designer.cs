@@ -46,6 +46,8 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             this.txtScriptVersion = new System.Windows.Forms.TextBox();
             this.lblAuthor = new System.Windows.Forms.Label();
             this.txtScriptAuthor = new System.Windows.Forms.TextBox();
+            this.txtScriptRevision = new System.Windows.Forms.Label();
+            this.lblScriptRevision = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiBtnOpen)).BeginInit();
             this.panel1.SuspendLayout();
@@ -102,6 +104,8 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.txtScriptRevision);
+            this.panel1.Controls.Add(this.lblScriptRevision);
             this.panel1.Controls.Add(this.txtLastRun);
             this.panel1.Controls.Add(this.lblLastRun);
             this.panel1.Controls.Add(this.txtRunTimes);
@@ -126,7 +130,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             this.txtLastRun.BackColor = System.Drawing.Color.Transparent;
             this.txtLastRun.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.txtLastRun.ForeColor = System.Drawing.Color.SlateGray;
-            this.txtLastRun.Location = new System.Drawing.Point(9, 326);
+            this.txtLastRun.Location = new System.Drawing.Point(9, 375);
             this.txtLastRun.Name = "txtLastRun";
             this.txtLastRun.Size = new System.Drawing.Size(62, 21);
             this.txtLastRun.TabIndex = 20;
@@ -138,7 +142,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             this.lblLastRun.BackColor = System.Drawing.Color.Transparent;
             this.lblLastRun.Font = new System.Drawing.Font("Segoe UI Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLastRun.ForeColor = System.Drawing.Color.SlateGray;
-            this.lblLastRun.Location = new System.Drawing.Point(9, 309);
+            this.lblLastRun.Location = new System.Drawing.Point(9, 358);
             this.lblLastRun.Name = "lblLastRun";
             this.lblLastRun.Size = new System.Drawing.Size(110, 17);
             this.lblLastRun.TabIndex = 19;
@@ -254,6 +258,30 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             this.txtScriptAuthor.Size = new System.Drawing.Size(401, 29);
             this.txtScriptAuthor.TabIndex = 10;
             // 
+            // txtScriptRevision
+            // 
+            this.txtScriptRevision.AutoSize = true;
+            this.txtScriptRevision.BackColor = System.Drawing.Color.Transparent;
+            this.txtScriptRevision.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtScriptRevision.ForeColor = System.Drawing.Color.SlateGray;
+            this.txtScriptRevision.Location = new System.Drawing.Point(10, 329);
+            this.txtScriptRevision.Name = "txtScriptRevision";
+            this.txtScriptRevision.Size = new System.Drawing.Size(65, 21);
+            this.txtScriptRevision.TabIndex = 22;
+            this.txtScriptRevision.Text = "revision";
+            // 
+            // lblScriptRevision
+            // 
+            this.lblScriptRevision.AutoSize = true;
+            this.lblScriptRevision.BackColor = System.Drawing.Color.Transparent;
+            this.lblScriptRevision.Font = new System.Drawing.Font("Segoe UI Semilight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScriptRevision.ForeColor = System.Drawing.Color.SlateGray;
+            this.lblScriptRevision.Location = new System.Drawing.Point(10, 312);
+            this.lblScriptRevision.Name = "lblScriptRevision";
+            this.lblScriptRevision.Size = new System.Drawing.Size(88, 17);
+            this.lblScriptRevision.TabIndex = 21;
+            this.lblScriptRevision.Text = "Script Revision";
+            // 
             // frmScriptInformations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -290,5 +318,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         private System.Windows.Forms.Label lblRunTimes;
         private System.Windows.Forms.Label txtLastRun;
         private System.Windows.Forms.Label lblLastRun;
+        private System.Windows.Forms.Label txtScriptRevision;
+        private System.Windows.Forms.Label lblScriptRevision;
     }
 }

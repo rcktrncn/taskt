@@ -8,7 +8,8 @@ namespace taskt.Core.Script
         public string TasktVersion { get; set; }
         public string Author { get; set; }
         public DateTime LastRunTime { get; set; }
-        public int RunTimes { get; set; }
+        public uint RunTimes { get; set; }
+        public uint Revision { get; set; }
         public string ScriptVersion { get; set; }
         public string Description { get; set; }
         public ScriptInformation()
@@ -17,6 +18,7 @@ namespace taskt.Core.Script
             this.Author = "";
             this.LastRunTime = DateTime.Parse("1990-01-01T00:00:00");
             this.RunTimes = 0;
+            this.Revision = 0;
             this.ScriptVersion = "0.0.0";
             this.Description = "";
         }

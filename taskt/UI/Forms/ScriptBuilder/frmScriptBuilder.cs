@@ -2729,6 +2729,17 @@ namespace taskt.UI.Forms.ScriptBuilder
                 //get deserialized script
                 Script deserializedScript = Core.Script.Script.DeserializeFile(filePath, appSettings.EngineSettings, scriptSerializer);
 
+                // check script created taskt version
+                var myVer = new Version(Application.ProductVersion);
+                var scriptVer = new Version(deserializedScript.Info.TasktVersion);
+                if (myVer < scriptVer)
+                {
+                    using (var fm = new General.frmDialog($"This script file was created with version {deserializedScript.Info.TasktVersion}. It may not work correctly with the taskt version {Application.ProductVersion} that you are currently using.", "Script Warning", General.frmDialog.DialogType.OkOnly, 0))
+                    {
+                        fm.ShowDialog();
+                    }
+                }
+
                 if (deserializedScript.Commands.Count == 0)
                 {
                     Notify("Error Parsing File: Commands not found!");
@@ -3048,6 +3059,7 @@ namespace taskt.UI.Forms.ScriptBuilder
             try
             {
                 scriptInfo.TasktVersion = Application.ProductVersion;
+                scriptInfo.Revision++;
                 var exportedScript = Core.Script.Script.SerializeScript(lstScriptActions.Items, scriptVariables, scriptInfo, appSettings.EngineSettings, scriptSerializer, this.ScriptFilePath);
                 //show success dialog
                 Notify("File has been saved successfully!");
