@@ -110,7 +110,7 @@ namespace taskt.Core
             OverrideExistingAppInstances = false;
             AutoCloseMessagesOnServerExecution = true;
             AutoCloseDebugWindowOnServerExecution = true;
-            AutoCalcVariables = true;
+            AutoCalcVariables = false;
             CurrentWindowKeyword = "Current Window";
             DesktopKeyword = "Desktop";
             AllWindowsKeyword = "All Windows";
