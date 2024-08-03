@@ -7,7 +7,7 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
     {
         public event EventHandler<LoginResultArgs> LoginUpdateEvent;
 
-        public frmRemoteDesktopViewer(string machineName, string userName, string password, bool supportCreadSsp, int totalWidth, int totalHeight, bool hideDisplay, bool minimizeOnStart)
+        public frmRemoteDesktopViewer(string machineName, string userName, string password, bool supportCreadSsp, int totalWidth, int totalHeight, bool hideDisplay, bool minimizeOnStart, int keyboardHookMode = 2)
         {
             InitializeComponent();
 
@@ -36,6 +36,8 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
             axRDP.AdvancedSettings9.RedirectDrives = true;
             axRDP.AdvancedSettings9.RedirectPrinters = false;
             axRDP.AdvancedSettings9.RedirectClipboard = false;
+
+            axRDP.SecuredSettings3.KeyboardHookMode = keyboardHookMode;
 
             //defaults to false
             //axRDP.AdvancedSettings7.RedirectDrives = false;

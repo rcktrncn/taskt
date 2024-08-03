@@ -51,6 +51,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyFirstValue("Yes")]
         [PropertyIsOptional(true, "Yes")]
         [PropertyValidationRule("CredSSP", PropertyValidationRule.ValidationRuleFlags.None)]
+        [PropertyDisplayText(false, "")]
         public string v_SupportCredSSP { get; set; }
 
         [XmlAttribute]
@@ -74,6 +75,21 @@ namespace taskt.Core.Automation.Commands
         [PropertyValidationRule("Height", PropertyValidationRule.ValidationRuleFlags.EqualsZero | PropertyValidationRule.ValidationRuleFlags.LessThanZero)]
         [PropertyDisplayText(false, "")]
         public string v_RDPHeight { get; set; }
+
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
+        [PropertyDescription("Keyboard Hook Mode")]
+        [PropertyUISelectionOption("Client Computer")]
+        [PropertyUISelectionOption("Remote Server")]
+        [PropertyUISelectionOption("Remote Server Only When Full-Screen")]
+        [PropertyIsOptional(true, "Remote Server Only When Full-Screen")]
+        [PropertyFirstValue("Remote Server Only When Full-Screen")]
+        [PropertyDetailSampleUsage("Client Computer", "Windows key and its combination shortcuts work only on the client computer")]
+        [PropertyDetailSampleUsage("Remote Server", "Windows key and its combination shortcuts work only on the remote server")]
+        [PropertyDetailSampleUsage("Remote Server Only When Full-Screen", "Windows key and its combination shortcuts work only on the client computer. Remote Desktop cannot be made full screen.")]
+        [PropertyValidationRule("Keyborad Hook Mode", PropertyValidationRule.ValidationRuleFlags.None)]
+        [PropertyDisplayText(false, "")]
+        public string v_KeyboadHookMode { get; set; }
 
         public LaunchRemoteDesktopCommand()
         {
@@ -105,9 +121,22 @@ namespace taskt.Core.Automation.Commands
             }
             var height = this.ExpandValueOrUserVariableAsInteger(nameof(v_RDPHeight), engine);
 
+            int keyboardHook = 2;
+            switch(this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_KeyboadHookMode), engine))
+            {
+                case "client computer":
+                    keyboardHook = 0;
+                    break;
+                case "remote server":
+                    keyboardHook = 1;
+                    break;
+                default:
+                    break;
+            }
+
             var result = engine.tasktEngineUI.Invoke(new Action(() =>
             {
-                engine.tasktEngineUI.LaunchRDPSession(machineName, userName, password, credSsp, width, height);
+                engine.tasktEngineUI.LaunchRDPSession(machineName, userName, password, credSsp, width, height, keyboardHook);
             }));
         }
     }
