@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands
         /// <summary>
         /// inner variable name prefix
         /// </summary>
-        private const string INNER_VARIABLE_PREFIX = "__INNER_";
+        public const string INNER_VARIABLE_PREFIX = "__INNER_";
         /// <summary>
         /// inner variable start marker
         /// </summary>
