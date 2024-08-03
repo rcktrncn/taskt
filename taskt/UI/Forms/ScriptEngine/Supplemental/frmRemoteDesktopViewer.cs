@@ -7,7 +7,7 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
     {
         public event EventHandler<LoginResultArgs> LoginUpdateEvent;
 
-        public frmRemoteDesktopViewer(string machineName, string userName, string password, int totalWidth, int totalHeight, bool hideDisplay, bool minimizeOnStart, bool supportCreadSsp)
+        public frmRemoteDesktopViewer(string machineName, string userName, string password, bool supportCreadSsp, int totalWidth, int totalHeight, bool hideDisplay, bool minimizeOnStart)
         {
             InitializeComponent();
 

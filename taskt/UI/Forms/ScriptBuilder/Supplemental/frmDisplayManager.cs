@@ -25,6 +25,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             newMachine.MachineName = "HostName";
             newMachine.UserName = "Administrator";
             newMachine.Password = "12345";
+            newMachine.SupportCredSsp = "Yes";
             newMachine.NextConnectionDue = DateTime.Now;
             newMachine.LastKnownStatus = "Just Added";
             Machines.Add(newMachine);
@@ -79,13 +80,28 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                         windowHeight = 768;
                     }
 
+                    string credSSp = machine.SupportCredSsp.Trim().ToLower();
+                    switch (credSSp)
+                    {
+                        case "yes":
+                            credSSp = "true";
+                            break;  
+                        case "no":
+                            credSSp = "false";
+                            break;
+                    }
+                    if (!bool.TryParse(credSSp, out bool supportCredSsp))
+                    {
+                        supportCredSsp = true;
+                    }
+
                     AddLogEvent($"Machine '{machine.MachineName}' is due for desktop login");          
                     machine.LastKnownStatus = "Attempting to login";
                     machine.NextConnectionDue = DateTime.Now.AddMinutes(2);
 
                     AddLogEvent($"Next Connection for Machine '{machine.MachineName}' due at '{machine.NextConnectionDue}'");
                     
-                    var viewer = new ScriptEngine.Supplemental.frmRemoteDesktopViewer(machine.MachineName, machine.UserName, machine.Password, windowWidth, windowHeight, chkHideScreen.Checked, chkStartMinimized.Checked);
+                    var viewer = new ScriptEngine.Supplemental.frmRemoteDesktopViewer(machine.MachineName, machine.UserName, machine.Password, supportCredSsp, windowWidth, windowHeight, chkHideScreen.Checked, chkStartMinimized.Checked);
                     viewer.LoginUpdateEvent += Viewer_LoginUpdateEvent;
                     viewer.Show();
                 }
@@ -126,6 +142,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             public string MachineName { get; set; }
             public string UserName { get; set; }
             public string Password { get; set; }
+            public string SupportCredSsp { get; set; }
             public DateTime NextConnectionDue { get; set; }
             public string LastKnownStatus { get; set; }
         }

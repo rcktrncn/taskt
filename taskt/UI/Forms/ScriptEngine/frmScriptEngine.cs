@@ -400,14 +400,14 @@ namespace taskt.UI.Forms.ScriptEngine
         }
 
         // TODO: is it possible to move to LaunchRemoteDesktopCommand or other class file
-        public void LaunchRDPSession(string machineName, string userName, string password, int width, int height)
+        public void LaunchRDPSession(string machineName, string userName, string password, bool supportCredSsp, int width, int height)
         {
             if (InvokeRequired)
             {
-                this.Invoke((Action)(() => LaunchRDPSession(machineName, userName, password, width, height)));
+                this.Invoke((Action)(() => LaunchRDPSession(machineName, userName, password, supportCredSsp, width, height)));
             }
 
-            var remoteDesktopForm = new Supplemental.frmRemoteDesktopViewer(machineName, userName, password, width, height, false, false);
+            var remoteDesktopForm = new Supplemental.frmRemoteDesktopViewer(machineName, userName, password, supportCredSsp, width, height, false, false);
             remoteDesktopForm.Show();
         }
 

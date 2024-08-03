@@ -46,6 +46,14 @@ namespace taskt.Core.Automation.Commands
         public string v_Password { get; set; }
 
         [XmlAttribute]
+        [PropertyVirtualProperty(nameof(SelectionItemsControls), nameof(SelectionItemsControls.v_YesNoComboBox))]
+        [PropertyDescription("Support CredSSP")]
+        [PropertyFirstValue("Yes")]
+        [PropertyIsOptional(true, "Yes")]
+        [PropertyValidationRule("CredSSP", PropertyValidationRule.ValidationRuleFlags.None)]
+        public string v_SupportCredSSP { get; set; }
+
+        [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
         [PropertyDescription("Width of the RDP Window")]
         [InputSpecification("Width", true)]
@@ -83,14 +91,15 @@ namespace taskt.Core.Automation.Commands
             var machineName = v_MachineName.ExpandValueOrUserVariable(engine);
             var userName = v_UserName.ExpandValueOrUserVariable(engine);
             var password = v_Password.ExpandValueOrUserVariable(engine);
+            var credSsp = this.ExpandValueOrUserVariableAsYesNo(nameof(v_SupportCredSSP), engine);
 
-            if (String.IsNullOrEmpty(v_RDPWidth))
+            if (string.IsNullOrEmpty(v_RDPWidth))
             {
                 v_RDPWidth = SystemInformation.PrimaryMonitorSize.Width.ToString();
             }
             var width = this.ExpandValueOrUserVariableAsInteger(nameof(v_RDPWidth), engine);
 
-            if (String.IsNullOrEmpty(v_RDPHeight))
+            if (string.IsNullOrEmpty(v_RDPHeight))
             {
                 v_RDPHeight = SystemInformation.PrimaryMonitorSize.Height.ToString();
             }
@@ -98,7 +107,7 @@ namespace taskt.Core.Automation.Commands
 
             var result = engine.tasktEngineUI.Invoke(new Action(() =>
             {
-                engine.tasktEngineUI.LaunchRDPSession(machineName, userName, password, width, height);
+                engine.tasktEngineUI.LaunchRDPSession(machineName, userName, password, credSsp, width, height);
             }));
         }
     }
