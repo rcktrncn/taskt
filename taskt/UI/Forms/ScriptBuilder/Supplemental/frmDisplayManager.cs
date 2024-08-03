@@ -34,25 +34,26 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             if (Machines.Count == 0)
             {
-                LogEvent("No machines were found!");
+                AddLogEvent("No machines were found!");
                 return;
             }
 
-            LogEvent("Enabling Remote Desktop Polling");
+            AddLogEvent("Enabling Remote Desktop Polling");
             dgvMachines.ReadOnly = true;
             btnStart.Enabled = false;
             btnStop.Enabled = true;
-            tmrCheck.Enabled = true;      
+            tmrCheck.Enabled = true;
         }
+
         private void btnStop_Click(object sender, EventArgs e)
         {
             tmrCheck.Enabled = false;
-            LogEvent("Disabling Remote Desktop Polling");
+            AddLogEvent("Disabling Remote Desktop Polling");
             dgvMachines.ReadOnly = false;
             btnStart.Enabled = true;
             btnStop.Enabled = false;
-         
         }
+
         private void tmrCheck_Tick(object sender, EventArgs e)
         {
             dgvMachines.Refresh();
@@ -66,22 +67,24 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
                 if (machine.NextConnectionDue <= DateTime.Now)
                 {
-                    int windowWidth, windowHeight;
+                    //int windowWidth, windowHeight;
 
-                    if (!int.TryParse(txtWidth.Text, out windowWidth))
+                    if (!int.TryParse(txtWidth.Text, out int windowWidth))
                     {
                         windowWidth = 1024;
                     }
 
-                    if (!int.TryParse(txtHeight.Text, out windowHeight))
+                    if (!int.TryParse(txtHeight.Text, out int windowHeight))
                     {
                         windowHeight = 768;
                     }
 
-                    LogEvent("Machine '" + machine.MachineName + "' is due for desktop login");          
+                    AddLogEvent($"Machine '{machine.MachineName}' is due for desktop login");          
                     machine.LastKnownStatus = "Attempting to login";
                     machine.NextConnectionDue = DateTime.Now.AddMinutes(2);
-                    LogEvent("Next Connection for Machine '" + machine.MachineName + "' due at '" + machine.NextConnectionDue + "'");
+
+                    AddLogEvent($"Next Connection for Machine '{machine.MachineName}' due at '{machine.NextConnectionDue}'");
+                    
                     var viewer = new ScriptEngine.Supplemental.frmRemoteDesktopViewer(machine.MachineName, machine.UserName, machine.Password, windowWidth, windowHeight, chkHideScreen.Checked, chkStartMinimized.Checked);
                     viewer.LoginUpdateEvent += Viewer_LoginUpdateEvent;
                     viewer.Show();
@@ -93,14 +96,14 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             //var frmViewer = (Supplement_Forms.frmRemoteDesktopViewer)sender;
             var connResult = e.Result.ToString();
-            LogEvent("Machine '" + e.MachineName + "' login attempt was '" + connResult + "' " + e.AdditionalDetail);
+            AddLogEvent($"Machine '{e.MachineName}' login attempt was '{connResult}' {e.AdditionalDetail}");
 
             var machine = Machines.Where(f => f.MachineName == e.MachineName).FirstOrDefault();
 
-            var status = "Connection Result: '" + connResult + "'";
+            var status = $"Connection Result: '{connResult}'";
             if (!string.IsNullOrEmpty(e.AdditionalDetail))
             {
-                status += " (" + e.AdditionalDetail + ")";
+                status += $" ({e.AdditionalDetail})";
             }
 
             machine.LastKnownStatus = status;
@@ -112,9 +115,9 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             }
         }
 
-        private void LogEvent(string log)
+        private void AddLogEvent(string log)
         {
-            lstEventLogs.Items.Add(DateTime.Now.ToString() + " - " + log);
+            lstEventLogs.Items.Add($"{DateTime.Now} - {log}");
             lstEventLogs.SelectedIndex = lstEventLogs.Items.Count - 1;
         }
 
