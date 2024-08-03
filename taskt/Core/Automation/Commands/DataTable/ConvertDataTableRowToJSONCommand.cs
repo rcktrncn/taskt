@@ -62,7 +62,8 @@ namespace taskt.Core.Automation.Commands
                 };
                 dicCommand.RunCommand(engine);
 
-                string json = Newtonsoft.Json.JsonConvert.SerializeObject((Dictionary<string, string>)myDic.VariableValue);
+                //string json = Newtonsoft.Json.JsonConvert.SerializeObject((Dictionary<string, string>)myDic.VariableValue);
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(EM_CanHandleDictionary.ExpandUserVariableAsDictionary(myDic));
                 json.StoreInUserVariable(engine, v_Result);
             }
         }

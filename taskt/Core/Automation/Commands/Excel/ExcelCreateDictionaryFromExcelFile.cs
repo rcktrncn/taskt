@@ -228,9 +228,9 @@ namespace taskt.Core.Automation.Commands
                     };
                     closeInstance.RunCommand(engine);
 
-                    var keyList = (List<string>)myKey.VariableValue;
+                    var keyList = EM_CanHandleListExtensionMethods.ExpandUserVariableAsList(myKey);
 
-                    var valueList = (List<string>)myValue.VariableValue;
+                    var valueList = EM_CanHandleListExtensionMethods.ExpandUserVariableAsList(myValue);
 
                     var myDic = new Dictionary<string, string>();
                     foreach (var key in keyList)

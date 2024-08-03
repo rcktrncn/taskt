@@ -71,7 +71,8 @@ namespace taskt.Core.Automation.Commands
 
                 //var myList = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
 
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject((List<string>)myList.VariableValue);
+                //var json = Newtonsoft.Json.JsonConvert.SerializeObject((List<string>)myList.VariableValue);
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(EM_CanHandleListExtensionMethods.ExpandUserVariableAsList(myList));
                 json.StoreInUserVariable(engine, v_Result);
             }
 

@@ -104,7 +104,8 @@ namespace taskt.Core.Automation.Commands
                     v_Result = myColumn.VariableName,
                 }.RunCommand(engine);
                 //var columns = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
-                var columns = (List<string>)myColumn.VariableValue;
+                //var columns = (List<string>)myColumn.VariableValue;
+                var columns = EM_CanHandleListExtensionMethods.ExpandUserVariableAsList(myColumn);
 
                 if (ifNotColumnExists == "error")
                 {

@@ -94,7 +94,8 @@ namespace taskt.Core.Automation.Commands
                     };
                     getKeys.RunCommand(engine);
                     //var keys = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
-                    var keys = (List<string>)myDic.VariableValue;
+                    //var keys = (List<string>)myDic.VariableValue;
+                    var keys = EM_CanHandleListExtensionMethods.ExpandUserVariableAsList(myDic);
                     var index = this.ExpandValueOrUserVariableAsInteger(nameof(v_Key), "Key", engine);
                     if (index < 0)
                     {
