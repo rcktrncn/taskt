@@ -52,7 +52,7 @@ namespace taskt.Core.Automation.Engine
 
         private Serilog.Core.Logger engineLogger = null;
 
-        private const int INNER_VARIABLES = 4;
+        //private const int INNER_VARIABLES = 4;
 
         public AutomationEngineInstance(bool enableLog = true)
         {
@@ -207,32 +207,32 @@ namespace taskt.Core.Automation.Engine
 
                 VariableList = automationScript.Variables;
 
-                // add hidden inner variable
-                VariableList.AddRange(
-                    new ScriptVariable[]
-                    {
-                        new ScriptVariable()
-                        {
-                            VariableName = "__INNER_0",
-                            VariableValue = ""
-                        },
-                        new ScriptVariable()
-                        {
-                            VariableName = "__INNER_1",
-                            VariableValue = ""
-                        },
-                        new ScriptVariable()
-                        {
-                            VariableName = "__INNER_2",
-                            VariableValue = ""
-                        },
-                        new ScriptVariable()
-                        {
-                            VariableName = "__INNER_3",
-                            VariableValue = ""
-                        }
-                    }
-                );
+                //// add hidden inner variable
+                //VariableList.AddRange(
+                //    new ScriptVariable[]
+                //    {
+                //        new ScriptVariable()
+                //        {
+                //            VariableName = "__INNER_0",
+                //            VariableValue = ""
+                //        },
+                //        new ScriptVariable()
+                //        {
+                //            VariableName = "__INNER_1",
+                //            VariableValue = ""
+                //        },
+                //        new ScriptVariable()
+                //        {
+                //            VariableName = "__INNER_2",
+                //            VariableValue = ""
+                //        },
+                //        new ScriptVariable()
+                //        {
+                //            VariableName = "__INNER_3",
+                //            VariableValue = ""
+                //        }
+                //    }
+                //);
 
                 ReportProgress("Creating App Instance Tracking List");
                 //create app instances and merge in global instances
@@ -381,7 +381,7 @@ namespace taskt.Core.Automation.Engine
             }
             finally
             {
-                ClearInnerVariables();
+                //ClearInnerVariables();
             }
         }
 
@@ -471,17 +471,17 @@ namespace taskt.Core.Automation.Engine
         //    }
         //}
 
-        private void ClearInnerVariables()
-        {
-            for (int i = 0; i < INNER_VARIABLES; i++)
-            {
-                ScriptVariable v = VariableList.Where(x => x.VariableName == "__INNER_" + i.ToString()).FirstOrDefault();
-                if (v != null)
-                {
-                    v.VariableValue = "";
-                }
-            }
-        }
+        //private void ClearInnerVariables()
+        //{
+        //    for (int i = 0; i < INNER_VARIABLES; i++)
+        //    {
+        //        ScriptVariable v = VariableList.Where(x => x.VariableName == "__INNER_" + i.ToString()).FirstOrDefault();
+        //        if (v != null)
+        //        {
+        //            v.VariableValue = "";
+        //        }
+        //    }
+        //}
 
         public void CancelScript()
         {
