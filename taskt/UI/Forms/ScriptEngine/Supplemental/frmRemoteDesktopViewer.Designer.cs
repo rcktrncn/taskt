@@ -34,8 +34,10 @@
             this.lblLogo = new System.Windows.Forms.Label();
             this.tmrLoginFailure = new System.Windows.Forms.Timer(this.components);
             this.axRDP = new AxMSTSCLib.AxMsRdpClient6NotSafeForScripting();
+            this.taskEventWatcher1 = new Microsoft.Win32.TaskScheduler.TaskEventWatcher();
             this.pnlCover.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axRDP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.taskEventWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlCover
@@ -77,6 +79,10 @@
             this.axRDP.Size = new System.Drawing.Size(1008, 729);
             this.axRDP.TabIndex = 2;
             // 
+            // taskEventWatcher1
+            // 
+            this.taskEventWatcher1.SynchronizingObject = this;
+            // 
             // frmRemoteDesktopViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -91,6 +97,7 @@
             this.pnlCover.ResumeLayout(false);
             this.pnlCover.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axRDP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.taskEventWatcher1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -100,5 +107,6 @@
         private System.Windows.Forms.Label lblLogo;
         private System.Windows.Forms.Timer tmrLoginFailure;
         private AxMSTSCLib.AxMsRdpClient6NotSafeForScripting axRDP;
+        private Microsoft.Win32.TaskScheduler.TaskEventWatcher taskEventWatcher1;
     }
 }
