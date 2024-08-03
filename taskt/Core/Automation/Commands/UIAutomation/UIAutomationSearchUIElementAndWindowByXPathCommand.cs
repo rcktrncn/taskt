@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 using System.Windows.Forms;
 using taskt.UI.CustomControls;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -77,29 +78,54 @@ namespace taskt.Core.Automation.Commands
 
             //elem.StoreInUserVariable(engine, v_AutomationElementVariable);
 
-            var varName = VariableNameControls.GetInnerVariableName(0, engine, false);
+            //var varName = VariableNameControls.GetInnerVariableName(0, engine, false);
 
-            var winSearch = new UIAutomationSearchUIElementFromWindowCommand()
-            {
-                v_WindowName = this.v_WindowName,
-                v_CompareMethod = this.v_CompareMethod,
-                v_MatchMethod = this.v_MatchMethod,
-                v_TargetWindowIndex = this.v_TargetWindowIndex,
-                v_WaitTimeForWindow = this.v_WaitTimeForWindow,
-                v_AutomationElementVariable = varName,
-                v_NameResult = this.v_NameResult,
-                v_HandleResult = this.v_HandleResult,
-            };
-            winSearch.RunCommand(engine);
+            //var winSearch = new UIAutomationSearchUIElementFromWindowCommand()
+            //{
+            //    v_WindowName = this.v_WindowName,
+            //    v_CompareMethod = this.v_CompareMethod,
+            //    v_MatchMethod = this.v_MatchMethod,
+            //    v_TargetWindowIndex = this.v_TargetWindowIndex,
+            //    v_WaitTimeForWindow = this.v_WaitTimeForWindow,
+            //    v_AutomationElementVariable = varName,
+            //    v_NameResult = this.v_NameResult,
+            //    v_HandleResult = this.v_HandleResult,
+            //};
+            //winSearch.RunCommand(engine);
 
-            var searchElem = new UIAutomationSearchUIElementFromUIElementByXPathCommand()
+            //var searchElem = new UIAutomationSearchUIElementFromUIElementByXPathCommand()
+            //{
+            //    v_TargetElement = varName,
+            //    v_SearchXPath = this.v_SearchXPath,
+            //    v_AutomationElementVariable = this.v_AutomationElementVariable,
+            //    v_WaitTime = this.v_ElementWaitTime
+            //};
+            //searchElem.RunCommand(engine);
+
+            using(var myVar = new InnerScriptVariable(engine))
             {
-                v_TargetElement = varName,
-                v_SearchXPath = this.v_SearchXPath,
-                v_AutomationElementVariable = this.v_AutomationElementVariable,
-                v_WaitTime = this.v_ElementWaitTime
-            };
-            searchElem.RunCommand(engine);
+                var winSearch = new UIAutomationSearchUIElementFromWindowCommand()
+                {
+                    v_WindowName = this.v_WindowName,
+                    v_CompareMethod = this.v_CompareMethod,
+                    v_MatchMethod = this.v_MatchMethod,
+                    v_TargetWindowIndex = this.v_TargetWindowIndex,
+                    v_WaitTimeForWindow = this.v_WaitTimeForWindow,
+                    v_AutomationElementVariable = myVar.VariableName,
+                    v_NameResult = this.v_NameResult,
+                    v_HandleResult = this.v_HandleResult,
+                };
+                winSearch.RunCommand(engine);
+
+                var searchElem = new UIAutomationSearchUIElementFromUIElementByXPathCommand()
+                {
+                    v_TargetElement = myVar.VariableName,
+                    v_SearchXPath = this.v_SearchXPath,
+                    v_AutomationElementVariable = this.v_AutomationElementVariable,
+                    v_WaitTime = this.v_ElementWaitTime
+                };
+                searchElem.RunCommand(engine);
+            }
         }
 
         private void MatchMethodComboBox_SelectionChangeCommitted(object sender, EventArgs e)

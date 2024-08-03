@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -362,16 +363,21 @@ namespace taskt.Core.Automation.Commands
             //newElementActionCommand.v_InstanceName = param["WebBrowser Instance Name"];
             //bool elementExists = newElementActionCommand.ElementExists(engine, param["Element Search Method"], param["Element Search Parameter"]);
 
-            var checkWebElement = new SeleniumBrowserCheckWebElementExistsCommand()
+            using (var res = new InnerScriptVariable(engine))
             {
-                v_InstanceName = param["WebBrowser Instance Name"],
-                v_SeleniumSearchType = param["Element Search Method"],
-                v_SeleniumSearchParameter = param["Element Search Parameter"],
-                v_Result = VariableNameControls.GetInnerVariableName(0, engine),
-            };
-            checkWebElement.RunCommand(engine);
+                var checkWebElement = new SeleniumBrowserCheckWebElementExistsCommand()
+                {
+                    v_InstanceName = param["WebBrowser Instance Name"],
+                    v_SeleniumSearchType = param["Element Search Method"],
+                    v_SeleniumSearchParameter = param["Element Search Parameter"],
+                    //v_Result = VariableNameControls.GetInnerVariableName(0, engine),
+                    v_Result = res.VariableName,
+                };
+                checkWebElement.RunCommand(engine);
 
-            return VariableNameControls.GetInnerVariable(0, engine).VariableValue.ToString().ExpandValueOrUserVariableAsBool("Result", engine);
+                //return VariableNameControls.GetInnerVariable(0, engine).VariableValue.ToString().ExpandValueOrUserVariableAsBool("Result", engine);
+                return res.VariableValue.ToString().ExpandValueOrUserVariableAsBool("Result", engine);
+            }
         }
 
         private static bool DetermineStatementTruth_GUIElement(DataTable actionParameterTable, Engine.AutomationEngineInstance engine)
@@ -392,21 +398,40 @@ namespace taskt.Core.Automation.Commands
             searchTb.Columns.Add("ParameterValue");
             searchTb.Rows.Add(true, param["Element Search Method"], param["Element Search Parameter"]);
 
-            var vName = VariableNameControls.GetInnerVariableName(2, engine);
+            //var vName = VariableNameControls.GetInnerVariableName(2, engine);
 
-            var actionTb = new DataTable();
-            actionTb.Columns.Add("Parameter Name");
-            actionTb.Columns.Add("Parameter Value");
-            actionTb.Rows.Add("Apply To Variable", vName);
+            //var actionTb = new DataTable();
+            //actionTb.Columns.Add("Parameter Name");
+            //actionTb.Columns.Add("Parameter Value");
+            //actionTb.Rows.Add("Apply To Variable", vName);
 
-            var checkUI = new UIAutomationUIElementActionCommand();
-            checkUI.v_WindowName = windowName;
-            checkUI.v_UIASearchParameters = searchTb;
-            checkUI.v_AutomationType = "Check UIElement Exists";
-            checkUI.v_UIAActionParameters = actionTb;
-            checkUI.RunCommand(engine);
+            //var checkUI = new UIAutomationUIElementActionCommand();
+            //checkUI.v_WindowName = windowName;
+            //checkUI.v_UIASearchParameters = searchTb;
+            //checkUI.v_AutomationType = "Check UIElement Exists";
+            //checkUI.v_UIAActionParameters = actionTb;
+            //checkUI.RunCommand(engine);
 
-            return vName.ExpandValueOrUserVariableAsBool("result", engine);
+            //return vName.ExpandValueOrUserVariableAsBool("result", engine);
+
+            using (var myName = new InnerScriptVariable(engine))
+            {
+                var actionTb = new DataTable();
+                actionTb.Columns.Add("Parameter Name");
+                actionTb.Columns.Add("Parameter Value");
+                actionTb.Rows.Add("Apply To Variable", myName.VariableName);
+
+                var checkUI = new UIAutomationUIElementActionCommand
+                {
+                    v_WindowName = windowName,
+                    v_UIASearchParameters = searchTb,
+                    v_AutomationType = "Check UIElement Exists",
+                    v_UIAActionParameters = actionTb,
+                };
+                checkUI.RunCommand(engine);
+
+                return myName.VariableValue.ToString().ExpandValueOrUserVariableAsBool("result", engine);
+            }
 
             //UIAutomationUIElementActionCommand newUIACommand = new UIAutomationUIElementActionCommand();
             //newUIACommand.v_WindowName = windowName;

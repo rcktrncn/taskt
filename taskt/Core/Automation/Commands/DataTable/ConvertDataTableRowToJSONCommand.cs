@@ -2,6 +2,7 @@
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -39,17 +40,31 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var dicCommand = new ConvertDataTableRowToDictionaryCommand
-            {
-                v_DataTable = this.v_DataTable,
-                v_RowIndex = this.v_RowIndex,
-                v_Result = VariableNameControls.GetInnerVariableName(0, engine)
-            };
-            dicCommand.RunCommand(engine);
+            //var dicCommand = new ConvertDataTableRowToDictionaryCommand
+            //{
+            //    v_DataTable = this.v_DataTable,
+            //    v_RowIndex = this.v_RowIndex,
+            //    v_Result = VariableNameControls.GetInnerVariableName(0, engine)
+            //};
+            //dicCommand.RunCommand(engine);
 
-            var tDic = (Dictionary<string, string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(tDic);
-            json.StoreInUserVariable(engine, v_Result);
+            //var tDic = (Dictionary<string, string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
+            //string json = Newtonsoft.Json.JsonConvert.SerializeObject(tDic);
+            //json.StoreInUserVariable(engine, v_Result);
+
+            using (var myDic = new InnerScriptVariable(engine))
+            {
+                var dicCommand = new ConvertDataTableRowToDictionaryCommand
+                {
+                    v_DataTable = this.v_DataTable,
+                    v_RowIndex = this.v_RowIndex,
+                    v_Result = myDic.VariableName,
+                };
+                dicCommand.RunCommand(engine);
+
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject((Dictionary<string, string>)myDic.VariableValue);
+                json.StoreInUserVariable(engine, v_Result);
+            }
         }
     }
 }

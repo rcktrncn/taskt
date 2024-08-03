@@ -289,44 +289,44 @@ namespace taskt.Core.Automation.Commands
 
         #region inner variable methods
 
-        /// <summary>
-        /// get inner variable value
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        public static Script.ScriptVariable GetInnerVariable(int index, Engine.AutomationEngineInstance engine)
-        {
-            return GetInnerVariableName(index, engine).GetRawVariable(engine);
-        }
+        ///// <summary>
+        ///// get inner variable value
+        ///// </summary>
+        ///// <param name="index"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        //public static Script.ScriptVariable GetInnerVariable(int index, Engine.AutomationEngineInstance engine)
+        //{
+        //    return GetInnerVariableName(index, engine).GetRawVariable(engine);
+        //}
 
-        /// <summary>
-        /// set inner variable value
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="index"></param>
-        /// <param name="engine"></param>
-        public static void SetInnerVariable(object value, int index, Engine.AutomationEngineInstance engine)
-        {
-            Script.ScriptVariable v = GetInnerVariableName(index, engine).GetRawVariable(engine);
-            v.VariableValue = value;
-        }
+        ///// <summary>
+        ///// set inner variable value
+        ///// </summary>
+        ///// <param name="value"></param>
+        ///// <param name="index"></param>
+        ///// <param name="engine"></param>
+        //public static void SetInnerVariable(object value, int index, Engine.AutomationEngineInstance engine)
+        //{
+        //    Script.ScriptVariable v = GetInnerVariableName(index, engine).GetRawVariable(engine);
+        //    v.VariableValue = value;
+        //}
 
-        /// <summary>
-        /// get inner variable name
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        public static string GetInnerVariableName(int index, Engine.AutomationEngineInstance engine, bool wrapped = true)
-        {
-            var varName = INNER_VARIABLE_PREFIX + index.ToString();
-            if (wrapped)
-            {
-                varName = GetWrappedVariableName(varName, engine);
-            }
-            return varName;
-        }
+        ///// <summary>
+        ///// get inner variable name
+        ///// </summary>
+        ///// <param name="index"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        //public static string GetInnerVariableName(int index, Engine.AutomationEngineInstance engine, bool wrapped = true)
+        //{
+        //    var varName = INNER_VARIABLE_PREFIX + index.ToString();
+        //    if (wrapped)
+        //    {
+        //        varName = GetWrappedVariableName(varName, engine);
+        //    }
+        //    return varName;
+        //}
         #endregion
     }
 }
