@@ -88,7 +88,7 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
 
         private void axRDP_OnLogonError(object sender, AxMSTSCLib.IMsTscAxEvents_OnLogonErrorEvent e)
         {
-            MessageBox.Show(e.ToString(), "Logon Error");
+            //MessageBox.Show(e.ToString(), "Logon Error");
         }
     }
 
