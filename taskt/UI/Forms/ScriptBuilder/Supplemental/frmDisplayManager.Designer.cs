@@ -62,9 +62,9 @@
             this.lstEventLogs.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstEventLogs.FormattingEnabled = true;
             this.lstEventLogs.ItemHeight = 15;
-            this.lstEventLogs.Location = new System.Drawing.Point(3, 411);
+            this.lstEventLogs.Location = new System.Drawing.Point(3, 380);
             this.lstEventLogs.Name = "lstEventLogs";
-            this.lstEventLogs.Size = new System.Drawing.Size(1011, 240);
+            this.lstEventLogs.Size = new System.Drawing.Size(1011, 221);
             this.lstEventLogs.TabIndex = 0;
             // 
             // dgvMachines
@@ -89,7 +89,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvMachines.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvMachines.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvMachines.Location = new System.Drawing.Point(3, 75);
+            this.dgvMachines.Location = new System.Drawing.Point(3, 69);
             this.dgvMachines.Name = "dgvMachines";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -99,7 +99,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvMachines.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvMachines.Size = new System.Drawing.Size(1011, 290);
+            this.dgvMachines.Size = new System.Drawing.Size(1011, 268);
             this.dgvMachines.TabIndex = 1;
             // 
             // btnStart
@@ -107,7 +107,7 @@
             this.btnStart.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStart.Location = new System.Drawing.Point(10, 3);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 27);
+            this.btnStart.Size = new System.Drawing.Size(75, 25);
             this.btnStart.TabIndex = 2;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -118,7 +118,7 @@
             this.btnStop.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStop.Location = new System.Drawing.Point(90, 3);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(75, 27);
+            this.btnStop.Size = new System.Drawing.Size(75, 25);
             this.btnStop.TabIndex = 3;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -127,9 +127,9 @@
             // btnAddMachine
             // 
             this.btnAddMachine.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddMachine.Location = new System.Drawing.Point(240, 12);
+            this.btnAddMachine.Location = new System.Drawing.Point(240, 11);
             this.btnAddMachine.Name = "btnAddMachine";
-            this.btnAddMachine.Size = new System.Drawing.Size(126, 27);
+            this.btnAddMachine.Size = new System.Drawing.Size(126, 25);
             this.btnAddMachine.TabIndex = 4;
             this.btnAddMachine.Text = "Add Machine";
             this.btnAddMachine.UseVisualStyleBackColor = true;
@@ -156,9 +156,9 @@
             this.tlpDisplayManager.RowCount = 4;
             this.tlpDisplayManager.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.52862F));
             this.tlpDisplayManager.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.47138F));
-            this.tlpDisplayManager.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpDisplayManager.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 245F));
-            this.tlpDisplayManager.Size = new System.Drawing.Size(1017, 654);
+            this.tlpDisplayManager.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tlpDisplayManager.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 226F));
+            this.tlpDisplayManager.Size = new System.Drawing.Size(1017, 604);
             this.tlpDisplayManager.TabIndex = 5;
             // 
             // panel1
@@ -172,9 +172,9 @@
             this.panel1.Controls.Add(this.btnStart);
             this.panel1.Controls.Add(this.btnStop);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 371);
+            this.panel1.Location = new System.Drawing.Point(3, 343);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1011, 34);
+            this.panel1.Size = new System.Drawing.Size(1011, 31);
             this.panel1.TabIndex = 6;
             // 
             // lblResolution
@@ -182,7 +182,7 @@
             this.lblResolution.AutoSize = true;
             this.lblResolution.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResolution.ForeColor = System.Drawing.Color.White;
-            this.lblResolution.Location = new System.Drawing.Point(427, 9);
+            this.lblResolution.Location = new System.Drawing.Point(427, 8);
             this.lblResolution.Name = "lblResolution";
             this.lblResolution.Size = new System.Drawing.Size(123, 15);
             this.lblResolution.TabIndex = 9;
@@ -195,7 +195,7 @@
             this.txtHeight.Name = "txtHeight";
             this.txtHeight.Size = new System.Drawing.Size(32, 22);
             this.txtHeight.TabIndex = 8;
-            this.txtHeight.Text = "1080";
+            this.txtHeight.Text = "768";
             // 
             // txtWidth
             // 
@@ -204,7 +204,7 @@
             this.txtWidth.Name = "txtWidth";
             this.txtWidth.Size = new System.Drawing.Size(32, 22);
             this.txtWidth.TabIndex = 7;
-            this.txtWidth.Text = "1920";
+            this.txtWidth.Text = "1024";
             // 
             // chkStartMinimized
             // 
@@ -241,7 +241,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1017, 72);
+            this.panel2.Size = new System.Drawing.Size(1017, 66);
             this.panel2.TabIndex = 7;
             // 
             // lblScheduledScripts
@@ -250,7 +250,7 @@
             this.lblScheduledScripts.BackColor = System.Drawing.Color.Transparent;
             this.lblScheduledScripts.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblScheduledScripts.ForeColor = System.Drawing.Color.White;
-            this.lblScheduledScripts.Location = new System.Drawing.Point(6, 44);
+            this.lblScheduledScripts.Location = new System.Drawing.Point(6, 41);
             this.lblScheduledScripts.Name = "lblScheduledScripts";
             this.lblScheduledScripts.Size = new System.Drawing.Size(598, 21);
             this.lblScheduledScripts.TabIndex = 7;
@@ -270,10 +270,10 @@
             // 
             // frmDisplayManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundChangeIndex = 3;
-            this.ClientSize = new System.Drawing.Size(1017, 654);
+            this.ClientSize = new System.Drawing.Size(1017, 604);
             this.Controls.Add(this.tlpDisplayManager);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmDisplayManager";

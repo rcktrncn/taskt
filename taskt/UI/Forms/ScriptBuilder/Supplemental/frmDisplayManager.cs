@@ -70,12 +70,12 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
                     if (!int.TryParse(txtWidth.Text, out windowWidth))
                     {
-                        windowWidth = 1920;
+                        windowWidth = 1024;
                     }
 
                     if (!int.TryParse(txtHeight.Text, out windowHeight))
                     {
-                        windowHeight = 1080;
+                        windowHeight = 768;
                     }
 
                     LogEvent("Machine '" + machine.MachineName + "' is due for desktop login");          
