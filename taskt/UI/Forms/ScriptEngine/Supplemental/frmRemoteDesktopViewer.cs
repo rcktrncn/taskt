@@ -7,7 +7,7 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
     {
         public event EventHandler<LoginResultArgs> LoginUpdateEvent;
 
-        public frmRemoteDesktopViewer(string machineName, string userName, string password, int totalWidth, int totalHeight, bool hideDisplay, bool minimizeOnStart)
+        public frmRemoteDesktopViewer(string machineName, string userName, string password, int totalWidth, int totalHeight, bool hideDisplay, bool minimizeOnStart, bool supportCreadSsp)
         {
             InitializeComponent();
 
@@ -29,12 +29,18 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
             //declare credentials
             axRDP.Server = machineName;
             axRDP.UserName = userName;
-            axRDP.AdvancedSettings7.ClearTextPassword = password;
+
+            axRDP.AdvancedSettings9.ClearTextPassword = password;
+            axRDP.AdvancedSettings9.EnableCredSspSupport = supportCreadSsp;
+
+            axRDP.AdvancedSettings9.RedirectDrives = true;
+            axRDP.AdvancedSettings9.RedirectPrinters = false;
+            axRDP.AdvancedSettings9.RedirectClipboard = false;
 
             //defaults to false
-            axRDP.AdvancedSettings7.RedirectDrives = false;
-            axRDP.AdvancedSettings7.RedirectPrinters = false;
-            axRDP.AdvancedSettings7.RedirectClipboard = false;
+            //axRDP.AdvancedSettings7.RedirectDrives = false;
+            //axRDP.AdvancedSettings7.RedirectPrinters = false;
+            //axRDP.AdvancedSettings7.RedirectClipboard = false;
 
             //initiate connection
             axRDP.Connect();
@@ -78,6 +84,11 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
         private void pnlCover_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             pnlCover.Hide();
+        }
+
+        private void axRDP_OnLogonError(object sender, AxMSTSCLib.IMsTscAxEvents_OnLogonErrorEvent e)
+        {
+            MessageBox.Show(e.ToString(), "Logon Error");
         }
     }
 

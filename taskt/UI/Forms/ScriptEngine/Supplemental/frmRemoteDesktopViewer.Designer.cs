@@ -33,7 +33,7 @@
             this.pnlCover = new System.Windows.Forms.Panel();
             this.lblLogo = new System.Windows.Forms.Label();
             this.tmrLoginFailure = new System.Windows.Forms.Timer(this.components);
-            this.axRDP = new AxMSTSCLib.AxMsRdpClient6NotSafeForScripting();
+            this.axRDP = new AxMSTSCLib.AxMsRdpClient11NotSafeForScripting();
             this.taskEventWatcher1 = new Microsoft.Win32.TaskScheduler.TaskEventWatcher();
             this.pnlCover.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axRDP)).BeginInit();
@@ -78,6 +78,9 @@
             this.axRDP.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axRDP.OcxState")));
             this.axRDP.Size = new System.Drawing.Size(1008, 729);
             this.axRDP.TabIndex = 2;
+            this.axRDP.OnLoginComplete += new System.EventHandler(this.axRDP_OnLoginComplete);
+            this.axRDP.OnDisconnected += new AxMSTSCLib.IMsTscAxEvents_OnDisconnectedEventHandler(this.axRDP_OnDisconnected);
+            this.axRDP.OnLogonError += new AxMSTSCLib.IMsTscAxEvents_OnLogonErrorEventHandler(this.axRDP_OnLogonError);
             // 
             // taskEventWatcher1
             // 
@@ -106,7 +109,7 @@
         private System.Windows.Forms.Panel pnlCover;
         private System.Windows.Forms.Label lblLogo;
         private System.Windows.Forms.Timer tmrLoginFailure;
-        private AxMSTSCLib.AxMsRdpClient6NotSafeForScripting axRDP;
+        private AxMSTSCLib.AxMsRdpClient11NotSafeForScripting axRDP;
         private Microsoft.Win32.TaskScheduler.TaskEventWatcher taskEventWatcher1;
     }
 }
