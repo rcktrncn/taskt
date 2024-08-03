@@ -9,7 +9,7 @@ namespace taskt.Core.Script
     /// </summary>
     public class InnerScriptVariable : ScriptVariable, IDisposable
     {
-        private AutomationEngineInstance engine;
+        private readonly AutomationEngineInstance engine;
 
         public InnerScriptVariable(AutomationEngineInstance engine)
         {
