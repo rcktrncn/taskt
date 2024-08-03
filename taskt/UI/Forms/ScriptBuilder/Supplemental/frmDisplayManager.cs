@@ -7,11 +7,13 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 {
     public partial class frmDisplayManager : UIForm
     {
+        BindingList<MachineConfiguration> Machines = new BindingList<MachineConfiguration>();
+
         public frmDisplayManager()
         {
             InitializeComponent();
         }
-        BindingList<MachineConfiguration> Machines = new BindingList<MachineConfiguration>();
+
         private void frmDisplayManager_Load(object sender, EventArgs e)
         {
             dgvMachines.DataSource = Machines;
@@ -71,12 +73,10 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                         windowWidth = 1920;
                     }
 
-
                     if (!int.TryParse(txtHeight.Text, out windowHeight))
                     {
                         windowHeight = 1080;
                     }
-
 
                     LogEvent("Machine '" + machine.MachineName + "' is due for desktop login");          
                     machine.LastKnownStatus = "Attempting to login";
@@ -87,7 +87,6 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                     viewer.Show();
                 }
             }
-
         }
 
         private void Viewer_LoginUpdateEvent(object sender, ScriptEngine.Supplemental.LoginResultArgs e)
@@ -104,17 +103,13 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 status += " (" + e.AdditionalDetail + ")";
             }
 
-
             machine.LastKnownStatus = status;
-
 
             if (e.Result == ScriptEngine.Supplemental.LoginResultArgs.LoginResultCode.Failed)
             {
                 var frmSender = (ScriptEngine.Supplemental.frmRemoteDesktopViewer)sender;
                 frmSender.Close();
             }
-
-
         }
 
         private void LogEvent(string log)
@@ -122,8 +117,6 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             lstEventLogs.Items.Add(DateTime.Now.ToString() + " - " + log);
             lstEventLogs.SelectedIndex = lstEventLogs.Items.Count - 1;
         }
-
-
 
         public class MachineConfiguration
         {
