@@ -2,6 +2,7 @@
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -68,29 +69,60 @@ namespace taskt.Core.Automation.Commands
             //(var addDT, var srcRowIndex) = this.ExpandUserVariablesAsDataTableAndRowIndex(nameof(v_RowName), nameof(v_SrcRowIndex), engine);
             string ifNotColumnExists = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenColumnNotExists), "Column not exists", engine);
 
-            // get columns list
-            new GetDataTableColumnListCommand
-            {
-                v_DataTable = this.v_DataTable,
-                v_Result = VariableNameControls.GetInnerVariableName(0, engine)
-            }.RunCommand(engine);
-            var columns = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
+            //// get columns list
+            //new GetDataTableColumnListCommand
+            //{
+            //    v_DataTable = this.v_DataTable,
+            //    v_Result = VariableNameControls.GetInnerVariableName(0, engine)
+            //}.RunCommand(engine);
+            //var columns = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
 
-            if (ifNotColumnExists == "error")
+            //if (ifNotColumnExists == "error")
+            //{
+            //    for (int i = 0; i < addDT.Columns.Count; i++)
+            //    {
+            //        if (!columns.Contains(addDT.Columns[i].ColumnName))
+            //        {
+            //            throw new Exception("Column name " + addDT.Columns[i].ColumnName + " does not exists");
+            //        }
+            //    }
+            //}
+            //for (int i = 0; i < addDT.Columns.Count; i++)
+            //{
+            //    if (columns.Contains(addDT.Columns[i].ColumnName))
+            //    {
+            //        myDT.Rows[rowIndex][addDT.Columns[i].ColumnName] = addDT.Rows[srcRowIndex][addDT.Columns[i].ColumnName];
+            //    }
+            //}
+
+            using (var myColumn = new InnerScriptVariable(engine))
             {
-                for (int i = 0; i < addDT.Columns.Count; i++)
+                // get columns list
+                new GetDataTableColumnListCommand
                 {
-                    if (!columns.Contains(addDT.Columns[i].ColumnName))
+                    v_DataTable = this.v_DataTable,
+                    v_Result = myColumn.VariableName,
+                }.RunCommand(engine);
+                //var columns = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
+                //var columns = (List<string>)myColumn.VariableValue;
+                var columns = EM_CanHandleListExtensionMethods.ExpandUserVariableAsList(myColumn);
+
+                if (ifNotColumnExists == "error")
+                {
+                    for (int i = 0; i < addDT.Columns.Count; i++)
                     {
-                        throw new Exception("Column name " + addDT.Columns[i].ColumnName + " does not exists");
+                        if (!columns.Contains(addDT.Columns[i].ColumnName))
+                        {
+                            throw new Exception($"Column name {addDT.Columns[i].ColumnName} does not exists");
+                        }
                     }
                 }
-            }
-            for (int i = 0; i < addDT.Columns.Count; i++)
-            {
-                if (columns.Contains(addDT.Columns[i].ColumnName))
+                for (int i = 0; i < addDT.Columns.Count; i++)
                 {
-                    myDT.Rows[rowIndex][addDT.Columns[i].ColumnName] = addDT.Rows[srcRowIndex][addDT.Columns[i].ColumnName];
+                    if (columns.Contains(addDT.Columns[i].ColumnName))
+                    {
+                        myDT.Rows[rowIndex][addDT.Columns[i].ColumnName] = addDT.Rows[srcRowIndex][addDT.Columns[i].ColumnName];
+                    }
                 }
             }
         }

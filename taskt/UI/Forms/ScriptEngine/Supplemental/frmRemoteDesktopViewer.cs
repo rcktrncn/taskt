@@ -6,7 +6,8 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
     public partial class frmRemoteDesktopViewer : Form
     {
         public event EventHandler<LoginResultArgs> LoginUpdateEvent;
-        public frmRemoteDesktopViewer(string machineName, string userName, string password, int totalWidth, int totalHeight, bool hideDisplay, bool minimizeOnStart)
+
+        public frmRemoteDesktopViewer(string machineName, string userName, string password, bool supportCreadSsp, int totalWidth, int totalHeight, bool hideDisplay, bool minimizeOnStart, int keyboardHookMode = 2)
         {
             InitializeComponent();
 
@@ -21,19 +22,27 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
             }
 
             //set text and form properties
-            this.Text = "Remote Desktop - Machine: " + machineName + " | User: " + userName; 
+            this.Text = $"Remote Desktop - Machine: '{machineName}' | User: '{userName}'"; 
             this.Width = totalWidth;
             this.Height = totalHeight;
 
             //declare credentials
             axRDP.Server = machineName;
             axRDP.UserName = userName;
-            axRDP.AdvancedSettings7.ClearTextPassword = password;
+
+            axRDP.AdvancedSettings9.ClearTextPassword = password;
+            axRDP.AdvancedSettings9.EnableCredSspSupport = supportCreadSsp;
+
+            axRDP.AdvancedSettings9.RedirectDrives = true;
+            axRDP.AdvancedSettings9.RedirectPrinters = false;
+            axRDP.AdvancedSettings9.RedirectClipboard = false;
+
+            axRDP.SecuredSettings3.KeyboardHookMode = keyboardHookMode;
 
             //defaults to false
-            axRDP.AdvancedSettings7.RedirectDrives = false;
-            axRDP.AdvancedSettings7.RedirectPrinters = false;
-            axRDP.AdvancedSettings7.RedirectClipboard = false;
+            //axRDP.AdvancedSettings7.RedirectDrives = false;
+            //axRDP.AdvancedSettings7.RedirectPrinters = false;
+            //axRDP.AdvancedSettings7.RedirectClipboard = false;
 
             //initiate connection
             axRDP.Connect();
@@ -49,7 +58,6 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
 
         private void frmRemoteDesktopViewer_Load(object sender, EventArgs e)
         {
-           
         }
 
         private void axRDP_OnDisconnected(object sender, AxMSTSCLib.IMsTscAxEvents_OnDisconnectedEvent e)
@@ -68,6 +76,7 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
            tmrLoginFailure.Enabled = false;
            LoginUpdateEvent?.Invoke(this, new LoginResultArgs(axRDP.Server, LoginResultArgs.LoginResultCode.Success, ""));
         }
+
         private void tmrLoginFailure_Tick(object sender, EventArgs e)
         {
             tmrLoginFailure.Enabled = false;
@@ -79,25 +88,29 @@ namespace taskt.UI.Forms.ScriptEngine.Supplemental
             pnlCover.Hide();
         }
 
-
+        private void axRDP_OnLogonError(object sender, AxMSTSCLib.IMsTscAxEvents_OnLogonErrorEvent e)
+        {
+            //MessageBox.Show(e.ToString(), "Logon Error");
+        }
     }
 
     public class LoginResultArgs
     {
-       
+        public enum LoginResultCode
+        {
+            Success,
+            Failed
+        }
+
+        public LoginResultCode Result;
+        public string MachineName { get; set; }
+        public string AdditionalDetail { get; set; }
+
         public LoginResultArgs(string userName, LoginResultCode result, string additionalDetail)
         {
             this.MachineName = userName;
             this.Result = result;
             this.AdditionalDetail = additionalDetail;
-        }
-        public LoginResultCode Result;
-        public string MachineName { get; set; }
-        public string AdditionalDetail { get; set; }
-        public enum LoginResultCode
-        {
-            Success,
-            Failed
         }
     }
 }

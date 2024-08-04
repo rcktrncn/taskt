@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 using System.Windows.Forms;
 using taskt.UI.CustomControls;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -81,21 +82,39 @@ namespace taskt.Core.Automation.Commands
             switch (v_FormatType)
             {
                 case "Date":
-                    var inner0 = VariableNameControls.GetInnerVariableName(0, engine);
+                    //var inner0 = VariableNameControls.GetInnerVariableName(0, engine);
 
-                    var dateTimeFromText = new CreateDateTimeFromTextCommand()
+                    //var dateTimeFromText = new CreateDateTimeFromTextCommand()
+                    //{
+                    //    v_Text = v_InputValue,
+                    //    v_DateTime = inner0
+                    //};
+                    //dateTimeFromText.RunCommand(engine);
+                    //var formatDateTime = new FormatDateTimeCommand()
+                    //{
+                    //    v_DateTime = inner0,
+                    //    v_Format = v_ToStringFormat,
+                    //    v_Result = v_applyToVariableName
+                    //};
+                    //formatDateTime.RunCommand(engine);
+
+                    using(var myVar = new InnerScriptVariable(engine))
                     {
-                        v_Text = v_InputValue,
-                        v_DateTime = inner0
-                    };
-                    dateTimeFromText.RunCommand(engine);
-                    var formatDateTime = new FormatDateTimeCommand()
-                    {
-                        v_DateTime = inner0,
-                        v_Format = v_ToStringFormat,
-                        v_Result = v_applyToVariableName
-                    };
-                    formatDateTime.RunCommand(engine);
+                        var dateTimeFromText = new CreateDateTimeFromTextCommand()
+                        {
+                            v_Text = v_InputValue,
+                            v_DateTime = myVar.VariableName,
+                        };
+                        dateTimeFromText.RunCommand(engine);
+
+                        var formatDateTime = new FormatDateTimeCommand()
+                        {
+                            v_DateTime = myVar.VariableName,
+                            v_Format = v_ToStringFormat,
+                            v_Result = v_applyToVariableName
+                        };
+                        formatDateTime.RunCommand(engine);
+                    }
                     break;
 
                 case "Number":

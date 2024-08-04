@@ -2,6 +2,7 @@
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -63,25 +64,51 @@ namespace taskt.Core.Automation.Commands
         {
             if (this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_KeyType), engine) == "index")
             {
-                var getKeys = new GetDictionaryKeysListCommand()
+                //var getKeys = new GetDictionaryKeysListCommand()
+                //{
+                //    v_Dictionary = this.v_Dictionary,
+                //    v_Result = VariableNameControls.GetInnerVariableName(0, engine),
+                //};
+                //getKeys.RunCommand(engine);
+                //var keys = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
+                //var index = this.ExpandValueOrUserVariableAsInteger(nameof(v_Key), "Key", engine);
+                //if (index < 0)
+                //{
+                //    index += keys.Count;
+                //}
+                //if (index >= 0 && index < keys.Count)
+                //{
+                //    v_Key = keys[index];    // override Key name
+                //}
+                //else
+                //{
+                //    throw new Exception($"Index value is Out of Range. Value: '{v_Key}', Expand Value: '{index}'");
+                //}
+
+                using (var myDic = new InnerScriptVariable(engine))
                 {
-                    v_Dictionary = this.v_Dictionary,
-                    v_Result = VariableNameControls.GetInnerVariableName(0, engine),
-                };
-                getKeys.RunCommand(engine);
-                var keys = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
-                var index = this.ExpandValueOrUserVariableAsInteger(nameof(v_Key), "Key", engine);
-                if (index < 0)
-                {
-                    index += keys.Count;
-                }
-                if (index >= 0 && index < keys.Count)
-                {
-                    v_Key = keys[index];    // override Key name
-                }
-                else
-                {
-                    throw new Exception($"Index value is Out of Range. Value: '{v_Key}', Expand Value: '{index}'");
+                    var getKeys = new GetDictionaryKeysListCommand()
+                    {
+                        v_Dictionary = this.v_Dictionary,
+                        v_Result = myDic.VariableName,
+                    };
+                    getKeys.RunCommand(engine);
+                    //var keys = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
+                    //var keys = (List<string>)myDic.VariableValue;
+                    var keys = EM_CanHandleListExtensionMethods.ExpandUserVariableAsList(myDic);
+                    var index = this.ExpandValueOrUserVariableAsInteger(nameof(v_Key), "Key", engine);
+                    if (index < 0)
+                    {
+                        index += keys.Count;
+                    }
+                    if (index >= 0 && index < keys.Count)
+                    {
+                        v_Key = keys[index];    // override Key name
+                    }
+                    else
+                    {
+                        throw new Exception($"Index value is Out of Range. Value: '{v_Key}', Expand Value: '{index}'");
+                    }
                 }
             }
 

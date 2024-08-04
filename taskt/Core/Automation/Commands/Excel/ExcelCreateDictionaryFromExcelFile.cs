@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -156,51 +157,95 @@ namespace taskt.Core.Automation.Commands
             };
             activateSheet.RunCommand(engine);
 
-            var keyListName = VariableNameControls.GetInnerVariableName(0, engine);
-            var getListKey = new ExcelGetColumnValuesAsListCommand()
+            //var keyListName = VariableNameControls.GetInnerVariableName(0, engine);
+            //var getListKey = new ExcelGetColumnValuesAsListCommand()
+            //{
+            //    v_InstanceName = instanceName,
+            //    v_ColumnType = this.v_ColumnType,
+            //    v_ColumnIndex = this.v_KeyColumn,
+            //    v_Result = keyListName,
+            //};
+            //getListKey.RunCommand(engine);
+
+            //var valueListName = VariableNameControls.GetInnerVariableName(1, engine);
+            //var getListValue = new ExcelGetColumnValuesAsListCommand()
+            //{
+            //    v_InstanceName = instanceName,
+            //    v_ColumnType = this.v_ColumnType,
+            //    v_ColumnIndex = this.v_ValueColumn,
+            //    v_Result = valueListName,
+            //};
+            //getListValue.RunCommand(engine);
+
+            //var closeInstance = new ExcelCloseExcelInstanceCommand()
+            //{
+            //    v_InstanceName = instanceName,
+            //};
+            //closeInstance.RunCommand(engine);
+
+            //var keyList = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
+
+            //var valueList = (List<string>)VariableNameControls.GetInnerVariable(1, engine).VariableValue;
+
+            //var myDic = new Dictionary<string, string>();
+            //foreach(var key in keyList)
+            //{
+            //    myDic.Add(key, "");
+            //}
+            //int max = (keyList.Count <= valueList.Count) ? keyList.Count : valueList.Count; 
+            //for (int i = 0; i < max; i++) 
+            //{
+            //    myDic[keyList[i]] = valueList[i];
+            //}
+
+            //this.StoreDictionaryInUserVariable(myDic, nameof(v_DictionaryName), engine);
+
+            using (var myKey = new InnerScriptVariable(engine))
             {
-                v_InstanceName = instanceName,
-                v_ColumnType = this.v_ColumnType,
-                v_ColumnIndex = this.v_KeyColumn,
-                v_Result = keyListName,
-            };
-            getListKey.RunCommand(engine);
+                using (var myValue = new InnerScriptVariable(engine))
+                {
+                    var getListKey = new ExcelGetColumnValuesAsListCommand()
+                    {
+                        v_InstanceName = instanceName,
+                        v_ColumnType = this.v_ColumnType,
+                        v_ColumnIndex = this.v_KeyColumn,
+                        v_Result = myKey.VariableName,
+                    };
+                    getListKey.RunCommand(engine);
 
-            var valueListName = VariableNameControls.GetInnerVariableName(1, engine);
-            var getListValue = new ExcelGetColumnValuesAsListCommand()
-            {
-                v_InstanceName = instanceName,
-                v_ColumnType = this.v_ColumnType,
-                v_ColumnIndex = this.v_ValueColumn,
-                v_Result = valueListName,
-            };
-            getListValue.RunCommand(engine);
+                    var getListValue = new ExcelGetColumnValuesAsListCommand()
+                    {
+                        v_InstanceName = instanceName,
+                        v_ColumnType = this.v_ColumnType,
+                        v_ColumnIndex = this.v_ValueColumn,
+                        v_Result = myValue.VariableName,
+                    };
+                    getListValue.RunCommand(engine);
 
-            var closeInstance = new ExcelCloseExcelInstanceCommand()
-            {
-                v_InstanceName = instanceName,
-            };
-            closeInstance.RunCommand(engine);
+                    var closeInstance = new ExcelCloseExcelInstanceCommand()
+                    {
+                        v_InstanceName = instanceName,
+                    };
+                    closeInstance.RunCommand(engine);
 
-            //var keyList = keyListName.ExpandUserVariableAsList(engine);
-            var keyList = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
+                    var keyList = EM_CanHandleListExtensionMethods.ExpandUserVariableAsList(myKey);
 
-            //var valueList = valueListName.ExpandUserVariableAsList(engine);
-            var valueList = (List<string>)VariableNameControls.GetInnerVariable(1, engine).VariableValue;
+                    var valueList = EM_CanHandleListExtensionMethods.ExpandUserVariableAsList(myValue);
 
-            var myDic = new Dictionary<string, string>();
-            foreach(var key in keyList)
-            {
-                myDic.Add(key, "");
+                    var myDic = new Dictionary<string, string>();
+                    foreach (var key in keyList)
+                    {
+                        myDic.Add(key, "");
+                    }
+                    int max = (keyList.Count <= valueList.Count) ? keyList.Count : valueList.Count;
+                    for (int i = 0; i < max; i++)
+                    {
+                        myDic[keyList[i]] = valueList[i];
+                    }
+
+                    this.StoreDictionaryInUserVariable(myDic, nameof(v_DictionaryName), engine);
+                }
             }
-            int max = (keyList.Count <= valueList.Count) ? keyList.Count : valueList.Count; 
-            for (int i = 0; i < max; i++) 
-            {
-                myDic[keyList[i]] = valueList[i];
-            }
-
-            //myDic.StoreInUserVariable(engine, v_DictionaryName);
-            this.StoreDictionaryInUserVariable(myDic, nameof(v_DictionaryName), engine);
         }
 
         //public override List<Control> Render(frmCommandEditor editor)

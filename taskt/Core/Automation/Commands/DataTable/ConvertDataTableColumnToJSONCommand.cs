@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Xml.Serialization;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -43,19 +44,39 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            var listCommand = new ConvertDataTableColumnToListCommand
+            //var listCommand = new ConvertDataTableColumnToListCommand
+            //{
+            //    v_DataTable = this.v_DataTable,
+            //    v_ColumnType = this.v_ColumnType,
+            //    v_ColumnIndex = this.v_ColumnIndex,
+            //    v_Result = VariableNameControls.GetInnerVariableName(0, engine)
+            //};
+            //listCommand.RunCommand(engine);
+
+            //var myList = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
+
+            //var json = Newtonsoft.Json.JsonConvert.SerializeObject(myList);
+            //json.StoreInUserVariable(engine, v_Result);
+
+            using (var myList = new InnerScriptVariable(engine))
             {
-                v_DataTable = this.v_DataTable,
-                v_ColumnType = this.v_ColumnType,
-                v_ColumnIndex = this.v_ColumnIndex,
-                v_Result = VariableNameControls.GetInnerVariableName(0, engine)
-            };
-            listCommand.RunCommand(engine);
+                var listCommand = new ConvertDataTableColumnToListCommand
+                {
+                    v_DataTable = this.v_DataTable,
+                    v_ColumnType = this.v_ColumnType,
+                    v_ColumnIndex = this.v_ColumnIndex,
+                    v_Result = myList.VariableName,
+                };
+                listCommand.RunCommand(engine);
 
-            var myList = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
+                //var myList = (List<string>)VariableNameControls.GetInnerVariable(0, engine).VariableValue;
 
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(myList);
-            json.StoreInUserVariable(engine, v_Result);
+                //var json = Newtonsoft.Json.JsonConvert.SerializeObject((List<string>)myList.VariableValue);
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(EM_CanHandleListExtensionMethods.ExpandUserVariableAsList(myList));
+                json.StoreInUserVariable(engine, v_Result);
+            }
+
+            int v = 3;
         }
     }
 }

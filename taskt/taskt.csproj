@@ -603,6 +603,7 @@
     <Compile Include="Core\Automation\Engine\IScriptVariableListProperties.cs" />
     <Compile Include="Core\Automation\Engine\SystemVariables.cs" />
     <Compile Include="Core\Automation\Commands\FormUIControls.cs" />
+    <Compile Include="Core\Script\InnerScriptVariable.cs" />
     <Compile Include="Core\Update\ApplicationUpdate.cs" />
     <Compile Include="Core\ApplicationSettings\ApplicationSettings.cs" />
     <Compile Include="Core\Automation\Attributes\PropertyAttributes.cs" />
