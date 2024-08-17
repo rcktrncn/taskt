@@ -17,7 +17,8 @@ namespace taskt.UI.Forms.AttendedMode
         private void frmAttendedMode_Load(object sender, EventArgs e)
         {
             //get app settings
-            appSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings();
+            //appSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings();
+            appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
 
             //setup file system watcher
             attendedScriptWatcher.Path = appSettings.ClientSettings.AttendedTasksFolder;

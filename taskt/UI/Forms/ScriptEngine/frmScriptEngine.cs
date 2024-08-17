@@ -74,7 +74,8 @@ namespace taskt.UI.Forms.ScriptEngine
             this.filePath = pathToFile;
 
             //get engine settings
-            engineSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings().EngineSettings;
+            //engineSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings().EngineSettings;
+            engineSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings().EngineSettings;
 
             //determine whether to show listbox or not
             advancedDebug = engineSettings.ShowAdvancedDebugOutput;
@@ -117,7 +118,8 @@ namespace taskt.UI.Forms.ScriptEngine
             this.filePath = null;
 
             //get engine settings
-            engineSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings().EngineSettings;
+            //engineSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings().EngineSettings;
+            engineSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings().EngineSettings;
 
             //determine whether to show listbox or not
             advancedDebug = engineSettings.ShowAdvancedDebugOutput;

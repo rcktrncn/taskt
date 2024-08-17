@@ -70,7 +70,8 @@ namespace taskt.Core.Automation.Engine
             CurrentStatus = EngineStatus.Loaded;
 
             //get engine settings
-            var settings = new ApplicationSettings().GetOrCreateApplicationSettings();
+            //var settings = new ApplicationSettings().GetOrCreateApplicationSettings();
+            var settings = ApplicationSettings.GetOrCreateApplicationSettings();
             engineSettings = settings.EngineSettings;
             serverSettings = settings.ServerSettings;
 

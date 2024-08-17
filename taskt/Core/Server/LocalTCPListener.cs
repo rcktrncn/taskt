@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using RestSharp;
 using static taskt.Core.Automation.Commands.TextControls;
@@ -42,8 +41,9 @@ namespace taskt.Core.Server
 
             automationInstance = new Automation.Engine.AutomationEngineInstance();
 
-            var appSettings = new Core.ApplicationSettings();
-            appSettings = appSettings.GetOrCreateApplicationSettings();
+            //var appSettings = new Core.ApplicationSettings();
+            //appSettings = appSettings.GetOrCreateApplicationSettings();
+            var appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
 
             listenerSettings = appSettings.ListenerSettings;
 

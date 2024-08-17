@@ -49,8 +49,9 @@ namespace taskt.Core.Server
             reconnectTimer.Elapsed += ReconnectTimer_Elapsed;
 
             //get app settings
-            var appSettings = new Core.ApplicationSettings();
-            appSettings = appSettings.GetOrCreateApplicationSettings();
+            //var appSettings = new Core.ApplicationSettings();
+            //appSettings = appSettings.GetOrCreateApplicationSettings();
+            var appSettings = ApplicationSettings.GetOrCreateApplicationSettings();
 
             //pull server settings
             var serverSettings = appSettings.ServerSettings;
@@ -190,14 +191,16 @@ namespace taskt.Core.Server
             {
                 var authPublicKey = e.Message.Replace("ACCEPT_KEY=", "");
                 publicKey = authPublicKey;
-           
+
                 //add public key to app settings and save
-                var appSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings();
+                //var appSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings();
+                var appSettings = ApplicationSettings.GetOrCreateApplicationSettings();
                 appSettings.ServerSettings.ConnectToServerOnStartup = true;
                 appSettings.ServerSettings.ServerConnectionEnabled = true;
                 appSettings.ServerSettings.ServerPublicKey = authPublicKey;
 
-                appSettings.Save(appSettings);
+                //appSettings.Save(appSettings);
+                appSettings.Save();
             }
         }
 

@@ -1912,7 +1912,8 @@ namespace taskt.UI.CustomControls
                     return t.IsSubclassOf(typeof(ScriptCommand)) && !t.IsAbstract;
                 }).ToList();
 
-            var userPrefs = new ApplicationSettings().GetOrCreateApplicationSettings();
+            //var userPrefs = new ApplicationSettings().GetOrCreateApplicationSettings();
+            var userPrefs = ApplicationSettings.GetOrCreateApplicationSettings();
 
             //Loop through each class
             foreach (var commandClass in commandClasses)

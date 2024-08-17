@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using taskt.Core;
 using taskt.Core.IO;
 
 namespace taskt.UI.Forms.ScriptBuilder.Supplemental
@@ -55,8 +56,9 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
         private void frmNewSettings_Load(object sender, EventArgs e)
         {
-            newAppSettings = new Core.ApplicationSettings();
-            newAppSettings = newAppSettings.GetOrCreateApplicationSettings();
+            //newAppSettings = new Core.ApplicationSettings();
+            //newAppSettings = newAppSettings.GetOrCreateApplicationSettings();
+            newAppSettings = ApplicationSettings.GetOrCreateApplicationSettings();
 
             // Network -> Server
             Core.Server.LocalTCPListener.ListeningStarted += AutomationTCPListener_ListeningStarted;
@@ -73,7 +75,8 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             //Keys key = (Keys)Enum.Parse(typeof(Keys), cboCancellationKey.Text);
             //newAppSettings.EngineSettings.CancellationKey = key;
-            newAppSettings.Save(newAppSettings);
+            //newAppSettings.Save(newAppSettings);
+            newAppSettings.Save();
             Core.Server.SocketClient.LoadSettings();
             this.Close();
         }
@@ -1008,8 +1011,10 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
                 if (pulledNewGUID)
                 {
-                    newAppSettings = new Core.ApplicationSettings();
-                    newAppSettings = newAppSettings.GetOrCreateApplicationSettings();
+                    //newAppSettings = new Core.ApplicationSettings();
+                    //newAppSettings = newAppSettings.GetOrCreateApplicationSettings();
+                    newAppSettings = ApplicationSettings.GetOrCreateApplicationSettings();
+
                     txtAddress.Text = newAppSettings.ServerSettings.HTTPGuid.ToString();
                     MessageBox.Show("Connected Successfully!\nGUID will be reloaded automatically the next time settings is loaded!", "Taskt", MessageBoxButtons.OK);
                 }
@@ -1348,7 +1353,8 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 {
                     try
                     {
-                        Core.ApplicationSettings.SaveAs(newAppSettings, frm.FileName);
+                        //Core.ApplicationSettings.SaveAs(newAppSettings, frm.FileName);
+                        Core.ApplicationSettings.Save(newAppSettings, frm.FileName);
                         MessageBox.Show("Exported", "taskt", MessageBoxButtons.OK);
                     }
                     catch

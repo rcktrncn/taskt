@@ -26,8 +26,9 @@ namespace taskt.Core.Server
         /// </summary>
         public static void Initialize()
         {
-            var settingClass = new Core.ApplicationSettings();
-            appSettings = settingClass.GetOrCreateApplicationSettings();
+            //var settingClass = new Core.ApplicationSettings();
+            //appSettings = settingClass.GetOrCreateApplicationSettings();
+            var appSettings = ApplicationSettings.GetOrCreateApplicationSettings();
 
             if (appSettings.ServerSettings.ServerConnectionEnabled)
             {
@@ -98,7 +99,8 @@ namespace taskt.Core.Server
                     var deserialized = Newtonsoft.Json.JsonConvert.DeserializeObject<Worker>(content);
 
                     appSettings.ServerSettings.HTTPGuid = deserialized.WorkerID;
-                    new ApplicationSettings().Save(appSettings);
+                    //new ApplicationSettings().Save(appSettings);
+                    appSettings.Save();
                     return true;
                 }
                 else
@@ -199,7 +201,8 @@ namespace taskt.Core.Server
                 var deserialized = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
 
                 appSettings.ServerSettings.HTTPServerURL = HTTPServerURL;
-                new ApplicationSettings().Save(appSettings);
+                //new ApplicationSettings().Save(appSettings);
+                appSettings.Save();
 
                 return true;
             }

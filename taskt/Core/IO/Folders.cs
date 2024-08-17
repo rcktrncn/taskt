@@ -118,7 +118,8 @@ namespace taskt.Core.IO
         /// <returns></returns>
         public static string GetRootFolderPath()
         {
-            var rootSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings();
+            //var rootSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings();
+            var rootSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
             return rootSettings.ClientSettings.RootFolder;
         }
 
@@ -128,7 +129,8 @@ namespace taskt.Core.IO
         /// <returns></returns>
         public static string GetAttendedTasksFolderPath()
         {
-            var attendedSettings = new ApplicationSettings().GetOrCreateApplicationSettings();
+            //var attendedSettings = new ApplicationSettings().GetOrCreateApplicationSettings();
+            var attendedSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
             return attendedSettings.ClientSettings.AttendedTasksFolder;
         }
 

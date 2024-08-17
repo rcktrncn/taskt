@@ -177,8 +177,9 @@ namespace taskt.UI.Forms.ScriptBuilder
             undoList = new List<List<ListViewItem>>();
 
             //get app settings
-            appSettings = new Core.ApplicationSettings();
-            appSettings = appSettings.GetOrCreateApplicationSettings();
+            //appSettings = new Core.ApplicationSettings();
+            //appSettings = appSettings.GetOrCreateApplicationSettings();
+            appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
 
             if (appSettings.ServerSettings.ServerConnectionEnabled && appSettings.ServerSettings.HTTPGuid == Guid.Empty)
             {              
@@ -349,7 +350,8 @@ namespace taskt.UI.Forms.ScriptBuilder
 
             if ((this.WindowState == FormWindowState.Minimized) && (appSettings.ClientSettings.MinimizeToTray))
             {
-                appSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings();
+                //appSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings();
+                appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
                 if (appSettings.ClientSettings.MinimizeToTray)
                 {
                     notifyTray.Visible = true;
@@ -3475,8 +3477,9 @@ namespace taskt.UI.Forms.ScriptBuilder
                 newSettings.ShowDialog();
 
                 //reload app settings
-                appSettings = new Core.ApplicationSettings();
-                appSettings = appSettings.GetOrCreateApplicationSettings();
+                //appSettings = new Core.ApplicationSettings();
+                //appSettings = appSettings.GetOrCreateApplicationSettings();
+                appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
 
                 //reinit
                 Core.Server.HttpServerClient.Initialize();
@@ -3489,8 +3492,9 @@ namespace taskt.UI.Forms.ScriptBuilder
                 newSettings.ShowDialog();
 
                 //reload app settings
-                appSettings = new Core.ApplicationSettings();
-                appSettings = appSettings.GetOrCreateApplicationSettings();
+                //appSettings = new Core.ApplicationSettings();
+                //appSettings = appSettings.GetOrCreateApplicationSettings();
+                appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
 
                 //reinit
                 Core.Server.HttpServerClient.Initialize();

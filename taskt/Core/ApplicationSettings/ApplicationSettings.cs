@@ -22,39 +22,172 @@ namespace taskt.Core
         {
         }
 
-        public void Save(ApplicationSettings appSettings)
+        /// <summary>
+        /// save taskt settigs file as XML
+        /// </summary>
+        public void Save()
         {
-            //create settings directory
-            var settingsDir = Folders.GetSettingsFolderPath();
-
-            //if directory does not exist then create directory
-            if (!Directory.Exists(settingsDir))
-            {
-                Directory.CreateDirectory(settingsDir);
-            }
-
             //create file path
-            var filePath = Path.Combine(settingsDir, "AppSettings.xml");
+            var filePath = Files.GetSettigsFilePath();
 
-            ////output to xml file
-            SaveAs(appSettings, filePath);
+            //var settigsDir = Path.GetDirectoryName(filePath);
+            //if (!Directory.Exists(settigsDir))
+            //{
+            //    Directory.CreateDirectory(settigsDir);
+            //}
+
+            //// output to xml file
+            //SaveAs(this, filePath);
+
+            SaveProcess(this, filePath);
         }
 
-        public static void SaveAs(ApplicationSettings appSettings, string filePath)
+        /// <summary>
+        /// Save taskt settigs file as XML, the file name is specified by a argument
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void Save(string fileName)
+        {
+            var filePath = Files.GetSettigsFilePath(fileName);
+
+            //var settigsDir = Path.GetDirectoryName(filePath);
+            //if (!Directory.Exists(settigsDir))
+            //{
+            //    Directory.CreateDirectory(settigsDir);
+            //}
+
+            //// output to xml file
+            //SaveAs(this, filePath);
+
+            SaveProcess(this, filePath);
+        }
+
+        /// <summary>
+        /// File Save Process
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="filePath"></param>
+        private static void SaveProcess(ApplicationSettings settings, string filePath)
+        {
+            var settigsDir = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(settigsDir))
+            {
+                Directory.CreateDirectory(settigsDir);
+            }
+
+            // output to xml file
+            SaveAs(settings, filePath);
+        }
+
+        /// <summary>
+        /// save taskt settigs xml file, settigs is specified
+        /// </summary>
+        /// <param name="settings"></param>
+        public static void Save(ApplicationSettings settings)
+        {
+            ////create settings directory
+            //var settingsDir = Folders.GetSettingsFolderPath();
+
+            ////if directory does not exist then create directory
+            //if (!Directory.Exists(settingsDir))
+            //{
+            //    Directory.CreateDirectory(settingsDir);
+            //}
+
+            //create file path
+            //var filePath = Path.Combine(settingsDir, "AppSettings.xml");
+            var filePath = Files.GetSettigsFilePath();
+
+            //var settigsDir = Path.GetDirectoryName(filePath);
+            //if (!Directory.Exists(settigsDir))
+            //{
+            //    Directory.CreateDirectory(settigsDir);
+            //}
+
+            //////output to xml file
+            //SaveAs(settings, filePath);
+
+            SaveProcess(settings, filePath);
+        }
+
+        /// <summary>
+        /// save taskt settigs xml file, settigs and fileName are specified
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="fileName"></param>
+        public static void Save(ApplicationSettings settings, string fileName)
+        {
+            var filePath = Files.GetSettigsFilePath(fileName);
+
+            SaveProcess(settings, filePath);
+        }
+
+        /// <summary>
+        /// Save settigs file as XML
+        /// </summary>
+        /// <param name="appSettings"></param>
+        /// <param name="filePath"></param>
+        private static void SaveAs(ApplicationSettings appSettings, string filePath)
         {
             using (FileStream fileStream = File.Create(filePath))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(ApplicationSettings));
                 serializer.Serialize(fileStream, appSettings);
                 fileStream.Close();
-            }       
+            }
         }
 
-        public ApplicationSettings GetOrCreateApplicationSettings()
+        /// <summary>
+        /// get taskt settigs from file or create taskt settigs
+        /// </summary>
+        /// <returns></returns>
+        public static ApplicationSettings GetOrCreateApplicationSettings()
         {
             //create file path
-            var filePath = Path.Combine(Folders.GetSettingsFolderPath(), "AppSettings.xml");
+            //var filePath = Path.Combine(Folders.GetSettingsFolderPath(), "AppSettings.xml");
+            var filePath = Files.GetSettigsFilePath();
 
+            //ApplicationSettings appSettings;
+            //if (File.Exists(filePath))
+            //{
+            //    try
+            //    {
+            //        appSettings = Open(filePath);
+            //    }
+            //    catch
+            //    {
+            //        appSettings = new ApplicationSettings();
+            //    }
+            //}
+            //else
+            //{
+            //    appSettings = new ApplicationSettings();
+            //}
+
+            //return appSettings;
+
+            return GetOrCreateApplicationSettingsProcess(filePath);
+        }
+
+        /// <summary>
+        /// get taskt settigs from file or create taskt settigs, fileName is specified
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static ApplicationSettings GetOrCreateApplicationSettings(string fileName)
+        {
+            var filePath = Files.GetSettigsFilePath(fileName);
+
+            return GetOrCreateApplicationSettingsProcess(filePath);
+        }
+
+        /// <summary>
+        /// get or create taskt settigs process
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        private static ApplicationSettings GetOrCreateApplicationSettingsProcess(string filePath)
+        {
             ApplicationSettings appSettings;
             if (File.Exists(filePath))
             {
@@ -75,6 +208,12 @@ namespace taskt.Core
             return appSettings;
         }
 
+
+        /// <summary>
+        /// Open taskt settigs file and convert instance
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public static ApplicationSettings Open(string filePath)
         {
             ApplicationSettings appSettings = null;

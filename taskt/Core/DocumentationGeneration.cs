@@ -63,7 +63,8 @@ namespace taskt.Core
                 }).ToList();
 
             // load settings
-            var settings = new ApplicationSettings().GetOrCreateApplicationSettings();
+            //var settings = new ApplicationSettings().GetOrCreateApplicationSettings();
+            var settings = ApplicationSettings.GetOrCreateApplicationSettings();
             settings.ClientSettings.ShowSampleUsageInDescription = false;   // output trick
             settings.ClientSettings.ShowDefaultValueInDescription = false;
 
