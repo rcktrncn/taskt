@@ -468,6 +468,7 @@
     <Compile Include="Core\Automation\Commands\JSON\EM_JSONValueActionPropertiesExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\GetJSONValueFromJSONArrayCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\GetJSONValueCommand.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\GetJSONValuesAsDataTableCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\GetJSONValuesAsDictionaryCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\SetJSONValueOfJSONArrayCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\SetJSONValueOfJSONObjectCommand.cs" />
