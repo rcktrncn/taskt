@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using RestSharp;
 using static taskt.Core.Automation.Commands.TextControls;
@@ -468,10 +469,10 @@ namespace taskt.Core.Server
             }
 
             //check type of execution needed
-            if (parameterType == "Run Raw Script Data")
+            if (parameterType == "run raw script data")
             {
                 //handle await preference
-                if (awaitPreference == "Await For Result")
+                if (awaitPreference == "await for result")
                 {
                     request.Resource = "/AwaitScript";
                 }
@@ -483,10 +484,10 @@ namespace taskt.Core.Server
                 //add script data
                 request.AddParameter("ScriptData", scriptData.ConvertToBase64(), RestSharp.ParameterType.HttpHeader);
             }
-            else if (parameterType == "Run Local File")
+            else if (parameterType == "run local file")
             {
                 //handle await preference
-                if (awaitPreference == "Await For Result")
+                if (awaitPreference == "await for result")
                 {
                     request.Resource = "/AwaitScript";
                 }
@@ -516,10 +517,10 @@ namespace taskt.Core.Server
                 //add script data
                 request.AddParameter("ScriptData", scriptData.ConvertToBase64(), RestSharp.ParameterType.HttpHeader);
             }
-            else if (parameterType == "Run Remote File")
+            else if (parameterType == "run remote file")
             {
                 //handle await preference
-                if (awaitPreference == "Await For Result")
+                if (awaitPreference == "await for result")
                 {
                     request.Resource = "/AwaitScript";
                 }
@@ -531,18 +532,18 @@ namespace taskt.Core.Server
                 //add script parameter
                 request.AddParameter("ScriptLocation", scriptData, RestSharp.ParameterType.HttpHeader);
             }
-            else if (parameterType == "Run Command Json")
+            else if (parameterType == "run command json")
             {
                 request.Resource = "/ExecuteCommand";
 
                 //add script data
                 request.AddParameter("CommandData", scriptData.ConvertToBase64(), RestSharp.ParameterType.HttpHeader);
             }
-            else if (parameterType == "Get Engine Status")
+            else if (parameterType == "get engine status")
             {
                 request.Resource = "/EngineStatus";
             }
-            else if (parameterType == "Restart taskt")
+            else if (parameterType == "restart taskt")
             {
                 request.Resource = "/RestartTaskt";
             }
@@ -550,6 +551,23 @@ namespace taskt.Core.Server
             request.Timeout = new TimeSpan(int.Parse(timeout));
 
             var resp = client.Execute<RestResponse>(request);
+
+            //var resp = await client.ExecuteAsync<RestResponse>(request);
+
+
+            //var stopDateTime = DateTime.Now.AddMilliseconds(int.Parse(timeout));
+            //while (true)
+            //{
+            //    if (resp.ErrorMessage != null)
+            //    {
+            //        break;
+            //    }
+            //    else if (DateTime.Now > stopDateTime)
+            //    {
+            //        break;
+            //    }
+            //    Thread.Sleep(500);  // wait 500 ms
+            //}
 
             string content;
             if (resp.ErrorMessage is null)
