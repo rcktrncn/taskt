@@ -6,7 +6,7 @@ namespace taskt.Core
     /// Defines Server settings for tasktServer if using the server component to manage the client
     /// </summary>
     [Serializable]
-    public class LocalListenerSettings
+    public sealed class LocalListenerSettings
     {
         public bool StartListenerOnStartup { get; set; }
         public bool LocalListeningEnabled { get; set; }

@@ -9,7 +9,7 @@ namespace taskt.Core
     /// Defines settings for the entire application
     /// </summary>
     [Serializable]
-    public class ApplicationSettings
+    public sealed class ApplicationSettings
     {
         public ServerSettings ServerSettings { get; set; } = new ServerSettings();
         public EngineSettings EngineSettings { get; set; } = new EngineSettings();

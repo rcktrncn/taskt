@@ -4,7 +4,7 @@ namespace taskt.Core
 {
 
     [Serializable]
-    public class WhiteListIP
+    public sealed class WhiteListIP
     {
         string _value;
         public WhiteListIP(string s)
