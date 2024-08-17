@@ -225,15 +225,5 @@ namespace taskt.Core
             ChangeItemsWithWheelWhenNotForcused = false;
             DisplayNumberBeforeParameterDescription = true;
         }
-
-        //public string replaceClientKeyword(string targetString)
-        //{
-        //    return targetString.Replace(InterDefaultBrowserInstanceNameKeyword, this.DefaultBrowserInstanceName)
-        //            .Replace(InterDefaultStopWatchInstanceNameKeyword, this.DefaultStopWatchInstanceName)
-        //            .Replace(InterDefaultExcelInstanceNameKeyword, this.DefaultExcelInstanceName)
-        //            .Replace(InterDefaultWordInstanceNameKeyword, this.DefaultWordInstanceName)
-        //            .Replace(InterDefaultDBInstanceNameKeyword, this.DefaultDBInstanceName)
-        //            .Replace(InterDefaultNLGInstanceNameKeyword, this.DefaultNLGInstanceName);
-        //}
     }
 }

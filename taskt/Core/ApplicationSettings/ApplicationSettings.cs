@@ -11,10 +11,13 @@ namespace taskt.Core
     [Serializable]
     public sealed class ApplicationSettings
     {
+        #region xml properties
         public ServerSettings ServerSettings { get; set; } = new ServerSettings();
         public EngineSettings EngineSettings { get; set; } = new EngineSettings();
         public ClientSettings ClientSettings { get; set; } = new ClientSettings();
         public LocalListenerSettings ListenerSettings { get; set; } = new LocalListenerSettings();
+        #endregion
+
         public ApplicationSettings()
         {
         }
@@ -22,8 +25,6 @@ namespace taskt.Core
         public void Save(ApplicationSettings appSettings)
         {
             //create settings directory
-
-            //var settingsDir = Folders.GetFolder(Folders.FolderType.SettingsFolder);
             var settingsDir = Folders.GetSettingsFolderPath();
 
             //if directory does not exist then create directory
@@ -35,13 +36,7 @@ namespace taskt.Core
             //create file path
             var filePath = Path.Combine(settingsDir, "AppSettings.xml");
 
-            ////create filestream
-            //var fileStream = System.IO.File.Create(filePath);
-
             ////output to xml file
-            //XmlSerializer serializer = new XmlSerializer(typeof(ApplicationSettings));
-            //serializer.Serialize(fileStream, appSettings);
-            //fileStream.Close();
             SaveAs(appSettings, filePath);
         }
 
@@ -57,30 +52,12 @@ namespace taskt.Core
 
         public ApplicationSettings GetOrCreateApplicationSettings()
         {
-            //create settings directory
-            //var settingsDir = Folders.GetFolder(Folders.FolderType.SettingsFolder);
-            //var settingsDir = Folders.GetSettingsFolderPath();
-
             //create file path
             var filePath = Path.Combine(Folders.GetSettingsFolderPath(), "AppSettings.xml");
 
             ApplicationSettings appSettings;
             if (File.Exists(filePath))
             {
-                ////open file and return it or return new settings on error
-                //var fileStream = System.IO.File.Open(filePath, FileMode.Open);
-
-                //try
-                //{
-                //    XmlSerializer serializer = new XmlSerializer(typeof(ApplicationSettings));
-                //    appSettings = (ApplicationSettings)serializer.Deserialize(fileStream);
-                //}
-                //catch (Exception)
-                //{
-                //    appSettings = new ApplicationSettings();
-                //}
-
-                //fileStream.Close();
                 try
                 {
                     appSettings = Open(filePath);
@@ -120,10 +97,5 @@ namespace taskt.Core
             }
             return appSettings;
         }
-
-        //public string replaceApplicationKeyword(string targetString)
-        //{
-        //    return this.ClientSettings.replaceClientKeyword(this.EngineSettings.replaceEngineKeyword(targetString));
-        //}
     }
 }
