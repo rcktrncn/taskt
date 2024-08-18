@@ -387,6 +387,7 @@
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryKeyPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryResultPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\JoinDictionaryValuesAsTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ICanHandleDictionary.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryAddCreateProperties.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryGetFromDictionaryProperties.cs" />
