@@ -341,6 +341,7 @@
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableGetFromDataTableRowCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableInputDataTableCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableRowCommands.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ConvertDataTableToVisualizedTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\JoinDataTableColumnAsTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\JoinDataTableRowAsTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ExportDataTableRowAsTextFileCommand.cs" />
@@ -382,6 +383,7 @@
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryKeyActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryKeyCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryInputDictionaryCommands.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\CovnertDictionaryToVisualizedTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\CovnertDictionaryToTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ExportDictionaryAsTextFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_CanHandleDictionary.cs" />
@@ -495,6 +497,7 @@
     <Compile Include="Core\Automation\Commands\List\AListGetMathResultFromListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListIndexCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListInputListCommands.cs" />
+    <Compile Include="Core\Automation\Commands\List\CovnertListToVisualizedTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\List\JoinListValuesAsTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_CanHandleListExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_ListCreateFromListPropertiesExtensionMethods.cs" />
