@@ -19,9 +19,19 @@ namespace taskt.UI.Forms.General
 {
     public partial class frmDialog : Form
     {
+        #region fields
+        public enum DialogType
+        {
+            YesNo,
+            OkCancel,
+            OkOnly
+        }
+
         public int closeTicks;
+
         public int ticksPassed;
-        public frmDialog(string message, string title, DialogType dialogType, int closeAfterSeconds)
+        #endregion
+        public frmDialog(string message, string title, DialogType dialogType, int closeAfterSeconds, bool showTop = true, string fontName = "", float fontSize = 0F)
         {
             InitializeComponent();
 
@@ -51,18 +61,26 @@ namespace taskt.UI.Forms.General
                 autoCloseTimer.Enabled = true;
             }
             pnlControlContainer.BackColor = Color.SteelBlue;
-            this.txtMessage.SelectionStart = txtMessage.Text.Length;
+
+            //this.txtMessage.SelectionStart = txtMessage.Text.Length;
+            //txtMessage.SelectionStart = 0;
+            //txtMessage.Font = new Font("MS Gothic", 14.25F);
+
+            txtMessage.SelectionStart = (showTop) ? 0 : txtMessage.Text.Length;
+
+            if (!string.IsNullOrEmpty(fontName))
+            {
+                if (fontSize <= 0F)
+                {
+                    fontSize = txtMessage.Font.Size;
+                }
+                txtMessage.Font = new Font(fontName, fontSize);
+            }
         }
+
         private void CalculateCloseTime()
         {
             lblAutoClose.Text = "closing in " + (closeTicks - ticksPassed) + " sec(s)";
-        }
-
-        public enum DialogType
-        {
-            YesNo,
-            OkCancel,
-            OkOnly
         }
 
         private void uiBtnOk_Click(object sender, EventArgs e)
