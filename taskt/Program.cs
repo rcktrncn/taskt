@@ -12,16 +12,17 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
 
 namespace taskt
 {
     static class Program
     {
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool SetProcessDPIAware();
+
+        public static UI.Forms.Splash.frmSplash SplashForm { get; set; }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -120,14 +121,10 @@ namespace taskt
                 Application.Run(new UI.Forms.ScriptBuilder.frmScriptBuilder());
             }
         }
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern bool SetProcessDPIAware();
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             MessageBox.Show("An unhandled exception occured: " + (e.ExceptionObject as Exception).ToString(), "Oops");
         }
-
-        public static UI.Forms.Splash.frmSplash SplashForm { get; set; }
     }
 }
