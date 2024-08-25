@@ -325,6 +325,7 @@
     <Compile Include="Core\ApplicationSettings\LocalListenerSettings.cs" />
     <Compile Include="Core\ApplicationSettings\ServerSettings.cs" />
     <Compile Include="Core\ApplicationSettings\WhiteListIP.cs" />
+    <Compile Include="Core\Automation\Commands\ApplicationScriptFile\RunJavaScriptFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\Color\AColorCreateCommands.cs" />
     <Compile Include="Core\Automation\Commands\Color\EM_CanHandleColorExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Color\ICanHandleColor.cs" />
@@ -341,6 +342,13 @@
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableGetFromDataTableRowCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableInputDataTableCommands.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ADataTableRowCommands.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ConvertDataTableToVisualizedTextCommand.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\JoinDataTableColumnAsTextCommand.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\JoinDataTableRowAsTextCommand.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ExportDataTableRowAsTextFileCommand.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ExportDataTableColumnAsTextFileCommand.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ConvertDataTableColumnToTextCommand.cs" />
+    <Compile Include="Core\Automation\Commands\DataTable\ConvertDataTableRowToTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ConvertDataTableToTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\ExportDataTableAsTextFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\DataTable\EM_CanHandleDataTable.cs" />
@@ -376,6 +384,7 @@
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryKeyActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryKeyCommands.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ADictionaryInputDictionaryCommands.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\CovnertDictionaryToVisualizedTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\CovnertDictionaryToTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ExportDictionaryAsTextFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_CanHandleDictionary.cs" />
@@ -383,6 +392,7 @@
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryKeyPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\EM_DictionaryResultPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\Dictionary\JoinDictionaryValuesAsTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\ICanHandleDictionary.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryAddCreateProperties.cs" />
     <Compile Include="Core\Automation\Commands\Dictionary\IDictionaryGetFromDictionaryProperties.cs" />
@@ -466,6 +476,7 @@
     <Compile Include="Core\Automation\Commands\JSON\EM_JSONValueActionPropertiesExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\JSON\GetJSONValueFromJSONArrayCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\GetJSONValueCommand.cs" />
+    <Compile Include="Core\Automation\Commands\JSON\GetJSONValuesAsDataTableCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\GetJSONValuesAsDictionaryCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\SetJSONValueOfJSONArrayCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\SetJSONValueOfJSONObjectCommand.cs" />
@@ -487,6 +498,7 @@
     <Compile Include="Core\Automation\Commands\List\AListGetMathResultFromListCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListIndexCommands.cs" />
     <Compile Include="Core\Automation\Commands\List\AListInputListCommands.cs" />
+    <Compile Include="Core\Automation\Commands\List\CovnertListToVisualizedTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\List\JoinListValuesAsTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_CanHandleListExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\List\EM_ListCreateFromListPropertiesExtensionMethods.cs" />

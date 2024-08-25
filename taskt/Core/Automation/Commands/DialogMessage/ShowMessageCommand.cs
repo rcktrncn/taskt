@@ -41,6 +41,27 @@ namespace taskt.Core.Automation.Commands
         [PropertyDisplayText(false, "")]
         public string v_AutoCloseAfter { get; set; }
 
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
+        [PropertyDescription("Font Name")]
+        [PropertyShowSampleUsageInDescription(true)]
+        [PropertyDetailSampleUsage("**MS Gothic**", "Specify MS Gothic")]
+        [PropertyIsOptional(true)]
+        [PropertyValidationRule("", PropertyValidationRule.ValidationRuleFlags.None)]
+        [PropertyDisplayText(false, "")]
+        public string v_FontName { get; set; }
+
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
+        [PropertyDescription("Font Size")]
+        [PropertyShowSampleUsageInDescription(true)]
+        [PropertyDetailSampleUsage("**12**", PropertyDetailSampleUsage.ValueType.Value, "Font Size")]
+        [PropertyDetailSampleUsage("**{{{vFont}}}**", PropertyDetailSampleUsage.ValueType.VariableName, "Font Size")]
+        [PropertyIsOptional(true)]
+        [PropertyValidationRule("", PropertyValidationRule.ValidationRuleFlags.None)]
+        [PropertyDisplayText(false, "")]
+        public string v_FontSize { get; set; }
+
         public ShowMessageCommand()
         {
             //this.CommandName = "MessageBoxCommand";
@@ -71,10 +92,21 @@ namespace taskt.Core.Automation.Commands
                 closeAfter = 10;
             }
 
+            string fontName = "";
+            if (!string.IsNullOrEmpty(v_FontName))
+            {
+                fontName = this.ExpandValueOrUserVariable(nameof(v_FontName), "Font Name", engine);
+            }
+            float fontSize = 0F;
+            if (!string.IsNullOrEmpty(v_FontSize))
+            {
+                fontSize = (float)this.ExpandValueOrUserVariableAsDecimal(nameof(v_FontSize), engine);
+            }
+
             // TODO: support OK/cancel etc buttons
             var result = engine.tasktEngineUI.Invoke(new Action(() =>
             {
-                engine.tasktEngineUI.ShowMessage(variableMessage, "MessageBox Command", UI.Forms.General.frmDialog.DialogType.OkOnly, closeAfter);
+                engine.tasktEngineUI.ShowMessage(variableMessage, "MessageBox Command", UI.Forms.General.frmDialog.DialogType.OkOnly, closeAfter, true, fontName, fontSize);
             }
             ));
         }

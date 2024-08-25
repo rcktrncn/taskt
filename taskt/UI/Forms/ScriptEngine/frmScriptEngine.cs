@@ -11,7 +11,6 @@
 //WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and
 //limitations under the License.
-using Org.BouncyCastle.Utilities.Bzip2;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -341,20 +340,20 @@ namespace taskt.UI.Forms.ScriptEngine
         /// Delegate for showing message box
         /// </summary>
         /// <param name="message"></param>
-        public delegate void ShowMessageDelegate(string message, string title, Forms.General.frmDialog.DialogType dialogType, int closeAfter);
+        public delegate void ShowMessageDelegate(string message, string title, Forms.General.frmDialog.DialogType dialogType, int closeAfter, bool showTop = true, string fontName = "", float fontSize = 0F);
         /// <summary>
         /// Used by the automation engine to show a message to the user on-screen. If UI is not available, a standard messagebox will be invoked instead.
         /// </summary>
-        public void ShowMessage(string message, string title, General.frmDialog.DialogType dialogType, int closeAfter)
+        public void ShowMessage(string message, string title, General.frmDialog.DialogType dialogType, int closeAfter, bool showTop = true, string fontName = "", float fontSize = 0F)
         {
             if (InvokeRequired)
             {
                 var d = new ShowMessageDelegate(ShowMessage);
-                Invoke(d, new object[] { message, title, dialogType, closeAfter });
+                Invoke(d, new object[] { message, title, dialogType, closeAfter, showTop, fontName, fontSize });
             }
             else
             {
-                using (var confirmationForm = new Forms.General.frmDialog(message, title, dialogType, closeAfter))
+                using (var confirmationForm = new Forms.General.frmDialog(message, title, dialogType, closeAfter, showTop, fontName, fontSize))
                 {
                     confirmationForm.ShowDialog();
                 }
