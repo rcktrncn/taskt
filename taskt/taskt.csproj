@@ -325,6 +325,7 @@
     <Compile Include="Core\ApplicationSettings\LocalListenerSettings.cs" />
     <Compile Include="Core\ApplicationSettings\ServerSettings.cs" />
     <Compile Include="Core\ApplicationSettings\WhiteListIP.cs" />
+    <Compile Include="Core\Automation\Commands\ApplicationScriptFile\RunJavaScriptFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\Color\AColorCreateCommands.cs" />
     <Compile Include="Core\Automation\Commands\Color\EM_CanHandleColorExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\Color\ICanHandleColor.cs" />
