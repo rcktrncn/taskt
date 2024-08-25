@@ -320,12 +320,14 @@ namespace taskt.UI.Forms.ScriptBuilder
         
         private void frmScriptBuilder_Shown(object sender, EventArgs e)
         {
-
-            Program.SplashForm.Hide();
+            //Program.SplashForm.Hide();
+            Program.HideSplashScreen();
 
             if (editMode)
+            {
                 return;
-
+            }
+            
             Notify("Welcome! Press 'Start Edit Script' to get started!");
         }
 
