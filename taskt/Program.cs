@@ -122,6 +122,11 @@ namespace taskt
                 }
 
                 string checkFilePath = scriptFilePath.StartsWith("*") ? scriptFilePath.Substring(1) : scriptFilePath;
+                if (!Path.IsPathRooted(checkFilePath))
+                {
+                    checkFilePath = Path.Combine(Core.IO.Folders.GetScriptsFolderPath(), checkFilePath);
+                }
+
                 if (!File.Exists(checkFilePath))
                 {
                     MessageBox.Show($"taskt Script File does not exits.\r\nPath: {scriptFilePath}", Taskt_VersionInfo.ProductName);
