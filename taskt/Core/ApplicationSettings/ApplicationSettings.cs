@@ -36,10 +36,10 @@ namespace taskt.Core
         /// <summary>
         /// Save taskt settigs file as XML, the file name is specified by a argument
         /// </summary>
-        /// <param name="fileName"></param>
+        /// <param name="fileName">file name of file path</param>
         public void Save(string fileName)
         {
-            var filePath = Files.GetSettigsFilePath(fileName);
+            var filePath = (Path.IsPathRooted(fileName)) ? fileName : Files.GetSettigsFilePath(fileName);
 
             SaveProcess(this, filePath);
         }
@@ -77,10 +77,10 @@ namespace taskt.Core
         /// save taskt settigs xml file, settigs and fileName are specified
         /// </summary>
         /// <param name="settings"></param>
-        /// <param name="fileName"></param>
+        /// <param name="fileName">file name of file path</param>
         public static void Save(ApplicationSettings settings, string fileName)
         {
-            var filePath = Files.GetSettigsFilePath(fileName);
+            var filePath = (Path.IsPathRooted(fileName)) ? fileName : Files.GetSettigsFilePath(fileName);
 
             SaveProcess(settings, filePath);
         }
@@ -115,11 +115,11 @@ namespace taskt.Core
         /// <summary>
         /// get taskt settigs from file or create taskt settigs, fileName is specified
         /// </summary>
-        /// <param name="fileName"></param>
+        /// <param name="fileName">file name of file path</param>
         /// <returns></returns>
         public static ApplicationSettings GetOrCreateApplicationSettings(string fileName)
         {
-            var filePath = Files.GetSettigsFilePath(fileName);
+            var filePath = (Path.IsPathRooted(fileName)) ? fileName : Files.GetSettigsFilePath(fileName);
 
             return GetOrCreateApplicationSettingsProcess(filePath);
         }
