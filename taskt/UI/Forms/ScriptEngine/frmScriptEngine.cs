@@ -113,7 +113,6 @@ namespace taskt.UI.Forms.ScriptEngine
         {
             InitializeComponent();
 
-
             //set file
             this.filePath = null;
 
@@ -139,7 +138,6 @@ namespace taskt.UI.Forms.ScriptEngine
                 pbBotIcon.Show();
                 lblAction.Show();
             }
-
 
             //apply debug window setting
             if (!engineSettings.ShowDebugWindow)
@@ -290,7 +288,6 @@ namespace taskt.UI.Forms.ScriptEngine
         /// <param name="mainLogoText"></param>
         private void UpdateUI(string mainLogoText)
         {
-
             if (InvokeRequired)
             {
                 var d = new UpdateUIDelegate(UpdateUI);
