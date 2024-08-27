@@ -14,19 +14,20 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         private frmScriptBuilder parentForm;
         private TreeNode[] bufferdSampleNodes;
 
-        public frmSample(frmScriptBuilder parentForm)
+        public frmSample()
         {
             InitializeComponent();
-            this.parentForm = parentForm;
         }
 
-        public frmSample(frmScriptBuilder parentForm, string searchKeyword) : this(parentForm)
+        public frmSample(string searchKeyword) : this()
         {
             txtSearchBox.Text = searchKeyword;
         }
 
         private void frmSample_Load(object sender, EventArgs e)
         {
+            this.parentForm = (frmScriptBuilder)this.Owner;
+
             //samplePath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Samples";
             samplePath = Core.IO.Folders.GetSamplesFolderPath();
 
