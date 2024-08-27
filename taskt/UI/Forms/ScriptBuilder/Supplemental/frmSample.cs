@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
-using System.Reflection;
-using System.Linq;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 {
@@ -38,7 +38,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             var files = Directory.EnumerateFiles(samplePath, "*.xml", SearchOption.AllDirectories).ToList();
 
             //int baseLen = samplePath.Length + 1;    // (+1) is \\
-            int baseLen = samplePath.Length;
+            var baseLen = samplePath.Length;
 
             ImageList tvImageList = new ImageList();
             tvImageList.ImageSize = new Size(16, 16);
@@ -46,15 +46,14 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             tvImageList.Images.Add(Properties.Resources.command_group);
             tvSamples.ImageList = tvImageList;
 
-            string oldFolder;
-            oldFolder = "----";
+            string oldFolder = "----";
 
-            List<TreeNode> tempNodes = new List<TreeNode>();
+            var tempNodes = new List<TreeNode>();
             TreeNode parentGroup = null;
             foreach(var file in files)
             {
-                string absPath = file.Substring(baseLen);
-                string[] absParts = absPath.Split('\\');
+                var absPath = file.Substring(baseLen);
+                var absParts = absPath.Split('\\');
                 if (absParts[0] == oldFolder)
                 {
                     TreeNode newNode = new TreeNode(convertFileNameToTreeNode(absParts[1]));
@@ -68,7 +67,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                     }
                     oldFolder = absParts[0];
                     parentGroup = new TreeNode(absParts[0], 1, 1);
-                    TreeNode newNode = new TreeNode(convertFileNameToTreeNode(absParts[1]));
+                    var newNode = new TreeNode(convertFileNameToTreeNode(absParts[1]));
                     parentGroup.Nodes.Add(newNode);
                 }
             }
@@ -227,7 +226,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
         private void openSampleScriptProcess()
         {
-            string targetFile = getSelectedScriptPath();
+            var targetFile = getSelectedScriptPath();
             //string fileName = Path.GetFileName(targetFile);
             if (targetFile != "")
             {
@@ -238,7 +237,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
         private void importSampleScriptProcess()
         {
-            string targetFile = getSelectedScriptPath();
+            var targetFile = getSelectedScriptPath();
             //string fileName = Path.GetFileName(targetFile);
             if (targetFile != "")
             {
@@ -249,7 +248,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
         private void newTasktSampleScriptProcess()
         {
-            string targetFile = getSelectedScriptPath();
+            var targetFile = getSelectedScriptPath();
             //string fileName = Path.GetFileName(targetFile);
             if (targetFile != "")
             {
@@ -329,7 +328,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
         private void filterSampleProcess()
         {
-            string keyword = txtSearchBox.Text.ToLower().Trim();
+            var keyword = txtSearchBox.Text.ToLower().Trim();
             if (keyword.Length == 0)
             {
                 showAllSamples();
@@ -347,7 +346,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
             foreach(TreeNode parentNode in bufferdSampleNodes)
             {
-                TreeNode paNode = new TreeNode("", 1, 1);
+                var paNode = new TreeNode("", 1, 1);
                 foreach(TreeNode node in parentNode.Nodes)
                 {
                     if (node.Text.ToLower().Contains(keyword))
