@@ -1,5 +1,9 @@
 taskt command line reference
 
+nothing (Only script file path. Do not specify any other parameters)
+	Run (Execute) script file.
+	ex.) taskt "C:\scripts\myscript.xml"
+
 -o
 	Open script file.
 	ex.) taskt -o "C:\scripts\myscript.xml"
@@ -7,15 +11,15 @@ taskt command line reference
 -oh
 	Open script file as unsaved file.
 	ex.) taskt -oh "C:\scripts\myscript.xml"
-	
-nothing (only file path)
-	Run (Execute) script file.
-	ex.) taskt "C:\scripts\myscript.xml"
 
 -r
-	Run(Execute) script file.
+	Run (Execute) script file.
 	ex.) taskt -r "C:\scripts\myscript.xml"
 	
 -e
 	Run (Execute) script file.
 	ex.) taskt -e "C:\scripts\myscript.xml"
+
+-s
+	Specify settings file path.
+	ex.) taskt -s "C:\taskt\mysettings.xml"
