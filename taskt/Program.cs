@@ -126,6 +126,11 @@ namespace taskt
             }
         }
 
+        /// <summary>
+        /// error!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             MessageBox.Show("An unhandled exception occured: " + (e.ExceptionObject as Exception).ToString(), "Oops");
