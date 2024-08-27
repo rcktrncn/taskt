@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Linq;
+using System.IO;
 
 namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 {
@@ -25,16 +27,18 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
         private void frmSample_Load(object sender, EventArgs e)
         {
-            samplePath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Samples";
+            //samplePath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\Samples";
+            samplePath = Core.IO.Folders.GetSamplesFolderPath();
 
-            if (!System.IO.Directory.Exists(samplePath))
+            if (!Directory.Exists(samplePath))
             {
                 return;
             }
 
-            IEnumerable<string> files = System.IO.Directory.EnumerateFiles(samplePath, "*.xml", System.IO.SearchOption.AllDirectories);
+            var files = Directory.EnumerateFiles(samplePath, "*.xml", SearchOption.AllDirectories).ToList();
 
-            int baseLen = samplePath.Length + 1;    // (+1) is \\
+            //int baseLen = samplePath.Length + 1;    // (+1) is \\
+            int baseLen = samplePath.Length;
 
             ImageList tvImageList = new ImageList();
             tvImageList.ImageSize = new Size(16, 16);
@@ -82,6 +86,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 filterSampleProcess();
             }
         }
+
         private void frmSample_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -106,6 +111,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 tvContextMenuStrip.Show(Cursor.Position);
             }
         }
+
         private void tvSamples_MouseClick(object sender, MouseEventArgs e)
         {
             if (tvSamples.SelectedNode == null)
@@ -142,6 +148,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 tvSamples.SelectedNode = e.Node;
             }
         }
+
         private void tvSamples_KeyDown(object sender, KeyEventArgs e)
         {
             if (tvSamples.SelectedNode == null)
@@ -177,14 +184,17 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             openSampleScriptProcess();
         }
+
         private void btnImport_Click(object sender, EventArgs e)
         {
             importSampleScriptProcess();
         }
+
         private void btnNew_Click(object sender, EventArgs e)
         {
             newTasktSampleScriptProcess();
         }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -194,12 +204,14 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         #region Open/Import sample
         private string convertFileNameToTreeNode(string filaName)
         {
-            return System.IO.Path.GetFileNameWithoutExtension(filaName).Replace("_", " ");
+            return Path.GetFileNameWithoutExtension(filaName).Replace("_", " ");
         }
+
         private string convertTreeNodeToFileName(string treeText)
         {
             return treeText.Replace(" ", "_") + ".xml";
         }
+
         private string getSelectedScriptPath()
         {
             if (tvSamples.SelectedNode.Level != 1)
@@ -208,38 +220,44 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             }
             else
             {
-                return samplePath + "\\" + tvSamples.SelectedNode.Parent.Text + "\\" + convertTreeNodeToFileName(tvSamples.SelectedNode.Text);
+                //return samplePath + "\\" + tvSamples.SelectedNode.Parent.Text + "\\" + convertTreeNodeToFileName(tvSamples.SelectedNode.Text);
+                return Path.Combine(samplePath, tvSamples.SelectedNode.Parent.Text, convertTreeNodeToFileName(tvSamples.SelectedNode.Text));
             }
         }
+
         private void openSampleScriptProcess()
         {
             string targetFile = getSelectedScriptPath();
-            string fileName = System.IO.Path.GetFileName(targetFile);
+            //string fileName = Path.GetFileName(targetFile);
             if (targetFile != "")
             {
                 parentForm.OpenScriptFromFilePath(targetFile);
                 this.Close();
             }
         }
+
         private void importSampleScriptProcess()
         {
             string targetFile = getSelectedScriptPath();
-            string fileName = System.IO.Path.GetFileName(targetFile);
+            //string fileName = Path.GetFileName(targetFile);
             if (targetFile != "")
             {
                 parentForm.ImportScriptFromFilePath(targetFile);
                 this.Close();
             }
         }
+
         private void newTasktSampleScriptProcess()
         {
             string targetFile = getSelectedScriptPath();
-            string fileName = System.IO.Path.GetFileName(targetFile);
+            //string fileName = Path.GetFileName(targetFile);
             if (targetFile != "")
             {
-                System.Diagnostics.ProcessStartInfo pInfo = new System.Diagnostics.ProcessStartInfo();
-                pInfo.FileName = Assembly.GetEntryAssembly().Location;
-                pInfo.Arguments = "-oh \"" + getSelectedScriptPath() + "\"";
+                System.Diagnostics.ProcessStartInfo pInfo = new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = Assembly.GetEntryAssembly().Location,
+                    Arguments = "-oh \"" + getSelectedScriptPath() + "\""
+                };
                 System.Diagnostics.Process.Start(pInfo);
                 this.Close();
             }
@@ -256,10 +274,12 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             importSampleScriptProcess();
         }
+
         private void newWindowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             newTasktSampleScriptProcess();
         }
+
         private void clearFilterTvContextMenuStrip_Click(object sender, EventArgs e)
         {
             //txtSearchBox.Text = "";
@@ -290,11 +310,13 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             filterSampleProcess();
         }
+
         private void picClear_Click(object sender, EventArgs e)
         {
             //txtSearchBox.Text = "";
             showAllSamples();
         }
+
         private void txtSearchBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -304,6 +326,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 filterSampleProcess();
             }
         }
+
         private void filterSampleProcess()
         {
             string keyword = txtSearchBox.Text.ToLower().Trim();
@@ -365,8 +388,5 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             clearFilterTvContextMenuStrip.Enabled = false;
         }
         #endregion
-
-        
-
     }
 }
