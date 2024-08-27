@@ -70,21 +70,6 @@ namespace taskt
                 }
                 else if ((args.Length > 1) && (args.Length % 2 == 0))
                 {
-                    //switch (args[0])
-                    //{
-                    //    case "-r":
-                    //    case "-e":
-                    //        scriptFilePath = args[1];
-                    //        break;
-                    //    case "-o":
-                    //        type = "open";
-                    //        scriptFilePath = args[1];
-                    //        break;
-                    //    case "-oh":
-                    //        type = "open";
-                    //        scriptFilePath = "*" + args[1];
-                    //        break;
-                    //}
                     for (int i = 0; i < args.Length; i += 2)
                     {
                         switch (args[i])
@@ -139,6 +124,10 @@ namespace taskt
 
                     Application.Exit();
                     return;
+                }
+                else
+                {
+                    scriptFilePath = scriptFilePath.StartsWith("*") ? $"*{checkFilePath}" : checkFilePath;
                 }
 
                 if (type == "run")
