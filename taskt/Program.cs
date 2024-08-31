@@ -14,9 +14,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Web.SessionState;
 using System.Windows.Forms;
-using taskt.Core;
 
 namespace taskt
 {
