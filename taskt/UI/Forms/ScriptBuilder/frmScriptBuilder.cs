@@ -180,7 +180,7 @@ namespace taskt.UI.Forms.ScriptBuilder
             //appSettings = new Core.ApplicationSettings();
             //appSettings = appSettings.GetOrCreateApplicationSettings();
             //appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
-            appSettings = App.Taskt_Settings;
+            appSettings = App.Taskt_UNSAFE_Settings;
 
             if (appSettings.ServerSettings.ServerConnectionEnabled && appSettings.ServerSettings.HTTPGuid == Guid.Empty)
             {              
@@ -357,7 +357,7 @@ namespace taskt.UI.Forms.ScriptBuilder
                 //appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
                 if (appSettings == null)
                 {
-                    appSettings = App.Taskt_Settings;
+                    appSettings = App.Taskt_UNSAFE_Settings;
                 }
 
                 if (appSettings.ClientSettings.MinimizeToTray)
