@@ -4,6 +4,9 @@ using taskt.Core;
 
 namespace taskt
 {
+    /// <summary>
+    /// Location, FileVersionInfo, AppSettings
+    /// </summary>
     public static class App
     {
         /// <summary>
