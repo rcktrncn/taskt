@@ -64,7 +64,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             // System Variables
             bufferedSystemVariableParentNode.Nodes.Clear();
             bufferedSystemVariableParentNode.Text = System_Variables_Text;
-            //List<Core.Script.ScriptVariable> systemVars = Core.Common.GenerateSystemVariables();
+
             var systemVars = SystemVariables.GetSystemVariables(new AutomationEngineInstance());
             foreach(var item in systemVars)
             {
