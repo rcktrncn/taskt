@@ -75,7 +75,8 @@ namespace taskt.UI.Forms.ScriptEngine
 
             //get engine settings
             //engineSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings().EngineSettings;
-            engineSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings().EngineSettings;
+            //engineSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings().EngineSettings;
+            engineSettings = App.Taskt_Settings.EngineSettings;
 
             //determine whether to show listbox or not
             advancedDebug = engineSettings.ShowAdvancedDebugOutput;
@@ -118,7 +119,8 @@ namespace taskt.UI.Forms.ScriptEngine
 
             //get engine settings
             //engineSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings().EngineSettings;
-            engineSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings().EngineSettings;
+            //engineSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings().EngineSettings;
+            engineSettings = App.Taskt_Settings.EngineSettings;
 
             //determine whether to show listbox or not
             advancedDebug = engineSettings.ShowAdvancedDebugOutput;

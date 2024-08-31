@@ -321,6 +321,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
     <Compile Include="Core\ApplicationSettings\ClientSettings.cs" />
     <Compile Include="Core\ApplicationSettings\EngineSettings.cs" />
     <Compile Include="Core\ApplicationSettings\LocalListenerSettings.cs" />

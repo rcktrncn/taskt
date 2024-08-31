@@ -14,7 +14,9 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Web.SessionState;
 using System.Windows.Forms;
+using taskt.Core;
 
 namespace taskt
 {
@@ -24,19 +26,15 @@ namespace taskt
         private static extern bool SetProcessDPIAware();
 
         /// <summary>
+        /// app switch
+        /// </summary>
+        public static bool AllowChangeSettingsFilePathSwitch { get; private set; } = false;
+
+        /// <summary>
         /// splash form
         /// </summary>
         //public static UI.Forms.Splash.frmSplash SplashForm { get; set; }
         private static UI.Forms.Splash.frmSplash SplashForm;
-
-        /// <summary>
-        /// taskt location
-        /// </summary>
-        public static string Taskt_Location { get; private set; }
-        /// <summary>
-        /// taskt version info
-        /// </summary>
-        public static FileVersionInfo Taskt_VersionInfo { get; private set; }
 
         /// <summary>
         /// The main entry point for the application.
@@ -44,6 +42,8 @@ namespace taskt
         [STAThread]
         static void Main(string[] args)
         {
+            App.UpdateLocationAndVersionInfo();
+
             // High DPI
             SetProcessDPIAware();
 
@@ -53,9 +53,6 @@ namespace taskt
             //exception handler
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
-
-            Taskt_Location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            Taskt_VersionInfo = FileVersionInfo.GetVersionInfo(Taskt_Location);
 
             //if the exe was passed a filename argument then run the script
             if (args.Length > 0)
@@ -94,7 +91,7 @@ namespace taskt
                 }
                 else
                 {
-                    MessageBox.Show("Strange parameters", Taskt_VersionInfo.ProductName);
+                    MessageBox.Show("Strange parameters", App.Taskt_VersionInfo.ProductName);
 
                     using (var eventLog = new EventLog("Application"))
                     {
@@ -106,6 +103,23 @@ namespace taskt
                     return;
                 }
 
+                // specify settings file
+                if (!string.IsNullOrEmpty(settingsFilePath))
+                {
+                    if (Path.IsPathRooted(settingsFilePath))
+                    {
+                        settingsFilePath = Path.Combine(Core.IO.Folders.GetSettingsFolderPath(), settingsFilePath);
+                    }
+                }
+
+                // load settings file
+                if (!UpdateSettingsProcess(settingsFilePath))
+                {
+                    Application.Exit();
+                    return;
+                }
+                
+                // script file
                 string checkFilePath = scriptFilePath.StartsWith("*") ? scriptFilePath.Substring(1) : scriptFilePath;
                 if (!Path.IsPathRooted(checkFilePath))
                 {
@@ -114,7 +128,7 @@ namespace taskt
 
                 if (!File.Exists(checkFilePath))
                 {
-                    MessageBox.Show($"taskt Script File does not exits.\r\nPath: {scriptFilePath}", Taskt_VersionInfo.ProductName);
+                    MessageBox.Show($"taskt Script File does not exits.\r\nPath: {scriptFilePath}", App.Taskt_VersionInfo.ProductName);
 
                     using (var eventLog = new EventLog("Application"))
                     {
@@ -156,6 +170,13 @@ namespace taskt
                     File.Delete(updaterExecutableDestination);
                 }
 
+                // load settings file
+                if (!UpdateSettingsProcess(""))
+                {
+                    Application.Exit();
+                    return;
+                }
+                
                 SplashForm = new UI.Forms.Splash.frmSplash();
                 SplashForm.Show();
 
@@ -166,13 +187,25 @@ namespace taskt
         }
 
         /// <summary>
+        /// Update settings file
+        /// </summary>
+        /// <param name="settingsFilePath"></param>
+        private static bool UpdateSettingsProcess(string settingsFilePath)
+        {
+            AllowChangeSettingsFilePathSwitch = true;
+            var result = App.UpdateSettings(settingsFilePath);
+            AllowChangeSettingsFilePathSwitch = false;
+            return result;
+        }
+
+        /// <summary>
         /// error!
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            MessageBox.Show($"An unhandled exception occured: {e.ExceptionObject as Exception}", Taskt_VersionInfo.ProductName);
+            MessageBox.Show($"An unhandled exception occured: {e.ExceptionObject as Exception}", App.Taskt_VersionInfo.ProductName);
         }
 
         /// <summary>

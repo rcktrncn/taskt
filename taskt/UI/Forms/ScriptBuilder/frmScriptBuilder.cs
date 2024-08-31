@@ -179,7 +179,8 @@ namespace taskt.UI.Forms.ScriptBuilder
             //get app settings
             //appSettings = new Core.ApplicationSettings();
             //appSettings = appSettings.GetOrCreateApplicationSettings();
-            appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
+            //appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
+            appSettings = App.Taskt_Settings;
 
             if (appSettings.ServerSettings.ServerConnectionEnabled && appSettings.ServerSettings.HTTPGuid == Guid.Empty)
             {              
@@ -353,7 +354,12 @@ namespace taskt.UI.Forms.ScriptBuilder
             if ((this.WindowState == FormWindowState.Minimized) && (appSettings.ClientSettings.MinimizeToTray))
             {
                 //appSettings = new Core.ApplicationSettings().GetOrCreateApplicationSettings();
-                appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
+                //appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
+                if (appSettings == null)
+                {
+                    appSettings = App.Taskt_Settings;
+                }
+
                 if (appSettings.ClientSettings.MinimizeToTray)
                 {
                     notifyTray.Visible = true;
@@ -437,12 +443,14 @@ namespace taskt.UI.Forms.ScriptBuilder
                         break;
                     }
 
-                    LinkLabel newFileLink = new LinkLabel();
-                    newFileLink.Text = fil;
-                    newFileLink.AutoSize = true;
-                    newFileLink.LinkColor = Color.AliceBlue;
-                    newFileLink.Font = lnkGitIssue.Font;
-                    newFileLink.Margin = new Padding(0, 0, 0, 0);
+                    LinkLabel newFileLink = new LinkLabel
+                    {
+                        Text = fil,
+                        AutoSize = true,
+                        LinkColor = Color.AliceBlue,
+                        Font = lnkGitIssue.Font,
+                        Margin = new Padding(0, 0, 0, 0)
+                    };
                     newFileLink.LinkClicked += NewFileLink_LinkClicked;
                     flwRecentFiles.Controls.Add(newFileLink);
                 }
@@ -3481,7 +3489,7 @@ namespace taskt.UI.Forms.ScriptBuilder
                 //reload app settings
                 //appSettings = new Core.ApplicationSettings();
                 //appSettings = appSettings.GetOrCreateApplicationSettings();
-                appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
+                appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings(App.Taskt_Settings_File_Path);
 
                 //reinit
                 Core.Server.HttpServerClient.Initialize();
@@ -3496,7 +3504,7 @@ namespace taskt.UI.Forms.ScriptBuilder
                 //reload app settings
                 //appSettings = new Core.ApplicationSettings();
                 //appSettings = appSettings.GetOrCreateApplicationSettings();
-                appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings();
+                appSettings = Core.ApplicationSettings.GetOrCreateApplicationSettings(App.Taskt_Settings_File_Path);
 
                 //reinit
                 Core.Server.HttpServerClient.Initialize();
