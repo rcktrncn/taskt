@@ -325,6 +325,11 @@
     <Compile Include="Core\ApplicationSettings\ClientSettings.cs" />
     <Compile Include="Core\ApplicationSettings\EngineSettings.cs" />
     <Compile Include="Core\ApplicationSettings\LocalListenerSettings.cs" />
+    <Compile Include="Core\ApplicationSettings\SafeApplicationSettings.cs" />
+    <Compile Include="Core\ApplicationSettings\SafeClientSettings.cs" />
+    <Compile Include="Core\ApplicationSettings\SafeEngineSettings.cs" />
+    <Compile Include="Core\ApplicationSettings\SafeServerSettings.cs" />
+    <Compile Include="Core\ApplicationSettings\SefeLocalListenerSettings.cs" />
     <Compile Include="Core\ApplicationSettings\ServerSettings.cs" />
     <Compile Include="Core\ApplicationSettings\WhiteListIP.cs" />
     <Compile Include="Core\Automation\Commands\ApplicationScriptFile\RunJavaScriptFileCommand.cs" />
