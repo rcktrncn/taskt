@@ -22,9 +22,16 @@ namespace taskt
         /// </summary>
         public static string Taskt_Settings_File_Path { get; private set; }
         /// <summary>
+        /// UNSAFE application settings
+        /// </summary>
+        // TODO: hidden in feature
+        public static ApplicationSettings Taskt_UNSAFE_Settings { get; set; }
+
+        /// <summary>
         /// application settings
         /// </summary>
-        public static ApplicationSettings Taskt_Settings { get; set; }
+        public static SafeApplicationSettings Taskt_Settings { get; set; }
+
 
         /// <summary>
         /// update location, version info
@@ -59,7 +66,8 @@ namespace taskt
             try
             {
                 // when the settings file does not exists, create the file automatically
-                Taskt_Settings = ApplicationSettings.GetOrCreateApplicationSettings(Taskt_Settings_File_Path);
+                Taskt_UNSAFE_Settings = ApplicationSettings.GetOrCreateApplicationSettings(Taskt_Settings_File_Path);
+                Taskt_Settings = new SafeApplicationSettings(Taskt_UNSAFE_Settings);
                 return true;
             }
             catch
