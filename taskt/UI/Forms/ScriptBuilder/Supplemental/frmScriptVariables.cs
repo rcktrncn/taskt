@@ -44,6 +44,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             this.scriptVariables = variables;
             this.appSettings = appSettings;
         }
+
         private void frmScriptVariables_Load(object sender, EventArgs e)
         {
             ImageList tvVariablesImageList = new ImageList();
@@ -53,34 +54,13 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             tvVariablesImageList.Images.Add(Properties.Resources.taskt_variable_helper);
             tvScriptVariables.ImageList = tvVariablesImageList;
 
-            ////initialize
-            // bufferedUserVariableParentNode = InitializeNodes(User_Variable_Text, scriptVariables);
-            // InitializeNodes(Taskt_Variable_Text, Core.Common.GenerateSystemVariables());
+            //initialize
             InitializeNodes();
         }
 
         // create variables TreeNode
         private void InitializeNodes()
         {
-            ////create a root node (parent)
-            //TreeNode parentNode = new TreeNode(parentName);
-
-            ////add each item to parent
-            //foreach (var item in variables)
-            //{
-            //    AddUserVariableNode(parentNode, item.VariableName, (string)item.VariableValue);
-            //}
-
-            //tvScriptVariables.BeginUpdate();
-            ////add parent to treeview
-            //tvScriptVariables.Nodes.Add(parentNode);
-            //tvScriptVariables.Sort();
-            //ExpandUserVariableNode();
-            //tvScriptVariables.EndUpdate();
-
-            ////return parent and utilize if needed
-            //return parentNode;
-
             // System Variables
             bufferedSystemVariableParentNode.Nodes.Clear();
             bufferedSystemVariableParentNode.Text = System_Variables_Text;
@@ -99,13 +79,6 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 AddUserVariableNode(bufferedUserVariableParentNode, item.VariableName, (string)item.VariableValue);
             }
 
-            //tvScriptVariables.BeginUpdate();
-            //tvScriptVariables.Nodes.Clear();
-            //tvScriptVariables.Nodes.Add((TreeNode)bufferedSystemVariableParentNode.Clone());
-            //tvScriptVariables.Nodes.Add((TreeNode)bufferedUserVariableParentNode.Clone());
-            //tvScriptVariables.Nodes[1].ExpandAll();
-            //tvScriptVariables.Sort();
-            //tvScriptVariables.EndUpdate();
             showAllVariables();
         }
 
@@ -118,16 +91,6 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             //remove all variables
             scriptVariables.Clear();
 
-            //loop each variable and add
-            //for (int i = 0; i < userVariableParentNode.Nodes.Count; i++)
-            //{
-            //    //get name and value
-            //    var VariableName = userVariableParentNode.Nodes[i].Text;
-            //    var VariableValue = userVariableParentNode.Nodes[i].Nodes[0].Text.Replace(leadingValue, "").Replace(emptyValue, "");
-
-            //    //add to list
-            //    scriptVariables.Add(new Core.Script.ScriptVariable() { VariableName = VariableName, VariableValue = VariableValue });
-            //}
             foreach(TreeNode targetVariable in bufferedUserVariableParentNode.Nodes)
             {
                 var variableName = targetVariable.Text;
@@ -151,42 +114,6 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
         private void uiBtnNew_Click(object sender, EventArgs e)
         {
-            ////create variable editing form
-            //using (Supplement_Forms.frmAddVariable addVariableForm = new Supplement_Forms.frmAddVariable())
-            //{
-            //    addVariableForm.appSettings = this.appSettings;
-            //    ExpandUserVariableNode();
-
-            //    //validate if user added variable
-            //    if (addVariableForm.ShowDialog() == DialogResult.OK)
-            //    {
-            //        string newVariable = addVariableForm.txtVariableName.Text.Trim();
-            //        if (checkVariableNameIsValid(newVariable))
-            //        {
-            //            if (!isVariableExists(newVariable))
-            //            {
-            //                //add newly edited node
-            //                AddUserVariableNode(userVariableParentNode, newVariable, addVariableForm.txtDefaultValue.Text);
-            //            }
-            //            else
-            //            {
-            //                //MessageBox.Show("'" + newVaiable + "' is already exists.", "Variable Error");
-            //                using (var fm = new Forms.Supplemental.frmDialog("'" + newVariable + "' is already exists.", "Variable Error",Supplemental.frmDialog.DialogType.OkOnly, 0))
-            //                {
-            //                    fm.ShowDialog();
-            //                }
-            //            }
-            //        }
-            //        else
-            //        {
-            //            //MessageBox.Show("'" + newVaiable + "' contains bad character(ex. { } [ ] + - * /)." + Environment.NewLine + "Or equals reserved keyword.", "Variable Error");
-            //            using (var fm = new Forms.Supplemental.frmDialog("'" + newVariable + "' contains bad character(ex. { } [ ] + - * /)." + Environment.NewLine + "Or equals reserved keyword.", "Variable Error", Supplemental.frmDialog.DialogType.OkOnly, 0))
-            //            {
-            //                fm.ShowDialog();
-            //            }
-            //        }
-            //    }
-            //}
             AddOrEditVaiableProcess(null);
         }
 
@@ -211,9 +138,6 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             //create variable editing form
             using (addVariableForm)
             {
-                //addVariableForm.appSettings = this.appSettings;
-                //ExpandUserVariableNode();
-
                 //validate if user added variable
                 if (addVariableForm.ShowDialog() == DialogResult.OK)
                 {
@@ -255,8 +179,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                                     fm.ShowDialog();
                                 }
                             }
-                        }
-                        
+                        }   
                     }
                     else
                     {
@@ -269,9 +192,9 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             }
             tvScriptVariables.Nodes[1].ExpandAll();
             tvScriptVariables.Sort();
-            //ExpandUserVariableNode();
             tvScriptVariables.EndUpdate();
         }
+
         private void AddVariableProcess(string variableName)
         {
             variableName = variableName.Trim();
@@ -311,6 +234,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 }
             }
         }
+
         private void EditSelectedVariableProcess()
         {
             //handle double clicks outside
@@ -346,6 +270,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             }
             AddOrEditVaiableProcess(parentNode);
         }
+
         private void RemoveSelectedVariableProcess()
         {
             //determine which node is the parent
@@ -360,7 +285,6 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             }
 
             //remove parent node
-            //parentNode.Remove();
             RemoveUserVariableNode(tvScriptVariables.Nodes[1], parentNode.Text);
             RemoveUserVariableNode(bufferedUserVariableParentNode, parentNode.Text);
         }
@@ -369,100 +293,9 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         #region tvScriptVariables events
         private void tvScriptVariables_DoubleClick(object sender, EventArgs e)
         {
-            ////handle double clicks outside
-            //if (tvScriptVariables.SelectedNode == null)
-            //{
-            //    return;
-            //}
-
-            ////if parent was selected return
-            //if (tvScriptVariables.SelectedNode.Parent == null)
-            //{
-            //    //user selected top parent
-            //    return;
-            //}
-
-            ////top node check
-            //var topNode = GetSelectedTopNode();
-
-            //if (topNode.Text != "My Task Variables")
-            //{
-            //    return;
-            //}
-
-            ////string variableName, variableValue;
-            //TreeNode parentNode;
-            //if(tvScriptVariables.SelectedNode.Nodes.Count == 0)
-            //{
-            //    parentNode = tvScriptVariables.SelectedNode.Parent;
-            //    //variableName = tvScriptVariables.SelectedNode.Parent.Text;
-            //    //variableValue = tvScriptVariables.SelectedNode.Text.Replace(leadingValue, "").Replace(emptyValue, "");
-            //}
-            //else
-            //{
-            //    parentNode = tvScriptVariables.SelectedNode;
-            //    //variableName = tvScriptVariables.SelectedNode.Text;
-            //    //variableValue = tvScriptVariables.SelectedNode.Nodes[0].Text.Replace(leadingValue, "").Replace(emptyValue, "");
-            //}
-            ////variableName = parentNode.Text;
-            ////variableValue = parentNode.Nodes[0].Text.Replace(leadingValue, "").Replace(emptyValue, "");
-
-            //////create variable editing form
-            ////using (Supplement_Forms.frmAddVariable addVariableForm = new Supplement_Forms.frmAddVariable(variableName, variableValue))
-            ////{
-            ////    addVariableForm.appSettings = this.appSettings;
-            ////    ExpandUserVariableNode();
-
-            ////    //validate if user added variable
-            ////    if (addVariableForm.ShowDialog() == DialogResult.OK)
-            ////    {
-            ////        string newVariable = addVariableForm.txtVariableName.Text;
-            ////        if (variableName == newVariable)
-            ////        {
-            ////            // variable name don't change
-
-            ////            //remove parent
-            ////            parentNode.Remove();
-
-            ////            //add newly edited node
-            ////            AddUserVariableNode(userVariableParentNode, newVariable, addVariableForm.txtDefaultValue.Text);
-            ////        }
-            ////        else
-            ////        {
-            ////            // variable name changed
-            ////            if (checkVariableNameIsValid(newVariable))
-            ////            {
-            ////                if (!isVariableExists(newVariable))
-            ////                {
-            ////                    //remove parent
-            ////                    parentNode.Remove();
-
-            ////                    //add newly edited node
-            ////                    AddUserVariableNode(userVariableParentNode, newVariable, addVariableForm.txtDefaultValue.Text);
-            ////                }
-            ////                else
-            ////                {
-            ////                    //MessageBox.Show("'" + newVariable + "' is already exists.", "Variable Error");
-            ////                    using (var fm = new Forms.Supplemental.frmDialog("'" + newVariable + "' is already exists.", "Variable Error", Supplemental.frmDialog.DialogType.OkOnly, 0))
-            ////                    {
-            ////                        fm.ShowDialog();
-            ////                    }
-            ////                }
-            ////            }
-            ////            else
-            ////            {
-            ////                //MessageBox.Show("'" + newVariable + "' contains bad character(ex. { } [ ] + - * /)." + Environment.NewLine + "Or equals reserved keyword.", "Variable Error");
-            ////                using (var fm = new Forms.Supplemental.frmDialog("'" + newVariable + "' contains bad character(ex. { } [ ] + - * /)." + Environment.NewLine + "Or equals reserved keyword.", "Variable Error", Supplemental.frmDialog.DialogType.OkOnly, 0))
-            ////                {
-            ////                    fm.ShowDialog();
-            ////                }
-            ////            }
-            ////        }
-            ////    }
-            ////}
-            //AddOrEditVaiableProcess(parentNode);
             EditSelectedVariableProcess();
         }
+
         private void tvScriptVariables_KeyDown(object sender, KeyEventArgs e)
         {
             //handling outside
@@ -489,18 +322,6 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             //if user selected delete
             if (e.KeyCode == Keys.Delete)
             {
-                ////determine which node is the parent
-                //TreeNode parentNode;
-                //if (tvScriptVariables.SelectedNode.Nodes.Count == 0)
-                //{
-                //    parentNode = tvScriptVariables.SelectedNode.Parent;
-                //}
-                //else
-                //{
-                //    parentNode = tvScriptVariables.SelectedNode;
-                //}
-
-                ////remove parent node
                 //parentNode.Remove();
                 RemoveSelectedVariableProcess();
             }
@@ -510,6 +331,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 EditSelectedVariableProcess();
             }
         }
+
         private void tvScriptVariables_MouseClick(object sender, MouseEventArgs e)
         {
             if (tvScriptVariables.SelectedNode == null)
@@ -519,10 +341,6 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             TreeNode topNode = GetSelectedTopNode();
             if (e.Button == MouseButtons.Right)
             {
-                //if (tvScriptVariables.Parent != null)
-                //{
-                //    addToolStripMenuItem.Visible = false;
-                //}
                 if (topNode.Text == User_Variables_Text)
                 {
                     if (tvScriptVariables.SelectedNode.Text == User_Variables_Text)
@@ -562,6 +380,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 }
             }
         }
+
         private void tvScriptVariables_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Node == null)
@@ -573,6 +392,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 tvScriptVariables.SelectedNode = e.Node;
             }
         }
+
         private TreeNode GetSelectedTopNode()
         {
             TreeNode node = tvScriptVariables.SelectedNode;
@@ -582,6 +402,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             }
             return node;
         }
+
         private bool GetVariableNameAndValue(TreeNode tn, out string variableName, out string variableValue)
         {
             if (tn.Nodes.Count > 0)
@@ -605,10 +426,12 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             EditSelectedVariableProcess();
         }
 
+
         private void removeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RemoveSelectedVariableProcess();
         }
+
         private void clearFilterEditVariableContextMenuStrip_Click(object sender, EventArgs e)
         {
             showAllVariables();
@@ -620,6 +443,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             AddOrEditVaiableProcess(null);
         }
+
         private void expandToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tvScriptVariables.BeginUpdate();
@@ -633,6 +457,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             tvScriptVariables.SelectedNode.Collapse();
             tvScriptVariables.EndUpdate();
         }
+
         private void clearFilterRootVariableContextMenuStrip_Click(object sender, EventArgs e)
         {
             showAllVariables();
@@ -652,9 +477,8 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
             childNode.Nodes.Add(new TreeNode(leadingValue + variableText, 2, 2));
             parentNode.Nodes.Add(childNode);
-            //tvScriptVariables.Sort();
-            //ExpandUserVariableNode();
         }
+
         private void RemoveUserVariableNode(TreeNode parentNode, string VariableName)
         {
             foreach (TreeNode item in parentNode.Nodes)
@@ -669,25 +493,11 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
         private void ExpandUserVariableNode()
         {
-            //if (bufferedUserVariableParentNode != null)
-            //{
-            //    bufferedUserVariableParentNode.ExpandAll();
-            //}
             tvScriptVariables.Nodes[1].ExpandAll();
         }
 
         private bool isVariableExists(string variableName)
         {
-            //foreach(TreeNode parentNode in tvScriptVariables.Nodes)
-            //{
-            //    foreach(TreeNode child in parentNode.Nodes)
-            //    {
-            //        if (variableName == child.Text)
-            //        {
-            //            return true;
-            //        }
-            //    }
-            //}
             foreach(TreeNode item in bufferedSystemVariableParentNode.Nodes)
             {
                 if (item.Text == variableName)
@@ -707,27 +517,6 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
         private bool checkVariableNameIsValid(string variableName)
         {
-            //var disallowChars = appSettings.EngineSettings.DisallowVariableCharList();
-            //foreach(string k in disallowChars)
-            //{
-            //    if (variableName.Contains(k))
-            //    {
-            //        return false;
-            //    }
-            //}
-
-            //var keyNames = appSettings.EngineSettings.KeyNameList();
-            //var upperVarName = variableName.ToUpper();
-            //foreach(string k in keyNames)
-            //{
-            //    if (upperVarName == k)
-            //    {
-            //        return false;
-            //    }
-            //}
-            //return true;
-            //return appSettings.EngineSettings.isValidVariableName(variableName);
-
             return VariableNameControls.IsValidVariableName(variableName);
         }
         #endregion
@@ -762,15 +551,17 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             BeginFilterVariablesProcess();
         }
+
         private void picClear_Click(object sender, EventArgs e)
         {
-            //txtSearchBox.Text = "";
             showAllVariables();
         }
+
         private void picAdd_Click(object sender, EventArgs e)
         {
             AddVariableProcess(txtSearchBox.Text);
         }
+
         private void txtSearchBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -780,6 +571,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 BeginFilterVariablesProcess();
             }
         }
+
         private void BeginFilterVariablesProcess()
         {
             string keyword = txtSearchBox.Text.ToLower().Trim();
@@ -832,6 +624,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             clearFilterEditVariableContextMenuStrip.Enabled = true;
             clearFilterRootVariableContextMenuStrip.Enabled = true;
         }
+
         private void showAllVariables()
         {
             txtSearchBox.Text = "";
@@ -848,6 +641,5 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             clearFilterRootVariableContextMenuStrip.Enabled = false;
         }
         #endregion
-
     }
 }
