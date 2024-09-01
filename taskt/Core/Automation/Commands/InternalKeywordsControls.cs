@@ -33,7 +33,7 @@
         /// <param name="txt"></param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        public static string ReplaceKeywordsToInstanceName(string txt, ApplicationSettings settings)
+        public static string ReplaceKeywordsToInstanceName(string txt, IApplicationSettings settings)
         {
             return txt.Replace(INTERNAL_DEFAULT_WEBBROWSER_INSTANCE_NAME_KEYWORD, settings.ClientSettings.DefaultBrowserInstanceName)
                     .Replace(INTERNAL_DEFAULT_STOPWATCH_INSTANCE_NAME_KEYWORD, settings.ClientSettings.DefaultStopWatchInstanceName)
@@ -63,7 +63,7 @@
         /// <param name="txt"></param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        public static string ReplaceKeywordsToSystemVariableAndInstanceName(string txt, ApplicationSettings settings)
+        public static string ReplaceKeywordsToSystemVariableAndInstanceName(string txt, IApplicationSettings settings)
         {
             txt = ReplaceKeywordsToInstanceName(txt, settings);
             txt = VariableNameControls.ReplaceKeywordsToSystemVariable(txt, settings);

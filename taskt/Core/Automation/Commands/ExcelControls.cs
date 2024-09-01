@@ -345,7 +345,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="txt"></param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        public static string ReplaceKeywordsToSystemVariable(string txt, ApplicationSettings settings)
+        public static string ReplaceKeywordsToSystemVariable(string txt, IApplicationSettings settings)
         {
             return txt.Replace(INTERNAL_EXCEL_CURRENT_WORKSHEET_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Excel_CurrentWorkSheet.VariableName, settings))
                         .Replace(INTERNAL_EXCEL_NEXT_WORKSHEET_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Excel_NextWorkSheet.VariableName, settings))

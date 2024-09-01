@@ -1380,7 +1380,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="txt"></param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        public static string ReplaceKeywordsToSystemVariable(string txt, ApplicationSettings settings)
+        public static string ReplaceKeywordsToSystemVariable(string txt, IApplicationSettings settings)
         {
             return txt.Replace(INTERNAL_CURRENT_WINDOW_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentWindowName.VariableName, settings))
                         .Replace(INTERNAL_ALL_WINDOWS_KEYWORD, VariableNameControls.GetWrappedVariableName(SystemVariables.Window_AllWindows.VariableName, settings))

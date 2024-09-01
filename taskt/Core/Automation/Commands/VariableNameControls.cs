@@ -155,7 +155,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="name">name is not converted</param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        public static bool IsWrappedVariableMarker(string name, ApplicationSettings settings)
+        public static bool IsWrappedVariableMarker(string name, IApplicationSettings settings)
         {
             return IsWrappedVariableMarker(name, settings.EngineSettings);
         }
@@ -166,7 +166,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="name">name is not converted</param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        private static bool IsWrappedVariableMarker(string name, EngineSettings settings)
+        private static bool IsWrappedVariableMarker(string name, IEngineSettings settings)
         {
             return (name.StartsWith(settings.VariableStartMarker) && name.EndsWith(settings.VariableEndMarker));
         }
@@ -195,7 +195,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="name">name is not converted</param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        public static string GetWrappedVariableName(string name, ApplicationSettings settings)
+        public static string GetWrappedVariableName(string name, IApplicationSettings settings)
         {
             if (IsWrappedVariableMarker(name, settings))
             {
@@ -213,7 +213,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="name">name is not converted</param>
         /// <param name="settings"></param>
         /// <returns></returns>
-        private static string GetWrappedVariableName(string name, EngineSettings settings)
+        private static string GetWrappedVariableName(string name, IEngineSettings settings)
         {
             return settings.VariableStartMarker + name + settings.VariableEndMarker;
         }
@@ -279,7 +279,7 @@ namespace taskt.Core.Automation.Commands
                         .Replace(INTERNAL_VARIABLE_END_MARKER_KEYWORD, engine.engineSettings.VariableEndMarker);
         }
 
-        public static string ReplaceKeywordsToSystemVariable(string txt, ApplicationSettings settings)
+        public static string ReplaceKeywordsToSystemVariable(string txt, IApplicationSettings settings)
         {
             return txt.Replace(INTERNAL_VARIABLE_START_MARKER_KEYWORD, settings.EngineSettings.VariableStartMarker)
                         .Replace(INTERNAL_VARIABLE_END_MARKER_KEYWORD, settings.EngineSettings.VariableEndMarker);
