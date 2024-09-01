@@ -19,7 +19,7 @@ namespace taskt.Core.Server
         public static Automation.Engine.AutomationEngineInstance ExecuteCommandEngine;
         private static Serilog.Core.Logger automationLogger;
         public static TcpListener automationListener;
-        private static LocalListenerSettings listenerSettings;
+        private static ILocalListenerSettings listenerSettings;
         public static UI.Forms.ScriptBuilder.frmScriptBuilder associatedBuilder;
         public static int Port;
         public static bool IsListening { get; set; }
