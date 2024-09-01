@@ -34,7 +34,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**{WIN_KEY+R}**", "Specify **Windows Key** and **R** for Enter Keys")]
         [Remarks("")]
         [PropertyShowSampleUsageInDescription(true)]
-        [PropertyIntermediateConvert(nameof(ApplicationSettings.EngineSettings.convertToIntermediateVariableParser), "")]
+        [PropertyIntermediateConvert(nameof(IntermediateControls.ConvertToIntermediate_CheckedVariableMarker), "")]
         [PropertyDisplayText(true, "Text")]
         public string v_TextToSend { get; set; }
 

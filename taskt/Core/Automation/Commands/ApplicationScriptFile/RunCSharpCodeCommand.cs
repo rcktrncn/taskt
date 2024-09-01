@@ -26,7 +26,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyCustomUIHelper("Show Code Builder", nameof(lnkShowCodeBuilderLink_Clicked))]
         [PropertyValidationRule("C# Code", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(false, "")]
-        [PropertyIntermediateConvert(nameof(ApplicationSettings.EngineSettings.convertToIntermediate), "")]
+        [PropertyIntermediateConvert(nameof(IntermediateControls.ConvertToIntermediate_CheckedVariableMarker), "")]
         public string v_Code { get; set; }
 
         [XmlAttribute]
