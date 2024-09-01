@@ -13,25 +13,27 @@ namespace taskt
         /// taskt location
         /// </summary>
         public static string Taskt_Location { get; private set; }
+
         /// <summary>
         /// taskt version info
         /// </summary>
         public static FileVersionInfo Taskt_VersionInfo { get; private set; }
+
         /// <summary>
         /// taskt settings file path
         /// </summary>
         public static string Taskt_Settings_File_Path { get; private set; }
+
         /// <summary>
         /// UNSAFE application settings
         /// </summary>
         // TODO: hidden in feature
-        public static ApplicationSettings Taskt_UNSAFE_Settings { get; set; }
+        public static ApplicationSettings Taskt_UNSAFE_Settings { get; private set; }
 
         /// <summary>
         /// application settings
         /// </summary>
-        public static SafeApplicationSettings Taskt_Settings { get; set; }
-
+        public static SafeApplicationSettings Taskt_Settings { get; private set; }
 
         /// <summary>
         /// update location, version info
