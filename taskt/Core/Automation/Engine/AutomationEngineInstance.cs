@@ -35,8 +35,8 @@ namespace taskt.Core.Automation.Engine
         public UI.Forms.ScriptEngine.frmScriptEngine tasktEngineUI { get; set; }
         private System.Diagnostics.Stopwatch sw { get; set; }
         public EngineStatus CurrentStatus { get; set; }
-        public EngineSettings engineSettings { get; set; }
-        public ServerSettings serverSettings { get; set; }
+        public IEngineSettings engineSettings { get; set; }
+        public IServerSettings serverSettings { get; set; }
         public List<DataTable> DataTables { get; set; }
         public string FileName { get; set; }
         public Task taskModel { get; set; }
