@@ -87,24 +87,24 @@ namespace taskt.Core
         }
 
         // todo: move these methods to other file
-        public string convertToIntermediate(string targetString)
-        {
-            return targetString.Replace(this.VariableStartMarker, "\u2983")
-                    .Replace(this.VariableEndMarker, "\u2984");
-        }
+        //public string convertToIntermediate(string targetString)
+        //{
+        //    return targetString.Replace(this.VariableStartMarker, "\u2983")
+        //            .Replace(this.VariableEndMarker, "\u2984");
+        //}
 
-        public string convertToRaw(string targetString)
-        {
-            return targetString.Replace("\u2983", this.VariableStartMarker)
-                    .Replace("\u2984", this.VariableEndMarker);
-        }
+        //public string convertToRaw(string targetString)
+        //{
+        //    return targetString.Replace("\u2983", this.VariableStartMarker)
+        //            .Replace("\u2984", this.VariableEndMarker);
+        //}
 
-        public string convertToIntermediateVariableParser(string targetString, List<Core.Script.ScriptVariable> variables)
-        {
-            Core.Automation.Engine.AutomationEngineInstance engine = new Automation.Engine.AutomationEngineInstance(false);
-            engine.engineSettings = this;
-            engine.VariableList = variables;
-            return ExtensionMethods.ConvertUserVariableToIntermediateNotation(targetString, engine);
-        }
+        //public string convertToIntermediateVariableParser(string targetString, List<Core.Script.ScriptVariable> variables)
+        //{
+        //    Core.Automation.Engine.AutomationEngineInstance engine = new Automation.Engine.AutomationEngineInstance(false);
+        //    engine.engineSettings = this;
+        //    engine.VariableList = variables;
+        //    return ExtensionMethods.ConvertUserVariableToIntermediateNotation(targetString, engine);
+        //}
     }
 }
