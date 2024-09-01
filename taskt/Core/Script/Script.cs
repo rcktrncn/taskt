@@ -60,7 +60,7 @@ namespace taskt.Core.Script
         /// <summary>
         /// Converts and serializes the user-defined commands into an XML file  
         /// </summary>
-        public static Script SerializeScript(ListView.ListViewItemCollection scriptCommands, List<ScriptVariable> scriptVariables, ScriptInformation info, EngineSettings engineSettings, XmlSerializer serializer = null, string scriptFilePath = "")
+        public static Script SerializeScript(ListView.ListViewItemCollection scriptCommands, List<ScriptVariable> scriptVariables, ScriptInformation info, IEngineSettings engineSettings, XmlSerializer serializer = null, string scriptFilePath = "")
         {
             var script = new Script
             {
