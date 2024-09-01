@@ -36,7 +36,7 @@ namespace taskt.Core.Script
             return newExecutionCommand;
         }
 
-        public void ConvertToIntermediate(EngineSettings settings, List<ScriptVariable> variables)
+        public void ConvertToIntermediate(IEngineSettings settings, List<ScriptVariable> variables)
         {
             ScriptCommand.ConvertToIntermediate(settings, variables);
             if (AdditionalScriptCommands != null && AdditionalScriptCommands.Count > 0)
@@ -48,7 +48,7 @@ namespace taskt.Core.Script
             }
         }
 
-        public void ConvertToRaw(EngineSettings settings)
+        public void ConvertToRaw(IEngineSettings settings)
         {
             ScriptCommand.ConvertToRaw(settings);
             if (AdditionalScriptCommands != null && AdditionalScriptCommands.Count > 0)

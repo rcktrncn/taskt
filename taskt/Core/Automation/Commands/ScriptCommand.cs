@@ -204,7 +204,7 @@ namespace taskt.Core.Automation.Commands
         /// </summary>
         /// <param name="settings"></param>
         /// <param name="variables"></param>
-        public virtual void ConvertToIntermediate(EngineSettings settings, List<Script.ScriptVariable> variables)
+        public virtual void ConvertToIntermediate(IEngineSettings settings, List<Script.ScriptVariable> variables)
         {
             //IntermediateControls.ConvertToIntermediate(this, settings, variables);
             var convertMethods = new Dictionary<string, string>();
@@ -236,7 +236,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="settings"></param>
         /// <param name="convertMethods"></param>
         /// <param name="variables"></param>
-        public void ConvertToIntermediate(EngineSettings settings, Dictionary<string, string> convertMethods, List<Script.ScriptVariable> variables)
+        public void ConvertToIntermediate(IEngineSettings settings, Dictionary<string, string> convertMethods, List<Script.ScriptVariable> variables)
         {
             IntermediateControls.ConvertToIntermediate(this, settings, convertMethods, variables);
         }
@@ -245,7 +245,7 @@ namespace taskt.Core.Automation.Commands
         /// convert to raw script. this method use default convert method.
         /// </summary>
         /// <param name="settings"></param>
-        public virtual void ConvertToRaw(EngineSettings settings)
+        public virtual void ConvertToRaw(IEngineSettings settings)
         {
             //IntermediateControls.ConvertToRaw(this, settings);
             var convertMethods = new Dictionary<string, string>();
@@ -276,7 +276,7 @@ namespace taskt.Core.Automation.Commands
         /// </summary>
         /// <param name="settings"></param>
         /// <param name="convertMethods"></param>
-        public void ConvertToRaw(EngineSettings settings, Dictionary<string, string> convertMethods)
+        public void ConvertToRaw(IEngineSettings settings, Dictionary<string, string> convertMethods)
         {
             IntermediateControls.ConvertToRaw(this, settings, convertMethods);
         }

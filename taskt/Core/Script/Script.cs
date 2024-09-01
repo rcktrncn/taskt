@@ -167,7 +167,7 @@ namespace taskt.Core.Script
         /// <summary>
         /// Deserializes a valid XML file back into user-defined commands
         /// </summary>
-        public static Script DeserializeFile(string scriptFilePath, EngineSettings engineSettings, XmlSerializer serializer = null)
+        public static Script DeserializeFile(string scriptFilePath, IEngineSettings engineSettings, XmlSerializer serializer = null)
         {
             // backup before converted
             var fileName = $"bc-{Path.GetFileNameWithoutExtension(scriptFilePath)}-{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.xml";
@@ -359,7 +359,7 @@ namespace taskt.Core.Script
         /// </summary>
         /// <param name="doc"></param>
         /// <returns></returns>
-        private static XDocument convertOldScript(XDocument doc, EngineSettings engine)
+        private static XDocument convertOldScript(XDocument doc, IEngineSettings engine)
         {
             // very important!
             // ** DO NOT USE nameof to change command name **
@@ -1949,7 +1949,7 @@ namespace taskt.Core.Script
             ChangeAttributeName(doc, "GetWindowStateFromWindowHandleCommand", "v_Result", "v_WindowState");
         }
 
-        private static void convertTo3_5_1_75(XDocument doc, EngineSettings engine)
+        private static void convertTo3_5_1_75(XDocument doc, IEngineSettings engine)
         {
             //string oldKW;
             //string newKW;
@@ -2025,7 +2025,7 @@ namespace taskt.Core.Script
             ChangeAttributeName(doc, "TakeScreenshotCommand", "v_ScreenshotWindowName", "v_WindowName");
         }
 
-        private static void convertTo3_5_1_77(XDocument doc, EngineSettings engine)
+        private static void convertTo3_5_1_77(XDocument doc, IEngineSettings engine)
         {
             //var oldKW = IntermediateControls.GetWrappedIntermediateKeyword("%kwd_current_window%");
             //var newKW = IntermediateControls.GetWrappedIntermediateVariable(SystemVariables.Window_CurrentWindowName.VariableName);
@@ -2174,7 +2174,7 @@ namespace taskt.Core.Script
             );
         }
 
-        private static void convertTo3_5_1_79(XDocument doc, EngineSettings engine)
+        private static void convertTo3_5_1_79(XDocument doc, IEngineSettings engine)
         {
             // change v_XPosition, v_YPosition keyword
             //var oldPosition = IntermediateControls.GetWrappedIntermediateKeyword("%kwd_current_position%");
@@ -2282,7 +2282,7 @@ namespace taskt.Core.Script
             );
         }
 
-        private static void convertTo3_5_1_81(XDocument doc, EngineSettings engine)
+        private static void convertTo3_5_1_81(XDocument doc, IEngineSettings engine)
         {
             //var oldCurrent = IntermediateControls.GetWrappedIntermediateKeyword("%kwd_current_worksheet%");
             //var newCurrent = IntermediateControls.GetWrappedIntermediateVariable(SystemVariables.Excel_CurrentWorkSheet.VariableName);
@@ -3404,7 +3404,7 @@ namespace taskt.Core.Script
         /// </summary>
         /// <param name="engine"></param>
         /// <returns></returns>
-        private static (string oldKeyword, string newKeyword) GetOldNewCurrentWindow(EngineSettings engine)
+        private static (string oldKeyword, string newKeyword) GetOldNewCurrentWindow(IEngineSettings engine)
         {
             return GetOldNewKeyword("%kwd_current_window%", engine.CurrentWindowKeyword, SystemVariables.Window_CurrentWindowName, engine);
         }
@@ -3417,7 +3417,7 @@ namespace taskt.Core.Script
         /// <param name="systemVariable"></param>
         /// <param name="engine"></param>
         /// <returns></returns>
-        private static (string oldKeyword, string newKeyword) GetOldNewKeyword(string intermediateKeyword, string rawKeyword, ScriptVariable systemVariable, EngineSettings engine)
+        private static (string oldKeyword, string newKeyword) GetOldNewKeyword(string intermediateKeyword, string rawKeyword, ScriptVariable systemVariable, IEngineSettings engine)
         {
             string oldKW;
             string newKW;
