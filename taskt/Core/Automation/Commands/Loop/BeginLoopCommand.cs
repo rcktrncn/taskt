@@ -471,7 +471,7 @@ namespace taskt.Core.Automation.Commands
             return this.IsValid;
         }
 
-        public override void ConvertToIntermediate(EngineSettings settings, List<Core.Script.ScriptVariable> variables)
+        public override void ConvertToIntermediate(IEngineSettings settings, List<Core.Script.ScriptVariable> variables)
         {
             if (this.v_LoopActionType == "GUI Element Exists")
             {
@@ -485,7 +485,7 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
-        public override void ConvertToRaw(EngineSettings settings)
+        public override void ConvertToRaw(IEngineSettings settings)
         {
             if (this.v_LoopActionType == "GUI Element Exists")
             {
