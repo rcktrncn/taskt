@@ -3,7 +3,7 @@
     /// <summary>
     /// ClientSettings
     /// </summary>
-    public sealed class SafeClientSettings
+    public sealed class SafeClientSettings : IClientSettings
     {
         /// <summary>
         /// Client Settings for protect

@@ -3,7 +3,7 @@
     /// <summary>
     /// LocalListenerSettings
     /// </summary>
-    public sealed class SafeLocalListenerSettings
+    public sealed class SafeLocalListenerSettings: ILocalListenerSettings
     {
         /// <summary>
         /// LocalListenerSettings for protect

@@ -3,7 +3,7 @@
     /// <summary>
     /// EngineSettings
     /// </summary>
-    public sealed class SafeEngineSettings
+    public sealed class SafeEngineSettings : IEngineSettings
     {
         /// <summary>
         /// EngineSettings for protect

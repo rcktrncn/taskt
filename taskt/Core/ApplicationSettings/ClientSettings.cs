@@ -7,7 +7,7 @@ namespace taskt.Core
     /// Defines application/client-level settings which can be managed by the user
     /// </summary>
     [Serializable]
-    public sealed class ClientSettings
+    public sealed class ClientSettings : IClientSettings
     {
         public bool AntiIdleWhileOpen { get; set; }
         public string RootFolder { get; set; }

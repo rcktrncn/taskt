@@ -9,13 +9,13 @@ namespace taskt.Core
     /// Defines settings for the entire application
     /// </summary>
     [Serializable]
-    public sealed class ApplicationSettings
+    public sealed class ApplicationSettings : IApplicationSettings
     {
         #region xml properties
-        public ServerSettings ServerSettings { get; set; } = new ServerSettings();
-        public EngineSettings EngineSettings { get; set; } = new EngineSettings();
-        public ClientSettings ClientSettings { get; set; } = new ClientSettings();
-        public LocalListenerSettings ListenerSettings { get; set; } = new LocalListenerSettings();
+        public IServerSettings ServerSettings { get; set; } = new ServerSettings();
+        public IEngineSettings EngineSettings { get; set; } = new EngineSettings();
+        public IClientSettings ClientSettings { get; set; } = new ClientSettings();
+        public ILocalListenerSettings ListenerSettings { get; set; } = new LocalListenerSettings();
         #endregion
 
         public ApplicationSettings()
@@ -178,6 +178,42 @@ namespace taskt.Core
                 }
             }
             return appSettings;
+        }
+
+        /// <summary>
+        /// get ClientSettings as (typeof)ClientSettings
+        /// </summary>
+        /// <returns></returns>
+        public ClientSettings GetClientSettings()
+        {
+            return (ClientSettings)ClientSettings;
+        }
+
+        /// <summary>
+        /// get EngineSettings as (typeof)EngineSettings
+        /// </summary>
+        /// <returns></returns>
+        public EngineSettings GetEngineSettings()
+        {
+            return (EngineSettings)EngineSettings;
+        }
+
+        /// <summary>
+        /// get ServerSettings as (typeof)ServerSettings
+        /// </summary>
+        /// <returns></returns>
+        public ServerSettings GetServerSettings()
+        {
+            return (ServerSettings)ServerSettings;
+        }
+
+        /// <summary>
+        /// get LocalListenerSettings as (typeof)LocalListenerSettings
+        /// </summary>
+        /// <returns></returns>
+        public LocalListenerSettings GetLocalListenerSettings()
+        {
+            return (LocalListenerSettings)ListenerSettings;
         }
     }
 }

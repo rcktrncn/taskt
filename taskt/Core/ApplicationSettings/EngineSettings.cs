@@ -7,7 +7,7 @@ namespace taskt.Core
     /// Defines engine settings which can be managed by the user
     /// </summary>
     [Serializable]
-    public sealed class EngineSettings
+    public sealed class EngineSettings : IEngineSettings
     {
         public bool ShowDebugWindow { get; set; }
         public bool AutoCloseDebugWindow { get; set; }
