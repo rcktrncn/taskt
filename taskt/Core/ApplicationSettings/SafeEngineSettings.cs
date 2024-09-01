@@ -1,4 +1,6 @@
-﻿namespace taskt.Core
+﻿using System.ComponentModel;
+
+namespace taskt.Core
 {
     /// <summary>
     /// EngineSettings
@@ -130,6 +132,79 @@
                 engineSettings.AutoCalcVariables = value;
             }
         }
+
+        public string CurrentWindowKeyword
+        {
+            get
+            {
+                return engineSettings.CurrentWindowKeyword;
+            }
+        }
+
+        public string DesktopKeyword
+        {
+            get
+            {
+                return engineSettings.DesktopKeyword;
+            }
+        }
+
+        public string AllWindowsKeyword
+        {
+            get
+            {
+                return engineSettings.AllWindowsKeyword;
+            }
+        }
+
+        public string CurrentWindowPositionKeyword
+        {
+            get
+            {
+                return engineSettings.CurrentWindowPositionKeyword;
+            }
+        }
+
+        public string CurrentWindowXPositionKeyword
+        {
+            get
+            {
+                return engineSettings.CurrentWindowXPositionKeyword;
+            }
+        }
+
+        public string CurrentWindowYPositionKeyword
+        {
+            get
+            {
+                return engineSettings.CurrentWindowYPositionKeyword;
+            }
+        }
+
+        public string CurrentWorksheetKeyword
+        {
+            get
+            {
+                return engineSettings.CurrentWorksheetKeyword;
+            }
+        }
+
+        public string NextWorksheetKeyword
+        {
+            get
+            {
+                return engineSettings.NextWorksheetKeyword;
+            }
+        }
+
+        public string PreviousWorksheetKeyword
+        {
+            get
+            {
+                return engineSettings.PreviousWorksheetKeyword;
+            }
+        }
+
         public bool ExportIntermediateXML
         {
             get

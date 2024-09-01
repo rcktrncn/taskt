@@ -73,6 +73,51 @@
         bool AutoCalcVariables { get; set; }
 
         /// <summary>
+        /// Current Window Keyword (Not currently in use)
+        /// </summary>
+        string CurrentWindowKeyword { get; }
+
+        /// <summary>
+        /// Desktop Keyword (Not currently in use)
+        /// </summary>
+        string DesktopKeyword { get; }
+
+        /// <summary>
+        /// All Windows Keyword (Not currently in use)
+        /// </summary>
+        string AllWindowsKeyword { get; }
+
+        /// <summary>
+        /// Current Window Position Keyword (Not currently in use)
+        /// </summary>
+        string CurrentWindowPositionKeyword { get; }
+
+        /// <summary>
+        /// Current Window X Position Keyword (Not currently in use)
+        /// </summary>
+        string CurrentWindowXPositionKeyword { get; }
+
+        /// <summary>
+        /// Current Window Y Position Keyword (Not currently in use)
+        /// </summary>
+        string CurrentWindowYPositionKeyword { get; }
+
+        /// <summary>
+        /// Current Worksheet Keyword (Not currently in use)
+        /// </summary>
+        string CurrentWorksheetKeyword { get; }
+
+        /// <summary>
+        /// Next Worksheet Keyword (Not currently in use)
+        /// </summary>
+        string NextWorksheetKeyword { get; }
+
+        /// <summary>
+        /// Previous Worksheet Keyword (Not currently in use)
+        /// </summary>
+        string PreviousWorksheetKeyword { get; }
+
+        /// <summary>
         /// export intermediate script xml
         /// </summary>
         bool ExportIntermediateXML { get; }
