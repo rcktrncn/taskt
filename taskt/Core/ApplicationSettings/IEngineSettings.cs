@@ -48,9 +48,9 @@
         System.Windows.Forms.Keys CancellationKey { get; }
 
         /// <summary>
-        /// Delay between commands
+        /// Delay between commands, Value can be changed during script execution
         /// </summary>
-        int DelayBetweenCommands { get; }
+        int DelayBetweenCommands { get; set; }
 
         /// <summary>
         /// override existing app instances

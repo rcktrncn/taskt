@@ -99,6 +99,10 @@ namespace taskt.Core
             {
                 return engineSettings.DelayBetweenCommands;
             }
+            set
+            {
+                engineSettings.DelayBetweenCommands = value;
+            }
         }
         public bool OverrideExistingAppInstances
         {
