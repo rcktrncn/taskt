@@ -8,9 +8,13 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 {
     public partial class frmAddVariable : ThemedForm
     {
-        private Core.ApplicationSettings appSettings;
+        //private Core.ApplicationSettings appSettings;
+        private Core.SafeApplicationSettings appSettings;
+
         public frmAddVariablesEditMode editMode { get; }
+        
         public string VariableName { get; private set; }
+        
         public string VariableValue { get; private set; }
 
         public enum frmAddVariablesEditMode
@@ -19,14 +23,14 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             Edit
         }
 
-        public frmAddVariable(Core.ApplicationSettings appSettings)
+        public frmAddVariable()
         {
             InitializeComponent();
             this.editMode = frmAddVariablesEditMode.Add;
-            this.appSettings = appSettings;
+            this.appSettings = App.Taskt_Settings;
         }
 
-        public frmAddVariable(string VariableName, string variableValue, Core.ApplicationSettings appSettings)
+        public frmAddVariable(string VariableName, string variableValue)
         {
             InitializeComponent();
             this.Text = "edit variable";
@@ -34,14 +38,11 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             txtVariableName.Text = VariableName;
             txtDefaultValue.Text = variableValue;
             this.editMode = frmAddVariablesEditMode.Edit;
-            this.appSettings = appSettings;
+            this.appSettings = App.Taskt_Settings;
         }
 
         private void frmAddVariable_Load(object sender, EventArgs e)
         {
-            //lblDefineNameDescription.Text = lblDefineNameDescription.Tag.ToString().Replace("{{{", appSettings.EngineSettings.VariableStartMarker)
-            //        .Replace("}}}", appSettings.EngineSettings.VariableEndMarker);
-            //lblDefineNameDescription.Text = appSettings.replaceApplicationKeyword(lblDefineNameDescription.Tag.ToString());
             lblDefineNameDescription.Text = Core.Automation.Commands.InternalKeywordsControls.ReplaceKeywordsToSystemVariableAndInstanceName(lblDefineNameDescription.Tag.ToString(), appSettings);
         }
 

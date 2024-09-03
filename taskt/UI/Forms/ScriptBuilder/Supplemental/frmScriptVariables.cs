@@ -26,12 +26,15 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
     public partial class frmScriptVariables : ThemedForm
     {
         public List<Core.Script.ScriptVariable> scriptVariables { get; }
+
         TreeNode bufferedUserVariableParentNode = new TreeNode();
         TreeNode bufferedSystemVariableParentNode = new TreeNode();
 
         private readonly string leadingValue = "Default Value: ";
         private readonly string emptyValue = "(no default value)";
-        public Core.ApplicationSettings appSettings;
+
+        //public Core.ApplicationSettings appSettings;
+        private Core.SafeApplicationSettings appSettings;
 
         static readonly string User_Variables_Text = "My Task Variables";
         static readonly string System_Variables_Text = "Default Task Variables";
@@ -42,7 +45,8 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             InitializeComponent();
             this.scriptVariables = variables;
-            this.appSettings = appSettings;
+            //this.appSettings = appSettings;
+            this.appSettings = App.Taskt_Settings;
         }
 
         private void frmScriptVariables_Load(object sender, EventArgs e)
@@ -123,7 +127,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             string variableName = "", variableValue = "";
             if (targetVariable == null)
             {
-                addVariableForm = new frmAddVariable(appSettings);
+                addVariableForm = new frmAddVariable();
             }
             else
             {
@@ -131,7 +135,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 {
                     return;
                 }
-                addVariableForm = new frmAddVariable(variableName, variableValue, appSettings);
+                addVariableForm = new frmAddVariable(variableName, variableValue);
             }
 
             tvScriptVariables.BeginUpdate();
