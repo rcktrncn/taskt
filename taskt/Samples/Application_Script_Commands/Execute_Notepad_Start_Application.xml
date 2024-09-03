@@ -17,7 +17,7 @@
       <ScriptCommand xsi:type="CommentCommand" CommandID="02c82b18-41bd-4354-b434-68dda3d14eeb" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Type &quot;Hello!&quot;" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="ecdc31b4-3139-4682-a053-7d4d6e69bb60" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="𝕂%kwd_current_window%𝕎" v_TextToSend="Hello!" v_EncryptionOption="Not Encrypted" />
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="ecdc31b4-3139-4682-a053-7d4d6e69bb60" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="Hello!" v_EncryptionOption="Not Encrypted" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="CommentCommand" CommandID="02c82b18-41bd-4354-b434-68dda3d14eeb" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Stop Notepad" CommandEnabled="true" />
@@ -32,14 +32,15 @@
       <ScriptCommand xsi:type="CommentCommand" CommandID="02c82b18-41bd-4354-b434-68dda3d14eeb" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" v_Comment="Don't save" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="ecdc31b4-3139-4682-a053-7d4d6e69bb60" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="𝕂%kwd_current_window%𝕎" v_TextToSend="n" v_EncryptionOption="Not Encrypted" />
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="ecdc31b4-3139-4682-a053-7d4d6e69bb60" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="n" v_EncryptionOption="Not Encrypted" />
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.5.1.57</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
     <LastRunTime>2021-09-07T23:52:42.137668+09:00</LastRunTime>
     <RunTimes>3</RunTimes>
+    <Revision>1</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>

@@ -11,7 +11,7 @@
       <ScriptCommand xsi:type="CommentCommand" CommandID="1e201213-7bd1-4a38-a33f-9c0aec821588" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" v_Comment="Assign a Variable to be passed into Custom Code as an argument" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="SetVariableValueCommand" CommandID="2a8802ad-fd48-43f2-ae8e-b5d05ccca8e8" CommandName="SetVariableValueCommand" IsCommented="false" SelectionName="Set Variable Value" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="vArgument" v_Input="Hello World!" v_ReplaceInputVariables="Yes" />
+      <ScriptCommand xsi:type="CreateTextVariableCommand" CommandID="ed284a87-cdbc-4d72-bbb3-045a7edbd9cd" CommandName="CreateTextVariableCommand" IsCommented="false" SelectionName="Create Text Variable" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="vArgument" v_Value="Hello World!" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="CommentCommand" CommandID="f4f01a71-bdc3-4503-ab54-0435437be08f" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Run Custom Code, passing Arguments" CommandEnabled="true" />
@@ -21,10 +21,11 @@
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.5.1.57</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
     <LastRunTime>2021-09-23T18:36:42.7803592+09:00</LastRunTime>
     <RunTimes>4</RunTimes>
+    <Revision>1</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>

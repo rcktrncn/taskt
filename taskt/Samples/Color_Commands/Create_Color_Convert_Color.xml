@@ -44,7 +44,7 @@
       <ScriptCommand xsi:type="ConvertColorCommand" CommandID="74b97b32-0e72-4cf1-b229-2d57147b7e70" CommandName="ConvertColorCommand" IsCommented="false" SelectionName="Convert Color" DefaultPause="0" LineNumber="14" PauseBeforeExeucution="false" CommandEnabled="true" v_Color="⦃vColor⦄" v_Format="RGBA Dictionary" v_Result="vDic" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ConvertDictionaryToJSONCommand" CommandID="fa9d702f-bc2f-4442-abcb-b2c33c9df3f9" CommandName="ConvertDictionaryToJSONCommand" IsCommented="false" SelectionName="Convert Dictionary To JSON" DefaultPause="0" LineNumber="15" PauseBeforeExeucution="false" CommandEnabled="true" v_InputData="vDic" v_OutputVariable="vText" />
+      <ScriptCommand xsi:type="ConvertDictionaryToJSONCommand" CommandID="fa9d702f-bc2f-4442-abcb-b2c33c9df3f9" CommandName="ConvertDictionaryToJSONCommand" IsCommented="false" SelectionName="Convert Dictionary To JSON" DefaultPause="0" LineNumber="15" PauseBeforeExeucution="false" CommandEnabled="true" v_Dictionary="vDic" v_Result="vText" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="ShowMessageCommand" CommandID="5b9604e9-aa78-4601-bcab-bc09e71fcf8a" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="16" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vText⦄" v_AutoCloseAfter="0" />
@@ -56,17 +56,18 @@
       <ScriptCommand xsi:type="ConvertColorCommand" CommandID="74b97b32-0e72-4cf1-b229-2d57147b7e70" CommandName="ConvertColorCommand" IsCommented="false" SelectionName="Convert Color" DefaultPause="0" LineNumber="18" PauseBeforeExeucution="false" CommandEnabled="true" v_Color="⦃vColor⦄" v_Format="RGBA DataTable" v_Result="vTable" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ConvertDataTableToJSONCommand" CommandID="1cdb5bae-f568-4916-8d43-63b051c6f283" CommandName="ConvertDataTableToJSONCommand" IsCommented="false" SelectionName="Convert DataTable To JSON" DefaultPause="0" LineNumber="19" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTableName="⦃vTable⦄" v_OutputVariableName="vText" />
+      <ScriptCommand xsi:type="ConvertDataTableToJSONCommand" CommandID="1cdb5bae-f568-4916-8d43-63b051c6f283" CommandName="ConvertDataTableToJSONCommand" IsCommented="false" SelectionName="Convert DataTable To JSON" DefaultPause="0" LineNumber="19" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTable="⦃vTable⦄" v_Result="vText" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="ShowMessageCommand" CommandID="5b9604e9-aa78-4601-bcab-bc09e71fcf8a" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="20" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vText⦄" v_AutoCloseAfter="0" />
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.5.1.54</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
     <LastRunTime>2022-08-07T18:43:23.4628466+09:00</LastRunTime>
     <RunTimes>2</RunTimes>
+    <Revision>1</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>

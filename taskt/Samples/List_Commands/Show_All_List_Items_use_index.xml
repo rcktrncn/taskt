@@ -2,26 +2,25 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="dc4861d9-996b-4241-90f3-9515f1702f69" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Show All List items used by index" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="dc4861d9-996b-4241-90f3-9515f1702f69" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Show All List items used by index" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="dc4861d9-996b-4241-90f3-9515f1702f69" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Create List ⦃ &quot;hello&quot;, &quot;world&quot;, &quot;taskt&quot; ⦄" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="dc4861d9-996b-4241-90f3-9515f1702f69" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Create List [ &quot;hello&quot;, &quot;world&quot;, &quot;taskt&quot; ]" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CreateListCommand" CommandID="dd403294-c004-44a4-9171-c7c6eb1ed40f" CommandName="CreateListCommand" IsCommented="false" SelectionName="Create List" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_ListName="vList">
+      <ScriptCommand xsi:type="CreateListCommand" CommandID="dd403294-c004-44a4-9171-c7c6eb1ed40f" CommandName="CreateListCommand" IsCommented="false" SelectionName="Create List" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList">
         <v_ListValues>
           <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-            <xs:element name="ListValues010822.071441">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="Values" type="xs:string" minOccurs="0" />
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
             <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ListValues010822.071441" msdata:UseCurrentLocale="true">
               <xs:complexType>
                 <xs:choice minOccurs="0" maxOccurs="unbounded">
-                  <xs:element ref="ListValues010822.071441" />
+                  <xs:element name="ListValues010822.071441">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Values" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
                 </xs:choice>
               </xs:complexType>
             </xs:element>
@@ -54,44 +53,34 @@
       </ScriptCommand>
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="dc4861d9-996b-4241-90f3-9515f1702f69" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="now vCount is 3" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="dc4861d9-996b-4241-90f3-9515f1702f69" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Show all items value" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="GetListCountCommand" CommandID="7ecb53f5-2d98-4abd-9855-4575eece5ed8" CommandName="GetListCountCommand" IsCommented="false" SelectionName="Get List Count" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_ListName="vList" v_UserVariableName="vCount" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="dc4861d9-996b-4241-90f3-9515f1702f69" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="change vCount value 3 to 2" CommandEnabled="true" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="MathCalculationCommand" CommandID="16eabde0-c7cc-4b4b-ab53-f220e7767164" CommandName="MathCalculationCommand" IsCommented="false" SelectionName="Math Calculation" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_InputValue="⦃vCount⦄-1" v_ThousandSeperator="" v_DecimalSeperator="." v_applyToVariableName="vCount" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="dc4861d9-996b-4241-90f3-9515f1702f69" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" v_Comment="Show all items value" CommandEnabled="true" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="BeginNumberOfTimesLoopCommand" CommandID="d1748e7a-82b6-46c9-925c-73e1f1d0ef29" CommandName="BeginNumberOfTimesLoopCommand" IsCommented="false" SelectionName="Loop Number Of Times" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_LoopParameter="⦃vCount⦄" v_LoopStart="-1" />
+      <ScriptCommand xsi:type="BeginLoopForListCommand" CommandID="b775f315-46e7-46e9-9675-a7c74dd9eea4" CommandName="BeginLoopForListCommand" IsCommented="false" SelectionName="Loop For List" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_List="⦃vList⦄" v_Value="vValue" v_Index="vIndex" v_ReverseLoop="No" v_CurrentTimes="" v_NumberOfLoops="" />
       <AdditionalScriptCommands>
-        <ScriptCommand xsi:type="GetListItemCommand" CommandID="e5a854e8-0d69-4fcd-809d-471d4f4bbb60" CommandName="GetListItemCommand" IsCommented="false" SelectionName="Get List Item" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" CommandEnabled="true" v_ListName="vList" v_ItemIndex="⦃Loop.CurrentIndex⦄" v_UserVariableName="vValue" />
+        <ScriptCommand xsi:type="ShowMessageCommand" CommandID="8a3d5ad2-a69e-4515-af4a-9caf30ee7f07" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Index: ⦃vIndex⦄, Value: ⦃vValue⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
       </AdditionalScriptCommands>
       <AdditionalScriptCommands>
-        <ScriptCommand xsi:type="MessageBoxCommand" CommandID="3b31df94-7d09-4a7c-8ab7-9b367ab54f60" CommandName="MessageBoxCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="vList[⦃Loop.CurrentIndex⦄] : ⦃vValue⦄" v_AutoCloseAfter="0" />
-      </AdditionalScriptCommands>
-      <AdditionalScriptCommands>
-        <ScriptCommand xsi:type="EndLoopCommand" CommandID="6c9366be-7c78-47fa-b58c-d8ef0cf744e7" CommandName="EndLoopCommand" IsCommented="false" SelectionName="End Loop" DefaultPause="0" LineNumber="12" PauseBeforeExeucution="false" CommandEnabled="true" />
+        <ScriptCommand xsi:type="EndLoopCommand" CommandID="d4d62ebc-f205-48cf-a854-7ffdbe897bab" CommandName="EndLoopCommand" IsCommented="false" SelectionName="End Loop" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" />
       </AdditionalScriptCommands>
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.5.0.58</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2022-01-08T19:18:52.4651294+09:00</LastRunTime>
-    <RunTimes>2</RunTimes>
+    <LastRunTime>2024-09-03T22:41:41.3355164+09:00</LastRunTime>
+    <RunTimes>3</RunTimes>
+    <Revision>1</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
   <Variables>
     <ScriptVariable>
       <VariableName>vCount</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vIndex</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
     <ScriptVariable>

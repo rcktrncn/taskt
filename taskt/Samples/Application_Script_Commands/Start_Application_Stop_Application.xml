@@ -24,10 +24,11 @@
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.5.1.58</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
     <LastRunTime>2023-08-20T20:09:14.6119964+09:00</LastRunTime>
     <RunTimes>10</RunTimes>
+    <Revision>1</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>

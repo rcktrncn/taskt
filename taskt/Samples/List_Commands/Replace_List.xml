@@ -2,13 +2,13 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="18b07695-22eb-4f87-9fb7-dc03a61e91d6" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Replace List Command Sample" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="18b07695-22eb-4f87-9fb7-dc03a61e91d6" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Replace List Command Sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="18b07695-22eb-4f87-9fb7-dc03a61e91d6" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="vList is [ &quot;Hello&quot;, &quot;Yah&quot;, &quot;Hey&quot;, &quot;Bye&quot; ]" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="18b07695-22eb-4f87-9fb7-dc03a61e91d6" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="vList is [ &quot;Hello&quot;, &quot;Yah&quot;, &quot;Hey&quot;, &quot;Bye&quot; ]" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CreateListCommand" CommandID="80056496-4edc-49ec-ba9c-1343b3eabd86" CommandName="CreateListCommand" IsCommented="false" SelectionName="Create List" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_ListName="vList">
+      <ScriptCommand xsi:type="CreateListCommand" CommandID="80056496-4edc-49ec-ba9c-1343b3eabd86" CommandName="CreateListCommand" IsCommented="false" SelectionName="Create List" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList">
         <v_ListValues>
           <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
             <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ListValues080722.013247" msdata:UseCurrentLocale="true">
@@ -59,10 +59,10 @@
       </ScriptCommand>
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="18b07695-22eb-4f87-9fb7-dc03a61e91d6" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="replace &quot;Hello&quot;, &quot;Hey&quot; to &quot;starts H&quot;" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="18b07695-22eb-4f87-9fb7-dc03a61e91d6" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="replace &quot;Hello&quot;, &quot;Hey&quot; to &quot;starts H&quot;" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ReplaceListCommand" CommandID="92d09252-9efe-4386-a52b-5ce0ba33fdcc" CommandName="ReplaceListCommand" IsCommented="false" SelectionName="Replace List" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetList="vList" v_TargetType="Text" v_ReplaceAction="Starts with" v_ReplaceValue="starts H">
+      <ScriptCommand xsi:type="ReplaceListCommand" CommandID="92d09252-9efe-4386-a52b-5ce0ba33fdcc" CommandName="ReplaceListCommand" IsCommented="false" SelectionName="Replace List" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList" v_ValueType="Text" v_ReplaceAction="Starts with" v_NewValue="starts H">
         <v_ReplaceActionParameterTable>
           <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
             <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ReplaceActionParameterTable080722.013552" msdata:UseCurrentLocale="true">
@@ -106,23 +106,27 @@
       </ScriptCommand>
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ConvertListToJSONCommand" CommandID="cc10a54a-f649-4350-b04d-2e56ba361778" CommandName="ConvertListToJSONCommand" IsCommented="false" SelectionName="Convert List To JSON" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_InputList="vList" v_applyToVariableName="vJson" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="5df01e84-04a2-4b7c-85e1-b57fe84524e3" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Show vList" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="MessageBoxCommand" CommandID="526a473d-661c-4dd1-acc1-c53e06df94f9" CommandName="MessageBoxCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vJson⦄" v_AutoCloseAfter="0" />
+      <ScriptCommand xsi:type="ConvertListToVisualizedTextCommand" CommandID="816e4ad5-7892-4ba5-af1f-ec2acde567fc" CommandName="ConvertListToVisualizedTextCommand" IsCommented="false" SelectionName="Convert List To Visualized Text" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList" v_Result="view" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="526a473d-661c-4dd1-acc1-c53e06df94f9" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃view⦄" v_AutoCloseAfter="0" v_FontName="MS Gothic" />
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.5.1.0</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2022-08-07T13:37:11.8561913+09:00</LastRunTime>
-    <RunTimes>2</RunTimes>
+    <LastRunTime>2024-09-03T22:38:08.695377+09:00</LastRunTime>
+    <RunTimes>4</RunTimes>
+    <Revision>4</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
   <Variables>
     <ScriptVariable>
-      <VariableName>vJson</VariableName>
+      <VariableName>view</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
     <ScriptVariable>
