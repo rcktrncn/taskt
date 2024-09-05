@@ -53,31 +53,31 @@
       <ScriptCommand xsi:type="SetListItemCommand" CommandID="84482ebc-cf57-408f-9fa4-82da800f4c93" CommandName="SetListItemCommand" IsCommented="false" SelectionName="Set List Item" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList" v_Index="0" v_NewValue="hello" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="3801a123-0f0c-4c70-a049-5b3c3104d1b3" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Get List Value vList[0]" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="3801a123-0f0c-4c70-a049-5b3c3104d1b3" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Show vList" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="GetListItemCommand" CommandID="fb2b037e-a604-49c0-9712-56d4eb90957c" CommandName="GetListItemCommand" IsCommented="false" SelectionName="Get List Item" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList" v_Index="0" v_Result="vItemValue" />
+      <ScriptCommand xsi:type="ConvertListToVisualizedTextCommand" CommandID="a2707ff2-686d-405d-8400-6f92bd0c5616" CommandName="ConvertListToVisualizedTextCommand" IsCommented="false" SelectionName="Convert List To Visualized Text" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList" v_Result="view" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="6a689c86-8d5b-40ab-b911-734919b1665c" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="vList[0] is ⦃vItemValue⦄" v_AutoCloseAfter="0" />
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="647b60f2-3e18-4cc9-aba8-062a3871eb96" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃view⦄" v_AutoCloseAfter="0" v_FontName="MS Gothic" v_FontSize="" />
     </ScriptAction>
   </Commands>
   <Info>
     <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2024-09-03T22:39:48.5655331+09:00</LastRunTime>
-    <RunTimes>3</RunTimes>
-    <Revision>1</Revision>
+    <LastRunTime>2024-09-05T22:48:12.7201141+09:00</LastRunTime>
+    <RunTimes>4</RunTimes>
+    <Revision>2</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
   <Variables>
     <ScriptVariable>
-      <VariableName>vList</VariableName>
+      <VariableName>view</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
     <ScriptVariable>
-      <VariableName>vItemValue</VariableName>
+      <VariableName>vList</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
   </Variables>
