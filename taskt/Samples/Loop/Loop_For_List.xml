@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="bee6c1c3-8efc-4b6f-8de5-1cf0815c90ac" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Loop For List Sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="bee6c1c3-8efc-4b6f-8de5-1cf0815c90ac" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Create List, now [ &quot;abc&quot;, &quot;def&quot;, &quot;hello&quot; ]" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CreateListCommand" CommandID="3ba79a6e-1c58-41c5-9cb4-e0bafdb96f95" CommandName="CreateListCommand" IsCommented="false" SelectionName="Create List" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList">
+        <v_ListValues>
+          <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+            <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ListValues122921.043204" msdata:UseCurrentLocale="true">
+              <xs:complexType>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element name="ListValues122921.043204">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Values" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+          </xs:schema>
+          <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+            <DocumentElement>
+              <ListValues122921.043204 diffgr:id="ListValues122921.0432041" msdata:rowOrder="0" diffgr:hasChanges="modified">
+                <Values>abc</Values>
+              </ListValues122921.043204>
+              <ListValues122921.043204 diffgr:id="ListValues122921.0432042" msdata:rowOrder="1" diffgr:hasChanges="modified">
+                <Values>def</Values>
+              </ListValues122921.043204>
+              <ListValues122921.043204 diffgr:id="ListValues122921.0432043" msdata:rowOrder="2" diffgr:hasChanges="modified">
+                <Values>hello</Values>
+              </ListValues122921.043204>
+            </DocumentElement>
+            <diffgr:before>
+              <ListValues122921.043204 diffgr:id="ListValues122921.0432041" msdata:rowOrder="0">
+                <Values>abc</Values>
+              </ListValues122921.043204>
+              <ListValues122921.043204 diffgr:id="ListValues122921.0432042" msdata:rowOrder="1">
+                <Values>def</Values>
+              </ListValues122921.043204>
+              <ListValues122921.043204 diffgr:id="ListValues122921.0432043" msdata:rowOrder="2">
+                <Values>hello</Values>
+              </ListValues122921.043204>
+            </diffgr:before>
+          </diffgr:diffgram>
+        </v_ListValues>
+      </ScriptCommand>
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="BeginLoopForListCommand" CommandID="c146ac52-ca71-4b11-8364-ccb934993e10" CommandName="BeginLoopForListCommand" IsCommented="false" SelectionName="Loop For List" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList" v_Value="vValue" v_Index="" v_ReverseLoop="No" v_CurrentTimes="" v_NumberOfLoops="" />
+      <AdditionalScriptCommands>
+        <ScriptCommand xsi:type="ShowMessageCommand" CommandID="c4bc634e-47dc-464c-8275-841ed920d0c4" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Show values" CommandEnabled="true" v_Message="⦃vValue⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+      </AdditionalScriptCommands>
+      <AdditionalScriptCommands>
+        <ScriptCommand xsi:type="EndLoopCommand" CommandID="f8ed1022-2a9c-44c6-b0bf-26e02b1e0413" CommandName="EndLoopCommand" IsCommented="false" SelectionName="End Loop" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" />
+      </AdditionalScriptCommands>
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-07T10:57:35.5699902+09:00</LastRunTime>
+    <RunTimes>4</RunTimes>
+    <Revision>5</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vList</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vValue</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>
