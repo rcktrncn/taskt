@@ -2,7 +2,7 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="0fcc5093-aa1e-4050-b87b-b00db573df38" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Filter DataTable Row by Column Value Sample" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="0fcc5093-aa1e-4050-b87b-b00db573df38" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Filter DataTable Column By Row Value Sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="CommentCommand" CommandID="0fcc5093-aa1e-4050-b87b-b00db573df38" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Column is name, age, and contry" CommandEnabled="true" />
@@ -141,7 +141,7 @@
               </AddDataDataTable080722.045311>
               <AddDataDataTable080722.045311 diffgr:id="AddDataDataTable080722.0453113" msdata:rowOrder="2" diffgr:hasChanges="modified">
                 <Column_x0020_Name>contory</Column_x0020_Name>
-                <Data>Canada</Data>
+                <Data>America</Data>
               </AddDataDataTable080722.045311>
             </DocumentElement>
             <diffgr:before>
@@ -155,7 +155,7 @@
               </AddDataDataTable080722.045311>
               <AddDataDataTable080722.045311 diffgr:id="AddDataDataTable080722.0453113" msdata:rowOrder="2">
                 <Column_x0020_Name>contory</Column_x0020_Name>
-                <Data>Canada</Data>
+                <Data>America</Data>
               </AddDataDataTable080722.045311>
             </diffgr:before>
           </diffgr:diffgram>
@@ -221,13 +221,13 @@
       <ScriptCommand xsi:type="CommentCommand" CommandID="0fcc5093-aa1e-4050-b87b-b00db573df38" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" v_Comment="Filter age &gt; 25" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="FilterDataTableRowByColumnValueCommand" CommandID="28304704-a435-45fc-920d-5614c6936463" CommandName="FilterDataTableRowByColumnValueCommand" IsCommented="false" SelectionName="Filter DataTable Row By Column Value" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetDataTable="vTable" v_NewDataTable="vFilter" v_ColumnType="Column Name" v_ColumnIndex="age" v_ValueType="Numeric" v_FilterAction="Is Greater than">
+      <ScriptCommand xsi:type="FilterDataTableColumnByRowValueCommand" CommandID="8b564283-23ef-41de-ade8-aa62984065c9" CommandName="FilterDataTableColumnByRowValueCommand" IsCommented="false" SelectionName="Filter DataTable Column By Row Value" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetDataTable="vTable" v_NewDataTable="vFilter" v_RowIndex="" v_ValueType="Text" v_FilterAction="Is Equal To">
         <v_FilterActionParameterTable>
           <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-            <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="FilterActionParameterTable080722.045426" msdata:UseCurrentLocale="true">
+            <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="FilterActionParameterTable091424.053904" msdata:UseCurrentLocale="true">
               <xs:complexType>
                 <xs:choice minOccurs="0" maxOccurs="unbounded">
-                  <xs:element name="FilterActionParameterTable080722.045426">
+                  <xs:element name="FilterActionParameterTable091424.053904">
                     <xs:complexType>
                       <xs:sequence>
                         <xs:element name="ParameterName" type="xs:string" minOccurs="0" />
@@ -241,24 +241,24 @@
           </xs:schema>
           <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
             <DocumentElement>
-              <FilterActionParameterTable080722.045426 diffgr:id="FilterActionParameterTable080722.0454261" msdata:rowOrder="0" diffgr:hasChanges="modified">
+              <FilterActionParameterTable091424.053904 diffgr:id="FilterActionParameterTable091424.0539041" msdata:rowOrder="0" diffgr:hasChanges="modified">
                 <ParameterName>Value</ParameterName>
-                <ParameterValue>25</ParameterValue>
-              </FilterActionParameterTable080722.045426>
-              <FilterActionParameterTable080722.045426 diffgr:id="FilterActionParameterTable080722.0454262" msdata:rowOrder="1" diffgr:hasChanges="modified">
-                <ParameterName>If Not Numeric</ParameterName>
-                <ParameterValue>Error</ParameterValue>
-              </FilterActionParameterTable080722.045426>
+                <ParameterValue>America</ParameterValue>
+              </FilterActionParameterTable091424.053904>
+              <FilterActionParameterTable091424.053904 diffgr:id="FilterActionParameterTable091424.0539042" msdata:rowOrder="1" diffgr:hasChanges="modified">
+                <ParameterName>Case Sensitive</ParameterName>
+                <ParameterValue>No</ParameterValue>
+              </FilterActionParameterTable091424.053904>
             </DocumentElement>
             <diffgr:before>
-              <FilterActionParameterTable080722.045426 diffgr:id="FilterActionParameterTable080722.0454261" msdata:rowOrder="0">
+              <FilterActionParameterTable091424.053904 diffgr:id="FilterActionParameterTable091424.0539041" msdata:rowOrder="0">
                 <ParameterName>Value</ParameterName>
-                <ParameterValue>25</ParameterValue>
-              </FilterActionParameterTable080722.045426>
-              <FilterActionParameterTable080722.045426 diffgr:id="FilterActionParameterTable080722.0454262" msdata:rowOrder="1">
-                <ParameterName>If Not Numeric</ParameterName>
-                <ParameterValue>Error</ParameterValue>
-              </FilterActionParameterTable080722.045426>
+                <ParameterValue>America</ParameterValue>
+              </FilterActionParameterTable091424.053904>
+              <FilterActionParameterTable091424.053904 diffgr:id="FilterActionParameterTable091424.0539042" msdata:rowOrder="1">
+                <ParameterName>Case Sensitive</ParameterName>
+                <ParameterValue>No</ParameterValue>
+              </FilterActionParameterTable091424.053904>
             </diffgr:before>
           </diffgr:diffgram>
         </v_FilterActionParameterTable>
@@ -277,9 +277,9 @@
   <Info>
     <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2024-09-09T21:56:51.7514973+09:00</LastRunTime>
-    <RunTimes>4</RunTimes>
-    <Revision>6</Revision>
+    <LastRunTime>2024-09-14T17:40:24.0134397+09:00</LastRunTime>
+    <RunTimes>6</RunTimes>
+    <Revision>8</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
