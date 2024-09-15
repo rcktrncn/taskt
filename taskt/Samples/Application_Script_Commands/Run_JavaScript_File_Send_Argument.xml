@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="2396a0fd-bb92-4477-a079-cf03890a2c11" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Run JavaScript File send Argument Sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="RunJavaScriptFileCommand" CommandID="69ecd0db-f5e8-49ab-825c-128c7f47ddac" CommandName="RunJavaScriptFileCommand" IsCommented="false" SelectionName="Run JavaScript File" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" CommandEnabled="true" v_FilePath="⦃Folder.ResourcesPath⦄\get_argument.js" v_Args="John" v_Result="vResult" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="47c249bf-5bf8-478a-9cef-8809de5e44f2" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Result: ⦃vResult⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-15T10:41:49.6610456+09:00</LastRunTime>
+    <RunTimes>1</RunTimes>
+    <Revision>2</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vResult</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>
