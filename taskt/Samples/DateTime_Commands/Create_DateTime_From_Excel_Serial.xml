@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="3e050d72-3e0c-43e7-b397-76e004bd5ce9" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Create DateTime From Excel Serial sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="SetEnginePreferenceCommand" CommandID="70bb54b3-f491-41a2-93bc-fd8c695cf28f" CommandName="SetEnginePreferenceCommand" IsCommented="false" SelectionName="Set Engine Preference" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" CommandEnabled="true" v_PreferenceType="Disable Automatic Calculations" v_ParameterValue="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="252ec751-0f90-409c-a2e6-ca7ec788ef09" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" v_Comment="43385 is 10/12/2018 (MM/dd/yyyy)" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CreateDateTimeFromExcelSerialCommand" CommandID="f75d58cf-e035-42a7-9980-8ca9174c5afb" CommandName="CreateDateTimeFromExcelSerialCommand" IsCommented="false" SelectionName="Create DateTime From Excel Serial" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_DateTime="vDateTime" v_Serial="43385" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="c10c0ede-fad9-4486-8fd0-18013d8c5a6e" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Show DateTime" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="FormatDateTimeCommand" CommandID="d8bdd3ff-77f1-48a8-a9d4-a320c668d948" CommandName="FormatDateTimeCommand" IsCommented="false" SelectionName="Format DateTime" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_DateTime="⦃vDateTime⦄" v_Result="vText" v_Format="MM/dd/yyyy" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="645f5d14-0f9c-4728-85a8-511bffee949d" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vText⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-15T11:22:06.512878+09:00</LastRunTime>
+    <RunTimes>2</RunTimes>
+    <Revision>5</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vDateTime</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vText</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>

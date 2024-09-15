@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="aebc21dc-4e52-4a23-ab0f-408c2879bd89" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Calculate DateTime sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="SetEnginePreferenceCommand" CommandID="7ef0dffa-933b-4c75-91e5-caf6ba2537d6" CommandName="SetEnginePreferenceCommand" IsCommented="false" SelectionName="Set Engine Preference" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" CommandEnabled="true" v_PreferenceType="Disable Automatic Calculations" v_ParameterValue="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="d98ce2f2-a4d0-4e1b-bb83-6d6568d4134d" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" v_Comment="10/12/2018 (MM/dd/yyyy)" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CreateDateTimeCommand" CommandID="39d85d69-5b85-4378-a23a-49867ea54ec4" CommandName="CreateDateTimeCommand" IsCommented="false" SelectionName="Create DateTime" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_DateTime="vDateTime" v_Year="2018" v_Month="10" v_Day="12" v_Hour="" v_Minute="" v_Second="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CalculateDateTimeCommand" CommandID="157f4f66-88e6-4283-9bc6-8a2dd506da57" CommandName="CalculateDateTimeCommand" IsCommented="false" SelectionName="Calculate DateTime" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="12 days after" CommandEnabled="true" v_DateTime="⦃vDateTime⦄" v_Result="vDateTime" v_CalculationMethod="Add Days" v_Value="12" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="dc63bda8-8961-4ee7-91ca-9ebfa3f28d5f" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Show DateTime" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="FormatDateTimeCommand" CommandID="f18bc0ae-a7ff-402b-90a4-b46506b3add9" CommandName="FormatDateTimeCommand" IsCommented="false" SelectionName="Format DateTime" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_DateTime="⦃vDateTime⦄" v_Result="vText" v_Format="MM/dd/yyyy" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="627831e4-d2ab-4ffa-b8b4-bb52998675fb" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vText⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-15T11:16:32.5659587+09:00</LastRunTime>
+    <RunTimes>1</RunTimes>
+    <Revision>2</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vDateTime</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vText</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>
