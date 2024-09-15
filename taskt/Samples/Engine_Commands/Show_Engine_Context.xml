@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="bb28deab-1360-4974-9084-5ce8d0615f99" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Show Engine Context sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowEngineContextCommand" CommandID="d2bab8fd-fe45-4f20-8f66-8070555eadd6" CommandName="ShowEngineContextCommand" IsCommented="false" SelectionName="Show Engine Context" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" CommandEnabled="true" v_AutoCloseAfter="0" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-15T11:39:20.3598705+09:00</LastRunTime>
+    <RunTimes>1</RunTimes>
+    <Revision>1</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables />
+</Script>
