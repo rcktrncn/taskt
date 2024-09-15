@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="693f4b44-e49e-414c-a058-d0c4ea4d0aa0" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Run Script File Sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExtractionFilePathCommand" CommandID="bc406520-e1a9-45bb-80fd-91dc91759939" CommandName="ExtractionFilePathCommand" IsCommented="false" SelectionName="Extraction File Path" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Get Script File Directory" CommandEnabled="true" v_SourceFilePath="⦃File.CurrentScriptFile⦄" v_Format="Folder" v_Result="vDirPath" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="RunScriptFileCommand" CommandID="f6c98595-7685-4648-ac1f-ee1146d4a608" CommandName="RunScriptFileCommand" IsCommented="false" SelectionName="Run Script File" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" v_Comment="Run &quot;Run_By_Run_Script_File.xml&quot; in the same folder as this script file" CommandEnabled="true" v_taskPath="⦃vDirPath⦄\Run_By_Run_Script_File.xml" v_AssignVariables="No" v_WaitForFile="10">
+        <v_VariableAssignments>
+          <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+            <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="VariableAssignments091524.100110" msdata:UseCurrentLocale="true">
+              <xs:complexType>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element name="VariableAssignments091524.100110">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="VariableName" type="xs:string" minOccurs="0" />
+                        <xs:element name="VariableValue" type="xs:string" minOccurs="0" />
+                        <xs:element name="VariableReturn" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+          </xs:schema>
+          <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1" />
+        </v_VariableAssignments>
+      </ScriptCommand>
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-15T10:06:42.2902206+09:00</LastRunTime>
+    <RunTimes>3</RunTimes>
+    <Revision>7</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vDirPath</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>
