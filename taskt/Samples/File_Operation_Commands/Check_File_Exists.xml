@@ -5,7 +5,7 @@
       <ScriptCommand xsi:type="CommentCommand" CommandID="0b05e8c3-bf35-49b7-9b3a-8a3703c7b34f" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Check File Exists sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="214bd14c-108b-4f9c-acf8-5f86adafd265" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="This file is Exists" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="214bd14c-108b-4f9c-acf8-5f86adafd265" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Check &quot;sample_text&quot; in Resouces Folder. This file is Exists" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="CheckFileExistsCommand" CommandID="798ae435-d757-42d2-ad6f-de017fa0626f" CommandName="CheckFileExistsCommand" IsCommented="false" SelectionName="Check File Exists" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetFileName="⦃Folder.ResourcesPath⦄\sample_text.txt" v_UserVariableName="vResult" v_WaitTime="0" v_ResultPath="" />
@@ -14,21 +14,21 @@
       <ScriptCommand xsi:type="ShowMessageCommand" CommandID="697f61cb-19cd-424c-b156-1df22d28ac08" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Does sample_text Exists ? Result: ⦃vResult⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="c85b20d2-bbd1-4dbc-a80a-073e6bb02693" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="This file is NOT Exists" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="c85b20d2-bbd1-4dbc-a80a-073e6bb02693" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Check &quot;C:\my_super_cool_text.txt&quot;. This file should not exists." CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CheckFileExistsCommand" CommandID="cb399dcb-6856-4b48-ad0c-3c19ec4eab52" CommandName="CheckFileExistsCommand" IsCommented="false" SelectionName="Check File Exists" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetFileName="⦃Folder.ResourcesPath⦄\sample_text2.txt" v_UserVariableName="vResult" v_WaitTime="0" v_ResultPath="" />
+      <ScriptCommand xsi:type="CheckFileExistsCommand" CommandID="cb399dcb-6856-4b48-ad0c-3c19ec4eab52" CommandName="CheckFileExistsCommand" IsCommented="false" SelectionName="Check File Exists" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetFileName="C:\my_super_cool_text.txt" v_UserVariableName="vResult" v_WaitTime="0" v_ResultPath="" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="ffad38c2-9cc0-4df5-bf37-01fd00335db6" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Does sample_text2 Exists ? Result: ⦃vResult⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="ffad38c2-9cc0-4df5-bf37-01fd00335db6" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Does my_super_cool_text Exists ? Result: ⦃vResult⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
     </ScriptAction>
   </Commands>
   <Info>
     <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2024-09-15T12:21:23.3522384+09:00</LastRunTime>
-    <RunTimes>2</RunTimes>
-    <Revision>3</Revision>
+    <LastRunTime>2024-09-15T21:47:04.0760086+09:00</LastRunTime>
+    <RunTimes>3</RunTimes>
+    <Revision>6</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
