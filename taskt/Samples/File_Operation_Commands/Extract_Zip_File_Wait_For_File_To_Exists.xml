@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="d1c45bb3-7591-4920-b931-17ba5e497231" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Extract Zip File, Wait For File To Exists sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="e05718dc-64e8-452b-bd23-f4cfd2a06464" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="At least 10MB of free space is required to run this script" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="a321415c-cb09-4aa6-835f-541112721d6b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" v_Comment="Copy sample_10mb.zip to Desktop" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CopyFileCommand" CommandID="4415a331-d368-4e1c-85b3-7d956703e33f" CommandName="CopyFileCommand" IsCommented="false" SelectionName="Copy File" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_SourceFilePath="⦃Folder.ResourcesPath⦄\sample_10mb.zip" v_DestinationDirectory="⦃Folder.Desktop⦄" v_CreateDirectory="" v_DeleteExisting="" v_WaitTime="10" v_BeforeFilePathResult="" v_AfterFilePathResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="4ee216dd-624c-47df-b4fc-6dca808ac036" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Extract Zip (This zip file contains &quot;only_a_10mb.txt&quot;)" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExtractZipFileCommand" CommandID="5a1847d0-0f7e-4f46-81c8-98a88576e177" CommandName="ExtractZipFileCommand" IsCommented="false" SelectionName="Extract Zip File" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_FilePathOrigin="⦃Folder.Desktop⦄\sample_10mb.zip" v_PathDestination="⦃Folder.Desktop⦄" v_CreateDirectory="" v_Password="" v_applyToVariableName="" v_WaitTime="10" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="83162f59-19e8-4794-8aed-e6c61ebfa6b6" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Wait for the zip file to finish extracting" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="WaitForFileToExistCommand" CommandID="0e28b879-e435-4f55-847a-0d29e81851ec" CommandName="WaitForFileToExistCommand" IsCommented="false" SelectionName="Wait For File To Exists" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_FileName="⦃Folder.Desktop⦄\only_a_10mb.txt" v_WaitTime="60" v_ResultPath="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="51b8db2e-85eb-4dce-8327-2bc18f367eca" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Extracted!" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-15T13:21:46.6129942+09:00</LastRunTime>
+    <RunTimes>1</RunTimes>
+    <Revision>2</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables />
+</Script>
