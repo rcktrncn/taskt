@@ -11,7 +11,7 @@
       <ScriptCommand xsi:type="CommentCommand" CommandID="a321415c-cb09-4aa6-835f-541112721d6b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" v_Comment="Copy sample_10mb.zip to Desktop" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CopyFileCommand" CommandID="4415a331-d368-4e1c-85b3-7d956703e33f" CommandName="CopyFileCommand" IsCommented="false" SelectionName="Copy File" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_SourceFilePath="⦃Folder.ResourcesPath⦄\sample_10mb.zip" v_DestinationDirectory="⦃Folder.Desktop⦄" v_CreateDirectory="" v_DeleteExisting="" v_WaitTime="10" v_BeforeFilePathResult="" v_AfterFilePathResult="" />
+      <ScriptCommand xsi:type="CopyFileCommand" CommandID="4415a331-d368-4e1c-85b3-7d956703e33f" CommandName="CopyFileCommand" IsCommented="false" SelectionName="Copy File" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_SourceFilePath="⦃Folder.SamplesPath⦄\Resources\sample_10mb.zip" v_DestinationDirectory="⦃Folder.Desktop⦄" v_CreateDirectory="" v_DeleteExisting="" v_WaitTime="10" v_BeforeFilePathResult="" v_AfterFilePathResult="" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="CommentCommand" CommandID="4ee216dd-624c-47df-b4fc-6dca808ac036" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Extract Zip (This zip file contains &quot;only_a_10mb.txt&quot;)" CommandEnabled="true" />
@@ -37,7 +37,7 @@
     <Author />
     <LastRunTime>2024-09-15T13:21:46.6129942+09:00</LastRunTime>
     <RunTimes>1</RunTimes>
-    <Revision>3</Revision>
+    <Revision>4</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
