@@ -2,36 +2,35 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="d8c4e404-1e9c-4956-b3b6-ac9ac910121a" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Infinite Loop, Exit Loop" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="d8c4e404-1e9c-4956-b3b6-ac9ac910121a" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Infinite Loop, Exit Loop" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="d8c4e404-1e9c-4956-b3b6-ac9ac910121a" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Loop Infinite times" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="d8c4e404-1e9c-4956-b3b6-ac9ac910121a" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Loop Infinite times" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="BeginContinousLoopCommand" CommandID="6343c8c7-294f-424c-88ad-6f7f84df293f" CommandName="BeginContinousLoopCommand" IsCommented="false" SelectionName="Loop Continuously" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" />
       <AdditionalScriptCommands>
-        <ScriptCommand xsi:type="CommentCommand" CommandID="d8c4e404-1e9c-4956-b3b6-ac9ac910121a" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Show User Input" CommandEnabled="true" />
+        <ScriptCommand xsi:type="CommentCommand" CommandID="d8c4e404-1e9c-4956-b3b6-ac9ac910121a" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Show User Input" CommandEnabled="true" />
       </AdditionalScriptCommands>
       <AdditionalScriptCommands>
-        <ScriptCommand xsi:type="UserInputCommand" CommandID="5647cf22-3355-4a68-aba0-ab570f6752d1" CommandName="UserInputCommand" IsCommented="false" SelectionName="Prompt for Input" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_InputHeader="Please Provide Input" v_InputDirections="Directions: Please fill in the following fields">
+        <ScriptCommand xsi:type="ShowUserInputDialogCommand" CommandID="5647cf22-3355-4a68-aba0-ab570f6752d1" CommandName="ShowUserInputDialogCommand" IsCommented="false" SelectionName="Show User Input Dialog" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_InputHeader="Please Provide Input" v_InputDirections="Directions: Please fill in the following fields">
           <v_UserInputConfig>
             <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-              <xs:element name="U6erInpu午Para5Table091021.120506">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="Type" type="xs:string" minOccurs="0" />
-                    <xs:element name="Label" type="xs:string" minOccurs="0" />
-                    <xs:element name="Size" type="xs:string" minOccurs="0" />
-                    <xs:element name="DefaultValue" type="xs:string" minOccurs="0" />
-                    <xs:element name="UserInput" type="xs:string" minOccurs="0" />
-                    <xs:element name="ApplyToVariable" type="xs:string" minOccurs="0" />
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
               <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="U6erInpu午Para5Table091021.120506" msdata:UseCurrentLocale="true">
                 <xs:complexType>
                   <xs:choice minOccurs="0" maxOccurs="unbounded">
-                    <xs:element ref="U6erInpu午Para5Table091021.120506" />
+                    <xs:element name="U6erInpu午Para5Table091021.120506">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Type" type="xs:string" minOccurs="0" />
+                          <xs:element name="Label" type="xs:string" minOccurs="0" />
+                          <xs:element name="Size" type="xs:string" minOccurs="0" />
+                          <xs:element name="DefaultValue" type="xs:string" minOccurs="0" />
+                          <xs:element name="UserInput" type="xs:string" minOccurs="0" />
+                          <xs:element name="ApplyToVariable" type="xs:string" minOccurs="0" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
                   </xs:choice>
                 </xs:complexType>
               </xs:element>
@@ -62,7 +61,7 @@
         </ScriptCommand>
       </AdditionalScriptCommands>
       <AdditionalScriptCommands>
-        <ScriptCommand xsi:type="CommentCommand" CommandID="d8c4e404-1e9c-4956-b3b6-ac9ac910121a" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Checkbox is checked ?" CommandEnabled="true" />
+        <ScriptCommand xsi:type="CommentCommand" CommandID="d8c4e404-1e9c-4956-b3b6-ac9ac910121a" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Checkbox is checked ?" CommandEnabled="true" />
       </AdditionalScriptCommands>
       <AdditionalScriptCommands>
         <ScriptCommand xsi:type="BeginIfCommand" CommandID="4e7ec230-4ab6-4c5f-ab31-582351847a8a" CommandName="BeginIfCommand" IsCommented="false" SelectionName="Begin If" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_IfActionType="Boolean">
@@ -108,7 +107,7 @@
           </v_IfActionParameterTable>
         </ScriptCommand>
         <AdditionalScriptCommands>
-          <ScriptCommand xsi:type="CommentCommand" CommandID="d8c4e404-1e9c-4956-b3b6-ac9ac910121a" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" v_Comment="Exit Loop" CommandEnabled="true" />
+          <ScriptCommand xsi:type="CommentCommand" CommandID="d8c4e404-1e9c-4956-b3b6-ac9ac910121a" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" v_Comment="Exit Loop" CommandEnabled="true" />
         </AdditionalScriptCommands>
         <AdditionalScriptCommands>
           <ScriptCommand xsi:type="ExitLoopCommand" CommandID="edab3134-aa29-4c9f-ac32-2201de0fdf20" CommandName="ExitLoopCommand" IsCommented="false" SelectionName="Exit Loop" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" />
@@ -123,10 +122,11 @@
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.5.0.30</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
     <LastRunTime>2021-09-10T12:08:30.0833551+09:00</LastRunTime>
     <RunTimes>3</RunTimes>
+    <Revision>1</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
