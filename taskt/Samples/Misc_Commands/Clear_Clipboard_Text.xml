@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="88d02a60-4ecb-4f18-bc69-7e45aa9dcf50" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Clear Clipboard Text sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="06d55311-dd80-4af7-8e06-22b047c96ea3" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Set and Get Clipboard Text" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="SetClipboardTextCommand" CommandID="45dff41c-b2d8-4e04-93b2-6ee0246e72f4" CommandName="SetClipboardTextCommand" IsCommented="false" SelectionName="Set Clipboard Text" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_InputValue="Hello" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="GetClipboardTextCommand" CommandID="b5a7cc6a-4b2d-4c8b-9fc7-ef005f11c0c2" CommandName="GetClipboardTextCommand" IsCommented="false" SelectionName="Get Clipboard Text" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="vValue" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="6a2e04c5-f382-4fbf-b21e-d43c50c45167" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vValue⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="e397aef1-d0c1-4bf6-9197-8716f835f484" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Clear Clipboard Text" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ClearClipboardTextCommand" CommandID="dad1321d-9779-4b74-9fe0-b21d220e1982" CommandName="ClearClipboardTextCommand" IsCommented="false" SelectionName="Clear Clipboard Text" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="GetClipboardTextCommand" CommandID="e180a35b-9362-415e-9391-2431d72c3add" CommandName="GetClipboardTextCommand" IsCommented="false" SelectionName="Get Clipboard Text" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="vValue" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="c7937b04-495e-4e53-84bd-fa4c28a0f420" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vValue⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-16T14:39:34.3689147+09:00</LastRunTime>
+    <RunTimes>1</RunTimes>
+    <Revision>2</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vValue</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>
