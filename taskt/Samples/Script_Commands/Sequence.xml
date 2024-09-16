@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="c1b3ab3f-3694-4ec1-8571-c045f8b8803e" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Sequence Sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="8ada253a-dad6-4bda-bf62-e4e3342cc21b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Please double click blow Sequence" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="SequenceCommand" CommandID="fe921d81-97b4-4da0-8e07-d1b2ea10b18c" CommandName="SequenceCommand" IsCommented="false" SelectionName="Sequence" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" v_Comment="" CommandEnabled="true">
+        <v_scriptActions>
+          <ScriptCommand xsi:type="CommentCommand" CommandID="c6187c86-fe21-417e-a785-ffcda49f307e" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="0" PauseBeforeExeucution="false" v_Comment="Sequence can have multiple commands inside" CommandEnabled="true" />
+          <ScriptCommand xsi:type="ShowMessageCommand" CommandID="0dfc4db8-74ef-4b17-b46c-1d055e22f677" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="0" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Hello World!" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+          <ScriptCommand xsi:type="ShowMessageCommand" CommandID="54f0a301-8059-42df-a5ed-76f43ea7aa59" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="0" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Hello taskt!" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+        </v_scriptActions>
+      </ScriptCommand>
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-16T16:51:41.6387629+09:00</LastRunTime>
+    <RunTimes>1</RunTimes>
+    <Revision>2</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables />
+</Script>
