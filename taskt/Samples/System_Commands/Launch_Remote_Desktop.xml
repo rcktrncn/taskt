@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="723a2fcb-34b6-44cf-a654-f3e6b983f409" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Launch Remote Desktop sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="53aa2c29-8eca-4ee2-a932-23b8121f27e3" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="This command is supported on Windows 10 or later or Windows Server 2019 or later" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="LaunchRemoteDesktopCommand" CommandID="218fb526-baeb-4484-9d5c-4e66479fa205" CommandName="LaunchRemoteDesktopCommand" IsCommented="false" SelectionName="Launch Remote Desktop" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_MachineName="**yout computer name or ip**" v_UserName="**your user name**" v_Password="**your password**" v_SupportCredSSP="Yes" v_RDPWidth="" v_RDPHeight="" v_KeyboadHookMode="Remote Server" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="PauseScriptCommand" CommandID="e4e853ac-883a-48b1-a917-daa7f2d8081e" CommandName="PauseScriptCommand" IsCommented="false" SelectionName="Pause Script" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="connecting..." CommandEnabled="true" v_PauseLength="10000" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="SetEngineDelayCommand" CommandID="ef7dbaf2-435a-400c-ba73-875ef3832d62" CommandName="SetEngineDelayCommand" IsCommented="false" SelectionName="Set Engine Delay" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="slowly" CommandEnabled="true" v_EngineSpeed="500" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="c28f1f29-f22d-418d-b437-a493269ff0b7" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="run Notepad" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="deef9e6c-be49-41c3-89fb-031bdbf60300" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Win key" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="^{ESC}" v_EncryptionOption="" v_UseClipBoard="" v_CompareMethod="" v_MatchMethod="" v_TargetWindowIndex="0" v_WaitTimeForWindow="60" v_WaitTime="500" v_ActivateCurrentWindow="" v_NameResult="" v_HandleResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="bff0acba-2d14-42e3-b247-9225813c4468" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="notepad" v_EncryptionOption="" v_UseClipBoard="" v_CompareMethod="" v_MatchMethod="" v_TargetWindowIndex="0" v_WaitTimeForWindow="60" v_WaitTime="500" v_ActivateCurrentWindow="" v_NameResult="" v_HandleResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="2242a6f8-d93c-4c24-8323-2df6e00d69e6" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="{ENTER}" v_EncryptionOption="" v_UseClipBoard="" v_CompareMethod="" v_MatchMethod="" v_TargetWindowIndex="0" v_WaitTimeForWindow="60" v_WaitTime="500" v_ActivateCurrentWindow="" v_NameResult="" v_HandleResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="577b675c-c7a5-4ca1-8f1e-78dbab6ef5e9" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="hello!" v_EncryptionOption="" v_UseClipBoard="" v_CompareMethod="" v_MatchMethod="" v_TargetWindowIndex="0" v_WaitTimeForWindow="60" v_WaitTime="500" v_ActivateCurrentWindow="" v_NameResult="" v_HandleResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="f35ae832-3290-48fa-90f3-3955a45318dc" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" v_Comment="open save dialog" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="^{s}" v_EncryptionOption="" v_UseClipBoard="" v_CompareMethod="" v_MatchMethod="" v_TargetWindowIndex="0" v_WaitTimeForWindow="60" v_WaitTime="500" v_ActivateCurrentWindow="" v_NameResult="" v_HandleResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="PauseScriptCommand" CommandID="8e0f2ec5-a1fb-410e-8684-4db6a8772bd4" CommandName="PauseScriptCommand" IsCommented="false" SelectionName="Pause Script" DefaultPause="0" LineNumber="12" PauseBeforeExeucution="false" v_Comment="connecting..." CommandEnabled="true" v_PauseLength="3000" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="b753b183-2964-47f7-a510-31efb2f3e4c0" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="13" PauseBeforeExeucution="false" v_Comment="not save" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="{ESC}" v_EncryptionOption="" v_UseClipBoard="" v_CompareMethod="" v_MatchMethod="" v_TargetWindowIndex="0" v_WaitTimeForWindow="60" v_WaitTime="500" v_ActivateCurrentWindow="" v_NameResult="" v_HandleResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="ec26bbe6-7558-4204-845e-beea8ebe8864" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="14" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="%{F4}" v_EncryptionOption="" v_UseClipBoard="" v_CompareMethod="" v_MatchMethod="" v_TargetWindowIndex="0" v_WaitTimeForWindow="60" v_WaitTime="500" v_ActivateCurrentWindow="" v_NameResult="" v_HandleResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="118247d7-af3e-46de-b893-52dfe8ac25e0" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="15" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="n" v_EncryptionOption="" v_UseClipBoard="" v_CompareMethod="" v_MatchMethod="" v_TargetWindowIndex="0" v_WaitTimeForWindow="60" v_WaitTime="500" v_ActivateCurrentWindow="" v_NameResult="" v_HandleResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="a8eafd1b-77d1-4eb0-8eaa-648cf868a7c4" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="16" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="ok?" v_AutoCloseAfter="0" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="1d215f2d-a785-4734-a76a-2eff55ce1c5d" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="17" PauseBeforeExeucution="false" v_Comment="logoff" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="3bd21b5b-749b-487b-9413-212ff40c089e" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="18" PauseBeforeExeucution="false" v_Comment="Win key" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="^{ESC}" v_EncryptionOption="" v_UseClipBoard="" v_CompareMethod="" v_MatchMethod="" v_TargetWindowIndex="0" v_WaitTimeForWindow="60" v_WaitTime="500" v_ActivateCurrentWindow="" v_NameResult="" v_HandleResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="f1740ed8-f1af-4366-83de-158ebc457fd3" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="19" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="logoff" v_EncryptionOption="" v_UseClipBoard="" v_CompareMethod="" v_MatchMethod="" v_TargetWindowIndex="0" v_WaitTimeForWindow="60" v_WaitTime="500" v_ActivateCurrentWindow="" v_NameResult="" v_HandleResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="EnterKeysCommand" CommandID="e66f8bc3-546f-4dcc-ab28-b6c53be45fe0" CommandName="EnterKeysCommand" IsCommented="false" SelectionName="Enter Keys" DefaultPause="0" LineNumber="20" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="⦃Window.CurrentWindowName⦄" v_TextToSend="{ENTER}" v_EncryptionOption="" v_UseClipBoard="" v_CompareMethod="" v_MatchMethod="" v_TargetWindowIndex="0" v_WaitTimeForWindow="60" v_WaitTime="500" v_ActivateCurrentWindow="" v_NameResult="" v_HandleResult="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-08-17T10:30:15.526261+09:00</LastRunTime>
+    <RunTimes>22</RunTimes>
+    <Revision>34</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables />
+</Script>
