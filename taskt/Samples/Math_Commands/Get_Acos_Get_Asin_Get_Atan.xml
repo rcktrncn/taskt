@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="a2c0cace-a19e-4acd-ab8f-0b944c51b949" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Get Acos, Get Asin, Get Atan sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="GetArccosCommand" CommandID="b85fde45-a03b-4118-b104-9f41ed34663d" CommandName="GetArccosCommand" IsCommented="false" SelectionName="Get Arccos" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" CommandEnabled="true" v_Value="0.5" v_Result="vAcos" v_AngleType="" v_WhenValueIsOutOfRange="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="GetArcsinCommand" CommandID="f4809a65-6bd5-441a-8f4c-343b7b25cee4" CommandName="GetArcsinCommand" IsCommented="false" SelectionName="Get Arcsin" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_Value="0.5" v_Result="vAsin" v_AngleType="" v_WhenValueIsOutOfRange="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="GetArctanCommand" CommandID="5ca1bbc9-337d-45d4-9f7a-aefbf1d9309e" CommandName="GetArctanCommand" IsCommented="false" SelectionName="Get Arctan" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_Value="0.5" v_Result="vAtan" v_AngleType="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="966b4ab9-62ce-4064-834d-ec92efcc422c" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Acos: ⦃vAcos⦄&#xD;&#xA;Asin: ⦃vAsin⦄&#xD;&#xA;Atan: ⦃vAtan⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-16T12:24:58.9195227+09:00</LastRunTime>
+    <RunTimes>3</RunTimes>
+    <Revision>5</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vAcos</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vAsin</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vAtan</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>
