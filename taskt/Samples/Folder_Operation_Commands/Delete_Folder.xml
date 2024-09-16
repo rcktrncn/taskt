@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="e1ccae7e-14e0-45e5-9b38-97d3ad302ba8" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Delete Folder sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="e0978d3e-a7ac-41d6-afbd-85f05b1c604b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Copy &quot;sample_folder&quot; in Resouces to Desktop" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CopyFolderCommand" CommandID="2e59fb53-8a4b-42e8-93fa-61f5f8ae692f" CommandName="CopyFolderCommand" IsCommented="false" SelectionName="Copy Folder" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_SourceFolderPath="⦃Folder.ResourcesPath⦄\sample_folder" v_DestinationDirectory="⦃Folder.Desktop⦄" v_CreateDirectory="" v_DeleteExisting="" v_WaitForTargetFolder="10" v_ResultPath="" v_AfterFilePathResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="602844ec-9804-43b4-b364-19bb1db76990" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Copy &quot;sample_folder&quot; to Desktop" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="4be25577-e355-4bb4-b342-da548cc11c2b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Delete &quot;sample_foder&quot; in Desktop" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="DeleteFolderCommand" CommandID="403022ed-1368-4dcf-bd9c-c482159aef3e" CommandName="DeleteFolderCommand" IsCommented="false" SelectionName="Delete Folder" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_SourceFolderPath="⦃Folder.Desktop⦄\sample_folder" v_MoveToRecycleBin="" v_WaitForFolder="10" v_ResultPath="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="57b70924-8edc-4a81-bfc5-7f8cb1acd846" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Delete &quot;sample_folder&quot;" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-16T09:30:23.2345286+09:00</LastRunTime>
+    <RunTimes>2</RunTimes>
+    <Revision>5</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables />
+</Script>

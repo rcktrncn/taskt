@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="b2576cbe-568d-4df2-9e58-566e834c8074" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Check Folder Exists sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="83db346f-259d-4573-a607-10da67781c4a" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Check &quot;Resources&quot; Folder. This Folder exists." CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CheckFolderExistsCommand" CommandID="c28cd18b-292a-4d68-a404-5fa0529db904" CommandName="CheckFolderExistsCommand" IsCommented="false" SelectionName="Check Folder Exists" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetFolderName="⦃Folder.ResourcesPath⦄" v_UserVariableName="vResult" v_WaitForFolder="0" v_ResultPath="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="a5a8fe58-211c-46b7-a256-08334c601463" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Result: ⦃vResult⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="8f55e825-b6eb-4464-a0ab-987da36730b5" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Check &quot;C:\my_super_cool_folder&quot; Folder. This Folder should not exists." CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CheckFolderExistsCommand" CommandID="47a2812e-eb65-4b4d-b5ef-9a5c1b355e38" CommandName="CheckFolderExistsCommand" IsCommented="false" SelectionName="Check Folder Exists" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetFolderName="C:\my_super_cool_folder" v_UserVariableName="vResult" v_WaitForFolder="0" v_ResultPath="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="aa48f526-00f7-4178-afbc-aee35e59b36c" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Result: ⦃vResult⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-15T21:45:37.2310421+09:00</LastRunTime>
+    <RunTimes>1</RunTimes>
+    <Revision>1</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vResult</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>
