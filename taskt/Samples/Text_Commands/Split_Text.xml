@@ -2,35 +2,36 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="90994d3b-e379-4b0e-b4da-ace1c26077ef" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Split Text sample" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="90994d3b-e379-4b0e-b4da-ace1c26077ef" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Split Text sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="90994d3b-e379-4b0e-b4da-ace1c26077ef" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Split Text by ," CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="90994d3b-e379-4b0e-b4da-ace1c26077ef" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Split Text by ," CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="SplitTextCommand" CommandID="547f60cf-b4cd-49fc-8f72-d75ad3c06a21" CommandName="SplitTextCommand" IsCommented="false" SelectionName="Split Text" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="tom,25,USA" v_splitCharacter="," v_applyConvertToUserVariableName="vList" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="90994d3b-e379-4b0e-b4da-ace1c26077ef" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Show vList as JSON" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="90994d3b-e379-4b0e-b4da-ace1c26077ef" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Show vList" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ConvertListToJSONCommand" CommandID="2ff7c27e-e8dc-48f6-9c34-94a7e84e4eff" CommandName="ConvertListToJSONCommand" IsCommented="false" SelectionName="Convert List To JSON" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_InputList="vList" v_applyToVariableName="vJSON" />
+      <ScriptCommand xsi:type="ConvertListToVisualizedTextCommand" CommandID="9887ad74-dc0d-4426-83d0-2f5f10afc2a0" CommandName="ConvertListToVisualizedTextCommand" IsCommented="false" SelectionName="Convert List To Visualized Text" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList" v_Result="view" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="MessageBoxCommand" CommandID="db9e2d03-a222-4c03-a6b6-cea9f521e575" CommandName="MessageBoxCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vJSON⦄" v_AutoCloseAfter="0" />
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="4d525f87-c9ae-40c2-8233-b01d20dd8135" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃view⦄" v_AutoCloseAfter="0" v_FontName="MS Gothic" v_FontSize="" />
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.6.0.0</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2022-01-02T12:15:39.6224497+09:00</LastRunTime>
-    <RunTimes>5</RunTimes>
+    <LastRunTime>2024-09-18T22:49:32.1720575+09:00</LastRunTime>
+    <RunTimes>7</RunTimes>
+    <Revision>5</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
   <Variables>
     <ScriptVariable>
-      <VariableName>vJSON</VariableName>
+      <VariableName>view</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
     <ScriptVariable>

@@ -14,27 +14,24 @@
       <ScriptCommand xsi:type="CommentCommand" CommandID="c623b3ba-0521-4e8d-8693-3b2aff73a70b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Split text &quot;Hello world and everyone&quot;" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="0357553b-0de9-4da6-8a0e-801363ac5f8c" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Char.Space means space" CommandEnabled="true" />
+      <ScriptCommand xsi:type="SplitTextCommand" CommandID="3efe3057-fc06-4543-a33c-38daee9b84a9" CommandName="SplitTextCommand" IsCommented="false" SelectionName="Split Text" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="Hello world and everyone" v_splitCharacter=" " v_applyConvertToUserVariableName="vSplit" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="SplitTextCommand" CommandID="3efe3057-fc06-4543-a33c-38daee9b84a9" CommandName="SplitTextCommand" IsCommented="false" SelectionName="Split Text" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="Hello world and everyone" v_splitCharacter="⦃Char.Space⦄" v_applyConvertToUserVariableName="vSplit" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="c623b3ba-0521-4e8d-8693-3b2aff73a70b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Show results" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="c623b3ba-0521-4e8d-8693-3b2aff73a70b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Show results" CommandEnabled="true" />
+      <ScriptCommand xsi:type="ConvertListToVisualizedTextCommand" CommandID="158f8d37-1702-47c1-8f9b-120531073a74" CommandName="ConvertListToVisualizedTextCommand" IsCommented="false" SelectionName="Convert List To Visualized Text" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vSplit" v_Result="view" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ConvertListToVisualizedTextCommand" CommandID="158f8d37-1702-47c1-8f9b-120531073a74" CommandName="ConvertListToVisualizedTextCommand" IsCommented="false" SelectionName="Convert List To Visualized Text" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vSplit" v_Result="view" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="4a4465ef-a71c-41c9-9b40-701cdcb0c0e8" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃view⦄" v_AutoCloseAfter="0" v_FontName="MS Gothic" v_FontSize="" />
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="4a4465ef-a71c-41c9-9b40-701cdcb0c0e8" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃view⦄" v_AutoCloseAfter="0" v_FontName="MS Gothic" v_FontSize="" />
     </ScriptAction>
   </Commands>
   <Info>
     <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2024-09-18T22:57:13.621763+09:00</LastRunTime>
-    <RunTimes>6</RunTimes>
-    <Revision>4</Revision>
+    <LastRunTime>2024-09-18T22:55:08.1620908+09:00</LastRunTime>
+    <RunTimes>5</RunTimes>
+    <Revision>2</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>

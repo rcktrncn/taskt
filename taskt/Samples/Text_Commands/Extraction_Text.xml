@@ -2,10 +2,10 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="7fada3c3-a43c-4553-8c2f-c48abbabe872" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Extraction Text sample" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="7fada3c3-a43c-4553-8c2f-c48abbabe872" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Extraction Text sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="7fada3c3-a43c-4553-8c2f-c48abbabe872" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Get After &quot;years old.&quot;" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="7fada3c3-a43c-4553-8c2f-c48abbabe872" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Get After &quot;years old.&quot;" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="ExtractionTextCommand" CommandID="1c4aa326-6250-4caa-8b99-bcfa9fefb293" CommandName="ExtractionTextCommand" IsCommented="false" SelectionName="Extraction Text" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_InputValue="Hello everyone.My name is tom. 25 years old. I'm from USA." v_TextExtractionType="Extract All After Text" v_applyToVariableName="vResult">
@@ -52,27 +52,26 @@
       </ScriptCommand>
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="MessageBoxCommand" CommandID="1128a8c3-b241-4144-84e9-30d113f43396" CommandName="MessageBoxCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vResult⦄" v_AutoCloseAfter="0" />
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="1128a8c3-b241-4144-84e9-30d113f43396" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vResult⦄" v_AutoCloseAfter="0" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="7fada3c3-a43c-4553-8c2f-c48abbabe872" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Get Before &quot;25 years&quot;" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="7fada3c3-a43c-4553-8c2f-c48abbabe872" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Get Before &quot;25 years&quot;" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="ExtractionTextCommand" CommandID="1c4aa326-6250-4caa-8b99-bcfa9fefb293" CommandName="ExtractionTextCommand" IsCommented="false" SelectionName="Extraction Text" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_InputValue="Hello everyone.My name is tom. 25 years old. I'm from USA." v_TextExtractionType="Extract All Before Text" v_applyToVariableName="vResult">
         <v_TextExtractionTable>
           <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-            <xs:element name="TextExtractionTable010222.122857">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="Parameter_x0020_Name" msdata:ReadOnly="true" type="xs:string" minOccurs="0" />
-                  <xs:element name="Parameter_x0020_Value" type="xs:string" minOccurs="0" />
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
             <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="TextExtractionTable010222.122857" msdata:UseCurrentLocale="true">
               <xs:complexType>
                 <xs:choice minOccurs="0" maxOccurs="unbounded">
-                  <xs:element ref="TextExtractionTable010222.122857" />
+                  <xs:element name="TextExtractionTable010222.122857">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Parameter_x0020_Name" msdata:ReadOnly="true" type="xs:string" minOccurs="0" />
+                        <xs:element name="Parameter_x0020_Value" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
                 </xs:choice>
               </xs:complexType>
             </xs:element>
@@ -103,27 +102,26 @@
       </ScriptCommand>
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="MessageBoxCommand" CommandID="1128a8c3-b241-4144-84e9-30d113f43396" CommandName="MessageBoxCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vResult⦄" v_AutoCloseAfter="0" />
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="1128a8c3-b241-4144-84e9-30d113f43396" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vResult⦄" v_AutoCloseAfter="0" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="7fada3c3-a43c-4553-8c2f-c48abbabe872" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" v_Comment="Get Between &quot;everyone.&quot; to &quot;25&quot;" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="7fada3c3-a43c-4553-8c2f-c48abbabe872" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" v_Comment="Get Between &quot;everyone.&quot; to &quot;25&quot;" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="ExtractionTextCommand" CommandID="1c4aa326-6250-4caa-8b99-bcfa9fefb293" CommandName="ExtractionTextCommand" IsCommented="false" SelectionName="Extraction Text" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_InputValue="Hello everyone.My name is tom. 25 years old. I'm from USA." v_TextExtractionType="Extract All Between Text" v_applyToVariableName="vResult">
         <v_TextExtractionTable>
           <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-            <xs:element name="TextExtractionTable010222.122857">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="Parameter_x0020_Name" msdata:ReadOnly="true" type="xs:string" minOccurs="0" />
-                  <xs:element name="Parameter_x0020_Value" type="xs:string" minOccurs="0" />
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
             <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="TextExtractionTable010222.122857" msdata:UseCurrentLocale="true">
               <xs:complexType>
                 <xs:choice minOccurs="0" maxOccurs="unbounded">
-                  <xs:element ref="TextExtractionTable010222.122857" />
+                  <xs:element name="TextExtractionTable010222.122857">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Parameter_x0020_Name" msdata:ReadOnly="true" type="xs:string" minOccurs="0" />
+                        <xs:element name="Parameter_x0020_Value" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
                 </xs:choice>
               </xs:complexType>
             </xs:element>
@@ -162,14 +160,15 @@
       </ScriptCommand>
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="MessageBoxCommand" CommandID="1128a8c3-b241-4144-84e9-30d113f43396" CommandName="MessageBoxCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vResult⦄" v_AutoCloseAfter="0" />
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="1128a8c3-b241-4144-84e9-30d113f43396" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vResult⦄" v_AutoCloseAfter="0" />
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.6.0.0</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2022-01-02T12:31:48.6438548+09:00</LastRunTime>
-    <RunTimes>1</RunTimes>
+    <LastRunTime>2024-09-18T22:50:13.2166752+09:00</LastRunTime>
+    <RunTimes>2</RunTimes>
+    <Revision>2</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
