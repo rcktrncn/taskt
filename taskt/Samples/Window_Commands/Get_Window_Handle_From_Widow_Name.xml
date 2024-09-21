@@ -23,7 +23,10 @@
       <ScriptCommand xsi:type="CommentCommand" CommandID="61e6dd12-679d-475d-9ebf-5af777331b44" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Window Handle is used for Window Handle Action group commands, etc." CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="cda9607a-5aff-4d6a-ac6e-c55f01139ee1" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" v_Comment="Please Close UIAutomation Tester :-)" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="6f42fc0a-ef4a-449e-b222-580458100304" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" v_Comment="Window Handle can also be obtained with Start Application command" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="cda9607a-5aff-4d6a-ac6e-c55f01139ee1" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" v_Comment="Please Close UIAutomation Tester :-)" CommandEnabled="true" />
     </ScriptAction>
   </Commands>
   <Info>
@@ -31,7 +34,7 @@
     <Author />
     <LastRunTime>2024-09-21T21:58:01.1352629+09:00</LastRunTime>
     <RunTimes>5</RunTimes>
-    <Revision>12</Revision>
+    <Revision>13</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>

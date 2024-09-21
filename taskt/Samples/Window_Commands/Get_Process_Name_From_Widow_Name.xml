@@ -25,13 +25,16 @@
     <ScriptAction>
       <ScriptCommand xsi:type="StopApplicationCommand" CommandID="087160f4-c6fe-4e95-8e84-e28143f5f452" CommandName="StopApplicationCommand" IsCommented="false" SelectionName="Stop Application" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_ProgramShortName="⦃vProcName⦄" />
     </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="843a9158-c428-424d-8750-b8632cc43b32" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" v_Comment="Process Name can also be obtained with Start Application command" CommandEnabled="true" />
+    </ScriptAction>
   </Commands>
   <Info>
     <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
     <LastRunTime>2024-09-21T21:55:20.1848387+09:00</LastRunTime>
     <RunTimes>4</RunTimes>
-    <Revision>9</Revision>
+    <Revision>11</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
