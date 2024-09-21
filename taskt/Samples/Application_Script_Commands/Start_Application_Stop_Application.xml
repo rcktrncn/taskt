@@ -5,7 +5,7 @@
       <ScriptCommand xsi:type="CommentCommand" CommandID="46d759f0-096c-456d-bdd1-4bef343edcf8" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Start Application, Stop Application Sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="46d759f0-096c-456d-bdd1-4bef343edcf8" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Start Noteapd" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="46d759f0-096c-456d-bdd1-4bef343edcf8" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Start Noteapd. Assign Process Name to vAppName." CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="StartApplicationCommand" CommandID="2a047182-69bd-40a8-9e48-5d615e9d25f0" CommandName="StartApplicationCommand" IsCommented="false" SelectionName="Start Application" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_ProgramName="notepad" v_WaitForExit="No" v_StartedProcessName="vAppName" />
@@ -17,7 +17,7 @@
       <ScriptCommand xsi:type="PauseScriptCommand" CommandID="8951444c-37c7-4044-a241-9f11cf4662a8" CommandName="PauseScriptCommand" IsCommented="false" SelectionName="Pause Script" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_PauseLength="3000" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="46d759f0-096c-456d-bdd1-4bef343edcf8" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Stop Notepad" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="46d759f0-096c-456d-bdd1-4bef343edcf8" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Stop Notepad. Specify Process Name, not Window Name" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="StopApplicationCommand" CommandID="9b1c63e4-4531-4e5e-bd1e-d7b4f2486c4c" CommandName="StopApplicationCommand" IsCommented="false" SelectionName="Stop Application" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_ProgramShortName="⦃vAppName⦄" />
@@ -28,7 +28,7 @@
     <Author />
     <LastRunTime>2024-09-14T22:03:43.2786215+09:00</LastRunTime>
     <RunTimes>11</RunTimes>
-    <Revision>2</Revision>
+    <Revision>4</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>

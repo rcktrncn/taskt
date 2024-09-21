@@ -2,70 +2,42 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="58d68a13-25ef-428a-ae64-070c60d8d5bc" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Move Window Sample" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="5ef83410-2ec5-40b6-92de-3f7df58fe593" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Move Window Sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="58d68a13-25ef-428a-ae64-070c60d8d5bc" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Execute Notepad" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="d27080f3-d96f-4b60-a61b-8e58c535f359" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Execute UIAutomationTester" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="StartProcessCommand" CommandID="22474ff1-5f83-4d69-96fc-afc3559cc4d5" CommandName="StartProcessCommand" IsCommented="false" SelectionName="Start Process" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_ProgramName="notepad" />
+      <ScriptCommand xsi:type="StartApplicationCommand" CommandID="db3aadbd-0247-47f3-9905-e23499e018da" CommandName="StartApplicationCommand" IsCommented="false" SelectionName="Start Application" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_ProgramName="⦃Folder.SamplesPath⦄\Resources\UIAutomationTester.exe" v_ProgramArgs="" v_WaitForExit="" v_StartedProcessName="" v_WindowName="" v_WindowHandle="" v_WaitTimeForExecute="2000" v_WaitTimeBeforeNext="2000" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="PauseCommand" CommandID="2b600e23-707d-4b1d-9c0d-5e09b0dcdbdc" CommandName="PauseCommand" IsCommented="false" SelectionName="Pause Script" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_PauseLength="2000" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="4937d74a-811f-493a-a08f-ae644269764d" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Move to (0, 0). Top-Left" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="58d68a13-25ef-428a-ae64-070c60d8d5bc" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Get Notepad position" CommandEnabled="true" />
+      <ScriptCommand xsi:type="MoveWindowCommand" CommandID="7578ffb4-c355-4acc-b7f1-bd9443ca704a" CommandName="MoveWindowCommand" IsCommented="false" SelectionName="Move Window" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="UIAutomation Tester" v_CompareMethod="" v_WaitTimeForWindow="60" v_NameResult="" v_HandleResult="" v_MatchMethod="" v_TargetWindowIndex="0" v_XPosition="0" v_YPosition="0" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="GetWindowPositionCommand" CommandID="545fc593-ee87-4359-b221-136d02dde128" CommandName="GetWindowPositionCommand" IsCommented="false" SelectionName="Get Window Position" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="𝕂%kwd_current_window%𝕎" v_VariablePositionX="x" v_VariablePositionY="y" />
+      <ScriptCommand xsi:type="PauseScriptCommand" CommandID="17101e13-d2df-45f1-ae68-0ac246a93748" CommandName="PauseScriptCommand" IsCommented="false" SelectionName="Pause Script" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_PauseLength="2000" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="58d68a13-25ef-428a-ae64-070c60d8d5bc" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Move to Left-Top" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="fa3e0ab1-2239-4495-8b8d-d2eeae7c56cc" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Move to (100, 100)" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="MoveWindowCommand" CommandID="31b119ad-1a91-4a84-9906-5a0b8969ffa1" CommandName="MoveWindowCommand" IsCommented="false" SelectionName="Move Window" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="𝕂%kwd_current_window%𝕎" v_XWindowPosition="0" v_YWindowPosition="0" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="PauseCommand" CommandID="2b600e23-707d-4b1d-9c0d-5e09b0dcdbdc" CommandName="PauseCommand" IsCommented="false" SelectionName="Pause Script" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_PauseLength="2000" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="58d68a13-25ef-428a-ae64-070c60d8d5bc" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" v_Comment="Move to (400, 400)" CommandEnabled="true" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="MoveWindowCommand" CommandID="31b119ad-1a91-4a84-9906-5a0b8969ffa1" CommandName="MoveWindowCommand" IsCommented="false" SelectionName="Move Window" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="𝕂%kwd_current_window%𝕎" v_XWindowPosition="400" v_YWindowPosition="400" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="PauseCommand" CommandID="2b600e23-707d-4b1d-9c0d-5e09b0dcdbdc" CommandName="PauseCommand" IsCommented="false" SelectionName="Pause Script" DefaultPause="0" LineNumber="12" PauseBeforeExeucution="false" CommandEnabled="true" v_PauseLength="2000" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="58d68a13-25ef-428a-ae64-070c60d8d5bc" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="13" PauseBeforeExeucution="false" v_Comment="Move to first position" CommandEnabled="true" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="MoveWindowCommand" CommandID="31b119ad-1a91-4a84-9906-5a0b8969ffa1" CommandName="MoveWindowCommand" IsCommented="false" SelectionName="Move Window" DefaultPause="0" LineNumber="14" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="𝕂%kwd_current_window%𝕎" v_XWindowPosition="⦃x⦄" v_YWindowPosition="⦃y⦄" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="58d68a13-25ef-428a-ae64-070c60d8d5bc" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="15" PauseBeforeExeucution="false" v_Comment="Please close Notepad after finished :-)" CommandEnabled="true" />
+      <ScriptCommand xsi:type="MoveWindowCommand" CommandID="a03ab746-7f98-4270-845d-9ced8d0bac77" CommandName="MoveWindowCommand" IsCommented="false" SelectionName="Move Window" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="UIAutomation Tester" v_CompareMethod="" v_WaitTimeForWindow="60" v_NameResult="" v_HandleResult="" v_MatchMethod="" v_TargetWindowIndex="0" v_XPosition="100" v_YPosition="100" />
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.5.0.29</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2021-09-08T13:01:44.668247+09:00</LastRunTime>
-    <RunTimes>7</RunTimes>
+    <LastRunTime>2024-09-21T22:00:58.6785513+09:00</LastRunTime>
+    <RunTimes>6</RunTimes>
+    <Revision>14</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
   <Variables>
     <ScriptVariable>
-      <VariableName>vNotepadTitle</VariableName>
-      <VariableValue xsi:type="xsd:string"></VariableValue>
-    </ScriptVariable>
-    <ScriptVariable>
-      <VariableName>x</VariableName>
-      <VariableValue xsi:type="xsd:string"></VariableValue>
-    </ScriptVariable>
-    <ScriptVariable>
-      <VariableName>y</VariableName>
+      <VariableName>vHandle</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
   </Variables>
