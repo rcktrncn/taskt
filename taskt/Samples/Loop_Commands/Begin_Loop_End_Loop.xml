@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="279cf50e-6fba-487b-82f3-9a9d0fdef02b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Begin Loop, Exit Loop sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="045be871-6650-4899-9e48-262b7f14b5eb" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Set vValue is 0" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CreateNumericalVariableCommand" CommandID="41155a07-1aeb-4ca4-a4e2-510ca46c7ed2" CommandName="CreateNumericalVariableCommand" IsCommented="false" SelectionName="Create Numerical Variable" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_VariableName="vValue" v_NumberValue="0" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="59da292a-33fb-4d76-a4e3-f01f67954d75" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Loop 5 times" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="BeginLoopCommand" CommandID="fb03a828-46f2-47ae-982c-431cdb2a23c1" CommandName="BeginLoopCommand" IsCommented="false" SelectionName="Begin Loop" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_LoopActionType="Numeric Compare">
+        <v_LoopActionParameterTable>
+          <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+            <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="LoopAc午ionPara34Table091624.113455" msdata:UseCurrentLocale="true">
+              <xs:complexType>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element name="LoopAc午ionPara34Table091624.113455">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Parameter_x0020_Name" type="xs:string" minOccurs="0" />
+                        <xs:element name="Parameter_x0020_Value" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+          </xs:schema>
+          <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+            <DocumentElement>
+              <LoopAc午ionPara34Table091624.113455 diffgr:id="LoopAc午ionPara34Table091624.1134551" msdata:rowOrder="0" diffgr:hasChanges="modified">
+                <Parameter_x0020_Name>Value1</Parameter_x0020_Name>
+                <Parameter_x0020_Value>⦃vValue⦄</Parameter_x0020_Value>
+              </LoopAc午ionPara34Table091624.113455>
+              <LoopAc午ionPara34Table091624.113455 diffgr:id="LoopAc午ionPara34Table091624.1134552" msdata:rowOrder="1" diffgr:hasChanges="modified">
+                <Parameter_x0020_Name>Operand</Parameter_x0020_Name>
+                <Parameter_x0020_Value>is less than</Parameter_x0020_Value>
+              </LoopAc午ionPara34Table091624.113455>
+              <LoopAc午ionPara34Table091624.113455 diffgr:id="LoopAc午ionPara34Table091624.1134553" msdata:rowOrder="2" diffgr:hasChanges="modified">
+                <Parameter_x0020_Name>Value2</Parameter_x0020_Name>
+                <Parameter_x0020_Value>5</Parameter_x0020_Value>
+              </LoopAc午ionPara34Table091624.113455>
+            </DocumentElement>
+            <diffgr:before>
+              <LoopAc午ionPara34Table091624.113455 diffgr:id="LoopAc午ionPara34Table091624.1134551" msdata:rowOrder="0">
+                <Parameter_x0020_Name>Value1</Parameter_x0020_Name>
+                <Parameter_x0020_Value>{vValue}</Parameter_x0020_Value>
+              </LoopAc午ionPara34Table091624.113455>
+              <LoopAc午ionPara34Table091624.113455 diffgr:id="LoopAc午ionPara34Table091624.1134552" msdata:rowOrder="1">
+                <Parameter_x0020_Name>Operand</Parameter_x0020_Name>
+                <Parameter_x0020_Value>is less than</Parameter_x0020_Value>
+              </LoopAc午ionPara34Table091624.113455>
+              <LoopAc午ionPara34Table091624.113455 diffgr:id="LoopAc午ionPara34Table091624.1134553" msdata:rowOrder="2">
+                <Parameter_x0020_Name>Value2</Parameter_x0020_Name>
+                <Parameter_x0020_Value>5</Parameter_x0020_Value>
+              </LoopAc午ionPara34Table091624.113455>
+            </diffgr:before>
+          </diffgr:diffgram>
+        </v_LoopActionParameterTable>
+      </ScriptCommand>
+      <AdditionalScriptCommands>
+        <ScriptCommand xsi:type="ShowMessageCommand" CommandID="9195f616-c95e-4942-8630-e3682975dd1b" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Value: ⦃vValue⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+      </AdditionalScriptCommands>
+      <AdditionalScriptCommands>
+        <ScriptCommand xsi:type="IncreaseNumericalVariableCommand" CommandID="b276aa53-71c6-4709-be95-cb6b6e4ac8ff" CommandName="IncreaseNumericalVariableCommand" IsCommented="false" SelectionName="Increase Numerical Variable" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_VariableName="vValue" v_Value="" />
+      </AdditionalScriptCommands>
+      <AdditionalScriptCommands>
+        <ScriptCommand xsi:type="EndLoopCommand" CommandID="3cd639fa-9f78-4229-a85a-d4658bf16b53" CommandName="EndLoopCommand" IsCommented="false" SelectionName="End Loop" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" />
+      </AdditionalScriptCommands>
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-16T11:36:22.0454085+09:00</LastRunTime>
+    <RunTimes>1</RunTimes>
+    <Revision>2</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vValue</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>

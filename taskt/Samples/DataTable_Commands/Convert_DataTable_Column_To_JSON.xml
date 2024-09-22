@@ -2,26 +2,25 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="ca09818d-9035-41f8-bf98-0f824b3c774d" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Convert DataTable Column To JSON sample" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="ca09818d-9035-41f8-bf98-0f824b3c774d" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Convert DataTable Column To JSON sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="ca09818d-9035-41f8-bf98-0f824b3c774d" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Create DataTable vTable ( name, age, contry )" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="ca09818d-9035-41f8-bf98-0f824b3c774d" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Create DataTable vTable ( name, age, contry )" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CreateDataTableCommand" CommandID="a07da8ca-3ca5-47b2-b397-46c417e311af" CommandName="CreateDataTableCommand" IsCommented="false" SelectionName="Create DataTable" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTableName="vTable">
+      <ScriptCommand xsi:type="CreateDataTableCommand" CommandID="a07da8ca-3ca5-47b2-b397-46c417e311af" CommandName="CreateDataTableCommand" IsCommented="false" SelectionName="Create DataTable" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTable="vTable">
         <v_ColumnNameDataTable>
           <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-            <xs:element name="ColumnNameDataTable010122.024700">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="Column_x0020_Name" type="xs:string" minOccurs="0" />
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
             <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ColumnNameDataTable010122.024700" msdata:UseCurrentLocale="true">
               <xs:complexType>
                 <xs:choice minOccurs="0" maxOccurs="unbounded">
-                  <xs:element ref="ColumnNameDataTable010122.024700" />
+                  <xs:element name="ColumnNameDataTable010122.024700">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Column_x0020_Name" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
                 </xs:choice>
               </xs:complexType>
             </xs:element>
@@ -54,24 +53,23 @@
       </ScriptCommand>
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="ca09818d-9035-41f8-bf98-0f824b3c774d" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Add 2 rows" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="ca09818d-9035-41f8-bf98-0f824b3c774d" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Add 2 rows" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="AddDataTableRowCommand" CommandID="88803458-78d0-41eb-b282-efaafb486c05" CommandName="AddDataTableRowCommand" IsCommented="false" SelectionName="Add DataTable Row" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTableName="vTable">
+      <ScriptCommand xsi:type="AddDataTableRowCommand" CommandID="88803458-78d0-41eb-b282-efaafb486c05" CommandName="AddDataTableRowCommand" IsCommented="false" SelectionName="Add DataTable Row" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTable="vTable">
         <v_AddDataDataTable>
           <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-            <xs:element name="AddDataDataTable010122.024709">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="Column_x0020_Name" type="xs:string" minOccurs="0" />
-                  <xs:element name="Data" type="xs:string" minOccurs="0" />
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
             <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="AddDataDataTable010122.024709" msdata:UseCurrentLocale="true">
               <xs:complexType>
                 <xs:choice minOccurs="0" maxOccurs="unbounded">
-                  <xs:element ref="AddDataDataTable010122.024709" />
+                  <xs:element name="AddDataDataTable010122.024709">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Column_x0020_Name" type="xs:string" minOccurs="0" />
+                        <xs:element name="Data" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
                 </xs:choice>
               </xs:complexType>
             </xs:element>
@@ -110,21 +108,20 @@
       </ScriptCommand>
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="AddDataTableRowCommand" CommandID="88803458-78d0-41eb-b282-efaafb486c05" CommandName="AddDataTableRowCommand" IsCommented="false" SelectionName="Add DataTable Row" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTableName="vTable">
+      <ScriptCommand xsi:type="AddDataTableRowCommand" CommandID="88803458-78d0-41eb-b282-efaafb486c05" CommandName="AddDataTableRowCommand" IsCommented="false" SelectionName="Add DataTable Row" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTable="vTable">
         <v_AddDataDataTable>
           <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-            <xs:element name="AddDataDataTable010122.024709">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="Column_x0020_Name" type="xs:string" minOccurs="0" />
-                  <xs:element name="Data" type="xs:string" minOccurs="0" />
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
             <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="AddDataDataTable010122.024709" msdata:UseCurrentLocale="true">
               <xs:complexType>
                 <xs:choice minOccurs="0" maxOccurs="unbounded">
-                  <xs:element ref="AddDataDataTable010122.024709" />
+                  <xs:element name="AddDataDataTable010122.024709">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Column_x0020_Name" type="xs:string" minOccurs="0" />
+                        <xs:element name="Data" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
                 </xs:choice>
               </xs:complexType>
             </xs:element>
@@ -163,23 +160,33 @@
       </ScriptCommand>
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="ca09818d-9035-41f8-bf98-0f824b3c774d" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Convert vTable column &quot;name&quot; to vJSON (convert to JSON array)" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="39dde80c-fe7d-4780-a54a-12325d921fc2" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Show vTable" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ConvertDataTableColumnToJSONCommand" CommandID="079ae047-13fd-45f2-8042-934c57eb5a06" CommandName="ConvertDataTableColumnToJSONCommand" IsCommented="false" SelectionName="Convert DataTable Column To JSON" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTableName="vTable" v_DataColumnIndex="name" v_OutputVariableName="vJSON" />
+      <ScriptCommand xsi:type="ConvertDataTableToVisualizedTextCommand" CommandID="2e73e006-93e8-46bd-87f0-c0f5baa7a9b8" CommandName="ConvertDataTableToVisualizedTextCommand" IsCommented="false" SelectionName="Convert DataTable To Visualized Text" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTable="vTable" v_Result="view" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="ca09818d-9035-41f8-bf98-0f824b3c774d" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" v_Comment="Show vJSON" CommandEnabled="true" />
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="36f30d16-1fbe-4828-865c-b0ab741a5ea8" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃view⦄" v_AutoCloseAfter="0" v_FontName="MS Gothic" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="MessageBoxCommand" CommandID="b46c2885-1cdb-4c27-b07e-05a694c8ce87" CommandName="MessageBoxCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vJSON⦄" v_AutoCloseAfter="0" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="ca09818d-9035-41f8-bf98-0f824b3c774d" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" v_Comment="Convert vTable column &quot;name&quot; to vJSON (convert to JSON array)" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ConvertDataTableColumnToJSONCommand" CommandID="079ae047-13fd-45f2-8042-934c57eb5a06" CommandName="ConvertDataTableColumnToJSONCommand" IsCommented="false" SelectionName="Convert DataTable Column To JSON" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTable="vTable" v_ColumnIndex="name" v_Result="vJSON" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="ca09818d-9035-41f8-bf98-0f824b3c774d" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="12" PauseBeforeExeucution="false" v_Comment="Show vJSON" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="b46c2885-1cdb-4c27-b07e-05a694c8ce87" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="13" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vJSON⦄" v_AutoCloseAfter="0" />
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.5.0.56</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2022-01-01T16:34:37.5378495+09:00</LastRunTime>
-    <RunTimes>17</RunTimes>
+    <LastRunTime>2024-09-07T17:22:06.9110723+09:00</LastRunTime>
+    <RunTimes>18</RunTimes>
+    <Revision>1</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
@@ -190,6 +197,10 @@
     </ScriptVariable>
     <ScriptVariable>
       <VariableName>vTable</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>view</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
   </Variables>

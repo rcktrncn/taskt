@@ -2,27 +2,26 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="10113c24-0a57-441f-ad3a-85679e0e4ac1" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Add Dictionary Item sample" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="10113c24-0a57-441f-ad3a-85679e0e4ac1" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Add Dictionary Item sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="10113c24-0a57-441f-ad3a-85679e0e4ac1" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Create Dictionary ⦃ &quot;name&quot;: &quot;tom&quot;, &quot;age&quot;: 25 ⦄ (JSON like)" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="10113c24-0a57-441f-ad3a-85679e0e4ac1" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Create Dictionary ⦃ &quot;name&quot;: &quot;tom&quot;, &quot;age&quot;: 25 ⦄ (JSON like)" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CreateDictionaryCommand" CommandID="54ad6f81-4597-4363-a0c3-6d003fa2ff2b" CommandName="CreateDictionaryCommand" IsCommented="false" SelectionName="Create Dictionary" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_DictionaryName="myDic">
+      <ScriptCommand xsi:type="CreateDictionaryCommand" CommandID="54ad6f81-4597-4363-a0c3-6d003fa2ff2b" CommandName="CreateDictionaryCommand" IsCommented="false" SelectionName="Create Dictionary" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_Dictionary="myDic">
         <v_ColumnNameDataTable>
           <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-            <xs:element name="ColumnNameDataTable122121.115710">
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="Keys" type="xs:string" minOccurs="0" />
-                  <xs:element name="Values" type="xs:string" minOccurs="0" />
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
             <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ColumnNameDataTable122121.115710" msdata:UseCurrentLocale="true">
               <xs:complexType>
                 <xs:choice minOccurs="0" maxOccurs="unbounded">
-                  <xs:element ref="ColumnNameDataTable122121.115710" />
+                  <xs:element name="ColumnNameDataTable122121.115710">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Keys" type="xs:string" minOccurs="0" />
+                        <xs:element name="Values" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
                 </xs:choice>
               </xs:complexType>
             </xs:element>
@@ -53,10 +52,19 @@
       </ScriptCommand>
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="10113c24-0a57-441f-ad3a-85679e0e4ac1" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Add Item contry" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="ac65e58b-9e5e-4995-a1a2-87c67ab7ff4a" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Show Dictionary Keys &amp; Items" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="AddDictionaryCommand" CommandID="82f49777-bf73-48b8-9808-57ddd40a99bc" CommandName="AddDictionaryItemCommand" IsCommented="false" SelectionName="Add Dictionary Item" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_DictionaryName="myDic">
+      <ScriptCommand xsi:type="ConvertDictionaryToVisualizedTextCommand" CommandID="04a38963-f7ea-4383-8168-7899848d6f99" CommandName="ConvertDictionaryToVisualizedTextCommand" IsCommented="false" SelectionName="Covnert Dictionary To Visualized Text" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_Dictionary="myDic" v_Result="view" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="ff452c4e-5ddc-4c9f-baff-a8c5900aab7c" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃view⦄" v_AutoCloseAfter="0" v_FontName="MS Gothic" v_FontSize="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="10113c24-0a57-441f-ad3a-85679e0e4ac1" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Add Item contry" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="AddDictionaryItemCommand" CommandID="82f49777-bf73-48b8-9808-57ddd40a99bc" CommandName="AddDictionaryItemCommand" IsCommented="false" SelectionName="Add Dictionary Item" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_Dictionary="myDic">
         <v_ColumnNameDataTable>
           <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
             <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ColumnNameDataTable122921.053116" msdata:UseCurrentLocale="true">
@@ -92,20 +100,21 @@
       </ScriptCommand>
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="10113c24-0a57-441f-ad3a-85679e0e4ac1" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Show Dictionary Keys &amp; Items" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="10113c24-0a57-441f-ad3a-85679e0e4ac1" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" v_Comment="Show Dictionary Keys &amp; Items" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ConvertDictionaryToJSONCommand" CommandID="554bafd4-c0df-4f75-abd6-0289a82907d2" CommandName="ConvertDictionaryToJSONCommand" IsCommented="false" SelectionName="Convert Dictionary To JSON" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_InputData="myDic" v_OutputVariable="vJSON" />
+      <ScriptCommand xsi:type="ConvertDictionaryToVisualizedTextCommand" CommandID="26712a6f-e9e8-41e4-ba68-f4cb86010698" CommandName="ConvertDictionaryToVisualizedTextCommand" IsCommented="false" SelectionName="Covnert Dictionary To Visualized Text" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" CommandEnabled="true" v_Dictionary="myDic" v_Result="view" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="MessageBoxCommand" CommandID="6207acf0-9a2d-4467-8422-ff0eb0194059" CommandName="MessageBoxCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vJSON⦄" v_AutoCloseAfter="0" />
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="fda0ed58-d3bd-4d03-a6d1-840877e2fe7e" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃view⦄" v_AutoCloseAfter="0" v_FontName="MS Gothic" v_FontSize="" />
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.5.0.55</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2021-12-29T17:32:31.8130711+09:00</LastRunTime>
-    <RunTimes>2</RunTimes>
+    <LastRunTime>2024-09-07T11:18:58.3487469+09:00</LastRunTime>
+    <RunTimes>4</RunTimes>
+    <Revision>2</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
@@ -115,7 +124,7 @@
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
     <ScriptVariable>
-      <VariableName>vJSON</VariableName>
+      <VariableName>view</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
   </Variables>

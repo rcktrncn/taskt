@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="eb38f6fb-84df-4ac3-9096-0ca4549b87ca" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Join List Items As Text command sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="8ec33234-8803-488a-81ae-22594a737881" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="vList is [ &quot;Hi&quot;, &quot;Hey&quot;, &quot;Hello&quot; ]" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CreateListCommand" CommandID="cd634813-89d7-4831-9649-c60a92fbff6b" CommandName="CreateListCommand" IsCommented="false" SelectionName="Create List" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList">
+        <v_ListValues>
+          <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+            <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ListValues090524.104131" msdata:UseCurrentLocale="true">
+              <xs:complexType>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element name="ListValues090524.104131">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Values" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+          </xs:schema>
+          <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+            <DocumentElement>
+              <ListValues090524.104131 diffgr:id="ListValues090524.1041311" msdata:rowOrder="0" diffgr:hasChanges="modified">
+                <Values>Hi</Values>
+              </ListValues090524.104131>
+              <ListValues090524.104131 diffgr:id="ListValues090524.1041312" msdata:rowOrder="1" diffgr:hasChanges="modified">
+                <Values>Hey</Values>
+              </ListValues090524.104131>
+              <ListValues090524.104131 diffgr:id="ListValues090524.1041313" msdata:rowOrder="2" diffgr:hasChanges="modified">
+                <Values>Hello</Values>
+              </ListValues090524.104131>
+            </DocumentElement>
+            <diffgr:before>
+              <ListValues090524.104131 diffgr:id="ListValues090524.1041311" msdata:rowOrder="0">
+                <Values>Hi</Values>
+              </ListValues090524.104131>
+              <ListValues090524.104131 diffgr:id="ListValues090524.1041312" msdata:rowOrder="1">
+                <Values>Hey</Values>
+              </ListValues090524.104131>
+              <ListValues090524.104131 diffgr:id="ListValues090524.1041313" msdata:rowOrder="2">
+                <Values>Hello</Values>
+              </ListValues090524.104131>
+            </diffgr:before>
+          </diffgr:diffgram>
+        </v_ListValues>
+      </ScriptCommand>
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="JoinListValuesAsTextCommand" CommandID="b0f17e07-68ae-425c-968e-4d418d2edf5e" CommandName="JoinListValuesAsTextCommand" IsCommented="false" SelectionName="Join List Values As Text" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList" v_Result="view" v_Separator="," v_BeforeText="" v_AfterText="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="acb31f79-f605-4af5-9db0-e4f4507927b8" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃view⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-05T22:46:53.1131188+09:00</LastRunTime>
+    <RunTimes>5</RunTimes>
+    <Revision>7</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>view</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vList</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>

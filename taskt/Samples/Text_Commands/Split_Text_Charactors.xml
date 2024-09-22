@@ -2,45 +2,47 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="dedaa487-a0bb-4bd5-955d-4a0f6a89b865" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Split NewLine" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="dedaa487-a0bb-4bd5-955d-4a0f6a89b865" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Split Text Charactors sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="dedaa487-a0bb-4bd5-955d-4a0f6a89b865" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Set Text in 'vText'" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="dedaa487-a0bb-4bd5-955d-4a0f6a89b865" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Set Text in 'vText'" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="VariableCommand" CommandID="87038574-d92b-4bbf-8055-0291b130f31a" CommandName="VariableCommand" IsCommented="false" SelectionName="Set Variable" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="vText" v_Input="Hello" v_ReplaceInputVariables="Yes" />
+      <ScriptCommand xsi:type="CreateTextVariableCommand" CommandID="4bd5096c-45b1-42a1-a106-a81a73bd39ac" CommandName="CreateTextVariableCommand" IsCommented="false" SelectionName="Create Text Variable" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="vText" v_Value="Hello" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="MessageBoxCommand" CommandID="2c43e953-da67-43a8-9da2-ac3d62aa8f1d" CommandName="MessageBoxCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vText⦄" v_AutoCloseAfter="0" />
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="2c43e953-da67-43a8-9da2-ac3d62aa8f1d" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vText⦄" v_AutoCloseAfter="0" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="dedaa487-a0bb-4bd5-955d-4a0f6a89b865" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Delimiter [crLF] means new line" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="dedaa487-a0bb-4bd5-955d-4a0f6a89b865" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Delimiter [crLF] means charactors" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="SplitTextCommand" CommandID="de5105fd-d635-4ff6-a510-a268a0e8536d" CommandName="SplitTextCommand" IsCommented="false" SelectionName="Split Text" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="⦃vText⦄" v_splitCharacter="[chars]" v_applyConvertToUserVariableName="vSplitResult" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="dedaa487-a0bb-4bd5-955d-4a0f6a89b865" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Show split result" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="dedaa487-a0bb-4bd5-955d-4a0f6a89b865" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Show split result" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="BeginListLoopCommand" CommandID="c5c9d67e-3959-4f3e-8275-f05894867e02" CommandName="BeginListLoopCommand" IsCommented="false" SelectionName="Loop List" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_LoopParameter="⦃vSplitResult⦄" />
-      <AdditionalScriptCommands>
-        <ScriptCommand xsi:type="MessageBoxCommand" CommandID="bc7ed8a6-ee02-4efc-ad8c-5c90eb643672" CommandName="MessageBoxCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vSplitResult⦄" v_AutoCloseAfter="0" />
-      </AdditionalScriptCommands>
-      <AdditionalScriptCommands>
-        <ScriptCommand xsi:type="EndLoopCommand" CommandID="35ec8cd9-cf23-410b-ae07-8c116da9f02c" CommandName="EndLoopCommand" IsCommented="false" SelectionName="End Loop" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" CommandEnabled="true" />
-      </AdditionalScriptCommands>
+      <ScriptCommand xsi:type="ConvertListToVisualizedTextCommand" CommandID="158f8d37-1702-47c1-8f9b-120531073a74" CommandName="ConvertListToVisualizedTextCommand" IsCommented="false" SelectionName="Convert List To Visualized Text" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vSplitResult" v_Result="view" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="4a4465ef-a71c-41c9-9b40-701cdcb0c0e8" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃view⦄" v_AutoCloseAfter="0" v_FontName="MS Gothic" v_FontSize="" />
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.6.0.0</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2021-09-04T23:08:23.3669289+09:00</LastRunTime>
-    <RunTimes>2</RunTimes>
+    <LastRunTime>2024-09-18T22:52:42.1307458+09:00</LastRunTime>
+    <RunTimes>3</RunTimes>
+    <Revision>2</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
   <Variables>
+    <ScriptVariable>
+      <VariableName>view</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
     <ScriptVariable>
       <VariableName>vSplitResult</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>

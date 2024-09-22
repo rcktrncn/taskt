@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="011e220d-13ff-4a60-89e3-02b207cb84b9" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Get Cos, Get Sin, Get Tan sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="GetCosCommand" CommandID="48e604ae-6a87-4dea-91a3-256aa410ca68" CommandName="GetCosCommand" IsCommented="false" SelectionName="Get Cos" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" CommandEnabled="true" v_Value="45" v_Result="vCos" v_AngleType="Degree" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="GetSinCommand" CommandID="92f1c407-32ad-459e-870c-37941b8d74e5" CommandName="GetSinCommand" IsCommented="false" SelectionName="Get Sin" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_Value="45" v_Result="vSin" v_AngleType="Degree" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="GetTanCommand" CommandID="585ecdbb-670a-47fd-a8b9-af8921385f2a" CommandName="GetTanCommand" IsCommented="false" SelectionName="Get Tan" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_Value="45" v_Result="vTan" v_AngleType="Degree" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="e551436a-45bf-4231-8160-33c6d5a27e3d" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Cos: ⦃vCos⦄&#xD;&#xA;Sin: ⦃vSin⦄&#xD;&#xA;Tan: ⦃vTan⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-16T12:21:53.3479082+09:00</LastRunTime>
+    <RunTimes>1</RunTimes>
+    <Revision>2</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vCos</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vSin</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vTan</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>

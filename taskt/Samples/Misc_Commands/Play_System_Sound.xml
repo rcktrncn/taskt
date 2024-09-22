@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="6e5fdf09-7b25-4dc6-885d-99c7ee66bd3e" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Play System Sound sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="PlaySystemSoundCommand" CommandID="e7504836-4fd1-4e0e-82f4-ae5e5572f051" CommandName="PlaySystemSoundCommand" IsCommented="false" SelectionName="Play System Sound" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" CommandEnabled="true" v_SoundType="Asterisk" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="PauseScriptCommand" CommandID="873b6c91-8581-4c26-8858-dd3a62b4b03e" CommandName="PauseScriptCommand" IsCommented="false" SelectionName="Pause Script" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_PauseLength="1500" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="PlaySystemSoundCommand" CommandID="d276ae1b-8fb0-4eed-a8ed-ef6b80c4fdcd" CommandName="PlaySystemSoundCommand" IsCommented="false" SelectionName="Play System Sound" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_SoundType="Beep" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="PauseScriptCommand" CommandID="ec859f81-a7d9-4a7d-806c-e6050ac9ef57" CommandName="PauseScriptCommand" IsCommented="false" SelectionName="Pause Script" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_PauseLength="1500" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="PlaySystemSoundCommand" CommandID="d276ae1b-8fb0-4eed-a8ed-ef6b80c4fdcd" CommandName="PlaySystemSoundCommand" IsCommented="false" SelectionName="Play System Sound" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_SoundType="Exclamation" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="PauseScriptCommand" CommandID="ec859f81-a7d9-4a7d-806c-e6050ac9ef57" CommandName="PauseScriptCommand" IsCommented="false" SelectionName="Pause Script" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_PauseLength="1500" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-16T14:45:07.8323567+09:00</LastRunTime>
+    <RunTimes>4</RunTimes>
+    <Revision>6</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables />
+</Script>

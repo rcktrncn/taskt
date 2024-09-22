@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="6e8d6c41-4353-429b-bdc3-16ad381346ef" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Run By Script File use Assing Variable Sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExtractionFilePathCommand" CommandID="ed3525fe-3ab1-4125-9d06-52455a6556b6" CommandName="ExtractionFilePathCommand" IsCommented="false" SelectionName="Extraction File Path" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" CommandEnabled="true" v_SourceFilePath="⦃File.CurrentScriptFile⦄" v_Format="Folder" v_Result="vDirPath" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="RunScriptFileCommand" CommandID="992136aa-ccc9-4ea1-81fd-7c01dd563583" CommandName="RunScriptFileCommand" IsCommented="false" SelectionName="Run Script File" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" v_Comment="Run &quot;Run_By_Run_Script_File_Assing_Variable.xml&quot; in the same folder as this script file" CommandEnabled="true" v_taskPath="⦃vDirPath⦄\Run_By_Run_Script_File_Assign_Variable.xml" v_AssignVariables="No" v_WaitForFile="10">
+        <v_VariableAssignments>
+          <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+            <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="VariableAssignments091524.100905" msdata:UseCurrentLocale="true">
+              <xs:complexType>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element name="VariableAssignments091524.100905">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="VariableName" type="xs:string" minOccurs="0" />
+                        <xs:element name="VariableValue" type="xs:string" minOccurs="0" />
+                        <xs:element name="VariableReturn" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+          </xs:schema>
+          <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+            <DocumentElement>
+              <VariableAssignments091524.100905 diffgr:id="VariableAssignments091524.1009051" msdata:rowOrder="0" diffgr:hasChanges="modified">
+                <VariableName>vArg</VariableName>
+                <VariableValue>John</VariableValue>
+                <VariableReturn>Yes</VariableReturn>
+              </VariableAssignments091524.100905>
+            </DocumentElement>
+            <diffgr:before>
+              <VariableAssignments091524.100905 diffgr:id="VariableAssignments091524.1009051" msdata:rowOrder="0">
+                <VariableName>vArg</VariableName>
+                <VariableValue>John</VariableValue>
+                <VariableReturn>Yes</VariableReturn>
+              </VariableAssignments091524.100905>
+            </diffgr:before>
+          </diffgr:diffgram>
+        </v_VariableAssignments>
+      </ScriptCommand>
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="b4040b31-e464-47b7-bb03-9b6ff2023730" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Return Value: ⦃vArg⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-15T10:12:59.2005131+09:00</LastRunTime>
+    <RunTimes>2</RunTimes>
+    <Revision>4</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vArg</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vDirPath</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>

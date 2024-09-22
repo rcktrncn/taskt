@@ -2,29 +2,33 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="c8569508-7e90-4e6d-9ccc-a4309439dff2" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Set variable &quot;vStringValue&quot; to 'HELLO WORLD!&quot;" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="8e3eb947-b077-48cf-b258-40c3f831e784" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Replace Text sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="VariableCommand" CommandID="8f9b7cf1-1eed-4c21-bdb2-2f8d20570dfd" CommandName="VariableCommand" IsCommented="false" SelectionName="Set Variable" DefaultPause="250" LineNumber="2" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="vStringValue" v_Input="HELLO WORLD!" v_ReplaceInputVariables="Yes" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="c8569508-7e90-4e6d-9ccc-a4309439dff2" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Set variable &quot;vStringValue&quot; to 'HELLO WORLD!&quot;" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="c8569508-7e90-4e6d-9ccc-a4309439dff2" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" v_Comment="Replace 'L' to '1' in 'HELLO WORLD!&quot;" CommandEnabled="true" />
+      <ScriptCommand xsi:type="ConcatenateTextVariableCommand" CommandID="463c470e-1db9-4e9b-9a81-e825fe033eed" CommandName="ConcatenateTextVariableCommand" IsCommented="false" SelectionName="Concatenate Text Variable" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetVariable="vStringValue" v_ConcatText="HELLO WORLD!" v_InsertNewLine="" v_ConcatenatePosition="" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ReplaceTextCommand" CommandID="95abd732-1973-49a1-8fe6-8db7e1181ea0" CommandName="ReplaceTextCommand" IsCommented="false" SelectionName="Replace Text" DefaultPause="250" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="⦃vStringValue⦄" v_replacementText="L" v_replacementValue="1" v_applyToVariableName="vStringValue" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="c8569508-7e90-4e6d-9ccc-a4309439dff2" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Replace 'L' to '1' in 'HELLO WORLD!&quot;" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="c8569508-7e90-4e6d-9ccc-a4309439dff2" CommandName="CommentCommand" IsCommented="false" SelectionName="Add Code Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Show result" CommandEnabled="true" />
+      <ScriptCommand xsi:type="ReplaceTextCommand" CommandID="95abd732-1973-49a1-8fe6-8db7e1181ea0" CommandName="ReplaceTextCommand" IsCommented="false" SelectionName="Replace Text" DefaultPause="250" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_userVariableName="⦃vStringValue⦄" v_replacementText="L" v_replacementValue="1" v_applyToVariableName="vStringValue" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="MessageBoxCommand" CommandID="539d7633-3419-429e-923e-cdfcd2737001" CommandName="MessageBoxCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="250" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vStringValue⦄" v_AutoCloseAfter="0" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="c8569508-7e90-4e6d-9ccc-a4309439dff2" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Show result" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="539d7633-3419-429e-923e-cdfcd2737001" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="250" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vStringValue⦄" v_AutoCloseAfter="0" />
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.6.0.0</TasktVersion>
+    <TasktVersion>3.5.2.4</TasktVersion>
     <Author />
-    <LastRunTime>2021-08-31T23:48:45.1765298+09:00</LastRunTime>
-    <RunTimes>1</RunTimes>
+    <LastRunTime>2024-09-18T22:49:39.1705108+09:00</LastRunTime>
+    <RunTimes>2</RunTimes>
+    <Revision>3</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="4eb1801b-4b79-4e32-8f7b-b0c838c83eb5" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Create Shortcut Sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="dc3de31a-31bb-4a21-b8e5-c2153a11405f" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Create taskt script folder in Desktop" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CreateShortcutCommand" CommandID="c54a29bf-b8d1-405d-b6bf-3709c6123964" CommandName="CreateShortcutCommand" IsCommented="false" SelectionName="Create Shortcut" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_SavePath="⦃Folder.Desktop⦄\ScriptFolder.lnk" v_Description="">
+        <v_TargetPath>⦃Folder.ScriptPath⦄</v_TargetPath>
+      </ScriptCommand>
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="227bf23d-08f3-4481-8bc8-a0176b9ef0fd" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Create GitHub URL Shortcut" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CreateShortcutCommand" CommandID="9232f343-64b2-4264-8871-994e464708d4" CommandName="CreateShortcutCommand" IsCommented="false" SelectionName="Create Shortcut" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_SavePath="⦃Folder.Desktop⦄\GitHub.url" v_Description="">
+        <v_TargetPath>https://github.com/</v_TargetPath>
+      </ScriptCommand>
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-16T14:43:34.3294328+09:00</LastRunTime>
+    <RunTimes>3</RunTimes>
+    <Revision>5</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables />
+</Script>
