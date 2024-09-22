@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="f7a998dc-98af-4cbc-aec8-a4c412de49fa" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Activate Window By Window Handle sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="64c49ee7-65c8-4ca6-acc0-5b3e934d1a4f" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Execute Notepad, Window Handle assign to vHandleA" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="StartApplicationCommand" CommandID="8397d9f7-6bdc-45da-9ff0-cce8d89fd646" CommandName="StartApplicationCommand" IsCommented="false" SelectionName="Start Application" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_ProgramName="notepad" v_ProgramArgs="" v_WaitForExit="" v_StartedProcessName="" v_WindowName="" v_WindowHandle="vHandleA" v_WaitTimeForExecute="2000" v_WaitTimeBeforeNext="2000" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="2d3a5454-294d-4315-bbd8-d0a928c7a2e9" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Execute Notepad, Window Handle assign to vHandleB" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="StartApplicationCommand" CommandID="c0371a90-9de3-4246-88c6-8c77359bfeee" CommandName="StartApplicationCommand" IsCommented="false" SelectionName="Start Application" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_ProgramName="notepad" v_ProgramArgs="" v_WaitForExit="" v_StartedProcessName="" v_WindowName="" v_WindowHandle="vHandleB" v_WaitTimeForExecute="2000" v_WaitTimeBeforeNext="2000" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="3ee1a9d3-df91-4b0d-82be-7b926c0fb23d" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="vHandleA ⦃vHandleA⦄&#xD;&#xA;vHandleB ⦃vHandleB⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="6bbff9c1-e648-4937-ad46-14f17b4e77cc" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Activate vHandleA" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ActivateWindowByWindowHandleCommand" CommandID="f8c66e8a-ae31-492e-872a-efa9a5df2679" CommandName="ActivateWindowByWindowHandleCommand" IsCommented="false" SelectionName="Activate Window By Window Handle" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowHandle="⦃vHandleA⦄" v_WaitTimeForWindow="60" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="PauseScriptCommand" CommandID="761058d1-b321-4759-aff9-ed7cdbdf0d5c" CommandName="PauseScriptCommand" IsCommented="false" SelectionName="Pause Script" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_PauseLength="2000" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="6955fb93-ba47-4158-ba8b-0682316fca4a" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" v_Comment="Activate vHandleB" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ActivateWindowByWindowHandleCommand" CommandID="43283209-079a-4b3e-b5f6-e0c31d5ebf4f" CommandName="ActivateWindowByWindowHandleCommand" IsCommented="false" SelectionName="Activate Window By Window Handle" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowHandle="⦃vHandleB⦄" v_WaitTimeForWindow="60" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="a4c17fae-bb19-4ac7-90dd-ff4e1ec68a3e" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="12" PauseBeforeExeucution="false" v_Comment="Even if Window Names are the Same, " CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="00b05e6c-5c36-4335-8058-0fe9aa91239e" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="13" PauseBeforeExeucution="false" v_Comment="Window Handles can be used to distinguish them." CommandEnabled="true" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.4</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-22T17:02:42.2901239+09:00</LastRunTime>
+    <RunTimes>2</RunTimes>
+    <Revision>7</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vHandleA</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vHandleB</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>
