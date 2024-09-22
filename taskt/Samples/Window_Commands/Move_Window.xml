@@ -31,14 +31,9 @@
     <Author />
     <LastRunTime>2024-09-21T22:00:58.6785513+09:00</LastRunTime>
     <RunTimes>6</RunTimes>
-    <Revision>14</Revision>
+    <Revision>15</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
-  <Variables>
-    <ScriptVariable>
-      <VariableName>vHandle</VariableName>
-      <VariableValue xsi:type="xsd:string"></VariableValue>
-    </ScriptVariable>
-  </Variables>
+  <Variables />
 </Script>
