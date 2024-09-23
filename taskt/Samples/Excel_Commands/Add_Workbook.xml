@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="c9bcf79c-e7b2-4a6c-8ea1-f5584dee799c" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Add Workbook sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="ed49f82c-fe36-4f84-b99e-597efc2f876a" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Create Excel Instance (Start Excel)" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCreateExcelInstanceCommand" CommandID="5ce47cd2-061c-4aea-90a7-4ddfdd88b57b" CommandName="ExcelCreateExcelInstanceCommand" IsCommented="false" SelectionName="Create Excel Instance" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_WindowHandle="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="8d13395a-3f1b-4cd0-bb12-a36839c50532" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Add Workbook (Create New Excel Workbook)" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelAddWorkbookCommand" CommandID="8ca1f098-9efd-42dc-a8e7-f22603ddeb1c" CommandName="ExcelAddWorkbookCommand" IsCommented="false" SelectionName="Add Workbook" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_IfWorkbookExists="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="a40c481f-9cf8-4ce1-94dc-8075ae12bf04" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="Close Excel Instance (Close Excel)" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCloseExcelInstanceCommand" CommandID="e74601b0-64a8-47c5-99be-df4c1ec4d01b" CommandName="ExcelCloseExcelInstanceCommand" IsCommented="false" SelectionName="Close Excel Instance" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_ExcelSaveOnExit="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.5</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-23T15:07:30.6452671+09:00</LastRunTime>
+    <RunTimes>1</RunTimes>
+    <Revision>4</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables />
+</Script>
