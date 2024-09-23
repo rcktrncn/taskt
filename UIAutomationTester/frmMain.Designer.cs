@@ -28,33 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "A1",
             "B1",
             "C1"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "A2",
             "B2",
             "C2"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "A3",
             "B3",
             "C3"}, -1);
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("node0_0");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("node0_1");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("node0", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("node1_0");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("node1_1");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("node1_2_0");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("node1_2", new System.Windows.Forms.TreeNode[] {
-            treeNode6});
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("node1", new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5,
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("node2");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("node0_0");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("node0_1");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("node0", new System.Windows.Forms.TreeNode[] {
+            treeNode10,
+            treeNode11});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("node1_0");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("node1_1");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("node1_2_0");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("node1_2", new System.Windows.Forms.TreeNode[] {
+            treeNode15});
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("node1", new System.Windows.Forms.TreeNode[] {
+            treeNode13,
+            treeNode14,
+            treeNode16});
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("node2");
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -431,9 +431,9 @@
             this.columnHeader3});
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3});
+            listViewItem4,
+            listViewItem5,
+            listViewItem6});
             this.listView1.Location = new System.Drawing.Point(244, 234);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(200, 85);
@@ -535,28 +535,28 @@
             // 
             this.treeView1.Location = new System.Drawing.Point(460, 116);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "node0_0";
-            treeNode1.Text = "node0_0";
-            treeNode2.Name = "node0_1";
-            treeNode2.Text = "node0_1";
-            treeNode3.Name = "node0";
-            treeNode3.Text = "node0";
-            treeNode4.Name = "node1_0";
-            treeNode4.Text = "node1_0";
-            treeNode5.Name = "node1_1";
-            treeNode5.Text = "node1_1";
-            treeNode6.Name = "node1_2_0";
-            treeNode6.Text = "node1_2_0";
-            treeNode7.Name = "node1_2";
-            treeNode7.Text = "node1_2";
-            treeNode8.Name = "node1";
-            treeNode8.Text = "node1";
-            treeNode9.Name = "node2";
-            treeNode9.Text = "node2";
+            treeNode10.Name = "node0_0";
+            treeNode10.Text = "node0_0";
+            treeNode11.Name = "node0_1";
+            treeNode11.Text = "node0_1";
+            treeNode12.Name = "node0";
+            treeNode12.Text = "node0";
+            treeNode13.Name = "node1_0";
+            treeNode13.Text = "node1_0";
+            treeNode14.Name = "node1_1";
+            treeNode14.Text = "node1_1";
+            treeNode15.Name = "node1_2_0";
+            treeNode15.Text = "node1_2_0";
+            treeNode16.Name = "node1_2";
+            treeNode16.Text = "node1_2";
+            treeNode17.Name = "node1";
+            treeNode17.Text = "node1";
+            treeNode18.Name = "node2";
+            treeNode18.Text = "node2";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode8,
-            treeNode9});
+            treeNode12,
+            treeNode17,
+            treeNode18});
             this.treeView1.Size = new System.Drawing.Size(184, 80);
             this.treeView1.TabIndex = 28;
             // 
@@ -657,6 +657,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 30;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label17
             // 
@@ -704,6 +705,8 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmMain";
             this.Text = "UIAutomation Tester";
             this.Load += new System.EventHandler(this.frmMain_Load);
