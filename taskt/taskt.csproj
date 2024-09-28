@@ -1674,7 +1674,9 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rmdir /s /q "$(ProjectDir)$(OutDir)selenium-manager\linux"
-rmdir /s /q "$(ProjectDir)$(OutDir)selenium-manager\macos"</PostBuildEvent>
+rmdir /s /q "$(ProjectDir)$(OutDir)selenium-manager\macos"
+del "$(ProjectDir)$(OutDir)tasktOnTheFly.exe"
+</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>robocopy "$(ProjectDir)Samples" "$(ProjectDir)$(OutDir)Samples" *.xml /xo /E /S
