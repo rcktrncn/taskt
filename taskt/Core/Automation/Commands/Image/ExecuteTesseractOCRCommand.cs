@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using Tesseract;
@@ -43,8 +42,10 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(FilePathControls), nameof(FilePathControls.v_FilePath))]
         [PropertyDescription("Tesseract Data Path, it must point to the locally installed Tesseract, tessdata folder")]
+        [PropertyDetailSampleUsage("**C:\\Program Fles\\Tesseract-OCR\\tessdata**", "Tessdata Folder Path")]
+        [PropertyDetailSampleUsage("**{{{vFolderPath}}}**", "Tessdata Folder Path")]
         [PropertyIsOptional(true, @"C:\Program Files\Tesseract-OCR\tessdata")]
-        [PropertyValidationRule("File Path", PropertyValidationRule.ValidationRuleFlags.None)]
+        [PropertyValidationRule("tessdata Folder Path", PropertyValidationRule.ValidationRuleFlags.None)]
         public string v_TessData { get; set; }
 
         [XmlAttribute]
@@ -53,11 +54,6 @@ namespace taskt.Core.Automation.Commands
 
         public ExecuteTesseractOCRCommand()
         {
-            //this.DefaultPause = 0;
-            //this.CommandName = "OCRCommand";
-            //this.SelectionName = "Perform OCR";
-            //this.CommandEnabled = true;
-            //this.CustomRendering = true;
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
@@ -95,8 +91,6 @@ namespace taskt.Core.Automation.Commands
                         text.StoreInUserVariable(engine, v_Result);
                     }
                 }
-
-
             }
             catch (Exception ex)
             {
