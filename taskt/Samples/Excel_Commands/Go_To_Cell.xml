@@ -41,10 +41,7 @@
       <ScriptCommand xsi:type="CommentCommand" CommandID="6afa24c3-1de1-463e-bd60-d39df299e8d5" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="13" PauseBeforeExeucution="false" v_Comment="Close Excel File" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ExcelSaveCommand" CommandID="d73ba000-43e8-4aff-b962-63696af0111f" CommandName="ExcelSaveCommand" IsCommented="false" SelectionName="Save Workbook" DefaultPause="0" LineNumber="14" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" />
-    </ScriptAction>
-    <ScriptAction>
-      <ScriptCommand xsi:type="ExcelCloseExcelInstanceCommand" CommandID="f98f2bca-c62e-491f-8582-dfc8382ea1f7" CommandName="ExcelCloseExcelInstanceCommand" IsCommented="false" SelectionName="Close Excel Instance" DefaultPause="0" LineNumber="15" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_ExcelSaveOnExit="" />
+      <ScriptCommand xsi:type="ExcelCloseExcelInstanceCommand" CommandID="f98f2bca-c62e-491f-8582-dfc8382ea1f7" CommandName="ExcelCloseExcelInstanceCommand" IsCommented="false" SelectionName="Close Excel Instance" DefaultPause="0" LineNumber="14" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_ExcelSaveOnExit="" />
     </ScriptAction>
   </Commands>
   <Info>
@@ -52,7 +49,7 @@
     <Author />
     <LastRunTime>2024-09-26T22:21:27.4838436+09:00</LastRunTime>
     <RunTimes>4</RunTimes>
-    <Revision>7</Revision>
+    <Revision>8</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
