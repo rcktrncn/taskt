@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Xml.Serialization;
-//using System.Drawing;
-using System.Windows.Forms;
-using taskt.UI.CustomControls;
-using taskt.Core.Automation.Attributes.PropertyAttributes;
-using taskt.UI.Forms.ScriptBuilder.CommandEditor;
 using System.Drawing;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -19,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_camera))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class GetPixelCommand : ScriptCommand
+    public class GetPixelColourCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
@@ -56,16 +52,9 @@ namespace taskt.Core.Automation.Commands
         public static extern IntPtr GetDC(IntPtr hwnd);
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         public static extern void ReleaseDC(IntPtr hwnd, IntPtr dc);
-        public GetPixelCommand()
-        {
-            //this.CommandName = "ImageRecognitionCommand";
-            //this.SelectionName = "Image Recognition";
-            //this.CommandEnabled = true;
-            //this.CustomRendering = true;
 
-            //v_xOffsetAdjustment = "0";
-            //v_YOffsetAdjustment = "0";
-            //v_TimeoutSeconds = "30";
+        public GetPixelColourCommand()
+        {
         }
 
         public override void AfterShown(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
@@ -110,8 +99,6 @@ namespace taskt.Core.Automation.Commands
                 {
                     v_xCoord = frmShowCursorPos.xPos.ToString();
                     v_yCoord = frmShowCursorPos.yPos.ToString();
-                    //((TextBox)ControlsList[nameof(v_XMousePosition)]).Text = v_XMousePosition;
-                    //((TextBox)ControlsList[nameof(v_YMousePosition)]).Text = v_YMousePosition;
                     ControlsList.GetPropertyControl<TextBox>(nameof(v_xCoord)).Text = v_xCoord;
                     ControlsList.GetPropertyControl<TextBox>(nameof(v_yCoord)).Text = v_yCoord;
                 }

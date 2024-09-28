@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Xml.Serialization;
-//using System.Drawing;
-using System.Windows.Forms;
-using taskt.UI.CustomControls;
-using taskt.Core.Automation.Attributes.PropertyAttributes;
-using taskt.UI.Forms.ScriptBuilder.CommandEditor;
 using System.Drawing;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+using taskt.Core.Automation.Attributes.PropertyAttributes;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -19,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_camera))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public class FindPixelCommand : ScriptCommand
+    public class FindPixelColourCommand : ScriptCommand
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
@@ -56,8 +52,8 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**100**", PropertyDetailSampleUsage.ValueType.Value, "X")]
         [PropertyDetailSampleUsage("**{{{vXOffset}}}**", PropertyDetailSampleUsage.ValueType.VariableValue, "X")]
         [PropertyCustomUIHelper("Capture Mouse Position", nameof(lnkMouseCapture_Clicked2))]
-        [PropertyIsOptional(true, "0")]
-        [PropertyFirstValue("0")]
+        [PropertyIsOptional(true, "1")]
+        [PropertyFirstValue("1")]
         [PropertyDisplayText(true, "X2 coord")]
         public string v_x2Coord { get; set; }
 
@@ -70,8 +66,8 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**{{{vYOffset}}}**", PropertyDetailSampleUsage.ValueType.VariableValue, "Y")]
         //[PropertyCustomUIHelper("Capture Mouse Position", nameof(lnkMouseCapture_Clicked))]
         [PropertyUIHelper(PropertyUIHelper.UIAdditionalHelperType.ShowVariableHelper)]
-        [PropertyIsOptional(true, "0")]
-        [PropertyFirstValue("0")]
+        [PropertyIsOptional(true, "1")]
+        [PropertyFirstValue("1")]
         [PropertyDisplayText(true, "Y2 coord")]
         public string v_y2Coord { get; set; }
 
@@ -87,16 +83,9 @@ namespace taskt.Core.Automation.Commands
         public static extern IntPtr GetDC(IntPtr hwnd);
         [System.Runtime.InteropServices.DllImport("User32.dll")]
         public static extern void ReleaseDC(IntPtr hwnd, IntPtr dc);
-        public FindPixelCommand()
-        {
-            //this.CommandName = "ImageRecognitionCommand";
-            //this.SelectionName = "Image Recognition";
-            //this.CommandEnabled = true;
-            //this.CustomRendering = true;
 
-            //v_xOffsetAdjustment = "0";
-            //v_YOffsetAdjustment = "0";
-            //v_TimeoutSeconds = "30";
+        public FindPixelColourCommand()
+        {
         }
 
         public override void AfterShown(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
