@@ -301,6 +301,9 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Tesseract, Version=5.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tesseract.5.2.0\lib\net48\Tesseract.dll</HintPath>
+    </Reference>
     <Reference Include="UIAutomationClient" />
     <Reference Include="UIAutomationClientsideProviders" />
     <Reference Include="UIAutomationProvider" />
@@ -461,8 +464,8 @@
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetProperties.cs" />
     <Compile Include="Core\Automation\Commands\If\IHaveIfAdditionalCommands.cs" />
     <Compile Include="Core\Automation\Commands\Image\ExecuteTesseractOCRCommand.cs" />
-    <Compile Include="Core\Automation\Commands\Image\FindPixel.cs" />
-    <Compile Include="Core\Automation\Commands\Image\GetPixel.cs" />
+    <Compile Include="Core\Automation\Commands\Image\FindPixelColourCommand].cs" />
+    <Compile Include="Core\Automation\Commands\Image\GetPixelColourCommand.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONAddInsertSetJContainerCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONGetFromJContainerCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONGetFromJSONCommands.cs" />
@@ -1689,8 +1692,10 @@ if %25ERRORLEVEL%25 LSS 8 EXIT 0</PreBuildEvent>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.2739.15\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.2739.15\build\Microsoft.Web.WebView2.targets'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.4.25.0\build\Selenium.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.4.25.0\build\Selenium.WebDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\Tesseract.5.2.0\build\Tesseract.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Tesseract.5.2.0\build\Tesseract.targets'))" />
   </Target>
   <Import Project="..\packages\Selenium.WebDriver.4.25.0\build\Selenium.WebDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.4.25.0\build\Selenium.WebDriver.targets')" />
+  <Import Project="..\packages\Tesseract.5.2.0\build\Tesseract.targets" Condition="Exists('..\packages\Tesseract.5.2.0\build\Tesseract.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
