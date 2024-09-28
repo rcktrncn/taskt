@@ -460,6 +460,9 @@
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetCopyRenameProperties.cs" />
     <Compile Include="Core\Automation\Commands\Excel\IExcelWorksheetProperties.cs" />
     <Compile Include="Core\Automation\Commands\If\IHaveIfAdditionalCommands.cs" />
+    <Compile Include="Core\Automation\Commands\Image\ExecuteTesseractOCRCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Image\FindPixel.cs" />
+    <Compile Include="Core\Automation\Commands\Image\GetPixel.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONAddInsertSetJContainerCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONGetFromJContainerCommands.cs" />
     <Compile Include="Core\Automation\Commands\JSON\AJSONGetFromJSONCommands.cs" />
