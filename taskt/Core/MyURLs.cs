@@ -44,6 +44,7 @@
         public const string SharpSimpleNLGURL = "https://github.com/nickhodge/SharpSimpleNLG";
         public const string SuperSocketClientEngineURL = "https://github.com/kerryjiang/SuperSocket.ClientEngine";
         public const string TaskSchedulerURL = "https://github.com/dahall/TaskScheduler";
+        public const string TesseractURL = "https://github.com/charlesw/tesseract/";
         public const string WebSocket4NetURL = "https://github.com/kerryjiang/WebSocket4Net";
         public const string ZstdSharpPortURL = "https://github.com/oleg-st/ZstdSharp";
 
