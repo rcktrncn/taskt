@@ -1,6 +1,5 @@
 ![taskt](https://i.imgur.com/gBpKDg0.png)
 
-taskt uob is forked from taskt.
 taskt (formerly sharpRPA) is the first truly free, easy to use, and open-source process automation client built on the .NET Framework in C#.  taskt allows you to build and design process automation without needing to write application code.
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -51,7 +50,7 @@ Feel free to open up a feature request or report a bug/issue.
 Please note whatever software that taskt is automating can affect the minimum software requirements. 
 
 ## Minimum
- * Windows 7/8.1/10/Server 2012/Server 2016/Server 2019
+ * Windows 7/8.1/10/Server 2012/Server 2016/Server 2019 (32bit and 64bit)
  * 1GB ram
  * 200MB disk space
  * 1 vCPU
@@ -61,12 +60,14 @@ Please note whatever software that taskt is automating can affect the minimum so
 **Attension**: Windows 7, Windows 8.1, Windows Server 2012 are no longer supported.
 
 ## Recommended
- * Windows 10/Server 2016/Server 2019
+ * Windows 10/Server 2016/Server 2019 (32bit and 64bit)
  * 4GB ram
  * 1GB disk space
  * 2 CPU
  * .NET Framework 4.8
  * (We think it will probably work in Windows 11 :-)
+
+**Attention**: After windows 10 support ends, windows 10 will be removed from the recommended environment.
 
 [![Open New Issue](https://img.shields.io/badge/Open-New&nbsp;Issue-blue.svg)](https://github.com/saucepleez/taskt/issues/new)
 [![Chat on Gitter](https://img.shields.io/badge/Chat-On&nbsp;Gitter-green.svg)](https://gitter.im/taskt-rpa/Lobby)

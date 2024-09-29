@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="c9bcf79c-e7b2-4a6c-8ea1-f5584dee799c" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Check Excel Instance Exists sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="ed49f82c-fe36-4f84-b99e-597efc2f876a" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Create Excel Instance. Instance Name is RPAExcel" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCreateExcelInstanceCommand" CommandID="5ce47cd2-061c-4aea-90a7-4ddfdd88b57b" CommandName="ExcelCreateExcelInstanceCommand" IsCommented="false" SelectionName="Create Excel Instance" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_WindowHandle="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="843a3095-9b75-475b-9ce4-ee4c3419e48c" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Check Excel Instance" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCheckExcelInstanceExistsCommand" CommandID="a24fc264-4781-4461-814a-0bffae2e3a44" CommandName="ExcelCheckExcelInstanceExistsCommand" IsCommented="false" SelectionName="Check Excel Instance Exists" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_Result="vResult" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="dd2afc10-e9be-45f0-97f2-7e7e1fbbb0de" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="RPAExcel exists: ⦃vResult⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCheckExcelInstanceExistsCommand" CommandID="1f67466e-0fdb-43f6-8329-1b871d50d3bc" CommandName="ExcelCheckExcelInstanceExistsCommand" IsCommented="false" SelectionName="Check Excel Instance Exists" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel2" v_Result="vResult" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="bf9d4fc5-0eeb-4ead-92cf-be62907f2180" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="RPAExcel2 exists: ⦃vResult⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="a40c481f-9cf8-4ce1-94dc-8075ae12bf04" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" v_Comment="Close Excel Instance (Close Excel)" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCloseExcelInstanceCommand" CommandID="e74601b0-64a8-47c5-99be-df4c1ec4d01b" CommandName="ExcelCloseExcelInstanceCommand" IsCommented="false" SelectionName="Close Excel Instance" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_ExcelSaveOnExit="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="e0045784-504c-4ae5-bb10-b8b77e6e7fec" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" v_Comment="Check Excel Instance" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCheckExcelInstanceExistsCommand" CommandID="d92c9979-3444-4a3d-8761-7b19e03291fb" CommandName="ExcelCheckExcelInstanceExistsCommand" IsCommented="false" SelectionName="Check Excel Instance Exists" DefaultPause="0" LineNumber="12" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_Result="vResult" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="4ccc30e2-56b5-4d2a-9358-4f4c178a6b83" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="13" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="RPAExcel exists: ⦃vResult⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.5</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-23T15:07:10.1752047+09:00</LastRunTime>
+    <RunTimes>1</RunTimes>
+    <Revision>4</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vResult</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>

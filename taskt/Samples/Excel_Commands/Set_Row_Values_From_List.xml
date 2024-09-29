@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="31e7496a-2d56-4e16-9001-404abe8cc565" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Set Row Values From List sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="81edd9b0-4f76-4ac5-b94b-10998975dbe7" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Copy &quot;Resources\sample_excel.xlsx&quot; to Desktop" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CopyFileCommand" CommandID="84c8d726-7eb0-4392-9c06-b7cbcf33b307" CommandName="CopyFileCommand" IsCommented="false" SelectionName="Copy File" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_SourceFilePath="⦃Folder.SamplesPath⦄\Resources\sample_excel.xlsx" v_DestinationDirectory="⦃Folder.Desktop⦄" v_CreateDirectory="" v_DeleteExisting="" v_WaitTime="10" v_BeforeFilePathResult="" v_AfterFilePathResult="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="8383aead-db16-4151-b5a3-37c95990d939" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Create List" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CreateListCommand" CommandID="2b873318-9cf8-4a4b-968b-5a228acc4529" CommandName="CreateListCommand" IsCommented="false" SelectionName="Create List" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList">
+        <v_ListValues>
+          <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+            <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ListValues092924.030131" msdata:UseCurrentLocale="true">
+              <xs:complexType>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element name="ListValues092924.030131">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Values" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+          </xs:schema>
+          <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+            <DocumentElement>
+              <ListValues092924.030131 diffgr:id="ListValues092924.0301311" msdata:rowOrder="0" diffgr:hasChanges="modified">
+                <Values>Tom</Values>
+              </ListValues092924.030131>
+              <ListValues092924.030131 diffgr:id="ListValues092924.0301312" msdata:rowOrder="1" diffgr:hasChanges="modified">
+                <Values>18</Values>
+              </ListValues092924.030131>
+              <ListValues092924.030131 diffgr:id="ListValues092924.0301313" msdata:rowOrder="2" diffgr:hasChanges="modified">
+                <Values>America</Values>
+              </ListValues092924.030131>
+            </DocumentElement>
+            <diffgr:before>
+              <ListValues092924.030131 diffgr:id="ListValues092924.0301311" msdata:rowOrder="0">
+                <Values>Tom</Values>
+              </ListValues092924.030131>
+              <ListValues092924.030131 diffgr:id="ListValues092924.0301312" msdata:rowOrder="1">
+                <Values>18</Values>
+              </ListValues092924.030131>
+              <ListValues092924.030131 diffgr:id="ListValues092924.0301313" msdata:rowOrder="2">
+                <Values>America</Values>
+              </ListValues092924.030131>
+            </diffgr:before>
+          </diffgr:diffgram>
+        </v_ListValues>
+      </ScriptCommand>
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ConvertListToVisualizedTextCommand" CommandID="440b394f-2901-447f-8dda-461f633d4269" CommandName="ConvertListToVisualizedTextCommand" IsCommented="false" SelectionName="Convert List To Visualized Text" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList" v_Result="view" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="187a48fa-d99e-4f9e-b979-bea27a2761cd" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃view⦄" v_AutoCloseAfter="0" v_FontName="MS Gothic" v_FontSize="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="9b4bf38a-83ff-4cbd-8d3e-a684c2648aca" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" v_Comment="Open Excel File" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCreateExcelInstanceCommand" CommandID="abff5193-3a50-4ab7-89e9-443c0392b64a" CommandName="ExcelCreateExcelInstanceCommand" IsCommented="false" SelectionName="Create Excel Instance" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_WindowHandle="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelOpenWorkbookCommand" CommandID="a3c5f1d2-5f8e-4a15-85b6-f8eaa5f7c588" CommandName="ExcelOpenWorkbookCommand" IsCommented="false" SelectionName="Open Workbook" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_FilePath="⦃Folder.Desktop⦄\sample_excel.xlsx" v_Password="" v_IfWorksheetExists="" v_WaitForFile="10" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelActivateWorksheetCommand" CommandID="963a3bea-826b-4c64-804f-767e4b0aaff4" CommandName="ExcelActivateWorksheetCommand" IsCommented="false" SelectionName="Activate Worksheet" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_SheetName="Sheet1" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="d5b9ca8c-bb56-45a3-8201-c945baf1caf3" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="12" PauseBeforeExeucution="false" v_Comment="Set Row 1 Values" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelSetRowValuesFromListCommand" CommandID="45b7279c-8e7e-4ca0-ae70-1ef41ca17d2e" CommandName="ExcelSetRowValuesFromListCommand" IsCommented="false" SelectionName="Set Row Values From List" DefaultPause="0" LineNumber="13" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_RowIndex="1" v_ColumnType="" v_ColumnStart="A" v_ColumnEnd="" v_ValueType="" v_WhenItemNotEnough="" v_ListVariable="vList" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="0b74c4ed-2e84-4f0e-944f-c3ce1656773c" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="14" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Check Worksheet" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="6afa24c3-1de1-463e-bd60-d39df299e8d5" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="15" PauseBeforeExeucution="false" v_Comment="Close Excel File" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelSaveCommand" CommandID="d73ba000-43e8-4aff-b962-63696af0111f" CommandName="ExcelSaveCommand" IsCommented="false" SelectionName="Save Workbook" DefaultPause="0" LineNumber="16" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCloseExcelInstanceCommand" CommandID="f98f2bca-c62e-491f-8582-dfc8382ea1f7" CommandName="ExcelCloseExcelInstanceCommand" IsCommented="false" SelectionName="Close Excel Instance" DefaultPause="0" LineNumber="17" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_ExcelSaveOnExit="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.5</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-29T15:02:03.7777079+09:00</LastRunTime>
+    <RunTimes>6</RunTimes>
+    <Revision>10</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>view</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vList</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="e5932794-e339-408c-8ecc-ccfa73cf6701" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Create DataTable From Excel File sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="f797b21c-4a12-42f1-806c-ab6fad4b0f8c" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Create DataTable vTable from &quot;sample_excel.xml&quot;" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCreateDataTableFromExcelFile" CommandID="228e7564-68e7-4053-90ff-67b42bd3f8e2" CommandName="ExcelCreateDataTableFromExcelFile" IsCommented="false" SelectionName="Create DataTable From Excel File" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTableName="vTable" v_FilePath="⦃Folder.SamplesPath⦄\Resources\sample_excel.xlsx" v_SheetName="Sheet2" v_ColumnType="" v_ColumnIndex="A" v_RowIndex="" v_FirstRowAsColumnName="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ConvertDataTableToVisualizedTextCommand" CommandID="d378eb67-c3ea-4f87-bd40-48cc04219200" CommandName="ConvertDataTableToVisualizedTextCommand" IsCommented="false" SelectionName="Convert DataTable To Visualized Text" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_DataTable="vTable" v_Result="view" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="b0fa4036-1b3d-447d-90a9-8317a6ed3102" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Open &quot;sample_excel&quot; in Sample\Resources" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCreateExcelInstanceCommand" CommandID="5c7cb8cd-e33b-419c-a1c0-d6c72efb4b76" CommandName="ExcelCreateExcelInstanceCommand" IsCommented="false" SelectionName="Create Excel Instance" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_WindowHandle="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelOpenWorkbookCommand" CommandID="191fe667-3c16-41eb-8045-9b0cf8b64851" CommandName="ExcelOpenWorkbookCommand" IsCommented="false" SelectionName="Open Workbook" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_FilePath="⦃Folder.SamplesPath⦄\Resources\sample_excel.xlsx" v_Password="" v_IfWorksheetExists="" v_WaitForFile="10" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelActivateWorksheetCommand" CommandID="478a40bb-0fc9-46b0-92a7-9ae97f957828" CommandName="ExcelActivateWorksheetCommand" IsCommented="false" SelectionName="Activate Worksheet" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_SheetName="Sheet2" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="9e00ef55-905d-43c4-953d-f758c8feadd9" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" v_Comment="Show vTable" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="f1f6301b-42b5-4915-91a6-ce43584d35c6" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Compare vTable values&#xD;&#xA;⦃view⦄" v_AutoCloseAfter="0" v_FontName="MS Gothic" v_FontSize="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCloseExcelInstanceCommand" CommandID="e03e530c-6503-4199-9d40-a13d975a58a5" CommandName="ExcelCloseExcelInstanceCommand" IsCommented="false" SelectionName="Close Excel Instance" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_ExcelSaveOnExit="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.5</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-23T21:20:48.4637333+09:00</LastRunTime>
+    <RunTimes>2</RunTimes>
+    <Revision>4</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>view</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vTable</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>

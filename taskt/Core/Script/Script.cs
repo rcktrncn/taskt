@@ -427,6 +427,7 @@ namespace taskt.Core.Script
             convertTo3_5_1_98(doc);
             convertTo3_5_2_0(doc);
             convertTo3_5_2_1(doc);
+            convertTo3_5_2_6(doc);
             return doc;
         }
 
@@ -3397,6 +3398,14 @@ namespace taskt.Core.Script
         {
             // GetJSONValueListCommand -> GetJSONValuesAsListCommand
             ChangeCommandName(doc, "GetJSONValueListCommand", "GetJSONValuesAsListCommand", "Get JSON Values As List");
+        }
+
+        private static void convertTo3_5_2_6(XDocument doc)
+        {
+            // GetPixelCommand -> GetPixelColourCommand
+            ChangeCommandName(doc, "GetPixelCommand", "GetPixelColourCommand", "Get Pixel Colour");
+            // FindPixelCommand -> FindPixelColourCommand
+            ChangeCommandName(doc, "FindPixelCommand", "FindPixelColourCommand", "Find Pixel Colour");
         }
 
         /// <summary>

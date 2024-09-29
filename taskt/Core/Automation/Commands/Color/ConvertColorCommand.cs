@@ -53,12 +53,14 @@ namespace taskt.Core.Automation.Commands
         [PropertyUISelectionOption("CMYK")]
         [PropertyUISelectionOption("RGBA Dictionary")]
         [PropertyUISelectionOption("RGBA DataTable")]
+        [PropertyUISelectionOption("ARGB Number")]
         [PropertyAddtionalParameterInfo("Hex", "Convert to Hex value, like **11FFAA**")]
         [PropertyAddtionalParameterInfo("CSS RGB", "Convert to CSS RGB value, like **rgb(255, 64, 0)**")]
         [PropertyAddtionalParameterInfo("CSS RGBA", "Convert to CSS RGB value, like **rgba(255, 64, 0, 0.6)**")]
         [PropertyAddtionalParameterInfo("Excel Color", "Convert to Excel Color Value like **25312**")]
         [PropertyAddtionalParameterInfo("RGBA Dictionary", "Convert to Dictionary. Key names are R, G, B, A.")]
         [PropertyAddtionalParameterInfo("RGBA DataTable", "Convert to DataTable. Column names are R, G, B, A.")]
+        [PropertyAddtionalParameterInfo("ARGB Number", "Convert to Int32. Call ToARGB() method.")]
         [PropertySelectionChangeEvent(nameof(cmbFormatSelectionChange))]
         [PropertyValidationRule("Format", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "Format")]
@@ -80,7 +82,7 @@ namespace taskt.Core.Automation.Commands
         {
             //Color co = v_Color.ExpandUserVariableAsColor(engine);
             var co = this.ExpandUserVariableAsColor(nameof(v_Color), engine);
-            
+
             string format = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_Format), engine);
 
             string res = "";
@@ -182,6 +184,10 @@ namespace taskt.Core.Automation.Commands
                     rgbaDT.Rows[0][3] = co.A;
                     //rgbaDT.StoreInUserVariable(engine, v_Result);
                     this.StoreDataTableInUserVariable(rgbaDT, engine);
+                    return;
+
+                case "argb number":
+                    co.ToArgb().StoreInUserVariable(engine, v_Result);
                     return;
             }
             res.StoreInUserVariable(engine, v_Result);
