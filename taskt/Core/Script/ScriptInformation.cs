@@ -14,7 +14,7 @@ namespace taskt.Core.Script
         public string Description { get; set; }
         public ScriptInformation()
         {
-            this.TasktVersion = "";
+            this.TasktVersion = "0.0.0.0";
             this.Author = "";
             this.LastRunTime = DateTime.Parse("1990-01-01T00:00:00");
             this.RunTimes = 0;
