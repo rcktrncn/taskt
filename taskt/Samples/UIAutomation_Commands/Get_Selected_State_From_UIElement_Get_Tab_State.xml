@@ -524,17 +524,13 @@
     <Author />
     <LastRunTime>2024-10-05T10:25:37.3296752+09:00</LastRunTime>
     <RunTimes>9</RunTimes>
-    <Revision>3</Revision>
+    <Revision>4</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
   <Variables>
     <ScriptVariable>
       <VariableName>vElem</VariableName>
-      <VariableValue xsi:type="xsd:string"></VariableValue>
-    </ScriptVariable>
-    <ScriptVariable>
-      <VariableName>vPath</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
     <ScriptVariable>

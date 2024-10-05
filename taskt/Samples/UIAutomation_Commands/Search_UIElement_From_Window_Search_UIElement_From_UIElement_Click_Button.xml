@@ -273,21 +273,17 @@
     <Author />
     <LastRunTime>2024-10-03T22:37:08.2754676+09:00</LastRunTime>
     <RunTimes>5</RunTimes>
-    <Revision>3</Revision>
+    <Revision>4</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
   <Variables>
     <ScriptVariable>
-      <VariableName>vPath</VariableName>
+      <VariableName>vElem</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
     <ScriptVariable>
       <VariableName>vWin</VariableName>
-      <VariableValue xsi:type="xsd:string"></VariableValue>
-    </ScriptVariable>
-    <ScriptVariable>
-      <VariableName>vElem</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
   </Variables>

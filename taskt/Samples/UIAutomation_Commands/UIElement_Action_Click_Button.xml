@@ -309,14 +309,9 @@
     <Author />
     <LastRunTime>2024-10-03T22:38:37.4194118+09:00</LastRunTime>
     <RunTimes>8</RunTimes>
-    <Revision>5</Revision>
+    <Revision>6</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
-  <Variables>
-    <ScriptVariable>
-      <VariableName>vPath</VariableName>
-      <VariableValue xsi:type="xsd:string"></VariableValue>
-    </ScriptVariable>
-  </Variables>
+  <Variables />
 </Script>
