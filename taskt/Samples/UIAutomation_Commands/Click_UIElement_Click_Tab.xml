@@ -2,7 +2,7 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="218fd5f4-b58e-497b-b7e5-c801d58b022b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Click CheckBox Sample" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="218fd5f4-b58e-497b-b7e5-c801d58b022b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Click UIElement Click Tab sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="StartApplicationCommand" CommandID="a7cdfa43-c3e0-4681-8598-3547bb4f31b4" CommandName="StartApplicationCommand" IsCommented="false" SelectionName="Start Application" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" CommandEnabled="true" v_ProgramName="⦃Folder.SamplesPath⦄\Resources\UIAutomationTester.exe" v_ProgramArgs="" v_WaitForExit="" v_StartedProcessName="" />
@@ -14,7 +14,7 @@
       <ScriptCommand xsi:type="UIAutomationSearchUIElementFromWindowCommand" CommandID="be605cdc-25fa-4680-84ad-ac75afc86c91" CommandName="UIAutomationSearchUIElementFromWindowCommand" IsCommented="false" SelectionName="Search UIElement From Window" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_WindowName="UIAutomation Tester" v_AutomationElementVariable="vWin" v_CompareMethod="" v_MatchMethod="" v_TargetWindowIndex="0" v_WaitTimeForWindow="60" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="218fd5f4-b58e-497b-b7e5-c801d58b022b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Search checkBox1 as UIElement" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="218fd5f4-b58e-497b-b7e5-c801d58b022b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Search tabPage3 as UIElement" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="UIAutomationSearchUIElementFromUIElementCommand" CommandID="ac724675-6c24-4a80-a6ba-aba3f8dc4b10" CommandName="UIAutomationSearchUIElementFromUIElementCommand" IsCommented="false" SelectionName="Search UIElement From UIElement" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetElement="⦃vWin⦄" v_AutomationElementVariable="vElem" v_WaitTime="10">
@@ -49,19 +49,19 @@
                 <ParameterValue></ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.1146293" msdata:rowOrder="2" diffgr:hasChanges="modified">
-                <Enabled>True</Enabled>
+                <Enabled>False</Enabled>
                 <ParameterName>AutomationId</ParameterName>
-                <ParameterValue>checkBox1</ParameterValue>
+                <ParameterValue></ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.1146294" msdata:rowOrder="3" diffgr:hasChanges="modified">
                 <Enabled>False</Enabled>
                 <ParameterName>ClassName</ParameterName>
-                <ParameterValue>WindowsForms10.BUTTON.app.0.141b42a_r11_ad1</ParameterValue>
+                <ParameterValue></ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.1146295" msdata:rowOrder="4" diffgr:hasChanges="modified">
                 <Enabled>False</Enabled>
                 <ParameterName>ControlType</ParameterName>
-                <ParameterValue>CheckBox</ParameterValue>
+                <ParameterValue>TabItem</ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.1146296" msdata:rowOrder="5" diffgr:hasChanges="modified">
                 <Enabled>False</Enabled>
@@ -126,17 +126,17 @@
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.11462918" msdata:rowOrder="17" diffgr:hasChanges="modified">
                 <Enabled>False</Enabled>
                 <ParameterName>LocalizedControlType</ParameterName>
-                <ParameterValue>チェック ボックス</ParameterValue>
+                <ParameterValue>タブ項目</ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.11462919" msdata:rowOrder="18" diffgr:hasChanges="modified">
-                <Enabled>False</Enabled>
+                <Enabled>True</Enabled>
                 <ParameterName>Name</ParameterName>
-                <ParameterValue>checkBox1</ParameterValue>
+                <ParameterValue>tabPage3</ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.11462920" msdata:rowOrder="19" diffgr:hasChanges="modified">
                 <Enabled>False</Enabled>
                 <ParameterName>NativeWindowHandle</ParameterName>
-                <ParameterValue>200128</ParameterValue>
+                <ParameterValue>0</ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.11462921" msdata:rowOrder="20" diffgr:hasChanges="modified">
                 <Enabled>False</Enabled>
@@ -156,19 +156,19 @@
                 <ParameterValue></ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.1146293" msdata:rowOrder="2">
-                <Enabled>True</Enabled>
+                <Enabled>False</Enabled>
                 <ParameterName>AutomationId</ParameterName>
-                <ParameterValue>checkBox1</ParameterValue>
+                <ParameterValue></ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.1146294" msdata:rowOrder="3">
                 <Enabled>False</Enabled>
                 <ParameterName>ClassName</ParameterName>
-                <ParameterValue>WindowsForms10.BUTTON.app.0.141b42a_r11_ad1</ParameterValue>
+                <ParameterValue></ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.1146295" msdata:rowOrder="4">
                 <Enabled>False</Enabled>
                 <ParameterName>ControlType</ParameterName>
-                <ParameterValue>CheckBox</ParameterValue>
+                <ParameterValue>TabItem</ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.1146296" msdata:rowOrder="5">
                 <Enabled>False</Enabled>
@@ -233,17 +233,17 @@
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.11462918" msdata:rowOrder="17">
                 <Enabled>False</Enabled>
                 <ParameterName>LocalizedControlType</ParameterName>
-                <ParameterValue>チェック ボックス</ParameterValue>
+                <ParameterValue>タブ項目</ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.11462919" msdata:rowOrder="18">
-                <Enabled>False</Enabled>
+                <Enabled>True</Enabled>
                 <ParameterName>Name</ParameterName>
-                <ParameterValue>checkBox1</ParameterValue>
+                <ParameterValue>tabPage3</ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.11462920" msdata:rowOrder="19">
                 <Enabled>False</Enabled>
                 <ParameterName>NativeWindowHandle</ParameterName>
-                <ParameterValue>200128</ParameterValue>
+                <ParameterValue>0</ParameterValue>
               </SearchParameters082123.114629>
               <SearchParameters082123.114629 diffgr:id="SearchParameters082123.11462921" msdata:rowOrder="20">
                 <Enabled>False</Enabled>
@@ -256,10 +256,10 @@
       </ScriptCommand>
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="218fd5f4-b58e-497b-b7e5-c801d58b022b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Click button" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="218fd5f4-b58e-497b-b7e5-c801d58b022b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" v_Comment="Click tabPage3" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="UIAutomationClickUIElementCommand" CommandID="b1d84cd9-8acd-4c51-913a-d32cbe4ef535" CommandName="UIAutomationClickUIElementCommand" IsCommented="false" SelectionName="Click UIElement" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetElement="⦃vElem⦄" v_ClickType="Left Click" v_XOffset="0" v_YOffset="0" v_ActivateWindow="" />
+      <ScriptCommand xsi:type="UIAutomationClickUIElementCommand" CommandID="c9749360-4b16-4cf9-ab52-8a24a526b075" CommandName="UIAutomationClickUIElementCommand" IsCommented="false" SelectionName="Click UIElement" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetElement="⦃vElem⦄" v_ClickType="Left Click" v_XOffset="0" v_YOffset="0" v_ActivateWindow="" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="CommentCommand" CommandID="218fd5f4-b58e-497b-b7e5-c801d58b022b" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" v_Comment="Please exit UIAutomationTester after execution" CommandEnabled="true" />
@@ -268,8 +268,8 @@
   <Info>
     <TasktVersion>3.5.2.6</TasktVersion>
     <Author />
-    <LastRunTime>2024-10-03T22:39:40.1240002+09:00</LastRunTime>
-    <RunTimes>6</RunTimes>
+    <LastRunTime>2024-10-03T22:41:18.6198189+09:00</LastRunTime>
+    <RunTimes>8</RunTimes>
     <Revision>2</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
