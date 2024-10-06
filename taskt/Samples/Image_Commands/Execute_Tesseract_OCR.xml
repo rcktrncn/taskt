@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="b2c7518f-4734-4d1e-914d-6f82fb2579e4" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Execute Tesseract OCR sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExecuteTesseractOCRCommand" CommandID="639357e0-fd26-48a5-bcfe-1c9f874ba0c6" CommandName="ExecuteTesseractOCRCommand" IsCommented="false" SelectionName="Execute Tesseract OCR" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" CommandEnabled="true" v_FilePath="⦃Folder.SamplesPath⦄\Resources\sample_ocr_image.png" v_ImageVar="" v_Result="vResult" v_TessData="" v_WaitForFile="10" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="693940d7-853c-472a-8366-57bdc5ac88a9" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vResult⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="460c648b-1deb-4a3a-b824-04c0a5e3d9c0" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Please Download and Install Tesseract OCR, before Execute" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="f0c282e8-9c62-4381-8428-9e17d428826c" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="https://github.com/UB-Mannheim/tesseract/wiki" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="92f2ab49-3685-4d0d-8c22-bb87c8ddaec4" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" v_Comment="File name is tesseract-ocr-w64-setup-x.y.z.yyyymmdd.exe" CommandEnabled="true" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.6</TasktVersion>
+    <Author />
+    <LastRunTime>2024-09-29T19:14:23.2891248+09:00</LastRunTime>
+    <RunTimes>1</RunTimes>
+    <Revision>4</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vResult</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>
