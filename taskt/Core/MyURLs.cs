@@ -10,7 +10,7 @@
         public const string GitterURL = "https://gitter.im/taskt-rpa/Lobby";
         public const string WikiBaseURL = "https://github.com/rcktrncn/taskt-wiki/blob/master/";
 
-        public const string LatestJSONURL = "https://raw.githubusercontent.com/rcktrncn/taskt/development-branch/taskt/latest.json";
+        public const string LatestJSONURL = "https://raw.githubusercontent.com/rcktrncn/taskt/uob-release/taskt/latest.json";
 
         public const string ChromeDriverURL = "https://googlechromelabs.github.io/chrome-for-testing/";
         public const string EdgeDriverURL = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
