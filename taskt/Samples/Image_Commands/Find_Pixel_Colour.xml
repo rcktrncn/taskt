@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="bd944559-52fb-4812-8386-c3793f551b7f" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Find Pixel Colour sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="81a816b2-3d90-415e-906f-32d1d85271c5" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="rgb(255,0,0)" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CreateColorCommand" CommandID="b50a1c8f-83a3-4027-91bd-9c028e7d275f" CommandName="CreateColorCommand" IsCommented="false" SelectionName="Create Color" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_Color="vColor" v_Red="255" v_Green="0" v_Blue="0" v_Alpha="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ConvertColorCommand" CommandID="633cee90-58c3-43c0-abd2-3c592a27cb98" CommandName="ConvertColorCommand" IsCommented="false" SelectionName="Convert Color" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_Color="⦃vColor⦄" v_Format="ARGB Number" v_Result="vARGB" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="6c4424cf-9a49-46f9-a824-0e92bad32888" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Search (0,0) - (255,255)" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="FindPixelColourCommand" CommandID="53cd8ef8-0ad5-486b-9c97-1cdb1382c411" CommandName="FindPixelColourCommand" IsCommented="false" SelectionName="Find Pixel Colour" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_x1Coord="0" v_y1Coord="0" v_x2Coord="255" v_y2Coord="255" v_ColorCodeToSearch="⦃vARGB⦄" v_userVariableName="vResult" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="fc60d646-dc41-4ba6-b7ff-3acdb88714a1" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="Result: ⦃vResult⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.7</TasktVersion>
+    <Author />
+    <LastRunTime>2024-10-06T17:29:44.4734132+09:00</LastRunTime>
+    <RunTimes>3</RunTimes>
+    <Revision>4</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vARGB</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vColor</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vResult</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>
