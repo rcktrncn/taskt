@@ -55,17 +55,17 @@ Please note whatever software that taskt is automating can affect the minimum so
  * 200MB disk space
  * 1 vCPU
  * .NET Framework 4.8
- * (We think it will probably work in Windows 11 :-)
+ * (We think it will probably work in Windows 11 and Windows Server 2022 :-)
 
-**Attension**: Windows 7, Windows 8.1, Windows Server 2012 are no longer supported.
+**Attension**: Windows 7, Windows 8.1, Windows Server 2012, Windows Server 2016 are no longer supported.
 
 ## Recommended
- * Windows 10/Server 2016/Server 2019 (32bit and 64bit)
+ * Windows 10/Server 2019 (32bit and 64bit)
  * 4GB ram
  * 1GB disk space
  * 2 CPU
  * .NET Framework 4.8
- * (We think it will probably work in Windows 11 :-)
+ * (We think it will probably work in Windows 11 and Windows Server 2022 :-)
 
 **Attention**: After windows 10 support ends, windows 10 will be removed from the recommended environment.
 
