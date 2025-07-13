@@ -25,7 +25,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 {
     public partial class frmScriptVariables : ThemedForm
     {
-        public List<Core.Script.ScriptVariable> scriptVariables { get; }
+        public List<Core.Script.ScriptVariable> scriptVariables { get; private set; }
 
         TreeNode bufferedUserVariableParentNode = new TreeNode();
         TreeNode bufferedSystemVariableParentNode = new TreeNode();
@@ -44,7 +44,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         public frmScriptVariables(List<Core.Script.ScriptVariable> variables, Core.SafeApplicationSettings appSettings)
         {
             InitializeComponent();
-            this.scriptVariables = variables;
+            this.scriptVariables = new List<Core.Script.ScriptVariable>(variables);
             //this.appSettings = appSettings;
             this.appSettings = App.Taskt_Settings;
         }

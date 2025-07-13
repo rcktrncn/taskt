@@ -1445,7 +1445,7 @@ namespace taskt.UI.CustomControls
 
             string sortOrder = editor.appSettings.ClientSettings.InstanceNameOrder.ToLower();
 
-            Dictionary<string, int> instanceList = editor.instanceList.getInstanceClone(tp, (sortOrder == "frequency of use"));
+            Dictionary<string, int> instanceList = editor.instanceList.GetInstanceCounterClone(tp, (sortOrder == "frequency of use"));
 
             string defInstanceName = "";
             switch (tp)

@@ -109,7 +109,7 @@ namespace taskt.Core.Automation.Commands
         {
             var mail = (string.IsNullOrEmpty(v_MailName)) ? "" : v_MailName;
 
-            counter.addInstance(mail, new PropertyInstanceType(PropertyInstanceType.InstanceType.MailKitEMail, true), true);
+            counter.AddInstance(mail, new PropertyInstanceType(PropertyInstanceType.InstanceType.MailKitEMail, true), true);
 
             var tp = (string.IsNullOrEmpty(v_TextType)) ? "" : v_TextType.ToLower();
             switch (tp)
@@ -119,8 +119,8 @@ namespace taskt.Core.Automation.Commands
                     var ins = new PropertyInstanceType(PropertyInstanceType.InstanceType.DateTime, true);
                     var name = (string.IsNullOrEmpty(v_ResultVariable)) ? "" : v_ResultVariable;
 
-                    counter.addInstance(name, ins, false);
-                    counter.addInstance(name, ins, true);
+                    counter.AddInstance(name, ins, false);
+                    counter.AddInstance(name, ins, true);
 
                     break;
             }
@@ -130,7 +130,7 @@ namespace taskt.Core.Automation.Commands
         {
             var mail = (string.IsNullOrEmpty(v_MailName)) ? "" : v_MailName;
 
-            counter.removeInstance(mail, new PropertyInstanceType(PropertyInstanceType.InstanceType.MailKitEMail, true), true);
+            counter.RemoveInstance(mail, new PropertyInstanceType(PropertyInstanceType.InstanceType.MailKitEMail, true), true);
 
             var tp = (string.IsNullOrEmpty(v_TextType)) ? "" : v_TextType.ToLower();
             switch (tp)
@@ -140,8 +140,8 @@ namespace taskt.Core.Automation.Commands
                     var ins = new PropertyInstanceType(PropertyInstanceType.InstanceType.DateTime, true);
                     var name = (string.IsNullOrEmpty(v_ResultVariable)) ? "" : v_ResultVariable;
 
-                    counter.removeInstance(name, ins, false);
-                    counter.removeInstance(name, ins, true);
+                    counter.RemoveInstance(name, ins, false);
+                    counter.RemoveInstance(name, ins, true);
 
                     break;
             }

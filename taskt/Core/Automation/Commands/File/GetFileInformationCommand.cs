@@ -111,8 +111,8 @@ namespace taskt.Core.Automation.Commands
                 case "hidden file":
                     var boolType = new Automation.Attributes.PropertyAttributes.PropertyInstanceType(PropertyInstanceType.InstanceType.Boolean, true);
                     var ins = (string.IsNullOrEmpty(v_Result) ? "" : v_Result);
-                    counter.addInstance(ins, boolType, true);
-                    counter.addInstance(ins, boolType, false);
+                    counter.AddInstance(ins, boolType, true);
+                    counter.AddInstance(ins, boolType, false);
                     break;
             }
         }
@@ -127,8 +127,8 @@ namespace taskt.Core.Automation.Commands
                 case "hidden file":
                     var boolType = new Automation.Attributes.PropertyAttributes.PropertyInstanceType(PropertyInstanceType.InstanceType.Boolean, true);
                     var ins = (string.IsNullOrEmpty(v_Result) ? "" : v_Result);
-                    counter.removeInstance(ins, boolType, true);
-                    counter.removeInstance(ins, boolType, false);
+                    counter.RemoveInstance(ins, boolType, true);
+                    counter.RemoveInstance(ins, boolType, false);
                     break;
             }
         }

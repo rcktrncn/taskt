@@ -437,7 +437,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             //var frmAttended = new frmAttendedMode();
             //frmAttended.Show();
-            scriptBuilderForm.showAttendedModeFormProcess();
+            scriptBuilderForm.ShowAttendedModeFormProcess();
             this.Close();
         }
 

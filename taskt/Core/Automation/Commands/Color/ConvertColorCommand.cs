@@ -219,7 +219,7 @@ namespace taskt.Core.Automation.Commands
         public override void AddInstance(InstanceCounter counter)
         {
             var co = (string.IsNullOrEmpty(v_Color)) ? "" : v_Color;
-            counter.addInstance(co, new PropertyInstanceType(PropertyInstanceType.InstanceType.Color, true), true);
+            counter.AddInstance(co, new PropertyInstanceType(PropertyInstanceType.InstanceType.Color, true), true);
 
             var format = (string.IsNullOrEmpty(v_Format) ? "" : v_Format.ToLower());
             var ins = (string.IsNullOrEmpty(v_Result) ? "" : v_Result);
@@ -229,13 +229,13 @@ namespace taskt.Core.Automation.Commands
                 case "cmyk":
                 case "rgba dictioanry":
                     var dicProp = new PropertyInstanceType(PropertyInstanceType.InstanceType.Dictionary, true);
-                    counter.addInstance(ins, dicProp, false);
-                    counter.addInstance(ins, dicProp, true);
+                    counter.AddInstance(ins, dicProp, false);
+                    counter.AddInstance(ins, dicProp, true);
                     break;
                 case "rgba datatable":
                     var dtProp = new PropertyInstanceType(PropertyInstanceType.InstanceType.DataTable, true);
-                    counter.addInstance(ins, dtProp, false);
-                    counter.addInstance(ins, dtProp, true);
+                    counter.AddInstance(ins, dtProp, false);
+                    counter.AddInstance(ins, dtProp, true);
                     break;
             }
         }
@@ -243,7 +243,7 @@ namespace taskt.Core.Automation.Commands
         public override void RemoveInstance(InstanceCounter counter)
         {
             var co = (string.IsNullOrEmpty(v_Color)) ? "" : v_Color;
-            counter.removeInstance(co, new PropertyInstanceType(PropertyInstanceType.InstanceType.Color, true), true);
+            counter.RemoveInstance(co, new PropertyInstanceType(PropertyInstanceType.InstanceType.Color, true), true);
 
             var format = (string.IsNullOrEmpty(v_Format) ? "" : v_Format.ToLower());
             var ins = (string.IsNullOrEmpty(v_Result) ? "" : v_Result);
@@ -253,13 +253,13 @@ namespace taskt.Core.Automation.Commands
                 case "cmyk":
                 case "rgba dictioanry":
                     var dicProp = new PropertyInstanceType(PropertyInstanceType.InstanceType.Dictionary, true);
-                    counter.removeInstance(ins, dicProp, false);
-                    counter.removeInstance(ins, dicProp, true);
+                    counter.RemoveInstance(ins, dicProp, false);
+                    counter.RemoveInstance(ins, dicProp, true);
                     break;
                 case "rgba datatable":
                     var dtProp = new PropertyInstanceType(PropertyInstanceType.InstanceType.DataTable, true);
-                    counter.removeInstance(ins, dtProp, false);
-                    counter.removeInstance(ins, dtProp, true);
+                    counter.RemoveInstance(ins, dtProp, false);
+                    counter.RemoveInstance(ins, dtProp, true);
                     break;
             }
         }

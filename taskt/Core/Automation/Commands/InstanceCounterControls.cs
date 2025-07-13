@@ -18,7 +18,7 @@ namespace taskt.Core.Automation.Commands
         {
             ActionInstance(command, new Action<string, PropertyInstanceType, bool>((instanceName, instanceType, isUsed) =>
             {
-                counter.addInstance(instanceName, instanceType, isUsed);
+                counter.AddInstance(instanceName, instanceType, isUsed);
             }));
         }
 
@@ -31,7 +31,7 @@ namespace taskt.Core.Automation.Commands
         {
             ActionInstance(command, new Action<string, PropertyInstanceType, bool>((instanceName, instanceType, isUsed) =>
             {
-                counter.removeInstance(instanceName, instanceType, isUsed);
+                counter.RemoveInstance(instanceName, instanceType, isUsed);
             }));
         }
 

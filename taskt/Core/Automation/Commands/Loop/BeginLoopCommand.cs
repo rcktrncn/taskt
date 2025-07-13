@@ -297,7 +297,7 @@ namespace taskt.Core.Automation.Commands
 
         private void linkWebBrowserInstanceSelector_Click(object sender, EventArgs e, UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
-            var instances = editor.instanceList.getInstanceClone(Attributes.PropertyAttributes.PropertyInstanceType.InstanceType.WebBrowser);
+            var instances = editor.instanceList.GetInstanceCounterClone(Attributes.PropertyAttributes.PropertyInstanceType.InstanceType.WebBrowser);
 
             using (var frm = new UI.Forms.ScriptBuilder.CommandEditor.Supplemental.frmItemSelector(instances.Keys.ToList<string>()))
             {
@@ -346,7 +346,7 @@ namespace taskt.Core.Automation.Commands
 
         private void linkBooleanInstanceSelector_Click(object sender, EventArgs e, UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
-            var instances = editor.instanceList.getInstanceClone(Attributes.PropertyAttributes.PropertyInstanceType.InstanceType.Boolean);
+            var instances = editor.instanceList.GetInstanceCounterClone(Attributes.PropertyAttributes.PropertyInstanceType.InstanceType.Boolean);
 
             using (var frm = new UI.Forms.ScriptBuilder.CommandEditor.Supplemental.frmItemSelector(instances.Keys.ToList<string>()))
             {

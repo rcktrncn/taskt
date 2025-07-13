@@ -851,7 +851,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             if (MessageBox.Show("Close Settings form to launch Attended Mode.\nIf you have changed the settings, click the 'OK' button to save the changes.\nLaunch Attended Mode now ?", "Settings", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                scriptBuilderForm.showAttendedModeFormProcess();
+                scriptBuilderForm.ShowAttendedModeFormProcess();
                 this.Close();
             }
         }
