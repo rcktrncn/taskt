@@ -8,7 +8,7 @@ using taskt.UI.CustomControls;
 
 namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 {
-    public partial class frmMultiEnterKeys : ThemedForm
+    public partial class frmMultiEnterKeys : DialogLikeThemedForm
     {
         private Core.SafeApplicationSettings appSetttings;
         private List<Core.Script.ScriptVariable> scriptVariables;

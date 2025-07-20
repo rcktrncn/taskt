@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 {
-    public partial class frmCommandList : ThemedForm
+    public partial class frmCommandList : DialogLikeThemedForm
     {
         private Core.SafeApplicationSettings appSettings;
 

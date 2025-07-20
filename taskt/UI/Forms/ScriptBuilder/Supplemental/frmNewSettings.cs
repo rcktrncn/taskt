@@ -8,7 +8,7 @@ using taskt.Core.IO;
 
 namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 {
-    public partial class frmNewSettings : ThemedForm
+    public partial class frmNewSettings : DialogLikeThemedForm
     {
         Core.ApplicationSettings newAppSettings;
         ScriptBuilder.frmScriptBuilder scriptBuilderForm;

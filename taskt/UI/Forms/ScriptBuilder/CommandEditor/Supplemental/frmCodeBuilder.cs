@@ -6,7 +6,7 @@ using taskt.Core.Automation.Commands;
 
 namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 {
-    public partial class frmCodeBuilder : Form
+    public partial class frmCodeBuilder : DialogLikeThemedForm
     {
         public frmCodeBuilder()
         {

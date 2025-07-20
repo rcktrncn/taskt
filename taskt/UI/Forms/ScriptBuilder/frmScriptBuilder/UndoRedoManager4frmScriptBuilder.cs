@@ -6,6 +6,9 @@ namespace taskt.UI.Forms
     // aliace for Instances Counter dictionary, too long!
     using InstanceCounterData = Dictionary<string, Dictionary<string, Dictionary<string, int>>>;
 
+    // aliace lstScriptActions line state (isNewLine, isDontSave)
+    using LineStatesData = List<(bool IsNewInsertedLine, bool IsDontSaveLine)>;
+
     /// <summary>
     /// Undo, Redo manager for frmScriptBuilder
     /// </summary>
@@ -14,11 +17,11 @@ namespace taskt.UI.Forms
         /// <summary>
         /// undo stack
         /// </summary>
-        private readonly Stack<(Script, InstanceCounterData)> undo = new Stack<(Script, InstanceCounterData)>();
+        private readonly Stack<(Script, InstanceCounterData, LineStatesData)> undo = new Stack<(Script, InstanceCounterData, LineStatesData)>();
         /// <summary>
         /// redo stack
         /// </summary>
-        private readonly Stack<(Script, InstanceCounterData)> redo = new Stack<(Script, InstanceCounterData)>();
+        private readonly Stack<(Script, InstanceCounterData, LineStatesData)> redo = new Stack<(Script, InstanceCounterData, LineStatesData)>();
         
         /// <summary>
         /// can undo?
@@ -40,9 +43,9 @@ namespace taskt.UI.Forms
         /// add undo snapshot
         /// </summary>
         /// <param name="script"></param>
-        public void AddUndoSnapshot(Script script, InstanceCounterData counter)
+        public void AddUndoSnapshot(Script script, InstanceCounterData counter, LineStatesData lineState)
         {
-            undo.Push((script, counter));
+            undo.Push((script, counter, lineState));
         }
 
         /// <summary>
@@ -50,16 +53,16 @@ namespace taskt.UI.Forms
         /// </summary>
         /// <param name="script"></param>
         /// <param name="counter"></param>
-        public void AddRedoSnapshot(Script script, InstanceCounterData counter)
+        public void AddRedoSnapshot(Script script, InstanceCounterData counter, LineStatesData lineState)
         {
-            redo.Push((script, counter));
+            redo.Push((script, counter, lineState));
         }
 
         /// <summary>
         /// undo
         /// </summary>
         /// <returns></returns>
-        public (Script, InstanceCounterData) Undo()
+        public (Script, InstanceCounterData, LineStatesData) Undo()
         {
             if (CanUndo)
             {
@@ -68,7 +71,7 @@ namespace taskt.UI.Forms
             }
             else
             {
-                return (null, null);
+                return (null, null, null);
             }
         }
 
@@ -76,7 +79,7 @@ namespace taskt.UI.Forms
         /// redo
         /// </summary>
         /// <returns></returns>
-        public (Script, InstanceCounterData) Redo()
+        public (Script, InstanceCounterData, LineStatesData) Redo()
         {
             if (CanRedo)
             {
@@ -85,7 +88,7 @@ namespace taskt.UI.Forms
             }
             else
             {
-                return (null, null);
+                return (null, null, null);
             }
         }
 

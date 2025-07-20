@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 {
-    public partial class frmInspectParser : ThemedForm
+    public partial class frmInspectParser : DialogLikeThemedForm
     {
         public frmInspectParser()
         {

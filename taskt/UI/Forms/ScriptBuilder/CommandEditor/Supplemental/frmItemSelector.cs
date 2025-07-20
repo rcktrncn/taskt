@@ -17,7 +17,7 @@ using System.Windows.Forms;
 
 namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 {
-    public partial class frmItemSelector : ThemedForm
+    public partial class frmItemSelector : DialogLikeThemedForm
     {
         public object selectedItem { get; private set; }
 

@@ -58,18 +58,25 @@ namespace taskt.Core.Script
         }
 
         /// <summary>
-        /// Converts and serializes the user-defined commands into an XML file  
+        /// Converts and serializes the user-defined commands into an XML file 
         /// </summary>
-        public static Script SerializeScript(ListView.ListViewItemCollection scriptCommands, List<ScriptVariable> scriptVariables, ScriptInformation info, IEngineSettings engineSettings, XmlSerializer serializer = null, string scriptFilePath = "")
+        /// <param name="scriptCommands"></param>
+        /// <param name="scriptVariables"></param>
+        /// <param name="info"></param>
+        /// <param name="engineSettings">engine settings</param>
+        /// <param name="serializer">Script Serializer, when null create new</param>
+        /// <param name="scriptFilePath">output file path, when null not output</param>
+        /// <param name="enableConvertIntermediate">convert intermediate script, but depends on the engine settings</param>
+        /// <param name="changeCommandSaveState">change IsDontSaveCommand is false when specified true</param>
+        /// <returns></returns>
+        public static Script SerializeScript(ListView.ListViewItemCollection scriptCommands, List<ScriptVariable> scriptVariables, ScriptInformation info, IEngineSettings engineSettings, XmlSerializer serializer = null, string scriptFilePath = "", bool enableConvertIntermediate = true, bool changeCommandSaveState = true)
         {
             var script = new Script
             {
-                //save variables to file
+                // save variables to file
                 Variables = scriptVariables,
                 Info = info
             };
-
-            //save listview tags to command list
 
             int lineNumber = 1;
 
@@ -78,47 +85,52 @@ namespace taskt.Core.Script
             foreach (ListViewItem commandItem in scriptCommands)
             {
                 var srcCommand = (ScriptCommand)commandItem.Tag;
-                srcCommand.IsDontSavedCommand = false;
-
+                if (changeCommandSaveState)
+                {
+                    srcCommand.IsDontSavedCommand = false;
+                }
+                
                 var command = srcCommand.Clone();
                 command.LineNumber = lineNumber;
 
-                //if ((command is BeginNumberOfTimesLoopCommand) || (command is BeginContinousLoopCommand) || (command is BeginLoopForComplexDataTypesCommand) || (command is BeginIfCommand) || (command is BeginMultiIfCommand) || (command is TryCommand) || (command is BeginLoopCommand) || (command is BeginMultiLoopCommand))
                 if ((command is IHaveErrorAdditionalCommands) || (command is IHaveIfAdditionalCommands) || (command is IHaveLoopAdditionalCommands))
                 {
-                    if (subCommands.Count == 0)  //if this is the first loop
+                    if (subCommands.Count == 0)
                     {
-                        //add command to root node
+                        //if this is the first loop
+                        // add command to root node
                         var newCommand = script.AddNewParentCommand(command);
-                        //add to tracking for additional commands
+                        // add to tracking for additional commands
                         subCommands.Add(newCommand);
                     }
-                    else  //we are already looping so add to sub item
+                    else
                     {
-                        //get reference to previous node
+                        //we are already looping so add to sub item
+                        // get reference to previous node
                         var parentCommand = subCommands[subCommands.Count - 1];
-                        //add as new node to previous node
+                        // add as new node to previous node
                         var nextNodeParent = parentCommand.AddAdditionalAction(command);
-                        //add to tracking for additional commands
+                        // add to tracking for additional commands
                         subCommands.Add(nextNodeParent);
                     }
                 }
-                //else if ((command is EndLoopCommand) || (command is EndIfCommand) || (command is EndTryCommand))  //if current loop scenario is ending
                 else if (command is IEndOfStacturedCommand)
                 {
-                    //get reference to previous node
+                    // get reference to previous node
                     var parentCommand = subCommands[subCommands.Count - 1];
-                    //add to end command // DECIDE WHETHER TO ADD WITHIN LOOP NODE OR PREVIOUS NODE
+                    // add to end command // DECIDE WHETHER TO ADD WITHIN LOOP NODE OR PREVIOUS NODE
                     parentCommand.AddAdditionalAction(command);
-                    //remove last command since loop is ending
+                    // remove last command since loop is ending
                     subCommands.RemoveAt(subCommands.Count - 1);
                 }
-                else if (subCommands.Count == 0) //add command as a root item
+                else if (subCommands.Count == 0) 
                 {
+                    // add command as a root item
                     script.AddNewParentCommand(command);
                 }
-                else //we are within a loop so add to the latest tracked loop item
+                else
                 {
+                    // we are within a loop so add to the latest tracked loop item
                     var parentCommand = subCommands[subCommands.Count - 1];
                     parentCommand.AddAdditionalAction(command);
                 }
@@ -128,7 +140,7 @@ namespace taskt.Core.Script
             }
 
             // Convert Intermediate
-            if (engineSettings.ExportIntermediateXML)
+            if (enableConvertIntermediate && engineSettings.ExportIntermediateXML)
             {
                 foreach (var cmd in script.Commands)
                 {
@@ -136,8 +148,7 @@ namespace taskt.Core.Script
                 }
             }
 
-            //output to xml file
-            //XmlSerializer serializer = new XmlSerializer(typeof(Script));
+            // output to xml file
             if (serializer == null)
             {
                 serializer = CreateSerializer();
@@ -148,11 +159,11 @@ namespace taskt.Core.Script
                 Indent = true
             };
 
-            //if output path was provided
+            // if output path was provided
             if (scriptFilePath != "")
             {
                 //write to file
-                using (System.IO.FileStream fs = File.Create(scriptFilePath))
+                using (FileStream fs = File.Create(scriptFilePath))
                 {
                     using (XmlWriter writer = XmlWriter.Create(fs, settings))
                     {
@@ -205,7 +216,7 @@ namespace taskt.Core.Script
         {
             try
             {
-                using (System.IO.StringReader reader = new System.IO.StringReader(scriptXML))
+                using (StringReader reader = new StringReader(scriptXML))
                 {
                     //XmlSerializer serializer = new XmlSerializer(typeof(Script));
                     if (serializer == null)
@@ -235,7 +246,7 @@ namespace taskt.Core.Script
             {
                 actions.AddNewParentCommand(cmd);
             }
-            using (var writer = new System.IO.StringWriter())
+            using (var writer = new StringWriter())
             {
                 serializer.Serialize(writer, actions);
                 actions = null;
@@ -245,7 +256,7 @@ namespace taskt.Core.Script
 
         public static Script DeserializeScript(string scriptXML, XmlSerializer serializer = null)
         {
-            using (var reader = new System.IO.StringReader(scriptXML))
+            using (var reader = new StringReader(scriptXML))
             {
                 //XmlSerializer serializer = new XmlSerializer(typeof(Script));
                 if (serializer == null)

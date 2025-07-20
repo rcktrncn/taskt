@@ -18,6 +18,7 @@ namespace taskt.Core.Automation.Commands
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(TextControls), nameof(TextControls.v_OutputTextVariableName))]
+        [PropertyDisplayText(true, "Variable")]
         public string v_userVariableName { get; set; }
 
         [XmlAttribute]

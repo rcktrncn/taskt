@@ -2,6 +2,9 @@
 
 namespace taskt.Core.Script
 {
+    /// <summary>
+    /// Script Information
+    /// </summary>
     [Serializable]
     public class ScriptInformation
     {
@@ -21,6 +24,17 @@ namespace taskt.Core.Script
             this.Revision = 0;
             this.ScriptVersion = "0.0.0";
             this.Description = "";
+        }
+
+        public ScriptInformation(ScriptInformation info)
+        {
+            this.TasktVersion = info.TasktVersion;
+            this.Author= info.Author;
+            this.LastRunTime = info.LastRunTime;
+            this.RunTimes = info.RunTimes;
+            this.Revision = info.Revision;
+            this.ScriptVersion = info.ScriptVersion;
+            this.Description = info.Description;
         }
     }
 }

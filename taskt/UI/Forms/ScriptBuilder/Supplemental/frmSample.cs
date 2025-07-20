@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 {
-    public partial class frmSample : ThemedForm
+    public partial class frmSample : DialogLikeThemedForm
     {
         private string samplePath;
         private frmScriptBuilder parentForm;

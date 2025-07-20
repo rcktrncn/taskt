@@ -6,7 +6,7 @@ using System.Windows.Forms;
  */
 namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 {
-    public partial class frmAddVariable : ThemedForm
+    public partial class frmAddVariable : DialogLikeThemedForm
     {
         //private Core.ApplicationSettings appSettings;
         private Core.SafeApplicationSettings appSettings;
@@ -61,14 +61,6 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         private void uiBtnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-        }
-
-        private void frmAddVariable_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-            {
-                this.DialogResult = DialogResult.Cancel;
-            }
         }
     }
 }

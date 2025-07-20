@@ -11,7 +11,7 @@ using System.Windows.Automation;
  */
 namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 {
-    public partial class frmGUIInspect : ThemedForm
+    public partial class frmGUIInspect : DialogLikeThemedForm
     {
         private XElement xml = null;
         private taskt.Core.Automation.Engine.AutomationEngineInstance engine;

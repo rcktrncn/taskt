@@ -17,11 +17,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("taskt uob")]
+[assembly: AssemblyTitle("taskt")]
 [assembly: AssemblyDescription("Build and Execute Automation Scripts")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("taskt uob")]
+[assembly: AssemblyProduct("taskt")]
 [assembly: AssemblyCopyright("Copyright ©2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

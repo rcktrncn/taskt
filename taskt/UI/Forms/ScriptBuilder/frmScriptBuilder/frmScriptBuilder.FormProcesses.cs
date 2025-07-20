@@ -59,12 +59,14 @@ namespace taskt.UI.Forms.ScriptBuilder
 
         private void ShowScriptInformationForm()
         {
-            using (var frm = new Supplemental.frmScriptInformations())
+            using (var frm = new Supplemental.frmScriptInformations(this.scriptInfo))
             {
-                CreateUndoSnapshot();
-                frm.infos = scriptInfo;
-                frm.ShowDialog();
-                ChangeSaveState(true);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    CreateUndoSnapshot();
+                    this.scriptInfo = frm.infos;
+                    ChangeSaveState(true);
+                }
             }
         }
 

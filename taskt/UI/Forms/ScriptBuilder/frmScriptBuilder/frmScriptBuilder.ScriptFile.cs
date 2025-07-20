@@ -10,6 +10,7 @@ using taskt.Core.Script;
 namespace taskt.UI.Forms.ScriptBuilder
 {
     using InstanceCounterData = Dictionary<string, Dictionary<string, Dictionary<string, int>>>;
+    using LineStatesData = List<(bool IsNewInsertedLine, bool IsDontSaveLine)>;
 
     public partial class frmScriptBuilder
     {
@@ -22,7 +23,10 @@ namespace taskt.UI.Forms.ScriptBuilder
         /// </summary>
         private void BeginOpenScriptProcess()
         {
-            CheckAndSaveScriptIfForget();
+            if (!CheckAndSaveScriptIfForget())
+            {
+                return;
+            }
 
             // show ofd
             using (var openFileDialog = new OpenFileDialog())
@@ -43,14 +47,28 @@ namespace taskt.UI.Forms.ScriptBuilder
         /// <summary>
         /// show check and save dialog
         /// </summary>
-        private void CheckAndSaveScriptIfForget()
+        /// <returns>true is allow to continue next process, false is stop process</returns>
+        private bool CheckAndSaveScriptIfForget()
         {
             if (this.dontSaveFlag)
             {
-                if (MessageBox.Show("This script has not been saved yet.\nDo you save it?", "taskt", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                var ret = MessageBox.Show("This script has not been saved yet.\nDo you save it?", "taskt", MessageBoxButtons.YesNoCancel);
+                switch (ret)
                 {
-                    BeginSaveScriptProcess((ScriptFilePath == ""));
+                    case DialogResult.Yes:
+                        BeginSaveScriptProcess((ScriptFilePath == ""));
+                        return true;
+                    case DialogResult.No:
+                        return true;
+
+                    case DialogResult.Cancel:
+                    default:
+                        return false;
                 }
+            }
+            else
+            {
+                return true;
             }
         }
 
@@ -450,10 +468,11 @@ namespace taskt.UI.Forms.ScriptBuilder
         /// get serialized script and save
         /// </summary>
         /// <param name="fileName"></param>
+        /// <param name="enableConvertIntermediate"></param>
         /// <returns></returns>
-        private Script GetSerializedScript(string fileName = "")
+        private Script GetSerializedScript(string fileName = "", bool enableConvertIntermediate = true, bool changeCommandSaveState = true)
         {
-            return Script.SerializeScript(lstScriptActions.Items, this.scriptVariables, this.scriptInfo, appSettings.EngineSettings, scriptSerializer, fileName);
+            return Script.SerializeScript(lstScriptActions.Items, this.scriptVariables, this.scriptInfo, appSettings.EngineSettings, scriptSerializer, fileName, enableConvertIntermediate, changeCommandSaveState);
         }
 
         private void CheckValidateCommands(List<ScriptCommand> commands)
@@ -476,7 +495,11 @@ namespace taskt.UI.Forms.ScriptBuilder
 
         public bool OpenScriptFromFilePath(string filePath, bool normalFileOpen = false)
         {
-            CheckAndSaveScriptIfForget();
+            if (!CheckAndSaveScriptIfForget())
+            {
+                return false;
+            }
+
             OpenFile(filePath);
             if (normalFileOpen)
             {
@@ -523,9 +546,9 @@ namespace taskt.UI.Forms.ScriptBuilder
         /// <param name="overrideScript"></param>
         /// <param name="overrideInstanceCounter"></param>
         /// <param name="isUndo"></param>
-        private void BeginUndoRedoProcess(Script overrideScript, InstanceCounterData overrideInstanceCounter, bool isUndo = true)
+        private void BeginUndoRedoProcess(Script overrideScript, InstanceCounterData overrideInstanceCounter, LineStatesData overrideLineStates, bool isUndo = true)
         {
-            if ((overrideInstanceCounter != null) && (overrideInstanceCounter != null))
+            if ((overrideInstanceCounter != null) && (overrideInstanceCounter != null) && (overrideLineStates != null))
             {
                 if (isUndo)
                 {
@@ -536,7 +559,7 @@ namespace taskt.UI.Forms.ScriptBuilder
                     CreateUndoSnapshot();
                 }
 
-                UndoRedoProcess(overrideScript, overrideInstanceCounter, isUndo);
+                UndoRedoProcess(overrideScript, overrideInstanceCounter, overrideLineStates, isUndo);
             }
             else
             {
@@ -550,7 +573,7 @@ namespace taskt.UI.Forms.ScriptBuilder
         /// <param name="overrideScript"></param>
         /// <param name="overrideInstanceCounter"></param>
         /// <param name="isUndo"></param>
-        private void UndoRedoProcess(Script overrideScript, InstanceCounterData overrideInstanceCounter, bool isUndo = true)
+        private void UndoRedoProcess(Script overrideScript, InstanceCounterData overrideInstanceCounter, LineStatesData overrideLineStates, bool isUndo = true)
         {
             lstScriptActions.BeginUpdate();
 
@@ -559,6 +582,14 @@ namespace taskt.UI.Forms.ScriptBuilder
 
             // populate commands
             PopulateExecutionCommands(overrideScript.Commands);
+
+            // set line states
+            for (int i = lstScriptActions.Items.Count - 1; i >= 0; i--) 
+            {
+                var cmd = (ScriptCommand)lstScriptActions.Items[i].Tag;
+                cmd.IsNewInsertedCommand = overrideLineStates[i].IsNewInsertedLine;
+                cmd.IsDontSavedCommand = overrideLineStates[i].IsDontSaveLine;
+            }
 
             // check indent
             IndentListViewItems();

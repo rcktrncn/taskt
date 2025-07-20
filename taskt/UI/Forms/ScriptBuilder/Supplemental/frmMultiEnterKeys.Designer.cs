@@ -77,13 +77,14 @@
             this.tableLayoutPanel1.Controls.Add(this.panelBody, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(562, 507);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 71F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(749, 634);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panelFooter
@@ -91,10 +92,10 @@
             this.panelFooter.Controls.Add(this.uiBtnAdd);
             this.panelFooter.Controls.Add(this.uiBtnCancel);
             this.panelFooter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelFooter.Location = new System.Drawing.Point(0, 430);
+            this.panelFooter.Location = new System.Drawing.Point(0, 538);
             this.panelFooter.Margin = new System.Windows.Forms.Padding(0);
             this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(562, 57);
+            this.panelFooter.Size = new System.Drawing.Size(749, 71);
             this.panelFooter.TabIndex = 0;
             // 
             // uiBtnAdd
@@ -106,10 +107,10 @@
             this.uiBtnAdd.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.uiBtnAdd.Image = global::taskt.Properties.Resources.various_ok_button;
             this.uiBtnAdd.IsMouseOver = false;
-            this.uiBtnAdd.Location = new System.Drawing.Point(6, 5);
-            this.uiBtnAdd.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.uiBtnAdd.Location = new System.Drawing.Point(8, 6);
+            this.uiBtnAdd.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.uiBtnAdd.Name = "uiBtnAdd";
-            this.uiBtnAdd.Size = new System.Drawing.Size(88, 49);
+            this.uiBtnAdd.Size = new System.Drawing.Size(117, 61);
             this.uiBtnAdd.TabIndex = 20;
             this.uiBtnAdd.TabStop = false;
             this.uiBtnAdd.Text = "Ok";
@@ -124,10 +125,10 @@
             this.uiBtnCancel.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.uiBtnCancel.Image = global::taskt.Properties.Resources.various_cancel_button;
             this.uiBtnCancel.IsMouseOver = false;
-            this.uiBtnCancel.Location = new System.Drawing.Point(106, 5);
-            this.uiBtnCancel.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.uiBtnCancel.Location = new System.Drawing.Point(141, 6);
+            this.uiBtnCancel.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.uiBtnCancel.Name = "uiBtnCancel";
-            this.uiBtnCancel.Size = new System.Drawing.Size(88, 49);
+            this.uiBtnCancel.Size = new System.Drawing.Size(117, 61);
             this.uiBtnCancel.TabIndex = 21;
             this.uiBtnCancel.TabStop = false;
             this.uiBtnCancel.Text = "Cancel";
@@ -140,7 +141,7 @@
             this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Margin = new System.Windows.Forms.Padding(0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(562, 40);
+            this.panelHeader.Size = new System.Drawing.Size(749, 50);
             this.panelHeader.TabIndex = 1;
             // 
             // lblFormTitle
@@ -148,9 +149,10 @@
             this.lblFormTitle.AutoSize = true;
             this.lblFormTitle.Font = new System.Drawing.Font("Segoe UI Emoji", 16F);
             this.lblFormTitle.ForeColor = System.Drawing.Color.White;
-            this.lblFormTitle.Location = new System.Drawing.Point(3, 5);
+            this.lblFormTitle.Location = new System.Drawing.Point(4, 6);
+            this.lblFormTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFormTitle.Name = "lblFormTitle";
-            this.lblFormTitle.Size = new System.Drawing.Size(163, 30);
+            this.lblFormTitle.Size = new System.Drawing.Size(199, 36);
             this.lblFormTitle.TabIndex = 2;
             this.lblFormTitle.Text = "Multi EnterKeys";
             // 
@@ -160,9 +162,10 @@
             this.panelBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(59)))), ((int)(((byte)(59)))));
             this.panelBody.Controls.Add(this.flowBody);
             this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBody.Location = new System.Drawing.Point(3, 43);
+            this.panelBody.Location = new System.Drawing.Point(4, 54);
+            this.panelBody.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelBody.Name = "panelBody";
-            this.panelBody.Size = new System.Drawing.Size(556, 384);
+            this.panelBody.Size = new System.Drawing.Size(741, 480);
             this.panelBody.TabIndex = 2;
             // 
             // flowBody
@@ -179,7 +182,7 @@
             this.flowBody.Location = new System.Drawing.Point(0, 0);
             this.flowBody.Margin = new System.Windows.Forms.Padding(0);
             this.flowBody.Name = "flowBody";
-            this.flowBody.Size = new System.Drawing.Size(556, 384);
+            this.flowBody.Size = new System.Drawing.Size(741, 480);
             this.flowBody.TabIndex = 14;
             this.flowBody.WrapContents = false;
             // 
@@ -191,10 +194,11 @@
             this.flowWindowName.Controls.Add(this.lnkWindowNameUpToDate);
             this.flowWindowName.Controls.Add(this.cmbWindowName);
             this.flowWindowName.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowWindowName.Location = new System.Drawing.Point(3, 3);
+            this.flowWindowName.Location = new System.Drawing.Point(4, 4);
+            this.flowWindowName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flowWindowName.Name = "flowWindowName";
-            this.flowWindowName.Padding = new System.Windows.Forms.Padding(0, 0, 0, 16);
-            this.flowWindowName.Size = new System.Drawing.Size(527, 105);
+            this.flowWindowName.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
+            this.flowWindowName.Size = new System.Drawing.Size(703, 131);
             this.flowWindowName.TabIndex = 13;
             this.flowWindowName.WrapContents = false;
             // 
@@ -203,9 +207,10 @@
             this.lblWindowName.BackColor = System.Drawing.Color.Transparent;
             this.lblWindowName.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblWindowName.ForeColor = System.Drawing.Color.White;
-            this.lblWindowName.Location = new System.Drawing.Point(3, 0);
+            this.lblWindowName.Location = new System.Drawing.Point(4, 0);
+            this.lblWindowName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWindowName.Name = "lblWindowName";
-            this.lblWindowName.Size = new System.Drawing.Size(114, 21);
+            this.lblWindowName.Size = new System.Drawing.Size(152, 26);
             this.lblWindowName.TabIndex = 13;
             this.lblWindowName.Text = "Window Name";
             // 
@@ -220,10 +225,10 @@
             this.lnkWindoNameVariable.FunctionalDescription = null;
             this.lnkWindoNameVariable.HelperType = taskt.Core.Automation.Attributes.PropertyAttributes.PropertyUIHelper.UIAdditionalHelperType.ShowVariableHelper;
             this.lnkWindoNameVariable.ImplementationDescription = null;
-            this.lnkWindoNameVariable.Location = new System.Drawing.Point(0, 21);
+            this.lnkWindoNameVariable.Location = new System.Drawing.Point(0, 26);
             this.lnkWindoNameVariable.Margin = new System.Windows.Forms.Padding(0);
             this.lnkWindoNameVariable.Name = "lnkWindoNameVariable";
-            this.lnkWindoNameVariable.Size = new System.Drawing.Size(105, 17);
+            this.lnkWindoNameVariable.Size = new System.Drawing.Size(120, 20);
             this.lnkWindoNameVariable.TabIndex = 14;
             this.lnkWindoNameVariable.Click += new System.EventHandler(this.lnkInsertVariable_Click);
             // 
@@ -238,10 +243,10 @@
             this.lnkWindowNameUpToDate.FunctionalDescription = null;
             this.lnkWindowNameUpToDate.HelperType = taskt.Core.Automation.Attributes.PropertyAttributes.PropertyUIHelper.UIAdditionalHelperType.ShowVariableHelper;
             this.lnkWindowNameUpToDate.ImplementationDescription = null;
-            this.lnkWindowNameUpToDate.Location = new System.Drawing.Point(0, 38);
+            this.lnkWindowNameUpToDate.Location = new System.Drawing.Point(0, 46);
             this.lnkWindowNameUpToDate.Margin = new System.Windows.Forms.Padding(0);
             this.lnkWindowNameUpToDate.Name = "lnkWindowNameUpToDate";
-            this.lnkWindowNameUpToDate.Size = new System.Drawing.Size(85, 17);
+            this.lnkWindowNameUpToDate.Size = new System.Drawing.Size(98, 20);
             this.lnkWindowNameUpToDate.TabIndex = 16;
             this.lnkWindowNameUpToDate.Click += new System.EventHandler(this.lnkWindowNameUpToDate_Click);
             // 
@@ -249,9 +254,10 @@
             // 
             this.cmbWindowName.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.cmbWindowName.FormattingEnabled = true;
-            this.cmbWindowName.Location = new System.Drawing.Point(3, 58);
+            this.cmbWindowName.Location = new System.Drawing.Point(4, 70);
+            this.cmbWindowName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbWindowName.Name = "cmbWindowName";
-            this.cmbWindowName.Size = new System.Drawing.Size(521, 28);
+            this.cmbWindowName.Size = new System.Drawing.Size(693, 33);
             this.cmbWindowName.TabIndex = 15;
             // 
             // flowTextToSend
@@ -263,10 +269,11 @@
             this.flowTextToSend.Controls.Add(this.lnkTextToSend);
             this.flowTextToSend.Controls.Add(this.txtTextToSend);
             this.flowTextToSend.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowTextToSend.Location = new System.Drawing.Point(3, 114);
+            this.flowTextToSend.Location = new System.Drawing.Point(4, 143);
+            this.flowTextToSend.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flowTextToSend.Name = "flowTextToSend";
-            this.flowTextToSend.Padding = new System.Windows.Forms.Padding(0, 8, 0, 16);
-            this.flowTextToSend.Size = new System.Drawing.Size(527, 198);
+            this.flowTextToSend.Padding = new System.Windows.Forms.Padding(0, 10, 0, 20);
+            this.flowTextToSend.Size = new System.Drawing.Size(703, 248);
             this.flowTextToSend.TabIndex = 15;
             // 
             // lblTextToSend
@@ -275,9 +282,10 @@
             this.lblTextToSend.BackColor = System.Drawing.Color.Transparent;
             this.lblTextToSend.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblTextToSend.ForeColor = System.Drawing.Color.White;
-            this.lblTextToSend.Location = new System.Drawing.Point(3, 8);
+            this.lblTextToSend.Location = new System.Drawing.Point(4, 10);
+            this.lblTextToSend.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTextToSend.Name = "lblTextToSend";
-            this.lblTextToSend.Size = new System.Drawing.Size(311, 21);
+            this.lblTextToSend.Size = new System.Drawing.Size(391, 28);
             this.lblTextToSend.TabIndex = 5;
             this.lblTextToSend.Text = "Text of Keys to Send. (Separate by NewLine)";
             // 
@@ -292,21 +300,22 @@
             this.lnkTextToSend.FunctionalDescription = null;
             this.lnkTextToSend.HelperType = taskt.Core.Automation.Attributes.PropertyAttributes.PropertyUIHelper.UIAdditionalHelperType.ShowVariableHelper;
             this.lnkTextToSend.ImplementationDescription = null;
-            this.lnkTextToSend.Location = new System.Drawing.Point(0, 29);
+            this.lnkTextToSend.Location = new System.Drawing.Point(0, 38);
             this.lnkTextToSend.Margin = new System.Windows.Forms.Padding(0);
             this.lnkTextToSend.Name = "lnkTextToSend";
-            this.lnkTextToSend.Size = new System.Drawing.Size(105, 17);
+            this.lnkTextToSend.Size = new System.Drawing.Size(120, 20);
             this.lnkTextToSend.TabIndex = 7;
             this.lnkTextToSend.Click += new System.EventHandler(this.lnkInsertVariable_Click);
             // 
             // txtTextToSend
             // 
             this.txtTextToSend.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtTextToSend.Location = new System.Drawing.Point(3, 49);
+            this.txtTextToSend.Location = new System.Drawing.Point(4, 62);
+            this.txtTextToSend.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtTextToSend.Multiline = true;
             this.txtTextToSend.Name = "txtTextToSend";
             this.txtTextToSend.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtTextToSend.Size = new System.Drawing.Size(521, 130);
+            this.txtTextToSend.Size = new System.Drawing.Size(693, 162);
             this.txtTextToSend.TabIndex = 6;
             // 
             // flowCompareMethod
@@ -316,10 +325,11 @@
             this.flowCompareMethod.Controls.Add(this.lnkCompareMethodVariable);
             this.flowCompareMethod.Controls.Add(this.cmbCompareMethod);
             this.flowCompareMethod.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowCompareMethod.Location = new System.Drawing.Point(3, 318);
+            this.flowCompareMethod.Location = new System.Drawing.Point(4, 399);
+            this.flowCompareMethod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flowCompareMethod.Name = "flowCompareMethod";
-            this.flowCompareMethod.Padding = new System.Windows.Forms.Padding(0, 8, 0, 16);
-            this.flowCompareMethod.Size = new System.Drawing.Size(527, 96);
+            this.flowCompareMethod.Padding = new System.Windows.Forms.Padding(0, 10, 0, 20);
+            this.flowCompareMethod.Size = new System.Drawing.Size(703, 120);
             this.flowCompareMethod.TabIndex = 14;
             // 
             // lblCompareMethod
@@ -328,9 +338,10 @@
             this.lblCompareMethod.BackColor = System.Drawing.Color.Transparent;
             this.lblCompareMethod.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblCompareMethod.ForeColor = System.Drawing.Color.White;
-            this.lblCompareMethod.Location = new System.Drawing.Point(3, 8);
+            this.lblCompareMethod.Location = new System.Drawing.Point(4, 10);
+            this.lblCompareMethod.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCompareMethod.Name = "lblCompareMethod";
-            this.lblCompareMethod.Size = new System.Drawing.Size(338, 21);
+            this.lblCompareMethod.Size = new System.Drawing.Size(424, 28);
             this.lblCompareMethod.TabIndex = 3;
             this.lblCompareMethod.Text = "Window Compare Method (Default is Contains)";
             // 
@@ -345,10 +356,10 @@
             this.lnkCompareMethodVariable.FunctionalDescription = null;
             this.lnkCompareMethodVariable.HelperType = taskt.Core.Automation.Attributes.PropertyAttributes.PropertyUIHelper.UIAdditionalHelperType.ShowVariableHelper;
             this.lnkCompareMethodVariable.ImplementationDescription = null;
-            this.lnkCompareMethodVariable.Location = new System.Drawing.Point(0, 29);
+            this.lnkCompareMethodVariable.Location = new System.Drawing.Point(0, 38);
             this.lnkCompareMethodVariable.Margin = new System.Windows.Forms.Padding(0);
             this.lnkCompareMethodVariable.Name = "lnkCompareMethodVariable";
-            this.lnkCompareMethodVariable.Size = new System.Drawing.Size(105, 17);
+            this.lnkCompareMethodVariable.Size = new System.Drawing.Size(120, 20);
             this.lnkCompareMethodVariable.TabIndex = 15;
             this.lnkCompareMethodVariable.Click += new System.EventHandler(this.lnkInsertVariable_Click);
             // 
@@ -356,9 +367,10 @@
             // 
             this.cmbCompareMethod.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.cmbCompareMethod.FormattingEnabled = true;
-            this.cmbCompareMethod.Location = new System.Drawing.Point(3, 49);
+            this.cmbCompareMethod.Location = new System.Drawing.Point(4, 62);
+            this.cmbCompareMethod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbCompareMethod.Name = "cmbCompareMethod";
-            this.cmbCompareMethod.Size = new System.Drawing.Size(521, 28);
+            this.cmbCompareMethod.Size = new System.Drawing.Size(693, 33);
             this.cmbCompareMethod.TabIndex = 4;
             // 
             // flowWaitTimeAfter
@@ -370,10 +382,11 @@
             this.flowWaitTimeAfter.Controls.Add(this.lnkWaitTimeAfterVariable);
             this.flowWaitTimeAfter.Controls.Add(this.txtWaitTimeAfter);
             this.flowWaitTimeAfter.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowWaitTimeAfter.Location = new System.Drawing.Point(3, 420);
+            this.flowWaitTimeAfter.Location = new System.Drawing.Point(4, 527);
+            this.flowWaitTimeAfter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flowWaitTimeAfter.Name = "flowWaitTimeAfter";
-            this.flowWaitTimeAfter.Padding = new System.Windows.Forms.Padding(0, 8, 0, 16);
-            this.flowWaitTimeAfter.Size = new System.Drawing.Size(527, 95);
+            this.flowWaitTimeAfter.Padding = new System.Windows.Forms.Padding(0, 10, 0, 20);
+            this.flowWaitTimeAfter.Size = new System.Drawing.Size(703, 119);
             this.flowWaitTimeAfter.TabIndex = 16;
             // 
             // lblWaitTimeAfter
@@ -382,9 +395,10 @@
             this.lblWaitTimeAfter.BackColor = System.Drawing.Color.Transparent;
             this.lblWaitTimeAfter.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.lblWaitTimeAfter.ForeColor = System.Drawing.Color.White;
-            this.lblWaitTimeAfter.Location = new System.Drawing.Point(3, 8);
+            this.lblWaitTimeAfter.Location = new System.Drawing.Point(4, 10);
+            this.lblWaitTimeAfter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblWaitTimeAfter.Name = "lblWaitTimeAfter";
-            this.lblWaitTimeAfter.Size = new System.Drawing.Size(323, 21);
+            this.lblWaitTimeAfter.Size = new System.Drawing.Size(404, 28);
             this.lblWaitTimeAfter.TabIndex = 8;
             this.lblWaitTimeAfter.Text = "Waiting time after Keystrokes (Default is 500)";
             // 
@@ -401,10 +415,10 @@
             this.lnkWaitTimeAfterVariable.FunctionalDescription = null;
             this.lnkWaitTimeAfterVariable.HelperType = taskt.Core.Automation.Attributes.PropertyAttributes.PropertyUIHelper.UIAdditionalHelperType.ShowVariableHelper;
             this.lnkWaitTimeAfterVariable.ImplementationDescription = null;
-            this.lnkWaitTimeAfterVariable.Location = new System.Drawing.Point(0, 29);
+            this.lnkWaitTimeAfterVariable.Location = new System.Drawing.Point(0, 38);
             this.lnkWaitTimeAfterVariable.Margin = new System.Windows.Forms.Padding(0);
             this.lnkWaitTimeAfterVariable.Name = "lnkWaitTimeAfterVariable";
-            this.lnkWaitTimeAfterVariable.Size = new System.Drawing.Size(329, 17);
+            this.lnkWaitTimeAfterVariable.Size = new System.Drawing.Size(412, 21);
             this.lnkWaitTimeAfterVariable.TabIndex = 9;
             this.lnkWaitTimeAfterVariable.Click += new System.EventHandler(this.lnkInsertVariable_Click);
             // 
@@ -413,18 +427,20 @@
             this.txtWaitTimeAfter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWaitTimeAfter.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.txtWaitTimeAfter.Location = new System.Drawing.Point(3, 49);
+            this.txtWaitTimeAfter.Location = new System.Drawing.Point(4, 63);
+            this.txtWaitTimeAfter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtWaitTimeAfter.Name = "txtWaitTimeAfter";
-            this.txtWaitTimeAfter.Size = new System.Drawing.Size(323, 27);
+            this.txtWaitTimeAfter.Size = new System.Drawing.Size(404, 32);
             this.txtWaitTimeAfter.TabIndex = 10;
             this.txtWaitTimeAfter.Text = "500";
             // 
             // frmMultiEnterKeys
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(562, 507);
+            this.ClientSize = new System.Drawing.Size(749, 634);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMultiEnterKeys";

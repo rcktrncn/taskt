@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 namespace taskt.UI.Forms.ScriptEngine.Supplemental
 {
-    public partial class frmEngineContextViewer : ThemedForm
+    public partial class frmEngineContextViewer : DialogLikeThemedForm
     {
         public frmEngineContextViewer(string context, int closeAfter)
         {

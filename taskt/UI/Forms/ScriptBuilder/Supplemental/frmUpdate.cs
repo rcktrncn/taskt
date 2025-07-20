@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 {
-    public partial class frmUpdate : ThemedForm
+    public partial class frmUpdate : DialogLikeThemedForm
     {
         private Core.Update.UpdateManifest manifest = null;
 

@@ -341,29 +341,29 @@ namespace taskt.UI.Forms.ScriptEngine
             }
         }
 
-        /// <summary>
-        /// Delegate for showing message box
-        /// </summary>
-        /// <param name="message"></param>
-        public delegate void ShowMessageDelegate(string message, string title, Forms.General.frmDialog.DialogType dialogType, int closeAfter, bool showTop = true, string fontName = "", float fontSize = 0F);
-        /// <summary>
-        /// Used by the automation engine to show a message to the user on-screen. If UI is not available, a standard messagebox will be invoked instead.
-        /// </summary>
-        public void ShowMessage(string message, string title, General.frmDialog.DialogType dialogType, int closeAfter, bool showTop = true, string fontName = "", float fontSize = 0F)
-        {
-            if (InvokeRequired)
-            {
-                var d = new ShowMessageDelegate(ShowMessage);
-                Invoke(d, new object[] { message, title, dialogType, closeAfter, showTop, fontName, fontSize });
-            }
-            else
-            {
-                using (var confirmationForm = new Forms.General.frmDialog(message, title, dialogType, closeAfter, showTop, fontName, fontSize))
-                {
-                    confirmationForm.ShowDialog();
-                }
-            }
-        }
+        ///// <summary>
+        ///// Delegate for showing message box
+        ///// </summary>
+        ///// <param name="message"></param>
+        //public delegate void ShowMessageDelegate(string message, string title, Forms.General.frmDialog.DialogType dialogType, int closeAfter, bool showTop = true, string fontName = "", float fontSize = 0F);
+        ///// <summary>
+        ///// Used by the automation engine to show a message to the user on-screen. If UI is not available, a standard messagebox will be invoked instead.
+        ///// </summary>
+        //public void ShowMessage(string message, string title, General.frmDialog.DialogType dialogType, int closeAfter, bool showTop = true, string fontName = "", float fontSize = 0F)
+        //{
+        //    if (InvokeRequired)
+        //    {
+        //        var d = new ShowMessageDelegate(ShowMessage);
+        //        Invoke(d, new object[] { message, title, dialogType, closeAfter, showTop, fontName, fontSize });
+        //    }
+        //    else
+        //    {
+        //        using (var confirmationForm = new Forms.General.frmDialog(message, title, dialogType, closeAfter, showTop, fontName, fontSize))
+        //        {
+        //            confirmationForm.ShowDialog();
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Delegate for showing engine context form
@@ -665,5 +665,15 @@ namespace taskt.UI.Forms.ScriptEngine
             MessageBox.Show(lstSteppingCommands.SelectedItem.ToString(), "Item Status");
         }
         #endregion UI Elements
+
+
+        /// <summary>
+        /// move form to window Bottom-Right
+        /// </summary>
+        /// <param name="sender"></param>
+        public static void MoveFormToBottomRight(Form sender)
+        {
+            sender.Location = new Point(Screen.FromPoint(sender.Location).WorkingArea.Right - sender.Width, Screen.FromPoint(sender.Location).WorkingArea.Bottom - sender.Height);
+        }
     }
 }

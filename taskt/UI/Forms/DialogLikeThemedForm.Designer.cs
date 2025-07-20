@@ -1,6 +1,6 @@
 ﻿namespace taskt.UI.Forms
 {
-    partial class ThemedForm
+    partial class DialogLikeThemedForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,16 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogLikeThemedForm));
             this.SuspendLayout();
             // 
-            // ThemedForm
+            // DialogLikeThemedForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 335);
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "ThemedForm";
-            this.Text = "ThemedForm";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
+            this.Name = "DialogLikeThemedForm";
+            this.Text = "DialogLikeThemedForm";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DialogLikeThemedForm_KeyPress);
             this.ResumeLayout(false);
 
         }

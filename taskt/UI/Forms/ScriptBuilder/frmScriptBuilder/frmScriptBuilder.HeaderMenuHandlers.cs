@@ -46,7 +46,10 @@ namespace taskt.UI.Forms.ScriptBuilder
 
         private void restartApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CheckAndSaveScriptIfForget();
+            if (!CheckAndSaveScriptIfForget())
+            {
+                return;
+            }
 
             Application.Restart();
         }

@@ -6,6 +6,8 @@ using taskt.Core.Script;
 
 namespace taskt.UI.Forms.ScriptBuilder
 {
+    using LineStatesData = List<(bool IsNewInsertedLine, bool IsDontSaveLine)>;
+
     public partial class frmScriptBuilder
     {
         /*
@@ -293,16 +295,16 @@ namespace taskt.UI.Forms.ScriptBuilder
 
         private void UndoChange()
         {
-            (var script, var instances) = undoRedo.Undo();
-            BeginUndoRedoProcess(script, instances);
+            (var script, var instances, var lineStates) = undoRedo.Undo();
+            BeginUndoRedoProcess(script, instances, lineStates);
 
             undoSplitMenuItem.Enabled = undoRedo.CanUndo;
         }
 
         private void RedoChange()
         {
-            (var script, var instances) = undoRedo.Redo();
-            BeginUndoRedoProcess(script, instances, false);
+            (var script, var instances, var lineStates) = undoRedo.Redo();
+            BeginUndoRedoProcess(script, instances, lineStates, false);
 
             redoSplitMenuItem.Enabled = undoRedo.CanRedo;
         }
@@ -403,7 +405,7 @@ namespace taskt.UI.Forms.ScriptBuilder
         /// </summary>
         private void CreateUndoSnapshot()
         {
-            undoRedo.AddUndoSnapshot(GetSerializedScript(), instanceList.GetInstancesCounterClone());
+            undoRedo.AddUndoSnapshot(GetSerializedScript("", false, false), instanceList.GetInstancesCounterClone(), CreateLineStates());
 
             undoSplitMenuItem.Enabled = true;
         }
@@ -413,9 +415,24 @@ namespace taskt.UI.Forms.ScriptBuilder
         /// </summary>
         private void CreateRedoSnapshot()
         {
-            undoRedo.AddRedoSnapshot(GetSerializedScript(), instanceList.GetInstancesCounterClone());
+            undoRedo.AddRedoSnapshot(GetSerializedScript("", false, false), instanceList.GetInstancesCounterClone(), CreateLineStates());
 
             redoSplitMenuItem.Enabled = true;
+        }
+
+        /// <summary>
+        /// create line state
+        /// </summary>
+        /// <returns></returns>
+        private LineStatesData CreateLineStates()
+        {
+            var lines = new LineStatesData(lstScriptActions.Items.Count);
+            foreach (ListViewItem item in lstScriptActions.Items)
+            {
+                var cmd = (ScriptCommand)item.Tag;
+                lines.Add((cmd.IsNewInsertedCommand, cmd.IsDontSavedCommand));
+            }
+            return lines;
         }
         #endregion
 

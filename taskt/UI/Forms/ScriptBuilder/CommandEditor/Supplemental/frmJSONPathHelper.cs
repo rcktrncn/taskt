@@ -8,7 +8,7 @@ using System.Windows.Forms;
  */
 namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 {
-    public partial class frmJSONPathHelper : ThemedForm
+    public partial class frmJSONPathHelper : DialogLikeThemedForm
     {
         public frmJSONPathHelper()
         {

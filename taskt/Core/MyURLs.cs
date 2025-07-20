@@ -1,17 +1,7 @@
 ﻿namespace taskt.Core
 {
-    public class MyURLs
+    public partial class MyURLs
     {
-        public const string GitProjectURL = "https://github.com/rcktrncn/taskt";
-        public const string GitReleaseURL = "https://github.com/rcktrncn/taskt/releases";
-        public const string GitIssueURL = "https://github.com/rcktrncn/taskt/issues/new";
-        public const string WikiURL = "https://github.com/rcktrncn/taskt-wiki/blob/master/home.md";
-        public const string OfficialSiteURL = "http://www.taskt.net/";
-        public const string GitterURL = "https://gitter.im/taskt-rpa/Lobby";
-        public const string WikiBaseURL = "https://github.com/rcktrncn/taskt-wiki/blob/master/";
-
-        public const string LatestJSONURL = "https://raw.githubusercontent.com/rcktrncn/taskt/uob-release/taskt/latest.json";
-
         public const string ChromeDriverURL = "https://googlechromelabs.github.io/chrome-for-testing/";
         public const string EdgeDriverURL = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
         public const string GeckoDriverURL = "https://github.com/mozilla/geckodriver/releases/";

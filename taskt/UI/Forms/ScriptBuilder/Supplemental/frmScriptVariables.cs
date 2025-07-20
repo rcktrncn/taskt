@@ -23,7 +23,7 @@ using taskt.Core.Automation.Engine;
  */
 namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 {
-    public partial class frmScriptVariables : ThemedForm
+    public partial class frmScriptVariables : DialogLikeThemedForm
     {
         public List<Core.Script.ScriptVariable> scriptVariables { get; private set; }
 

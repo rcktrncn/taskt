@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 {
-    public partial class frmSearchCommands : ThemedForm
+    public partial class frmSearchCommands : DialogLikeThemedForm
     {
         public List<string> variables { set; get; }
         private frmScriptBuilder parentForm = null;

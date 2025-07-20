@@ -43,8 +43,9 @@
             this.lblProjectName.Font = new System.Drawing.Font("Segoe UI Light", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProjectName.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblProjectName.Location = new System.Drawing.Point(1, 0);
+            this.lblProjectName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProjectName.Name = "lblProjectName";
-            this.lblProjectName.Size = new System.Drawing.Size(87, 47);
+            this.lblProjectName.Size = new System.Drawing.Size(110, 60);
             this.lblProjectName.TabIndex = 1;
             this.lblProjectName.Text = "taskt";
             // 
@@ -54,9 +55,10 @@
             this.lblAppVersion.BackColor = System.Drawing.Color.Transparent;
             this.lblAppVersion.Font = new System.Drawing.Font("Segoe UI Semilight", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAppVersion.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblAppVersion.Location = new System.Drawing.Point(3, 40);
+            this.lblAppVersion.Location = new System.Drawing.Point(4, 50);
+            this.lblAppVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAppVersion.Name = "lblAppVersion";
-            this.lblAppVersion.Size = new System.Drawing.Size(100, 40);
+            this.lblAppVersion.Size = new System.Drawing.Size(128, 50);
             this.lblAppVersion.TabIndex = 2;
             this.lblAppVersion.Text = "v. 0.0.0";
             // 
@@ -66,9 +68,10 @@
             this.lblBuildDate.BackColor = System.Drawing.Color.Transparent;
             this.lblBuildDate.Font = new System.Drawing.Font("Segoe UI Semilight", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBuildDate.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblBuildDate.Location = new System.Drawing.Point(3, 76);
+            this.lblBuildDate.Location = new System.Drawing.Point(4, 95);
+            this.lblBuildDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBuildDate.Name = "lblBuildDate";
-            this.lblBuildDate.Size = new System.Drawing.Size(151, 40);
+            this.lblBuildDate.Size = new System.Drawing.Size(193, 50);
             this.lblBuildDate.TabIndex = 5;
             this.lblBuildDate.Text = "Build Date:";
             // 
@@ -78,9 +81,10 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label1.Location = new System.Drawing.Point(4, 113);
+            this.label1.Location = new System.Drawing.Point(5, 141);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(178, 47);
+            this.label1.Size = new System.Drawing.Size(225, 60);
             this.label1.TabIndex = 6;
             this.label1.Text = "thank you";
             // 
@@ -89,17 +93,18 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label2.Location = new System.Drawing.Point(8, 155);
+            this.label2.Location = new System.Drawing.Point(11, 194);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(458, 44);
+            this.label2.Size = new System.Drawing.Size(611, 55);
             this.label2.TabIndex = 7;
             this.label2.Text = "to all of the community members and projects that make this software possible.\r\n";
             // 
             // frmAbout
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 204);
+            this.ClientSize = new System.Drawing.Size(816, 255);
             this.Controls.Add(this.lblProjectName);
             this.Controls.Add(this.lblAppVersion);
             this.Controls.Add(this.label2);
@@ -108,12 +113,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmAbout";
             this.Text = "About";
             this.Load += new System.EventHandler(this.frmAbout_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmAbout_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

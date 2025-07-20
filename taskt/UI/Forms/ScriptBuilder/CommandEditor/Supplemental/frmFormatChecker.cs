@@ -6,7 +6,7 @@ using System.Windows.Forms;
  */
 namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 {
-    public partial class frmFormatChecker : ThemedForm
+    public partial class frmFormatChecker : DialogLikeThemedForm
     {
         public frmFormatChecker()
         {
