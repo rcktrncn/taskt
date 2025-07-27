@@ -13,6 +13,6 @@
         public const string GitterURL = "https://gitter.im/taskt-rpa/Lobby";
         public const string WikiBaseURL = "https://github.com/rcktrncn/taskt-wiki/blob/master/";
 
-        public const string LatestJSONURL = "https://raw.githubusercontent.com/rcktrncn/taskt/refs/heads/development-branch/taskt/latest.json";
+        public const string LatestJSONURL = "https://raw.githubusercontent.com/rcktrncn/taskt/refs/heads/uob-release/taskt/latest.json";
     }
 }
