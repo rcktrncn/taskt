@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_input))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class ShowMessageCommand : ScriptCommand
+    public sealed class ShowMessageCommand : ScriptCommand, IDialogResultProperties
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_MultiLinesTextBox))]
@@ -77,13 +77,16 @@ namespace taskt.Core.Automation.Commands
         public string v_DialogType { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
-        [PropertyDescription("Dialog Title")]
-        [InputSpecification("Text")]
+        //[PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
+        //[PropertyDescription("Dialog Title")]
+        //[InputSpecification("Text")]
+        //[PropertyIsOptional(true, "ShowMessage Command")]
+        //[PropertyValidationRule("DialogTitle", PropertyValidationRule.ValidationRuleFlags.None)]
+        //[PropertyFirstValue("ShowMessage Command")]
+        //[PropertyDisplayText(false, "Dialog Title")]
+        [PropertyVirtualProperty(nameof(ShowDialogControls), nameof(ShowDialogControls.v_DialogTitle))]
+        [PropertyFirstValue("ShowMessage Comamnd")]
         [PropertyIsOptional(true, "ShowMessage Command")]
-        [PropertyValidationRule("DialogTitle", PropertyValidationRule.ValidationRuleFlags.None)]
-        [PropertyFirstValue("ShowMessage Command")]
-        [PropertyDisplayText(false, "Dialog Title")]
         public string v_DialogTitle { get; set; }
 
         [XmlAttribute]
@@ -97,11 +100,12 @@ namespace taskt.Core.Automation.Commands
         public string v_WaitForAnswer { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        [PropertyDescription("Variable Name to Store Dialog Result")]
-        [PropertyIsOptional(true)]
-        [PropertyValidationRule("Dialog Result", PropertyValidationRule.ValidationRuleFlags.None)]
-        [PropertyDisplayText(false, "Dialog Result")]
+        //[PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
+        //[PropertyDescription("Variable Name to Store Dialog Result")]
+        //[PropertyIsOptional(true)]
+        //[PropertyValidationRule("Dialog Result", PropertyValidationRule.ValidationRuleFlags.None)]
+        //[PropertyDisplayText(false, "Dialog Result")]
+        [PropertyVirtualProperty(nameof(ShowDialogControls), nameof(ShowDialogControls.v_DialogResult))]
         public string v_DialogResult { get; set; }
 
         public ShowMessageCommand()
@@ -168,10 +172,11 @@ namespace taskt.Core.Automation.Commands
                 using (var confirmationForm = new frmDialog(variableMessage, dialogTitle, dialogType, closeAfter, true, fontName, fontSize))
                 {
                     var res = confirmationForm.ShowDialog();
-                    if (!string.IsNullOrEmpty(v_DialogResult))
-                    {
-                        res.ToString().StoreInUserVariable(engine, v_DialogResult);
-                    }
+                    //if (!string.IsNullOrEmpty(v_DialogResult))
+                    //{
+                    //    //res.ToString().StoreInUserVariable(engine, v_DialogResult);
+                    //}
+                    this.StoreDialogResultInUserVariable(res.ToString(), engine);
                 }
             }));
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -16,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_input))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class ShowHTMLInputDialogCommand : ScriptCommand
+    public sealed class ShowHTMLInputDialogCommand : ScriptCommand, IWaitDialogResultProperties
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_MultiLinesTextBox))]
@@ -24,7 +25,7 @@ namespace taskt.Core.Automation.Commands
         [InputSpecification("HTML", true)]
         [PropertyCustomUIHelper("Launch HTML Builder", nameof(ShowHTMLBuilder))]
         [PropertyValidationRule("HTML", PropertyValidationRule.ValidationRuleFlags.Empty)]
-        [PropertyDisplayText(false, "")]
+        [PropertyDisplayText(false, "HTML")]
         [PropertyFirstValue(
 @"<!DOCTYPE html>
 <html lang=""en"" xmlns=""http://www.w3.org/1999/xhtml"">
@@ -104,15 +105,34 @@ Similarly, The <b>Cancel</b> button should call <b>chrome.webview.hostObjects.fm
   </div>
 </body>
 </html>")]
+        [PropertyParameterOrder(1000)]
         public string v_InputHTML { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
-        [PropertyDescription("When an Error should Occur on any Result other than 'OK'")]
-        [PropertyUISelectionOption("Error On Close")]
-        [PropertyUISelectionOption("Do Not Error On Close")]
-        [PropertyIsOptional(true, "Error On Close")]
-        public string v_ErrorOnClose { get; set; }
+        [PropertyVirtualProperty(nameof(ShowDialogControls), nameof(ShowDialogControls.v_DialogTitle))]
+        [PropertyFirstValue("ShowHTMLInputDialog Command")]
+        [PropertyIsOptional(true, "ShowHTMLInputDialog Command")]
+        [PropertyParameterOrder(2000)]
+        public string v_DialogTitle { get; set; }
+
+        //[XmlAttribute]
+        //[PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
+        //[PropertyDescription("When an Error should Occur on any Result other than 'OK'")]
+        //[PropertyUISelectionOption("Error On Close")]
+        //[PropertyUISelectionOption("Do Not Error On Close")]
+        //[PropertyIsOptional(true, "Error On Close")]
+        //[PropertyDisplayText(false, "Error")]
+        //public string v_ErrorOnClose { get; set; }
+
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(ShowDialogControls), nameof(ShowDialogControls.v_WhenCancel))]
+        [PropertyParameterOrder(12000)]
+        public string v_WhenCancel { get; set; }
+
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(ShowDialogControls), nameof(ShowDialogControls.v_DialogResult))]
+        [PropertyParameterOrder(13000)]
+        public string v_DialogResult { get; set; }
 
         public ShowHTMLInputDialogCommand()
         {
@@ -131,26 +151,64 @@ Similarly, The <b>Cancel</b> button should call <b>chrome.webview.hostObjects.fm
                 return;
             }
 
-            //invoke ui for data collection
-            var result = engine.tasktEngineUI.Invoke(new Action(() =>
+            //// invoke ui for data collection
+            //var result = engine.tasktEngineUI.Invoke(new Action(() =>
+            //{
+            //    // sample for temp testing
+            //    var htmlInput = v_InputHTML.ExpandValueOrUserVariable(engine);
+
+            //    var errorOnClose = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_ErrorOnClose), engine);
+
+            //    var variables = engine.tasktEngineUI.ShowHTMLInput(htmlInput);
+
+            //    // if user selected Ok then process variables
+            //    // null result means user cancelled/closed
+            //    if (variables != null)
+            //    {
+            //        ////store each one into context
+            //        //foreach (var variable in variables)
+            //        //{
+            //        //    variable.VariableValue.ToString().StoreInUserVariable(engine, variable.VariableName);
+            //        //}
+
+            //        Action<ScriptVariable> newVariableAction;
+            //        if (engine.engineSettings.CreateMissingVariablesDuringExecution)
+            //        {
+            //            newVariableAction = new Action<ScriptVariable>((v) =>
+            //            {
+            //                engine.VariableList.Add(v);
+            //            });
+            //        }
+            //        else
+            //        {
+            //            newVariableAction = new Action<ScriptVariable>((v) => {
+            //                // nothing
+            //            });
+            //        }
+
+            //        foreach(var v in variables)
+            //        {
+            //            var existsVar = engine.VariableList.FirstOrDefault(t => v.VariableName == t.VariableName);
+            //            if (existsVar != null)
+            //            {
+            //                existsVar.VariableValue = v.VariableValue;
+            //            }
+            //            else
+            //            {
+            //                newVariableAction(v);
+            //            }
+            //        }
+            //    }
+            //    else if (errorOnClose == "Error On Close")
+            //    {
+            //        throw new Exception("Input Form was closed by the user");
+            //    }
+            //}));
+
+            void SetOrAddVariableValueProcess(List<ScriptVariable> vs)
             {
-                //sample for temp testing
-                var htmlInput = v_InputHTML.ExpandValueOrUserVariable(engine);
-
-                var errorOnClose = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_ErrorOnClose), engine);
-
-                var variables = engine.tasktEngineUI.ShowHTMLInput(htmlInput);
-
-                //if user selected Ok then process variables
-                //null result means user cancelled/closed
-                if (variables != null)
+                if (vs != null)
                 {
-                    ////store each one into context
-                    //foreach (var variable in variables)
-                    //{
-                    //    variable.VariableValue.ToString().StoreInUserVariable(engine, variable.VariableName);
-                    //}
-
                     Action<ScriptVariable> newVariableAction;
                     if (engine.engineSettings.CreateMissingVariablesDuringExecution)
                     {
@@ -166,7 +224,7 @@ Similarly, The <b>Cancel</b> button should call <b>chrome.webview.hostObjects.fm
                         });
                     }
 
-                    foreach(var v in variables)
+                    foreach (var v in vs)
                     {
                         var existsVar = engine.VariableList.FirstOrDefault(t => v.VariableName == t.VariableName);
                         if (existsVar != null)
@@ -178,14 +236,142 @@ Similarly, The <b>Cancel</b> button should call <b>chrome.webview.hostObjects.fm
                             newVariableAction(v);
                         }
                     }
+                }
+            }
 
-                    // DBG
-                    //var x = engine.VariableList;
-                }
-                else if (errorOnClose == "Error On Close")
+            engine.tasktEngineUI.Invoke(new Action(() =>
+            {
+                // sample for temp testing
+                var htmlInput = v_InputHTML.ExpandValueOrUserVariable(engine);
+
+                //var errorOnClose = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_ErrorOnClose), engine);
+                //var errorOnClose = "";
+                var whenCancel = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenCancel), engine);
+
+                if (string.IsNullOrEmpty(v_DialogTitle))
                 {
-                    throw new Exception("Input Form was closed by the user");
+                    v_DialogTitle = "ShowHTMLInputDialog Command";
                 }
+                var title = this.ExpandValueOrUserVariable(nameof(v_DialogTitle), "DialogTitle", engine);
+
+                //List<ScriptVariable> variables = null;
+
+                if (whenCancel == "show dialog again")
+                {
+                    bool isAgain = true;
+                    do
+                    {
+                        using (var fm = new UI.Forms.ScriptEngine.Supplemental.frmHTMLDisplayForm(htmlInput, title))
+                        {
+                            if (fm.ShowDialog() == DialogResult.OK)
+                            {
+                                //variables = fm.VariablesList;
+                                SetOrAddVariableValueProcess(fm.VariablesList);
+                                isAgain = false;
+                            }
+                        }
+                    } while (isAgain);
+                    this.StoreDialogResultInUserVariable("OK", engine);
+                }
+                else
+                {
+                    using (var fm = new UI.Forms.ScriptEngine.Supplemental.frmHTMLDisplayForm(htmlInput, title)) 
+                    { 
+                        if (fm.ShowDialog() == DialogResult.OK)
+                        {
+                            SetOrAddVariableValueProcess(fm.VariablesList);
+                            this.StoreDialogResultInUserVariable("OK", engine);
+                        }
+                        else
+                        {
+                            switch (whenCancel)
+                            {
+                                case "error":
+                                    throw new Exception("Error. HTML Input clicked Cancel.");
+
+                                case "ignore":
+                                    break;
+
+                                case "set empty":
+                                    var vars = fm.VariablesList;
+                                    if (vars != null)
+                                    {
+                                        Action<ScriptVariable> newVariableAction;
+                                        if (engine.engineSettings.CreateMissingVariablesDuringExecution)
+                                        {
+                                            newVariableAction = new Action<ScriptVariable>((v) =>
+                                            {
+                                                engine.VariableList.Add(new ScriptVariable()
+                                                {
+                                                    VariableName = v.VariableName,
+                                                    VariableValue = "",
+                                                });
+                                            });
+                                        }
+                                        else
+                                        {
+                                            newVariableAction = new Action<ScriptVariable>((v) =>
+                                            {
+                                                // nothing
+                                            });
+                                        }
+
+                                        foreach (var v in vars)
+                                        {
+                                            var existsVar = engine.VariableList.FirstOrDefault(t => v.VariableName == t.VariableName);
+                                            if (existsVar != null)
+                                            {
+                                                existsVar.VariableValue = "";
+                                            }
+                                            else
+                                            {
+                                                newVariableAction(v);
+                                            }
+                                        }
+                                    }
+                                    break;
+                            }
+                            this.StoreDialogResultInUserVariable("Cancel", engine);
+                        }
+                    }
+                }
+
+                //// if user selected Ok then process variables
+                //// null result means user cancelled/closed
+                //if (variables != null)
+                //{
+                //    Action<ScriptVariable> newVariableAction;
+                //    if (engine.engineSettings.CreateMissingVariablesDuringExecution)
+                //    {
+                //        newVariableAction = new Action<ScriptVariable>((v) =>
+                //        {
+                //            engine.VariableList.Add(v);
+                //        });
+                //    }
+                //    else
+                //    {
+                //        newVariableAction = new Action<ScriptVariable>((v) => {
+                //            // nothing
+                //        });
+                //    }
+
+                //    foreach (var v in variables)
+                //    {
+                //        var existsVar = engine.VariableList.FirstOrDefault(t => v.VariableName == t.VariableName);
+                //        if (existsVar != null)
+                //        {
+                //            existsVar.VariableValue = v.VariableValue;
+                //        }
+                //        else
+                //        {
+                //            newVariableAction(v);
+                //        }
+                //    }
+                //}
+                //else if (errorOnClose == "Error On Close")
+                //{
+                //    throw new Exception("Input Form was closed by the user");
+                //}
             }));
         }
 
