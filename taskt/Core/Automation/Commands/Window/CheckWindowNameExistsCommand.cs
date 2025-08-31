@@ -7,7 +7,7 @@ namespace taskt.Core.Automation.Commands
 {
     [Serializable]
     [Attributes.ClassAttributes.Group("Window")]
-    [Attributes.ClassAttributes.SubGruop("Window State")]
+    [Attributes.ClassAttributes.SubGruop("Get From Window Name")]
     [Attributes.ClassAttributes.CommandSettings("Check Window Name Exists")]
     [Attributes.ClassAttributes.Description("This command returns a existence of window name.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to check a existence of window name.")]
@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_window))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class CheckWindowNameExistsCommand : AAnyWindowNameCommands
+    public sealed class CheckWindowNameExistsCommand : AWindowNamesCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WindowName))]
@@ -56,12 +56,23 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            WindowControls.WindowAction(this, engine,
+            //WindowControls.WindowAction(this, engine,
+            //    new Action<List<(IntPtr, string)>>(wins =>
+            //    {
+            //        (wins.Count > 0).StoreInUserVariable(engine, v_UserVariableName);
+            //    }),
+            //    new Action<Exception>(ex =>
+            //    {
+            //        false.StoreInUserVariable(engine, v_UserVariableName);
+            //    })
+            //);
+
+            this.WindowNamesAction(engine,
                 new Action<List<(IntPtr, string)>>(wins =>
                 {
-                    (wins.Count > 0).StoreInUserVariable(engine, v_UserVariableName);
+                    true.StoreInUserVariable(engine, v_UserVariableName);
                 }),
-                new Action<Exception>(ex =>
+                new Action<Exception>((ex) =>
                 {
                     false.StoreInUserVariable(engine, v_UserVariableName);
                 })

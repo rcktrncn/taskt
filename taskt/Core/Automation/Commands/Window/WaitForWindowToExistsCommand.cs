@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
     [Attributes.ClassAttributes.Group("Window")]
-    [Attributes.ClassAttributes.SubGruop("Window Actions")]
+    [Attributes.ClassAttributes.SubGruop("One Window Name Actions")]
     [Attributes.ClassAttributes.CommandSettings("Wait For Window To Exists")]
     [Attributes.ClassAttributes.Description("This command waits for a window to exist.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to explicitly wait for a window to exist before continuing script execution.")]
@@ -13,7 +12,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_window))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class WaitForWindowToExistsCommand : AAnyWindowNameCommands
+    public sealed class WaitForWindowToExistsCommand : AWindowNameCoreCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WindowName))]
@@ -49,12 +48,13 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            WindowControls.WindowAction(this, engine,
-                new Action<List<(IntPtr, string)>>(wins =>
-                {
-                    // nothing to do
-                })
-            );
+            //WindowControls.WindowAction(this, engine,
+            //    new Action<List<(IntPtr, string)>>(wins =>
+            //    {
+            //        // nothing to do
+            //    })
+            //);
+            this.WaitForWindowNames(engine);
         }
 
         //public override void Refresh(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)

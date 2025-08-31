@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
@@ -28,9 +30,13 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         //[PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WaitTime))]
-        [PropertyIsOptional(true, "0")]
-        [PropertyFirstValue("0")]
+        //[PropertyIsOptional(true, "0")]
+        //[PropertyFirstValue("0")]
+        //[PropertyValidationRule("WaitTime", PropertyValidationRule.ValidationRuleFlags.LessThanZero)]
+        [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_WaitTime))]
         public override string v_WaitTimeForWindow { get; set; }
+
+
 
         public GetWindowNameFromWindowHandleCommand()
         {
@@ -38,13 +44,24 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            WindowControls.WindowHandleAction(this, engine,
-                new Action<IntPtr>(whnd =>
-                {
-                    var n = WindowControls.GetWindowTitle(whnd);
-                    n.StoreInUserVariable(engine, v_Result);
-                })
-            );
+            //WindowControls.WindowHandleAction(this, engine,
+            //    new Action<IntPtr>(whnd =>
+            //    {
+            //        var n = WindowControls.GetWindowTitle(whnd);
+            //        n.StoreInUserVariable(engine, v_Result);
+            //    })
+            //);
+
+            //var whnd = this.GetWindowHandle(engine);
+            //int titleLengthA = GetWindowTextLengthW(whnd);
+            //StringBuilder title = new StringBuilder(titleLengthA + 1);
+            //GetWindowTextW(whnd, title, title.Capacity);
+            //title.ToString().StoreInUserVariable(engine, v_Result);
+
+            this.WindowHandleAction(engine, new Action<IntPtr>((whnd) =>
+            {
+                EM_CanHandleWindowHandleExtentionMethods.GetWindowName(whnd).StoreInUserVariable(engine, v_Result);
+            }));
         }
     }
 }

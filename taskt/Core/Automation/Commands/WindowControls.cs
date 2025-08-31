@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Linq;
-using System.Drawing;
-using System.ComponentModel;
 using System.Windows.Forms;
-using taskt.UI.CustomControls;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using taskt.Core.Automation.Engine;
+using taskt.UI.CustomControls;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -113,6 +113,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**Index**", "the Window specifed by Index. **0** means First Window")]
         [Remarks("Specify when there are Multiple Matching Windows")]
         [PropertyIsOptional(true, "First")]
+        [PropertyDisplayText(true, "Match")]
         //[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
         //[InputSpecification("", true)]
         //[PropertyParameterOrder(5000)]
@@ -149,6 +150,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**{{{vIndex}}}**", PropertyDetailSampleUsage.ValueType.VariableValue, "Window Index")]
         [PropertyIsOptional(true, "0")]
         [PropertyFirstValue("0")]
+        [PropertyDisplayText(true, "Window Index")]
         //[Remarks("")]
         //[PropertyShowSampleUsageInDescription(true)]
         //[PropertyTextBoxSetting(1, false)]
@@ -170,6 +172,25 @@ namespace taskt.Core.Automation.Commands
         //[PropertyTextBoxSetting(1, false)]
         //[PropertyParameterOrder(5000)]
         public static string v_WaitTime { get; }
+
+        /// <summary>
+        /// wait time between find the window and execute action
+        /// </summary>
+        [PropertyVirtualProperty(nameof(WaitControls), nameof(WaitControls.v_WaitTime))]
+        [PropertyDescription("Wait Time between Finding the Window and Executing Action (sec)")]
+        [PropertyIsOptional(true, "0")]
+        [PropertyFirstValue("0")]
+        [PropertyDisplayText(false, "Wait Time Between", "s")]
+        public static string v_WaitTimeBetweenFindAndAction { get; }
+
+        ///// <summary>
+        ///// window wait time allows 0
+        ///// </summary>
+        //[PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_WaitTime))]
+        //[PropertyIsOptional(true, "0")]
+        //[PropertyFirstValue("0")]
+        //[PropertyValidationRule("Wait Time", PropertyValidationRule.ValidationRuleFlags.LessThanZero)]
+        //public static string v_ZeroWaitTime { get; }
 
         /// <summary>
         /// window name result
@@ -309,6 +330,63 @@ namespace taskt.Core.Automation.Commands
         //[PropertyParameterOrder(5000)]
         public static string v_InputYPosition { get; }
 
+        /// <summary>
+        /// window state
+        /// </summary>
+        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
+        [PropertyDescription("State of the Window")]
+        [PropertyUISelectionOption("Maximize")]
+        [PropertyUISelectionOption("Minimize")]
+        [PropertyUISelectionOption("Restore")]
+        [PropertyUISelectionOption("3")]
+        [PropertyUISelectionOption("2")]
+        [PropertyUISelectionOption("1")]
+        [PropertyDetailSampleUsage("**Maximize**", "Specifiy Maximize")]
+        [PropertyDetailSampleUsage("**3**", "Specifiy Maximize")]
+        [PropertyDetailSampleUsage("**2**", "Specifiy Minimize")]
+        [PropertyDetailSampleUsage("**1**", "Specifiy Restore")]
+        [PropertyDetailSampleUsage("**{{{vState}}}**", PropertyDetailSampleUsage.ValueType.VariableValue)]
+        [InputSpecification("Window State Text or Number", true)]
+        [PropertyValidationRule("Window State", PropertyValidationRule.ValidationRuleFlags.Empty)]
+        [PropertyDisplayText(true, "State")]
+        public static string v_WindowState { get; }
+
+        /// <summary>
+        /// when target window is minimized for Set-commands
+        /// </summary>
+        [PropertyVirtualProperty(nameof(SelectionItemsControls), nameof(SelectionItemsControls.v_ComboBoxHasErrorIgnore))]
+        [PropertyDescription("When Window Is Minimized")]
+        [PropertyUISelectionOption("Execute")]
+        [PropertyUISelectionOption("Restore")]
+        [PropertyIsOptional(true, "Restore")]
+        [PropertyDisplayText(false, "When Window Is Minimized")]
+        public static string v_WhenWindowIsMinimizedForSet { get; }
+
+        /// <summary>
+        /// when target window is minimized for Get-commands
+        /// </summary>
+        [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_WhenWindowIsMinimizedForSet))]
+        [PropertyDescription("When Window Is Minimized")]
+        [PropertyUISelectionOption("Set Zero")]
+        [PropertyDisplayText(false, "When Window Is Minimized")]
+        public static string v_WhenWindowIsMinimizedForGet { get; }
+
+        /// <summary>
+        /// when target window is maximized for Set-commands
+        /// </summary>
+        [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_WhenWindowIsMinimizedForSet))]
+        [PropertyDescription("When Window Is Maximized")]
+        [PropertyDisplayText(false, "When Window Is Maximized")]
+        public static string v_WhenWindowIsMaximizedForSet { get; }
+
+        /// <summary>
+        /// when target window is maximized for Get-commands
+        /// </summary>
+        [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_WhenWindowIsMinimizedForGet))]
+        [PropertyDescription("When Window Is Maximized")]
+        [PropertyDisplayText(false, "When Window Is Maximized")]
+        public static string v_WhenWindowIsMaximizedForGet { get; }
+
         #endregion
 
         #region enum, struct
@@ -353,16 +431,16 @@ namespace taskt.Core.Automation.Commands
         //    public int bottom;
         //}
 
-        public struct WINDOWPLACEMENT
-        {
-            public int length;
-            public int flags;
-            public int showCmd;
-            Point ptMinPosition;
-            Point ptMaxPosition;
-            RECT rcNormalPosition;
-            RECT rcDevice;
-        }
+        //public struct WINDOWPLACEMENT
+        //{
+        //    public int length;
+        //    public int flags;
+        //    public int showCmd;
+        //    Point ptMinPosition;
+        //    Point ptMaxPosition;
+        //    RECT rcNormalPosition;
+        //    RECT rcDevice;
+        //}
         #endregion
 
         #region win api
@@ -377,8 +455,8 @@ namespace taskt.Core.Automation.Commands
         [DllImport("user32.dll")]
         private static extern bool IsWindowVisible(IntPtr hWnd);
 
-        [DllImport("user32.dll")]
-        private static extern bool IsWindow(IntPtr hWnd);
+        //[DllImport("user32.dll")]
+        //private static extern bool IsWindow(IntPtr hWnd);
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         private static extern int GetWindowTextLengthW(IntPtr hWnd);
@@ -404,18 +482,18 @@ namespace taskt.Core.Automation.Commands
         [DllImport("user32.dll", EntryPoint = "GetWindowRect")]
         private static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
 
-        [DllImport("user32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+        //[DllImport("user32.dll", SetLastError = true)]
+        //[return: MarshalAs(UnmanagedType.Bool)]
+        //private static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+        //[DllImport("user32.dll", CharSet = CharSet.Auto)]
+        //private static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
         private static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, int wFlags);
 
-        [DllImport("user32.dll")]
-        private static extern bool ShowWindowAsync(IntPtr hWnd, WindowState nCmdShow);
+        //[DllImport("user32.dll")]
+        //private static extern bool ShowWindowAsync(IntPtr hWnd, WindowState nCmdShow);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         private static extern IntPtr GetDesktopWindow();
@@ -504,27 +582,27 @@ namespace taskt.Core.Automation.Commands
             return clientArea;
         }
 
-        /// <summary>
-        /// get window state
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <returns></returns>
-        public static int GetWindowState(IntPtr hWnd)
-        {
-            var wInfo = new WINDOWPLACEMENT();
-            GetWindowPlacement(hWnd, ref wInfo);
-            return wInfo.showCmd;
-        }
+        ///// <summary>
+        ///// get window state
+        ///// </summary>
+        ///// <param name="hWnd"></param>
+        ///// <returns></returns>
+        //public static int GetWindowState(IntPtr hWnd)
+        //{
+        //    var wInfo = new WINDOWPLACEMENT();
+        //    GetWindowPlacement(hWnd, ref wInfo);
+        //    return wInfo.showCmd;
+        //}
 
-        /// <summary>
-        /// close window. send SendMessage
-        /// </summary>
-        /// <param name="hWnd"></param>
-        public static void CloseWindow(IntPtr hWnd)
-        {
-            const UInt32 WM_CLOSE = 0x0010;
-            SendMessage(hWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
-        }
+        ///// <summary>
+        ///// close window. send SendMessage
+        ///// </summary>
+        ///// <param name="hWnd"></param>
+        //public static void CloseWindow(IntPtr hWnd)
+        //{
+        //    const UInt32 WM_CLOSE = 0x0010;
+        //    SendMessage(hWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+        //}
 
         /// <summary>
         /// set window position
@@ -541,30 +619,30 @@ namespace taskt.Core.Automation.Commands
             SetWindowPos(hWnd, 0, newXPosition, newYPosition, 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_SHOWWINDOW);
         }
 
-        /// <summary>
-        /// set window size
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <param name="newXSize"></param>
-        /// <param name="newYSize"></param>
-        public static void SetWindowSize(IntPtr hWnd, int newXSize, int newYSize)
-        {
-            const short SWP_NOZORDER = 0X4;
-            const int SWP_SHOWWINDOW = 0x0040;
+        ///// <summary>
+        ///// set window size
+        ///// </summary>
+        ///// <param name="hWnd"></param>
+        ///// <param name="newXSize"></param>
+        ///// <param name="newYSize"></param>
+        //public static void SetWindowSize(IntPtr hWnd, int newXSize, int newYSize)
+        //{
+        //    const short SWP_NOZORDER = 0X4;
+        //    const int SWP_SHOWWINDOW = 0x0040;
 
-            GetWindowRect(hWnd, out RECT windowRect);
+        //    GetWindowRect(hWnd, out RECT windowRect);
 
-            SetWindowPos(hWnd, 0, windowRect.left, windowRect.top, newXSize, newYSize, SWP_NOZORDER | SWP_SHOWWINDOW);
-        }
+        //    SetWindowPos(hWnd, 0, windowRect.left, windowRect.top, newXSize, newYSize, SWP_NOZORDER | SWP_SHOWWINDOW);
+        //}
 
-        /// <summary>
-        /// ?
-        /// </summary>
-        /// <param name="hWind"></param>
-        public static void ShowIconicWindow(IntPtr hWind)
-        {
-            ShowWindowAsync(hWind, WindowState.SW_SHOWNORMAL);
-        }
+        ///// <summary>
+        ///// ?
+        ///// </summary>
+        ///// <param name="hWind"></param>
+        //public static void ShowIconicWindow(IntPtr hWind)
+        //{
+        //    ShowWindowAsync(hWind, WindowState.SW_SHOWNORMAL);
+        //}
 
         /// <summary>
         /// get active window name (title)
@@ -1130,111 +1208,111 @@ namespace taskt.Core.Automation.Commands
             }
         }
 
-        /// <summary>
-        /// window general action. This method search window before execute actionFunc, and try store Found Window Name and Handle after execute actionFunc. This method specifies the parameter names from interface
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="engine"></param>
-        /// <param name="actionFunc"></param>
-        /// <param name="errorFunc"></param>
-        public static void WindowAction(AWindowNameCommands command, Engine.AutomationEngineInstance engine, Action<List<(IntPtr, string)>> actionFunc, Action<Exception> errorFunc = null)
-        {
-            WindowAction(command, 
-                nameof(command.v_WindowName), nameof(command.v_CompareMethod), nameof(command.v_MatchMethod), 
-                nameof(command.v_TargetWindowIndex), nameof(command.v_WaitTimeForWindow), engine, actionFunc, 
-                nameof(command.v_NameResult), nameof(command.v_HandleResult), errorFunc);
-        }
+        ///// <summary>
+        ///// window general action. This method search window before execute actionFunc, and try store Found Window Name and Handle after execute actionFunc. This method specifies the parameter names from interface
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="engine"></param>
+        ///// <param name="actionFunc"></param>
+        ///// <param name="errorFunc"></param>
+        //public static void WindowAction(AOneWindowNameCommands command, Engine.AutomationEngineInstance engine, Action<List<(IntPtr, string)>> actionFunc, Action<Exception> errorFunc = null)
+        //{
+        //    WindowAction(command, 
+        //        nameof(command.v_WindowName), nameof(command.v_CompareMethod), nameof(command.v_MatchMethod), 
+        //        nameof(command.v_TargetWindowIndex), nameof(command.v_WaitTimeForWindow), engine, actionFunc, 
+        //        nameof(command.v_NameResult), nameof(command.v_HandleResult), errorFunc);
+        //}
 
-        /// <summary>
-        /// window general action. This method search window before execute actionFunc, and try store Found Window Name and Handle after execute actionFunc. This method specifies the parameter names from interface
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="engine"></param>
-        /// <param name="actionFunc"></param>
-        /// <param name="errorFunc"></param>
-        public static void WindowAction(AAnyWindowNameCommands command, Engine.AutomationEngineInstance engine, Action<List<(IntPtr, string)>> actionFunc, Action<Exception> errorFunc = null)
-        {
-            WindowAction(command, 
-                nameof(command.v_WindowName), nameof(command.v_CompareMethod), nameof(command.v_WaitTimeForWindow), 
-                engine, actionFunc, nameof(command.v_NameResult), nameof(command.v_HandleResult), errorFunc);
-        }
+        ///// <summary>
+        ///// window general action. This method search window before execute actionFunc, and try store Found Window Name and Handle after execute actionFunc. This method specifies the parameter names from interface
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="engine"></param>
+        ///// <param name="actionFunc"></param>
+        ///// <param name="errorFunc"></param>
+        //public static void WindowAction(AWindowNameCoreCommands command, Engine.AutomationEngineInstance engine, Action<List<(IntPtr, string)>> actionFunc, Action<Exception> errorFunc = null)
+        //{
+        //    WindowAction(command, 
+        //        nameof(command.v_WindowName), nameof(command.v_CompareMethod), nameof(command.v_WaitTimeForWindow), 
+        //        engine, actionFunc, nameof(command.v_NameResult), nameof(command.v_HandleResult), errorFunc);
+        //}
 
-        /// <summary>
-        /// inner window handle action
-        /// </summary>
-        /// <param name="handleValue"></param>
-        /// <param name="waitTime"></param>
-        /// <param name="engine"></param>
-        /// <param name="actionFunc"></param>
-        /// <param name="errorFunc"></param>
-        private static void WindowHandleAction(string handleValue, int waitTime, Engine.AutomationEngineInstance engine, Action<IntPtr> actionFunc, Action<Exception> errorFunc = null)
-        {
-            try
-            {
-                var whnd = handleValue.ExpandUserVariableAsWindowHandle(engine);
+        ///// <summary>
+        ///// inner window handle action
+        ///// </summary>
+        ///// <param name="handleValue"></param>
+        ///// <param name="waitTime"></param>
+        ///// <param name="engine"></param>
+        ///// <param name="actionFunc"></param>
+        ///// <param name="errorFunc"></param>
+        //private static void WindowHandleAction(string handleValue, int waitTime, Engine.AutomationEngineInstance engine, Action<IntPtr> actionFunc, Action<Exception> errorFunc = null)
+        //{
+        //    try
+        //    {
+        //        var whnd = handleValue.ExpandUserVariableAsWindowHandle(engine);
 
-                var obj = WaitControls.WaitProcess(waitTime, "Window Handle", new Func<(bool, object)>(() =>
-                {
-                    if (IsWindow(whnd))
-                    {
-                        return (true, whnd);
-                    }
-                    else
-                    {
-                        return (false, null);
-                    }
+        //        var obj = WaitControls.WaitProcess(waitTime, "Window Handle", new Func<(bool, object)>(() =>
+        //        {
+        //            if (IsWindow(whnd))
+        //            {
+        //                return (true, whnd);
+        //            }
+        //            else
+        //            {
+        //                return (false, null);
+        //            }
                     
-                }), engine);
+        //        }), engine);
 
-                if (obj is IntPtr ptr)
-                {
-                    actionFunc(ptr);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (errorFunc != null)
-                {
-                    errorFunc(ex);
-                }
-                else
-                {
-                    throw ex;
-                }
-            }
-        }
+        //        if (obj is IntPtr ptr)
+        //        {
+        //            actionFunc(ptr);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (errorFunc != null)
+        //        {
+        //            errorFunc(ex);
+        //        }
+        //        else
+        //        {
+        //            throw ex;
+        //        }
+        //    }
+        //}
 
-        /// <summary>
-        /// window handle action. specified Window Handle, Wait Time parameter names
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="handleName"></param>
-        /// <param name="waitTimeName"></param>
-        /// <param name="engine"></param>
-        /// <param name="actionFunc"></param>
-        /// <param name="errorFunc"></param>
-        public static void WindowHandleAction(ScriptCommand command, string handleName, string waitTimeName, Engine.AutomationEngineInstance engine, Action<IntPtr> actionFunc, Action<Exception> errorFunc = null)
-        {
-            //var handle = command.ExpandValueOrUserVariable(handleName, "Window Handle", engine);
-            var handle = command.GetRawPropertyValueAsString(handleName, "Window Handle");
-            var waitTime = command.ExpandValueOrUserVariableAsInteger(waitTimeName, "Wait Time", engine);
-            WindowHandleAction(handle, waitTime, engine, actionFunc, errorFunc);
-        }
+        ///// <summary>
+        ///// window handle action. specified Window Handle, Wait Time parameter names
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="handleName"></param>
+        ///// <param name="waitTimeName"></param>
+        ///// <param name="engine"></param>
+        ///// <param name="actionFunc"></param>
+        ///// <param name="errorFunc"></param>
+        //public static void WindowHandleAction(ScriptCommand command, string handleName, string waitTimeName, Engine.AutomationEngineInstance engine, Action<IntPtr> actionFunc, Action<Exception> errorFunc = null)
+        //{
+        //    //var handle = command.ExpandValueOrUserVariable(handleName, "Window Handle", engine);
+        //    var handle = command.GetRawPropertyValueAsString(handleName, "Window Handle");
+        //    var waitTime = command.ExpandValueOrUserVariableAsInteger(waitTimeName, "Wait Time", engine);
+        //    WindowHandleAction(handle, waitTime, engine, actionFunc, errorFunc);
+        //}
 
-        /// <summary>
-        /// general window handle action. Infer parameter names from VirtualProperty
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="engine"></param>
-        /// <param name="actionFunc"></param>
-        /// <param name="errorFunc"></param>
-        public static void WindowHandleAction(ScriptCommand command, Engine.AutomationEngineInstance engine, Action<IntPtr> actionFunc, Action<Exception> errorFunc = null)
-        {
-            var props = command.GetParameterProperties();
-            var handleName = props.GetProperty(new PropertyVirtualProperty(nameof(WindowControls), nameof(v_InputWindowHandle)))?.Name ?? "";
-            var waitTimeName = props.GetProperty(new PropertyVirtualProperty(nameof(WindowControls), nameof(v_WaitTime)))?.Name ?? "";
-            WindowHandleAction(command, handleName, waitTimeName, engine, actionFunc, errorFunc);
-        }
+        ///// <summary>
+        ///// general window handle action. Infer parameter names from VirtualProperty
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="engine"></param>
+        ///// <param name="actionFunc"></param>
+        ///// <param name="errorFunc"></param>
+        //public static void WindowHandleAction(ScriptCommand command, Engine.AutomationEngineInstance engine, Action<IntPtr> actionFunc, Action<Exception> errorFunc = null)
+        //{
+        //    var props = command.GetParameterProperties();
+        //    var handleName = props.GetProperty(new PropertyVirtualProperty(nameof(WindowControls), nameof(v_InputWindowHandle)))?.Name ?? "";
+        //    var waitTimeName = props.GetProperty(new PropertyVirtualProperty(nameof(WindowControls), nameof(v_WaitTime)))?.Name ?? "";
+        //    WindowHandleAction(command, handleName, waitTimeName, engine, actionFunc, errorFunc);
+        //}
         
 
         #endregion
@@ -1274,54 +1352,54 @@ namespace taskt.Core.Automation.Commands
             return value.ExpandValueOrUserVariableAsWindowName(engine);
         }
 
-        /// <summary>
-        /// expand variable as WindowHandle specified by parameter value
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public static IntPtr ExpandUserVariableAsWindowHandle(this string value, Engine.AutomationEngineInstance engine)
-        {
-            var v = value.GetRawVariable(engine);
-            var vv = v.VariableValue;
-            string handleStr;
-            if (vv is string str)
-            {
-                handleStr = str;
-            }
-            else if (vv is List<string> lst)
-            {
-                handleStr = lst[v.CurrentPosition];
-            }
-            else
-            {
-                throw new Exception($"Value '{value}' is not Window Handle value type.");
-            }
+        ///// <summary>
+        ///// expand variable as WindowHandle specified by parameter value
+        ///// </summary>
+        ///// <param name="value"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception"></exception>
+        //public static IntPtr ExpandUserVariableAsWindowHandle(this string value, Engine.AutomationEngineInstance engine)
+        //{
+        //    var v = value.GetRawVariable(engine);
+        //    var vv = v.VariableValue;
+        //    string handleStr;
+        //    if (vv is string str)
+        //    {
+        //        handleStr = str;
+        //    }
+        //    else if (vv is List<string> lst)
+        //    {
+        //        handleStr = lst[v.CurrentPosition];
+        //    }
+        //    else
+        //    {
+        //        throw new Exception($"Value '{value}' is not Window Handle value type.");
+        //    }
 
-            if (int.TryParse(handleStr, out int whnd))
-            {
-                return (IntPtr)whnd;
-            }
-            else
-            {
-                throw new Exception($"Value '{value}' is not Window Handle value type.");
-            }
-        }
+        //    if (int.TryParse(handleStr, out int whnd))
+        //    {
+        //        return (IntPtr)whnd;
+        //    }
+        //    else
+        //    {
+        //        throw new Exception($"Value '{value}' is not Window Handle value type.");
+        //    }
+        //}
 
-        /// <summary>
-        /// expand variable as WindowHanle specified by parameter name
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="windowName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        public static IntPtr ExpandUserVariableAsWindowHandle(this ScriptCommand command, string windowName, Engine.AutomationEngineInstance engine)
-        {
-            var prop = command.GetProperty(windowName);
-            var value = prop.GetValue(command)?.ToString() ?? "";
-            return value.ExpandUserVariableAsWindowHandle(engine);
-        }
+        ///// <summary>
+        ///// expand variable as WindowHanle specified by parameter name
+        ///// </summary>
+        ///// <param name="command"></param>
+        ///// <param name="windowName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        //public static IntPtr ExpandUserVariableAsWindowHandle(this ScriptCommand command, string windowName, Engine.AutomationEngineInstance engine)
+        //{
+        //    var prop = command.GetProperty(windowName);
+        //    var value = prop.GetValue(command)?.ToString() ?? "";
+        //    return value.ExpandUserVariableAsWindowHandle(engine);
+        //}
 
         /// <summary>
         /// store IntPtr In User Variable

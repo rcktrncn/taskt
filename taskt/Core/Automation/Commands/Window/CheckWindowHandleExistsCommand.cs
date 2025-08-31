@@ -28,9 +28,13 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         //[PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_WaitTime))]
-        [PropertyIsOptional(true, "0")]
-        [PropertyFirstValue("0")]
+        //[PropertyIsOptional(true, "0")]
+        //[PropertyValidationRule("WaitTime", PropertyValidationRule.ValidationRuleFlags.LessThanZero)]
+        //[PropertyFirstValue("0")]
+        [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_WaitTime))]
         public override string v_WaitTimeForWindow { get; set; }
+
+        //public string v_WindowTitleResult {get;set;}
 
         public CheckWindowHandleExistsCommand()
         {
@@ -38,12 +42,31 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            WindowControls.WindowHandleAction(this, engine,
-                new Action<IntPtr>(whnd =>
+            //WindowControls.WindowHandleAction(this, engine,
+            //    new Action<IntPtr>(whnd =>
+            //    {
+            //        true.StoreInUserVariable(engine, v_Result);
+            //    }),
+            //    new Action<Exception>(ex =>
+            //    {
+            //        false.StoreInUserVariable(engine, v_Result);
+            //    })
+            //);
+            //try
+            //{
+            //    this.GetWindowHandle(engine);
+            //    true.StoreInUserVariable(engine, v_Result);
+            //}
+            //catch
+            //{
+            //    false.StoreInUserVariable(engine, v_Result);
+            //}
+            this.WindowHandleAction(engine,
+                new Action<IntPtr>((whnd) =>
                 {
                     true.StoreInUserVariable(engine, v_Result);
                 }),
-                new Action<Exception>(ex =>
+                new Action<Exception>((ex) =>
                 {
                     false.StoreInUserVariable(engine, v_Result);
                 })
