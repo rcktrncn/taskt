@@ -106,7 +106,7 @@
       <HintPath>..\packages\ImapX.2.0.0.18\lib\net452\ImapX.dll</HintPath>
     </Reference>
     <Reference Include="JetBrains.Annotations, Version=4242.42.42.42, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\packages\JetBrains.Annotations.2025.2.1\lib\net20\JetBrains.Annotations.dll</HintPath>
+      <HintPath>..\packages\JetBrains.Annotations.2025.2.2\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="MailKit, Version=4.13.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
       <HintPath>..\packages\MailKit.4.13.0\lib\net48\MailKit.dll</HintPath>
@@ -458,8 +458,20 @@
     <Compile Include="Core\Automation\Commands\List\GetCommonValuesOfListsCommand.cs" />
     <Compile Include="Core\Automation\Commands\List\CheckValidListIndexCommand.cs" />
     <Compile Include="Core\Automation\Commands\Window\ActivateWindowsCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Window\AGetFromWindowNamesAsListCommands.cs" />
     <Compile Include="Core\Automation\Commands\Window\AWindowNamesActionCommnads.cs" />
     <Compile Include="Core\Automation\Commands\Window\AWindowNamesCommands.cs" />
+    <Compile Include="Core\Automation\Commands\Window\AGetFromWindowNamesAsDataTableCommands.cs" />
+    <Compile Include="Core\Automation\Commands\Window\GetWindowStatesFromWindowNamesAsListCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Window\GetWindowSizesFromWindowNamesAsListCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Window\GetWindowPositionsFromWindowNamesAsListCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Window\GetWindowHandlesFromWindowNamesAsListCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Window\GetProcessNamesFromWindowNamesAsListCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Window\GetWindowHandlesFromWindowNamesAsDataTableCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Window\GetWindowStatesFromWindowNamesAsDataTableCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Window\GetWindowSizesFromWindowNamesAsDataTableCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Window\GetWindowPositionsFromWindowNamesAsDataTableCommand.cs" />
+    <Compile Include="Core\Automation\Commands\Window\GetProcessNamesFromWindowNamesAsDataTableCommand.cs" />
     <Compile Include="Core\Automation\Commands\Window\SetWindowsStateCommand.cs" />
     <Compile Include="Core\Automation\Commands\Window\ResizeWindowsCommand.cs" />
     <Compile Include="Core\Automation\Commands\Window\MoveWindowsCommand.cs" />
