@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Automation.Commands.TextGroup;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -16,7 +17,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_files))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class GetFoldersPathAsListCommand : AFolderExistsFolderPathCommands, ITextCompareProperties, IListResultProperties
+    public sealed class GetFoldersPathAsListCommand : AFolderExistsFolderPathCommands, ITextCheckProperties, IListResultProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(FolderPathControls), nameof(FolderPathControls.v_FolderPath))]
@@ -43,20 +44,20 @@ namespace taskt.Core.Automation.Commands
         //[PropertyUISelectionOption("Ends with")]
         //[PropertyUISelectionOption("Exact match")]
         //[PropertyIsOptional(true, "Contains")]
-        [PropertyVirtualProperty(nameof(TextCompareSelectMethodControls), nameof(TextCompareSelectMethodControls.v_CompareMethod))]
-        [PropertyDescription("Folder Name Compare Method")]
+        [PropertyVirtualProperty(nameof(VP_TextCheckMethodControls), nameof(VP_TextCheckMethodControls.v_CheckMethod))]
+        [PropertyDescription("Folder Name Check Method")]
         [PropertyParameterOrder(6100)]
-        public string v_CompareMethod { get; set; }
+        public string v_CheckMethod { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(TextCompareSelectMethodControls), nameof(TextCompareSelectMethodControls.v_CaseSensitiveNo))]
+        [PropertyVirtualProperty(nameof(VP_TextCheckMethodControls), nameof(VP_TextCheckMethodControls.v_CaseSensitiveNo))]
         [PropertyParameterOrder(6200)]
         public string v_CaseSensitive { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(TextCompareSelectMethodControls), nameof(TextCompareSelectMethodControls.v_TrimBeforeCompare))]
+        [PropertyVirtualProperty(nameof(VP_TextCheckMethodControls), nameof(VP_TextCheckMethodControls.v_TrimBeforeCheck))]
         [PropertyParameterOrder(6300)]
-        public string v_TrimBeforeCompare { get; set; }
+        public string v_TrimBeforeCheck { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(ListControls), nameof(ListControls.v_OutputListName))]
@@ -88,7 +89,7 @@ namespace taskt.Core.Automation.Commands
                     //var searchFolder = v_SearchFolderName.ExpandValueOrUserVariableAsFolderName(engine);
                     var searchFolder = this.ExpandValueOrUserVariable(nameof(v_SearchFolderName), "Folder Name", engine);
 
-                    var compareFunc = this.GetCompareFunction(engine);
+                    var compareFunc = this.GetTextCheckFunction(engine);
 
                     var filteredDirectory = new List<string>();
                     foreach (var f in directoriesList)

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Automation.Commands.TextGroup;
 using taskt.Core.Automation.Engine;
 using taskt.UI.CustomControls;
 
@@ -84,27 +84,42 @@ namespace taskt.Core.Automation.Commands
         public static string v_WindowName { get; }
 
         /// <summary>
-        /// windows name compare(search) method
+        /// windows name check(search) method
         /// </summary>
-        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
-        [PropertyDescription("Compare Method for the Window Name")]
-        [PropertyUISelectionOption("Contains")]
-        [PropertyUISelectionOption("Starts with")]
-        [PropertyUISelectionOption("Ends with")]
-        [PropertyUISelectionOption("Exact match")]
+        //[PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
+        [PropertyVirtualProperty(nameof(VP_TextCheckMethodControls), nameof(VP_TextCheckMethodControls.v_CheckMethod))]
+        [PropertyDescription("Check Method for the Window Name")]
+        //[PropertyUISelectionOption("Contains")]
+        //[PropertyUISelectionOption("Starts with")]
+        //[PropertyUISelectionOption("Ends with")]
+        //[PropertyUISelectionOption("Exact match")]
         [PropertyIsOptional(true, "Contains")]
-        [PropertyDisplayText(true, "Compare Method")]
+        [PropertyDisplayText(true, "Check Method")]
         //[InputSpecification("", true)]
         //[Remarks("")]
         //[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
         //[PropertyParameterOrder(5000)]
-        public static string v_CompareMethod { get; }
+        public static string v_CheckMethod { get; }
+
+        /// <summary>
+        /// window check case sensitive
+        /// </summary>
+        [PropertyVirtualProperty(nameof(VP_TextCheckMethodControls), nameof(VP_TextCheckMethodControls.v_CaseSensitiveNo))]
+        [PropertyDescription("Case Sensitive Checking for Window Names")]
+        public static string v_CaseSensitive { get; }
+
+        /// <summary>
+        /// trim before check window name
+        /// </summary>
+        [PropertyVirtualProperty(nameof(VP_TextCheckMethodControls), nameof(VP_TextCheckMethodControls.v_TrimBeforeCheck))]
+        [PropertyDescription("Trim before Check Window Names")]
+        public static string v_TrimBeforeCheck { get; }
 
         /// <summary>
         /// match method get one window, please specify PropertySelectionChangeEvent
         /// </summary>
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
-        [PropertyDescription("Match Method for the Window Name")]
+        [PropertyDescription("Selection Method for the Window Name")]
         [PropertyUISelectionOption("First")]
         [PropertyUISelectionOption("Last")]
         [PropertyUISelectionOption("Index")]
@@ -113,31 +128,31 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**Index**", "the Window specifed by Index. **0** means First Window")]
         [Remarks("Specify when there are Multiple Matching Windows")]
         [PropertyIsOptional(true, "First")]
-        [PropertyDisplayText(true, "Match")]
+        [PropertyDisplayText(true, "Select")]
         //[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
         //[InputSpecification("", true)]
         //[PropertyParameterOrder(5000)]
-        public static string v_MatchMethod_Single { get; }
+        public static string v_SelectionMethod_Single { get; }
 
-        /// <summary>
-        /// match method, please specify PropertySelectionChangeEvent
-        /// </summary>
-        [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_MatchMethod_Single))]
-        [PropertyUISelectionOption("All")]
-        [PropertyDetailSampleUsage("**All**", "Specify the All Windows")]
-        //[PropertyDescription("Match Method for the Window Name")]
-        //[PropertyUISelectionOption("First")]
-        //[PropertyUISelectionOption("Last")]
-        //[PropertyUISelectionOption("Index")]
-        //[PropertyDetailSampleUsage("**First**", "Specify the First Window")]
-        //[PropertyDetailSampleUsage("**Last**", "Specify the Last Window")]
-        //[PropertyDetailSampleUsage("**Index**", "the Window specifed by Index. **0** means First Window")]
-        //[Remarks("Specify when there are Multiple Matching Windows")]
-        //[PropertyIsOptional(true, "First")]
-        //[InputSpecification("", true)]
-        //[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
-        //[PropertyParameterOrder(5000)]
-        public static string v_MatchMethod { get; }
+        ///// <summary>
+        ///// match method, please specify PropertySelectionChangeEvent
+        ///// </summary>
+        //[PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_SelectionMethod_Single))]
+        //[PropertyUISelectionOption("All")]
+        //[PropertyDetailSampleUsage("**All**", "Specify the All Windows")]
+        ////[PropertyDescription("Match Method for the Window Name")]
+        ////[PropertyUISelectionOption("First")]
+        ////[PropertyUISelectionOption("Last")]
+        ////[PropertyUISelectionOption("Index")]
+        ////[PropertyDetailSampleUsage("**First**", "Specify the First Window")]
+        ////[PropertyDetailSampleUsage("**Last**", "Specify the Last Window")]
+        ////[PropertyDetailSampleUsage("**Index**", "the Window specifed by Index. **0** means First Window")]
+        ////[Remarks("Specify when there are Multiple Matching Windows")]
+        ////[PropertyIsOptional(true, "First")]
+        ////[InputSpecification("", true)]
+        ////[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
+        ////[PropertyParameterOrder(5000)]
+        //public static string v_SelectionMethod { get; }
 
         /// <summary>
         /// window index for match

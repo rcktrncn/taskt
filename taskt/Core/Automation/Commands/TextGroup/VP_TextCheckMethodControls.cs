@@ -1,14 +1,14 @@
 ﻿using taskt.Core.Automation.Attributes.PropertyAttributes;
 
-namespace taskt.Core.Automation.Commands
+namespace taskt.Core.Automation.Commands.TextGroup
 {
-    public static class TextCompareSelectMethodControls
+    public static class VP_TextCheckMethodControls
     {
         /// <summary>
-        /// compare method
+        /// text check method
         /// </summary>
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
-        [PropertyDescription("Compare Method")]
+        [PropertyDescription("Check Method")]
         [PropertyUISelectionOption("Contains")]
         [PropertyUISelectionOption("Starts with")]
         [PropertyUISelectionOption("Ends with")]
@@ -46,54 +46,33 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**Is Not Number**", "This determines whether it is **Not** a number.")]
         [PropertyDetailSampleUsage("**Is Not Boolean**", "This determines whether it is **Not** a boolean, such as **True** or **False**.")]
         [PropertyDetailSampleUsage("**Is Not Boolean Loose**", "This determines whether it is **Not** a loose boolean, such as **True**, **False**, **Yes**, **No**, **1**, or **0**.")]
-        [PropertyDisplayText(true, "Compare Method")]
-        //[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
-        //[InputSpecification("", true)]
-        //[Remarks("")]
-        //[PropertyShowSampleUsageInDescription(false)]
-        //[PropertyParameterOrder(5000)]
-        public static string v_CompareMethod { get; }
+        [PropertyDisplayText(true, "Check Method")]
+        public static string v_CheckMethod { get; }
 
         /// <summary>
-        /// compare method is case sensitive or not
+        /// check method is case sensitive or not
         /// </summary>
         [PropertyVirtualProperty(nameof(SelectionItemsControls), nameof(SelectionItemsControls.v_YesNoComboBox))]
         [PropertyDescription("Case Sensitive")]
         [PropertyIsOptional(true, "No")]
         [PropertyDetailSampleUsageBehavior(MultiAttributesBehavior.Overwrite)]
-        [PropertyDetailSampleUsage("**Yes**", "Comparison Method is Case Sensitive")]
-        [PropertyDetailSampleUsage("**No**", "Comparison Method is NOT Case Sensitive")]
+        [PropertyDetailSampleUsage("**Yes**", "Check Method is Case Sensitive")]
+        [PropertyDetailSampleUsage("**No**", "Check Method is NOT Case Sensitive")]
         [PropertyDisplayText(false, "Case Sensitive")]
-        //[InputSpecification("", true)]
-        //[Remarks("")]
-        //[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
-        //[PropertyUISelectionOption("Yes")]
-        //[PropertyUISelectionOption("No")]
-        //[PropertyParameterOrder(5000)]
         public static string v_CaseSensitiveNo { get; }
 
         /// <summary>
-        /// compare method is case sensitive or not
+        /// check method is case sensitive or not
         /// </summary>
-        [PropertyVirtualProperty(nameof(TextCompareSelectMethodControls), nameof(TextCompareSelectMethodControls.v_CaseSensitiveNo))]
+        [PropertyVirtualProperty(nameof(VP_TextCheckMethodControls), nameof(VP_TextCheckMethodControls.v_CaseSensitiveNo))]
         [PropertyIsOptional(true, "Yes")]
-        //[PropertyDescription("Case Sensitive")]
-        //[InputSpecification("", true)]
-        //[Remarks("")]
-        //[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
-        //[PropertyUISelectionOption("Yes")]
-        //[PropertyUISelectionOption("No")]
-        //[PropertyDetailSampleUsage("**Yes**", "Comparison Method is Case Sensitive")]
-        //[PropertyDetailSampleUsage("**No**", "Comparison Method is NOT Case Sensitive")]
-        //[PropertyDisplayText(false, "Case Sensitive")]
-        //[PropertyParameterOrder(5000)]
         public static string v_CaseSensitiveYes { get; }
 
         /// <summary>
-        /// trim before compare
+        /// trim before check
         /// </summary>
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
-        [PropertyDescription("Trim Before Compare")]
+        [PropertyDescription("Trim Before Check")]
         [PropertyUISelectionOption("Trim")]
         [PropertyUISelectionOption("Trim Start")]
         [PropertyUISelectionOption("Trim End")]
@@ -103,46 +82,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyDetailSampleUsage("**Trim Start**", "Remove White Space at the Start of Text")]
         [PropertyDetailSampleUsage("**Trim End**", "Remove White Space at the End of Text")]
         [PropertyDetailSampleUsage("**No**", "Not Trim")]
-        [PropertyDisplayText(false, "Trim Before Compare")]
-        //[InputSpecification("", true)]
-        //[Remarks("")]
-        //[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
-        //[PropertyParameterOrder(5000)]
-        public static string v_TrimBeforeCompare { get; }
-
-        /// <summary>
-        /// select method, select one item
-        /// </summary>
-        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
-        [PropertyDescription("Select Method")]
-        [PropertyUISelectionOption("First")]
-        [PropertyUISelectionOption("Last")]
-        [PropertyUISelectionOption("Index")]
-        [PropertyDetailSampleUsage("**First**", "Specify the First Item")]
-        [PropertyDetailSampleUsage("**Last**", "Specify the Last Item")]
-        [PropertyDetailSampleUsage("**Index**", "the Item specifed by Index. **0** means First Item")]
-        [PropertyIsOptional(true, "First")]
-        [PropertyDisplayText(false, "Select Method")]
-        //[InputSpecification("", true)]
-        //[Remarks("")]
-        //[PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.ComboBox)]
-        //[PropertyParameterOrder(5000)]
-        public static string v_SelectMethod { get; }
-
-        /// <summary>
-        /// select item index
-        /// </summary>
-        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
-        [PropertyDescription("Selection Item Index")]
-        [InputSpecification("Selection Item Index", true)]
-        [PropertyDetailSampleUsage("**0**", "Specify the First Item")]
-        [PropertyDetailSampleUsage("**{{{vIndex}}}**", PropertyDetailSampleUsage.ValueType.VariableValue, "Item Index")]
-        //[PropertyIsOptional(true, "0")]
-        //[PropertyFirstValue("0")]
-        //[Remarks("")]
-        //[PropertyShowSampleUsageInDescription(true)]
-        //[PropertyTextBoxSetting(1, false)]
-        //[PropertyParameterOrder(5000)]
-        public static string v_SelectItemIndex { get; }
+        [PropertyDisplayText(false, "Trim Before Check")]
+        public static string v_TrimBeforeCheck { get; }
     }
 }
