@@ -100,14 +100,14 @@ namespace taskt.Core.Automation.Commands
 
             using (var myVar = new InnerScriptVariable(engine))
             {
-                var winSearch = new UIAutomationSearchUIElementFromWindowCommand()
+                var winSearch = new UIAutomationGetWindowUIElementCommand()
                 {
                     v_WindowName = this.v_WindowName,
                     v_CheckMethod = this.v_CheckMethod,
                     v_SelectionMethod = this.v_SelectionMethod,
                     v_TargetWindowIndex = this.v_TargetWindowIndex,
                     v_WaitTimeForWindow = this.v_WaitTimeForWindow,
-                    v_AutomationElementVariable = myVar.VariableName,
+                    v_Result = myVar.VariableName,
                     v_NameResult = this.v_NameResult,
                     v_HandleResult = this.v_HandleResult,
                 };

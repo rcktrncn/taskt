@@ -250,14 +250,14 @@ namespace taskt.Core.Automation.Commands
 
             using(var myWinElem = new InnerScriptVariable(engine))
             {
-                var winElem = new UIAutomationSearchUIElementFromWindowCommand()
+                var winElem = new UIAutomationGetWindowUIElementCommand()
                 {
                     v_WindowName = this.v_WindowName,
                     v_CheckMethod = this.v_CheckMethod,
                     v_SelectionMethod = this.v_SelectionMethod,
                     v_TargetWindowIndex = this.v_TargetWindowIndex,
                     v_WaitTimeForWindow = this.v_WaitTimeForWindow,
-                    v_AutomationElementVariable = myWinElem.VariableName,
+                    v_Result = myWinElem.VariableName,
                     v_NameResult = this.v_NameResult,
                     v_HandleResult = this.v_HandleResult,
                 };
@@ -341,7 +341,7 @@ namespace taskt.Core.Automation.Commands
                             var setTextCmd = new UIAutomationSetTextToUIElementCommand()
                             {
                                 v_TargetElement = myTrgElem.VariableName,
-                                v_TextVariable = p["Text To Set"],
+                                v_TextToSet = p["Text To Set"],
                             };
                             setTextCmd.RunCommand(engine);
                             break;
@@ -361,7 +361,7 @@ namespace taskt.Core.Automation.Commands
                             var getTextCmd = new UIAutomationGetTextFromUIElementCommand()
                             {
                                 v_TargetElement = myTrgElem.VariableName,
-                                v_TextVariable = p["Apply To Variable"],
+                                v_Result = p["Apply To Variable"],
                             };
                             getTextCmd.RunCommand(engine);
                             break;
@@ -369,7 +369,7 @@ namespace taskt.Core.Automation.Commands
                             var getSelectedCmd = new UIAutomationGetSelectedStateFromUIElementCommand()
                             {
                                 v_TargetElement = myTrgElem.VariableName,
-                                v_ResultVariable = p["Apply To Variable"],
+                                v_Result = p["Apply To Variable"],
                             };
                             getSelectedCmd.RunCommand(engine);
                             break;
@@ -379,7 +379,7 @@ namespace taskt.Core.Automation.Commands
                                 v_TargetElement = myTrgElem.VariableName,
                                 v_Row = p["Row"],
                                 v_Column = p["Column"],
-                                v_TextVariable = p["Apply To Variable"],
+                                v_Result = p["Apply To Variable"],
                             };
                             getTableCmd.RunCommand(engine);
                             break;

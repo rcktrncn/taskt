@@ -9,14 +9,14 @@ namespace taskt.Core.Automation.Commands
 {
     [Serializable]
     [Attributes.ClassAttributes.Group("UIAutomation")]
-    [Attributes.ClassAttributes.SubGruop("Search Window")]
-    [Attributes.ClassAttributes.CommandSettings("Search UIElement From Window")]
-    [Attributes.ClassAttributes.Description("This command allows you to get UIElement from Window Name using by XPath.")]
-    [Attributes.ClassAttributes.ImplementationDescription("Use this command when you want to get UIElement from Window Name. XPath does not support to use parent and sibling for root element.")]
+    [Attributes.ClassAttributes.SubGruop("Window UIElement")]
+    [Attributes.ClassAttributes.CommandSettings("Get Window UIElement")]
+    [Attributes.ClassAttributes.Description("This command allows you to get UIElement from Window Name")]
+    [Attributes.ClassAttributes.ImplementationDescription("Use this command when you want to get UIElement from Window Name.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_window))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class UIAutomationSearchUIElementFromWindowCommand : AOneWindowNameCommands
+    public sealed class UIAutomationGetWindowUIElementCommand : AOneWindowNameCommands
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_WindowName))]
@@ -25,7 +25,7 @@ namespace taskt.Core.Automation.Commands
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(UIElementControls), nameof(UIElementControls.v_OutputUIElementName))]
         [PropertyParameterOrder(5100)]
-        public string v_AutomationElementVariable { get; set; }
+        public string v_Result { get; set; }
 
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_CompareMethod))]
@@ -52,12 +52,8 @@ namespace taskt.Core.Automation.Commands
         //[PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_OutputWindowHandle))]
         //public string v_HandleResult { get; set; }
 
-        public UIAutomationSearchUIElementFromWindowCommand()
+        public UIAutomationGetWindowUIElementCommand()
         {
-            //this.CommandName = "UIAutomationGetElementFromWindowCommand";
-            //this.SelectionName = "Get Element From Window";
-            //this.CommandEnabled = true;
-            //this.CustomRendering = true;
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
@@ -68,9 +64,9 @@ namespace taskt.Core.Automation.Commands
             {
                 var ret = AutomationElement.FromHandle(whnd);
 
-                if (!string.IsNullOrEmpty(v_AutomationElementVariable))
+                if (!string.IsNullOrEmpty(v_Result))
                 {
-                    ret.StoreInUserVariable(engine, v_AutomationElementVariable);
+                    ret.StoreInUserVariable(engine, v_Result);
                 }
             }));
         }

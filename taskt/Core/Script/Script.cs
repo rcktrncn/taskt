@@ -11,6 +11,8 @@
 //WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and
 //limitations under the License.
+using Microsoft.Office.Interop.Outlook;
+using SimpleNLG;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -458,6 +460,7 @@ namespace taskt.Core.Script
             convertTo3_5_2_39(doc);
             convertTo3_5_2_42(doc);
             convertTo3_5_2_43(doc);
+            convertTo3_5_2_44(doc);
             return doc;
         }
 
@@ -4661,6 +4664,72 @@ namespace taskt.Core.Script
                             return false;
                     }
                 }), "v_UserVariableName", "v_Result");
+        }
+
+        private static void convertTo3_5_2_44(XDocument doc)
+        {
+            // ClickUIElement v_ActivateWindow -> v_ActivateWindowBeforeAction
+            ChangeAttributeName(doc, "UIAutomationClickUIElementCommand", "v_ActivateWindow", "v_ActivateWindowBeforeAction");
+
+            // UIAutomationSetTextToUIElementCommand v_TextVariable -> v_TextToSet
+            ChangeAttributeName(doc, "UIAutomationSetTextToUIElementCommand", "v_TextVariable", "v_TextToSet");
+
+            // UIAutomationGetSelectedStateFromUIElementCommand, UIAutomationGetChildrenUIElementsInformationCommand v_ResultVariable -> v_Result
+            ChangeAttributeName(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el)) 
+                {
+                    case "UIAutomationGetSelectedStateFromUIElementCommand":
+                    case "UIAutomationGetChildrenUIElementsInformationCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_ResultVariable", "v_Result");
+
+            // UIAutomationGetSelectionItemsFromUIElementCommand v_ListVariable -> v_Result
+            ChangeAttributeName(doc, "UIAutomationGetSelectionItemsFromUIElementCommand", "v_ListVariable", "v_Result");
+
+            // UIAutomationGetTextFromTableUIElementCommand, UIAutomationGetTextFromUIElementCommand v_TextVariable -> v_Result
+            ChangeAttributeName(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "UIAutomationGetTextFromTableUIElementCommand":
+                    case "UIAutomationGetTextFromUIElementCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_TextVariable", "v_Result");
+
+            // UIAutomationGetUIElementTreeXMLFromUIElementCommand v_XMLVariable -> v_Result
+            ChangeAttributeName(doc, "UIAutomationGetUIElementTreeXMLFromUIElementCommand", "v_XMLVariable", "v_Result");
+
+            // UIAutomationSearchUIElementFromTableUIElementCommand -> UIAutomationGetUIElementFromTableUIElementCommand
+            ChangeCommandName(doc, "UIAutomationSearchUIElementFromTableUIElementCommand", "UIAutomationGetUIElementFromTableUIElementCommand", "Get UIElement From Table UIElement");
+            // UIAutomationSearchParentUIElementCommand -> UIAutomationGetParentUIElementCommand
+            ChangeCommandName(doc, "UIAutomationSearchParentUIElementCommand", "UIAutomationGetParentUIElementCommand", "Get Parent UIElement");
+            // UIAutomationSearchUIElementFromWindowCommand -> UIAutomationGetWindowUIElementCommand
+            ChangeCommandName(doc, "UIAutomationSearchUIElementFromWindowCommand", "UIAutomationGetWindowUIElementCommand", "Get Window UIElement");
+
+            // UIAutomationGetUIElementFromTableUIElementCommand, UIAutomationGetParentUIElementCommand, UIAutomationGetWindowUIElementCommand
+            // v_AutomationElementVariable -> v_Result
+            ChangeAttributeName(doc, new Func<XElement, bool>((el) =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "UIAutomationGetUIElementFromTableUIElementCommand":
+                    case "UIAutomationGetParentUIElementCommand":
+                    case "UIAutomationGetWindowUIElementCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_AutomationElementVariable", "v_Result");
+
+            // UIAutomationGetSelectionItemsFromUIElementCommand -> UIAutomationGetSelectionItemsValueFromUIElementCommand
+            ChangeCommandName(doc, "UIAutomationGetSelectionItemsFromUIElementCommand", "UIAutomationGetSelectionItemsValueFromUIElementCommand", "Get Selection Items Value From UIElement");
         }
 
         /// <summary>

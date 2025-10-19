@@ -171,7 +171,7 @@ namespace taskt.Core.Automation.Commands
             }
             else
             {
-                throw new Exception("Variable " + variableName + " is not UIElement");
+                throw new Exception($"Variable '{variableName}' is not UIElement");
             }
         }
 
@@ -847,51 +847,6 @@ namespace taskt.Core.Automation.Commands
 
         #endregion
 
-        #region Winodow Search Methods
-
-        ///// <summary>
-        ///// get window UIElement. this method use PropertyVirtualProperty
-        ///// </summary>
-        ///// <param name="command"></param>
-        ///// <param name="engine"></param>
-        ///// <param name="resultName"></param>
-        ///// <returns></returns>
-        //public static AutomationElement GetWindowUIElement(ScriptCommand command, Engine.AutomationEngineInstance engine, string resultName = "")
-        //{
-        //    AutomationElement ret = null;
-
-        //    WindowControls.WindowAction(command, engine,
-        //        new Action<List<(IntPtr, string)>>(wins =>
-        //        {
-        //            ret = AutomationElement.FromHandle(wins[0].Item1);
-
-        //            if (!string.IsNullOrEmpty(resultName))
-        //            {
-        //                //var resultValue = command.ConvertToUserVariable(resultName, "Result", engine);
-        //                var resultValue = command.GetRawPropertyValueAsString(resultName, "Result");
-
-        //                ret.StoreInUserVariable(engine, resultValue);
-        //            }
-        //        })
-        //    );
-
-        //    return ret;
-        //}
-
-        ///// <summary>
-        ///// get window UIElement
-        ///// </summary>
-        ///// <param name="command"></param>
-        ///// <param name="engine"></param>
-        ///// <returns></returns>
-        //public static AutomationElement GetWindowUIElement(ScriptCommand command, Engine.AutomationEngineInstance engine)
-        //{
-        //    var resultName = command.GetProperty(new PropertyVirtualProperty(nameof(UIElementControls), nameof(v_OutputUIElementName)))?.Name ?? "";
-
-        //    return GetWindowUIElement(command, engine, resultName);
-        //}
-        #endregion
-
         #region search element node
 
         public static List<AutomationElement> GetChildrenUIElements(AutomationElement rootElement, DataTable conditionTable, Engine.AutomationEngineInstance engine)
@@ -932,229 +887,202 @@ namespace taskt.Core.Automation.Commands
             return elems;
         }
 
-        /// <summary>
-        /// get parent element
-        /// </summary>
-        /// <param name="targetElement"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public static AutomationElement GetParentUIElement(AutomationElement targetElement)
-        {
-            TreeWalker walker = TreeWalker.RawViewWalker;
-
-            var parent = walker.GetParent(targetElement);
-            if (parent != null)
-            {
-                return parent;
-            }
-            else
-            {
-                throw new Exception("Parent UIElement not exists");
-            }
-        }
-
-        /// <summary>
-        /// get window name from UIElement
-        /// </summary>
-        /// <param name="targetElement"></param>
-        /// <returns></returns>
-        public static string GetWindowName(AutomationElement targetElement)
-        {
-            TreeWalker walker = TreeWalker.RawViewWalker;
-
-            if (targetElement.Current.ControlType == ControlType.Window)
-            {
-                return targetElement.Current.Name;
-            }
-
-            try
-            {
-                var parent = walker.GetParent(targetElement);
-                while (parent.Current.ControlType != ControlType.Window)
-                {
-                    parent = walker.GetParent(parent);
-                }
-                return parent.Current.Name;
-            }
-            catch
-            {
-                // try other method
-                var windowNames = WindowControls.GetAllWindowTitles();
-                if ((targetElement.Current.NativeWindowHandle != 0) && (windowNames.Contains(targetElement.Current.Name)))
-                {
-                    return targetElement.Current.Name;
-                }
-
-                try
-                {
-                    var parent = walker.GetParent(targetElement);
-                    while((parent.Current.NativeWindowHandle == 0) || (!windowNames.Contains(parent.Current.Name)))
-                    {
-                        parent = walker.GetParent(parent);
-                    }
-                    return parent.Current.Name;
-                }
-                catch
-                {
-                    throw new Exception("Fail Get Window Name from UIElement");
-                }
-            }
-        }
-
         ///// <summary>
-        ///// get window handle from UIElement
+        ///// get parent element
         ///// </summary>
         ///// <param name="targetElement"></param>
         ///// <returns></returns>
-        //public static int GetWindowHandle(AutomationElement targetElement)
+        ///// <exception cref="Exception"></exception>
+        //public static AutomationElement GetParentUIElement(AutomationElement targetElement)
         //{
         //    TreeWalker walker = TreeWalker.RawViewWalker;
 
-        //    var hnd = targetElement.GetCurrentPropertyValue(AutomationElement.NativeWindowHandleProperty);
-        //    if(hnd != AutomationElement.NotSupported)
+        //    var parent = walker.GetParent(targetElement);
+        //    if (parent != null)
         //    {
-        //        return (int)hnd;
+        //        return parent;
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("Parent UIElement not exists");
+        //    }
+        //}
+
+        ///// <summary>
+        ///// get window name from UIElement
+        ///// </summary>
+        ///// <param name="targetElement"></param>
+        ///// <returns></returns>
+        //public static string GetWindowName(AutomationElement targetElement)
+        //{
+        //    TreeWalker walker = TreeWalker.RawViewWalker;
+
+        //    if (targetElement.Current.ControlType == ControlType.Window)
+        //    {
+        //        return targetElement.Current.Name;
         //    }
 
-        //    var parent = walker.GetParent(targetElement);
-        //    while (true)
+        //    try
         //    {
-        //        hnd = parent.GetCurrentPropertyValue(AutomationElement.NativeWindowHandleProperty);
-        //        if (hnd != AutomationElement.NotSupported)
+        //        var parent = walker.GetParent(targetElement);
+        //        while (parent.Current.ControlType != ControlType.Window)
         //        {
-        //            return (int)hnd;
+        //            parent = walker.GetParent(parent);
         //        }
-        //        parent = walker.GetParent(parent);
+        //        return parent.Current.Name;
+        //    }
+        //    catch
+        //    {
+        //        // try other method
+        //        var windowNames = WindowControls.GetAllWindowTitles();
+        //        if ((targetElement.Current.NativeWindowHandle != 0) && (windowNames.Contains(targetElement.Current.Name)))
+        //        {
+        //            return targetElement.Current.Name;
+        //        }
+
+        //        try
+        //        {
+        //            var parent = walker.GetParent(targetElement);
+        //            while((parent.Current.NativeWindowHandle == 0) || (!windowNames.Contains(parent.Current.Name)))
+        //            {
+        //                parent = walker.GetParent(parent);
+        //            }
+        //            return parent.Current.Name;
+        //        }
+        //        catch
+        //        {
+        //            throw new Exception("Fail Get Window Name from UIElement");
+        //        }
         //    }
         //}
 
         #endregion
 
-        public static string GetTextValue(AutomationElement targetElement)
-        {
-            //object patternObj;
-            if (targetElement.TryGetCurrentPattern(RangeValuePattern.Pattern, out object rPtn))
-            {
-                // bar
-                return ((RangeValuePattern)rPtn).Current.Value.ToString();
-            }
-            else if (targetElement.TryGetCurrentPattern(ValuePattern.Pattern, out object vPtn))
-            {
-                // TextBox
-                return ((ValuePattern)vPtn).Current.Value;
-            }
-            else if (targetElement.TryGetCurrentPattern(TextPattern.Pattern, out object tPtn))
-            {
-                // TextBox Multilune
-                return ((TextPattern)tPtn).DocumentRange.GetText(-1);
-            }
-            else if (targetElement.TryGetCurrentPattern(SelectionPattern.Pattern, out object sPtn))
-            {
-                // combobox
-                AutomationElement selElem = ((SelectionPattern)sPtn).Current.GetSelection()[0];
-                return selElem.Current.Name;
-            }
-            else
-            {
-                // others
-                return targetElement.Current.Name;
-            }
-        }
+        //public static string GetTextValue(AutomationElement targetElement)
+        //{
+        //    //object patternObj;
+        //    if (targetElement.TryGetCurrentPattern(RangeValuePattern.Pattern, out object rPtn))
+        //    {
+        //        // bar
+        //        return ((RangeValuePattern)rPtn).Current.Value.ToString();
+        //    }
+        //    else if (targetElement.TryGetCurrentPattern(ValuePattern.Pattern, out object vPtn))
+        //    {
+        //        // TextBox
+        //        return ((ValuePattern)vPtn).Current.Value;
+        //    }
+        //    else if (targetElement.TryGetCurrentPattern(TextPattern.Pattern, out object tPtn))
+        //    {
+        //        // TextBox Multilune
+        //        return ((TextPattern)tPtn).DocumentRange.GetText(-1);
+        //    }
+        //    else if (targetElement.TryGetCurrentPattern(SelectionPattern.Pattern, out object sPtn))
+        //    {
+        //        // combobox
+        //        AutomationElement selElem = ((SelectionPattern)sPtn).Current.GetSelection()[0];
+        //        return selElem.Current.Name;
+        //    }
+        //    else
+        //    {
+        //        // others
+        //        return targetElement.Current.Name;
+        //    }
+        //}
 
-        public static AutomationElement GetTableUIElement(AutomationElement targetElement, int row, int column)
-        {
-            if (targetElement.TryGetCurrentPattern(GridPattern.Pattern, out object gridObj))
-            {
-                var cosutomRows = targetElement.FindAll(TreeScope.Children, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Custom));
-                if (cosutomRows.Count > 0)
-                {
-                    // DataGridView (.net)
-                    if (cosutomRows.Count > row)
-                    {
-                        var r = cosutomRows[row + 1];
-                        var cols = r.FindAll(TreeScope.Children, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit));
-                        if (cols.Count > column)
-                        {
-                            return cols[column];
-                        }
-                    }
+        //public static AutomationElement GetTableUIElement(AutomationElement targetElement, int row, int column)
+        //{
+        //    if (targetElement.TryGetCurrentPattern(GridPattern.Pattern, out object gridObj))
+        //    {
+        //        var cosutomRows = targetElement.FindAll(TreeScope.Children, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Custom));
+        //        if (cosutomRows.Count > 0)
+        //        {
+        //            // DataGridView (.net)
+        //            if (cosutomRows.Count > row)
+        //            {
+        //                var r = cosutomRows[row + 1];
+        //                var cols = r.FindAll(TreeScope.Children, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit));
+        //                if (cols.Count > column)
+        //                {
+        //                    return cols[column];
+        //                }
+        //            }
 
-                    throw new Exception("Table Row: '" + row + "', Column: '" + column + "' does not exists");
-                }
-                else
-                {
-                    // listView
-                    AutomationElement cellElem = ((GridPattern)gridObj).GetItem(row, column);
-                    if (cellElem == null)
-                    {
-                        throw new Exception("Table Row: '" + row + "', Column: '" + column + "' does not exists");
-                    }
-                    return cellElem;
-                }
-            }
-            else
-            {
-                throw new Exception("UIElement is not Table Element");
-            }
-        }
+        //            throw new Exception($"Table Row: '{row}', Column: '{column}' does not exists");
+        //        }
+        //        else
+        //        {
+        //            // listView
+        //            AutomationElement cellElem = ((GridPattern)gridObj).GetItem(row, column);
+        //            if (cellElem == null)
+        //            {
+        //                throw new Exception($"Table Row: '{row}', Column: '{column}' does not exists");
+        //            }
+        //            return cellElem;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("UIElement is not Table Element");
+        //    }
+        //}
 
-        public static List<AutomationElement> GetSelectionItems(AutomationElement targetElement)
-        {
-            var getListItemFunc = new Func<AutomationElement, List<AutomationElement>>( el => {
-                var elems = el.FindAll(TreeScope.Descendants, new PropertyCondition(AutomationElement.IsSelectionItemPatternAvailableProperty, true));
-                List<AutomationElement> ret = new List<AutomationElement>();
-                foreach (AutomationElement elem in elems)
-                {
-                    ret.Add(elem);
-                }
-                return ret;
-            });
+        //public static List<AutomationElement> GetSelectionItems(AutomationElement targetElement)
+        //{
+        //    var getListItemFunc = new Func<AutomationElement, List<AutomationElement>>( el => {
+        //        var elems = el.FindAll(TreeScope.Descendants, new PropertyCondition(AutomationElement.IsSelectionItemPatternAvailableProperty, true));
+        //        List<AutomationElement> ret = new List<AutomationElement>();
+        //        foreach (AutomationElement elem in elems)
+        //        {
+        //            ret.Add(elem);
+        //        }
+        //        return ret;
+        //    });
 
-            AutomationElement rootElement = targetElement;
+        //    AutomationElement rootElement = targetElement;
 
-            if ((bool)rootElement.GetCurrentPropertyValue(AutomationElement.IsGridPatternAvailableProperty) ||
-                (bool)rootElement.GetCurrentPropertyValue(AutomationElement.IsSelectionPatternAvailableProperty))
-            {
-                // DataGridView-ComboBox, ListBox
-                return getListItemFunc(rootElement);
-            }
-            else
-            {
-                // ComboBox, TreeView
-                bool isCmb = (bool)rootElement.GetCurrentPropertyValue(AutomationElement.IsExpandCollapsePatternAvailableProperty);
+        //    if ((bool)rootElement.GetCurrentPropertyValue(AutomationElement.IsGridPatternAvailableProperty) ||
+        //        (bool)rootElement.GetCurrentPropertyValue(AutomationElement.IsSelectionPatternAvailableProperty))
+        //    {
+        //        // DataGridView-ComboBox, ListBox
+        //        return getListItemFunc(rootElement);
+        //    }
+        //    else
+        //    {
+        //        // ComboBox, TreeView
+        //        bool isCmb = (bool)rootElement.GetCurrentPropertyValue(AutomationElement.IsExpandCollapsePatternAvailableProperty);
 
-                if (!isCmb)
-                {
-                    rootElement = GetParentUIElement(rootElement);
-                    isCmb = (bool)rootElement.GetCurrentPropertyValue(AutomationElement.IsExpandCollapsePatternAvailableProperty);
-                }
+        //        if (!isCmb)
+        //        {
+        //            rootElement = GetParentUIElement(rootElement);
+        //            isCmb = (bool)rootElement.GetCurrentPropertyValue(AutomationElement.IsExpandCollapsePatternAvailableProperty);
+        //        }
 
-                if ((bool)isCmb)
-                {
-                    object selPtn = rootElement.GetCurrentPattern(ExpandCollapsePattern.Pattern);
+        //        if ((bool)isCmb)
+        //        {
+        //            object selPtn = rootElement.GetCurrentPattern(ExpandCollapsePattern.Pattern);
 
-                    ExpandCollapsePattern ecPtn = (ExpandCollapsePattern)selPtn;
-                    ecPtn.Expand();
-                    System.Threading.Thread.Sleep(500);
+        //            ExpandCollapsePattern ecPtn = (ExpandCollapsePattern)selPtn;
+        //            ecPtn.Expand();
+        //            System.Threading.Thread.Sleep(500);
 
-                    // dbg
-                    //System.Threading.Thread.Sleep(1000);
-                    //Console.WriteLine("Expanded");
+        //            // dbg
+        //            //System.Threading.Thread.Sleep(1000);
+        //            //Console.WriteLine("Expanded");
 
-                    var ret = getListItemFunc(rootElement);
+        //            var ret = getListItemFunc(rootElement);
 
-                    //if (collapseAfter)
-                    //{
-                    //    ecPtn.Collapse();
-                    //}
-                    return ret;
-                }
-                else
-                {
-                    throw new Exception("This UIElement does not have Selection Items");
-                }
-            }
-        }
+        //            //if (collapseAfter)
+        //            //{
+        //            //    ecPtn.Collapse();
+        //            //}
+        //            return ret;
+        //        }
+        //        else
+        //        {
+        //            throw new Exception("This UIElement does not have Selection Items");
+        //        }
+        //    }
+        //}
 
         #region create XElement methods
 
@@ -1211,7 +1139,7 @@ namespace taskt.Core.Automation.Commands
 
             var tp = targetElement.Current.GetType();
 
-            foreach(var t in TargetControlTypes)
+            foreach (var t in TargetControlTypes)
             {
                 node.SetAttributeValue(t, tp.GetProperty(t)?.GetValue(targetElement.Current)?.ToString() ?? "");
             }
@@ -1277,21 +1205,33 @@ namespace taskt.Core.Automation.Commands
 
         public static TreeNode GetElementTreeNode(string windowName, Engine.AutomationEngineInstance engine, out XElement xml)
         {
-            AutomationElement root = GetFromWindowName(windowName, engine);
+            // cache request
+            var cacheReq = new CacheRequest();
+            cacheReq.Add(AutomationElement.NameProperty);
+            cacheReq.Add(AutomationElement.ControlTypeProperty);
+            cacheReq.Add(AutomationElement.LocalizedControlTypeProperty);
+            cacheReq.TreeScope = TreeScope.Element | TreeScope.Children;
 
-            TreeWalker walker = TreeWalker.RawViewWalker;
+            var root = GetFromWindowName(windowName, engine);
+
+            cacheReq.Push();
+
+            var walker = TreeWalker.RawViewWalker;
 
             var tree = CreateTreeNodeFromAutomationElement(root);
             xml = CreateXmlElement(root);
 
-            GetChildElementTreeNode(tree, xml, root, walker, 1, engine);
+            GetChildElementTreeNode(tree, xml, root, walker, cacheReq, 1, engine);
+
+            cacheReq.Pop();
 
             return tree;
         }
 
-        private static void GetChildElementTreeNode(TreeNode tree, XElement xml, AutomationElement rootElement, TreeWalker walker, int depth, Engine.AutomationEngineInstance engine)
+        private static void GetChildElementTreeNode(TreeNode tree, XElement xml, AutomationElement rootElement, TreeWalker walker, CacheRequest cacheRequest, int depth, Engine.AutomationEngineInstance engine)
         {
-            AutomationElement node = walker.GetFirstChild(rootElement);
+            var node = walker.GetFirstChild(rootElement, cacheRequest);
+            //var node = walker.GetLastChild(rootElement);
 
             int siblingCount = 0;
             while(node != null)
@@ -1302,9 +1242,10 @@ namespace taskt.Core.Automation.Commands
                 var childXml = CreateXmlElement(node);
                 xml.Add(childXml);
 
-                if ((walker.GetFirstChild(node) != null) && (depth < engine.engineSettings.MaxUIElementInpectDepth))
+                if ((walker.GetFirstChild(node, cacheRequest) != null) && (depth < engine.engineSettings.MaxUIElementInpectDepth))
+                //if ((walker.GetLastChild(node) != null) && (depth < engine.engineSettings.MaxUIElementInpectDepth))
                 {
-                    GetChildElementTreeNode(item, childXml, node, walker, (depth + 1), engine);
+                    GetChildElementTreeNode(item, childXml, node, walker, cacheRequest, (depth + 1), engine);
                 }
 
                 siblingCount++;
@@ -1313,16 +1254,46 @@ namespace taskt.Core.Automation.Commands
                     break;
                 }
 
-                node = walker.GetNextSibling(node);
+                node = walker.GetNextSibling(node, cacheRequest);
+                //node = walker.GetPreviousSibling(node);
             }
         }
         
 
         private static TreeNode CreateTreeNodeFromAutomationElement(AutomationElement element)
         {
-            TreeNode node = new TreeNode();
-            node.Text = "\"" + element.Current.Name + "\" " + element.Current.LocalizedControlType;
-            node.Tag = element;
+            //try
+            //{
+            //    // Debug
+            //    var r = element.GetCurrentPropertyValue(AutomationElement.NameProperty, true);
+            //    Console.WriteLine($"{element.Cached.Name}" + ((r == AutomationElement.NotSupported) ? "*" : ""));
+
+            //    var node = new TreeNode
+            //    {
+            //        Text = "\"" + (element.Cached.Name) + "\" " + (element.Cached.LocalizedControlType),
+            //        Tag = element
+            //    };
+            //    return node;
+            //}
+            //catch
+            //{
+            //    var node = new TreeNode
+            //    {
+            //        Text = "\"" + (element.Current.Name) + "\" " + (element.Current.LocalizedControlType),
+            //        Tag = element
+            //    };
+            //    return node;
+            //}
+
+            // Debug
+            //var r = element.GetCurrentPropertyValue(AutomationElement.NameProperty, true);
+            //Console.WriteLine($"{element.Cached.Name}" + ((r == AutomationElement.NotSupported) ? "*" : ""));
+
+            var node = new TreeNode
+            {
+                Text = "\"" + (element.Current.Name) + "\" " + (element.Current.LocalizedControlType),
+                Tag = element
+            };
             return node;
         }
 
@@ -1376,7 +1347,7 @@ namespace taskt.Core.Automation.Commands
             }
             catch(Exception ex)
             {
-                res += "Error: " + ex.Message;
+                res += $"Error: {ex.Message}";
             }
 
             return res;
