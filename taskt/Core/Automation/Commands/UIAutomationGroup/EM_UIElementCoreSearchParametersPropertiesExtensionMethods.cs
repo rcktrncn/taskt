@@ -121,7 +121,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         /// <param name="table"></param>
         /// <param name="engine"></param>
         /// <returns></returns>
-        private static List<PropertyCondition> CreateSearchCondition(this IUIElementCoreSearchParametersProperties comamnd, Engine.AutomationEngineInstance engine)
+        public static List<PropertyCondition> CreateSearchCondition(this IUIElementCoreSearchParametersProperties comamnd, Engine.AutomationEngineInstance engine)
         {
             var table = comamnd.v_SearchParameters;
 
@@ -264,17 +264,17 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
                     CheckAndAddProcess(node, searchConditions, elems);
                     if (timeOutFunc() || maxUIElementsFunc(elems))
                     {
-                        return (true, elems);
+                        return ((elems.Count > 0), elems);
                     }
 
                     node = nextChildFunc(node, walker);
                     sibCnt++;
                     if (maxSiblingsFunc(sibCnt))
                     {
-                        return (true, elems);
+                        return ((elems.Count > 0), elems);
                     }
                 }
-                return (true, elems);
+                return ((elems.Count > 0), elems);
             }), engine);
 
             if (ret is List<AutomationElement> e)

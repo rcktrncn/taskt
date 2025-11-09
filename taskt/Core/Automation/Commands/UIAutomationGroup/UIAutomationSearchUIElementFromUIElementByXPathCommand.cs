@@ -27,11 +27,11 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(UIElementControls), nameof(UIElementControls.v_NewOutputUIElementName))]
-        public string v_AutomationElementVariable { get; set; }
+        public string v_Result { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(UIElementControls), nameof(UIElementControls.v_WaitTime))]
-        public string v_WaitTime { get; set; }
+        public string v_WaitTimeForUIElement { get; set; }
 
         //[XmlIgnore]
         //[NonSerialized]
@@ -48,7 +48,7 @@ namespace taskt.Core.Automation.Commands
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
             var elem = UIElementControls.SearchGUIElementByXPath(this, engine);
-            elem.StoreInUserVariable(engine, v_AutomationElementVariable);
+            elem.StoreInUserVariable(engine, v_Result);
         }
     }
 }

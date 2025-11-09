@@ -15,9 +15,9 @@ namespace taskt.Core.Automation.Commands
         /// <param name="engine"></param>
         public static void StoreWindowNameResultInUserVariable(this IWindowNamesProperties command, List<string> result, AutomationEngineInstance engine)
         {
-            if (!string.IsNullOrEmpty(command.v_NameResult))
+            if (!string.IsNullOrEmpty(command.v_WindowNameResult))
             {
-                result.StoreInUserVariable(engine, command.v_NameResult);
+                result.StoreInUserVariable(engine, command.v_WindowNameResult);
             }
         }
 
@@ -29,9 +29,9 @@ namespace taskt.Core.Automation.Commands
         /// <param name="engine"></param>
         public static void StoreWindowHandleResultInUserVariable(this IWindowNamesProperties command, List<string> result, AutomationEngineInstance engine)
         {
-            if (!string.IsNullOrEmpty(command.v_HandleResult))
+            if (!string.IsNullOrEmpty(command.v_WindowHandleResult))
             {
-                result.StoreInUserVariable(engine, command.v_HandleResult);
+                result.StoreInUserVariable(engine, command.v_WindowHandleResult);
             }
         }
 
@@ -42,7 +42,7 @@ namespace taskt.Core.Automation.Commands
         /// <param name="names"></param>
         /// <param name="handles"></param>
         /// <param name="engine"></param>
-        public static void StoreWindowNameAndHandleResultInUserVariable(this IWindowNamesProperties command, List<string> names, List<string> handles, AutomationEngineInstance engine)
+        public static void StoreWindowNameAndHandleResultsInUserVariables(this IWindowNamesProperties command, List<string> names, List<string> handles, AutomationEngineInstance engine)
         {
             command.StoreWindowNameResultInUserVariable(names, engine);
             command.StoreWindowHandleResultInUserVariable(handles, engine);
@@ -79,7 +79,7 @@ namespace taskt.Core.Automation.Commands
                 actionFunc(wins);
 
                 (var names, var handles) = ConvertWindowNameAndWindowHandleList(wins);
-                command.StoreWindowNameAndHandleResultInUserVariable(names, handles, engine);
+                command.StoreWindowNameAndHandleResultsInUserVariables(names, handles, engine);
             }
             catch (Exception ex)
             {

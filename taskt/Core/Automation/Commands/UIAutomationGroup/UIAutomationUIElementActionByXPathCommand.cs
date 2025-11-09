@@ -76,15 +76,15 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(UIElementControls), nameof(UIElementControls.v_WaitTime))]
-        public string v_ElementWaitTime { get; set; }
+        public string v_WaitTimeForUIElement { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_WindowNameResult))]
-        public string v_NameResult { get; set; }
+        public string v_WindowNameResult { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_OutputWindowHandle))]
-        public string v_HandleResult { get; set; }
+        public string v_WindowHandleResult { get; set; }
 
         public UIAutomationUIElementActionByXPathCommand()
         {
@@ -257,8 +257,8 @@ namespace taskt.Core.Automation.Commands
                     v_TargetWindowIndex = this.v_TargetWindowIndex,
                     v_WaitTimeForWindow = this.v_WaitTimeForWindow,
                     v_Result = myWinElem.VariableName,
-                    v_NameResult = this.v_NameResult,
-                    v_HandleResult = this.v_HandleResult,
+                    v_WindowNameResult = this.v_WindowNameResult,
+                    v_WindowHandleResult = this.v_WindowHandleResult,
                 };
                 winElem.RunCommand(engine);
 
@@ -273,7 +273,7 @@ namespace taskt.Core.Automation.Commands
                             {
                                 v_TargetElement = myWinElem.VariableName,
                                 v_SearchXPath = this.v_UIASearchParameters,
-                                v_WaitTime = this.v_ElementWaitTime,
+                                v_WaitTimeForUIElement = this.v_WaitTimeForUIElement,
                                 v_Result = p["Apply To Variable"],
                             };
                             chkElem.RunCommand(engine);
@@ -284,8 +284,8 @@ namespace taskt.Core.Automation.Commands
                             {
                                 v_TargetElement = myWinElem.VariableName,
                                 v_SearchXPath = this.v_UIASearchParameters,
-                                v_WaitTime = this.v_ElementWaitTime,
-                                v_AutomationElementVariable = myTrgElem.VariableName,
+                                v_WaitTimeForUIElement = this.v_WaitTimeForUIElement,
+                                v_Result = myTrgElem.VariableName,
                             };
                             trgElem.RunCommand(engine);
                             break;

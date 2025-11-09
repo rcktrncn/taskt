@@ -2,38 +2,49 @@
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Automation.Commands.WindowGroup;
 
 namespace taskt.Core.Automation.Commands.UIAutomationGroup
 {
     /// <summary>
-    /// for search UIElement from UIElement by TreeWalker commands
+    /// for search UIElements from Something by TreeWalker commands
     /// </summary>
-    public abstract class ACoreSearchUIElementFromUIElementByTreeWalkerCommands : ADoSomethingUIElementCommands, IUIElementCoreSearchParametersProperties
+    public abstract class ACoreSearchUIElementsFromSomethingByTreeWalkerCommands : ScriptCommand, IUIElementCoreSearchParametersProperties, IFromWindowNameResultsProperties
     {
         [XmlElement]
         [PropertyVirtualProperty(nameof(VP_UIElementControls), nameof(VP_UIElementControls.v_SearchParameters))]
         [PropertyParameterOrder(6000)]
-        public DataTable v_SearchParameters { get; set; }
+        public virtual DataTable v_SearchParameters { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(VP_UIElementControls), nameof(VP_UIElementControls.v_WaitTimeForUIElement))]
         [PropertyParameterOrder(7990)]
-        public string v_WaitTimeForUIElement { get; set; }
+        public virtual string v_WaitTimeForUIElement { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(VP_UIElementControls), nameof(VP_UIElementControls.v_MaxSiblings))]
         [PropertyParameterOrder(7991)]
-        public string v_MaxSiblings { get; set; }
+        public virtual string v_MaxSiblings { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(VP_UIElementControls), nameof(VP_UIElementControls.v_MaxNumberUIElements))]
         [PropertyParameterOrder(7995)]
-        public string v_MaxNumberUIElements { get; set; }
+        public virtual string v_MaxNumberUIElements { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(VP_UIElementControls), nameof(VP_UIElementControls.v_SiblingsDirection))]
         [PropertyParameterOrder(7996)]
-        public string v_SiblingsDirection { get; set; }
+        public virtual string v_SiblingsDirection { get; set; }
+
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_WindowNameResult))]
+        [PropertyParameterOrder(10000)]
+        public virtual string v_WindowNameResult { get; set; }
+
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_OutputWindowHandle))]
+        [PropertyParameterOrder(10100)]
+        public virtual string v_WindowHandleResult { get; set; }
 
         public override void AfterShown(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {

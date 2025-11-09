@@ -15,7 +15,7 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_window))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class UIAutomationSearchChildUIElementCommand : ACoreSearchUIElementFromUIElementByTreeWalkerCommands
+    public sealed class UIAutomationSearchChildUIElementCommand : ACoreSearchUIElementsFromUIElementByTreeWalkerCommands, IUIElementIndexProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(UIElementControls), nameof(UIElementControls.v_InputUIElementName))]
@@ -28,18 +28,19 @@ namespace taskt.Core.Automation.Commands
         //public DataTable v_SearchParameters { get; set; }
 
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
-        [PropertyDescription("Child UIElement Index")]
-        [InputSpecification("Number", true)]
-        [PropertyDetailSampleUsage("**0**", "Specfity the First UIElement")]
-        [PropertyDetailSampleUsage("**1**", PropertyDetailSampleUsage.ValueType.Value, "Index")]
-        [PropertyDetailSampleUsage("**{{{vIndex}}}**", PropertyDetailSampleUsage.ValueType.VariableValue, "Index")]
-        [Remarks("")]
-        [PropertyShowSampleUsageInDescription(true)]
-        [PropertyValidationRule("Index", PropertyValidationRule.ValidationRuleFlags.Empty | PropertyValidationRule.ValidationRuleFlags.LessThanZero)]
-        [PropertyDisplayText(true, "Index")]
+        [PropertyVirtualProperty(nameof(VP_UIElementControls), nameof(VP_UIElementControls.v_TargetUIElementIndex))]
+        //[PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_DisallowNewLine_OneLineTextBox))]
+        //[PropertyDescription("Child UIElement Index")]
+        //[InputSpecification("Number", true)]
+        //[PropertyDetailSampleUsage("**0**", "Specfity the First UIElement")]
+        //[PropertyDetailSampleUsage("**1**", PropertyDetailSampleUsage.ValueType.Value, "Index")]
+        //[PropertyDetailSampleUsage("**{{{vIndex}}}**", PropertyDetailSampleUsage.ValueType.VariableValue, "Index")]
+        //[Remarks("")]
+        //[PropertyShowSampleUsageInDescription(true)]
+        //[PropertyValidationRule("Index", PropertyValidationRule.ValidationRuleFlags.Empty | PropertyValidationRule.ValidationRuleFlags.LessThanZero)]
+        //[PropertyDisplayText(true, "Index")]
         [PropertyParameterOrder(6100)]
-        public string v_Index { get; set; }
+        public string v_TargetUIElementIndex { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(VP_UIElementControls), nameof(VP_UIElementControls.v_NewOutputUIElementName))]
@@ -58,50 +59,28 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //var rootElement = v_TargetElement.ExpandUserVariableAsUIElement(engine);
-            //int index = v_Index.ExpandValueOrUserVariableAsInteger("v_Index", engine);
-
-            //var elems = UIElementControls.GetChildrenUIElements(rootElement, v_SearchParameters, engine);
-            //if (elems.Count > 0)
-            //{
-            //    elems[index].StoreInUserVariable(engine, v_Result);
-            //}
-            //else
-            //{
-            //    throw new Exception("UIElement not found");
-            //}
-
             this.UIElementAction(engine, new Action<AutomationElement>((elem) =>
             {
                 var children = this.SearchChildrenUIElements(elem, engine);
-                
-                var index = v_Index.ExpandValueOrUserVariableAsInteger("v_Index", engine);
-                if (index < 0)
-                {
-                    index += children.Count;
-                }
-                if (index >= 0 && index < children.Count)
-                {
-                    children[index].StoreInUserVariable(engine, v_Result);
-                }
-                else
-                {
-                    throw new Exception($"UIElement not found. Index: '{v_Index}', Expand Value: '{index}'");
-                }
+
+                //var index = v_TargetUIElementIndex.ExpandValueOrUserVariableAsInteger("v_Index", engine);
+                //var index = this.ExpandValueOrUserVariableAsUIElementIndex(engine);
+                //if (index < 0)
+                //{
+                //    index += children.Count;
+                //}
+                //if (index >= 0 && index < children.Count)
+                //{
+                //    children[index].StoreInUserVariable(engine, v_Result);
+                //}
+                //else
+                //{
+                //    throw new Exception($"UIElement not found. Index: '{v_TargetUIElementIndex}', Expand Value: '{index}'");
+                //}
+
+                var e = this.GetUIElementFromLis(children, engine);
+                e.StoreInUserVariable(engine, v_Result);
             }));
         }
-
-        //public override void AfterShown(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
-        //{
-        //    UIElementControls.RenderSearchParameterDataGridView(ControlsList.GetPropertyControl<DataGridView>(nameof(v_SearchParameters)));
-        //}
-
-        //public override void BeforeValidate()
-        //{
-        //    base.BeforeValidate();
-
-        //    var dgv = FormUIControls.GetPropertyControl<DataGridView>(ControlsList, nameof(v_SearchParameters));
-        //    DataTableControls.BeforeValidate_NoRowAdding(dgv, v_SearchParameters);
-        //}
     }
 }

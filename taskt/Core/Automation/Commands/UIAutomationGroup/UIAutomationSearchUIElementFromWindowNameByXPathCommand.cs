@@ -4,19 +4,21 @@ using System.Windows.Forms;
 using taskt.UI.CustomControls;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using taskt.Core.Script;
+using taskt.Core.Automation.Commands.UIAutomationGroup;
+using System.Windows.Automation;
 
 namespace taskt.Core.Automation.Commands
 {
     [Serializable]
     [Attributes.ClassAttributes.Group("UIAutomation")]
-    [Attributes.ClassAttributes.SubGruop("Search UIElement & Window")]
-    [Attributes.ClassAttributes.CommandSettings("Search UIElement And Window By XPath")]
+    [Attributes.ClassAttributes.SubGruop("Search UIElement From Window")]
+    [Attributes.ClassAttributes.CommandSettings("Search UIElement From Window Name By XPath")]
     [Attributes.ClassAttributes.Description("This command allows you to get UIElement from Window Name using by XPath.")]
     [Attributes.ClassAttributes.ImplementationDescription("Use this command when you want to get UIElement from Window Name. XPath does not support to use parent and sibling for root element.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_window))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class UIAutomationSearchUIElementAndWindowByXPathCommand : ScriptCommand
+    public sealed class UIAutomationSearchUIElementFromWindowNameByXPathCommand : ScriptCommand, IWindowUIElementResultProperties
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_WindowName))]
@@ -28,7 +30,7 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(UIElementControls), nameof(UIElementControls.v_OutputUIElementName))]
-        public string v_AutomationElementVariable { get; set; }
+        public string v_Result { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_CheckMethod))]
@@ -49,59 +51,26 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(UIElementControls), nameof(UIElementControls.v_WaitTime))]
-        public string v_ElementWaitTime { get; set; }
+        public string v_WaitTimeForUIElement { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_WindowNameResult))]
-        public string v_NameResult { get; set; }
+        public string v_WindowNameResult { get; set; }
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(WindowControls), nameof(WindowControls.v_OutputWindowHandle))]
-        public string v_HandleResult { get; set; }
+        public string v_WindowHandleResult { get; set; }
 
-        public UIAutomationSearchUIElementAndWindowByXPathCommand()
+        [XmlAttribute]
+        [PropertyVirtualProperty(nameof(VP_UIElementControls), nameof(VP_UIElementControls.v_WindowUIElementName))]
+        public string v_WindowUIElement { get;set; }
+
+        public UIAutomationSearchUIElementFromWindowNameByXPathCommand()
         {
-            //this.CommandName = "UIAutomationGetElementFromWindowByXPathCommand";
-            //this.SelectionName = "Get Element From Window By XPath";
-            //this.CommandEnabled = true;
-            //this.CustomRendering = true;
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //var winElem = AutomationElementControls.GetWindowAutomationElement(this, engine);
-
-            //var waitTime = this.ConvertToUserVariableAsInteger(nameof(v_ElementWaitTime), engine);
-            //var xpath = v_SearchXPath.ConvertToUserVariableAsXPath(engine);
-
-            //var elem = AutomationElementControls.SearchGUIElementByXPath(winElem, xpath, waitTime, engine);
-
-            //elem.StoreInUserVariable(engine, v_AutomationElementVariable);
-
-            //var varName = VariableNameControls.GetInnerVariableName(0, engine, false);
-
-            //var winSearch = new UIAutomationSearchUIElementFromWindowCommand()
-            //{
-            //    v_WindowName = this.v_WindowName,
-            //    v_CompareMethod = this.v_CompareMethod,
-            //    v_MatchMethod = this.v_MatchMethod,
-            //    v_TargetWindowIndex = this.v_TargetWindowIndex,
-            //    v_WaitTimeForWindow = this.v_WaitTimeForWindow,
-            //    v_AutomationElementVariable = varName,
-            //    v_NameResult = this.v_NameResult,
-            //    v_HandleResult = this.v_HandleResult,
-            //};
-            //winSearch.RunCommand(engine);
-
-            //var searchElem = new UIAutomationSearchUIElementFromUIElementByXPathCommand()
-            //{
-            //    v_TargetElement = varName,
-            //    v_SearchXPath = this.v_SearchXPath,
-            //    v_AutomationElementVariable = this.v_AutomationElementVariable,
-            //    v_WaitTime = this.v_ElementWaitTime
-            //};
-            //searchElem.RunCommand(engine);
-
             using(var myVar = new InnerScriptVariable(engine))
             {
                 var winSearch = new UIAutomationGetWindowUIElementCommand()
@@ -112,8 +81,8 @@ namespace taskt.Core.Automation.Commands
                     v_TargetWindowIndex = this.v_TargetWindowIndex,
                     v_WaitTimeForWindow = this.v_WaitTimeForWindow,
                     v_Result = myVar.VariableName,
-                    v_NameResult = this.v_NameResult,
-                    v_HandleResult = this.v_HandleResult,
+                    v_WindowNameResult = this.v_WindowNameResult,
+                    v_WindowHandleResult = this.v_WindowHandleResult,
                 };
                 winSearch.RunCommand(engine);
 
@@ -121,10 +90,12 @@ namespace taskt.Core.Automation.Commands
                 {
                     v_TargetElement = myVar.VariableName,
                     v_SearchXPath = this.v_SearchXPath,
-                    v_AutomationElementVariable = this.v_AutomationElementVariable,
-                    v_WaitTime = this.v_ElementWaitTime
+                    v_Result = this.v_Result,
+                    v_WaitTimeForUIElement = this.v_WaitTimeForUIElement
                 };
                 searchElem.RunCommand(engine);
+
+                this.StoreWindowUIElementInUserVariable((AutomationElement)myVar.VariableValue, engine);
             }
         }
 

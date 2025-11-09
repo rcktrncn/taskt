@@ -12,6 +12,7 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 using Microsoft.Office.Interop.Outlook;
+using OpenQA.Selenium.DevTools.V140.WebAuthn;
 using SimpleNLG;
 using System;
 using System.Collections.Generic;
@@ -29,17 +30,24 @@ using taskt.Core.Automation.Engine;
 
 namespace taskt.Core.Script
 {
+    /// <summary>
+    /// taskt script file class
+    /// </summary>
     public class Script
     {
         /// <summary>
         /// Contains user-defined variables
         /// </summary>
         public List<ScriptVariable> Variables { get; set; }
+        
         /// <summary>
         /// Contains user-selected commands
         /// </summary>
         public List<ScriptAction> Commands;
 
+        /// <summary>
+        /// script informations
+        /// </summary>
         public ScriptInformation Info;
 
         public Script()
@@ -49,6 +57,7 @@ namespace taskt.Core.Script
             Commands = new List<ScriptAction>();
             Info = new ScriptInformation();
         }
+
         /// <summary>
         /// Returns a new 'Top-Level' command.  
         /// </summary>
@@ -462,6 +471,7 @@ namespace taskt.Core.Script
             convertTo3_5_2_43(doc);
             convertTo3_5_2_44(doc);
             convertTo3_5_2_45(doc);
+            convertTo3_5_2_46(doc);
             return doc;
         }
 
@@ -4759,6 +4769,169 @@ namespace taskt.Core.Script
             ChangeCommandName(doc, "UIAutomationSetSelectionStateToUIElementCommand", "UIAutomationSetSelectedStateToUIElementCommand", "Set Selected State To UIElement");
         }
 
+        private static void convertTo3_5_2_46(XDocument doc)
+        {
+            // UIAutomationCheckUIElementExistsByXPathCommand, UIAutomationCheckUIElementExistsCommand,
+            // UIAutomationSearchUIElementFromUIElementByXPathCommand, UIAutomationSearchUIElementFromUIElementCommand,
+            // UIAutomationWaitForUIElementToExistsByXPathCommand, UIAutomationWaitForUIElementToExistsCommand
+            // v_WaitTime -> v_WaitTimeForUIElement
+            ChangeAttributeName(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "UIAutomationCheckUIElementExistsByXPathCommand":
+                    case "UIAutomationCheckUIElementExistsCommand":
+                    case "UIAutomationSearchUIElementFromUIElementByXPathCommand":
+                    case "UIAutomationSearchUIElementFromUIElementCommand":
+                    case "UIAutomationWaitForUIElementToExistsByXPathCommand":
+                    case "UIAutomationWaitForUIElementToExistsCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_WaitTime", "v_WaitTimeForUIElement");
+
+            // UIAutomationSearchUIElementAndWindowByXPathCommand, UIAutomationSearchUIElementAndWindowCommand,
+            // UIAutomationUIElementActionByXPathCommand, UIAutomationUIElementActionCommand
+            // v_ElementWaitTime -> v_WaitTimeForUIElement
+            ChangeAttributeName(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "UIAutomationSearchUIElementAndWindowByXPathCommand":
+                    case "UIAutomationSearchUIElementAndWindowCommand":
+                    case "UIAutomationUIElementActionByXPathCommand":
+                    case "UIAutomationUIElementActionCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_ElementWaitTime", "v_WaitTimeForUIElement");
+
+            // UIAutomationSearchChildUIElementCommand v_Index -> v_TargetUIElementIndex
+            ChangeAttributeName(doc, "UIAutomationSearchChildUIElementCommand", "v_Index", "v_TargetUIElementIndex");
+
+            // UIAutomationSearchUIElementAndWindowByXPathCommand, UIAutomationSearchUIElementAndWindowCommand,
+            // UIAutomationSearchUIElementFromUIElementByXPathCommand, UIAutomationSearchUIElementFromUIElementCommand
+            // v_AutomationElementVariable -> v_Result
+            ChangeAttributeName(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "UIAutomationSearchUIElementAndWindowByXPathCommand":
+                    case "UIAutomationSearchUIElementAndWindowCommand":
+                    case "UIAutomationSearchUIElementFromUIElementByXPathCommand":
+                    case "UIAutomationSearchUIElementFromUIElementCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_AutomationElementVariable", "v_Result");
+
+            // ActivateOneWindowCommand, ActivateWindowsCommand, 
+            // CheckWindowNameExistsCommand,
+            // CloseOneWindowCommand, CloseWindowsCommand, 
+            // GetOneProcessNameFromOneWindowNameCommand, GetOneWindowHandleFromOneWindowNameCommand, 
+            // GetOneWindowPositionCommand, GetOneWindowSizeCommand, GetOneWindowStateCommand, 
+            // GetProcessNamesFromWindowNamesAsDataTableCommand, GetProcessNamesFromWindowNamesAsListCommand, 
+            // GetWindowHandlesFromWindowNamesAsDataTableCommand, GetWindowHandlesFromWindowNamesAsListCommand,
+            // GetWindowNamesCommand, 
+            // GetWindowPositionsFromWindowNamesAsDataTableCommand, GetWindowPositionsFromWindowNamesAsListCommand,
+            // GetWindowSizesFromWindowNamesAsDataTableCommand, GetWindowSizesFromWindowNamesAsListCommand,
+            // GetWindowStatesFromWindowNamesAsDataTableCommand, GetWindowStatesFromWindowNamesAsListCommand,
+            // MoveOneWindowCommand, MoveWindowsCommand,
+            // ResizeOneWindowCommand, ResizeWindowsCommand,
+            // SetOneWindowStateCommand, SetWindowsStateCommand,
+            // WaitForWindowToExistsCommand,
+            // UIAutomationSearchUIElementAndWindowByXPathCommand, UIAutomationSearchUIElementAndWindowCommand,
+            // UIAutomationUIElementActionByXPathCommand, UIAutomationUIElementActionCommand
+            // v_NameResult -> v_WindowNameResult, v_HandleResult -> v_WindowHandleResult
+            ChangeMultiAttributeNames(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    // window commands
+                    case "ActivateOneWindowCommand":
+                    case "ActivateWindowsCommand":
+                    case "CheckWindowNameExistsCommand":
+                    case "CloseOneWindowCommand":
+                    case "CloseWindowsCommand":
+                    case "GetOneProcessNameFromOneWindowNameCommand":
+                    case "GetOneWindowHandleFromOneWindowNameCommand":
+                    case "GetOneWindowPositionCommand":
+                    case "GetOneWindowSizeCommand":
+                    case "GetOneWindowStateCommand":
+                    case "GetProcessNamesFromWindowNamesAsDataTableCommand":
+                    case "GetProcessNamesFromWindowNamesAsListCommand":
+                    case "GetWindowHandlesFromWindowNamesAsDataTableCommand":
+                    case "GetWindowHandlesFromWindowNamesAsListCommand":
+                    case "GetWindowNamesCommand":
+                    case "GetWindowPositionsFromWindowNamesAsDataTableCommand":
+                    case "GetWindowPositionsFromWindowNamesAsListCommand":
+                    case "GetWindowSizesFromWindowNamesAsDataTableCommand":
+                    case "GetWindowSizesFromWindowNamesAsListCommand":
+                    case "GetWindowStatesFromWindowNamesAsDataTableCommand":
+                    case "GetWindowStatesFromWindowNamesAsListCommand":
+                    case "MoveOneWindowCommand":
+                    case "MoveWindowsCommand":
+                    case "ResizeOneWindowCommand":
+                    case "ResizeWindowsCommand":
+                    case "SetOneWindowStateCommand":
+                    case "SetWindowsStateCommand":
+                    case "WaitForWindowToExistsCommand":
+                    // UIElement command
+                    case "UIAutomationSearchUIElementAndWindowByXPathCommand":
+                    case "UIAutomationSearchUIElementAndWindowCommand":
+                    case "UIAutomationUIElementActionByXPathCommand":
+                    case "UIAutomationUIElementActionCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), new List<(string, string)>()
+            {
+                ("v_NameResult", "v_WindowNameResult"),
+                ("v_HandleResult", "v_WindowHandleResult"),
+            });
+
+            // UIAutomationUIElementActionCommand v_UIASearchParameters -> v_SearchParameters
+            ChangeInnerTagName(doc, "UIAutomationUIElementActionCommand", "v_UIASearchParameters", "v_SearchParameters");
+
+            // UIAutomationSearchUIElementAndWindowByXPathCommand -> UIAutomationSearchUIElementFromWindowNameByXPathCommand
+            ChangeCommandName(doc, "UIAutomationSearchUIElementAndWindowByXPathCommand", "UIAutomationSearchUIElementFromWindowNameByXPathCommand", "Search UIElement From Window Name By XPath");
+
+            // UIAutomationSearchUIElementAndWindowCommand -> UIAutomationSearchUIElementFromWindowCommand
+            ChangeCommandName(doc, "UIAutomationSearchUIElementAndWindowCommand", "UIAutomationSearchUIElementFromWindowNameCommand", "Search UIElement From Window Name");
+
+            // GetOneWindowHandleFromOneWindowNameCommand, GetWindowHandlesFromWindowNamesAsListCommand
+            // v_Result -> v_WindowHandleResult
+            OverwriteAttributeValue(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "GetOneWindowHandleFromOneWindowNameCommand":
+                    case "GetWindowHandlesFromWindowNamesAsListCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_Result", "v_WindowHandleResult");
+
+            // GetWindowNameFromWindowHandleCommand, GetWindowNamesCommand
+            // v_Result -> v_WindowNameResult
+            OverwriteAttributeValue(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "GetWindowNameFromWindowHandleCommand":
+                    case "GetWindowNamesCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_Result", "v_WindowNameResult");
+        }
+
         /// <summary>
         /// get old, new current window keyword
         /// </summary>
@@ -4950,7 +5123,7 @@ namespace taskt.Core.Script
             XNamespace ns = "urn:schemas-microsoft-com:xml-diffgram-v1";
             foreach (var cmd in commands)
             {
-                XElement tableParams = cmd.Element(tableParameterName).Element(ns + "diffgram").Element("DocumentElement");
+                XElement tableParams = cmd.Element(tableParameterName)?.Element(ns + "diffgram")?.Element("DocumentElement") ?? null;
                 var table = tableParams?.Elements() ?? new List<XElement>();
                 foreach (XElement row in table)
                 {
@@ -4995,6 +5168,12 @@ namespace taskt.Core.Script
             XNamespace nsMsdata = "urn:schemas-microsoft-com:xml-msdata";
 
             var el = elem.Element(tableParameterName);
+            if (el == null)
+            {
+                // table not found
+                return (null, null, "", null, null);
+            }
+
             var elel = el.Element(nsXs + "schema").Element(nsXs + "element");
 
             // table name
@@ -5153,6 +5332,10 @@ namespace taskt.Core.Script
             foreach(var cmd in cmds)
             {
                 (var table, var before, _, _, var seq) = GetTable(cmd, tableParameterName);
+                if ((table == null) || (before == null))
+                {
+                    continue;
+                }
 
                 foreach (var e in seq)
                 {
@@ -5348,6 +5531,116 @@ namespace taskt.Core.Script
         private static XDocument ChangeToOtherCommand(XDocument doc, string targetCommand, string newCommand, string newSelectionName, List<(string, string)> attributePairs, List<(string, Action<XAttribute>)> preAttributeFunc = null)
         {
             return ChangeToOtherCommand(doc, GetSearchCommandsFunc(targetCommand), newCommand, newSelectionName, attributePairs, preAttributeFunc);
+        }
+
+        /// <summary>
+        /// change tag name in commands
+        /// </summary>
+        /// <param name="commands"></param>
+        /// <param name="currentTagName"></param>
+        /// <param name="newTagName"></param>
+        private static void ChangeInnerTagNameProcess(List<XElement> commands, string currentTagName, string newTagName)
+        {
+            foreach(var cmd in commands)
+            {
+                var targetElement = cmd.Element(currentTagName);
+                if (targetElement != null)
+                {
+                    var newElement = new XElement(newTagName, targetElement.Attributes(), targetElement.Nodes());
+                    targetElement.ReplaceWith(newElement);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Change inner tag name in Commands
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="searchFunc"></param>
+        /// <param name="currentTagName"></param>
+        /// <param name="newTagName"></param>
+        /// <returns></returns>
+        private static XDocument ChangeInnerTagName(XDocument doc, Func<XElement, bool> searchFunc, string currentTagName, string newTagName)
+        {
+            var commands = doc.Descendants("ScriptCommand")
+                            .Where(searchFunc).ToList();
+            ChangeInnerTagNameProcess(commands, currentTagName, newTagName);
+            return doc;
+        }
+
+        /// <summary>
+        /// change inner tag name in commands
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="targetCommand"></param>
+        /// <param name="currentTagName"></param>
+        /// <param name="newTagName"></param>
+        /// <returns></returns>
+        private static XDocument ChangeInnerTagName(XDocument doc, string targetCommand, string currentTagName, string newTagName)
+        {
+            return ChangeInnerTagName(doc, GetSearchCommandsFunc(targetCommand), currentTagName, newTagName);
+        }
+
+        /// <summary>
+        /// overwrite attribute value with another existing attribute process
+        /// </summary>
+        /// <param name="commands"></param>
+        /// <param name="targetAttr"></param>
+        /// <param name="overwriteAttr"></param>
+        /// <param name="removeTargetAttr"></param>
+        private static void OverwriteAttributeValueProcess(List<XElement> commands, string targetAttr, string overwriteAttr, bool removeTargetAttr)
+        {
+            foreach (var cmd in commands)
+            {
+                var tAttr = cmd.Attribute(targetAttr);
+                if (tAttr != null)
+                {
+                    var oAttr = cmd.Attribute(overwriteAttr);
+                    if (oAttr != null)
+                    {
+                        oAttr.SetValue(tAttr.Value);
+                    }
+                    else
+                    {
+                        cmd.SetAttributeValue(overwriteAttr, tAttr.Value);
+                    }
+                    if (removeTargetAttr)
+                    {
+                        tAttr.Remove();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// overwrite attribute value with anothre existing attribute
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="searchFunc"></param>
+        /// <param name="targetAttribute"></param>
+        /// <param name="overwriteAttribute"></param>
+        /// <param name="removeTargetAttribute"></param>
+        /// <returns></returns>
+        private static XDocument OverwriteAttributeValue(XDocument doc, Func<XElement, bool> searchFunc, string targetAttribute, string overwriteAttribute, bool removeTargetAttribute = true)
+        {
+            var commands = doc.Descendants("ScriptCommand")
+                            .Where(searchFunc).ToList();
+            OverwriteAttributeValueProcess(commands, targetAttribute, overwriteAttribute, removeTargetAttribute);
+            return doc;
+        }
+
+        /// <summary>
+        /// overwrite attribute value with anothre existing attribute
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="targetCommand"></param>
+        /// <param name="targetAttribute"></param>
+        /// <param name="overwriteAttribute"></param>
+        /// <param name="removeTargetAttribute"></param>
+        /// <returns></returns>
+        private static XDocument OverwriteAttributeValue(XDocument doc, string targetCommand, string targetAttribute, string overwriteAttribute, bool removeTargetAttribute = true)
+        {
+            return OverwriteAttributeValue(doc, GetSearchCommandsFunc(targetCommand), targetAttribute, overwriteAttribute, removeTargetAttribute);
         }
     }
 }
