@@ -4937,6 +4937,31 @@ namespace taskt.Core.Script
 
             // UIAutomationGetUIElementTreeXMLFromUIElementCommand -> UIAutomationGetUIElementsTreeXMLFromUIElementCommand
             ChangeCommandName(doc, "UIAutomationGetUIElementTreeXMLFromUIElementCommand", "UIAutomationSearchUIElementsTreeXMLFromUIElementCommand", "Search UIElements Tree XML From UIElement");
+
+            // UIAutomationCheckUIElementExistsByXPathCommand, UIAutomationSearchUIElementFromUIElementByXPathCommand,
+            // UIAutomationWaitForUIElementToExistsByXPathCommand
+            // v_SearchXPath element to attribute
+            var checkUIElemXPath = GetCommands(doc, new Func<XElement, bool>(elem =>
+            {
+                switch (GetCommandName(elem))
+                {
+                    case "UIAutomationCheckUIElementExistsByXPathCommand":
+                    case "UIAutomationSearchUIElementFromUIElementByXPathCommand":
+                    case "UIAutomationWaitForUIElementToExistsByXPathCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }));
+            foreach (var command in checkUIElemXPath) 
+            {
+                var xpathElem = command.Element("v_SearchXPath");
+                if (xpathElem != null)
+                {
+                    command.SetAttributeValue("v_SearchXPath", xpathElem.Value);
+                    xpathElem.Remove();
+                }
+            }
         }
 
         /// <summary>
