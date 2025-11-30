@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Automation;
+using taskt.Core.Automation.Commands.WindowGroup;
 
 namespace taskt.Core.Automation.Commands.UIAutomationGroup
 {
@@ -89,7 +90,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         /// <param name="maxElementsFunc">when Func returns true, max Elements</param>
         /// <param name="timeoutFunc"></param>
         /// <param name="matchedElements"></param>
-        public static void DeepSearchUIElements_DepthFirst(AutomationElement rootElement, List<PropertyCondition> searchConditions,
+        private static void DeepSearchUIElements_DepthFirst(AutomationElement rootElement, List<PropertyCondition> searchConditions,
                             int currentDepth,
                             TreeWalker walker,
                             Func<AutomationElement, TreeWalker, AutomationElement> firstChildFunc, Func<AutomationElement, TreeWalker, AutomationElement> nextChildFunc,
@@ -135,6 +136,41 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
                 if (maxSiblingsFunc(sibCount))
                 {
                     return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// deep search UIElements Action
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="rootElement"></param>
+        /// <param name="engine"></param>
+        /// <param name="actionFunc"></param>
+        /// <param name="errorFunc"></param>
+        public static void DeepSearchUIElementsAction(this IUIElementDeepSearchParametersProperties command, AutomationElement rootElement, Engine.AutomationEngineInstance engine, Action<List<AutomationElement>> actionFunc, Action<Exception> errorFunc = null)
+        {
+            try
+            {
+                var elems = DeepSearchUIElements(command, rootElement, engine);
+                actionFunc(elems);
+
+                if (command.IsWindowNameOrWindowHandleResultsSpecified())
+                {
+                    command.StoreWindowNameAndWindowHandleInUserVariablesFromUIElement(rootElement, engine);
+                }
+            }
+            catch (Exception ex)
+            {
+                {
+                    if (errorFunc != null)
+                    {
+                        errorFunc(ex);
+                    }
+                    else
+                    {
+                        throw ex;
+                    }
                 }
             }
         }

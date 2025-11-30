@@ -146,7 +146,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         [PropertyDetailSampleUsage("**10**", PropertyDetailSampleUsage.ValueType.Value, "Max Depth")]
         [PropertyDetailSampleUsage("**{{{vMax}}}**", PropertyDetailSampleUsage.ValueType.VariableValue, "Max Depth")]
         [PropertyDetailSampleUsage("**0**", "Search to All Depth")]
-        [PropertyIsOptional(true, "16")]
+        [PropertyIsOptional(true, "32")]
         [PropertyDisplayText(false, "Max Depth")]
         [PropertyValidationRule("Max Depth", PropertyValidationRule.ValidationRuleFlags.LessThanZero)]
         public static string v_MaxDepth { get; }
@@ -204,6 +204,45 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         [PropertyDisplayText(true, "XPath")]
         [PropertyCustomUIHelper("GUI Inspect Tool", nameof(VP_UIElementControls) + "+" + nameof(lnkGUIInspectTool_UsedByXPath_Click))]
         public static string v_SearchXPath { get; }
+
+        /// <summary>
+        /// UIElement Action
+        /// </summary>
+        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_ComboBox))]
+        [PropertyDescription("UIElement Action")]
+        [PropertyUISelectionOption("Click UIElement")]
+        [PropertyUISelectionOption("Expand Collapse Items In UIElement")]
+        [PropertyUISelectionOption("Scroll UIElement")]
+        [PropertyUISelectionOption("Select Item In UIElement")]
+        [PropertyUISelectionOption("Select UIElement")]
+        [PropertyUISelectionOption("Set Selected State To UIElement")]
+        [PropertyUISelectionOption("Set Text To UIElement")]
+        [PropertyUISelectionOption("Get Parent UIElement")]
+        [PropertyUISelectionOption("Get Property Value From UIElement")]
+        [PropertyUISelectionOption("Get Selected State From UIElement")]
+        [PropertyUISelectionOption("Get Selection Items Value From UIElement")]
+        [PropertyUISelectionOption("Get Text From Table UIElement")]
+        [PropertyUISelectionOption("Get Text From UIElement")]
+        [PropertyUISelectionOption("Get UIElement From Table UIElement")]
+        [PropertyUISelectionOption("Get UIElement Position")]
+        [PropertyUISelectionOption("Get UIElement Size")]
+        [PropertyUISelectionOption("Get Window Handle From UIElement")]
+        [PropertyUISelectionOption("Get Window Name From UIElement")]
+        [PropertyUISelectionOption("Check UIElement Exists")]
+        [PropertyUISelectionOption("Wait For UIElement To Exists")]
+        //[PropertySelectionChangeEvent(nameof(cmbActionType_SelectedItemChange))]
+        [PropertyDisplayText(true, "Action")]
+        public static string v_AutomationType { get; }
+
+        /// <summary>
+        /// UIElement Action Parameters (actually data type is DataTable)
+        /// </summary>
+        [PropertyDescription("Action Parameters")]
+        [PropertyRecommendedUIControl(PropertyRecommendedUIControl.RecommendeUIControlType.DataGridView)]
+        [PropertyDataGridViewSetting(false, false, true, 400, 250)]
+        [PropertyDataGridViewColumnSettings("Parameter Name", "Parameter Name", true)]
+        [PropertyDataGridViewColumnSettings("Parameter Value", "Parameter Value", false)]
+        public static string v_UIAActionParameters { get; }
 
         /// <summary>
         /// show GUI InspectTool and get InspectTool like result
