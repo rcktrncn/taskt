@@ -213,14 +213,17 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         [PropertyUISelectionOption("Click UIElement")]
         [PropertyUISelectionOption("Expand Collapse Items In UIElement")]
         [PropertyUISelectionOption("Scroll UIElement")]
+        [PropertyUISelectionOption("Scroll Percent UIElement")]
         [PropertyUISelectionOption("Select Item In UIElement")]
         [PropertyUISelectionOption("Select UIElement")]
         [PropertyUISelectionOption("Set Selected State To UIElement")]
         [PropertyUISelectionOption("Set Text To UIElement")]
         [PropertyUISelectionOption("Get Parent UIElement")]
         [PropertyUISelectionOption("Get Property Value From UIElement")]
+        [PropertyUISelectionOption("Get ScrollBar Information From UIElement")]
         [PropertyUISelectionOption("Get Selected State From UIElement")]
         [PropertyUISelectionOption("Get Selection Items Value From UIElement")]
+        [PropertyUISelectionOption("Get Table Information From UIElement")]
         [PropertyUISelectionOption("Get Text From Table UIElement")]
         [PropertyUISelectionOption("Get Text From UIElement")]
         [PropertyUISelectionOption("Get UIElement From Table UIElement")]
@@ -251,7 +254,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         /// <param name="e"></param>
         public static void lnkGUIInspectTool_UsedByInspectResult_Click(object sender, EventArgs e)
         {
-            using (var fm = new UI.Forms.ScriptBuilder.CommandEditor.Supplemental.frmGUIInspect())
+            using (var fm = new UI.Forms.ScriptBuilder.CommandEditor.Supplemental.frmGUIInspectTool())
             {
                 if (fm.ShowDialog(((Control)sender).FindForm()) == DialogResult.OK)
                 {
@@ -285,14 +288,14 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         /// <param name="e"></param>
         public static void lnkInspectToolParser_Click(object sender, EventArgs e)
         {
-            using (var fm = new UI.Forms.ScriptBuilder.CommandEditor.Supplemental.frmInspectParser())
+            using (var fm = new UI.Forms.ScriptBuilder.CommandEditor.Supplemental.frmInspectToolParser())
             {
                 if (fm.ShowDialog(((Control)sender).FindForm()) == DialogResult.OK)
                 {
                     (var command, var dgv) = EM_UIElementChildrenSearchParametersPropertiesExtensionMethods.GetCommandAndSearchDataGridView((Control)sender);
                     command.SearchParametersUpdateProcess(dgv, new Action<DataTable>((tbl) =>
                     {
-                        ParseInspectToolResult(fm.inspectResult, tbl);
+                        ParseInspectToolResult(fm.InspectResult, tbl);
                     }));
                 }
             }
@@ -508,7 +511,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         /// <param name="e"></param>
         public static void lnkGUIInspectTool_UsedByXPath_Click(object sender, EventArgs e)
         {
-            using (var fm = new UI.Forms.ScriptBuilder.CommandEditor.Supplemental.frmGUIInspect())
+            using (var fm = new UI.Forms.ScriptBuilder.CommandEditor.Supplemental.frmGUIInspectTool())
             {
                 var trgCtrl = (Control)sender;
                 if (fm.ShowDialog(trgCtrl.FindForm()) == DialogResult.OK)

@@ -1,10 +1,18 @@
 ﻿using System;
 using System.Windows.Automation;
+using taskt.Core.Automation.Commands.WindowGroup;
 
 namespace taskt.Core.Automation.Commands.UIAutomationGroup
 {
     public static class EM_CanHandleUIElementExtentionMethods
     {
+        public enum AutomationElementPropertyValueTypes
+        {
+            String,
+            Bool,
+            Int,
+        }
+
         /// <summary>
         /// check specified object is UIElement
         /// </summary>
@@ -32,21 +40,51 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         /// <returns></returns>
         public static (string, IntPtr) GetWindowNameAndHandle(AutomationElement targetElement)
         {
-            TreeWalker walker = TreeWalker.RawViewWalker;
-
+            // already specify window
             if (targetElement.Current.ControlType == ControlType.Window)
             {
                 return (targetElement.Current.Name, (IntPtr)targetElement.Current.NativeWindowHandle);
             }
 
+            var walker = TreeWalker.RawViewWalker;
             try
             {
-                var parent = walker.GetParent(targetElement);
-                while (parent.Current.ControlType != ControlType.Window)
+                var desktopHandle = EM_CanHandleDesktopWindowHandleExtensionMethods.GetDesktopWindowHandle();
+
+                var currentElement = targetElement;
+                while (true)
                 {
-                    parent = walker.GetParent(parent);
+                    var tparent = walker.GetParent(currentElement);
+                    if (tparent != null)
+                    {
+                        var myHandle = (IntPtr)tparent.Current.NativeWindowHandle;
+                        if (myHandle == desktopHandle)
+                        {
+                            // tparent is Desktop, currentElement is window(?)
+                            return (currentElement.Current.Name, (IntPtr)currentElement.Current.NativeWindowHandle);
+                        }
+                        else if (tparent.Current.ControlType == ControlType.Window)
+                        {
+                            // tparent is window
+                            return (tparent.Current.Name, myHandle);
+                        }
+                        else
+                        {
+                            currentElement = tparent;
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Parent Element is null");
+                    }
                 }
-                return (parent.Current.Name, (IntPtr)parent.Current.NativeWindowHandle);
+
+                //var parent = walker.GetParent(targetElement);
+                //while (parent.Current.ControlType != ControlType.Window)
+                //{
+                //    parent = walker.GetParent(parent);
+                //}
+                //return (parent.Current.Name, (IntPtr)parent.Current.NativeWindowHandle);
             }
             catch
             {
@@ -80,7 +118,8 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         /// <returns></returns>
         public static string GetControlTypeText(AutomationElement elem)
         {
-            var fullName = elem.Current.ControlType.ProgrammaticName;
+            // MEMO: UIA_AppBarControlTypeId is null, why?
+            var fullName = elem.Current.ControlType?.ProgrammaticName ?? ".UNKNOWN";
             return fullName.Substring(fullName.LastIndexOf('.') + 1);
         }
 
@@ -102,6 +141,38 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
             else
             {
                 throw new Exception("Parent UIElement does not exists");
+            }
+        }
+
+        /// <summary>
+        /// get property value
+        /// </summary>
+        /// <param name="targetElement"></param>
+        /// <param name="propName"></param>
+        /// <param name="tp"></param>
+        /// <returns></returns>
+        public static string GetPropertyValueAsString(AutomationElement targetElement, AutomationProperty propName, AutomationElementPropertyValueTypes tp)
+        {
+            try
+            {
+                return targetElement.GetCurrentPropertyValue(propName).ToString();
+            }
+            catch
+            {
+                switch (tp)
+                {
+                    case AutomationElementPropertyValueTypes.String:
+                        return string.Empty;
+                        
+                    case AutomationElementPropertyValueTypes.Bool:
+                        return "false";
+                        
+                    case AutomationElementPropertyValueTypes.Int:
+                        return "0";
+
+                    default:
+                        return string.Empty;
+                }
             }
         }
     }

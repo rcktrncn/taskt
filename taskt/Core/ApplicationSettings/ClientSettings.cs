@@ -215,6 +215,22 @@ namespace taskt.Core
             }
         }
 
+        private int _GUIInspectMouseInterval;
+        public int GUIInspectMouseInterval
+        {
+            get
+            {
+                return _GUIInspectMouseInterval;
+            }
+            set
+            {
+                if (value >= 500)
+                {
+                    _GUIInspectMouseInterval = value;
+                }
+            }
+        }
+
         //private static readonly string InterDefaultBrowserInstanceNameKeyword = "%kwd_default_browser_instance%";
         //private static readonly string InterDefaultStopWatchInstanceNameKeyword = "%kwd_default_stopwatch_instance%";
         //private static readonly string InterDefaultExcelInstanceNameKeyword = "%kwd_default_excel_instance%";
@@ -280,7 +296,8 @@ namespace taskt.Core
 
             GUIInspectMaxSiblings = 64;
             GUIInspectMaxDepth = 32;
-            GUIInspectSearchTime = 30;
+            GUIInspectSearchTime = 5;
+            GUIInspectMouseInterval = 1500;
         }
 
         /// <summary>

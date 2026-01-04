@@ -174,8 +174,8 @@
     <Reference Include="Serilog.Sinks.File, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.File.7.0.0\lib\net471\Serilog.Sinks.File.dll</HintPath>
     </Reference>
-    <Reference Include="SharpCompress, Version=0.42.1.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpCompress.0.42.1\lib\net48\SharpCompress.dll</HintPath>
+    <Reference Include="SharpCompress, Version=0.43.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.43.0\lib\net48\SharpCompress.dll</HintPath>
     </Reference>
     <Reference Include="SharpSimpleNLG, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpSimpleNLG.1.4.0\lib\net472\SharpSimpleNLG.dll</HintPath>
@@ -332,8 +332,8 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
-    <Reference Include="ZstdSharp, Version=0.8.6.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf, processorArchitecture=MSIL">
-      <HintPath>..\packages\ZstdSharp.Port.0.8.6\lib\net462\ZstdSharp.dll</HintPath>
+    <Reference Include="ZstdSharp, Version=0.8.7.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZstdSharp.Port.0.8.7\lib\net462\ZstdSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -509,12 +509,14 @@
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_UIElementChildrenSearchParametersPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_UIElementDescendantsSearchAnyUIElementPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_UIElementDescendantsSearchParametersPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_CanHandleUIElementScrollBarExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_UIElementIndexPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_UIElementSearchUIElementFromWindowSomethingByAnywayPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_UIElementSelectionItemsPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_UIElementWindowNameResultsFromUIElementPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_WindowUIElementResultPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\ICanHandleUIElement.cs" />
+    <Compile Include="Core\Automation\Commands\UIAutomationGroup\ICanHandleUIElementScrollBar.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\ICanHandleUIElementXML.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\IGetUIElementsInformationProperties.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\IGetUIElementsXMLTreeFromSomethingProperties.cs" />
@@ -535,10 +537,14 @@
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\IUIElementUIElementActionSomewayProperties.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\IUIElementWindowResultsFromUIElementProperties.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\IWindowUIElementResultProperties.cs" />
+    <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetWindowUIElementFromUIElementCommand.cs" />
+    <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetTableInformationFromUIElementCommand.cs" />
+    <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetScrollBarInformationFromUIElementCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetWindowHandleFromUIElementCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetWindowNameFromUIElementCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetWindowUIElementFromWindowHandleCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\ADescendantsSearchUIElementsFromWindowNameByTreeWalkerCommands.cs" />
+    <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationScrollPercentUIElementCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationSearchChildUIElementFromUIElementByXPathCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationSearchUIElementFromWindowHandleCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationSearchUIElementFromWindowHandleByXPathCommand.cs" />
@@ -558,6 +564,7 @@
     <Compile Include="Core\Automation\Commands\WindowGroup\AWindowNamesActionCommnads.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\AWindowNamesCommands.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\AGetFromWindowNamesAsDataTableCommands.cs" />
+    <Compile Include="Core\Automation\Commands\WindowGroup\EM_CanHandleDesktopWindowHandleExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_FromWindowHandlePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_FromWindowNameResultPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowActivatePropertiesExtensionMethods.cs" />
@@ -1131,7 +1138,7 @@
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetParentUIElementCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationSearchChildUIElementCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationSearchUIElementFromUIElementCommand.cs" />
-    <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetWindowUIElementCommand.cs" />
+    <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetWindowUIElementFromWindowNameCommand.cs" />
     <Compile Include="Core\Automation\Commands\ValidationControls.cs" />
     <Compile Include="Core\Automation\Commands\VariableNameControls.cs" />
     <Compile Include="Core\Automation\Commands\VariableGroup\GetVariableTypeCommand.cs" />
@@ -1406,6 +1413,12 @@
     <Compile Include="UI\Forms\DialogLikeThemedForm.Designer.cs">
       <DependentUpon>DialogLikeThemedForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmUIElementSearchParameter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmUIElementSearchParameter.Designer.cs">
+      <DependentUpon>frmUIElementSearchParameter.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\ScriptBuilder\frmScriptBuilder\frmScriptBuilder.AutoSave.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1555,11 +1568,11 @@
     <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmImageCapture.Designer.cs">
       <DependentUpon>frmImageCapture.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmGUIInspect.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmGUIInspectTool.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmGUIInspect.Designer.cs">
-      <DependentUpon>frmGUIInspect.cs</DependentUpon>
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmGUIInspectTool.Designer.cs">
+      <DependentUpon>frmGUIInspectTool.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInputBox.cs">
       <SubType>Form</SubType>
@@ -1567,11 +1580,11 @@
     <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInputBox.designer.cs">
       <DependentUpon>frmInputBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInspectParser.cs">
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInspectToolParser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInspectParser.Designer.cs">
-      <DependentUpon>frmInspectParser.cs</DependentUpon>
+    <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInspectToolParser.Designer.cs">
+      <DependentUpon>frmInspectToolParser.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmJSONPathHelper.cs">
       <SubType>Form</SubType>
@@ -1707,6 +1720,9 @@
     <EmbeddedResource Include="UI\Forms\DialogLikeThemedForm.resx">
       <DependentUpon>DialogLikeThemedForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmUIElementSearchParameter.resx">
+      <DependentUpon>frmUIElementSearchParameter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmNewSettings.resx">
       <DependentUpon>frmNewSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -1778,14 +1794,14 @@
     <EmbeddedResource Include="UI\Forms\ScriptBuilder\Supplemental\frmScriptVariables.resx">
       <DependentUpon>frmScriptVariables.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmGUIInspect.resx">
-      <DependentUpon>frmGUIInspect.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmGUIInspectTool.resx">
+      <DependentUpon>frmGUIInspectTool.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInputBox.resx">
       <DependentUpon>frmInputBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInspectParser.resx">
-      <DependentUpon>frmInspectParser.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmInspectToolParser.resx">
+      <DependentUpon>frmInspectToolParser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ScriptBuilder\CommandEditor\Supplemental\frmJSONPathHelper.resx">
       <DependentUpon>frmJSONPathHelper.cs</DependentUpon>
