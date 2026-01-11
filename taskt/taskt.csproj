@@ -174,8 +174,8 @@
     <Reference Include="Serilog.Sinks.File, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.File.7.0.0\lib\net471\Serilog.Sinks.File.dll</HintPath>
     </Reference>
-    <Reference Include="SharpCompress, Version=0.43.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpCompress.0.43.0\lib\net48\SharpCompress.dll</HintPath>
+    <Reference Include="SharpCompress, Version=0.44.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.44.0\lib\net48\SharpCompress.dll</HintPath>
     </Reference>
     <Reference Include="SharpSimpleNLG, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpSimpleNLG.1.4.0\lib\net472\SharpSimpleNLG.dll</HintPath>
@@ -513,6 +513,7 @@
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_UIElementIndexPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_UIElementSearchUIElementFromWindowSomethingByAnywayPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_UIElementSelectionItemsPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_UIElementTableUIElement.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_UIElementWindowNameResultsFromUIElementPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\EM_WindowUIElementResultPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\ICanHandleUIElement.cs" />
@@ -537,6 +538,7 @@
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\IUIElementUIElementActionSomewayProperties.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\IUIElementWindowResultsFromUIElementProperties.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\IWindowUIElementResultProperties.cs" />
+    <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetTextsFromTableUIElementAsDataTableCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetWindowUIElementFromUIElementCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetTableInformationFromUIElementCommand.cs" />
     <Compile Include="Core\Automation\Commands\UIAutomationGroup\UIAutomationGetScrollBarInformationFromUIElementCommand.cs" />

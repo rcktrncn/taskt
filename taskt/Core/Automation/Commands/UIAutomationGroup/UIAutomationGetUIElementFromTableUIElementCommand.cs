@@ -75,18 +75,22 @@ namespace taskt.Core.Automation.Commands
                     if (targetElement.TryGetCurrentPattern(GridPattern.Pattern, out object gridObj))
                     {
                         var grid = (GridPattern)gridObj;
-                        var customRows = targetElement.FindAll(TreeScope.Children, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Custom));
+                        //var customRows = targetElement.FindAll(TreeScope.Children, new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Custom));
+                        //var customRows = targetElement.FindAll(TreeScope.Children, EM_UIElementTableUIElement.GetRowSearchConditionToDataGridView());
+                        var customRows = EM_UIElementTableUIElement.GetRowsFromDataGridView(targetElement);
                         if (customRows.Count > 0)
                         {
                             // DataGridView (.net)
                             try
                             {
                                 var row = GetInRangeUIElement(customRows, rowIndex, v_Row, "Row");
-                                var cols = row.FindAll(TreeScope.Children, new OrCondition(
-                                            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Header),
-                                            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit)
-                                        )
-                                    );
+                                //var cols = row.FindAll(TreeScope.Children, new OrCondition(
+                                //            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Header),
+                                //            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit)
+                                //        )
+                                //    );
+                                //var cols = row.FindAll(TreeScope.Children, EM_UIElementTableUIElement.GetColumnSearchConditionToDataGridView());
+                                var cols = EM_UIElementTableUIElement.GetColumnsFromDataGridView(row);
                                 ret = GetInRangeUIElement(cols, columnIndex, v_Column, "Column");
                             }
                             catch
@@ -100,18 +104,30 @@ namespace taskt.Core.Automation.Commands
                             // listView
                             try
                             {
-                                var rows = targetElement.FindAll(TreeScope.Children,
-                                        new OrCondition(
-                                            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Header),
-                                            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.DataItem)
-                                        )
-                                    );
+                                //var rows = targetElement.FindAll(TreeScope.Children,
+                                //        new OrCondition(
+                                //            new Condition[]
+                                //            {
+                                //                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Header),
+                                //                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.DataItem),
+                                //                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.ListItem),
+                                //            }
+                                //        )
+                                //    );
+                                //var rows = targetElement.FindAll(TreeScope.Children, EM_UIElementTableUIElement.GetRowSearchConditionToGridPattern());
+                                var rows = EM_UIElementTableUIElement.GetRowsFromGridPattern(targetElement);
                                 var row = GetInRangeUIElement(rows, rowIndex, v_Row, "Row");
-                                var cols = row.FindAll(TreeScope.Children, new OrCondition(
-                                            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.HeaderItem),
-                                            new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Text)
-                                        )
-                                    );
+                                //var cols = row.FindAll(TreeScope.Children, new OrCondition(
+                                //            new Condition[]
+                                //            {
+                                //                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.HeaderItem),
+                                //                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Text),
+                                //                new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Edit),
+                                //            }
+                                //        )
+                                //    );
+                                //var cols = row.FindAll(TreeScope.Children, EM_UIElementTableUIElement.GetColumnSearchConditionToGridPattern());
+                                var cols = EM_UIElementTableUIElement.GetColumnsFromGridPattern(row);
                                 ret = GetInRangeUIElement(cols, columnIndex, v_Column, "Column");
                             }
                             catch
@@ -119,6 +135,32 @@ namespace taskt.Core.Automation.Commands
                                 ErrorAction();
                                 return;
                             }
+                        }
+                    }
+                    else if (targetElement.TryGetCurrentPattern(SelectionPattern.Pattern, out object selectObj))
+                    {
+                        var selPattern = (SelectionPattern)selectObj;
+                        // foobar2000 like table
+                        try
+                        {
+                            //var rows = targetElement.FindAll(TreeScope.Children, EM_UIElementTableUIElement.GetRowSearchConditionToSelectionTable());
+                            var rows = EM_UIElementTableUIElement.GetRowsFromSelectionTable(targetElement);
+                            var row = GetInRangeUIElement(rows, rowIndex, v_Row, "Row");
+                            //var cols = row.FindAll(TreeScope.Children, EM_UIElementTableUIElement.GetColumnSearchConditionToSelectionTable());
+                            var cols = EM_UIElementTableUIElement.GetColumnsFromSelectionTable(row);
+                            if ((cols.Count == 0) && (columnIndex == 0))
+                            {
+                                ret = row;
+                            }
+                            else
+                            {
+                                ret = GetInRangeUIElement(cols, columnIndex, v_Column, "Column");
+                            }
+                        }
+                        catch
+                        {
+                            ErrorAction();
+                            return;
                         }
                     }
                     else
