@@ -215,6 +215,28 @@ namespace taskt.Core.Automation.Commands
         #region convert store methods
 
         /// <summary>
+        /// expand user variable as WebElement and WebDriver
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="parameterName"></param>
+        /// <param name="engine"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static (IWebElement, IWebDriver) ExpandUserVariableAsWebElementAndWebDriver(this string str, string parameterName, Engine.AutomationEngineInstance engine)
+        {
+            var v = str.GetRawVariable(engine);
+
+            if (v.VariableValue is ValueTuple<IWebElement, IWebDriver> webs)
+            {
+                return webs;
+            }
+            else
+            {
+                throw new Exception($"{parameterName} '{str}' is not a WebElement-WebDriver tuple.");
+            }
+        }
+
+        /// <summary>
         /// expand user variable as WebElement
         /// </summary>
         /// <param name="str"></param>
@@ -224,18 +246,70 @@ namespace taskt.Core.Automation.Commands
         /// <exception cref="Exception"></exception>
         public static IWebElement ExpandUserVariableAsWebElement(this string str, string parameterName, Engine.AutomationEngineInstance engine)
         {
-            var v = str.GetRawVariable(engine);
-            if (v.VariableValue is IWebElement e)
-            {
-                return e;
-            }
-            else
-            {
-                throw new Exception(parameterName + " '" + str + "' is not a WebElement.");
-            }
+            //var v = str.GetRawVariable(engine);
+            ////var tp = typeof((IWebElement, IWebDriver));
+            ////var vtp = v.VariableValue.GetType();
+            ////if (v.VariableValue is (IWebElement, IWebDriver))
+            ////{
+            ////    return webs.Item1;
+            ////}
+            ////else
+            ////{
+            ////    throw new Exception($"{parameterName} '{str}' is not a WebElement.");
+            ////}
+            ////try
+            ////{
+            ////    var webs = ((IWebElement, IWebDrier))v.VariableValue;
+            ////}
+            ////catch
+            ////{
+            ////    throw new Exception($"{parameterName} '{str}' is not a WebElement.");
+            ////}
+            //if (v.VariableValue is ValueTuple<IWebElement, IWebDriver> webs)
+            //{
+            //    return webs.Item1;
+            //}
+            //else
+            //{
+            //    throw new Exception($"{parameterName} '{str}' is not a WebElement.");
+            //}
+
+            (var e, _) = ExpandUserVariableAsWebElementAndWebDriver(str, parameterName, engine);
+            return e;
         }
 
-        public static void StoreInUserVariable(this IWebElement value, Core.Automation.Engine.AutomationEngineInstance engine, string targetVariable)
+        /// <summary>
+        /// expand user variable as webDriver from WebElement
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="parameterName"></param>
+        /// <param name="engine"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static IWebDriver ExpandUserVariableAsWebDriverFromWebElement(this string str, string parameterName, Engine.AutomationEngineInstance engine)
+        {
+            //var v = str.GetRawVariable(engine);
+
+            //if (v.VariableValue is ValueTuple<IWebElement, IWebDriver> webs)
+            //{
+            //    return webs.Item2;
+            //}
+            //else
+            //{
+            //    throw new Exception($"{parameterName} '{str}' is not a WebElement.");
+            //}
+
+            (_, var d) = ExpandUserVariableAsWebElementAndWebDriver(str, parameterName, engine);
+            return d;
+        }
+
+        /// <summary>
+        /// store WebElement (and WebDriver) to user variable
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="engine"></param>
+        /// <param name="targetVariable"></param>
+        public static void StoreInUserVariable(this (IWebElement, IWebDriver) value, Engine.AutomationEngineInstance engine, string targetVariable)
         {
             ExtensionMethods.StoreInUserVariable(targetVariable, value, engine, false);
         }
@@ -261,7 +335,7 @@ namespace taskt.Core.Automation.Commands
             }
             else
             {
-                throw new Exception("Instance Name '" + instanceName + "' is not WebBrowser Instance. Parsed Value: '" + vInstance + "'");
+                throw new Exception($"Instance Name '{instanceName}' is not WebBrowser Instance. Parsed Value: '{vInstance}'");
             }
         }
         #endregion
@@ -363,7 +437,7 @@ namespace taskt.Core.Automation.Commands
                     });
 
                 default:
-                    throw new Exception("Strange Search Method '" + searchMethod + "'");
+                    throw new Exception($"Strange Search Method '{searchMethod}'");
             }
         }
 
@@ -617,11 +691,11 @@ namespace taskt.Core.Automation.Commands
 
                 case "location":
                     System.Drawing.Point lc = element.Location;
-                    return lc.X.ToString() + "," + lc.Y.ToString();
+                    return $"{lc.X},{lc.Y}";
 
                 case "size":
                     System.Drawing.Size sz = element.Size;
-                    return sz.Width.ToString() + "," + sz.Height.ToString();
+                    return $"{sz.Width},{sz.Height}";
 
                 default:
                     var attr = element.GetDomAttribute(attributeName) ?? element.GetDomProperty(attributeName);
@@ -631,7 +705,7 @@ namespace taskt.Core.Automation.Commands
                     }
                     else
                     {
-                        throw new Exception("Attribute '" + attributeName + "' does not exists.");
+                        throw new Exception($"Attribute '{attributeName}' does not exists.");
                     }
             }
         }
@@ -644,7 +718,7 @@ namespace taskt.Core.Automation.Commands
         {
             // MEMO: it's probably works fine. :-)
 
-            string path = "";
+            string path = string.Empty;
 
             var curElem = elem;
             var curElemId = curElem.ToString();

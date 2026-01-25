@@ -473,6 +473,7 @@ namespace taskt.Core.Script
             convertTo3_5_2_51(doc);
             convertTo3_5_2_53(doc);
             convertTo3_5_2_55(doc);
+            convertTo3_5_2_56(doc);
             return doc;
         }
 
@@ -5000,6 +5001,78 @@ namespace taskt.Core.Script
                         break;
                 }
             }
+        }
+
+        private static void convertTo3_5_2_56(XDocument doc)
+        {
+            // change attribute name
+            // SeleniumBrowserScrollToWebElementCommand v_WhenFailScroll -> v_WhenFailAction
+            ChangeAttributeName(doc, "SeleniumBrowserScrollToWebElementCommand", "v_WhenFailScroll", "v_WhenFailAction");
+
+            // SeleniumBrowserClearTextInWebElementCommand
+            ChangeMultiAttributeNames(doc, "SeleniumBrowserClearTextInWebElementCommand", new List<(string, string)>()
+            {
+                ("v_ScrollToElement", "v_ScrollToWebElement"),
+                ("v_WhenClearNotSupported", "v_WhenFailAction"),
+            });
+
+            // SeleniumBrowserClickWebElementCommand
+            ChangeMultiAttributeNames(doc, "SeleniumBrowserClickWebElementCommand", new List<(string, string)>()
+            {
+                ("v_ScrollToElement", "v_ScrollToWebElement"),
+                ("v_WhenFailClick", "v_WhenFailAction"),
+            });
+
+            // SeleniumBrowserSelectOptionForWebElementCommand
+            ChangeMultiAttributeNames(doc, "SeleniumBrowserSelectOptionForWebElementCommand", new List<(string, string)>()
+            {
+                ("v_ScrollToElement", "v_ScrollToWebElement"),
+                ("v_WhenFailSelectAction", "v_WhenFailAction"),
+            });
+
+            //// SeleniumBrowserSendSpecialKeystrokesToWebElementCommand
+            //ChangeMultiAttributeNames(doc, "SeleniumBrowserSendSpecialKeystrokesToWebElementCommand", new List<(string, string)>()
+            //{
+            //    ("v_ScrollToElement", "v_ScrollToWebElement"),
+            //    ("v_WhenSetNotSupported", "v_WhenFailAction"),
+            //});
+
+            //// SeleniumBrowserSetTextToWebElementCommand
+            //ChangeMultiAttributeNames(doc, "SeleniumBrowserSetTextToWebElementCommand", new List<(string, string)>()
+            //{
+            //    ("v_ScrollToElement", "v_ScrollToWebElement"),
+            //    ("v_WhenSetNotSupported", "v_WhenFailAction"),
+            //});
+
+            // SeleniumBrowserSendSpecialKeystrokesToWebElementCommand
+            // SeleniumBrowserSetTextToWebElementCommand
+            ChangeMultiAttributeNames(doc,
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "SeleniumBrowserSendSpecialKeystrokesToWebElementCommand":
+                        case "SeleniumBrowserSetTextToWebElementCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                new List<(string, string)>()
+                {
+                    ("v_ScrollToElement", "v_ScrollToWebElement"),
+                    ("v_WhenSetNotSupported", "v_WhenFailAction"),
+                }
+            );
+
+            // SeleniumBrowserSwitchFrameToWebElementCommand
+            ChangeMultiAttributeNames(doc, "SeleniumBrowserSwitchFrameToWebElementCommand", new List<(string, string)>()
+            {
+                ("v_ScrollToElement", "v_ScrollToWebElement"),
+                ("v_WhenFailSwitch", "v_WhenFailAction"),
+            });
+            // SeleniumBrowserSwitchFrameToWebElementCommand -> SeleniumBrowserSwitchToFrameWebElementCommand
+            ChangeCommandName(doc, "SeleniumBrowserSwitchFrameToWebElementCommand", "SeleniumBrowserSwitchToFrameWebElementCommand", "Switch To Frame WebElement");
         }
 
         /// <summary>
