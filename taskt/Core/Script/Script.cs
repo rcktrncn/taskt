@@ -474,6 +474,7 @@ namespace taskt.Core.Script
             convertTo3_5_2_53(doc);
             convertTo3_5_2_55(doc);
             convertTo3_5_2_56(doc);
+            convertTo3_5_2_57(doc);
             return doc;
         }
 
@@ -5073,6 +5074,169 @@ namespace taskt.Core.Script
             });
             // SeleniumBrowserSwitchFrameToWebElementCommand -> SeleniumBrowserSwitchToFrameWebElementCommand
             ChangeCommandName(doc, "SeleniumBrowserSwitchFrameToWebElementCommand", "SeleniumBrowserSwitchToFrameWebElementCommand", "Switch To Frame WebElement");
+        }
+
+        private static void convertTo3_5_2_57(XDocument doc)
+        {
+            // SeleniumBrowserCreateWebBrowserInstanceCommand v_EngineType -> v_BrowserType
+            ChangeAttributeName(doc, "SeleniumBrowserCreateWebBrowserInstanceCommand", "v_EngineType", "v_BrowserType");
+
+            // SeleniumBrowserCheckBrowserInstanceExistsCommand, SeleniumBrowserGetWebBrowserInformationCommand
+            // v_applyToVariableName -> v_Result
+            ChangeAttributeName(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "SeleniumBrowserCheckBrowserInstanceExistsCommand":
+                    case "SeleniumBrowserGetWebBrowserInformationCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_applyToVariableName", "v_Result");
+
+            // SeleniumBrowserSearchWebElementCommand, SeleniumBrowserSearchWebElementFromWebEelementCommand,
+            // SeleniumBrowserCheckWebElementExistsCommand, SeleniumBrowserWaitForWebElementToExistsCommand,
+            // SeleniumBrowserGetAWebElementValuesAsDataTableCommand, SeleniumBrowserGetAWebElementValuesAsDictionaryCommand,
+            // SeleniumBrowserGetAWebElementValuesAsListCommand, SeleniumBrowserGetTableValueAsDataTableCommand,
+            // SeleniumBrowserWebElementActionCommand
+            ChangeMultiAttributeNames(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "SeleniumBrowserSearchWebElementCommand":
+                    case "SeleniumBrowserSearchWebElementFromWebElementCommand":
+                    case "SeleniumBrowserCheckWebElementExistsCommand":
+                    case "SeleniumBrowserWaitForWebElementToExistsCommand":
+                    case "SeleniumBrowserGetAWebElementValuesAsDataTableCommand":
+                    case "SeleniumBrowserGetAWebElementValuesAsDictionaryCommand":
+                    case "SeleniumBrowserGetAWebElementValuesAsListCommand":
+                    case "SeleniumBrowserGetTableValueAsDataTableCommand":
+                    case "SeleniumBrowserWebElementActionCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), new List<(string, string)>()
+            {
+                ("v_SeleniumSearchType", "v_SearchMethod"),
+                ("v_SeleniumSearchParameter", "v_SearchParameter"),
+                ("v_ElementIndex", "v_WebElementIndex"),
+                ("v_WaitTime", "v_WaitTimeForWebElement"),
+            });
+
+            // SeleniumBrowserWebElementActionCommand
+            // v_SeleniumElementAction -> v_WebElementAction, v_ScrollToElement -> v_ScrollToWebElement
+            ChangeMultiAttributeNames(doc, "SeleniumBrowserWebElementActionCommand", 
+                new List<(string, string)>()
+                {
+                    ("v_SeleniumElementAction", "v_WebElementAction"),
+                    ("v_ScrollToElement", "v_ScrollToWebElement"),
+                }
+            );
+
+            // SeleniumBrowserGetAttributeFromWebElementCommand, SeleniumBrowserGetOptionsFromWebElementCommand
+            ChangeMultiAttributeNames(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "SeleniumBrowserGetAttributeFromWebElementCommand":
+                    case "SeleniumBrowserGetOptionsFromWebElementCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), new List<(string, string)>()
+            {
+                ("v_WhenNoAttribute", "v_WhenValueCanNotRetrieved"),
+                ("v_ScrollToElement", "v_ScrollToWebElement"),
+            });
+
+            // SeleniumBrowserGetHTMLFromWebElementCommand, SeleniumBrowserGetTextFromWebElementCommand
+            // v_ScrollToElement -> v_ScrollToWebElement
+            ChangeAttributeName(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "SeleniumBrowserGetHTMLFromWebElementCommand":
+                    case "SeleniumBrowserGetTextFromWebElementCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_ScrollToElement", "v_ScrollToWebElement");
+
+            // SeleniumBrowserGetMatchedWebElementsCommand, SeleniumBrowserGetWebElementsCountCommand,
+            // SeleniumBrowserGetWebElementsValueAsDictionaryCommand, SeleniumBrowserGetWebElementsValueAsListCommand,
+            // SeleniumBrowserGetWebElementsValuesAsDataTableCommand, SeleniumBrowserGetWebElementsValueAsDataTableCommand
+            ChangeMultiAttributeNames(doc, 
+                new Func<XElement, bool>(el =>
+                {
+                    switch (GetCommandName(el))
+                    {
+                        case "SeleniumBrowserGetMatchedWebElementsCommand":
+                        case "SeleniumBrowserGetWebElementsCountCommand":
+                        case "SeleniumBrowserGetWebElementsValueAsDictionaryCommand":
+                        case "SeleniumBrowserGetWebElementsValueAsListCommand":
+                        case "SeleniumBrowserGetWebElementsValuesAsDataTableCommand":
+                        case "SeleniumBrowserGetWebElementsValueAsDataTableCommand":
+                            return true;
+                        default:
+                            return false;
+                    }
+                }),
+                new List<(string, string)>()
+                {
+                    ("v_SeleniumSearchType", "v_SearchMethod"),
+                    ("v_SeleniumSearchParameter", "v_SearchParameter"),
+                    ("v_WaitTime", "v_WaitTimeForWebElement"),
+                }
+            );
+
+            // SeleniumBrowserGetAWebElementValuesAsDataTableCommand, SeleniumBrowserGetTableValueAsDataTableCommand,
+            // SeleniumBrowserGetWebElementsValueAsDataTableCommand, SeleniumBrowserGetWebElementsValuesAsDataTableCommand
+            // v_DataTableVariableName -> v_Result
+            ChangeAttributeName(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "SeleniumBrowserGetAWebElementValuesAsDataTableCommand":
+                    case "SeleniumBrowserGetTableValueAsDataTableCommand":
+                    case "SeleniumBrowserGetWebElementsValueAsDataTableCommand":
+                    case "SeleniumBrowserGetWebElementsValuesAsDataTableCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_DataTableVariableName", "v_Result");
+
+            // SeleniumBrowserGetAWebElementValuesAsDictionaryCommand, SeleniumBrowserGetWebElementsValueAsDictionaryCommand
+            // v_DictionaryVariableName -> v_Result
+            ChangeAttributeName(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "SeleniumBrowserGetAWebElementValuesAsDictionaryCommand":
+                    case "SeleniumBrowserGetWebElementsValueAsDictionaryCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_DictionaryVariableName", "v_Result");
+
+            // SeleniumBrowserGetAWebElementValuesAsListCommand, SeleniumBrowserGetWebElementsValueAsListCommand
+            // v_ListVariableName -> v_Result
+            ChangeAttributeName(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "SeleniumBrowserGetAWebElementValuesAsListCommand":
+                    case "SeleniumBrowserGetWebElementsValueAsListCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }), "v_ListVariableName", "v_Result");
         }
 
         /// <summary>
