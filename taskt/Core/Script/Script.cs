@@ -750,6 +750,10 @@ namespace taskt.Core.Script
             {
                 convertTo3_5_2_59(doc);
             }
+            if (IsOldVersion(myVersion, "3.5.2.60"))
+            {
+                convertTo3_5_2_60(doc);
+            }
             return doc;
         }
 
@@ -5383,7 +5387,6 @@ namespace taskt.Core.Script
             // SeleniumBrowserCheckWebElementExistsCommand, SeleniumBrowserWaitForWebElementToExistsCommand,
             // SeleniumBrowserGetAWebElementValuesAsDataTableCommand, SeleniumBrowserGetAWebElementValuesAsDictionaryCommand,
             // SeleniumBrowserGetAWebElementValuesAsListCommand, SeleniumBrowserGetTableValueAsDataTableCommand,
-            // SeleniumBrowserWebElementActionCommand
             ChangeMultiAttributeNames(doc, new Func<XElement, bool>(el =>
             {
                 switch (GetCommandName(el))
@@ -5396,7 +5399,6 @@ namespace taskt.Core.Script
                     case "SeleniumBrowserGetAWebElementValuesAsDictionaryCommand":
                     case "SeleniumBrowserGetAWebElementValuesAsListCommand":
                     case "SeleniumBrowserGetTableValueAsDataTableCommand":
-                    case "SeleniumBrowserWebElementActionCommand":
                         return true;
                     default:
                         return false;
@@ -5410,12 +5412,18 @@ namespace taskt.Core.Script
             });
 
             // SeleniumBrowserWebElementActionCommand
+            // v_SeleniumSearchType -> v_SearchMethod, v_SeleniumSearchParameter -> v_SearchParameter
+            // v_SeleniumElementIndex -> v_WebElementIndex, v_SeleniumElementAction -> v_WebElementAction
             // v_SeleniumElementAction -> v_WebElementAction, v_ScrollToElement -> v_ScrollToWebElement
             ChangeMultiAttributeNames(doc, "SeleniumBrowserWebElementActionCommand",
                 new List<(string, string)>()
                 {
+                    ("v_SeleniumSearchType", "v_SearchMethod"),
+                    ("v_SeleniumSearchParameter", "v_SearchParameter"),
+                    ("v_SeleniumElementIndex", "v_WebElementIndex"),
                     ("v_SeleniumElementAction", "v_WebElementAction"),
                     ("v_ScrollToElement", "v_ScrollToWebElement"),
+                    ("v_WaitTime", "v_WaitTimeForWebElement"),
                 }
             );
 
@@ -5538,6 +5546,45 @@ namespace taskt.Core.Script
 
             // SeleniumBrowserExecuteScriptCommand -> SeleniumBrowserExecuteJavaScriptCommand
             ChangeCommandName(doc, "SeleniumBrowserExecuteScriptCommand", "SeleniumBrowserExecuteJavaScriptCommand", "Execute JavaScript");
+        }
+
+        private static void convertTo3_5_2_60(XDocument doc)
+        {
+            // SeleniumBrowserExecuteJavaScriptCommand v_Args -> v_Arguments
+            ChangeAttributeName(doc, "SeleniumBrowserExecuteJavaScriptCommand", "v_Args", "v_Arguments");
+
+            // SeleniumBrowserExecuteJavaScriptCommand -> SeleniumBrowserExecuteJavaScriptFromFileCommand
+            ChangeToOtherCommand(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "SeleniumBrowserExecuteJavaScriptCommand":
+                        var typeAttr = el.Attribute("v_CodeType");
+                        if (typeAttr != null)
+                        {
+                            var v = typeAttr.Value.ToLower();
+                            return (v == "file");
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                        
+                    default:
+                        return false;
+                }
+            }), "SeleniumBrowserExecuteJavaScriptFromFileCommand", "Execute JavaScript From File", 
+                new List<(string, string)>()
+                {
+                    ("v_ScriptCode", "v_FilePath"),
+                }
+            );
+
+            // SeleniumBrowserRefreshCommand -> SeleniumBrowserRefreshWebBrowserCommand
+            ChangeCommandName(doc, "SeleniumBrowserRefreshCommand", "SeleniumBrowserRefreshWebBrowserCommand", "Refresh Web Browser");
+
+            // SeleniumBrowserTakeScreenshotCommand -> SeleniumBrowserTakeScreenshotOfWebBrowserCommand
+            ChangeCommandName(doc, "SeleniumBrowserTakeScreenshotCommand", "SeleniumBrowserTakeScreenshotOfWebBrowserCommand", "Take Screenshot Of Web Browser");
         }
 
         /// <summary>
