@@ -109,13 +109,13 @@
       <HintPath>..\packages\JetBrains.Annotations.2025.2.4\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="MailKit, Version=4.15.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
-      <HintPath>..\packages\MailKit.4.15.0\lib\net48\MailKit.dll</HintPath>
+      <HintPath>..\packages\MailKit.4.15.1\lib\net48\MailKit.dll</HintPath>
     </Reference>
-    <Reference Include="Markdig, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Markdig.1.0.1\lib\net462\Markdig.dll</HintPath>
+    <Reference Include="Markdig, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Markdig.1.1.1\lib\net462\Markdig.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.10.0.3\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.10.0.5\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -152,7 +152,7 @@
       <HintPath>..\packages\Microsoft-WindowsAPICodePack-Shell-6.0.1.1.8\lib\net48\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
     <Reference Include="MimeKit, Version=4.15.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
-      <HintPath>..\packages\MimeKit.4.15.0\lib\net48\MimeKit.dll</HintPath>
+      <HintPath>..\packages\MimeKit.4.15.1\lib\net48\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -162,8 +162,8 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="RestSharp, Version=113.1.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.113.1.0\lib\net48\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=114.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.114.0.0\lib\net48\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=4.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.4.3.1\lib\net471\Serilog.dll</HintPath>
@@ -194,11 +194,11 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.10.0.3\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=10.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.10.0.5\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
-    <Reference Include="System.Formats.Asn1, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Formats.Asn1.10.0.3\lib\net462\System.Formats.Asn1.dll</HintPath>
+    <Reference Include="System.Formats.Asn1, Version=10.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Formats.Asn1.10.0.5\lib\net462\System.Formats.Asn1.dll</HintPath>
     </Reference>
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
@@ -206,8 +206,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.IO.Compression" />
-    <Reference Include="System.IO.Pipelines, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.Pipelines.10.0.3\lib\net462\System.IO.Pipelines.dll</HintPath>
+    <Reference Include="System.IO.Pipelines, Version=10.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.10.0.5\lib\net462\System.IO.Pipelines.dll</HintPath>
     </Reference>
     <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
@@ -277,22 +277,22 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Text.Encoding.CodePages, Version=10.0.0.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encoding.CodePages.10.0.3\lib\net462\System.Text.Encoding.CodePages.dll</HintPath>
+    <Reference Include="System.Text.Encoding.CodePages, Version=10.0.0.5, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.10.0.5\lib\net462\System.Text.Encoding.CodePages.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.10.0.3\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=10.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.10.0.5\lib\net462\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Json, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.10.0.3\lib\net462\System.Text.Json.dll</HintPath>
+    <Reference Include="System.Text.Json, Version=10.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.10.0.5\lib\net462\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Text.RegularExpressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.RegularExpressions.4.3.1\lib\net463\System.Text.RegularExpressions.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Threading.Channels, Version=10.0.0.3, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Channels.10.0.3\lib\net462\System.Threading.Channels.dll</HintPath>
+    <Reference Include="System.Threading.Channels, Version=10.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.10.0.5\lib\net462\System.Threading.Channels.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -564,6 +564,7 @@
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ASeleniumCreateWebDriverCommands.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ASeleniumDoSomethingToWebDriverCommands.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ASeleniumDoSomethingToWebElementCommands.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\ASeleniumExecuteJavaScriptCommands.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ASeleniumGetFromWebDriverCommands.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ASeleniumGetFromWebElementCommands.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ASeleniumGetOneResultFromWebElementCommands.cs" />
@@ -593,6 +594,7 @@
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumDoSomethingToWebDriverProperties.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumDoSomethingToWebElementProperties.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ICanExecuteJavaScriptToWebDriver.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumExecuteJavaScriptProperties.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumGetFromWebElementProperties.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumSearchWebElementParametersProperties.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumSearchMultiWebElementsParametersProperties.cs" />
@@ -604,6 +606,7 @@
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserAttachWebBrowserInstanceCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserExecuteJavaScriptFromFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetSpecialValueFromWebElementCommand.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetWebBrowserHTMLSourceCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetWebBrowserSizeCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetWebBrowserPositionCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\VP_WebBrowserControls.cs" />
@@ -903,7 +906,7 @@
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserCheckWebElementExistsCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserClickWebElementCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetHTMLFromWebElementCommand .cs" />
-    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetMatchedWebElementsCommand.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetMatchedWebElementsHTMLAsListCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetWindowAndTabInformationsAsJSONCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetWindowAndTabURLsAsJSONCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetWindowAndTabTitlesAsJSONCommand.cs" />
@@ -1194,12 +1197,12 @@
     <Compile Include="Core\Automation\Commands\PropertyControls.cs" />
     <Compile Include="Core\Automation\Commands\VariableGroup\GetVariableIndexCommand.cs" />
     <Compile Include="Core\Automation\Commands\WaitControls.cs" />
-    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetTableValueAsDataTableCommand.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetTableValuesAsDataTableCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetWebElementsValuesAsDataTableCommand.cs" />
-    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetAWebElementValuesAsDataTableCommand.cs" />
-    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetAWebElementValuesAsListCommand.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetOneWebElementValuesAsDataTableCommand.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetOneWebElementValuesAsListCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetWebElementsValueAsDataTableCommand.cs" />
-    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetAWebElementValuesAsDictionaryCommand.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetOneWebElementValuesAsDictionaryCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetWebElementsValueAsDictionaryCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetWebElementsValueAsListCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserResizeWebBrowserCommand.cs" />
@@ -1311,7 +1314,7 @@
     <Compile Include="Core\Automation\Commands\ApplicationScriptFileGroup\RunBatchScriptFileCommand.cs" />
     <Compile Include="Core\Automation\Commands\IEGroup\IEBrowserElementActionCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserWebElementActionCommand.cs" />
-    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserExecuteJavaScriptCommand.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserExecuteJavaScriptFromCodeCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserNavigateBackCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserNavigateForwardCommand.cs" />
     <Compile Include="Core\Automation\Commands\IEGroup\IEBrowserNavigateURLCommand.cs" />

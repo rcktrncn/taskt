@@ -27,10 +27,8 @@ namespace taskt.Core.Automation.Commands
         [PropertyUISelectionOption("Window Title")]
         [PropertyUISelectionOption("Window URL")]
         [PropertyUISelectionOption("Current Handle")]
-        [PropertyUISelectionOption("HTML Page Source")]
-        [PropertyUISelectionOption("Handles JSON Array")]
-        [InputSpecification("", true)]
-        [SampleUsage("")]
+        //[PropertyUISelectionOption("HTML Page Source")]
+        //[PropertyUISelectionOption("Handles JSON Array")]
         [PropertyValidationRule("Information Type", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyDisplayText(true, "Information Type")]
         [PropertyParameterOrder(6000)]
@@ -43,40 +41,10 @@ namespace taskt.Core.Automation.Commands
 
         public SeleniumBrowserGetWebBrowserInformationCommand()
         {
-            //this.CommandName = "SeleniumBrowserInfoCommand";
-            //this.SelectionName = "Get Browser Info";
-            //this.CommandEnabled = true;
-            //this.CustomRendering = true;
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //var seleniumInstance = SeleniumBrowserControls.ExpandValueOrUserVariableAsSeleniumBrowserInstance(v_InstanceName, engine);
-
-            //var requestedInfo = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_InfoType), engine);
-            //string info = "";
-            //switch (requestedInfo)
-            //{
-            //    case "window title":
-            //        info = seleniumInstance.Title;
-            //        break;
-            //    case "window url":
-            //        info = seleniumInstance.Url;
-            //        break;
-            //    case "current handle":
-            //        info = seleniumInstance.CurrentWindowHandle;
-            //        break;
-            //    case "html page source":
-            //        info = seleniumInstance.PageSource;
-            //        break;
-            //    case "handles json array":
-            //        info = Newtonsoft.Json.JsonConvert.SerializeObject(seleniumInstance.WindowHandles);
-            //        break;
-            //}
-
-            //store data
-            //info.StoreInUserVariable(engine, v_applyToVariableName);
-
             this.WebDriverActionCore(new Action<OpenQA.Selenium.IWebDriver, string>((seleniumInstance, _) =>
             {
                 var info = string.Empty;
@@ -91,12 +59,12 @@ namespace taskt.Core.Automation.Commands
                     case "current handle":
                         info = seleniumInstance.CurrentWindowHandle;
                         break;
-                    case "html page source":
-                        info = seleniumInstance.PageSource;
-                        break;
-                    case "handles json array":
-                        info = Newtonsoft.Json.JsonConvert.SerializeObject(seleniumInstance.WindowHandles);
-                        break;
+                    //case "html page source":
+                    //    info = seleniumInstance.PageSource;
+                    //    break;
+                    //case "handles json array":
+                    //    info = Newtonsoft.Json.JsonConvert.SerializeObject(seleniumInstance.WindowHandles);
+                    //    break;
                 }
                 info.StoreInUserVariable(engine, v_Result);
             }), engine);

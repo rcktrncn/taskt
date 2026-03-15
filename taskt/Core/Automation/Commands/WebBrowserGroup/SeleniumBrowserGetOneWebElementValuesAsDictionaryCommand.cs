@@ -8,14 +8,14 @@ namespace taskt.Core.Automation.Commands
     [Serializable]
     [Attributes.ClassAttributes.Group("Web Browser")]
     [Attributes.ClassAttributes.SubGruop("Scraping")]
-    [Attributes.ClassAttributes.CommandSettings("Get A WebElement Values As Dictionary")]
-    [Attributes.ClassAttributes.Description("This command allows you to get Attributes value for a WebElement As Dictionary.")]
-    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get Attributes value for a WebElement As Dictionary.")]
+    [Attributes.ClassAttributes.CommandSettings("Get One WebElement Values As Dictionary")]
+    [Attributes.ClassAttributes.Description("This command allows you to get Attributes value for One WebElement As Dictionary.")]
+    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get Attributes value for One WebElement As Dictionary.")]
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class SeleniumBrowserGetAWebElementValuesAsDictionaryCommand : ASeleniumGetOneWebElementValuesAsSomethingCommands, IDictionaryResultProperties
+    public sealed class SeleniumBrowserGetOneWebElementValuesAsDictionaryCommand : ASeleniumGetOneWebElementValuesAsSomethingCommands, IDictionaryResultProperties
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(SeleniumBrowserControls), nameof(SeleniumBrowserControls.v_InputInstanceName))]
@@ -46,12 +46,8 @@ namespace taskt.Core.Automation.Commands
         //[PropertyVirtualProperty(nameof(SeleniumBrowserControls), nameof(SeleniumBrowserControls.v_WaitTime))]
         //public string v_WaitTimeForWebElement { get; set; }
 
-        public SeleniumBrowserGetAWebElementValuesAsDictionaryCommand()
+        public SeleniumBrowserGetOneWebElementValuesAsDictionaryCommand()
         {
-            //this.CommandName = "SeleniumBrowserGetAnElementValuesAsDictionaryCommand";
-            //this.SelectionName = "Get An Element Values As Dictionary";
-            //this.CommandEnabled = true;
-            //this.CustomRendering = true;
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
