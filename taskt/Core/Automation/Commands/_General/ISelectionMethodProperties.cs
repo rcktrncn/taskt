@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace taskt.Core.Automation.Commands
+﻿namespace taskt.Core.Automation.Commands
 {
     /// <summary>
     /// general selection properties
@@ -15,5 +9,7 @@ namespace taskt.Core.Automation.Commands
         /// selection method
         /// </summary>
         string v_SelectionMethod { get; set; }
+
+        // index property name is v_Target***Index
     }
 }

@@ -2,7 +2,7 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="871bf4d7-4a47-4fff-9131-a7ea0814ee52" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Get WebElement Size sample" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="871bf4d7-4a47-4fff-9131-a7ea0814ee52" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Click WebElement sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="CommentCommand" CommandID="053191a7-41e1-453c-8920-1fbbd786fb93" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Execute Edge" CommandEnabled="true" />
@@ -23,13 +23,13 @@
       <ScriptCommand xsi:type="SeleniumBrowserSearchWebElementCommand" CommandID="7b91e460-e7b4-4be7-8500-61347afa7aa5" CommandName="SeleniumBrowserSearchWebElementCommand" IsCommented="false" SelectionName="Search WebElement" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPABrowser" v_Result="vElem" v_SearchMethod="Find Element By XPath" v_SearchParameter="//a" v_WaitTimeForWebElement="120" v_WebElementIndex="" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="b1d5b0ed-11e8-450f-b465-15a518de2c3a" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" v_Comment="Get Size" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="b1d5b0ed-11e8-450f-b465-15a518de2c3a" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="8" PauseBeforeExeucution="false" v_Comment="Click WebElement" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="SeleniumBrowserGetWebElementSizeCommand" CommandID="fe86170a-281b-4704-b896-aa1a042704b8" CommandName="SeleniumBrowserGetWebElementSizeCommand" IsCommented="false" SelectionName="Get WebElement Size" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_WebElement="⦃vElem⦄" v_Width="vWidth" v_Height="vHeight" />
+      <ScriptCommand xsi:type="SeleniumBrowserClickWebElementCommand" CommandID="727ffd44-03ae-4295-a62f-b56e581e8237" CommandName="SeleniumBrowserClickWebElementCommand" IsCommented="false" SelectionName="Click WebElement" DefaultPause="0" LineNumber="9" PauseBeforeExeucution="false" CommandEnabled="true" v_WebElement="⦃vElem⦄" v_WhenFailAction="" v_ScrollToWebElement="" v_ClickType="Invoke Click" v_XOffset="2" v_YOffset="2" />
     </ScriptAction>
     <ScriptAction>
-      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="2a3b33ca-3676-435c-8007-987831de8f4e" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="width: ⦃vWidth⦄, height: ⦃vHeight⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="2a3b33ca-3676-435c-8007-987831de8f4e" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="10" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="move page" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="CommentCommand" CommandID="30b65654-4491-4b05-8fe9-e32736163778" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="11" PauseBeforeExeucution="false" v_Comment="Close Edge" CommandEnabled="true" />
@@ -41,9 +41,9 @@
   <Info>
     <TasktVersion>3.5.2.61</TasktVersion>
     <Author />
-    <LastRunTime>2024-10-27T13:37:11.3254997+09:00</LastRunTime>
+    <LastRunTime>2026-03-17T21:42:18.6949352+09:00</LastRunTime>
     <RunTimes>6</RunTimes>
-    <Revision>13</Revision>
+    <Revision>12</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>
@@ -53,11 +53,7 @@
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
     <ScriptVariable>
-      <VariableName>vHeight</VariableName>
-      <VariableValue xsi:type="xsd:string"></VariableValue>
-    </ScriptVariable>
-    <ScriptVariable>
-      <VariableName>vWidth</VariableName>
+      <VariableName>vValue</VariableName>
       <VariableValue xsi:type="xsd:string"></VariableValue>
     </ScriptVariable>
   </Variables>
