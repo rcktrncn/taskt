@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using System;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using taskt.Core.Automation.Commands.WebBrowserGroup;
@@ -8,21 +9,20 @@ namespace taskt.Core.Automation.Commands
     [Serializable]
     [Attributes.ClassAttributes.Group("Web Browser")]
     [Attributes.ClassAttributes.SubGruop("Search WebElement")]
-    [Attributes.ClassAttributes.CommandSettings("Wait For WebElement To Exists")]
-    [Attributes.ClassAttributes.Description("This command allows you to Wait for WebElement exists.")]
-    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to Wait for WebElement exists.")]
+    [Attributes.ClassAttributes.CommandSettings("Search Shadow DOM WebElement From WebElement")]
+    [Attributes.ClassAttributes.Description("This command allows you to search Shadow DOM WebElement from WebElement.")]
+    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get Shadow DOM WebElement from WebElement.")]
     [Attributes.ClassAttributes.ImplementationDescription("")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class SeleniumBrowserWaitForWebElementToExistsCommand : ASeleniumDoSomethingToWebDriverCommands, ISeleniumSearchWebElementParametersProperties
+    public sealed class SeleniumBrowserSearchShadowDOMWebElementFromWebElementCommand : ASeleniumDoSomethingToWebElementCommands, ISeleniumSearchWebElementParametersProperties
     {
         [XmlAttribute]
-        [PropertyVirtualProperty(nameof(VP_WebBrowserControls), nameof(VP_WebBrowserControls.v_InputInstanceName))]
-        public override string v_InstanceName { get; set; }
-
-        [XmlAttribute]
         [PropertyVirtualProperty(nameof(VP_WebBrowserControls), nameof(VP_WebBrowserControls.v_SearchMethod))]
+        [PropertyUISelectionOptionBehavior(MultiAttributesBehavior.Overwrite)]
+        [PropertyUISelectionOption("Find Elements By CSS Selector")]
+        [PropertyUISelectionOption("Find Element By CSS Selector")]
         [PropertyParameterOrder(6000)]
         public string v_SearchMethod { get; set; }
 
@@ -42,21 +42,34 @@ namespace taskt.Core.Automation.Commands
         public string v_WebElementIndex { get; set; }
 
         [XmlAttribute]
+        [PropertyVirtualProperty(nameof(VP_WebBrowserControls), nameof(VP_WebBrowserControls.v_OutputWebElementName))]
+        [PropertyParameterOrder(7000)]
+        public string v_Result { get; set; }
+
+        [XmlAttribute]
         [PropertyVirtualProperty(nameof(VP_WebBrowserControls), nameof(VP_WebBrowserControls.v_WaitTimeForWebElement))]
         [PropertyParameterOrder(10000)]
         public string v_WaitTimeForWebElement { get; set; }
 
-        public SeleniumBrowserWaitForWebElementToExistsCommand()
+        public SeleniumBrowserSearchShadowDOMWebElementFromWebElementCommand()
         {
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //SeleniumBrowserControls.ExpandValueOrUserVariableAsSeleniumBrowserInstanceAndWebElement(this, nameof(v_InstanceName), nameof(v_SearchMethod), nameof(v_SearchParameter), nameof(v_WebElementIndex), nameof(v_WaitTimeForWebElement), engine);
-
-            this.WebDriverActionCore(new Action<OpenQA.Selenium.IWebDriver>(seleniumInstance =>
+            this.WebElementActionCore(new Action<IWebElement, IWebDriver>((elem, seleniumInstance) =>
             {
-                this.SearchWebElement(seleniumInstance, engine);
+                try
+                {
+                    var shadow = elem.GetShadowRoot();
+
+                    var findElem = this.SearchWebElement(shadow, engine);
+                    this.StoreInUserVariable(findElem, seleniumInstance, engine, v_Result);
+                }
+                catch
+                {
+                    throw new Exception($"WebElement does not have Shadow-Root or WebElement does not Exist. WebElement: '{v_WebElement}', Parameter: '{v_SearchParameter}'");
+                }
             }), engine);
         }
     }

@@ -17,7 +17,6 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
@@ -761,6 +760,10 @@ namespace taskt.Core.Script
             if (IsOldVersion(myVersion, "3.5.2.62"))
             {
                 convertTo3_5_2_62(doc);
+            }
+            if (IsOldVersion(myVersion, "3.5.2.64"))
+            {
+                convertTo3_5_2_64(doc);
             }
             return doc;
         }
@@ -5688,6 +5691,94 @@ namespace taskt.Core.Script
                     }
                 })
             );
+        }
+
+        private static void convertTo3_5_2_64(XDocument doc)
+        {
+            // add v_SelectionMethod in WebBrowser commands
+            var webCmds = GetCommands(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "SeleniumBrowserSearchWebElementFromWebElementCommand":
+                    case "SeleniumBrowserWaitForWebElementToExistsCommand":
+                    case "SeleniumBrowserWebElementActionCommand":
+                    case "SeleniumBrowserCheckWebElementExistsCommand":
+                    case "SeleniumBrowserGetTableValuesAsDataTableCommand":
+                    case "SeleniumBrowserSearchWebElementCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }));
+            foreach(var cmd in webCmds)
+            {
+                var indexAttr = cmd.Attribute("v_WebElementIndex");
+                if (indexAttr != null)
+                {
+                    if (!string.IsNullOrEmpty(indexAttr.Value))
+                    {
+                        cmd.SetAttributeValue("v_SelectionMethod", "Index");
+                    }
+                }
+            }
+            webCmds = null;
+
+            // add v_WindowSelectionMethod when it does not exists
+            var uiAction = GetCommands(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "UIAutomationSearchUIElementFromWindowNameCommand":
+                    case "UIAutomationUIElementActionAfterSearchUIElementFromWindowNameCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }));
+            foreach (var cmd in uiAction)
+            {
+                var winSelAttr = cmd.Attribute("v_WindowSelectionMethod");
+                if (winSelAttr == null)
+                {
+                    var selAttr = cmd.Attribute("v_SelectionMethod");
+                    var winSelValue = selAttr.Value;
+                    selAttr.Remove();
+                    cmd.SetAttributeValue("v_WindowSelectionMethod", winSelValue);
+                }
+            }
+            uiAction = null;
+
+            // add v_SelectionMethod in UIAutomation commands
+            var uiCmds = GetCommands(doc, new Func<XElement, bool>(el =>
+            {
+                switch (GetCommandName(el))
+                {
+                    case "UIAutomationUIElementActionAfterSearchUIElementFromWindowHandleCommand":
+                    case "UIAutomationUIElementActionAfterSearchUIElementFromWindowNameCommand":
+                    case "UIAutomationCheckUIElementExistsCommand":
+                    case "UIAutomationSearchChildUIElementCommand":
+                    case "UIAutomationSearchUIElementFromUIElementCommand":
+                    case "UIAutomationWaitForUIElementToExistsCommand":
+                    case "UIAutomationSearchUIElementFromWindowHandleCommand":
+                    case "UIAutomationSearchUIElementFromWindowNameCommand":
+                        return true;
+                    default:
+                        return false;
+                }
+            }));
+            foreach (var cmd in uiCmds)
+            {
+                var indexAttr = cmd.Attribute("v_TargetUIElementIndex");
+                if (indexAttr != null)
+                {
+                    if (!string.IsNullOrEmpty(indexAttr.Value))
+                    {
+                        cmd.SetAttributeValue("v_SelectionMethod", "Index");
+                    }
+                }
+            }
+            uiCmds = null;
         }
 
         /// <summary>
