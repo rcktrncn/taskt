@@ -10,14 +10,14 @@ namespace taskt.Core.Automation.Commands
 {
     [Serializable]
     [Attributes.ClassAttributes.Group("Web Browser")]
-    [Attributes.ClassAttributes.SubGruop("WebElement Action")]
-    [Attributes.ClassAttributes.CommandSettings("WebElement Action")]
+    [Attributes.ClassAttributes.SubGruop("Search And Action")]
+    [Attributes.ClassAttributes.CommandSettings("WebElement Action After Search WebElement")]
     [Attributes.ClassAttributes.Description("This command allows you to close a Selenium web browser session.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to manipulate, set, or get data on a webpage within the web browser.")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements Selenium to achieve automation.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_web))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
-    public sealed class SeleniumBrowserWebElementActionCommand : ASeleniumWebDriverActionCommands, ISeleniumSearchWebElementParametersProperties, IHaveDataTableElements
+    public sealed class SeleniumBrowserWebElementActionAfterSearchWebElementCommand : ASeleniumWebDriverActionCommands, ISeleniumSearchWebElementParametersProperties, IHaveDataTableElements
     {
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(VP_WebBrowserControls), nameof(VP_WebBrowserControls.v_InputInstanceName))]
@@ -51,15 +51,20 @@ namespace taskt.Core.Automation.Commands
         [PropertyUISelectionOption("Clear Text")]
         [PropertyUISelectionOption("Set Text")]
         [PropertyUISelectionOption("Get Text")]
+        [PropertyUISelectionOption("Get Options")]
+        [PropertyUISelectionOption("Select Option")]
         [PropertyUISelectionOption("Get Attribute")]
-        [PropertyUISelectionOption("Get Matching WebElements")]
+        [PropertyUISelectionOption("Remove WebElement")]
         [PropertyUISelectionOption("Wait For WebElement To Exists")]
         [PropertyUISelectionOption("Switch To Frame")]
+        [PropertyUISelectionOption("Get Matching WebElements HTML As List")]
         [PropertyUISelectionOption("Get WebElements Count")]
         [PropertyUISelectionOption("Get WebElement Position")]
         [PropertyUISelectionOption("Get WebElement Size")]
-        [PropertyUISelectionOption("Get Options")]
-        [PropertyUISelectionOption("Select Option")]
+        [PropertyUISelectionOption("Get CSS Selector")]
+        [PropertyUISelectionOption("Get XPath")]
+        [PropertyUISelectionOption("Get HTML")]
+        [PropertyUISelectionOption("Get Special Value")]
         [PropertySelectionChangeEvent(nameof(cmbSeleniumAction_SelectionChangeCommitted))]
         [PropertyValidationRule("WebElement Action", PropertyValidationRule.ValidationRuleFlags.Empty)]
         [PropertyParameterOrder(7000)]
@@ -90,7 +95,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyParameterOrder(11000)]
         public string v_ScrollToWebElement { get; set; }
 
-        public SeleniumBrowserWebElementActionCommand()
+        public SeleniumBrowserWebElementActionAfterSearchWebElementCommand()
         {
         }
 
@@ -106,12 +111,13 @@ namespace taskt.Core.Automation.Commands
                         v_InstanceName = this.v_InstanceName,
                         v_SearchMethod = this.v_SearchMethod,
                         v_SearchParameter = this.v_SearchParameter,
+                        v_SelectionMethod = this.v_SelectionMethod,
                         v_WebElementIndex = this.v_WebElementIndex,
                         v_WaitTimeForWebElement = this.v_WaitTimeForWebElement,
                     };
                     waitCommand.RunCommand(engine);
                     break;
-                case "get matching webelements":
+                case "get matching webelements html as list":
                     var getMatching = new SeleniumBrowserGetMatchedWebElementsHTMLAsListCommand()
                     {
                         v_InstanceName = this.v_InstanceName,
@@ -141,6 +147,7 @@ namespace taskt.Core.Automation.Commands
                             v_InstanceName = this.v_InstanceName,
                             v_SearchMethod = this.v_SearchMethod,
                             v_SearchParameter = this.v_SearchParameter,
+                            v_SelectionMethod = this.v_SelectionMethod,
                             v_WebElementIndex = this.v_WebElementIndex,
                             v_Result = myWebElem.VariableName,
                             v_WaitTimeForWebElement = this.v_WaitTimeForWebElement,
@@ -164,6 +171,7 @@ namespace taskt.Core.Automation.Commands
                                 var clearElement = new SeleniumBrowserClearTextInWebElementCommand()
                                 {
                                     v_WebElement = myWebElem.VariableName,
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
                                 };
                                 clearElement.RunCommand(engine);
                                 break;
@@ -174,6 +182,7 @@ namespace taskt.Core.Automation.Commands
                                     v_TextToSet = parameters["Text To Set"],
                                     v_ClearTextBeforeSetting = parameters["Clear Element Before Setting Text"],
                                     v_EncryptedText = parameters["Encrypted Text"],
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
                                 };
                                 setText.RunCommand(engine);
                                 break;
@@ -182,25 +191,9 @@ namespace taskt.Core.Automation.Commands
                                 {
                                     v_WebElement = myWebElem.VariableName,
                                     v_Result = parameters["Variable Name"],
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
                                 };
                                 getText.RunCommand(engine);
-                                break;
-                            case "get attribute":
-                                var getAttribute = new SeleniumBrowserGetAttributeFromWebElementCommand()
-                                {
-                                    v_WebElement = myWebElem.VariableName,
-                                    v_AttributeName = parameters["Attribute Name"],
-                                    v_Result = parameters["Variable Name"],
-                                };
-                                getAttribute.RunCommand(engine);
-                                break;
-                            case "switch to frame":
-                                var switchToFrame = new SeleniumBrowserSwitchToFrameWebElementCommand()
-                                {
-                                    //v_InstanceName = this.v_InstanceName,
-                                    v_WebElement = myWebElem.VariableName,
-                                };
-                                switchToFrame.RunCommand(engine);
                                 break;
                             case "get options":
                                 var getOptions = new SeleniumBrowserGetOptionsFromWebElementCommand()
@@ -208,8 +201,46 @@ namespace taskt.Core.Automation.Commands
                                     v_WebElement = myWebElem.VariableName,
                                     v_AttributeName = parameters["Attribute Name"],
                                     v_Result = parameters["Variable Name"],
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
                                 };
                                 getOptions.RunCommand(engine);
+                                break;
+                            case "select option":
+                                var selectOption = new SeleniumBrowserSelectOptionForWebElementCommand()
+                                {
+                                    v_WebElement = myWebElem.VariableName,
+                                    v_SelectionType = parameters["Selection Type"],
+                                    v_SelectionValue = parameters["Selection Parameter"],
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
+                                };
+                                selectOption.RunCommand(engine);
+                                break;
+                            case "get attribute":
+                                var getAttribute = new SeleniumBrowserGetAttributeFromWebElementCommand()
+                                {
+                                    v_WebElement = myWebElem.VariableName,
+                                    v_AttributeName = parameters["Attribute Name"],
+                                    v_Result = parameters["Variable Name"],
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
+                                };
+                                getAttribute.RunCommand(engine);
+                                break;
+                            case "remove webelement":
+                                var removeElem = new SeleniumBrowserRemoveWebElementCommand()
+                                {
+                                    v_WebElement = myWebElem.VariableName,
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
+                                };
+                                removeElem.RunCommand(engine);
+                                break;
+                            case "switch to frame":
+                                var switchToFrame = new SeleniumBrowserSwitchToFrameWebElementCommand()
+                                {
+                                    //v_InstanceName = this.v_InstanceName,
+                                    v_WebElement = myWebElem.VariableName,
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
+                                };
+                                switchToFrame.RunCommand(engine);
                                 break;
                             case "get webelement position":
                                 var getPos = new SeleniumBrowserGetWebElementPositionCommand()
@@ -218,6 +249,8 @@ namespace taskt.Core.Automation.Commands
                                     v_XPosition = parameters["X Variable"],
                                     v_YPosition = parameters["Y Variable"],
                                     v_PositionBase = parameters["Base Position"],
+                                    v_PositionType = parameters["Position Type"],
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
                                 };
                                 getPos.RunCommand(engine);
                                 break;
@@ -227,17 +260,47 @@ namespace taskt.Core.Automation.Commands
                                     v_WebElement = myWebElem.VariableName,
                                     v_Width = parameters["Width Variable"],
                                     v_Height = parameters["Height Variable"],
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
                                 };
                                 getSize.RunCommand(engine);
                                 break;
-                            case "select option":
-                                var selectOption = new SeleniumBrowserSelectOptionForWebElementCommand()
+                            
+                            case "get css selector":
+                                var getCSSSel = new SeleniumBrowserGetCSSSelectorFromWebElementCommand()
                                 {
                                     v_WebElement = myWebElem.VariableName,
-                                    v_SelectionType = parameters["Selection Type"],
-                                    v_SelectionValue = parameters["Selection Parameter"],
+                                    v_Result = parameters["Variable Name"],
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
                                 };
-                                selectOption.RunCommand(engine);
+                                getCSSSel.RunCommand(engine);
+                                break;
+                            case "get xpath":
+                                var getXPath = new SeleniumBrowserGetXPathFromWebElementCommand()
+                                {
+                                    v_WebElement = myWebElem.VariableName,
+                                    v_Result = parameters["Variable Name"],
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
+                                };
+                                getXPath.RunCommand(engine);
+                                break;
+                            case "get html":
+                                var getHTML = new SeleniumBrowserGetHTMLFromWebElementCommand()
+                                {
+                                    v_WebElement = myWebElem.VariableName,
+                                    v_Result = parameters["Variable Name"],
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
+                                };
+                                getHTML.RunCommand(engine);
+                                break;
+                            case "get special value":
+                                var getSpecial = new SeleniumBrowserGetSpecialValueFromWebElementCommand()
+                                {
+                                    v_WebElement = myWebElem.VariableName,
+                                    v_ValueType = parameters["Value Type"],
+                                    v_Result = parameters["Variable Name"],
+                                    v_ScrollToWebElement = this.v_ScrollToWebElement,
+                                };
+                                getSpecial.RunCommand(engine);
                                 break;
                         }
                     }
@@ -269,7 +332,10 @@ namespace taskt.Core.Automation.Commands
             {
                 case "get text":
                 case "get webelements count":
-                case "get matching webelements":
+                case "get matching webelements html as list":
+                case "get css selector":
+                case "get xpath":
+                case "get html":
                     // only variable name
                     v_WebActionParameterTable.Rows.Add("Variable Name");
                     break;
@@ -302,6 +368,7 @@ namespace taskt.Core.Automation.Commands
                     v_WebActionParameterTable.Rows.Add("X Variable");
                     v_WebActionParameterTable.Rows.Add("Y Variable");
                     v_WebActionParameterTable.Rows.Add("Base Position", "");
+                    v_WebActionParameterTable.Rows.Add("Position Type", "");
                     break;
 
                 case "get webelement size":
@@ -309,8 +376,14 @@ namespace taskt.Core.Automation.Commands
                     v_WebActionParameterTable.Rows.Add("Height Variable");
                     break;
 
+                case "get special value":
+                    v_WebActionParameterTable.Rows.Add("Value Type");
+                    v_WebActionParameterTable.Rows.Add("Variable Name");
+                    break;
+
                 case "clear webelement":
                 case "switch to frame":
+                case "remove webelement":
                 case "wait for webelement to exist":
                 default:
                     // no parameters
@@ -326,17 +399,37 @@ namespace taskt.Core.Automation.Commands
             switch (actionType.ToLower())
             {
                 case "set text":
-                    var clearBefore = new DataGridViewComboBoxCell();
-                    clearBefore.Items.AddRange(new string[] { "", "Yes", "No" });
-                    var encrypted = new DataGridViewComboBoxCell();
-                    encrypted.Items.AddRange(new string[] { "", "Yes", "No" });
-                    dgv.Rows[1].Cells[1] = clearBefore;
-                    dgv.Rows[2].Cells[1] = encrypted;
+                    //var clearBefore = new DataGridViewComboBoxCell();
+                    //clearBefore.Items.AddRange(new string[] { "", "Yes", "No" });
+                    //var encrypted = new DataGridViewComboBoxCell();
+                    //encrypted.Items.AddRange(new string[] { "", "Yes", "No" });
+                    dgv.Rows[1].Cells[1] = CreateComboBox(new string[]
+                    {
+                        "", 
+                        "Yes", 
+                        "No",
+                    });
+                    dgv.Rows[2].Cells[1] = CreateComboBox(new string[]
+                    {
+                        "",
+                        "Yes",
+                        "No",
+                    });
                     break;
 
                 case "select option":
-                    var selectionType = new DataGridViewComboBoxCell();
-                    selectionType.Items.AddRange(new string[] {
+                    //var selectionType = new DataGridViewComboBoxCell();
+                    //selectionType.Items.AddRange(new string[] {
+                    //    "Select By Index",
+                    //    "Select By Text",
+                    //    "Select By Value",
+                    //    "Deselect By Index",
+                    //    "Deselect By Text",
+                    //    "Deselect By Value",
+                    //    "Deselect All",
+                    //});
+                    dgv.Rows[0].Cells[1] = CreateComboBox(new string[]
+                    {
                         "Select By Index",
                         "Select By Text",
                         "Select By Value",
@@ -345,12 +438,26 @@ namespace taskt.Core.Automation.Commands
                         "Deselect By Value",
                         "Deselect All",
                     });
-                    dgv.Rows[0].Cells[1] = selectionType;
                     break;
 
                 case "click webelement":
-                    var clickType = new DataGridViewComboBoxCell();
-                    clickType.Items.AddRange(new string[]
+                    //var clickType = new DataGridViewComboBoxCell();
+                    //clickType.Items.AddRange(new string[]
+                    //{
+                    //    "Left Click",
+                    //    "Middle Click",
+                    //    "Right Click",
+                    //    "Left Down",
+                    //    "Middle Down",
+                    //    "Right Down",
+                    //    "Left Up",
+                    //    "Middle Up",
+                    //    "Right Up",
+                    //    "Double Left Click",
+                    //    "None",
+                    //    "Invoke Click",
+                    //});
+                    dgv.Rows[0].Cells[1] = CreateComboBox(new string[]
                     {
                         "Left Click",
                         "Middle Click",
@@ -365,12 +472,19 @@ namespace taskt.Core.Automation.Commands
                         "None",
                         "Invoke Click",
                     });
-                    dgv.Rows[0].Cells[1] = clickType;
                     break;
 
                 case "get webelement position":
-                    var basePosCmd = new DataGridViewComboBoxCell();
-                    basePosCmd.Items.AddRange(new string[]
+                    //var basePosCmd = new DataGridViewComboBoxCell();
+                    //basePosCmd.Items.AddRange(new string[]
+                    //{
+                    //    "Top Left",
+                    //    "Bottom Right",
+                    //    "Top Right",
+                    //    "Bottom Left",
+                    //    "Center",
+                    //});
+                    dgv.Rows[2].Cells[1] = CreateComboBox(new string[]
                     {
                         "Top Left",
                         "Bottom Right",
@@ -378,9 +492,63 @@ namespace taskt.Core.Automation.Commands
                         "Bottom Left",
                         "Center",
                     });
-                    dgv.Rows[2].Cells[1] = basePosCmd;
+                    //var posTypes = new DataGridViewComboBoxCell();
+                    //posTypes.Items.AddRange(new string[]
+                    //{
+                    //    "Screen",
+                    //    "Viewport",
+                    //});
+                    dgv.Rows[3].Cells[1] = CreateComboBox(new string[]
+                    {
+                        "Screen",
+                        "Viewport",
+                    });
+                    break;
+
+                case "get special value":
+                    //var specialValueTypeCmd = new DataGridViewComboBoxCell();
+                    //specialValueTypeCmd.Items.AddRange(new string[]
+                    //{
+                    //    "Enabled",
+                    //    "Displayed",
+                    //    "Selected",
+                    //    "Text",
+                    //    "Tag",
+                    //    "X Position",
+                    //    "Y Position",
+                    //    "Width",
+                    //    "Height",
+                    //    "Location",
+                    //    "Size",
+                    //});
+                    dgv.Rows[0].Cells[1] = CreateComboBox(new string[]
+                    {
+                        "Enabled",
+                        "Displayed",
+                        "Selected",
+                        "Text",
+                        "Tag",
+                        "X Position",
+                        "Y Position",
+                        "Width",
+                        "Height",
+                        "Location",
+                        "Size",
+                    });
                     break;
             }
+        }
+
+        /// <summary>
+        /// create combobox cell for dgv
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        private static DataGridViewComboBoxCell CreateComboBox(string[] items)
+        {
+            var cmb = new DataGridViewComboBoxCell();
+            cmb.Items.AddRange(items);
+            return cmb;
         }
 
         public override string GetDisplayValue()
