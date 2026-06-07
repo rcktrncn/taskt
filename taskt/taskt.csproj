@@ -109,8 +109,8 @@
     <Reference Include="JetBrains.Annotations, Version=4242.42.42.42, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.2025.2.4\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="MailKit, Version=4.16.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
-      <HintPath>..\packages\MailKit.4.16.0\lib\net48\MailKit.dll</HintPath>
+    <Reference Include="MailKit, Version=4.17.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.4.17.0\lib\net48\MailKit.dll</HintPath>
     </Reference>
     <Reference Include="Markdig, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Markdig.1.2.0\lib\net462\Markdig.dll</HintPath>
@@ -152,8 +152,8 @@
     <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.8.0, Culture=neutral, PublicKeyToken=8985beaab7ea3f04, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft-WindowsAPICodePack-Shell-6.0.1.1.8\lib\net48\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
-    <Reference Include="MimeKit, Version=4.16.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
-      <HintPath>..\packages\MimeKit.4.16.0\lib\net48\MimeKit.dll</HintPath>
+    <Reference Include="MimeKit, Version=4.17.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.4.17.0\lib\net48\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -181,8 +181,8 @@
     <Reference Include="Serilog.Sinks.File, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.File.7.0.0\lib\net471\Serilog.Sinks.File.dll</HintPath>
     </Reference>
-    <Reference Include="SharpCompress, Version=0.44.5.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpCompress.0.44.5\lib\net48\SharpCompress.dll</HintPath>
+    <Reference Include="SharpCompress, Version=0.49.1.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.49.1\lib\net48\SharpCompress.dll</HintPath>
     </Reference>
     <Reference Include="SharpSimpleNLG, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpSimpleNLG.1.4.0\lib\net472\SharpSimpleNLG.dll</HintPath>
@@ -585,6 +585,7 @@
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\EM_SeleniumGetFromWebElementPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\EM_SeleniumSearchMultiWebElementsParametersPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\EM_SeleniumSearchWebElementParametersPropertiesExtensionMethods.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\EM_SeleniumSendSpecialKeystrokesPropetiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\EM_SeleniumWebDriverActionPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\EM_SeleniumWebElementActionAndScrollPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\EM_SeleniumWebElementActionPropertiesExtensionMehtods.cs" />
@@ -599,6 +600,7 @@
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumGetFromWebElementProperties.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumSearchWebElementParametersProperties.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumSearchMultiWebElementsParametersProperties.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumSendSpecialKeystrokesProperties.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumWebBrowserInstanceActionProperties.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumWebDriverActionProperties.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\ISeleniumWebElementActionAndScrollProperties.cs" />
@@ -615,6 +617,7 @@
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetWebBrowserSizeCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserGetWebBrowserPositionCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserSearchShadowDOMWebElementFromWebEelementCommand.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserWaitForWebElementToExistsFromWebElementCommand.cs" />
     <Compile Include="Core\Automation\Commands\WebBrowserGroup\VP_WebBrowserControls.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\ActivateWindowsCommand.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\AGetFromWindowNamesAsListCommands.cs" />
@@ -1217,7 +1220,7 @@
     <Compile Include="Core\Automation\Commands\_RemovedCommands\GetWindowPositionCommand.cs" />
     <Compile Include="Core\Automation\Commands\WordControls.cs" />
     <Compile Include="Core\Automation\Commands\WordGroup\WordCheckWordInstanceExistsCommand.cs" />
-    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserCheckBrowserInstanceExistsCommand.cs" />
+    <Compile Include="Core\Automation\Commands\WebBrowserGroup\SeleniumBrowserCheckWebBrowserInstanceExistsCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelCheckExcelInstanceExistsCommand.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\GetWindowNamesCommand.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\CheckWindowNameExistsCommand.cs" />
