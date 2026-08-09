@@ -8,19 +8,19 @@ namespace taskt.Core.Automation.Commands
     [Serializable]
     [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Shape")]
-    [Attributes.ClassAttributes.CommandSettings("Get Shape Position By Name")]
-    [Attributes.ClassAttributes.Description("This command allows you to get Shape position by Name")]
-    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get Shape position by Name")]
+    [Attributes.ClassAttributes.CommandSettings("Move Shape By Name")]
+    [Attributes.ClassAttributes.Description("This command allows you to move Shape by Name")]
+    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to move Shape by Name")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements 'Excel Interop' to achieve automation.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class ExcelGetShapePositionByNameCommand : AExcelDoSomethingToShapeByShapeName, IPositionProperties
+    public sealed class ExcelMoveShapeByNameCommand : AExcelShapeActionCommands, IPositionProperties
     {
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        [PropertyDescription("Variable Name to Recieve the Chart X Position")]
-        [PropertyIsOptional(true)]
+        [PropertyDescription("X Position")]
+        [PropertyIsOptional(true, "Current X Position")]
         [PropertyDisplayText(true, "X Position")]
         [PropertyValidationRule("X Postition", PropertyValidationRule.ValidationRuleFlags.None)]
         [PropertyParameterOrder(8000)]
@@ -28,14 +28,14 @@ namespace taskt.Core.Automation.Commands
 
         [XmlAttribute]
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
-        [PropertyDescription("Variable Name to Recieve the Chart Y Position")]
-        [PropertyIsOptional(true)]
+        [PropertyDescription("Y Position")]
+        [PropertyIsOptional(true, "Current Y Position")]
         [PropertyDisplayText(true, "Y Position")]
         [PropertyValidationRule("Y Postition", PropertyValidationRule.ValidationRuleFlags.None)]
         [PropertyParameterOrder(8001)]
         public string v_YPosition { get; set; }
 
-        public ExcelGetShapePositionByNameCommand()
+        public ExcelMoveShapeByNameCommand()
         {
         }
 
@@ -45,11 +45,27 @@ namespace taskt.Core.Automation.Commands
             {
                 if (!string.IsNullOrEmpty(v_XPosition))
                 {
-                    ((double)shape.Left).StoreInUserVariable(engine, v_XPosition);
+                    var left = (float)this.ExpandValueOrUserVariableAsDecimal(nameof(v_XPosition), "X Position", engine);
+                    if (left >= 0.0)
+                    {
+                        shape.Left = left;
+                    }
+                    else
+                    {
+                        throw new Exception($"Strange X Position. Value: '{v_XPosition}', Expanded Value: '{left}'");
+                    }
                 }
                 if (!string.IsNullOrEmpty(v_YPosition))
                 {
-                    ((double)shape.Top).StoreInUserVariable(engine, v_YPosition);
+                    var top = (float)this.ExpandValueOrUserVariableAsDecimal(nameof(v_YPosition), "Y Position", engine);
+                    if (top >= 0.0)
+                    {
+                        shape.Top = top;
+                    }
+                    else
+                    {
+                        throw new Exception($"Strange Y Position. Value: '{v_YPosition}', Expanded Value: '{top}'");
+                    }
                 }
             }));
         }
