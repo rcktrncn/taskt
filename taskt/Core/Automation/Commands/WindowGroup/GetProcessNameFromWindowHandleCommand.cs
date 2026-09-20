@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -109,7 +110,8 @@ namespace taskt.Core.Automation.Commands
                 ////var proc = Process.GetProcesses().Where(p => (p.MainWindowHandle == whnd)).First();
                 //proc.ProcessName.StoreInUserVariable(engine, v_Result);
 
-                GetWindowThreadProcessId(whnd, out uint pid);
+                //GetWindowThreadProcessId(whnd, out uint pid);
+                var pid = WindowAPI.GetWindowProcessId(whnd);
                 if (pid != 0)
                 {
                     var p = Process.GetProcessById((int)pid);

@@ -190,6 +190,17 @@ namespace taskt.Core.Native.Windows
         [DllImport("user32.dll")]
         private static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, uint wFlags);
 
+        /// <summary>
+        /// flag when window move
+        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowpos
+        /// </summary>
+        private const uint MOVE_WINDOW_FLAG = 0x0045; // 0x0001 | 0x0004 | 0x0040;
+
+        /// <summary>
+        /// flag when window resize
+        /// </summary>
+        private const uint RESIZE_WINDOW_FLAG = 0x0046; // 0x0002 | 0x0004 | 0x0040;
+
         private struct WINDOWPLACEMENT
         {
             uint length;
@@ -210,6 +221,15 @@ namespace taskt.Core.Native.Windows
         [DllImport("user32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+
+        /// <summary>
+        /// get process id from window handle
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <param name="lpdwProcessId"></param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
         /// <summary>
         /// set window state
@@ -377,6 +397,50 @@ namespace taskt.Core.Native.Windows
                 }
                 return true;
             }, GCHandle.ToIntPtr(listHandle));
+            return ret;
+        }
+
+        /// <summary>
+        /// get window rect
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <returns></returns>
+        public static RECT GetWindowRect(IntPtr whnd)
+        {
+            GetWindowRect(whnd, out RECT r);
+            return r;
+        }
+
+        /// <summary>
+        /// move window
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public static void MoveWindow(IntPtr whnd, int x, int y)
+        {
+            SetWindowPos(whnd, 0, x, y, 0, 0, MOVE_WINDOW_FLAG);
+        }
+
+        /// <summary>
+        /// resize window
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        public static void ResizeWindow(IntPtr whnd, int width, int height)
+        {
+            SetWindowPos(whnd, 0, 0, 0, width, height, RESIZE_WINDOW_FLAG);
+        }
+
+        /// <summary>
+        /// get window process id
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <returns></returns>
+        public static uint GetWindowProcessId(IntPtr whnd)
+        {
+            GetWindowThreadProcessId(whnd, out uint ret);
             return ret;
         }
     }
