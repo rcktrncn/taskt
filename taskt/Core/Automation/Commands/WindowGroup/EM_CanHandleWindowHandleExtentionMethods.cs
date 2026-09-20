@@ -85,38 +85,38 @@ namespace taskt.Core.Automation.Commands
         //[DllImport("user32.dll")]
         //public static extern bool IsWindowVisible(IntPtr hWnd);
 
-        /// <summary>
-        /// check window handle exists
-        /// </summary>
-        /// <param name="wHnd"></param>
-        /// <returns></returns>
-        public static bool CheckWindowHandleExists(IntPtr wHnd)
-        {
-            //return WindowsAPI.IsWindow(wHnd);
-            return WindowAPI.CheckWindowHandleExists(wHnd);
-        }
+        ///// <summary>
+        ///// check window handle exists
+        ///// </summary>
+        ///// <param name="wHnd"></param>
+        ///// <returns></returns>
+        //public static bool CheckWindowHandleExists(IntPtr wHnd)
+        //{
+        //    //return WindowsAPI.IsWindow(wHnd);
+        //    return WindowAPI.CheckWindowHandleExists(wHnd);
+        //}
 
-        /// <summary>
-        /// check window is minimized
-        /// </summary>
-        /// <param name="wHnd"></param>
-        /// <returns></returns>
-        public static bool IsWindowMinimized(IntPtr wHnd)
-        {
-            //return IsIconic(wHnd);
-            return WindowAPI.IsWindowMinimized(wHnd);
-        }
+        ///// <summary>
+        ///// check window is minimized
+        ///// </summary>
+        ///// <param name="wHnd"></param>
+        ///// <returns></returns>
+        //public static bool IsWindowMinimized(IntPtr wHnd)
+        //{
+        //    //return IsIconic(wHnd);
+        //    return WindowAPI.IsWindowMinimized(wHnd);
+        //}
 
-        /// <summary>
-        /// check window is maximized
-        /// </summary>
-        /// <param name="wHnd"></param>
-        /// <returns></returns>
-        public static bool IsWindowMaximized(IntPtr wHnd)
-        {
-            //return IsZoomed(wHnd);
-            return WindowAPI.IsWindowMaximized(wHnd);
-        }
+        ///// <summary>
+        ///// check window is maximized
+        ///// </summary>
+        ///// <param name="wHnd"></param>
+        ///// <returns></returns>
+        //public static bool IsWindowMaximized(IntPtr wHnd)
+        //{
+        //    //return IsZoomed(wHnd);
+        //    return WindowAPI.IsWindowMaximized(wHnd);
+        //}
 
         /// <summary>
         /// get window name

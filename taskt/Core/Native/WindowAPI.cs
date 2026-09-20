@@ -238,6 +238,10 @@ namespace taskt.Core.Native.Windows
         /// <param name="state"></param>
         public static void SetWindowState(IntPtr whnd, WindowState state)
         {
+            if (IsWindowMinimized(whnd) && (state != WindowState.MINIMIZE))
+            {
+                ShowWindowAsync(whnd, (int)state);
+            }
             ShowWindow(whnd, (int)state);
         }
 
@@ -348,6 +352,16 @@ namespace taskt.Core.Native.Windows
         }
 
         /// <summary>
+        /// get active window name
+        /// </summary>
+        /// <returns></returns>
+        public static string GetActiveWindowName()
+        {
+            var whnd = GetActiveWindowHandle();
+            return GetWindowName(whnd);
+        }
+
+        /// <summary>
         /// get window name from handle
         /// </summary>
         /// <param name="whnd"></param>
@@ -409,6 +423,17 @@ namespace taskt.Core.Native.Windows
         {
             GetWindowRect(whnd, out RECT r);
             return r;
+        }
+
+        /// <summary>
+        /// get window size
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <returns>(width, height)</returns>
+        public static (int, int) GetWindowSize(IntPtr whnd)
+        {
+            var r = GetWindowRect(whnd);
+            return (r.GetWidth(), r.GetHeight());
         }
 
         /// <summary>

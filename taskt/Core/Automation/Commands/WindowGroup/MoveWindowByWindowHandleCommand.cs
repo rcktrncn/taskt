@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -95,7 +96,8 @@ namespace taskt.Core.Automation.Commands
                 var xPos = this.ExpandValueOrVariableAsWindowXPosition(wh, engine);
                 var yPos = this.ExpandValueOrVariableAsWindowYPosition(wh, engine);
 
-                EM_WindowPositionPropertiesExtensionMethods.MoveWindow(wh, xPos, yPos);
+                //EM_WindowPositionPropertiesExtensionMethods.MoveWindow(wh, xPos, yPos);
+                WindowAPI.MoveWindow(wh, xPos, yPos);
             }
 
             void RestoreWindowProcess(IntPtr wh)
@@ -110,7 +112,8 @@ namespace taskt.Core.Automation.Commands
 
             this.WindowHandleActionBeforeWaitActivate(engine, new Action<IntPtr>((whnd) =>
             {
-                if (EM_CanHandleWindowHandleExtentionMethods.IsWindowMinimized(whnd))
+                //if (EM_CanHandleWindowHandleExtentionMethods.IsWindowMinimized(whnd))
+                if (WindowAPI.IsWindowMinimized(whnd))
                 {
                     switch (this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenWindowIsMinimized), engine))
                     {
@@ -128,7 +131,8 @@ namespace taskt.Core.Automation.Commands
                     }
                 }
 
-                if (EM_CanHandleWindowHandleExtentionMethods.IsWindowMaximized(whnd))
+                //if (EM_CanHandleWindowHandleExtentionMethods.IsWindowMaximized(whnd))
+                if (WindowAPI.IsWindowMaximized(whnd))
                 {
                     switch (this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenWindowIsMinimized), engine))
                     {

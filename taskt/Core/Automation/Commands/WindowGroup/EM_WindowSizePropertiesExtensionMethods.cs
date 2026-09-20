@@ -1,5 +1,6 @@
 ﻿using System;
 using taskt.Core.Automation.Engine;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -15,8 +16,9 @@ namespace taskt.Core.Automation.Commands
         /// <returns>(width, height)</returns>
         public static (int, int) GetWindowSize(IntPtr whnd)
         {
-            var r = EM_WindowRECTPropertiesExtentionMethods.GetWindowRect(whnd);
-            return (r.GetWidth(), r.GetHeight());
+            //var r = EM_WindowRECTPropertiesExtentionMethods.GetWindowRect(whnd);
+            //return (r.GetWidth(), r.GetHeight());
+            return WindowAPI.GetWindowSize(whnd);
         }
 
         /// <summary>
