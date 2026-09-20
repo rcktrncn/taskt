@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Automation;
 using taskt.Core.Automation.Commands.WindowGroup;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands.UIAutomationGroup
 {
@@ -49,7 +50,8 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
             var walker = TreeWalker.RawViewWalker;
             try
             {
-                var desktopHandle = EM_CanHandleDesktopWindowHandleExtensionMethods.GetDesktopWindowHandle();
+                //var desktopHandle = EM_CanHandleDesktopWindowHandleExtensionMethods.GetDesktopWindowHandle();
+                var desktopHandle = WindowAPI.GetDesktopWindowHandle();
 
                 var currentElement = targetElement;
                 while (true)
