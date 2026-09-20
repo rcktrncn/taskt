@@ -443,5 +443,34 @@ namespace taskt.Core.Native.Windows
             GetWindowThreadProcessId(whnd, out uint ret);
             return ret;
         }
+
+        /// <summary>
+        /// get window state
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <returns>integer value and state text</returns>
+        public static (int, string) GetWindowState(IntPtr whnd)
+        {
+            var info = new WINDOWPLACEMENT();
+            GetWindowPlacement(whnd, ref info);
+            string stateText;
+            switch (info.showCmd)
+            {
+                case 1:
+                    stateText = "Restore";
+                    break;
+                case 2:
+                    stateText = "Minimize";
+                    break;
+                case 3:
+                    stateText = "Maximize";
+                    break;
+                default:
+                    stateText = "Unknown";
+                    break;
+            }
+
+            return ((int)info.showCmd, stateText);
+        }
     }
 }
