@@ -53,22 +53,22 @@ namespace taskt.Core.Automation.Commands
         //    return true;
         //}
 
-        /// <summary>
-        /// get window names and handles
-        /// </summary>
-        /// <returns></returns>
-        public static List<(IntPtr, string)> GetAllWindowNamesAndHandles()
-        {
-            //windowHandleNamePair = CreateEmptyWindowNameAndHandleList();
+        ///// <summary>
+        ///// get window names and handles
+        ///// </summary>
+        ///// <returns></returns>
+        //public static List<(IntPtr, string)> GetAllWindowNamesAndHandles()
+        //{
+        //    //windowHandleNamePair = CreateEmptyWindowNameAndHandleList();
 
-            //EM_CanHandleWindowHandleExtentionMethods.EnumWindows(new EM_CanHandleWindowHandleExtentionMethods.EnumWindowsDelegate(EnumerateWindowNames), IntPtr.Zero);
+        //    //EM_CanHandleWindowHandleExtentionMethods.EnumWindows(new EM_CanHandleWindowHandleExtentionMethods.EnumWindowsDelegate(EnumerateWindowNames), IntPtr.Zero);
 
-            //var ret = new List<(IntPtr, string)>(windowHandleNamePair);
-            //windowHandleNamePair = null;
-            //return ret;
+        //    //var ret = new List<(IntPtr, string)>(windowHandleNamePair);
+        //    //windowHandleNamePair = null;
+        //    //return ret;
 
-            return WindowAPI.GetAllWindowNamesAndHandles();
-        }
+        //    return WindowAPI.GetAllWindowNamesAndHandles();
+        //}
 
         /// <summary>
         /// get all window names
@@ -77,23 +77,25 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static List<string> GetAllWindowNames(bool useDistinct = true)
         {
-            var t = GetAllWindowNamesAndHandles().Select(item => item.Item2);
-            if (useDistinct)
-            {
-                t = t.Distinct();
-            }
-            return t.ToList();
+            //var t = GetAllWindowNamesAndHandles().Select(item => item.Item2);
+            //if (useDistinct)
+            //{
+            //    t = t.Distinct();
+            //}
+            //return t.ToList();
+
+            return WindowAPI.GetAllWindowNames();
         }
 
-        /// <summary>
-        /// get active window name
-        /// </summary>
-        /// <returns></returns>
-        public static string GetActiveWindowName()
-        {
-            //return EM_CanHandleWindowHandleExtentionMethods.GetWindowName(EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle());
-            return WindowAPI.GetActiveWindowName();
-        }
+        ///// <summary>
+        ///// get active window name
+        ///// </summary>
+        ///// <returns></returns>
+        //public static string GetActiveWindowName()
+        //{
+        //    //return EM_CanHandleWindowHandleExtentionMethods.GetWindowName(EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle());
+        //    return WindowAPI.GetActiveWindowName();
+        //}
 
         ///// <summary>
         ///// create empty window name and handle list

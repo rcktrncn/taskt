@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
@@ -358,7 +359,8 @@ namespace taskt.Core.Automation.Commands
                     throw new Exception($"Search method '{param["Search Method"]}' is not support.");
             }
 
-            return searchFunc(EM_CanHandleWindowNameExtensionMethods.GetActiveWindowName(), param["Window Name"]);
+            //return searchFunc(EM_CanHandleWindowNameExtensionMethods.GetActiveWindowName(), param["Window Name"]);
+            return searchFunc(WindowAPI.GetActiveWindowName(), param["Window Name"]);
         }
 
         private static bool DetermineStatementTruth_File(DataTable actionParameterTable, Engine.AutomationEngineInstance engine)
@@ -431,7 +433,8 @@ namespace taskt.Core.Automation.Commands
             if (windowName == VariableNameControls.GetWrappedVariableName(Engine.SystemVariables.Window_CurrentWindowName.VariableName, engine))
             {
                 //windowName = User32.User32Functions.GetActiveWindowTitle();
-                windowName = EM_CanHandleWindowNameExtensionMethods.GetActiveWindowName();
+                //windowName = EM_CanHandleWindowNameExtensionMethods.GetActiveWindowName();
+                windowName = WindowAPI.GetActiveWindowName();
             }
 
             var searchTb = new DataTable();
