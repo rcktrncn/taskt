@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
@@ -153,7 +154,8 @@ namespace taskt.Core.Automation.Commands
             if (!string.IsNullOrEmpty(v_StartedProcessName) || !string.IsNullOrEmpty(v_WindowName) ||
                 !string.IsNullOrEmpty(v_WindowHandle))
             {
-                var currentHandle = (p.MainWindowHandle != IntPtr.Zero) ? p.MainWindowHandle : EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle();
+                //var currentHandle = (p.MainWindowHandle != IntPtr.Zero) ? p.MainWindowHandle : EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle();
+                var currentHandle = (p.MainWindowHandle != IntPtr.Zero) ? p.MainWindowHandle : WindowAPI.GetActiveWindowHandle();
 
                 // process name
                 if (!string.IsNullOrEmpty(v_StartedProcessName))

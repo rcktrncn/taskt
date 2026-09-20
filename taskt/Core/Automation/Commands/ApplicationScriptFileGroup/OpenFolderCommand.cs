@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
@@ -68,7 +69,8 @@ namespace taskt.Core.Automation.Commands
                     var wait = this.ExpandValueOrUserVariableAsInteger(nameof(v_WaitTimeForOpen), engine);
                     System.Threading.Thread.Sleep(wait * 1000);
 
-                    var currentHandle = EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle();
+                    //var currentHandle = EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle();
+                    var currentHandle = WindowAPI.GetActiveWindowHandle();
 
                     if (!string.IsNullOrEmpty(v_WindowNameResult))
                     {

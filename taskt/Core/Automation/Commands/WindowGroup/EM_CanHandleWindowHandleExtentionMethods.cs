@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using taskt.Core.Native.Windows;
-
-namespace taskt.Core.Automation.Commands
+﻿namespace taskt.Core.Automation.Commands
 {
     public class EM_CanHandleWindowHandleExtentionMethods
     {
@@ -118,41 +114,30 @@ namespace taskt.Core.Automation.Commands
         //    return WindowAPI.IsWindowMaximized(wHnd);
         //}
 
-        /// <summary>
-        /// get window name
-        /// </summary>
-        /// <param name="wHnd"></param>
-        /// <returns></returns>
-        public static string GetWindowName(IntPtr wHnd)
-        {
-            //int titleLengthA = GetWindowTextLengthW(wHnd);
-            //StringBuilder title = new StringBuilder(titleLengthA + 1);
-            //GetWindowTextW(wHnd, title, title.Capacity);
-            //return title.ToString();
+        ///// <summary>
+        ///// get window name
+        ///// </summary>
+        ///// <param name="wHnd"></param>
+        ///// <returns></returns>
+        //public static string GetWindowName(IntPtr wHnd)
+        //{
+        //    //int titleLengthA = GetWindowTextLengthW(wHnd);
+        //    //StringBuilder title = new StringBuilder(titleLengthA + 1);
+        //    //GetWindowTextW(wHnd, title, title.Capacity);
+        //    //return title.ToString();
 
-            return WindowAPI.GetWindowName(wHnd);
-        }
+        //    return WindowAPI.GetWindowName(wHnd);
+        //}
 
-        /// <summary>
-        /// get window handle
-        /// </summary>
-        /// <returns></returns>
-        public static IntPtr GetActiveWindowHandle()
-        {
-            //return GetForegroundWindow();
-            return WindowAPI.GetActiveWindowHandle();
-        }
-
-        /// <summary>
-        /// check text is current window handle keyword
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        public static bool IsCurrentWindowHandleKeyword(string str, Engine.AutomationEngineInstance engine)
-        {
-            return (str == VariableNameControls.GetWrappedVariableName(Engine.SystemVariables.Window_CurrentWindowHandle.VariableName, engine));
-        }
+        ///// <summary>
+        ///// get window handle
+        ///// </summary>
+        ///// <returns></returns>
+        //public static IntPtr GetActiveWindowHandle()
+        //{
+        //    //return GetForegroundWindow();
+        //    return WindowAPI.GetActiveWindowHandle();
+        //}
 
         ///// <summary>
         ///// enum windows
@@ -169,21 +154,32 @@ namespace taskt.Core.Automation.Commands
         //    return true;
         //}
 
+        ///// <summary>
+        ///// get all window handles
+        ///// </summary>
+        ///// <returns></returns>
+        //public static List<IntPtr> GetAllWindowHandles()
+        //{
+        //    //windowHandle = new List<IntPtr>();
+
+        //    //EnumWindows(new EnumWindowsDelegate(EnumerateWindowHandle), IntPtr.Zero);
+
+        //    //var ret = new List<IntPtr>(windowHandle);
+        //    //windowHandle = null;
+        //    //return ret;
+
+        //    return WindowAPI.GetAllWindowHandles();
+        //}
+
         /// <summary>
-        /// get all window handles
+        /// check text is current window handle keyword
         /// </summary>
+        /// <param name="str"></param>
+        /// <param name="engine"></param>
         /// <returns></returns>
-        public static List<IntPtr> GetAllWindowHandles()
+        public static bool IsCurrentWindowHandleKeyword(string str, Engine.AutomationEngineInstance engine)
         {
-            //windowHandle = new List<IntPtr>();
-
-            //EnumWindows(new EnumWindowsDelegate(EnumerateWindowHandle), IntPtr.Zero);
-
-            //var ret = new List<IntPtr>(windowHandle);
-            //windowHandle = null;
-            //return ret;
-
-            return WindowAPI.GetAllWindowHandles();
+            return (str == VariableNameControls.GetWrappedVariableName(Engine.SystemVariables.Window_CurrentWindowHandle.VariableName, engine));
         }
     }
 }

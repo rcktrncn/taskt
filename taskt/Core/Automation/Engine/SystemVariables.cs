@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using taskt.Core.Automation.Commands;
 using taskt.Core.IO;
+using taskt.Core.Native.Windows;
 using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Engine
@@ -232,10 +233,13 @@ namespace taskt.Core.Automation.Engine
             DateTime_Now_FileSafe.VariableValue = DateTime.Now.ToString("MM-dd-yy HH.mm.ss");
             DateTime_Now_FileSafeLong.VariableValue = DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss");
 
-            Env_ActiveWindowTitle.VariableValue = EM_CanHandleWindowNameExtensionMethods.GetActiveWindowName(); ;
+            Env_ActiveWindowTitle.VariableValue = WindowAPI.GetActiveWindowName(); ;
 
-            Window_CurrentWindowName.VariableValue = EM_CanHandleWindowNameExtensionMethods.GetActiveWindowName();
-            Window_CurrentWindowHandle.VariableValue = EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle().ToString();
+            //Window_CurrentWindowName.VariableValue = WindowAPI.GetActiveWindowName();
+            Window_CurrentWindowName.VariableValue = Env_ActiveWindowTitle.VariableValue;
+
+            //Window_CurrentWindowHandle.VariableValue = EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle().ToString();
+            Window_CurrentWindowHandle.VariableValue = WindowAPI.GetActiveWindowHandle().ToString();
 
             // NOTE: Keep it commented out as this is where it slows down the script execution.
             //Taskt_EngineContext.VariableValue = engine.GetEngineContext();

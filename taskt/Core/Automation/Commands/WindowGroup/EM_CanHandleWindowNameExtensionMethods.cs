@@ -91,17 +91,18 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static string GetActiveWindowName()
         {
-            return EM_CanHandleWindowHandleExtentionMethods.GetWindowName(EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle());
+            //return EM_CanHandleWindowHandleExtentionMethods.GetWindowName(EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle());
+            return WindowAPI.GetActiveWindowName();
         }
 
-        /// <summary>
-        /// create empty window name and handle list
-        /// </summary>
-        /// <returns></returns>
-        public static List<(IntPtr, string)> CreateEmptyWindowNameAndHandleList()
-        {
-            return new List<(IntPtr, string)>();
-        }
+        ///// <summary>
+        ///// create empty window name and handle list
+        ///// </summary>
+        ///// <returns></returns>
+        //public static List<(IntPtr, string)> CreateEmptyWindowNameAndHandleList()
+        //{
+        //    return new List<(IntPtr, string)>();
+        //}
 
         /// <summary>
         /// check text is current window name keyword
