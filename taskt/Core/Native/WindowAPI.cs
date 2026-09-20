@@ -38,25 +38,25 @@ namespace taskt.Core.Native.Windows
         [DllImport("User32.dll")]
         private static extern IntPtr SetForegroundWindow(IntPtr hWnd);
 
-        /// <summary>
-        /// window state is normal
-        /// </summary>
-        private const int NORMAL = 1;
+        ///// <summary>
+        ///// window state is normal
+        ///// </summary>
+        //private const int NORMAL = 1;
 
-        /// <summary>
-        ///  window maximize value
-        /// </summary>
-        private const int MAXIMIZE = 3;
+        ///// <summary>
+        /////  window maximize value
+        ///// </summary>
+        //private const int MAXIMIZE = 3;
 
-        /// <summary>
-        /// window minimize value
-        /// </summary>
-        private const int MINIMIZE = 6;
+        ///// <summary>
+        ///// window minimize value
+        ///// </summary>
+        //private const int MINIMIZE = 6;
 
-        /// <summary>
-        /// window restore value
-        /// </summary>
-        private const int RESTORE = 9;
+        ///// <summary>
+        ///// window restore value
+        ///// </summary>
+        //private const int RESTORE = 9;
 
         /// <summary>
         /// window states
@@ -202,6 +202,9 @@ namespace taskt.Core.Native.Windows
         /// </summary>
         private const uint RESIZE_WINDOW_FLAG = 0x0046; // 0x0002 | 0x0004 | 0x0040;
 
+        /// <summary>
+        /// window state struct
+        /// </summary>
         private struct WINDOWPLACEMENT
         {
             uint length;
