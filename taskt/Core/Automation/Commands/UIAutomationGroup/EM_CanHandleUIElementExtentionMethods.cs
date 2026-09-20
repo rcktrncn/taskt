@@ -91,7 +91,8 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
             catch
             {
                 // try other method
-                var windowNames = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames();
+                //var windowNames = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames();
+                var windowNames = WindowAPI.GetAllWindowNames();
                 if ((targetElement.Current.NativeWindowHandle != 0) && (windowNames.Contains(targetElement.Current.Name)))
                 {
                     return (targetElement.Current.Name, (IntPtr)targetElement.Current.NativeWindowHandle);

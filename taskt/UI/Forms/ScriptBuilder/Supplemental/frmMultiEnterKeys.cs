@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using taskt.Core.Automation.Commands;
+using taskt.Core.Native.Windows;
 using taskt.UI.CustomControls;
 
 namespace taskt.UI.Forms.ScriptBuilder.Supplemental
@@ -309,7 +310,8 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             string currentWindow = cmbWindowName.Text;
 
-            var windowNames = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames();
+            //var windowNames = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames();
+            var windowNames = WindowAPI.GetAllWindowNames();
 
             cmbWindowName.BeginUpdate();
             cmbWindowName.Items.Clear();

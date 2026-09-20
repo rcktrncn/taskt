@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using taskt.Core.Native.Windows;
-
-namespace taskt.Core.Automation.Commands
+﻿namespace taskt.Core.Automation.Commands
 {
     public static class EM_CanHandleWindowNameExtensionMethods
     {
@@ -70,22 +65,22 @@ namespace taskt.Core.Automation.Commands
         //    return WindowAPI.GetAllWindowNamesAndHandles();
         //}
 
-        /// <summary>
-        /// get all window names
-        /// </summary>
-        /// <param name="useDistinct"></param>
-        /// <returns></returns>
-        public static List<string> GetAllWindowNames(bool useDistinct = true)
-        {
-            //var t = GetAllWindowNamesAndHandles().Select(item => item.Item2);
-            //if (useDistinct)
-            //{
-            //    t = t.Distinct();
-            //}
-            //return t.ToList();
+        ///// <summary>
+        ///// get all window names
+        ///// </summary>
+        ///// <param name="useDistinct"></param>
+        ///// <returns></returns>
+        //public static List<string> GetAllWindowNames(bool useDistinct = true)
+        //{
+        //    //var t = GetAllWindowNamesAndHandles().Select(item => item.Item2);
+        //    //if (useDistinct)
+        //    //{
+        //    //    t = t.Distinct();
+        //    //}
+        //    //return t.ToList();
 
-            return WindowAPI.GetAllWindowNames();
-        }
+        //    return WindowAPI.GetAllWindowNames();
+        //}
 
         ///// <summary>
         ///// get active window name

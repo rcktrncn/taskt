@@ -416,7 +416,8 @@ namespace taskt.Core.Automation.Commands
             cmb.BeginUpdate();
             cmb.Items.Clear();
 
-            var winList = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames();
+            //var winList = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames();
+            var winList = WindowAPI.GetAllWindowNames();
 
             cmb.Items.AddRange(winList.ToArray());
 
