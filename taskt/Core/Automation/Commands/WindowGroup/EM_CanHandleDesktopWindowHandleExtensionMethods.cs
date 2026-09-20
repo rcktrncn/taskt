@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Runtime.InteropServices;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands.WindowGroup
 {
     public static class EM_CanHandleDesktopWindowHandleExtensionMethods
     {
-        [DllImport("user32.dll", SetLastError = false)]
-        private static extern IntPtr GetDesktopWindow();
+        //[DllImport("user32.dll", SetLastError = false)]
+        //private static extern IntPtr GetDesktopWindow();
 
         /// <summary>
         /// get Desktop Window Handle
@@ -14,7 +14,7 @@ namespace taskt.Core.Automation.Commands.WindowGroup
         /// <returns></returns>
         public static IntPtr GetDesktopWindowHandle()
         {
-            return GetDesktopWindow();
+            return WindowAPI.GetDesktopWindowHandle();
         }
     }
 }

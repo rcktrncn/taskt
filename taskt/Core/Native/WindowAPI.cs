@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using taskt.Core.Automation.Commands;
@@ -187,7 +188,7 @@ namespace taskt.Core.Native.Windows
         /// <param name="wFlags"></param>
         /// <returns></returns>
         [DllImport("user32.dll")]
-        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, uint wFlags);
+        private static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, uint wFlags);
 
         private struct WINDOWPLACEMENT
         {
@@ -267,6 +268,16 @@ namespace taskt.Core.Native.Windows
         }
 
         /// <summary>
+        /// check window is maximized
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <returns></returns>
+        public static bool IsWindowMaximized(IntPtr whnd)
+        {
+            return IsZoomed(whnd);
+        }
+
+        /// <summary>
         /// activate window
         /// </summary>
         /// <param name="whnd"></param>
@@ -286,6 +297,87 @@ namespace taskt.Core.Native.Windows
         public static void CloseWindow(IntPtr whnd)
         {
             SendMessage(whnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+        }
+
+        /// <summary>
+        /// get Desktop Window Handle
+        /// </summary>
+        /// <returns></returns>
+        public static IntPtr GetDesktopWindowHandle()
+        {
+            return GetDesktopWindow();
+        }
+
+        /// <summary>
+        /// check window handle exists
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <returns></returns>
+        public static bool CheckWindowHandleExists(IntPtr whnd)
+        {
+            return IsWindow(whnd);
+        }
+
+        /// <summary>
+        /// get activate window handle
+        /// </summary>
+        /// <returns></returns>
+        public static IntPtr GetActiveWindowHandle()
+        {
+            return GetForegroundWindow();
+        }
+
+        /// <summary>
+        /// get window name from handle
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <returns></returns>
+        public static string GetWindowName(IntPtr whnd)
+        {
+            int titleLengthA = GetWindowTextLengthW(whnd);
+            StringBuilder title = new StringBuilder(titleLengthA + 1);
+            GetWindowTextW(whnd, title, title.Capacity);
+            return title.ToString();
+        }
+
+        /// <summary>
+        /// get all window handles
+        /// </summary>
+        /// <returns></returns>
+        public static List<IntPtr> GetAllWindowHandles()
+        {
+            var ret = new List<IntPtr>();
+            var listHandle = GCHandle.Alloc(ret);
+
+            EnumWindows((whnd, lParam) =>
+            {
+                var list = (List<IntPtr>)GCHandle.FromIntPtr(lParam).Target;
+                list.Add(whnd);
+                return true;
+            }, GCHandle.ToIntPtr(listHandle));
+            return ret;
+        }
+
+        /// <summary>
+        /// get all window names and handles
+        /// </summary>
+        /// <returns></returns>
+        public static List<(IntPtr, string)> GetAllWindowNamesAndHandles()
+        {
+            var ret = new List<(IntPtr, string)>();
+            var listHandle = GCHandle.Alloc(ret);
+
+            EnumWindows((whnd, lParam) =>
+            {
+                if (IsWindowVisible(whnd))
+                {
+                    var title = GetWindowName(whnd);
+                    var list = (List<(IntPtr, string)>)GCHandle.FromIntPtr(lParam).Target;
+                    list.Add((whnd, title));
+                }
+                return true;
+            }, GCHandle.ToIntPtr(listHandle));
+            return ret;
         }
     }
 }

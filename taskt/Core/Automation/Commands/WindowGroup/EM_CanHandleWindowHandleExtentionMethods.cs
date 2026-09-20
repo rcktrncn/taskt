@@ -1,90 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
     public class EM_CanHandleWindowHandleExtentionMethods
     {
-        /// <summary>
-        /// templorary window handles list
-        /// </summary>
-        private static List<IntPtr> windowHandle = null;
+        ///// <summary>
+        ///// templorary window handles list
+        ///// </summary>
+        //private static List<IntPtr> windowHandle = null;
 
-        /// <summary>
-        /// check window handle exists
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll")]
-        private static extern bool IsWindow(IntPtr hWnd);
+        ///// <summary>
+        ///// check window handle exists
+        ///// </summary>
+        ///// <param name="hWnd"></param>
+        ///// <returns></returns>
+        //[DllImport("user32.dll")]
+        //private static extern bool IsWindow(IntPtr hWnd);
 
-        /// <summary>
-        /// get window title length
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll")]
-        private static extern int GetWindowTextLengthW(IntPtr hWnd);
+        ///// <summary>
+        ///// get window title length
+        ///// </summary>
+        ///// <param name="hWnd"></param>
+        ///// <returns></returns>
+        //[DllImport("user32.dll")]
+        //private static extern int GetWindowTextLengthW(IntPtr hWnd);
 
-        /// <summary>
-        /// get window title
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <param name="text"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        private static extern int GetWindowTextW(IntPtr hWnd, StringBuilder text, int count);
+        ///// <summary>
+        ///// get window title
+        ///// </summary>
+        ///// <param name="hWnd"></param>
+        ///// <param name="text"></param>
+        ///// <param name="count"></param>
+        ///// <returns></returns>
+        //[DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        //private static extern int GetWindowTextW(IntPtr hWnd, StringBuilder text, int count);
 
-        /// <summary>
-        /// check window is minimized
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll")]
-        private static extern bool IsIconic(IntPtr hWnd);
+        ///// <summary>
+        ///// check window is minimized
+        ///// </summary>
+        ///// <param name="hWnd"></param>
+        ///// <returns></returns>
+        //[DllImport("user32.dll")]
+        //private static extern bool IsIconic(IntPtr hWnd);
 
-        /// <summary>
-        /// check window is maximized
-        /// </summary>
-        /// <param name="hWhnd"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll")]
-        private static extern bool IsZoomed(IntPtr hWhnd);
+        ///// <summary>
+        ///// check window is maximized
+        ///// </summary>
+        ///// <param name="hWhnd"></param>
+        ///// <returns></returns>
+        //[DllImport("user32.dll")]
+        //private static extern bool IsZoomed(IntPtr hWhnd);
 
-        /// <summary>
-        /// get active window handle
-        /// </summary>
-        /// <returns></returns>
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetForegroundWindow();
+        ///// <summary>
+        ///// get active window handle
+        ///// </summary>
+        ///// <returns></returns>
+        //[DllImport("user32.dll")]
+        //private static extern IntPtr GetForegroundWindow();
 
-        /// <summary>
-        /// enum window delegate
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <param name="lparam"></param>
-        /// <returns></returns>
-        public delegate bool EnumWindowsDelegate(IntPtr hWnd, IntPtr lparam);
+        ///// <summary>
+        ///// enum window delegate
+        ///// </summary>
+        ///// <param name="hWnd"></param>
+        ///// <param name="lparam"></param>
+        ///// <returns></returns>
+        //public delegate bool EnumWindowsDelegate(IntPtr hWnd, IntPtr lparam);
 
-        /// <summary>
-        /// enum all windows
-        /// </summary>
-        /// <param name="lpEnumFunc"></param>
-        /// <param name="lparam"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll")]
-        public static extern int EnumWindows(EnumWindowsDelegate lpEnumFunc, IntPtr lparam);
+        ///// <summary>
+        ///// enum all windows
+        ///// </summary>
+        ///// <param name="lpEnumFunc"></param>
+        ///// <param name="lparam"></param>
+        ///// <returns></returns>
+        //[DllImport("user32.dll")]
+        //public static extern int EnumWindows(EnumWindowsDelegate lpEnumFunc, IntPtr lparam);
 
-        /// <summary>
-        /// check window is visible
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll")]
-        public static extern bool IsWindowVisible(IntPtr hWnd);
+        ///// <summary>
+        ///// check window is visible
+        ///// </summary>
+        ///// <param name="hWnd"></param>
+        ///// <returns></returns>
+        //[DllImport("user32.dll")]
+        //public static extern bool IsWindowVisible(IntPtr hWnd);
 
         /// <summary>
         /// check window handle exists
@@ -93,7 +92,8 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static bool CheckWindowHandleExists(IntPtr wHnd)
         {
-            return IsWindow(wHnd);
+            //return WindowsAPI.IsWindow(wHnd);
+            return WindowAPI.CheckWindowHandleExists(wHnd);
         }
 
         /// <summary>
@@ -103,7 +103,8 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static bool IsWindowMinimized(IntPtr wHnd)
         {
-            return IsIconic(wHnd);
+            //return IsIconic(wHnd);
+            return WindowAPI.IsWindowMinimized(wHnd);
         }
 
         /// <summary>
@@ -113,7 +114,8 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static bool IsWindowMaximized(IntPtr wHnd)
         {
-            return IsZoomed(wHnd);
+            //return IsZoomed(wHnd);
+            return WindowAPI.IsWindowMaximized(wHnd);
         }
 
         /// <summary>
@@ -123,10 +125,12 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static string GetWindowName(IntPtr wHnd)
         {
-            int titleLengthA = GetWindowTextLengthW(wHnd);
-            StringBuilder title = new StringBuilder(titleLengthA + 1);
-            GetWindowTextW(wHnd, title, title.Capacity);
-            return title.ToString();
+            //int titleLengthA = GetWindowTextLengthW(wHnd);
+            //StringBuilder title = new StringBuilder(titleLengthA + 1);
+            //GetWindowTextW(wHnd, title, title.Capacity);
+            //return title.ToString();
+
+            return WindowAPI.GetWindowName(wHnd);
         }
 
         /// <summary>
@@ -135,7 +139,8 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static IntPtr GetActiveWindowHandle()
         {
-            return GetForegroundWindow();
+            //return GetForegroundWindow();
+            return WindowAPI.GetActiveWindowHandle();
         }
 
         /// <summary>
@@ -149,20 +154,20 @@ namespace taskt.Core.Automation.Commands
             return (str == VariableNameControls.GetWrappedVariableName(Engine.SystemVariables.Window_CurrentWindowHandle.VariableName, engine));
         }
 
-        /// <summary>
-        /// enum windows
-        /// </summary>
-        /// <param name="wHnd"></param>
-        /// <param name="lParam"></param>
-        /// <returns></returns>
-        private static bool EnumerateWindowHandle(IntPtr wHnd, IntPtr lParam)
-        {
-            if (IsWindowVisible(wHnd))
-            {
-                windowHandle.Add(wHnd);
-            }
-            return true;
-        }
+        ///// <summary>
+        ///// enum windows
+        ///// </summary>
+        ///// <param name="wHnd"></param>
+        ///// <param name="lParam"></param>
+        ///// <returns></returns>
+        //private static bool EnumerateWindowHandle(IntPtr wHnd, IntPtr lParam)
+        //{
+        //    if (IsWindowVisible(wHnd))
+        //    {
+        //        windowHandle.Add(wHnd);
+        //    }
+        //    return true;
+        //}
 
         /// <summary>
         /// get all window handles
@@ -170,13 +175,15 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static List<IntPtr> GetAllWindowHandles()
         {
-            windowHandle = new List<IntPtr>();
+            //windowHandle = new List<IntPtr>();
 
-            EnumWindows(new EnumWindowsDelegate(EnumerateWindowHandle), IntPtr.Zero);
+            //EnumWindows(new EnumWindowsDelegate(EnumerateWindowHandle), IntPtr.Zero);
 
-            var ret = new List<IntPtr>(windowHandle);
-            windowHandle = null;
-            return ret;
+            //var ret = new List<IntPtr>(windowHandle);
+            //windowHandle = null;
+            //return ret;
+
+            return WindowAPI.GetAllWindowHandles();
         }
     }
 }
