@@ -5,6 +5,9 @@ using taskt.Core.Automation.Commands;
 
 namespace taskt.Core.Native.Windows
 {
+    /// <summary>
+    /// Window API methods
+    /// </summary>
     static public class WindowAPI
     {
         /// <summary>
@@ -36,20 +39,35 @@ namespace taskt.Core.Native.Windows
         /// <summary>
         /// window state is normal
         /// </summary>
-        private const int WINDOW_NORMAL = 1;
+        private const int NORMAL = 1;
 
         /// <summary>
         ///  window maximize value
         /// </summary>
         private const int MAXIMIZE = 3;
+
         /// <summary>
         /// window minimize value
         /// </summary>
         private const int MINIMIZE = 6;
+
         /// <summary>
         /// window restore value
         /// </summary>
         private const int RESTORE = 9;
+
+        /// <summary>
+        /// window states
+        /// </summary>
+        public enum WindowState
+        {
+            NORMAL = 1,
+            MAXIMIZE = 3,
+
+            MINIMIZE = 6,
+
+            RESTORE = 9,
+        }
 
         /// <summary>
         /// for close window by whnd
@@ -191,5 +209,74 @@ namespace taskt.Core.Native.Windows
         [DllImport("user32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+
+        /// <summary>
+        /// set window state
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <param name="state"></param>
+        public static void SetWindowState(IntPtr whnd, WindowState state)
+        {
+            ShowWindow(whnd, (int)state);
+        }
+
+        /// <summary>
+        /// set window to normal
+        /// </summary>
+        /// <param name="whnd"></param>
+        public static void SetWindowNormal(IntPtr whnd)
+        {
+            SetWindowState(whnd, WindowState.NORMAL);
+        }
+
+        /// <summary>
+        /// set window to miximize
+        /// </summary>
+        /// <param name="whnd"></param>
+        public static void SetWindowMaximize(IntPtr whnd)
+        {
+            SetWindowState(whnd, WindowState.MAXIMIZE);
+        }
+
+        /// <summary>
+        /// set window to minimize
+        /// </summary>
+        /// <param name="whnd"></param>
+        public static void SetWindowMinimize(IntPtr whnd)
+        {
+            SetWindowState(whnd, WindowState.MINIMIZE);
+        }
+
+        /// <summary>
+        /// set window to restore
+        /// </summary>
+        /// <param name="whnd"></param>
+        public static void SetWindowRestore(IntPtr whnd)
+        {
+            SetWindowState(whnd, WindowState.RESTORE);
+        }
+
+        /// <summary>
+        /// check window is minimized
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <returns></returns>
+        public static bool IsWindowMinimized(IntPtr whnd)
+        {
+            return IsIconic(whnd);
+        }
+
+        /// <summary>
+        /// activate window
+        /// </summary>
+        /// <param name="whnd"></param>
+        public static void ActivateWindow(IntPtr whnd)
+        {
+            if (IsWindowMinimized(whnd))
+            {
+                SetWindowNormal(whnd);
+            }
+            SetForegroundWindow(whnd);
+        }
     }
 }
