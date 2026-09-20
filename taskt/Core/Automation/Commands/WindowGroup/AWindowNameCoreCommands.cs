@@ -47,10 +47,6 @@ namespace taskt.Core.Automation.Commands
         [PropertyParameterOrder(8400)]
         public virtual string v_TrimBeforeCheck { get; set; }
 
-        //public AWindowNameCoreCommands()
-        //{
-        //}
-
         public override void Refresh(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
             ControlsList.GetPropertyControl<ComboBox>(nameof(v_WindowName)).AddWindowNames();
