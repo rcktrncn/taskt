@@ -1,7 +1,4 @@
-﻿using System;
-using taskt.Core.Native.Windows;
-
-namespace taskt.Core.Automation.Commands
+﻿namespace taskt.Core.Automation.Commands
 {
     public static class EM_WindowRECTPropertiesExtentionMethods
     {
@@ -28,16 +25,16 @@ namespace taskt.Core.Automation.Commands
         //[DllImport("user32.dll")]
         //public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, uint wFlags);
 
-        /// <summary>
-        /// get window rect
-        /// </summary>
-        /// <param name="whnd"></param>
-        /// <returns></returns>
-        public static RECT GetWindowRect(IntPtr whnd)
-        {
-            //GetWindowRect(whnd, out RECT r);
-            //return r;
-            return WindowAPI.GetWindowRect(whnd);
-        }
+        ///// <summary>
+        ///// get window rect
+        ///// </summary>
+        ///// <param name="whnd"></param>
+        ///// <returns></returns>
+        //public static RECT GetWindowRect(IntPtr whnd)
+        //{
+        //    //GetWindowRect(whnd, out RECT r);
+        //    //return r;
+        //    return WindowAPI.GetWindowRect(whnd);
+        //}
     }
 }

@@ -453,6 +453,17 @@ namespace taskt.Core.Native.Windows
         }
 
         /// <summary>
+        /// get window position
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <returns>(top, left)</returns>
+        public static (int, int) GetWindowPosition(IntPtr whnd)
+        {
+            var r = GetWindowRect(whnd);
+            return (r.top, r.left);
+        }
+
+        /// <summary>
         /// move window
         /// </summary>
         /// <param name="whnd"></param>
