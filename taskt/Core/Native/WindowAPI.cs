@@ -81,7 +81,7 @@ namespace taskt.Core.Native.Windows
         private static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
 
         /// <summary>
-        /// close value
+        /// window close value
         /// </summary>
         private static readonly UInt32 WM_CLOSE = 0x0010;
 
@@ -277,6 +277,15 @@ namespace taskt.Core.Native.Windows
                 SetWindowNormal(whnd);
             }
             SetForegroundWindow(whnd);
+        }
+
+        /// <summary>
+        /// close window
+        /// </summary>
+        /// <param name="whnd"></param>
+        public static void CloseWindow(IntPtr whnd)
+        {
+            SendMessage(whnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
         }
     }
 }
