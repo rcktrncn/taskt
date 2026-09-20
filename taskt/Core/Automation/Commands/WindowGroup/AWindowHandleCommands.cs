@@ -28,9 +28,5 @@ namespace taskt.Core.Automation.Commands
         [PropertyDisplayText(false, "Window Name")]
         [PropertyParameterOrder(10000)]
         public virtual string v_WindowNameResult { get; set; }
-
-        //public AWindowHandleCommands()
-        //{
-        //}
     }
 }

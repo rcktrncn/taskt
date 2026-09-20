@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Runtime.InteropServices;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -25,21 +25,21 @@ namespace taskt.Core.Automation.Commands
 
         //public string v_WindowTitleResult {get;set;}
 
-        /// <summary>
-        /// for close window by whnd
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <param name="Msg"></param>
-        /// <param name="wParam"></param>
-        /// <param name="lParam"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll")]
-        private static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+        ///// <summary>
+        ///// for close window by whnd
+        ///// </summary>
+        ///// <param name="hWnd"></param>
+        ///// <param name="Msg"></param>
+        ///// <param name="wParam"></param>
+        ///// <param name="lParam"></param>
+        ///// <returns></returns>
+        //[DllImport("user32.dll")]
+        //private static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
 
-        /// <summary>
-        /// close value
-        /// </summary>
-        private static readonly UInt32 WM_CLOSE = 0x0010;
+        ///// <summary>
+        ///// close value
+        ///// </summary>
+        //private static readonly UInt32 WM_CLOSE = 0x0010;
 
         public CloseWindowByWindowHandle()
         {
@@ -58,7 +58,8 @@ namespace taskt.Core.Automation.Commands
 
             this.WindowHandleActionBeforeWaitActivate(engine, new Action<IntPtr>((whnd) =>
             {
-                SendMessage(whnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                //SendMessage(whnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                WindowAPI.CloseWindow(whnd);
             }));
         }
     }

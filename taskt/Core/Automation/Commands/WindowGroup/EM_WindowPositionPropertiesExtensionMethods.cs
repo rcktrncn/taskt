@@ -1,5 +1,6 @@
 ﻿using System;
 using taskt.Core.Automation.Engine;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -81,8 +82,9 @@ namespace taskt.Core.Automation.Commands
         /// <param name="y"></param>
         public static void MoveWindow(IntPtr whnd, int x, int y)
         {
-            const uint flag = 0x0045; // 0x0001 | 0x0004 | 0x0040;
-            EM_WindowRECTPropertiesExtentionMethods.SetWindowPos(whnd, 0, x, y, 0, 0, flag);
+            //const uint flag = 0x0045; // 0x0001 | 0x0004 | 0x0040;
+            //EM_WindowRECTPropertiesExtentionMethods.SetWindowPos(whnd, 0, x, y, 0, 0, flag);
+            WindowAPI.MoveWindow(whnd, x, y);
         }
     }
 }

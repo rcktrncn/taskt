@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
     public static class EM_CanHandleWindowNameExtensionMethods
     {
-        /// <summary>
-        /// templorary window handle name pair
-        /// </summary>
-        private static List<(IntPtr, string)> windowHandleNamePair = null;
+        ///// <summary>
+        ///// templorary window handle name pair
+        ///// </summary>
+        //private static List<(IntPtr, string)> windowHandleNamePair = null;
 
         ///// <summary>
         ///// enum window delegate
@@ -36,21 +37,21 @@ namespace taskt.Core.Automation.Commands
         //[DllImport("user32.dll")]
         //private static extern bool IsWindowVisible(IntPtr hWnd);
 
-        /// <summary>
-        /// enum window names
-        /// </summary>
-        /// <param name="hWnd"></param>
-        /// <param name="lParam"></param>
-        /// <returns></returns>
-        private static bool EnumerateWindowNames(IntPtr hWnd, IntPtr lParam)
-        {
-            if (EM_CanHandleWindowHandleExtentionMethods.IsWindowVisible(hWnd))
-            {
-                var title = EM_CanHandleWindowHandleExtentionMethods.GetWindowName(hWnd);
-                windowHandleNamePair.Add((hWnd, title));
-            }
-            return true;
-        }
+        ///// <summary>
+        ///// enum window names
+        ///// </summary>
+        ///// <param name="hWnd"></param>
+        ///// <param name="lParam"></param>
+        ///// <returns></returns>
+        //private static bool EnumerateWindowNames(IntPtr hWnd, IntPtr lParam)
+        //{
+        //    if (WindowAPI.IsWindowVisible(hWnd))
+        //    {
+        //        var title = EM_CanHandleWindowHandleExtentionMethods.GetWindowName(hWnd);
+        //        windowHandleNamePair.Add((hWnd, title));
+        //    }
+        //    return true;
+        //}
 
         /// <summary>
         /// get window names and handles
@@ -58,13 +59,15 @@ namespace taskt.Core.Automation.Commands
         /// <returns></returns>
         public static List<(IntPtr, string)> GetAllWindowNamesAndHandles()
         {
-            windowHandleNamePair = CreateEmptyWindowNameAndHandleList();
+            //windowHandleNamePair = CreateEmptyWindowNameAndHandleList();
 
-            EM_CanHandleWindowHandleExtentionMethods.EnumWindows(new EM_CanHandleWindowHandleExtentionMethods.EnumWindowsDelegate(EnumerateWindowNames), IntPtr.Zero);
+            //EM_CanHandleWindowHandleExtentionMethods.EnumWindows(new EM_CanHandleWindowHandleExtentionMethods.EnumWindowsDelegate(EnumerateWindowNames), IntPtr.Zero);
 
-            var ret = new List<(IntPtr, string)>(windowHandleNamePair);
-            windowHandleNamePair = null;
-            return ret;
+            //var ret = new List<(IntPtr, string)>(windowHandleNamePair);
+            //windowHandleNamePair = null;
+            //return ret;
+
+            return WindowAPI.GetAllWindowNamesAndHandles();
         }
 
         /// <summary>
