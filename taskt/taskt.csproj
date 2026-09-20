@@ -705,7 +705,6 @@
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_CanHandleWindowNameExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowNameCorePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_OneWindowNamePropertiesExtensionMethods.cs" />
-    <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowResizePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowWaitTimeBetweenFindAndActionPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\ActivateOneWindowCommand.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\GetOneWindowHandleFromOneWindowNameCommand.cs" />
@@ -721,7 +720,6 @@
     <Compile Include="Core\Automation\Commands\WindowGroup\AWindowHandleActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowHandleActionPropertiesExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowHandlePropertiesExtentionMethods.cs" />
-    <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowRECTPropertiesExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\ICanHandleWindowName.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\IWindowHandleActionPropeties.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\IOneWindowNameActionProperties.cs" />
