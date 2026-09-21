@@ -20,6 +20,7 @@ using System.Windows.Forms;
 using taskt.Core.Automation.Commands;
 using taskt.Core.Automation.Engine;
 using taskt.Core.Native.Windows;
+using static taskt.Core.Native.DEF_POINT;
 
 namespace taskt.Core.Automation.User32
 {
@@ -88,7 +89,7 @@ namespace taskt.Core.Automation.User32
             /// window event hook
             /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-wineventproc
             /// </summary>
-            private static SystemEventHandler _WinEventHookHandler;
+            private static HookAPI.SystemEventHandlerDelegate _WinEventHookHandler;
 
             /// <summary>
             /// keyboard input hook procedure handle
@@ -234,8 +235,10 @@ namespace taskt.Core.Automation.User32
                 // if user decided to capture window events
                 if (performWindowCapture)
                 {
-                    _WinEventHookHandler = new SystemEventHandler(BuildWindowCommand);
-                    _WinEventHook = SetWinEventHook(SystemEvents.EVENT_MIN, SystemEvents.EVENT_MAX, IntPtr.Zero, _WinEventHookHandler, 0, 0, 0);
+                    //_WinEventHookHandler = new HookAPI.SystemEventHandlerDelegate(BuildWindowCommand);
+                    _WinEventHookHandler = BuildWindowCommand;
+                    //_WinEventHook = SetWinEventHook(SystemEvents.EVENT_MIN, SystemEvents.EVENT_MAX, IntPtr.Zero, _WinEventHookHandler, 0, 0, 0);
+                    _WinEventHook = HookAPI.SetWindowHook(_WinEventHookHandler);
                 }
               
                 // start stopwatch for timing all event occurences
@@ -259,7 +262,8 @@ namespace taskt.Core.Automation.User32
 
                 if (performWindowCapture)
                 {
-                    UnhookWinEvent(_WinEventHook);
+                    //UnhookWinEvent(_WinEventHook);
+                    HookAPI.RemoveWindowHook(_WinEventHook);
                 }
                 
                 //BuildCommentCommand();
@@ -587,7 +591,8 @@ namespace taskt.Core.Automation.User32
 
                 if (mouseEventClickType != "None")
                 {
-                    IntPtr winHandle = WindowFromPoint(hookStruct.pt);
+                    //IntPtr winHandle = WindowFromPoint(hookStruct.pt);
+                    var winHandle = WindowAPI.GetWindowHandleFromPoint(hookStruct.pt);
 
                     //var _winName = new StringBuilder(512);
                     //int length = GetWindowText(winHandle, _winName, _winName.Capacity);
@@ -614,19 +619,19 @@ namespace taskt.Core.Automation.User32
             /// <param name="idChild"></param>
             /// <param name="dwEventThread"></param>
             /// <param name="dwmsEventTime"></param>
-            private static void BuildWindowCommand(IntPtr hWinEventHook, SystemEvents @event, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
+            private static void BuildWindowCommand(IntPtr hWinEventHook, HookAPI.SystemEvents @event, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
             {
                 switch (@event)
                 {
-                    case SystemEvents.EVENT_MIN:
+                    case HookAPI.SystemEvents.EVENT_MIN:
                         return;
-                    case SystemEvents.EVENT_MAX:
+                    case HookAPI.SystemEvents.EVENT_MAX:
                         return;
-                    case SystemEvents.EVENT_SYSTEM_FOREGROUND:
+                    case HookAPI.SystemEvents.EVENT_SYSTEM_FOREGROUND:
                         break;
-                    case SystemEvents.MINIMIZE_END:
+                    case HookAPI.SystemEvents.MINIMIZE_END:
                         return;
-                    case SystemEvents.MINIMIZE_START:
+                    case HookAPI.SystemEvents.MINIMIZE_START:
                         return;
                     default:
                         return;
@@ -878,23 +883,23 @@ namespace taskt.Core.Automation.User32
             [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
             private static extern short GetKeyState(int keyCode);
 
-            /// <summary>
-            /// get window handle from specified point
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-windowfrompoint
-            /// </summary>
-            /// <param name="Point"></param>
-            /// <returns></returns>
-            [DllImport("user32.dll")]
-            static extern IntPtr WindowFromPoint(POINT Point);
+            ///// <summary>
+            ///// get window handle from specified point
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-windowfrompoint
+            ///// </summary>
+            ///// <param name="Point"></param>
+            ///// <returns></returns>
+            //[DllImport("user32.dll")]
+            //static extern IntPtr WindowFromPoint(POINT Point);
 
-            /// <summary>
-            /// get child window handle from specified point
-            /// </summary>
-            /// <param name="hWndParent"></param>
-            /// <param name="Point"></param>
-            /// <returns></returns>
-            [DllImport("user32.dll")]
-            static extern IntPtr ChildWindowFromPoint(IntPtr hWndParent, POINT Point);
+            ///// <summary>
+            ///// get child window handle from specified point
+            ///// </summary>
+            ///// <param name="hWndParent"></param>
+            ///// <param name="Point"></param>
+            ///// <returns></returns>
+            //[DllImport("user32.dll")]
+            //static extern IntPtr ChildWindowFromPoint(IntPtr hWndParent, POINT Point);
 
             /// <summary>
             /// convert virtual-key code and keystate to unicode
@@ -912,11 +917,11 @@ namespace taskt.Core.Automation.User32
 
             // enums and structs
 
-            /// <summary>
-            /// value of win hook low level mouse input event
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa
-            /// </summary>
-            private const int WH_MOUSE_LL = 14;
+            ///// <summary>
+            ///// value of win hook low level mouse input event
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa
+            ///// </summary>
+            //private const int WH_MOUSE_LL = 14;
 
             /// <summary>
             /// mouse messages
@@ -931,15 +936,15 @@ namespace taskt.Core.Automation.User32
                 WM_RBUTTONUP = 0x0205   // right up
             }
 
-            /// <summary>
-            /// point location struct
-            /// </summary>
-            [StructLayout(LayoutKind.Sequential)]
-            private struct POINT
-            {
-                public int x;
-                public int y;
-            }
+            ///// <summary>
+            ///// point location struct
+            ///// </summary>
+            //[StructLayout(LayoutKind.Sequential)]
+            //private struct POINT
+            //{
+            //    public int x;
+            //    public int y;
+            //}
 
             /// <summary>
             /// low level keyboard input event information struct
@@ -1070,56 +1075,56 @@ namespace taskt.Core.Automation.User32
 
             #region User32 Window 
 
-            /// <summary>
-            /// WinEvents
-            /// https://learn.microsoft.com/en-us/windows/win32/winauto/event-constants?redirectedfrom=MSDN
-            /// </summary>
-            enum SystemEvents
-            {
-                EVENT_MIN = 0x00000001,       // MIN
-                EVENT_MAX = 0x7FFFFFFF,          // MAX
-                EVENT_SYSTEM_FOREGROUND = 0x3,  // The foreground window has changed. The system sends this event even if the foreground window has changed to another window in the same thread. Server applications never send this event.
-                MINIMIZE_END = 0x0017, // A window object is about to be restored. This event is sent by the system, never by servers.
-                MINIMIZE_START = 0x0016 // A window object is about to be minimized. This event is sent by the system, never by servers.
-            }
+            ///// <summary>
+            ///// WinEvents
+            ///// https://learn.microsoft.com/en-us/windows/win32/winauto/event-constants?redirectedfrom=MSDN
+            ///// </summary>
+            //enum SystemEvents
+            //{
+            //    EVENT_MIN = 0x00000001,       // MIN
+            //    EVENT_MAX = 0x7FFFFFFF,          // MAX
+            //    EVENT_SYSTEM_FOREGROUND = 0x3,  // The foreground window has changed. The system sends this event even if the foreground window has changed to another window in the same thread. Server applications never send this event.
+            //    MINIMIZE_END = 0x0017, // A window object is about to be restored. This event is sent by the system, never by servers.
+            //    MINIMIZE_START = 0x0016 // A window object is about to be minimized. This event is sent by the system, never by servers.
+            //}
 
-            /// <summary>
-            /// call back for WinEvents
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-wineventproc
-            /// </summary>
-            /// <param name="hWinEventHook"></param>
-            /// <param name="event"></param>
-            /// <param name="hwnd"></param>
-            /// <param name="idObject"></param>
-            /// <param name="idChild"></param>
-            /// <param name="dwEventThread"></param>
-            /// <param name="dwmsEventTime"></param>
-            delegate void SystemEventHandler(IntPtr hWinEventHook, SystemEvents @event, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
+            ///// <summary>
+            ///// call back for WinEvents
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-wineventproc
+            ///// </summary>
+            ///// <param name="hWinEventHook"></param>
+            ///// <param name="event"></param>
+            ///// <param name="hwnd"></param>
+            ///// <param name="idObject"></param>
+            ///// <param name="idChild"></param>
+            ///// <param name="dwEventThread"></param>
+            ///// <param name="dwmsEventTime"></param>
+            //delegate void SystemEventHandler(IntPtr hWinEventHook, SystemEvents @event, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
 
-            /// <summary>
-            /// sets an event hook function for a range of events (WinEvents)
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwineventhook
-            /// </summary>
-            /// <param name="eventMin">hook event lowest value</param>
-            /// <param name="eventMax">hook event highest value</param>
-            /// <param name="hmodWinEventProc"></param>
-            /// <param name="lpfnWinEventProc">callback hook procedure</param>
-            /// <param name="idProcess"></param>
-            /// <param name="idThread"></param>
-            /// <param name="dwFlags"></param>
-            /// <returns>event hook instance</returns>
-            [DllImport("user32.dll")]
-            static extern IntPtr SetWinEventHook(SystemEvents eventMin, SystemEvents eventMax, IntPtr hmodWinEventProc, SystemEventHandler lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
+            ///// <summary>
+            ///// sets an event hook function for a range of events (WinEvents)
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwineventhook
+            ///// </summary>
+            ///// <param name="eventMin">hook event lowest value</param>
+            ///// <param name="eventMax">hook event highest value</param>
+            ///// <param name="hmodWinEventProc"></param>
+            ///// <param name="lpfnWinEventProc">callback hook procedure</param>
+            ///// <param name="idProcess"></param>
+            ///// <param name="idThread"></param>
+            ///// <param name="dwFlags"></param>
+            ///// <returns>event hook instance</returns>
+            //[DllImport("user32.dll")]
+            //static extern IntPtr SetWinEventHook(SystemEvents eventMin, SystemEvents eventMax, IntPtr hmodWinEventProc, SystemEventHandler lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
 
-            /// <summary>
-            /// remove event hook function created by SetWinEventHook (WinEvents)
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unhookwinevent
-            /// </summary>
-            /// <param name="hWinEventHook"></param>
-            /// <returns></returns>
-            [DllImport("user32.dll")]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            static extern bool UnhookWinEvent(IntPtr hWinEventHook);
+            ///// <summary>
+            ///// remove event hook function created by SetWinEventHook (WinEvents)
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unhookwinevent
+            ///// </summary>
+            ///// <param name="hWinEventHook"></param>
+            ///// <returns></returns>
+            //[DllImport("user32.dll")]
+            //[return: MarshalAs(UnmanagedType.Bool)]
+            //static extern bool UnhookWinEvent(IntPtr hWinEventHook);
 
             ///// <summary>
             ///// get window title

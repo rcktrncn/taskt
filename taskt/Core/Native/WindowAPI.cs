@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using static taskt.Core.Native.Windows.MouseAPI;
+using static taskt.Core.Native.DEF_POINT;
 
 namespace taskt.Core.Native.Windows
 {

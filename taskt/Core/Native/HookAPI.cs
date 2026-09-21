@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
+using static taskt.Core.Native.DEF_POINT;
 
 namespace taskt.Core.Native.Windows
 {
@@ -15,7 +16,7 @@ namespace taskt.Core.Native.Windows
         /// <param name="wParam"></param>
         /// <param name="lParam"></param>
         /// <returns>when (nCode < 0) please specify return value of CallNextHookEx</returns>
-        private delegate IntPtr HookProcDelegate(int nCode, IntPtr wParam, IntPtr lParam);
+        public delegate IntPtr HookProcDelegate(int nCode, IntPtr wParam, IntPtr lParam);
 
         /// <summary>
         /// callback for keyboard input hook
@@ -164,16 +165,6 @@ namespace taskt.Core.Native.Windows
         }
 
         /// <summary>
-        /// point location struct
-        /// </summary>
-        [StructLayout(LayoutKind.Sequential)]
-        private struct POINT
-        {
-            public int x;
-            public int y;
-        }
-
-        /// <summary>
         /// low level keyboard input event information struct
         /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-kbdllhookstruct
         /// </summary>
@@ -232,6 +223,57 @@ namespace taskt.Core.Native.Windows
         }
 
         /// <summary>
+        /// WinEvents
+        /// https://learn.microsoft.com/en-us/windows/win32/winauto/event-constants?redirectedfrom=MSDN
+        /// </summary>
+        public enum SystemEvents
+        {
+            EVENT_MIN = 0x00000001,       // MIN
+            EVENT_MAX = 0x7FFFFFFF,          // MAX
+            EVENT_SYSTEM_FOREGROUND = 0x3,  // The foreground window has changed. The system sends this event even if the foreground window has changed to another window in the same thread. Server applications never send this event.
+            MINIMIZE_END = 0x0017, // A window object is about to be restored. This event is sent by the system, never by servers.
+            MINIMIZE_START = 0x0016 // A window object is about to be minimized. This event is sent by the system, never by servers.
+        }
+
+        /// <summary>
+        /// call back for WinEvents
+        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-wineventproc
+        /// </summary>
+        /// <param name="hWinEventHook"></param>
+        /// <param name="event"></param>
+        /// <param name="hwnd"></param>
+        /// <param name="idObject"></param>
+        /// <param name="idChild"></param>
+        /// <param name="dwEventThread"></param>
+        /// <param name="dwmsEventTime"></param>
+        public delegate void SystemEventHandlerDelegate(IntPtr hWinEventHook, SystemEvents @event, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
+
+        /// <summary>
+        /// sets an event hook function for a range of events (WinEvents)
+        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwineventhook
+        /// </summary>
+        /// <param name="eventMin">hook event lowest value</param>
+        /// <param name="eventMax">hook event highest value</param>
+        /// <param name="hmodWinEventProc"></param>
+        /// <param name="lpfnWinEventProc">callback hook procedure</param>
+        /// <param name="idProcess"></param>
+        /// <param name="idThread"></param>
+        /// <param name="dwFlags"></param>
+        /// <returns>event hook instance</returns>
+        [DllImport("user32.dll")]
+        private static extern IntPtr SetWinEventHook(SystemEvents eventMin, SystemEvents eventMax, IntPtr hmodWinEventProc, SystemEventHandlerDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
+
+        /// <summary>
+        /// remove event hook function created by SetWinEventHook (WinEvents)
+        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unhookwinevent
+        /// </summary>
+        /// <param name="hWinEventHook"></param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool UnhookWinEvent(IntPtr hWinEventHook);
+
+        /// <summary>
         /// set keyboard input hook
         /// </summary>
         /// <param name="proc">call back hook procedure</param>
@@ -268,6 +310,25 @@ namespace taskt.Core.Native.Windows
         /// </summary>
         /// <param name="hhk"></param>
         public static void RemoveKeyboardMouseHook(IntPtr hhk)
+        {
+            UnhookWindowsHookEx(hhk);
+        }
+
+        /// <summary>
+        /// set window event hook
+        /// </summary>
+        /// <param name="ev"></param>
+        /// <returns></returns>
+        public static IntPtr SetWindowHook(SystemEventHandlerDelegate ev)
+        {
+            return SetWinEventHook(SystemEvents.EVENT_MIN, SystemEvents.EVENT_MAX, IntPtr.Zero, ev, 0, 0, 0);
+        }
+
+        /// <summary>
+        /// remove window event hook
+        /// </summary>
+        /// <param name="hhk"></param>
+        public static void RemoveWindowHook(IntPtr hhk)
         {
             UnhookWindowsHookEx(hhk);
         }
