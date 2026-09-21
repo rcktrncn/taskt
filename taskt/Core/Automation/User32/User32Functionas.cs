@@ -26,31 +26,6 @@ namespace taskt.Core.Automation.User32
 {
     public static class User32Functions
     {
-        //[DllImport("user32.dll", EntryPoint = "SetWindowPos")]
-        //private static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, int wFlags);
-        //public static void SetWindowPosition(IntPtr hWnd, int newXPosition, int newYPosition)
-        //{
-        //    const short SWP_NOSIZE = 1;
-        //    const short SWP_NOZORDER = 0X4;
-        //    const int SWP_SHOWWINDOW = 0x0040;
-
-        //    SetWindowPos(hWnd, 0, newXPosition, newYPosition, 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_SHOWWINDOW);
-        //}
-
-        //[DllImport("user32.dll", EntryPoint = "GetWindowRect")]
-        //static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
-      
-        //public struct RECT
-        //{
-        //    public int left, top, right, bottom;
-        //}
-
-        //private delegate bool EnumWindowProc(IntPtr hwnd, IntPtr lParam);
-
-        //[DllImport("user32")]
-        //[return: MarshalAs(UnmanagedType.Bool)]
-        //private static extern bool EnumChildWindows(IntPtr window, EnumWindowProc callback, IntPtr lParam);     
-
         public class GlobalHook
         {
             ///// <summary>
@@ -1139,6 +1114,7 @@ namespace taskt.Core.Automation.User32
             #endregion
         }
     }
+
     public class WindowHandleInfo
     {
         private delegate bool EnumWindowProc(IntPtr hwnd, IntPtr lParam);
