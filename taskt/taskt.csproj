@@ -1034,7 +1034,6 @@
     <Compile Include="Core\Automation\Commands\_General\ISizeProperties.cs" />
     <Compile Include="Core\Automation\Commands\_General\IReplaceValueProperties.cs" />
     <Compile Include="Core\Automation\Commands\TextGroup\ITextCheckProperties.cs" />
-    <Compile Include="Core\Automation\Commands\_General\RECT.cs" />
     <Compile Include="Core\Automation\Engine\EM_AppInstancesPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Engine\EM_ScriptVariablePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Engine\IAppInstancesProperties.cs" />

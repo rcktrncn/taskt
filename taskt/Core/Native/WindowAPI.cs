@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using taskt.Core.Automation.Commands;
 
 namespace taskt.Core.Native.Windows
 {
@@ -176,6 +175,40 @@ namespace taskt.Core.Native.Windows
         /// <returns></returns>
         [DllImport("user32.dll")]
         private static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
+        /// <summary>
+        /// Rect Struct
+        /// </summary>
+        public struct RECT
+        {
+            public int left;
+            public int top;
+            public int right;
+            public int bottom;
+
+            public int GetWidth()
+            {
+                return (right - left);
+            }
+
+            public int GetHeight()
+            {
+                return (bottom - top);
+            }
+
+            public (int, int) GetWidthAndHeight()
+            {
+                return (GetWidth(), GetHeight());
+            }
+
+            public (int, int) GetCenterPosition()
+            {
+                return (
+                        left + (GetWidth() / 2),
+                        top + (GetHeight() / 2)
+                    );
+            }
+        }
 
         /// <summary>
         /// move or resize window
