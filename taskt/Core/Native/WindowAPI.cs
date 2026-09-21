@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using static taskt.Core.Native.Windows.MouseAPI;
 
 namespace taskt.Core.Native.Windows
 {
@@ -267,6 +268,24 @@ namespace taskt.Core.Native.Windows
         /// <returns></returns>
         [DllImport("user32.dll")]
         private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+
+        /// <summary>
+        /// get window handle from specified point
+        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-windowfrompoint
+        /// </summary>
+        /// <param name="Point"></param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        private static extern IntPtr WindowFromPoint(POINT Point);
+
+        /// <summary>
+        /// get child window handle from specified point
+        /// </summary>
+        /// <param name="hWndParent"></param>
+        /// <param name="Point"></param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        private static extern IntPtr ChildWindowFromPoint(IntPtr hWndParent, POINT Point);
 
         /// <summary>
         /// set window state
@@ -559,6 +578,16 @@ namespace taskt.Core.Native.Windows
             }
 
             return ((int)info.showCmd, stateText);
+        }
+
+        /// <summary>
+        /// get window handle from point
+        /// </summary>
+        /// <param name="pt"></param>
+        /// <returns></returns>
+        public static IntPtr GetWindowHandleFromPoint(POINT pt)
+        {
+            return WindowFromPoint(pt);
         }
     }
 }

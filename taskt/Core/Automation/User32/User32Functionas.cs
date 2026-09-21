@@ -52,11 +52,11 @@ namespace taskt.Core.Automation.User32
 
         public class GlobalHook
         {
-            /// <summary>
-            /// low level keyboard input event hook
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa
-            /// </summary>
-            private const int WH_KEYBOARD_LL = 13;
+            ///// <summary>
+            ///// low level keyboard input event hook
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa
+            ///// </summary>
+            //private const int WH_KEYBOARD_LL = 13;
 
             /// <summary>
             /// non-system key is pressed
@@ -67,17 +67,17 @@ namespace taskt.Core.Automation.User32
             /// <summary>
             /// low level keyboard input hook procedure
             /// </summary>
-            private static readonly LowLevelKeyboardProc _kbProc = KeyboardHookEvent;
+            private static readonly HookAPI.LowLevelKeyboardProcDelegate _kbProc = KeyboardHookEvent;
 
             /// <summary>
             /// low level mouse move hook procedure
             /// </summary>
-            private static readonly LowLevelMouseProc _mouseProc = MouseHookEvent;
+            private static readonly HookAPI.LowLevelMouseProcDelegate _mouseProc = MouseHookEvent;
 
             /// <summary>
             /// low level mouse click hook procedure
             /// </summary>
-            private static readonly LowLevelMouseProc _mouseLeftUpProc = MouseHookForLeftClickUpEvent;
+            private static readonly HookAPI.LowLevelMouseProcDelegate _mouseLeftUpProc = MouseHookForLeftClickUpEvent;
 
             /// <summary>
             /// return value of SetWinEventHook
@@ -183,7 +183,7 @@ namespace taskt.Core.Automation.User32
             {
                 stopHookKey = keyName.ToString();
                 // set hook for engine cancellation
-                _keyboardHookID = SetKeyboardHook(_kbProc);
+                _keyboardHookID = HookAPI.SetKeyboardHook(_kbProc);
             }
 
             /// <summary>
@@ -194,7 +194,7 @@ namespace taskt.Core.Automation.User32
             {
                 stopOnClick = stopOnFirstClick;
                 // set hook for engine cancellation
-                _mouseHookID = SetMouseHook(_mouseLeftUpProc);
+                _mouseHookID = HookAPI.SetMouseHook(_mouseLeftUpProc);
             }
 
             /// <summary>
@@ -228,8 +228,8 @@ namespace taskt.Core.Automation.User32
                 stopHookKey = stopHookHotKey;
 
                 // start hook
-                _mouseHookID = SetMouseHook(_mouseProc);
-                _keyboardHookID = SetKeyboardHook(_kbProc);
+                _mouseHookID = HookAPI.SetMouseHook(_mouseProc);
+                _keyboardHookID = HookAPI.SetKeyboardHook(_kbProc);
 
                 // if user decided to capture window events
                 if (performWindowCapture)
@@ -252,8 +252,10 @@ namespace taskt.Core.Automation.User32
             /// </summary>
             public static void StopHook()
             {
-                UnhookWindowsHookEx(_keyboardHookID);
-                UnhookWindowsHookEx(_mouseHookID);
+                //UnhookWindowsHookEx(_keyboardHookID);
+                //UnhookWindowsHookEx(_mouseHookID);
+                HookAPI.RemoveKeyboardMouseHook(_keyboardHookID);
+                HookAPI.RemoveKeyboardMouseHook(_mouseHookID);
 
                 if (performWindowCapture)
                 {
@@ -313,7 +315,8 @@ namespace taskt.Core.Automation.User32
                     {
                         if (stopOnClick)
                         {
-                            UnhookWindowsHookEx(_mouseHookID);
+                            //UnhookWindowsHookEx(_mouseHookID);
+                            HookAPI.RemoveKeyboardMouseHook(_mouseHookID);
                         }
 
                         var hookStruct = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
@@ -590,7 +593,8 @@ namespace taskt.Core.Automation.User32
                     //int length = GetWindowText(winHandle, _winName, _winName.Capacity);
                     //var windowName = _winName.ToString();
 
-                    var windowName = GetWindowName(winHandle);
+                    //var windowName = GetWindowName(winHandle);
+                    var windowName = WindowAPI.GetWindowName(winHandle);
 
                     mouseMove.v_Comment = $"Clicked On Window: {windowName}";
                 }
@@ -631,7 +635,8 @@ namespace taskt.Core.Automation.User32
                 //var _winName = new StringBuilder(512);
                 //int length = GetWindowText(hwnd, _winName, _winName.Capacity);
                 //var windowName = _winName.ToString();
-                var windowName = GetWindowName(hwnd);
+                //var windowName = GetWindowName(hwnd);
+                var windowName = WindowAPI.GetWindowName(hwnd);
                 //var length = windowName.Length;
 
                 // bypass screen recorder and Cortana (Win10) which throws errors
@@ -718,17 +723,17 @@ namespace taskt.Core.Automation.User32
                 }
             }
 
-            /// <summary>
-            /// get window name from handle
-            /// </summary>
-            /// <param name="whnd">window handle</param>
-            /// <returns></returns>
-            private static string GetWindowName(IntPtr whnd)
-            {
-                var _winName = new StringBuilder(512);
-                _ = GetWindowText(whnd, _winName, _winName.Capacity);
-                return _winName.ToString();
-            }
+            ///// <summary>
+            ///// get window name from handle
+            ///// </summary>
+            ///// <param name="whnd">window handle</param>
+            ///// <returns></returns>
+            //private static string GetWindowName(IntPtr whnd)
+            //{
+            //    var _winName = new StringBuilder(512);
+            //    _ = GetWindowText(whnd, _winName, _winName.Capacity);
+            //    return _winName.ToString();
+            //}
 
             /// <summary>
             /// build/create pause command
@@ -750,96 +755,98 @@ namespace taskt.Core.Automation.User32
                 sw.Restart();
             }
 
-            /// <summary>
-            /// set keyboard input hook
-            /// </summary>
-            /// <param name="proc">call back hook procedure</param>
-            /// <returns>hook procedure handle</returns>
-            private static IntPtr SetKeyboardHook(LowLevelKeyboardProc proc)
-            {
-                using (Process curProcess = Process.GetCurrentProcess())
-                using (ProcessModule curModule = curProcess.MainModule)
-                {
-                    return SetWindowsHookEx(WH_KEYBOARD_LL, proc,
-                                GetModuleHandle(curModule.ModuleName), 0
-                            );
-                }
-            }
+            ///// <summary>
+            ///// set keyboard input hook
+            ///// </summary>
+            ///// <param name="proc">call back hook procedure</param>
+            ///// <returns>hook procedure handle</returns>
+            //private static IntPtr SetKeyboardHook(LowLevelKeyboardProc proc)
+            //{
+            //    using (Process curProcess = Process.GetCurrentProcess())
+            //    using (ProcessModule curModule = curProcess.MainModule)
+            //    {
+            //        return SetWindowsHookEx(WH_KEYBOARD_LL, proc,
+            //                    GetModuleHandle(curModule.ModuleName), 0
+            //                );
+            //    }
+            //}
 
-            /// <summary>
-            /// set mouse input hook
-            /// </summary>
-            /// <param name="proc">call back hook procedure</param>
-            /// <returns>hook procedure handle</returns>
-            private static IntPtr SetMouseHook(LowLevelMouseProc proc)
-            {
-                using (Process curProcess = Process.GetCurrentProcess())
-                using (ProcessModule curModule = curProcess.MainModule)
-                {
-                    return SetWindowsHookEx(WH_MOUSE_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
-                }
-            }
+            ///// <summary>
+            ///// set mouse input hook
+            ///// </summary>
+            ///// <param name="proc">call back hook procedure</param>
+            ///// <returns>hook procedure handle</returns>
+            //private static IntPtr SetMouseHook(LowLevelMouseProc proc)
+            //{
+            //    using (Process curProcess = Process.GetCurrentProcess())
+            //    using (ProcessModule curModule = curProcess.MainModule)
+            //    {
+            //        return SetWindowsHookEx(WH_MOUSE_LL, proc,
+            //                GetModuleHandle(curModule.ModuleName), 0
+            //            );
+            //    }
+            //}
 
 
             //private static StringBuilder _Buffer = new StringBuilder(512);
 
             #region User32 Keyboard Mouse
 
-            /// <summary>
-            /// callback for keyboard input hook
-            /// https://learn.microsoft.com/en-us/windows/win32/winmsg/lowlevelkeyboardproc
-            /// </summary>
-            /// <param name="nCode"></param>
-            /// <param name="wParam">WM_KEYDOWN, WM_KEYUP, WM_SYSKEYDOWN, or WM_SYSKEYUP</param>
-            /// <param name="lParam">KBDLLHOOKSTRUCT structure
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-kbdllhookstruct</param>
-            /// <returns>when (nCode < 0) please specify return value of CallNextHookEx</returns>
-            private delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
+            ///// <summary>
+            ///// callback for keyboard input hook
+            ///// https://learn.microsoft.com/en-us/windows/win32/winmsg/lowlevelkeyboardproc
+            ///// </summary>
+            ///// <param name="nCode"></param>
+            ///// <param name="wParam">WM_KEYDOWN, WM_KEYUP, WM_SYSKEYDOWN, or WM_SYSKEYUP</param>
+            ///// <param name="lParam">KBDLLHOOKSTRUCT structure
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-kbdllhookstruct</param>
+            ///// <returns>when (nCode < 0) please specify return value of CallNextHookEx</returns>
+            //private delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
 
-            /// <summary>
-            /// callback for mouse click hook
-            /// https://learn.microsoft.com/en-us/windows/win32/winmsg/lowlevelmouseproc
-            /// </summary>
-            /// <param name="nCode"></param>
-            /// <param name="wParam">WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MOUSEMOVE, WM_MOUSEWHEEL, WM_RBUTTONDOWN, WM_RBUTTONUP, WM_MBUTTONDOWN, WM_MBUTTONUP, WM_XBUTTONDOWN, or WM_XBUTTONUP</param>
-            /// <param name="lParam">MSLLHOOKSTRUCT structure
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct</param>
-            /// <returns>when (nCode < 0) please specify return value of CallNextHookEx</returns>
-            private delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
+            ///// <summary>
+            ///// callback for mouse click hook
+            ///// https://learn.microsoft.com/en-us/windows/win32/winmsg/lowlevelmouseproc
+            ///// </summary>
+            ///// <param name="nCode"></param>
+            ///// <param name="wParam">WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MOUSEMOVE, WM_MOUSEWHEEL, WM_RBUTTONDOWN, WM_RBUTTONUP, WM_MBUTTONDOWN, WM_MBUTTONUP, WM_XBUTTONDOWN, or WM_XBUTTONUP</param>
+            ///// <param name="lParam">MSLLHOOKSTRUCT structure
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct</param>
+            ///// <returns>when (nCode < 0) please specify return value of CallNextHookEx</returns>
+            //private delegate IntPtr LowLevelMouseProc(int nCode, IntPtr wParam, IntPtr lParam);
 
-            /// <summary>
-            /// low level hook to keyborad
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa
-            /// </summary>
-            /// <param name="idHook"></param>
-            /// <param name="lpfn">call back procedure</param>
-            /// <param name="hMod"></param>
-            /// <param name="dwThreadId"></param>
-            /// <returns>hook procedure handle</returns>
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
+            ///// <summary>
+            ///// low level hook to keyborad
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa
+            ///// </summary>
+            ///// <param name="idHook"></param>
+            ///// <param name="lpfn">call back procedure</param>
+            ///// <param name="hMod"></param>
+            ///// <param name="dwThreadId"></param>
+            ///// <returns>hook procedure handle</returns>
+            //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            //private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
 
-            /// <summary>
-            /// low level hook to mouse click
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa
-            /// </summary>
-            /// <param name="idHook"></param>
-            /// <param name="lpfn">call back procedure</param>
-            /// <param name="hMod"></param>
-            /// <param name="dwThreadId"></param>
-            /// <returns>hook handle</returns>
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
+            ///// <summary>
+            ///// low level hook to mouse click
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa
+            ///// </summary>
+            ///// <param name="idHook"></param>
+            ///// <param name="lpfn">call back procedure</param>
+            ///// <param name="hMod"></param>
+            ///// <param name="dwThreadId"></param>
+            ///// <returns>hook handle</returns>
+            //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            //private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelMouseProc lpfn, IntPtr hMod, uint dwThreadId);
 
-            /// <summary>
-            /// remove hook
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unhookwindowshookex
-            /// </summary>
-            /// <param name="hhk">hook handle</param>
-            /// <returns></returns>
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            [return: MarshalAs(UnmanagedType.Bool)]
-            private static extern bool UnhookWindowsHookEx(IntPtr hhk);
+            ///// <summary>
+            ///// remove hook
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unhookwindowshookex
+            ///// </summary>
+            ///// <param name="hhk">hook handle</param>
+            ///// <returns></returns>
+            //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            //[return: MarshalAs(UnmanagedType.Bool)]
+            //private static extern bool UnhookWindowsHookEx(IntPtr hhk);
 
             /// <summary>
             /// passes the hook informationt to the next hook procedure
@@ -853,14 +860,14 @@ namespace taskt.Core.Automation.User32
             [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
 
-            /// <summary>
-            /// get a module handle for the specified module
-            /// https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlea
-            /// </summary>
-            /// <param name="lpModuleName"></param>
-            /// <returns></returns>
-            [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            private static extern IntPtr GetModuleHandle(string lpModuleName);
+            ///// <summary>
+            ///// get a module handle for the specified module
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlea
+            ///// </summary>
+            ///// <param name="lpModuleName"></param>
+            ///// <returns></returns>
+            //[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            //private static extern IntPtr GetModuleHandle(string lpModuleName);
 
             /// <summary>
             /// get the status of the specified virtual key (up, down)
@@ -1114,16 +1121,16 @@ namespace taskt.Core.Automation.User32
             [return: MarshalAs(UnmanagedType.Bool)]
             static extern bool UnhookWinEvent(IntPtr hWinEventHook);
 
-            /// <summary>
-            /// get window title
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtexta
-            /// </summary>
-            /// <param name="hWnd"></param>
-            /// <param name="lpClassName"></param>
-            /// <param name="nMaxCount"></param>
-            /// <returns>window name length</returns>
-            [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-            static extern int GetWindowText(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+            ///// <summary>
+            ///// get window title
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowtexta
+            ///// </summary>
+            ///// <param name="hWnd"></param>
+            ///// <param name="lpClassName"></param>
+            ///// <param name="nMaxCount"></param>
+            ///// <returns>window name length</returns>
+            //[DllImport("user32.dll", CharSet = CharSet.Unicode)]
+            //static extern int GetWindowText(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
             #endregion
         }
     }

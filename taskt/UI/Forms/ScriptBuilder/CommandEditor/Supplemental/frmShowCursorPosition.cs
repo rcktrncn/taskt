@@ -12,32 +12,32 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 using System;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using taskt.Core.Native.Windows;
 
 namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 {
     public partial class frmShowCursorPosition : UIForm
     {
-        public POINT lpPoint;
+        //public MouseAPI.POINT lpPoint;
         public int xPos { get; private set; }
         public int yPos { get; private set; }
 
-        [StructLayout(LayoutKind.Sequential)]
-        public struct POINT
-        {
-            public int X;
-            public int Y;
+        //[StructLayout(LayoutKind.Sequential)]
+        //public struct POINT
+        //{
+        //    public int X;
+        //    public int Y;
 
-            // not used this implicit operator
-            //public static implicit operator Point(POINT point)
-            //{
-            //    return new Point(point.X, point.Y);
-            //}
-        }
+        //    // not used this implicit operator
+        //    //public static implicit operator Point(POINT point)
+        //    //{
+        //    //    return new Point(point.X, point.Y);
+        //    //}
+        //}
 
-        [DllImport("user32.dll")]
-        public static extern bool GetCursorPos(out POINT lpPoint);
+        //[DllImport("user32.dll")]
+        //public static extern bool GetCursorPos(out POINT lpPoint);
 
         public frmShowCursorPosition()
         {
@@ -51,13 +51,20 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 
         private void tmrGetPosition_Tick(object sender, EventArgs e)
         {
-            GetCursorPos(out lpPoint);
-            lblXPosition.Text = "X Position: " + lpPoint.X;
-            lblYPosition.Text = "Y Position: " + lpPoint.Y;
-            xPos = lpPoint.X;
-            yPos = lpPoint.Y;
+            //GetCursorPos(out lpPoint);
+            //lblXPosition.Text = "X Position: " + lpPoint.X;
+            //lblYPosition.Text = "Y Position: " + lpPoint.Y;
+            //xPos = lpPoint.X;
+            //yPos = lpPoint.Y;
+
+            (var x, var y) = MouseAPI.GetCursorPosition();
+            lblXPosition.Text = $"X Position: {x}";
+            lblYPosition.Text = $"Y Position: {y}";
+
+            this.xPos = x;
+            this.yPos = y;
         }
-        
+
         private void ShowCursorPosition_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Space)
