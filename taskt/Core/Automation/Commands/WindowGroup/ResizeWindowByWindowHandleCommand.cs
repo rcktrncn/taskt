@@ -69,16 +69,6 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //WindowControls.WindowHandleAction(this, engine,
-            //    new Action<IntPtr>(whnd =>
-            //    {
-            //        var width = this.ExpandValueOrVariableAsWindowWidth(whnd, engine);
-            //        var height = this.ExpandValueOrVariableAsWindowHeight(whnd, engine);
-
-            //        WindowControls.SetWindowSize(whnd, width, height);
-            //    })
-            //);
-
             void ResizeWindowProcess(IntPtr wh)
             {
                 var width = this.ExpandValueOrVariableAsWindowWidth(wh, engine);

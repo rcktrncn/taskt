@@ -9,18 +9,6 @@ namespace taskt.Core.Automation.Commands
     /// </summary>
     public static class EM_WindowSizePropertiesExtensionMethods
     {
-        ///// <summary>
-        ///// get window size
-        ///// </summary>
-        ///// <param name="whnd"></param>
-        ///// <returns>(width, height)</returns>
-        //public static (int, int) GetWindowSize(IntPtr whnd)
-        //{
-        //    //var r = EM_WindowRECTPropertiesExtentionMethods.GetWindowRect(whnd);
-        //    //return (r.GetWidth(), r.GetHeight());
-        //    return WindowAPI.GetWindowSize(whnd);
-        //}
-
         /// <summary>
         /// expand value or variable as Window Width
         /// </summary>

@@ -42,23 +42,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //WindowControls.WindowHandleAction(this, engine,
-            //    new Action<IntPtr>(whnd =>
-            //    {
-            //        var n = WindowControls.GetWindowTitle(whnd);
-            //        n.StoreInUserVariable(engine, v_Result);
-            //    })
-            //);
-
-            //var whnd = this.GetWindowHandle(engine);
-            //int titleLengthA = GetWindowTextLengthW(whnd);
-            //StringBuilder title = new StringBuilder(titleLengthA + 1);
-            //GetWindowTextW(whnd, title, title.Capacity);
-            //title.ToString().StoreInUserVariable(engine, v_Result);
-
             this.WindowHandleAction(engine, new Action<IntPtr>((whnd) =>
             {
-                //EM_CanHandleWindowHandleExtentionMethods.GetWindowName(whnd).StoreInUserVariable(engine, v_Result);
                 // nothing
             }));
         }

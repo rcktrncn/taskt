@@ -9,18 +9,6 @@ namespace taskt.Core.Automation.Commands
     /// </summary>
     public static class EM_WindowPositionPropertiesExtensionMethods
     {
-        ///// <summary>
-        ///// get window position
-        ///// </summary>
-        ///// <param name="whnd"></param>
-        ///// <returns>(top, left)</returns>
-        //public static (int, int) GetWindowPosition(IntPtr whnd)
-        //{
-        //    //var rect = EM_WindowRECTPropertiesExtentionMethods.GetWindowRect(whnd);
-        //    //return (rect.top, rect.left);
-        //    return WindowAPI.GetWindowPosition(whnd);
-        //}
-
         /// <summary>
         /// expand value or variable as Window X Position
         /// </summary>
@@ -76,18 +64,5 @@ namespace taskt.Core.Automation.Commands
                 return v.ExpandValueOrUserVariableAsInteger("Window Y Position", engine);
             }
         }
-
-        ///// <summary>
-        ///// move window
-        ///// </summary>
-        ///// <param name="whnd"></param>
-        ///// <param name="x"></param>
-        ///// <param name="y"></param>
-        //public static void MoveWindow(IntPtr whnd, int x, int y)
-        //{
-        //    //const uint flag = 0x0045; // 0x0001 | 0x0004 | 0x0040;
-        //    //EM_WindowRECTPropertiesExtentionMethods.SetWindowPos(whnd, 0, x, y, 0, 0, flag);
-        //    WindowAPI.MoveWindow(whnd, x, y);
-        //}
     }
 }

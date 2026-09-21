@@ -40,27 +40,11 @@ namespace taskt.Core.Automation.Commands
 
         public WaitForWindowToExistsCommand()
         {
-            //this.CommandName = "WaitForWindowCommand";
-            //this.SelectionName = "Wait For Window To Exist";
-            //this.CommandEnabled = true;
-            //this.CustomRendering = true;
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //WindowControls.WindowAction(this, engine,
-            //    new Action<List<(IntPtr, string)>>(wins =>
-            //    {
-            //        // nothing to do
-            //    })
-            //);
             this.WaitForWindowNames(engine);
         }
-
-        //public override void Refresh(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
-        //{
-        //    //WindowNameControl.AddWindowNames();
-        //    ControlsList.GetPropertyControl<ComboBox>(nameof(v_WindowName)).AddWindowNames();
-        //}
     }
 }

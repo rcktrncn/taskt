@@ -42,19 +42,6 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //this.WindowNameActionAndWaitActivate(engine, new Action<IntPtr, string>((whnd, name) =>
-            //{
-            //    var resizeWindow = new ResizeWindowByWindowHandleCommand()
-            //    {
-            //        v_WindowHandle = whnd.ToString(),
-            //        v_Width = this.v_Width,
-            //        v_Height = this.v_Height,
-            //        v_WhenWindowIsMaximized = this.v_WhenWindowIsMaximized,
-            //        v_WhenWindowIsMinimized = this.v_WhenWindowIsMinimized,
-            //    };
-            //    resizeWindow.RunCommand(engine);
-            //}));
-
             this.WindowNameAction(engine, new Action<IntPtr, string>((whnd, name) =>
             {
                 var resizeWindow = new ResizeWindowByWindowHandleCommand()

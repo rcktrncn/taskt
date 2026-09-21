@@ -27,16 +27,6 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //this.WindowNameActionAndWaitActivate(engine, new Action<IntPtr, string>((whnd, name) =>
-            //{
-            //    var setState = new SetWindowStateByWindowHandleCommand()
-            //    {
-            //        v_WindowHandle = whnd.ToString(),
-            //        v_WindowState = this.v_WindowState,
-            //    };
-            //    setState.RunCommand(engine);
-            //}));
-
             this.WindowNameAction(engine, new Action<IntPtr, string>((whnd, name) => 
             {
                 var setState = new SetWindowStateByWindowHandleCommand()

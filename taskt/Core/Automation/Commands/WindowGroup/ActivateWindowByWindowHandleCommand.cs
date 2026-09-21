@@ -15,28 +15,6 @@ namespace taskt.Core.Automation.Commands
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
     public sealed class ActivateWindowByWindowHandleCommand : AWindowHandleCommands
     {
-        ///// <summary>
-        ///// set window state
-        ///// </summary>
-        ///// <param name="hWnd"></param>
-        ///// <param name="nCmdShow"></param>
-        ///// <returns></returns>
-        //[DllImport("user32.dll", EntryPoint = "ShowWindow")]
-        //private static extern bool SetWindowState(IntPtr hWnd, int nCmdShow);
-
-        ///// <summary>
-        ///// set window is ForeGround
-        ///// </summary>
-        ///// <param name="hWnd"></param>
-        ///// <returns></returns>
-        //[DllImport("User32.dll")]
-        //private static extern IntPtr SetForegroundWindow(IntPtr hWnd);
-
-        ///// <summary>
-        ///// window state is normal
-        ///// </summary>
-        //private const int WINDOW_NORMAL = 1;
-
         //[XmlAttribute]
         //[PropertyVirtualProperty(nameof(WindowNameControls), nameof(WindowNameControls.v_InputWindowHandle))]
         //public string v_WindowHandle { get; set; }
@@ -53,19 +31,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //var whnd = this.GetWindowHandle(engine);
-            //if (IsIconic(whnd)) 
-            //{
-            //    SetWindowState(whnd, WINDOW_NORMAL);
-            //}
-            //SetForegroundWindow(whnd);
             this.WindowHandleAction(engine, new Action<IntPtr>((whnd) =>
             {
-                //if (EM_CanHandleWindowHandleExtentionMethods.IsWindowMinimized(whnd))
-                //{
-                //    SetWindowState(whnd, WINDOW_NORMAL);
-                //}
-                //SetForegroundWindow(whnd);
                 WindowAPI.ActivateWindow(whnd);
             }));
         }

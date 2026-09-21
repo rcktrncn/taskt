@@ -56,17 +56,6 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //WindowControls.WindowAction(this, engine,
-            //    new Action<List<(IntPtr, string)>>(wins =>
-            //    {
-            //        (wins.Count > 0).StoreInUserVariable(engine, v_UserVariableName);
-            //    }),
-            //    new Action<Exception>(ex =>
-            //    {
-            //        false.StoreInUserVariable(engine, v_UserVariableName);
-            //    })
-            //);
-
             this.WindowNamesAction(engine,
                 new Action<List<(IntPtr, string)>>(wins =>
                 {
