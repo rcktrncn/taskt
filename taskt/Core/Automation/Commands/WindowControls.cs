@@ -339,10 +339,6 @@ namespace taskt.Core.Automation.Commands
 
         #endregion
 
-        //[DllImport("user32.dll")]
-        //private static extern int GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
-
-
         /// <summary>
         /// convert processId to Window Handle
         /// </summary>

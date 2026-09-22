@@ -23,22 +23,6 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
         public int xPos { get; private set; }
         public int yPos { get; private set; }
 
-        //[StructLayout(LayoutKind.Sequential)]
-        //public struct POINT
-        //{
-        //    public int X;
-        //    public int Y;
-
-        //    // not used this implicit operator
-        //    //public static implicit operator Point(POINT point)
-        //    //{
-        //    //    return new Point(point.X, point.Y);
-        //    //}
-        //}
-
-        //[DllImport("user32.dll")]
-        //public static extern bool GetCursorPos(out POINT lpPoint);
-
         public frmShowCursorPosition()
         {
             InitializeComponent();
