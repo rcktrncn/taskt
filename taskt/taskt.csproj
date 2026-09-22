@@ -1046,6 +1046,7 @@
     <Compile Include="Core\IO\Files.cs" />
     <Compile Include="Core\MyURLs.UserOriginal.cs" />
     <Compile Include="Core\Native\ClipboardAPI.cs" />
+    <Compile Include="Core\Native\GDIAPI.cs" />
     <Compile Include="Core\Native\GUIAPI.cs" />
     <Compile Include="Core\Native\HookAPI.cs" />
     <Compile Include="Core\Native\KeyboardAPI.cs" />
