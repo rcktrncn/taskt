@@ -1045,6 +1045,7 @@
     <Compile Include="Core\Automation\Commands\FormUIControls.cs" />
     <Compile Include="Core\IO\Files.cs" />
     <Compile Include="Core\MyURLs.UserOriginal.cs" />
+    <Compile Include="Core\Native\ClipboardAPI.cs" />
     <Compile Include="Core\Native\HookAPI.cs" />
     <Compile Include="Core\Native\KeyboardAPI.cs" />
     <Compile Include="Core\Native\MouseAPI.cs" />
@@ -1058,7 +1059,6 @@
     <Compile Include="Core\Automation\Attributes\PropertyAttributes.cs" />
     <Compile Include="Core\Automation\Commands\UIElementControls.cs" />
     <Compile Include="Core\Automation\Commands\BooleanControls.cs" />
-    <Compile Include="Core\Automation\Commands\ClipboardControls.cs" />
     <Compile Include="Core\Automation\Commands\ColorControls.cs" />
     <Compile Include="Core\Automation\Commands\ColorGroup\CreateColorFormExcelColorCommand.cs" />
     <Compile Include="Core\Automation\Commands\ColorGroup\ConvertColorCommand.cs" />

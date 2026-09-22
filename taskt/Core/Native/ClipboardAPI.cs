@@ -1,37 +1,77 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace taskt.Core.Automation.Commands
+namespace taskt.Core.Native.Windows
 {
-    /// <summary>
-    /// for clipboard methods
-    /// </summary>
-    static internal class ClipboardControls
+    public static class ClipboardAPI
     {
+        /// <summary>
+        /// get clipboard data in a specified format
+        /// </summary>
+        /// <param name="uFormat"></param>
+        /// <returns></returns>
         [DllImport("user32.dll")]
         private static extern IntPtr GetClipboardData(uint uFormat);
 
+        /// <summary>
+        /// set clipboard data in a specified format
+        /// </summary>
+        /// <param name="uFormat"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [DllImport("user32.dll")]
         private static extern bool SetClipboardData(uint uFormat, IntPtr data);
 
+        /// <summary>
+        /// empty
+        /// </summary>
+        /// <returns></returns>
         [DllImport("user32.dll")]
         private static extern bool EmptyClipboard();
 
+        /// <summary>
+        /// check clipboard contains data in a specified fomat
+        /// </summary>
+        /// <param name="format"></param>
+        /// <returns></returns>
         [DllImport("user32.dll")]
         private static extern bool IsClipboardFormatAvailable(uint format);
 
+        /// <summary>
+        /// open
+        /// </summary>
+        /// <param name="hWndNewOwner"></param>
+        /// <returns></returns>
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool OpenClipboard(IntPtr hWndNewOwner);
 
+        /// <summary>
+        /// close
+        /// </summary>
+        /// <returns></returns>
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool CloseClipboard();
 
+        /// <summary>
+        /// lock
+        /// </summary>
+        /// <param name="hMem"></param>
+        /// <returns></returns>
         [DllImport("kernel32.dll")]
         private static extern IntPtr GlobalLock(IntPtr hMem);
 
+        /// <summary>
+        /// unlock
+        /// </summary>
+        /// <param name="hMem"></param>
+        /// <returns></returns>
         [DllImport("kernel32.dll")]
         private static extern bool GlobalUnlock(IntPtr hMem);
 
+        /// <summary>
+        /// clipboard data format
+        /// https://learn.microsoft.com/en-us/windows/win32/dataxchg/standard-clipboard-formats
+        /// </summary>
         private const uint CF_UNICODETEXT = 13;
 
         /// <summary>
@@ -43,7 +83,7 @@ namespace taskt.Core.Automation.Commands
             OpenClipboard(IntPtr.Zero);
             EmptyClipboard();
             var ptr = Marshal.StringToHGlobalUni(textToSet);
-            SetClipboardData(13, ptr);
+            SetClipboardData(CF_UNICODETEXT, ptr);
             CloseClipboard();
         }
 
@@ -67,7 +107,7 @@ namespace taskt.Core.Automation.Commands
             {
                 return null;
             }
-                
+
             if (!OpenClipboard(IntPtr.Zero))
             {
                 return null;

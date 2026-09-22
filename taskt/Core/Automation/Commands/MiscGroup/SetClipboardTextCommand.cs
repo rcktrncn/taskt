@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -36,7 +37,8 @@ namespace taskt.Core.Automation.Commands
         {
             var input = v_InputValue.ExpandValueOrUserVariable(engine);
             //User32Functions.SetClipboardText(input);
-            ClipboardControls.SetClipboardText(input);
+            //ClipboardControls.SetClipboardText(input);
+            ClipboardAPI.SetClipboardText(input);
         }
     }
 }

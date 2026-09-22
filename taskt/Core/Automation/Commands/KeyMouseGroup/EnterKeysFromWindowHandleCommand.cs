@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using taskt.Core.Automation.Commands.KeyMouseGroup;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -121,13 +122,15 @@ namespace taskt.Core.Automation.Commands
                 {
                     if (this.ExpandValueOrUserVariableAsYesNo(nameof(v_UseClipBoard), engine))
                     {
-                        ClipboardControls.SetClipboardText(textToSend);
+                        //ClipboardControls.SetClipboardText(textToSend);
+                        ClipboardAPI.SetClipboardText(textToSend);
                         textToSend = "^v";  // Ctrl+V
                     }
                     SendKeys.SendWait(textToSend);
                     if (this.ExpandValueOrUserVariableAsYesNo(nameof(v_ClearClipboardAfterPaste), engine))
                     {
-                        ClipboardControls.ClearClipboard();
+                        //ClipboardControls.ClearClipboard();
+                        ClipboardAPI.ClearClipboard();
                     }
                 }
 
