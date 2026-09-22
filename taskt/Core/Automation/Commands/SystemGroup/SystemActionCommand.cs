@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -48,11 +49,12 @@ namespace taskt.Core.Automation.Commands
                     break;
                 case "logoff":
                     //User32.User32Functions.WindowsLogOff();
-                    SystemControls.WindowsLogOff();
+                    //SystemControls.WindowsLogOff();
+                    UserAccountSystemAPI.LogOffUserAccount();
                     break;
                 case "lock screen":
                     //User32.User32Functions.LockWorkStation();
-                    SystemControls.UserLock();
+                    UserAccountSystemAPI.LockUserAccount();
                     break;
             }
         }
