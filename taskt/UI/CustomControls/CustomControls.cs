@@ -16,6 +16,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Reflection;
 using System.Windows.Forms;
+using taskt.Core.Native.Windows;
 
 namespace taskt.UI.CustomControls
 {
@@ -276,12 +277,12 @@ namespace taskt.UI.CustomControls
 
     public class UITreeView : TreeView
     {
-        [System.Runtime.InteropServices.DllImport("uxtheme.dll", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
-        private static extern int SetWindowTheme(IntPtr hwnd, string pszSubAppName, string pszSubIdList);
         public UITreeView()
         {
             this.DoubleBuffered = true;
-            SetWindowTheme(this.Handle, "explorer", null);
+            //SetWindowTheme(this.Handle, "explorer", null);
+
+            GUIAPI.ApplyDefaultThemeStyle(this.Handle);
         }
     }
 
