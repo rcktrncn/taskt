@@ -15,7 +15,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 using taskt.Core.Automation.Commands;
 using taskt.Core.Automation.Engine;
@@ -260,7 +259,7 @@ namespace taskt.Core.Automation.User32
                 if (nCode >= 0 && wParam == (IntPtr)WM_KEYDOWN)
                 {
                     // KBDLLHOOKSTRUCT vkCode (virtual key code)
-                    var hookStruct = (KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(KBDLLHOOKSTRUCT));
+                    var hookStruct = (HookAPI.KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(HookAPI.KBDLLHOOKSTRUCT));
                     //int vkCode = Marshal.ReadInt32(lParam);
 
                     //BuildKeyboardCommand((Keys)vkCode);
@@ -342,7 +341,7 @@ namespace taskt.Core.Automation.User32
             /// <param name="hookInfo">KBDLLHOOKSTRUCT struct
             /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-kbdllhookstruct</param>
             //private static void BuildKeyboardCommand(Keys key)
-            private static void BuildKeyboardCommad(KBDLLHOOKSTRUCT hookInfo)
+            private static void BuildKeyboardCommad(HookAPI.KBDLLHOOKSTRUCT hookInfo)
             {
                 var key = (Keys)hookInfo.vkCode;
 
@@ -358,38 +357,42 @@ namespace taskt.Core.Automation.User32
                     LastKey = key;
                 }
 
-                bool toUpperCase = false;
+                //bool toUpperCase = false;
 
-                // determine if casing is needed
-                if (IsKeyDown(Keys.ShiftKey) && IsKeyToggled(Keys.Capital))
-                {
-                    toUpperCase = false;
-                }
-                else if (!IsKeyDown(Keys.ShiftKey) && IsKeyToggled(Keys.Capital))
-                {
-                    toUpperCase = true;
-                }
-                else if (IsKeyDown(Keys.ShiftKey) && !IsKeyToggled(Keys.Capital))
-                {
-                    toUpperCase = true;
-                }
-                else if (!IsKeyDown(Keys.ShiftKey) && !IsKeyToggled(Keys.Capital))
-                {
-                    toUpperCase = false;
-                }
+                //// determine if casing is needed
+                //if (KeyboardAPI.IsKeyDown(Keys.ShiftKey) && KeyboardAPI.IsKeyToggled(Keys.Capital))
+                //{
+                //    toUpperCase = false;
+                //}
+                //else if (!KeyboardAPI.IsKeyDown(Keys.ShiftKey) && KeyboardAPI.IsKeyToggled(Keys.Capital))
+                //{
+                //    toUpperCase = true;
+                //}
+                //else if (KeyboardAPI.IsKeyDown(Keys.ShiftKey) && !KeyboardAPI.IsKeyToggled(Keys.Capital))
+                //{
+                //    toUpperCase = true;
+                //}
+                //else if (!KeyboardAPI.IsKeyDown(Keys.ShiftKey) && !KeyboardAPI.IsKeyToggled(Keys.Capital))
+                //{
+                //    toUpperCase = false;
+                //}
 
-                // unicode key state
-                var buf = new StringBuilder(256);
-                var keyboardState = new byte[256];
+                //var toUpperCase = KeyboardAPI.IsUpperCase();
 
-                if (toUpperCase)
-                {
-                    keyboardState[(int)Keys.ShiftKey] = 0xff;
-                }
+                //// unicode key state
+                //var buf = new StringBuilder(256);
+                //var keyboardState = new byte[256];
 
-                ToUnicode((uint)key, 0, keyboardState, buf, 256, 0);
+                //if (toUpperCase)
+                //{
+                //    keyboardState[(int)Keys.ShiftKey] = 0xff;
+                //}
 
-                var selectedKey = buf.ToString();
+                //ToUnicode((uint)key, 0, keyboardState, buf, 256, 0);
+
+                //var selectedKey = buf.ToString();
+
+                var selectedKey = KeyboardAPI.ConvertVirtualKeyToString(hookInfo);
 
                 if ((selectedKey == "") || (selectedKey == "\r"))
                 {
@@ -849,14 +852,14 @@ namespace taskt.Core.Automation.User32
             //[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             //private static extern IntPtr GetModuleHandle(string lpModuleName);
 
-            /// <summary>
-            /// get the status of the specified virtual key (up, down)
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getkeystate
-            /// </summary>
-            /// <param name="keyCode"></param>
-            /// <returns></returns>
-            [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
-            private static extern short GetKeyState(int keyCode);
+            ///// <summary>
+            ///// get the status of the specified virtual key (up, down)
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getkeystate
+            ///// </summary>
+            ///// <param name="keyCode"></param>
+            ///// <returns></returns>
+            //[DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+            //private static extern short GetKeyState(int keyCode);
 
             ///// <summary>
             ///// get window handle from specified point
@@ -876,19 +879,19 @@ namespace taskt.Core.Automation.User32
             //[DllImport("user32.dll")]
             //static extern IntPtr ChildWindowFromPoint(IntPtr hWndParent, POINT Point);
 
-            /// <summary>
-            /// convert virtual-key code and keystate to unicode
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-tounicode
-            /// </summary>
-            /// <param name="virtualKeyCode">virtual keycode to be translated</param>
-            /// <param name="scanCode">hardware scancode to be translated</param>
-            /// <param name="keyboardState">265 byte array</param>
-            /// <param name="receivingBuffer">translated character UTF-16</param>
-            /// <param name="bufferSize">receivingBuffer size</param>
-            /// <param name="flags">behavior of function</param>
-            /// <returns></returns>
-            [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-            public static extern int ToUnicode(uint virtualKeyCode, uint scanCode, byte[] keyboardState, StringBuilder receivingBuffer, int bufferSize, uint flags);
+            ///// <summary>
+            ///// convert virtual-key code and keystate to unicode
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-tounicode
+            ///// </summary>
+            ///// <param name="virtualKeyCode">virtual keycode to be translated</param>
+            ///// <param name="scanCode">hardware scancode to be translated</param>
+            ///// <param name="keyboardState">265 byte array</param>
+            ///// <param name="receivingBuffer">translated character UTF-16</param>
+            ///// <param name="bufferSize">receivingBuffer size</param>
+            ///// <param name="flags">behavior of function</param>
+            ///// <returns></returns>
+            //[DllImport("user32.dll", CharSet = CharSet.Unicode)]
+            //public static extern int ToUnicode(uint virtualKeyCode, uint scanCode, byte[] keyboardState, StringBuilder receivingBuffer, int bufferSize, uint flags);
 
             // enums and structs
 
@@ -921,34 +924,34 @@ namespace taskt.Core.Automation.User32
             //    public int y;
             //}
 
-            /// <summary>
-            /// low level keyboard input event information struct
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-kbdllhookstruct
-            /// </summary>
-            [StructLayout(LayoutKind.Sequential)]
-            private struct KBDLLHOOKSTRUCT
-            {
-                /// <summary>
-                /// virtual key code
-                /// </summary>
-                public uint vkCode;
-                /// <summary>
-                /// hardware scan code
-                /// </summary>
-                public uint scanCode;
-                /// <summary>
-                /// extended key flag
-                /// </summary>
-                public uint flags;
-                /// <summary>
-                /// timestamp
-                /// </summary>
-                public uint time;
-                /// <summary>
-                /// additional infomation
-                /// </summary>
-                public IntPtr dwExtraInfo;
-            }
+            ///// <summary>
+            ///// low level keyboard input event information struct
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-kbdllhookstruct
+            ///// </summary>
+            //[StructLayout(LayoutKind.Sequential)]
+            //private struct KBDLLHOOKSTRUCT
+            //{
+            //    /// <summary>
+            //    /// virtual key code
+            //    /// </summary>
+            //    public uint vkCode;
+            //    /// <summary>
+            //    /// hardware scan code
+            //    /// </summary>
+            //    public uint scanCode;
+            //    /// <summary>
+            //    /// extended key flag
+            //    /// </summary>
+            //    public uint flags;
+            //    /// <summary>
+            //    /// timestamp
+            //    /// </summary>
+            //    public uint time;
+            //    /// <summary>
+            //    /// additional infomation
+            //    /// </summary>
+            //    public IntPtr dwExtraInfo;
+            //}
 
             /// <summary>
             /// low level mouse input event information struct
@@ -979,73 +982,73 @@ namespace taskt.Core.Automation.User32
                 public IntPtr dwExtraInfo;
             }
 
-            /// <summary>
-            /// key states
-            /// https://learn.microsoft.com/en-us/dotnet/api/system.windows.input.keystates?view=windowsdesktop-10.0
-            /// </summary>
-            [Flags]
-            private enum KeyStates
-            {
-                /// <summary>
-                /// not pressed
-                /// </summary>
-                None = 0,
-                /// <summary>
-                /// pressed
-                /// </summary>
-                Down = 1,
-                /// <summary>
-                /// toggled
-                /// </summary>
-                Toggled = 2
-            }
+            ///// <summary>
+            ///// key states
+            ///// https://learn.microsoft.com/en-us/dotnet/api/system.windows.input.keystates?view=windowsdesktop-10.0
+            ///// </summary>
+            //[Flags]
+            //private enum KeyStates
+            //{
+            //    /// <summary>
+            //    /// not pressed
+            //    /// </summary>
+            //    None = 0,
+            //    /// <summary>
+            //    /// pressed
+            //    /// </summary>
+            //    Down = 1,
+            //    /// <summary>
+            //    /// toggled
+            //    /// </summary>
+            //    Toggled = 2
+            //}
 
-            /// <summary>
-            /// get key state
-            /// </summary>
-            /// <param name="key"></param>
-            /// <returns></returns>
-            private static KeyStates GetKeyState(Keys key)
-            {
-                KeyStates state = KeyStates.None;
+            ///// <summary>
+            ///// get key state
+            ///// </summary>
+            ///// <param name="key"></param>
+            ///// <returns></returns>
+            //private static KeyStates GetKeyState(Keys key)
+            //{
+            //    KeyStates state = KeyStates.None;
 
-                short retVal = GetKeyState((int)key);
+            //    short retVal = GetKeyState((int)key);
 
-                // If the high-order bit is 1, the key is down
-                // otherwise, it is up.
-                if ((retVal & 0x8000) == 0x8000)
-                {
-                    state |= KeyStates.Down;
-                }
+            //    // If the high-order bit is 1, the key is down
+            //    // otherwise, it is up.
+            //    if ((retVal & 0x8000) == 0x8000)
+            //    {
+            //        state |= KeyStates.Down;
+            //    }
 
-                // If the low-order bit is 1, the key is toggled.
-                if ((retVal & 1) == 1)
-                {
-                    state |= KeyStates.Toggled;
-                }
+            //    // If the low-order bit is 1, the key is toggled.
+            //    if ((retVal & 1) == 1)
+            //    {
+            //        state |= KeyStates.Toggled;
+            //    }
                 
-                return state;
-            }
+            //    return state;
+            //}
 
-            /// <summary>
-            /// check keystate is down
-            /// </summary>
-            /// <param name="key"></param>
-            /// <returns></returns>
-            public static bool IsKeyDown(Keys key)
-            {
-                return KeyStates.Down == (GetKeyState(key) & KeyStates.Down);
-            }
+            ///// <summary>
+            ///// check keystate is down
+            ///// </summary>
+            ///// <param name="key"></param>
+            ///// <returns></returns>
+            //public static bool IsKeyDown(Keys key)
+            //{
+            //    return KeyStates.Down == (GetKeyState(key) & KeyStates.Down);
+            //}
 
-            /// <summary>
-            /// check keystate is toggled
-            /// </summary>
-            /// <param name="key"></param>
-            /// <returns></returns>
-            public static bool IsKeyToggled(Keys key)
-            {
-                return KeyStates.Toggled == (GetKeyState(key) & KeyStates.Toggled);
-            }
+            ///// <summary>
+            ///// check keystate is toggled
+            ///// </summary>
+            ///// <param name="key"></param>
+            ///// <returns></returns>
+            //public static bool IsKeyToggled(Keys key)
+            //{
+            //    return KeyStates.Toggled == (GetKeyState(key) & KeyStates.Toggled);
+            //}
             #endregion
 
             #region User32 Window 

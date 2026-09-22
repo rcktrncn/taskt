@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
 using static taskt.Core.Native.DEF_POINT;
 
 namespace taskt.Core.Native.Windows
@@ -30,6 +29,48 @@ namespace taskt.Core.Native.Windows
         public delegate IntPtr LowLevelKeyboardProcDelegate(int nCode, IntPtr wParam, IntPtr lParam);
 
         /// <summary>
+        /// keyboard messages for LowLevelKeyboardProc
+        /// https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-keyup
+        /// etc
+        /// </summary>
+        public enum KeyboardMessages
+        {
+            WM_KEYDOWN = 0x0100,    // key down
+            WM_KEYUP = 0x0101,  // key up
+            WM_SYSKEYDOWN = 0x0104,
+            WM_SYSKEYUP = 0x0105,
+        }
+
+        /// <summary>
+        /// low level keyboard input event information struct
+        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-kbdllhookstruct
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct KBDLLHOOKSTRUCT
+        {
+            /// <summary>
+            /// virtual key code
+            /// </summary>
+            public uint vkCode;
+            /// <summary>
+            /// hardware scan code
+            /// </summary>
+            public uint scanCode;
+            /// <summary>
+            /// extended key flag
+            /// </summary>
+            public uint flags;
+            /// <summary>
+            /// timestamp
+            /// </summary>
+            public uint time;
+            /// <summary>
+            /// additional infomation
+            /// </summary>
+            public IntPtr dwExtraInfo;
+        }
+
+        /// <summary>
         /// callback for mouse click hook
         /// https://learn.microsoft.com/en-us/windows/win32/winmsg/lowlevelmouseproc
         /// </summary>
@@ -39,6 +80,52 @@ namespace taskt.Core.Native.Windows
         /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct</param>
         /// <returns>when (nCode < 0) please specify return value of CallNextHookEx</returns>
         public delegate IntPtr LowLevelMouseProcDelegate(int nCode, IntPtr wParam, IntPtr lParam);
+
+        /// <summary>
+        /// mouse messages
+        /// https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-lbuttondown
+        /// etc ...
+        /// </summary>
+        public enum MouseMessages
+        {
+            WM_LBUTTONDOWN = 0x0201,    // left down
+            WM_LBUTTONUP = 0x0202,  // left up
+            WM_MOUSEMOVE = 0x0200,  // move
+            WM_MOUSEWHEEL = 0x020A, // wheel
+            WM_RBUTTONDOWN = 0x0204,    // right down
+            WM_RBUTTONUP = 0x0205,   // right up
+            WM_XBUTTONDOWN = 0x020b,
+            WM_XBUTTONUP = 0x020c,
+        }
+
+        /// <summary>
+        /// low level mouse input event information struct
+        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct MSLLHOOKSTRUCT
+        {
+            /// <summary>
+            /// point x and y
+            /// </summary>
+            public POINT pt;
+            /// <summary>
+            /// mouse button message
+            /// </summary>
+            public uint mouseData;
+            /// <summary>
+            /// event injected flag
+            /// </summary>
+            public uint flags;
+            /// <summary>
+            /// timestamp
+            /// </summary>
+            public uint time;
+            /// <summary>
+            /// additional message
+            /// </summary>
+            public IntPtr dwExtraInfo;
+        }
 
         /// <summary>
         /// low level hook
@@ -70,11 +157,11 @@ namespace taskt.Core.Native.Windows
         /// </summary>
         private const int WH_KEYBOARD_LL = 13;
 
-        /// <summary>
-        /// non-system key is pressed
-        /// https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-keydown
-        /// </summary>
-        private const int WM_KEYDOWN = 0x0100;
+        ///// <summary>
+        ///// non-system key is pressed
+        ///// https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-keydown
+        ///// </summary>
+        //private const int WM_KEYDOWN = 0x0100;
 
         /// <summary>
         /// value of win hook low level mouse input event
@@ -124,103 +211,6 @@ namespace taskt.Core.Native.Windows
         /// <returns></returns>
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern IntPtr GetModuleHandle(string lpModuleName);
-
-        /// <summary>
-        /// get the status of the specified virtual key (up, down)
-        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getkeystate
-        /// </summary>
-        /// <param name="keyCode"></param>
-        /// <returns></returns>
-        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
-        private static extern short GetKeyState(int keyCode);
-
-        /// <summary>
-        /// convert virtual-key code and keystate to unicode
-        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-tounicode
-        /// </summary>
-        /// <param name="virtualKeyCode">virtual keycode to be translated</param>
-        /// <param name="scanCode">hardware scancode to be translated</param>
-        /// <param name="keyboardState">265 byte array</param>
-        /// <param name="receivingBuffer">translated character UTF-16</param>
-        /// <param name="bufferSize">receivingBuffer size</param>
-        /// <param name="flags">behavior of function</param>
-        /// <returns></returns>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        private static extern int ToUnicode(uint virtualKeyCode, uint scanCode, byte[] keyboardState, StringBuilder receivingBuffer, int bufferSize, uint flags);
-
-        // enums and structs
-
-
-        /// <summary>
-        /// mouse messages
-        /// </summary>
-        private enum MouseMessages
-        {
-            WM_LBUTTONDOWN = 0x0201,    // left down
-            WM_LBUTTONUP = 0x0202,  // left up
-            WM_MOUSEMOVE = 0x0200,  // move
-            WM_MOUSEWHEEL = 0x020A, // wheel
-            WM_RBUTTONDOWN = 0x0204,    // right down
-            WM_RBUTTONUP = 0x0205   // right up
-        }
-
-        /// <summary>
-        /// low level keyboard input event information struct
-        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-kbdllhookstruct
-        /// </summary>
-        [StructLayout(LayoutKind.Sequential)]
-        private struct KBDLLHOOKSTRUCT
-        {
-            /// <summary>
-            /// virtual key code
-            /// </summary>
-            public uint vkCode;
-            /// <summary>
-            /// hardware scan code
-            /// </summary>
-            public uint scanCode;
-            /// <summary>
-            /// extended key flag
-            /// </summary>
-            public uint flags;
-            /// <summary>
-            /// timestamp
-            /// </summary>
-            public uint time;
-            /// <summary>
-            /// additional infomation
-            /// </summary>
-            public IntPtr dwExtraInfo;
-        }
-
-        /// <summary>
-        /// low level mouse input event information struct
-        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct
-        /// </summary>
-        [StructLayout(LayoutKind.Sequential)]
-        private struct MSLLHOOKSTRUCT
-        {
-            /// <summary>
-            /// point x and y
-            /// </summary>
-            public POINT pt;
-            /// <summary>
-            /// mouse button message
-            /// </summary>
-            public uint mouseData;
-            /// <summary>
-            /// event injected flag
-            /// </summary>
-            public uint flags;
-            /// <summary>
-            /// timestamp
-            /// </summary>
-            public uint time;
-            /// <summary>
-            /// additional message
-            /// </summary>
-            public IntPtr dwExtraInfo;
-        }
 
         /// <summary>
         /// WinEvents
@@ -331,6 +321,25 @@ namespace taskt.Core.Native.Windows
         public static void RemoveWindowHook(IntPtr hhk)
         {
             UnhookWindowsHookEx(hhk);
+        }
+
+        /// <summary>
+        /// create keyboad
+        /// </summary>
+        /// <param name="hookId"></param>
+        /// <returns></returns>
+        public static LowLevelKeyboardProcDelegate CreateKeyboadHookProcess(IntPtr hookId, Action<int, KeyboardMessages, KBDLLHOOKSTRUCT> hookAction)
+        {
+            LowLevelKeyboardProcDelegate ret = (nCode, wParam, lParam) =>
+            {
+                var keyboadMessage = (KeyboardMessages)wParam;
+                var hookStruct = (KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(KBDLLHOOKSTRUCT));
+
+                hookAction(nCode, keyboadMessage, hookStruct);
+
+                return CallNextHookEx(hookId, nCode, wParam, lParam);
+            };
+            return ret;
         }
     }
 }

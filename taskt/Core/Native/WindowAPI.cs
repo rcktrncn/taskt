@@ -64,6 +64,7 @@ namespace taskt.Core.Native.Windows
         public enum WindowState
         {
             NORMAL = 1,
+
             MAXIMIZE = 3,
 
             MINIMIZE = 6,
