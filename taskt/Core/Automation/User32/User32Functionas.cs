@@ -19,7 +19,6 @@ using System.Windows.Forms;
 using taskt.Core.Automation.Commands;
 using taskt.Core.Automation.Engine;
 using taskt.Core.Native.Windows;
-using static taskt.Core.Native.DEF_POINT;
 
 namespace taskt.Core.Automation.User32
 {
@@ -33,11 +32,11 @@ namespace taskt.Core.Automation.User32
             ///// </summary>
             //private const int WH_KEYBOARD_LL = 13;
 
-            /// <summary>
-            /// non-system key is pressed
-            /// https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-keydown
-            /// </summary>
-            private const int WM_KEYDOWN = 0x0100;
+            ///// <summary>
+            ///// non-system key is pressed
+            ///// https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-keydown
+            ///// </summary>
+            //private const int WM_KEYDOWN = 0x0100;
 
             /// <summary>
             /// low level keyboard input hook procedure
@@ -256,7 +255,7 @@ namespace taskt.Core.Automation.User32
             /// <returns></returns>
             private static IntPtr KeyboardHookEvent(int nCode, IntPtr wParam, IntPtr lParam)
             {
-                if (nCode >= 0 && wParam == (IntPtr)WM_KEYDOWN)
+                if (nCode >= 0 && wParam == (IntPtr)HookAPI.KeyboardMessages.WM_KEYDOWN)
                 {
                     // KBDLLHOOKSTRUCT vkCode (virtual key code)
                     var hookStruct = (HookAPI.KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(HookAPI.KBDLLHOOKSTRUCT));
@@ -287,9 +286,9 @@ namespace taskt.Core.Automation.User32
             {
                 if (nCode >= 0)
                 {
-                    var message = (MouseMessages)wParam;
+                    var message = (HookAPI.MouseMessages)wParam;
 
-                    if (message == MouseMessages.WM_LBUTTONDOWN)
+                    if (message == HookAPI.MouseMessages.WM_LBUTTONDOWN)
                     {
                         if (stopOnClick)
                         {
@@ -297,7 +296,7 @@ namespace taskt.Core.Automation.User32
                             HookAPI.RemoveKeyboardMouseHook(_mouseHookID);
                         }
 
-                        var hookStruct = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
+                        var hookStruct = (HookAPI.MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(HookAPI.MSLLHOOKSTRUCT));
                         var point = new System.Windows.Point(hookStruct.pt.x, hookStruct.pt.y);
                         MouseEvent?.Invoke(null, new MouseCoordinateEventArgs() { MouseCoordinates = point });
                     }
@@ -318,8 +317,8 @@ namespace taskt.Core.Automation.User32
             {
                 if (nCode >= 0)
                 {
-                    var hookStruct = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
-                    BuildMouseCommand(hookStruct, (MouseMessages)wParam);
+                    var hookStruct = (HookAPI.MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(HookAPI.MSLLHOOKSTRUCT));
+                    BuildMouseCommand(hookStruct, (HookAPI.MouseMessages)wParam);
                 }
 
                 return CallNextHookEx(_mouseHookID, nCode, wParam, lParam);
@@ -504,18 +503,18 @@ namespace taskt.Core.Automation.User32
             /// <param name="hookStruct">MSLLHOOKSTRUCT structure
             /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct</param>
             /// <param name="mouseMessage">MouseMessage</param>
-            private static void BuildMouseCommand(MSLLHOOKSTRUCT hookStruct, MouseMessages mouseMessage)
+            private static void BuildMouseCommand(HookAPI.MSLLHOOKSTRUCT hookStruct, HookAPI.MouseMessages mouseMessage)
             {
                 string mouseEventClickType = string.Empty;
                 switch (mouseMessage)
                 {
-                    case MouseMessages.WM_LBUTTONDOWN:
+                    case HookAPI.MouseMessages.WM_LBUTTONDOWN:
                         mouseEventClickType = "Left Down";
                         break;
-                    case MouseMessages.WM_LBUTTONUP:
+                    case HookAPI.MouseMessages.WM_LBUTTONUP:
                         mouseEventClickType = "Left Up";
                         break;
-                    case MouseMessages.WM_MOUSEMOVE:
+                    case HookAPI.MouseMessages.WM_MOUSEMOVE:
                         mouseEventClickType = "None";
 
                         if (lastMouseMove.ElapsedMilliseconds >= msResolution)
@@ -527,10 +526,10 @@ namespace taskt.Core.Automation.User32
                             return;
                         }
                         break;
-                    case MouseMessages.WM_RBUTTONDOWN:
+                    case HookAPI.MouseMessages.WM_RBUTTONDOWN:
                         mouseEventClickType = "Right Down";
                         break;
-                    case MouseMessages.WM_RBUTTONUP:
+                    case HookAPI.MouseMessages.WM_RBUTTONUP:
                         mouseEventClickType = "Right Up";
                         break;
                     default:
@@ -901,18 +900,18 @@ namespace taskt.Core.Automation.User32
             ///// </summary>
             //private const int WH_MOUSE_LL = 14;
 
-            /// <summary>
-            /// mouse messages
-            /// </summary>
-            private enum MouseMessages
-            {
-                WM_LBUTTONDOWN = 0x0201,    // left down
-                WM_LBUTTONUP = 0x0202,  // left up
-                WM_MOUSEMOVE = 0x0200,  // move
-                WM_MOUSEWHEEL = 0x020A, // wheel
-                WM_RBUTTONDOWN = 0x0204,    // right down
-                WM_RBUTTONUP = 0x0205   // right up
-            }
+            ///// <summary>
+            ///// mouse messages
+            ///// </summary>
+            //private enum MouseMessages
+            //{
+            //    WM_LBUTTONDOWN = 0x0201,    // left down
+            //    WM_LBUTTONUP = 0x0202,  // left up
+            //    WM_MOUSEMOVE = 0x0200,  // move
+            //    WM_MOUSEWHEEL = 0x020A, // wheel
+            //    WM_RBUTTONDOWN = 0x0204,    // right down
+            //    WM_RBUTTONUP = 0x0205   // right up
+            //}
 
             ///// <summary>
             ///// point location struct
@@ -953,34 +952,34 @@ namespace taskt.Core.Automation.User32
             //    public IntPtr dwExtraInfo;
             //}
 
-            /// <summary>
-            /// low level mouse input event information struct
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct
-            /// </summary>
-            [StructLayout(LayoutKind.Sequential)]
-            private struct MSLLHOOKSTRUCT
-            {
-                /// <summary>
-                /// point x and y
-                /// </summary>
-                public POINT pt;
-                /// <summary>
-                /// mouse button message
-                /// </summary>
-                public uint mouseData;
-                /// <summary>
-                /// event injected flag
-                /// </summary>
-                public uint flags;
-                /// <summary>
-                /// timestamp
-                /// </summary>
-                public uint time;
-                /// <summary>
-                /// additional message
-                /// </summary>
-                public IntPtr dwExtraInfo;
-            }
+            ///// <summary>
+            ///// low level mouse input event information struct
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct
+            ///// </summary>
+            //[StructLayout(LayoutKind.Sequential)]
+            //private struct MSLLHOOKSTRUCT
+            //{
+            //    /// <summary>
+            //    /// point x and y
+            //    /// </summary>
+            //    public POINT pt;
+            //    /// <summary>
+            //    /// mouse button message
+            //    /// </summary>
+            //    public uint mouseData;
+            //    /// <summary>
+            //    /// event injected flag
+            //    /// </summary>
+            //    public uint flags;
+            //    /// <summary>
+            //    /// timestamp
+            //    /// </summary>
+            //    public uint time;
+            //    /// <summary>
+            //    /// additional message
+            //    /// </summary>
+            //    public IntPtr dwExtraInfo;
+            //}
 
             ///// <summary>
             ///// key states

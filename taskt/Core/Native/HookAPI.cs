@@ -157,12 +157,6 @@ namespace taskt.Core.Native.Windows
         /// </summary>
         private const int WH_KEYBOARD_LL = 13;
 
-        ///// <summary>
-        ///// non-system key is pressed
-        ///// https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-keydown
-        ///// </summary>
-        //private const int WM_KEYDOWN = 0x0100;
-
         /// <summary>
         /// value of win hook low level mouse input event
         /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa
@@ -324,7 +318,7 @@ namespace taskt.Core.Native.Windows
         }
 
         /// <summary>
-        /// create keyboad
+        /// create keyboad hook procedure
         /// </summary>
         /// <param name="hookId"></param>
         /// <returns></returns>
