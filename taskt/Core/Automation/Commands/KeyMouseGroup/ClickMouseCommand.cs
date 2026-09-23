@@ -44,8 +44,6 @@ namespace taskt.Core.Automation.Commands
         {
             var clickType = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_MouseClick), engine);
 
-            //var mousePosition = Cursor.Position;
-            //KeyMouseControls.SendMouseClick(clickType, mousePosition.X, mousePosition.Y);
             (int x, int y) = MouseAPI.GetCursorPosition();
             MouseAPI.SendMouseClick(clickType, x, y);
 
