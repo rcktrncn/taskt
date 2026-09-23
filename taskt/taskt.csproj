@@ -112,8 +112,8 @@
     <Reference Include="MailKit, Version=4.18.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
       <HintPath>..\packages\MailKit.4.18.0\lib\net48\MailKit.dll</HintPath>
     </Reference>
-    <Reference Include="Markdig, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Markdig.1.3.2\lib\net462\Markdig.dll</HintPath>
+    <Reference Include="Markdig, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Markdig.1.4.0\lib\net462\Markdig.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.12, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.10.0.12\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -673,7 +673,6 @@
     <Compile Include="Core\Automation\Commands\WindowGroup\AWindowNamesActionCommnads.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\AWindowNamesCommands.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\AGetFromWindowNamesAsDataTableCommands.cs" />
-    <Compile Include="Core\Automation\Commands\WindowGroup\EM_CanHandleDesktopWindowHandleExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_FromWindowHandlePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_FromWindowNameResultPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowActivatePropertiesExtensionMethods.cs" />
@@ -707,7 +706,6 @@
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_CanHandleWindowNameExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowNameCorePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_OneWindowNamePropertiesExtensionMethods.cs" />
-    <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowResizePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowWaitTimeBetweenFindAndActionPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\ActivateOneWindowCommand.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\GetOneWindowHandleFromOneWindowNameCommand.cs" />
@@ -723,7 +721,6 @@
     <Compile Include="Core\Automation\Commands\WindowGroup\AWindowHandleActionCommands.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowHandleActionPropertiesExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowHandlePropertiesExtentionMethods.cs" />
-    <Compile Include="Core\Automation\Commands\WindowGroup\EM_WindowRECTPropertiesExtentionMethods.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\ICanHandleWindowName.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\IWindowHandleActionPropeties.cs" />
     <Compile Include="Core\Automation\Commands\WindowGroup\IOneWindowNameActionProperties.cs" />
@@ -1037,7 +1034,6 @@
     <Compile Include="Core\Automation\Commands\_General\ISizeProperties.cs" />
     <Compile Include="Core\Automation\Commands\_General\IReplaceValueProperties.cs" />
     <Compile Include="Core\Automation\Commands\TextGroup\ITextCheckProperties.cs" />
-    <Compile Include="Core\Automation\Commands\_General\RECT.cs" />
     <Compile Include="Core\Automation\Engine\EM_AppInstancesPropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Engine\EM_ScriptVariablePropertiesExtensionMethods.cs" />
     <Compile Include="Core\Automation\Engine\IAppInstancesProperties.cs" />
@@ -1049,6 +1045,15 @@
     <Compile Include="Core\Automation\Commands\FormUIControls.cs" />
     <Compile Include="Core\IO\Files.cs" />
     <Compile Include="Core\MyURLs.UserOriginal.cs" />
+    <Compile Include="Core\Native\ClipboardAPI.cs" />
+    <Compile Include="Core\Native\GDIAPI.cs" />
+    <Compile Include="Core\Native\GUIAPI.cs" />
+    <Compile Include="Core\Native\HookAPI.cs" />
+    <Compile Include="Core\Native\KeyboardAPI.cs" />
+    <Compile Include="Core\Native\MouseAPI.cs" />
+    <Compile Include="Core\Native\DEF_POINT.cs" />
+    <Compile Include="Core\Native\RecycleBinAPI.cs" />
+    <Compile Include="Core\Native\UserAccountSystemAPI.cs" />
     <Compile Include="Core\Native\WindowAPI.cs" />
     <Compile Include="Core\Script\InnerScriptVariable.cs" />
     <Compile Include="Core\Update\ApplicationUpdate.cs" />
@@ -1056,7 +1061,6 @@
     <Compile Include="Core\Automation\Attributes\PropertyAttributes.cs" />
     <Compile Include="Core\Automation\Commands\UIElementControls.cs" />
     <Compile Include="Core\Automation\Commands\BooleanControls.cs" />
-    <Compile Include="Core\Automation\Commands\ClipboardControls.cs" />
     <Compile Include="Core\Automation\Commands\ColorControls.cs" />
     <Compile Include="Core\Automation\Commands\ColorGroup\CreateColorFormExcelColorCommand.cs" />
     <Compile Include="Core\Automation\Commands\ColorGroup\ConvertColorCommand.cs" />
@@ -1142,8 +1146,6 @@
     <Compile Include="Core\Automation\Commands\SearchReplaceControls.cs" />
     <Compile Include="Core\Automation\Commands\SelectionItemsControls.cs" />
     <Compile Include="Core\Automation\Commands\SeleniumBrowserControls.cs" />
-    <Compile Include="Core\Automation\Commands\Shell32.cs" />
-    <Compile Include="Core\Automation\Commands\SystemControls.cs" />
     <Compile Include="Core\Automation\Commands\TextControls.cs" />
     <Compile Include="Core\Automation\Commands\TextGroup\CheckTextCommand.cs" />
     <Compile Include="Core\Automation\Commands\TextGroup\ConcatenateTextVariableCommand.cs" />

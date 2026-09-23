@@ -1,4 +1,5 @@
 ﻿using System;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -26,7 +27,8 @@ namespace taskt.Core.Automation.Commands
         {
             //User32Functions.SetClipboardText("");
             //ClipboardControls.SetClipboardText("");
-            ClipboardControls.ClearClipboard();
+            //ClipboardControls.ClearClipboard();
+            ClipboardAPI.ClearClipboard();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -40,93 +41,38 @@ namespace taskt.Core.Automation.Commands
 
         //public string v_WaitTimeBetweenFindAndAction
 
-        ///// <summary>
-        ///// check minimize
-        ///// </summary>
-        ///// <param name="hWnd"></param>
-        ///// <returns></returns>
-        //[DllImport("user32.dll")]
-        //private static extern bool IsIconic(IntPtr hWnd);
-
-
-        [DllImport("user32.dll")]
-        private static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
-
-        [DllImport("user32.dll")]
-        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        /// <summary>
-        ///  window maximize value
-        /// </summary>
-        private const int MAXIMIZE = 3;
-        /// <summary>
-        /// window minimize value
-        /// </summary>
-        private const int MINIMIZE = 6;
-        /// <summary>
-        /// window restore value
-        /// </summary>
-        private const int RESTORE = 9;
-
         public SetWindowStateByWindowHandleCommand()
         {
         }
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //WindowControls.WindowHandleAction(this, engine,
-            //    new Action<IntPtr>(whnd =>
-            //    {
-            //        var windowState = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WindowState), engine);
-            //        var state = WindowControls.WindowState.SW_RESTORE;
-            //        switch (windowState.ToLower())
-            //        {
-            //            case "maximize":
-            //                state = WindowControls.WindowState.SW_MAXIMIZE;
-            //                break;
-            //            case "minimize":
-            //                state = WindowControls.WindowState.SW_MINIMIZE;
-            //                break;
-            //        }
-
-            //        if (WindowControls.IsIconic(whnd) && (state != WindowControls.WindowState.SW_MINIMIZE))
-            //        {
-            //            WindowControls.ShowIconicWindow(whnd);
-            //        }
-            //        WindowControls.SetWindowState(whnd, state);
-            //    })
-            //);
-
             this.WindowHandleActionBeforeWaitActivate(engine, new Action<IntPtr>((whnd) =>
             {
-                int state = 0;
+                var state = WindowAPI.WindowState.MINIMIZE;
                 switch (this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WindowState), engine))
                 {
                     case "maximize":
-                        state = MAXIMIZE;
+                        state = WindowAPI.WindowState.MINIMIZE;
                         break;
                     case "minimize":
-                        state = MINIMIZE;
+                        state = WindowAPI.WindowState.MINIMIZE;
                         break;
                     case "restore":
-                        state = RESTORE;
+                        state = WindowAPI.WindowState.RESTORE;
                         break;
                     case "3":
-                        state = MAXIMIZE;
+                        state = WindowAPI.WindowState.MINIMIZE;
                         break;
                     case "2":
-                        state = MINIMIZE;
+                        state = WindowAPI.WindowState.MINIMIZE;
                         break;
                     case "1":
-                        state = RESTORE;
+                        state = WindowAPI.WindowState.RESTORE;
                         break;
                 }
 
-                if (EM_CanHandleWindowHandleExtentionMethods.IsWindowMinimized(whnd) && (state != MINIMIZE))
-                {
-                    ShowWindowAsync(whnd, state);
-                }
-                ShowWindow(whnd, state);
+                WindowAPI.SetWindowState(whnd, state);
             }));
         }
     }

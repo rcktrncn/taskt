@@ -15,14 +15,12 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using taskt.Core.Native.Windows;
 
 namespace taskt
 {
     static class Program
     {
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern bool SetProcessDPIAware();
-
         /// <summary>
         /// app switch
         /// </summary>
@@ -42,8 +40,8 @@ namespace taskt
         {
             App.UpdateLocationAndVersionInfo();
 
-            // High DPI
-            SetProcessDPIAware();
+            // support High DPI
+            GUIAPI.SupportHighDPI();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

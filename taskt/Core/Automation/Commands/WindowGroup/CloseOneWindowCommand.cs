@@ -20,15 +20,6 @@ namespace taskt.Core.Automation.Commands
 
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
-            //this.WindowNameActionAndWaitActivate(engine, new Action<IntPtr, string>((whnd, name) =>
-            //{
-            //    var closeWindow = new CloseWindowByWindowHandle()
-            //    {
-            //        v_WindowHandle = whnd.ToString(),
-            //        v_WaitTimeBetweenFindAndAction = this.v_WaitTimeBetweenFindAndAction,
-            //    };
-            //    closeWindow.RunCommand(engine);
-            //}));
             this.WindowNameAction(engine, new Action<IntPtr, string>((whnd, name) =>
             {
                 var closeWindow = new CloseWindowByWindowHandle()

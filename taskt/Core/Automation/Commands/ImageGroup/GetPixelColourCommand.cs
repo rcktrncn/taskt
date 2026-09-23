@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -48,10 +49,10 @@ namespace taskt.Core.Automation.Commands
         [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
         public string v_userVariableName { get; set; }
 
-        [System.Runtime.InteropServices.DllImport("User32.dll")]
-        public static extern IntPtr GetDC(IntPtr hwnd);
-        [System.Runtime.InteropServices.DllImport("User32.dll")]
-        public static extern void ReleaseDC(IntPtr hwnd, IntPtr dc);
+        //[System.Runtime.InteropServices.DllImport("User32.dll")]
+        //public static extern IntPtr GetDC(IntPtr hwnd);
+        //[System.Runtime.InteropServices.DllImport("User32.dll")]
+        //public static extern void ReleaseDC(IntPtr hwnd, IntPtr dc);
 
         public GetPixelColourCommand()
         {
@@ -59,7 +60,8 @@ namespace taskt.Core.Automation.Commands
 
         public override void AfterShown(UI.Forms.ScriptBuilder.CommandEditor.frmCommandEditor editor)
         {
-            IntPtr desktopPtr = GetDC(IntPtr.Zero);
+            //IntPtr desktopPtr = GetDC(IntPtr.Zero);
+            var desktopPtr = GDIAPI.GetDesktopDeviceContext();
             Graphics g = Graphics.FromHdc(desktopPtr);
 
             if (v_xCoord != null && v_yCoord != null)
@@ -70,7 +72,8 @@ namespace taskt.Core.Automation.Commands
                 g.DrawLine(p, xCoord, yCoord - 100, xCoord, yCoord + 100);
                 g.DrawLine(p, xCoord - 100, yCoord, xCoord + 100, yCoord);
                 g.Dispose();
-                ReleaseDC(IntPtr.Zero, desktopPtr);
+                //ReleaseDC(IntPtr.Zero, desktopPtr);
+                GDIAPI.ReleaseDesktopDeviceContext(desktopPtr);
             }
         }
 

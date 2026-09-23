@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -53,7 +54,8 @@ namespace taskt.Core.Automation.Commands
         {
             void GetWindowSizeProcess(IntPtr h)
             {
-                (var width, var height) = EM_WindowSizePropertiesExtensionMethods.GetWindowSize(h);
+                //(var width, var height) = EM_WindowSizePropertiesExtensionMethods.GetWindowSize(h);
+                (var width, var height) = WindowAPI.GetWindowSize(h);
                 if (!string.IsNullOrEmpty(v_Width))
                 {
                     width.StoreInUserVariable(engine, v_Width);
@@ -66,7 +68,8 @@ namespace taskt.Core.Automation.Commands
 
             this.WindowHandleAction(engine, new Action<IntPtr>((whnd) =>
             {
-                if (EM_CanHandleWindowHandleExtentionMethods.IsWindowMinimized(whnd))
+                //if (EM_CanHandleWindowHandleExtentionMethods.IsWindowMinimized(whnd))
+                if (WindowAPI.IsWindowMinimized(whnd))
                 {
                     switch (this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_WhenWindowIsMinimized), engine))
                     {

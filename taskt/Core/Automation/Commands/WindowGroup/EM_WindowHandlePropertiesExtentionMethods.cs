@@ -1,6 +1,7 @@
 ﻿using System;
 using taskt.Core.Automation.Commands.WindowGroup;
 using taskt.Core.Automation.Engine;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -17,7 +18,8 @@ namespace taskt.Core.Automation.Commands
         {
             if (command.v_WindowHandle == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentWindowHandle.VariableName, engine))
             {
-                return EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle();
+                //return EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle();
+                return WindowAPI.GetActiveWindowHandle();
             }
             else
             {
@@ -82,7 +84,8 @@ namespace taskt.Core.Automation.Commands
             var ret = WaitControls.WaitProcess(waitTime, "WindowHandle",
                 new Func<(bool, object)>(() =>
                 {
-                    if (EM_CanHandleWindowHandleExtentionMethods.CheckWindowHandleExists(whnd))
+                    //if (EM_CanHandleWindowHandleExtentionMethods.CheckWindowHandleExists(whnd))
+                    if (WindowAPI.CheckWindowHandleExists(whnd))
                     {
                         return (true, whnd);
                     }
@@ -127,7 +130,8 @@ namespace taskt.Core.Automation.Commands
                 var whnd = command.WaitForWindowHandle(engine);
 
                 // get window title before handle expired
-                var title = EM_CanHandleWindowHandleExtentionMethods.GetWindowName(whnd);
+                //var title = EM_CanHandleWindowHandleExtentionMethods.GetWindowName(whnd);
+                var title = WindowAPI.GetActiveWindowName();
                 
                 actionFunc(whnd);
 

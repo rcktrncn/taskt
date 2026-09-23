@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -79,7 +80,8 @@ namespace taskt.Core.Automation.Commands
                     // delete folder
                     if (this.ExpandValueOrUserVariableAsYesNo(nameof(v_MoveToRecycleBin), engine))
                     {
-                        Shell32.MoveToRecycleBin(path);
+                        //Shell32.MoveToRecycleBin(path);
+                        RecycleBinAPI.MoveToRecycleBin(path);
                     }
                     else
                     {

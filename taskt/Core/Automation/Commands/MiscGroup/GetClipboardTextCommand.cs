@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -40,11 +41,13 @@ namespace taskt.Core.Automation.Commands
         public override void RunCommand(Engine.AutomationEngineInstance engine)
         {
             //User32Functions.GetClipboardText().StoreInUserVariable(sender, v_userVariableName);
-            ClipboardControls.GetClipboardText().StoreInUserVariable(engine, v_userVariableName);
+            //ClipboardControls.GetClipboardText().StoreInUserVariable(engine, v_userVariableName);
+            ClipboardAPI.GetClipboardText().StoreInUserVariable(engine, v_userVariableName);
 
             if (this.ExpandValueOrUserVariableAsYesNo(nameof(v_ClearClipboadAfterGet), engine))
             {
-                ClipboardControls.ClearClipboard();
+                //ClipboardControls.ClearClipboard();
+                ClipboardAPI.ClearClipboard();
             }
         }
     }

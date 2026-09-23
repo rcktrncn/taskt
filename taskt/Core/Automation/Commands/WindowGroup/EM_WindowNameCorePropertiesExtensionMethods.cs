@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using taskt.Core.Automation.Commands.TextGroup;
 using taskt.Core.Automation.Engine;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -44,7 +45,8 @@ namespace taskt.Core.Automation.Commands
         {
             if (command.v_WindowName == VariableNameControls.GetWrappedVariableName(SystemVariables.Window_CurrentWindowName.VariableName, engine))
             {
-                return EM_CanHandleWindowNameExtensionMethods.GetActiveWindowName();
+                //return EM_CanHandleWindowNameExtensionMethods.GetActiveWindowName();
+                return WindowAPI.GetActiveWindowName();
             }
             else
             {
@@ -117,7 +119,9 @@ namespace taskt.Core.Automation.Commands
 
             var ret = WaitControls.WaitProcess(waitTime, "Window Name", new Func<(bool, object)>(() =>
             {
-                var allWindows = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNamesAndHandles();
+                //var allWindows = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNamesAndHandles();
+                var allWindows = WindowAPI.GetAllWindowNamesAndHandles();
+
                 var matchWindows = new List<(IntPtr, string)>();
                 foreach ((var whnd, var name) in allWindows)
                 {

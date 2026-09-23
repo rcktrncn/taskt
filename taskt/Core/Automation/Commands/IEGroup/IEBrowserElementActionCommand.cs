@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using taskt.Core.Script;
 using taskt.UI.CustomControls;
+using static taskt.Core.Native.Windows.WindowAPI;
 
 namespace taskt.Core.Automation.Commands
 {

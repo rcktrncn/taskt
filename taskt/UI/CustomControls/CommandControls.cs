@@ -11,6 +11,7 @@ using taskt.Core.Automation.Attributes.ClassAttributes;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using taskt.Core.Automation.Commands;
 using taskt.Core.Automation.Engine;
+using taskt.Core.Native.Windows;
 using static taskt.Core.Automation.Commands.PropertyControls;
 using static taskt.Core.Automation.Engine.SystemVariables;
 
@@ -676,7 +677,8 @@ namespace taskt.UI.CustomControls
                 lst.Add(VariableNameControls.GetWrappedVariableName(SystemVariables.Window_Desktop.VariableName, settings));
             }
 
-            lst.AddRange(EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames());
+            //lst.AddRange(EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames());
+            lst.AddRange(WindowAPI.GetAllWindowNames());
 
             return lst;
         }

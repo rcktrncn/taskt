@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using taskt.Core.Automation.Commands;
+using static taskt.Core.Native.DEF_POINT;
 
 namespace taskt.Core.Native.Windows
 {
@@ -37,25 +38,25 @@ namespace taskt.Core.Native.Windows
         [DllImport("User32.dll")]
         private static extern IntPtr SetForegroundWindow(IntPtr hWnd);
 
-        /// <summary>
-        /// window state is normal
-        /// </summary>
-        private const int NORMAL = 1;
+        ///// <summary>
+        ///// window state is normal
+        ///// </summary>
+        //private const int NORMAL = 1;
 
-        /// <summary>
-        ///  window maximize value
-        /// </summary>
-        private const int MAXIMIZE = 3;
+        ///// <summary>
+        /////  window maximize value
+        ///// </summary>
+        //private const int MAXIMIZE = 3;
 
-        /// <summary>
-        /// window minimize value
-        /// </summary>
-        private const int MINIMIZE = 6;
+        ///// <summary>
+        ///// window minimize value
+        ///// </summary>
+        //private const int MINIMIZE = 6;
 
-        /// <summary>
-        /// window restore value
-        /// </summary>
-        private const int RESTORE = 9;
+        ///// <summary>
+        ///// window restore value
+        ///// </summary>
+        //private const int RESTORE = 9;
 
         /// <summary>
         /// window states
@@ -63,6 +64,7 @@ namespace taskt.Core.Native.Windows
         public enum WindowState
         {
             NORMAL = 1,
+
             MAXIMIZE = 3,
 
             MINIMIZE = 6,
@@ -177,6 +179,40 @@ namespace taskt.Core.Native.Windows
         private static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
 
         /// <summary>
+        /// Rect Struct
+        /// </summary>
+        public struct RECT
+        {
+            public int left;
+            public int top;
+            public int right;
+            public int bottom;
+
+            public int GetWidth()
+            {
+                return (right - left);
+            }
+
+            public int GetHeight()
+            {
+                return (bottom - top);
+            }
+
+            public (int, int) GetWidthAndHeight()
+            {
+                return (GetWidth(), GetHeight());
+            }
+
+            public (int, int) GetCenterPosition()
+            {
+                return (
+                        left + (GetWidth() / 2),
+                        top + (GetHeight() / 2)
+                    );
+            }
+        }
+
+        /// <summary>
         /// move or resize window
         /// </summary>
         /// <param name="hWnd"></param>
@@ -201,6 +237,9 @@ namespace taskt.Core.Native.Windows
         /// </summary>
         private const uint RESIZE_WINDOW_FLAG = 0x0046; // 0x0002 | 0x0004 | 0x0040;
 
+        /// <summary>
+        /// window state struct
+        /// </summary>
         private struct WINDOWPLACEMENT
         {
             uint length;
@@ -232,12 +271,34 @@ namespace taskt.Core.Native.Windows
         private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
         /// <summary>
+        /// get window handle from specified point
+        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-windowfrompoint
+        /// </summary>
+        /// <param name="Point"></param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        private static extern IntPtr WindowFromPoint(POINT Point);
+
+        /// <summary>
+        /// get child window handle from specified point
+        /// </summary>
+        /// <param name="hWndParent"></param>
+        /// <param name="Point"></param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        private static extern IntPtr ChildWindowFromPoint(IntPtr hWndParent, POINT Point);
+
+        /// <summary>
         /// set window state
         /// </summary>
         /// <param name="whnd"></param>
         /// <param name="state"></param>
         public static void SetWindowState(IntPtr whnd, WindowState state)
         {
+            if (IsWindowMinimized(whnd) && (state != WindowState.MINIMIZE))
+            {
+                ShowWindowAsync(whnd, (int)state);
+            }
             ShowWindow(whnd, (int)state);
         }
 
@@ -348,6 +409,16 @@ namespace taskt.Core.Native.Windows
         }
 
         /// <summary>
+        /// get active window name
+        /// </summary>
+        /// <returns></returns>
+        public static string GetActiveWindowName()
+        {
+            var whnd = GetActiveWindowHandle();
+            return GetWindowName(whnd);
+        }
+
+        /// <summary>
         /// get window name from handle
         /// </summary>
         /// <param name="whnd"></param>
@@ -401,6 +472,21 @@ namespace taskt.Core.Native.Windows
         }
 
         /// <summary>
+        /// get all window names
+        /// </summary>
+        /// <param name="useDistinct"></param>
+        /// <returns></returns>
+        public static List<string> GetAllWindowNames(bool useDistinct = true)
+        {
+            var t = GetAllWindowNamesAndHandles().Select(item => item.Item2);
+            if (useDistinct)
+            {
+                t = t.Distinct();
+            }
+            return t.ToList();
+        }
+
+        /// <summary>
         /// get window rect
         /// </summary>
         /// <param name="whnd"></param>
@@ -409,6 +495,28 @@ namespace taskt.Core.Native.Windows
         {
             GetWindowRect(whnd, out RECT r);
             return r;
+        }
+
+        /// <summary>
+        /// get window size
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <returns>(width, height)</returns>
+        public static (int, int) GetWindowSize(IntPtr whnd)
+        {
+            var r = GetWindowRect(whnd);
+            return (r.GetWidth(), r.GetHeight());
+        }
+
+        /// <summary>
+        /// get window position
+        /// </summary>
+        /// <param name="whnd"></param>
+        /// <returns>(top, left)</returns>
+        public static (int, int) GetWindowPosition(IntPtr whnd)
+        {
+            var r = GetWindowRect(whnd);
+            return (r.top, r.left);
         }
 
         /// <summary>
@@ -471,6 +579,16 @@ namespace taskt.Core.Native.Windows
             }
 
             return ((int)info.showCmd, stateText);
+        }
+
+        /// <summary>
+        /// get window handle from point
+        /// </summary>
+        /// <param name="pt"></param>
+        /// <returns></returns>
+        public static IntPtr GetWindowHandleFromPoint(POINT pt)
+        {
+            return WindowFromPoint(pt);
         }
     }
 }

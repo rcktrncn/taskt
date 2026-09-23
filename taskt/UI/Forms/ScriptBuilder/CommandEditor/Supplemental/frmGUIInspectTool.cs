@@ -11,6 +11,7 @@ using System.Xml.XPath;
 using taskt.Core.Automation.Commands;
 using taskt.Core.Automation.Commands.UIAutomationGroup;
 using taskt.Core.Automation.Engine;
+using taskt.Core.Native.Windows;
 using taskt.Core.Script;
 using static taskt.Core.Automation.Commands.UIAutomationGroup.EM_CanHandleUIElementExtentionMethods;
 
@@ -112,7 +113,8 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
             cmbWindowList.BeginUpdate();
             cmbWindowList.Items.Clear();
 
-            var windows = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames();
+            //var windows = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames();
+            var windows = WindowAPI.GetAllWindowNames();
             foreach (string win in windows)
             {
                 cmbWindowList.Items.Add(win);
@@ -899,7 +901,8 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
         /// <param name="e"></param>
         private void timerMouseMove_Tick(object sender, EventArgs e)
         {
-            var p = Cursor.Position;
+            //var p = Cursor.Position;
+            var p = MouseAPI.GetCursorPositionAsSystemDrawingPoint();
             var isNotMoved = (p == oldCursorPosition);
             oldCursorPosition = p;
             

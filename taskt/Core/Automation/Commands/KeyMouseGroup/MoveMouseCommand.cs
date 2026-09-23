@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -73,7 +74,8 @@ namespace taskt.Core.Automation.Commands
 
             try
             {
-                KeyMouseControls.SetCursorPosition(mouseX, mouseY);
+                //KeyMouseControls.SetCursorPosition(mouseX, mouseY);
+                MouseAPI.SetCursorPosition(mouseX, mouseY);
 
                 if (!String.IsNullOrEmpty(v_MouseClick))
                 {

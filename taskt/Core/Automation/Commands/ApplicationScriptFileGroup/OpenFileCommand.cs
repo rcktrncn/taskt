@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands
@@ -68,7 +69,8 @@ namespace taskt.Core.Automation.Commands
                         IntPtr newWindowHandle;
                         if (p.MainWindowHandle == IntPtr.Zero)
                         {
-                            newWindowHandle = EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle();
+                            //newWindowHandle = EM_CanHandleWindowHandleExtentionMethods.GetActiveWindowHandle();
+                            newWindowHandle = WindowAPI.GetActiveWindowHandle();
                             using (var n = new InnerScriptVariable(engine))
                             {
                                 var getName = new GetWindowNameFromWindowHandleCommand()

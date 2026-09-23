@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using taskt.Core.Automation.Commands.TextGroup;
 using taskt.Core.Automation.Engine;
+using taskt.Core.Native.Windows;
 using taskt.UI.CustomControls;
 
 namespace taskt.Core.Automation.Commands
@@ -339,11 +339,6 @@ namespace taskt.Core.Automation.Commands
 
         #endregion
 
-
-        [DllImport("user32.dll")]
-        private static extern int GetWindowThreadProcessId(IntPtr hWnd, out int lpdwProcessId);
-
-
         /// <summary>
         /// convert processId to Window Handle
         /// </summary>
@@ -352,11 +347,13 @@ namespace taskt.Core.Automation.Commands
         /// <exception cref="Exception"></exception>
         public static IntPtr ConvertProcessIdToWindowHandle(int pid)
         {
-            var whnds = EM_CanHandleWindowHandleExtentionMethods.GetAllWindowHandles();
+            //var whnds = EM_CanHandleWindowHandleExtentionMethods.GetAllWindowHandles();
+            var whnds = WindowAPI.GetAllWindowHandles();
             foreach (var whnd in whnds)
             {
-                GetWindowThreadProcessId(whnd, out int myPid);
-                if (myPid == pid)
+                //GetWindowThreadProcessId(whnd, out int myPid);
+                //if (myPid == pid)
+                if (pid == WindowAPI.GetWindowProcessId(whnd))
                 {
                     return whnd;
                 }
@@ -415,7 +412,8 @@ namespace taskt.Core.Automation.Commands
             cmb.BeginUpdate();
             cmb.Items.Clear();
 
-            var winList = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames();
+            //var winList = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames();
+            var winList = WindowAPI.GetAllWindowNames();
 
             cmb.Items.AddRange(winList.ToArray());
 

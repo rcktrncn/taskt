@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using taskt.Core.Automation.Commands.KeyMouseGroup;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -95,39 +96,47 @@ namespace taskt.Core.Automation.Commands
 
                 if (textToSend == "{WIN_KEY}")
                 {
-                    KeyMouseControls.KeyDown(Keys.LWin);
-                    KeyMouseControls.KeyUp(Keys.LWin);
+                    //KeyMouseControls.SendKeyDown(Keys.LWin);
+                    //KeyMouseControls.SendKeyUp(Keys.LWin);
+                    KeyboardAPI.SendKeyDown(Keys.LWin);
+                    KeyboardAPI.SendKeyUp(Keys.LWin);
                 }
                 else if (textToSend.StartsWith("{WIN_KEY+") && textToSend.EndsWith("}"))
                 {
-                    KeyMouseControls.KeyDown(Keys.LWin);
+                    //KeyMouseControls.SendKeyDown(Keys.LWin);
+                    KeyboardAPI.SendKeyDown(Keys.LWin);
                     var remainingText = textToSend.Replace("{WIN_KEY+", "").Replace("}", "");
 
                     foreach (var c in remainingText)
                     {
                         Keys key = (Keys)Enum.Parse(typeof(Keys), c.ToString());
-                        KeyMouseControls.KeyDown(key);
+                        //KeyMouseControls.SendKeyDown(key);
+                        KeyboardAPI.SendKeyDown(key);
                     }
 
-                    KeyMouseControls.KeyUp(Keys.LWin);
+                    //KeyMouseControls.SendKeyUp(Keys.LWin);
+                    KeyboardAPI.SendKeyUp(Keys.LWin);
 
                     foreach (var c in remainingText)
                     {
                         Keys key = (Keys)Enum.Parse(typeof(Keys), c.ToString());
-                        KeyMouseControls.KeyUp(key);
+                        //KeyMouseControls.SendKeyUp(key);
+                        KeyboardAPI.SendKeyUp(key);
                     }
                 }
                 else
                 {
                     if (this.ExpandValueOrUserVariableAsYesNo(nameof(v_UseClipBoard), engine))
                     {
-                        ClipboardControls.SetClipboardText(textToSend);
+                        //ClipboardControls.SetClipboardText(textToSend);
+                        ClipboardAPI.SetClipboardText(textToSend);
                         textToSend = "^v";  // Ctrl+V
                     }
                     SendKeys.SendWait(textToSend);
                     if (this.ExpandValueOrUserVariableAsYesNo(nameof(v_ClearClipboardAfterPaste), engine))
                     {
-                        ClipboardControls.ClearClipboard();
+                        //ClipboardControls.ClearClipboard();
+                        ClipboardAPI.ClearClipboard();
                     }
                 }
 

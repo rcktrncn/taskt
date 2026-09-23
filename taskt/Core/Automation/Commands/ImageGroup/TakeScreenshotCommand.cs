@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -174,7 +175,8 @@ namespace taskt.Core.Automation.Commands
 
         private static Bitmap CaptureWindow(IntPtr whnd)
         {
-            var r = EM_WindowRECTPropertiesExtentionMethods.GetWindowRect(whnd);
+            //var r = EM_WindowRECTPropertiesExtentionMethods.GetWindowRect(whnd);
+            var r = WindowAPI.GetWindowRect(whnd);
             var bounds = new Rectangle(r.left, r.top, r.right - r.left, r.bottom - r.top);
             var screenshot = new Bitmap(bounds.Width, bounds.Height);
 

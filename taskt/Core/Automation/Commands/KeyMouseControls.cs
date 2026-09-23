@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
@@ -106,18 +105,18 @@ namespace taskt.Core.Automation.Commands
         #endregion
 
         #region enum, struct, const, field, property
-        private enum MouseEvents
-        {
-            MOUSEEVENTF_LEFTDOWN = 0x02,
-            MOUSEEVENTF_LEFTUP = 0x04,
-            MOUSEEVENTF_RIGHTDOWN = 0x08,
-            MOUSEEVENTF_RIGHTUP = 0x10,
-            MOUSEEVENTF_MIDDLEDOWN = 0x20,
-            MOUSEEVENTF_MIDDLEUP = 0x40
-        }
+        //private enum MouseEvents
+        //{
+        //    MOUSEEVENTF_LEFTDOWN = 0x02,
+        //    MOUSEEVENTF_LEFTUP = 0x04,
+        //    MOUSEEVENTF_RIGHTDOWN = 0x08,
+        //    MOUSEEVENTF_RIGHTUP = 0x10,
+        //    MOUSEEVENTF_MIDDLEDOWN = 0x20,
+        //    MOUSEEVENTF_MIDDLEUP = 0x40
+        //}
 
-        private const int KEYEVENTF_EXTENDEDKEY = 0x1;
-        private const int KEYEVENTF_KEYUP = 0x2;
+        //private const int KEYEVENTF_EXTENDEDKEY = 0x1;
+        //private const int KEYEVENTF_KEYUP = 0x2;
 
         private static Dictionary<string, string> _keysDescription = new Dictionary<string, string>();
 
@@ -151,114 +150,114 @@ namespace taskt.Core.Automation.Commands
         #endregion
 
         #region api
-        [DllImport("user32.dll")]
-        private static extern bool SetCursorPos(int x, int y);
+        //[DllImport("user32.dll")]
+        //private static extern bool SetCursorPos(int x, int y);
 
-        [DllImport("user32.dll")]
-        private static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+        //[DllImport("user32.dll")]
+        //private static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
         
-        [DllImport("user32.dll")]
-        private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+        //[DllImport("user32.dll")]
+        //private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
 
-        public static void SetCursorPosition(int newXPosition, int newYPosition)
-        {
-            SetCursorPos(newXPosition, newYPosition);
-        }
+        //public static void SetCursorPosition(int newXPosition, int newYPosition)
+        //{
+        //    SetCursorPos(newXPosition, newYPosition);
+        //}
 
-        public static void SendMouseClick(string clickType, int xMousePosition, int yMousePosition)
-        {
-            var actions = new List<MouseEvents>();
+        //public static void SendMouseClick(string clickType, int xMousePosition, int yMousePosition)
+        //{
+        //    var actions = new List<MouseEvents>();
 
-            switch (clickType.ToLower())
-            {
-                case "double left click":
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTDOWN, xMousePosition, yMousePosition, 0, 0);
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTUP, xMousePosition, yMousePosition, 0, 0);
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTDOWN, xMousePosition, yMousePosition, 0, 0);
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTUP, xMousePosition, yMousePosition, 0, 0);
-                    actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP, MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP });
-                    break;
+        //    switch (clickType.ToLower())
+        //    {
+        //        case "double left click":
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTDOWN, xMousePosition, yMousePosition, 0, 0);
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTUP, xMousePosition, yMousePosition, 0, 0);
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTDOWN, xMousePosition, yMousePosition, 0, 0);
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTUP, xMousePosition, yMousePosition, 0, 0);
+        //            actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP, MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP });
+        //            break;
 
-                case "left click":
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTDOWN, xMousePosition, yMousePosition, 0, 0);
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTUP, xMousePosition, yMousePosition, 0, 0);
-                    actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP });
-                    break;
+        //        case "left click":
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTDOWN, xMousePosition, yMousePosition, 0, 0);
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTUP, xMousePosition, yMousePosition, 0, 0);
+        //            actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP });
+        //            break;
 
-                case "right click":
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_RIGHTDOWN, xMousePosition, yMousePosition, 0, 0);
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_RIGHTUP, xMousePosition, yMousePosition, 0, 0);
-                    actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_RIGHTDOWN, MouseEvents.MOUSEEVENTF_RIGHTUP });
-                    break;
+        //        case "right click":
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_RIGHTDOWN, xMousePosition, yMousePosition, 0, 0);
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_RIGHTUP, xMousePosition, yMousePosition, 0, 0);
+        //            actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_RIGHTDOWN, MouseEvents.MOUSEEVENTF_RIGHTUP });
+        //            break;
 
-                case "middle click":
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_MIDDLEDOWN, xMousePosition, yMousePosition, 0, 0);
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_MIDDLEUP, xMousePosition, yMousePosition, 0, 0);
-                    actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_MIDDLEDOWN, MouseEvents.MOUSEEVENTF_MIDDLEUP });
-                    break;
+        //        case "middle click":
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_MIDDLEDOWN, xMousePosition, yMousePosition, 0, 0);
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_MIDDLEUP, xMousePosition, yMousePosition, 0, 0);
+        //            actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_MIDDLEDOWN, MouseEvents.MOUSEEVENTF_MIDDLEUP });
+        //            break;
 
-                case "left down":
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTDOWN, xMousePosition, yMousePosition, 0, 0);
-                    actions.Add(MouseEvents.MOUSEEVENTF_LEFTDOWN);
-                    break;
+        //        case "left down":
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTDOWN, xMousePosition, yMousePosition, 0, 0);
+        //            actions.Add(MouseEvents.MOUSEEVENTF_LEFTDOWN);
+        //            break;
 
-                case "right down":
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_RIGHTDOWN, xMousePosition, yMousePosition, 0, 0);
-                    actions.Add(MouseEvents.MOUSEEVENTF_RIGHTDOWN);
-                    break;
+        //        case "right down":
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_RIGHTDOWN, xMousePosition, yMousePosition, 0, 0);
+        //            actions.Add(MouseEvents.MOUSEEVENTF_RIGHTDOWN);
+        //            break;
 
-                case "middle down":
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_MIDDLEDOWN, xMousePosition, yMousePosition, 0, 0);
-                    actions.Add(MouseEvents.MOUSEEVENTF_MIDDLEDOWN);
-                    break;
+        //        case "middle down":
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_MIDDLEDOWN, xMousePosition, yMousePosition, 0, 0);
+        //            actions.Add(MouseEvents.MOUSEEVENTF_MIDDLEDOWN);
+        //            break;
 
-                case "left up":
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTUP, xMousePosition, yMousePosition, 0, 0);
-                    actions.Add(MouseEvents.MOUSEEVENTF_LEFTUP);
-                    break;
+        //        case "left up":
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_LEFTUP, xMousePosition, yMousePosition, 0, 0);
+        //            actions.Add(MouseEvents.MOUSEEVENTF_LEFTUP);
+        //            break;
 
-                case "right up":
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_RIGHTUP, xMousePosition, yMousePosition, 0, 0);
-                    actions.Add(MouseEvents.MOUSEEVENTF_RIGHTUP);
-                    break;
+        //        case "right up":
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_RIGHTUP, xMousePosition, yMousePosition, 0, 0);
+        //            actions.Add(MouseEvents.MOUSEEVENTF_RIGHTUP);
+        //            break;
 
-                case "middle up":
-                    //mouse_event((int)MouseEvents.MOUSEEVENTF_MIDDLEUP, xMousePosition, yMousePosition, 0, 0);
-                    actions.Add(MouseEvents.MOUSEEVENTF_MIDDLEUP);
-                    break;
+        //        case "middle up":
+        //            //mouse_event((int)MouseEvents.MOUSEEVENTF_MIDDLEUP, xMousePosition, yMousePosition, 0, 0);
+        //            actions.Add(MouseEvents.MOUSEEVENTF_MIDDLEUP);
+        //            break;
 
-                default:
-                    break;
-            }
+        //        default:
+        //            break;
+        //    }
 
-            foreach(var mouse in actions)
-            {
-                mouse_event((int)mouse, xMousePosition, yMousePosition, 0, 0);
-            }
-        }
+        //    foreach(var mouse in actions)
+        //    {
+        //        mouse_event((int)mouse, xMousePosition, yMousePosition, 0, 0);
+        //    }
+        //}
 
-        public static void KeyDownKeyUp(Keys[] keys)
-        {
-            foreach (var key in keys)
-            {
-                KeyDown(key);
-            }
+        //public static void KeyDownKeyUp(Keys[] keys)
+        //{
+        //    foreach (var key in keys)
+        //    {
+        //        SendKeyDown(key);
+        //    }
 
-            foreach (var key in keys)
-            {
-                KeyUp(key);
-            }
-        }
+        //    foreach (var key in keys)
+        //    {
+        //        SendKeyUp(key);
+        //    }
+        //}
 
-        public static void KeyDown(Keys vKey)
-        {
-            keybd_event((byte)vKey, 0, KEYEVENTF_EXTENDEDKEY, 0);
-        }
+        //public static void SendKeyDown(Keys vKey)
+        //{
+        //    keybd_event((byte)vKey, 0, KEYEVENTF_EXTENDEDKEY, 0);
+        //}
 
-        public static void KeyUp(Keys vKey)
-        {
-            keybd_event((byte)vKey, 0, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
-        }
+        //public static void SendKeyUp(Keys vKey)
+        //{
+        //    keybd_event((byte)vKey, 0, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
+        //}
 
         private static void CreateKeysDescription()
         {

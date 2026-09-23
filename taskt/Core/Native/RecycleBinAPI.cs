@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-/**
- * https://stackoverflow.com/questions/3282418/send-a-file-to-the-recycle-bin
- */
-namespace taskt.Core.Automation.Commands
+namespace taskt.Core.Native.Windows
 {
-    internal static class Shell32
+    /**
+     * https://stackoverflow.com/questions/3282418/send-a-file-to-the-recycle-bin
+     */
+    public static class RecycleBinAPI
     {
         /// <summary>
         /// Possible flags for the SHFileOperation method.
@@ -82,6 +82,12 @@ namespace taskt.Core.Automation.Commands
             public string lpszProgressTitle;
         }
 
+        /// <summary>
+        /// copy, move, rename, or delete a file system object
+        /// https://learn.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-shfileoperationa
+        /// </summary>
+        /// <param name="FileOp"></param>
+        /// <returns></returns>
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         private static extern int SHFileOperation(ref SHFILEOPSTRUCT FileOp);
 
@@ -125,7 +131,6 @@ namespace taskt.Core.Automation.Commands
         public static bool MoveToRecycleBin(string path)
         {
             return Send(path, FileOperationFlags.FOF_NOCONFIRMATION | FileOperationFlags.FOF_NOERRORUI | FileOperationFlags.FOF_SILENT);
-
         }
     }
 }
