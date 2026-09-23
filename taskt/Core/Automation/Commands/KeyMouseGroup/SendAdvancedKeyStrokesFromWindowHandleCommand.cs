@@ -5,6 +5,7 @@ using System.Data;
 using System.Windows.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using taskt.Core.Automation.Commands.KeyMouseGroup;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -100,8 +101,10 @@ namespace taskt.Core.Automation.Commands
                     {
                         case "Key Press (Down + Up)":
                             // simulate press
-                            KeyMouseControls.SendKeyDown(oemKeyName);
-                            KeyMouseControls.SendKeyUp(oemKeyName);
+                            //KeyMouseControls.SendKeyDown(oemKeyName);
+                            //KeyMouseControls.SendKeyUp(oemKeyName);
+                            KeyboardAPI.SendKeyDown(oemKeyName);
+                            KeyboardAPI.SendKeyUp(oemKeyName);
 
                             // key returned to UP position so remove if we added it to the keys down list
                             if (keysDown.Contains(oemKeyName))
@@ -112,7 +115,8 @@ namespace taskt.Core.Automation.Commands
 
                         case "Key Down":
                             // simulate down
-                            KeyMouseControls.SendKeyDown(oemKeyName);
+                            //KeyMouseControls.SendKeyDown(oemKeyName);
+                            KeyboardAPI.SendKeyDown(oemKeyName);
 
                             // track via keys down list
                             if (!keysDown.Contains(oemKeyName))
@@ -123,7 +127,8 @@ namespace taskt.Core.Automation.Commands
 
                         case "Key Up":
                             // simulate up
-                            KeyMouseControls.SendKeyUp(oemKeyName);
+                            //KeyMouseControls.SendKeyUp(oemKeyName);
+                            KeyboardAPI.SendKeyUp(oemKeyName);
 
                             // remove from key down
                             if (keysDown.Contains(oemKeyName))
@@ -142,7 +147,8 @@ namespace taskt.Core.Automation.Commands
                 {
                     foreach (var key in keysDown)
                     {
-                        KeyMouseControls.SendKeyUp(key);
+                        //KeyMouseControls.SendKeyUp(key);
+                        KeyboardAPI.SendKeyUp(key);
                     }
                 }
             }));

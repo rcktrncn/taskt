@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 
@@ -116,8 +115,8 @@ namespace taskt.Core.Automation.Commands
         //    MOUSEEVENTF_MIDDLEUP = 0x40
         //}
 
-        private const int KEYEVENTF_EXTENDEDKEY = 0x1;
-        private const int KEYEVENTF_KEYUP = 0x2;
+        //private const int KEYEVENTF_EXTENDEDKEY = 0x1;
+        //private const int KEYEVENTF_KEYUP = 0x2;
 
         private static Dictionary<string, string> _keysDescription = new Dictionary<string, string>();
 
@@ -157,8 +156,8 @@ namespace taskt.Core.Automation.Commands
         //[DllImport("user32.dll")]
         //private static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
         
-        [DllImport("user32.dll")]
-        private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+        //[DllImport("user32.dll")]
+        //private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
 
         //public static void SetCursorPosition(int newXPosition, int newYPosition)
         //{
@@ -237,28 +236,28 @@ namespace taskt.Core.Automation.Commands
         //    }
         //}
 
-        public static void KeyDownKeyUp(Keys[] keys)
-        {
-            foreach (var key in keys)
-            {
-                SendKeyDown(key);
-            }
+        //public static void KeyDownKeyUp(Keys[] keys)
+        //{
+        //    foreach (var key in keys)
+        //    {
+        //        SendKeyDown(key);
+        //    }
 
-            foreach (var key in keys)
-            {
-                SendKeyUp(key);
-            }
-        }
+        //    foreach (var key in keys)
+        //    {
+        //        SendKeyUp(key);
+        //    }
+        //}
 
-        public static void SendKeyDown(Keys vKey)
-        {
-            keybd_event((byte)vKey, 0, KEYEVENTF_EXTENDEDKEY, 0);
-        }
+        //public static void SendKeyDown(Keys vKey)
+        //{
+        //    keybd_event((byte)vKey, 0, KEYEVENTF_EXTENDEDKEY, 0);
+        //}
 
-        public static void SendKeyUp(Keys vKey)
-        {
-            keybd_event((byte)vKey, 0, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
-        }
+        //public static void SendKeyUp(Keys vKey)
+        //{
+        //    keybd_event((byte)vKey, 0, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
+        //}
 
         private static void CreateKeysDescription()
         {
