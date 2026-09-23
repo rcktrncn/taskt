@@ -208,9 +208,7 @@ namespace taskt.Core.Automation.User32
                 // if user decided to capture window events
                 if (performWindowCapture)
                 {
-                    //_WinEventHookHandler = new HookAPI.SystemEventHandlerDelegate(BuildWindowCommand);
                     _WinEventHookHandler = BuildWindowCommand;
-                    //_WinEventHook = SetWinEventHook(SystemEvents.EVENT_MIN, SystemEvents.EVENT_MAX, IntPtr.Zero, _WinEventHookHandler, 0, 0, 0);
                     _WinEventHook = HookAPI.SetWindowHook(_WinEventHookHandler);
                 }
               
