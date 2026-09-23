@@ -18,20 +18,6 @@ namespace taskt.Core.Native.Windows
         private static extern short GetKeyState(int keyCode);
 
         /// <summary>
-        /// convert virtual-key code and keystate to unicode
-        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-tounicode
-        /// </summary>
-        /// <param name="virtualKeyCode">virtual keycode to be translated</param>
-        /// <param name="scanCode">hardware scancode to be translated</param>
-        /// <param name="keyboardState">265 byte array</param>
-        /// <param name="receivingBuffer">translated character UTF-16</param>
-        /// <param name="bufferSize">receivingBuffer size</param>
-        /// <param name="flags">behavior of function</param>
-        /// <returns></returns>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        private static extern int ToUnicode(uint virtualKeyCode, uint scanCode, byte[] keyboardState, StringBuilder receivingBuffer, int bufferSize, uint flags);
-
-        /// <summary>
         /// key states
         /// https://learn.microsoft.com/en-us/dotnet/api/system.windows.input.keystates?view=windowsdesktop-10.0
         /// </summary>
@@ -50,6 +36,37 @@ namespace taskt.Core.Native.Windows
             /// toggled
             /// </summary>
             Toggled = 2
+        }
+
+        /// <summary>
+        /// convert virtual-key code and keystate to unicode
+        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-tounicode
+        /// </summary>
+        /// <param name="virtualKeyCode">virtual keycode to be translated</param>
+        /// <param name="scanCode">hardware scancode to be translated</param>
+        /// <param name="keyboardState">265 byte array</param>
+        /// <param name="receivingBuffer">translated character UTF-16</param>
+        /// <param name="bufferSize">receivingBuffer size</param>
+        /// <param name="flags">behavior of function</param>
+        /// <returns></returns>
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        private static extern int ToUnicode(uint virtualKeyCode, uint scanCode, byte[] keyboardState, StringBuilder receivingBuffer, int bufferSize, uint flags);
+
+        /// <summary>
+        /// send keyboad event (old api)
+        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-keybd_event
+        /// </summary>
+        /// <param name="bVk"></param>
+        /// <param name="bScan"></param>
+        /// <param name="dwFlags"></param>
+        /// <param name="dwExtraInfo"></param>
+        [DllImport("user32.dll")]
+        private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+
+        private enum KeyboadEvents
+        {
+            KEYEVENTF_EXTENDEDKEY = 0x1,
+            KEYEVENTF_KEYUP = 0x2,
         }
 
         /// <summary>
@@ -148,6 +165,41 @@ namespace taskt.Core.Native.Windows
             ToUnicode((uint)key, 0, keyboardState, buf, 256, 0);
 
             return buf.ToString();
+        }
+
+        /// <summary>
+        /// send keys down and up
+        /// </summary>
+        /// <param name="keys"></param>
+        public static void SendKeysDownKeyUp(Keys[] keys)
+        {
+            foreach (var key in keys)
+            {
+                SendKeyDown(key);
+            }
+
+            foreach (var key in keys)
+            {
+                SendKeyUp(key);
+            }
+        }
+
+        /// <summary>
+        /// send key down
+        /// </summary>
+        /// <param name="vKey"></param>
+        public static void SendKeyDown(Keys vKey)
+        {
+            keybd_event((byte)vKey, 0, (int)KeyboadEvents.KEYEVENTF_EXTENDEDKEY, 0);
+        }
+
+        /// <summary>
+        /// send key up
+        /// </summary>
+        /// <param name="vKey"></param>
+        public static void SendKeyUp(Keys vKey)
+        {
+            keybd_event((byte)vKey, 0, (int)(KeyboadEvents.KEYEVENTF_EXTENDEDKEY | KeyboadEvents.KEYEVENTF_KEYUP), 0);
         }
     }
 }

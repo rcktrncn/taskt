@@ -100,8 +100,8 @@ namespace taskt.Core.Automation.Commands
                     {
                         case "Key Press (Down + Up)":
                             // simulate press
-                            KeyMouseControls.KeyDown(oemKeyName);
-                            KeyMouseControls.KeyUp(oemKeyName);
+                            KeyMouseControls.SendKeyDown(oemKeyName);
+                            KeyMouseControls.SendKeyUp(oemKeyName);
 
                             // key returned to UP position so remove if we added it to the keys down list
                             if (keysDown.Contains(oemKeyName))
@@ -112,7 +112,7 @@ namespace taskt.Core.Automation.Commands
 
                         case "Key Down":
                             // simulate down
-                            KeyMouseControls.KeyDown(oemKeyName);
+                            KeyMouseControls.SendKeyDown(oemKeyName);
 
                             // track via keys down list
                             if (!keysDown.Contains(oemKeyName))
@@ -123,7 +123,7 @@ namespace taskt.Core.Automation.Commands
 
                         case "Key Up":
                             // simulate up
-                            KeyMouseControls.KeyUp(oemKeyName);
+                            KeyMouseControls.SendKeyUp(oemKeyName);
 
                             // remove from key down
                             if (keysDown.Contains(oemKeyName))
@@ -142,7 +142,7 @@ namespace taskt.Core.Automation.Commands
                 {
                     foreach (var key in keysDown)
                     {
-                        KeyMouseControls.KeyUp(key);
+                        KeyMouseControls.SendKeyUp(key);
                     }
                 }
             }));

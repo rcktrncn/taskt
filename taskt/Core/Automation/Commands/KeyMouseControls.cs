@@ -241,21 +241,21 @@ namespace taskt.Core.Automation.Commands
         {
             foreach (var key in keys)
             {
-                KeyDown(key);
+                SendKeyDown(key);
             }
 
             foreach (var key in keys)
             {
-                KeyUp(key);
+                SendKeyUp(key);
             }
         }
 
-        public static void KeyDown(Keys vKey)
+        public static void SendKeyDown(Keys vKey)
         {
             keybd_event((byte)vKey, 0, KEYEVENTF_EXTENDEDKEY, 0);
         }
 
-        public static void KeyUp(Keys vKey)
+        public static void SendKeyUp(Keys vKey)
         {
             keybd_event((byte)vKey, 0, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
         }
