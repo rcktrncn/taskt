@@ -60,6 +60,16 @@ namespace taskt.Core.Native.Windows
         }
 
         /// <summary>
+        /// get mouse cursor position
+        /// </summary>
+        /// <returns>System.Drawing.Point</returns>
+        public static System.Drawing.Point GetCursorPositionAsSystemDrawingPoint()
+        {
+            (var x, var y) = GetCursorPosition();
+            return new System.Drawing.Point(x, y);
+        }
+
+        /// <summary>
         /// set mouse cursor position
         /// </summary>
         /// <param name="x"></param>

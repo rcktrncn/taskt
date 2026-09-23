@@ -901,7 +901,8 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
         /// <param name="e"></param>
         private void timerMouseMove_Tick(object sender, EventArgs e)
         {
-            var p = Cursor.Position;
+            //var p = Cursor.Position;
+            var p = MouseAPI.GetCursorPositionAsSystemDrawingPoint();
             var isNotMoved = (p == oldCursorPosition);
             oldCursorPosition = p;
             
