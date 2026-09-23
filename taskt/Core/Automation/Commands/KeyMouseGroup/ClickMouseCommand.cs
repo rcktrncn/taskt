@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -44,8 +44,10 @@ namespace taskt.Core.Automation.Commands
         {
             var clickType = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_MouseClick), engine);
 
-            var mousePosition = Cursor.Position;
-            KeyMouseControls.SendMouseClick(clickType, mousePosition.X, mousePosition.Y);
+            //var mousePosition = Cursor.Position;
+            //KeyMouseControls.SendMouseClick(clickType, mousePosition.X, mousePosition.Y);
+            (int x, int y) = MouseAPI.GetCursorPosition();
+            MouseAPI.SendMouseClick(clickType, x, y);
 
             var isIgnore = this.ExpandValueOrUserVariableAsYesNo(nameof(v_IgnoreWaitTime), engine);
 

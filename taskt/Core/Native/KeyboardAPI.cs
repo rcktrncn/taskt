@@ -53,11 +53,11 @@ namespace taskt.Core.Native.Windows
         }
 
         /// <summary>
-        /// get key state
+        /// get key states
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        private static KeyStates GetKeyState(Keys key)
+        private static KeyStates GetKeyStates(Keys key)
         {
             KeyStates state = KeyStates.None;
 
@@ -86,7 +86,7 @@ namespace taskt.Core.Native.Windows
         /// <returns></returns>
         public static bool IsKeyDown(Keys key)
         {
-            return KeyStates.Down == (GetKeyState(key) & KeyStates.Down);
+            return KeyStates.Down == (GetKeyStates(key) & KeyStates.Down);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace taskt.Core.Native.Windows
         /// <returns></returns>
         public static bool IsKeyToggled(Keys key)
         {
-            return KeyStates.Toggled == (GetKeyState(key) & KeyStates.Toggled);
+            return KeyStates.Toggled == (GetKeyStates(key) & KeyStates.Toggled);
         }
 
         /// <summary>
