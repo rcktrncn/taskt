@@ -335,5 +335,25 @@ namespace taskt.Core.Native.Windows
             };
             return ret;
         }
+
+        /// <summary>
+        /// create mouse hook procedure
+        /// </summary>
+        /// <param name="hookId"></param>
+        /// <param name="hookAction"></param>
+        /// <returns></returns>
+        public static LowLevelMouseProcDelegate CreateMouseHookProcess(IntPtr hookId, Action<int, MouseMessages, MSLLHOOKSTRUCT> hookAction)
+        {
+            LowLevelMouseProcDelegate ret = (nCode, wParam, lParam) =>
+            {
+                var mouseMessage = (MouseMessages)wParam;
+                var hookStruct = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
+
+                hookAction(nCode, mouseMessage, hookStruct);
+
+                return CallNextHookEx(hookId, nCode, wParam, lParam);
+            };
+            return ret;
+        }
     }
 }
