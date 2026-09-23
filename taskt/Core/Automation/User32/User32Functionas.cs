@@ -228,14 +228,11 @@ namespace taskt.Core.Automation.User32
             /// </summary>
             public static void StopHook()
             {
-                //UnhookWindowsHookEx(_keyboardHookID);
-                //UnhookWindowsHookEx(_mouseHookID);
                 HookAPI.RemoveKeyboardMouseHook(_keyboardHookID);
                 HookAPI.RemoveKeyboardMouseHook(_mouseHookID);
 
                 if (performWindowCapture)
                 {
-                    //UnhookWinEvent(_WinEventHook);
                     HookAPI.RemoveWindowHook(_WinEventHook);
                 }
                 
@@ -259,9 +256,7 @@ namespace taskt.Core.Automation.User32
                 {
                     // KBDLLHOOKSTRUCT vkCode (virtual key code)
                     var hookStruct = (HookAPI.KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(HookAPI.KBDLLHOOKSTRUCT));
-                    //int vkCode = Marshal.ReadInt32(lParam);
 
-                    //BuildKeyboardCommand((Keys)vkCode);
                     BuildKeyboardCommad(hookStruct);
                 }
 
@@ -292,7 +287,6 @@ namespace taskt.Core.Automation.User32
                     {
                         if (stopOnClick)
                         {
-                            //UnhookWindowsHookEx(_mouseHookID);
                             HookAPI.RemoveKeyboardMouseHook(_mouseHookID);
                         }
 
@@ -355,41 +349,6 @@ namespace taskt.Core.Automation.User32
                 {
                     LastKey = key;
                 }
-
-                //bool toUpperCase = false;
-
-                //// determine if casing is needed
-                //if (KeyboardAPI.IsKeyDown(Keys.ShiftKey) && KeyboardAPI.IsKeyToggled(Keys.Capital))
-                //{
-                //    toUpperCase = false;
-                //}
-                //else if (!KeyboardAPI.IsKeyDown(Keys.ShiftKey) && KeyboardAPI.IsKeyToggled(Keys.Capital))
-                //{
-                //    toUpperCase = true;
-                //}
-                //else if (KeyboardAPI.IsKeyDown(Keys.ShiftKey) && !KeyboardAPI.IsKeyToggled(Keys.Capital))
-                //{
-                //    toUpperCase = true;
-                //}
-                //else if (!KeyboardAPI.IsKeyDown(Keys.ShiftKey) && !KeyboardAPI.IsKeyToggled(Keys.Capital))
-                //{
-                //    toUpperCase = false;
-                //}
-
-                //var toUpperCase = KeyboardAPI.IsUpperCase();
-
-                //// unicode key state
-                //var buf = new StringBuilder(256);
-                //var keyboardState = new byte[256];
-
-                //if (toUpperCase)
-                //{
-                //    keyboardState[(int)Keys.ShiftKey] = 0xff;
-                //}
-
-                //ToUnicode((uint)key, 0, keyboardState, buf, 256, 0);
-
-                //var selectedKey = buf.ToString();
 
                 var selectedKey = KeyboardAPI.ConvertVirtualKeyToString(hookInfo);
 
@@ -557,8 +516,6 @@ namespace taskt.Core.Automation.User32
 
 
                 // define new mouse command
-                //var hookStruct = (MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(MSLLHOOKSTRUCT));
-
                 var mouseMove = new MoveMouseCommand
                 {
                     v_XMousePosition = hookStruct.pt.x.ToString(),
@@ -568,14 +525,8 @@ namespace taskt.Core.Automation.User32
 
                 if (mouseEventClickType != "None")
                 {
-                    //IntPtr winHandle = WindowFromPoint(hookStruct.pt);
                     var winHandle = WindowAPI.GetWindowHandleFromPoint(hookStruct.pt);
 
-                    //var _winName = new StringBuilder(512);
-                    //int length = GetWindowText(winHandle, _winName, _winName.Capacity);
-                    //var windowName = _winName.ToString();
-
-                    //var windowName = GetWindowName(winHandle);
                     var windowName = WindowAPI.GetWindowName(winHandle);
 
                     mouseMove.v_Comment = $"Clicked On Window: {windowName}";
@@ -614,12 +565,7 @@ namespace taskt.Core.Automation.User32
                         return;
                 }
 
-                //var _winName = new StringBuilder(512);
-                //int length = GetWindowText(hwnd, _winName, _winName.Capacity);
-                //var windowName = _winName.ToString();
-                //var windowName = GetWindowName(hwnd);
                 var windowName = WindowAPI.GetWindowName(hwnd);
-                //var length = windowName.Length;
 
                 // bypass screen recorder and Cortana (Win10) which throws errors
                 if ((windowName == "Screen Recorder") || (windowName == "Cortana"))
@@ -630,10 +576,6 @@ namespace taskt.Core.Automation.User32
                 //if (length > 0)
                 if (!string.IsNullOrEmpty(windowName))
                 {
-                    // wait additional for window to initialize
-                    //System.Threading.Thread.Sleep(250);
-                    //windowName = _winName.ToString();
-                 
                     // generate activete window command
                     var activateWindowCommand = new ActivateOneWindowCommand()
                     {
@@ -645,15 +587,12 @@ namespace taskt.Core.Automation.User32
                     // detect if tracking window open location or activate windows to top left
                     if (trackWindowOpenLocations)
                     {
-                        //GetWindowRect(hwnd, out RECT windowRect);
                         (var top, var left) = WindowAPI.GetWindowPosition(hwnd);
 
                         // generate move window command
                         var moveWindowCommand = new MoveOneWindowCommand()
                         {
                             v_WindowName = windowName,
-                            //v_XPosition = windowRect.left.ToString(),
-                            //v_YPosition = windowRect.top.ToString(),
                             v_XPosition = left.ToString(),
                             v_YPosition = top.ToString(),
                             v_Comment = $"Generated by Screen Recorder @ {DateTime.Now}"
@@ -681,13 +620,6 @@ namespace taskt.Core.Automation.User32
                     // if tracking window sizes is set
                     if (trackActivatedWindowSizes)
                     {
-                        // create rectangle from hwnd
-                        //GetWindowRect(hwnd, out RECT windowRect);
-                        
-                        // do math to get height, etc
-                        //var width = windowRect.right - windowRect.left;
-                        //var height = windowRect.bottom - windowRect.top;
-
                         (var width, var height) = WindowAPI.GetWindowSize(hwnd);
 
                         // generate resize window command
@@ -704,18 +636,6 @@ namespace taskt.Core.Automation.User32
                     }
                 }
             }
-
-            ///// <summary>
-            ///// get window name from handle
-            ///// </summary>
-            ///// <param name="whnd">window handle</param>
-            ///// <returns></returns>
-            //private static string GetWindowName(IntPtr whnd)
-            //{
-            //    var _winName = new StringBuilder(512);
-            //    _ = GetWindowText(whnd, _winName, _winName.Capacity);
-            //    return _winName.ToString();
-            //}
 
             /// <summary>
             /// build/create pause command
@@ -736,6 +656,18 @@ namespace taskt.Core.Automation.User32
                 generatedCommands.Add(pauseCommand);
                 sw.Restart();
             }
+
+            ///// <summary>
+            ///// get window name from handle
+            ///// </summary>
+            ///// <param name="whnd">window handle</param>
+            ///// <returns></returns>
+            //private static string GetWindowName(IntPtr whnd)
+            //{
+            //    var _winName = new StringBuilder(512);
+            //    _ = GetWindowText(whnd, _winName, _winName.Capacity);
+            //    return _winName.ToString();
+            //}
 
             ///// <summary>
             ///// set keyboard input hook
