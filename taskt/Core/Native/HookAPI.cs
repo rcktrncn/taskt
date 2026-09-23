@@ -318,11 +318,19 @@ namespace taskt.Core.Native.Windows
         }
 
         /// <summary>
+        /// keyboard hook action
+        /// </summary>
+        /// <param name="nCode"></param>
+        /// <param name="message"></param>
+        /// <param name="hookStruct"></param>
+        public delegate void KeyboardHookActionDelegate(int nCode, KeyboardMessages message, KBDLLHOOKSTRUCT hookStruct);
+
+        /// <summary>
         /// create keyboad hook procedure
         /// </summary>
         /// <param name="hookAction"></param>
         /// <returns></returns>
-        public static LowLevelKeyboardProcDelegate CreateKeyboadHookProcess(Action<int, KeyboardMessages, KBDLLHOOKSTRUCT> hookAction)
+        public static LowLevelKeyboardProcDelegate CreateKeyboardHookProcess(KeyboardHookActionDelegate hookAction)
         {
             LowLevelKeyboardProcDelegate ret = (nCode, wParam, lParam) =>
             {

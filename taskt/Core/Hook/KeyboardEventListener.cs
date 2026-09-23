@@ -6,9 +6,9 @@ using static taskt.Core.Native.Windows.HookAPI;
 namespace taskt.Core.Hook
 {
     /// <summary>
-    /// mouse events listener (hook)
+    /// keyboard events listener (hook)
     /// </summary>
-    public class MouseEventListener: IDisposable
+    public class KeyboardEventListener: IDisposable
     {
         /// <summary>
         /// hook procedure ids
@@ -18,29 +18,29 @@ namespace taskt.Core.Hook
         /// <summary>
         /// inner hook procedures body
         /// </summary>
-        private List<MouseHookActionDelegate> innerActions = new List<MouseHookActionDelegate>();
+        private List<KeyboardHookActionDelegate> innerActions = new List<KeyboardHookActionDelegate>();
 
         /// <summary>
         /// hook procedures
         /// </summary>
-        private List<LowLevelMouseProcDelegate> hookProcs;
+        private List<LowLevelKeyboardProcDelegate> hookProcs;
 
         /// <summary>
         /// hook start state
         /// </summary>
         private bool isHookNow = false;
 
-        public MouseEventListener(MouseHookActionDelegate hookAction) 
+        public KeyboardEventListener(KeyboardHookActionDelegate hookAction) 
         {
             this.AddHookAction(hookAction);
         }
 
-        public MouseEventListener(List<MouseHookActionDelegate> hookActions)
+        public KeyboardEventListener(List<KeyboardHookActionDelegate> hookActions)
         {
             this.AddHookAction(hookActions);
         }
 
-        ~MouseEventListener()
+        ~KeyboardEventListener()
         {
             StopHook();
         }
@@ -50,7 +50,7 @@ namespace taskt.Core.Hook
         /// </summary>
         /// <param name="hookAction"></param>
         /// <returns></returns>
-        public bool AddHookAction(MouseHookActionDelegate hookAction)
+        public bool AddHookAction(KeyboardHookActionDelegate hookAction)
         {
             if (!isHookNow)
             {
@@ -64,7 +64,7 @@ namespace taskt.Core.Hook
         /// </summary>
         /// <param name="hookActions"></param>
         /// <returns></returns>
-        public bool AddHookAction(List<MouseHookActionDelegate> hookActions)
+        public bool AddHookAction(List<KeyboardHookActionDelegate> hookActions)
         {
             if (!isHookNow)
             {
@@ -87,12 +87,12 @@ namespace taskt.Core.Hook
             if (!isHookNow)
             {
                 this.hookIDs = new List<IntPtr>();
-                this.hookProcs = new List<LowLevelMouseProcDelegate>();
+                this.hookProcs = new List<LowLevelKeyboardProcDelegate>();
                 foreach (var act in this.innerActions)
                 {
-                    var proc = HookAPI.CreateMouseHookProcess(act);
+                    var proc = HookAPI.CreateKeyboardHookProcess(act);
                     this.hookProcs.Add(proc);
-                    this.hookIDs.Add(HookAPI.SetMouseHook(proc));
+                    this.hookIDs.Add(HookAPI.SetKeyboardHook(proc));
                 }
                 isHookNow = true;
                 return true;

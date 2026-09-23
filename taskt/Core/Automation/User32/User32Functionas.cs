@@ -39,20 +39,20 @@ namespace taskt.Core.Automation.User32
             ///// </summary>
             //private const int WM_KEYDOWN = 0x0100;
 
-            /// <summary>
-            /// low level keyboard input hook procedure
-            /// </summary>
-            private static readonly HookAPI.LowLevelKeyboardProcDelegate _kbProc = KeyboardHookEvent;
+            ///// <summary>
+            ///// low level keyboard input hook procedure
+            ///// </summary>
+            //private static readonly HookAPI.LowLevelKeyboardProcDelegate _kbProc = KeyboardHookEvent;
 
             ///// <summary>
             ///// low level mouse move hook procedure
             ///// </summary>
             //private static readonly HookAPI.LowLevelMouseProcDelegate _mouseProc = MouseHookEvent;
 
-            /// <summary>
-            /// low level mouse click hook procedure
-            /// </summary>
-            private static readonly HookAPI.LowLevelMouseProcDelegate _mouseLeftUpProc = MouseHookForLeftClickUpEvent;
+            ///// <summary>
+            ///// low level mouse click hook procedure
+            ///// </summary>
+            //private static readonly HookAPI.LowLevelMouseProcDelegate _mouseLeftUpProc = MouseHookForLeftClickUpEvent;
 
             /// <summary>
             /// return value of SetWinEventHook
@@ -65,17 +65,25 @@ namespace taskt.Core.Automation.User32
             /// </summary>
             private static HookAPI.SystemEventHandlerDelegate _WinEventHookHandler;
 
-            /// <summary>
-            /// keyboard input hook procedure handle
-            /// </summary>
-            private static IntPtr _keyboardHookID = IntPtr.Zero;
+            ///// <summary>
+            ///// keyboard input hook procedure handle
+            ///// </summary>
+            //private static IntPtr _keyboardHookID = IntPtr.Zero;
+
+            ///// <summary>
+            ///// mouse input hook procedure handle
+            ///// </summary>
+            //private static IntPtr _mouseHookID = IntPtr.Zero;
 
             /// <summary>
-            /// mouse input hook procedure handle
+            /// mouse event hook manage
             /// </summary>
-            private static IntPtr _mouseHookID = IntPtr.Zero;
-
             private static MouseEventListener mouseListener;
+
+            /// <summary>
+            /// keyboard event hook manage
+            /// </summary>
+            private static KeyboardEventListener keyboardListener;
 
             /// <summary>
             /// stop watch for timing all event occurences
@@ -160,7 +168,7 @@ namespace taskt.Core.Automation.User32
             {
                 stopHookKey = keyName.ToString();
                 // set hook for engine cancellation
-                _keyboardHookID = HookAPI.SetKeyboardHook(_kbProc);
+                //_keyboardHookID = HookAPI.SetKeyboardHook(_kbProc);
             }
 
             /// <summary>
@@ -171,7 +179,7 @@ namespace taskt.Core.Automation.User32
             {
                 stopOnClick = stopOnFirstClick;
                 // set hook for engine cancellation
-                _mouseHookID = HookAPI.SetMouseHook(_mouseLeftUpProc);
+                //_mouseHookID = HookAPI.SetMouseHook(_mouseLeftUpProc);
             }
 
             /// <summary>
@@ -206,16 +214,42 @@ namespace taskt.Core.Automation.User32
 
                 // start hook
                 //_mouseHookID = HookAPI.SetMouseHook(_mouseProc);
-                mouseListener = new MouseEventListener(new HookAPI.MouseHookActionDelegate((nCode, message, hookStruct) =>
+                if ((performMouseClickCapture | performMouseMoveCapture))
                 {
-                    if (nCode > 0)
+                    // mouse hook
+                    mouseListener = new MouseEventListener(new HookAPI.MouseHookActionDelegate((nCode, message, hookStruct) =>
                     {
-                        BuildMouseCommand(hookStruct, message);
-                    }
-                    //Console.WriteLine($"mouse hook! {DateTime.Now}");
-                }));
-                mouseListener.StartHook();
-                _keyboardHookID = HookAPI.SetKeyboardHook(_kbProc);
+                        if (nCode >= 0)
+                        {
+                            BuildMouseCommand(hookStruct, message);
+                            //Console.WriteLine($"mouse hook! {DateTime.Now}");
+                        }
+                    }));
+                    mouseListener.StartHook();
+                }
+                
+                //_keyboardHookID = HookAPI.SetKeyboardHook(_kbProc);
+                keyboardListener = new KeyboardEventListener(
+                    // set hook stop hotokey
+                    new HookAPI.KeyboardHookActionDelegate((nCode, message, hookStruct) =>
+                    {
+                        if ((nCode >= 0) && (message == HookAPI.KeyboardMessages.WM_KEYDOWN))
+                        {
+                            CancelScriptRecordHotkey(hookStruct);
+                        }
+                    })
+                );
+                if (performKeyboardCapture)
+                {
+                    keyboardListener.AddHookAction(new HookAPI.KeyboardHookActionDelegate((nCode, message, hookStruct) =>
+                    {
+                        if ((nCode >= 0) && (message == HookAPI.KeyboardMessages.WM_KEYDOWN))
+                        {
+                            BuildKeyboardCommad(hookStruct);
+                        }
+                    }));
+                }
+                keyboardListener.StartHook();
 
                 // if user decided to capture window events
                 if (performWindowCapture)
@@ -239,8 +273,9 @@ namespace taskt.Core.Automation.User32
             public static void StopHook()
             {
                 //HookAPI.RemoveKeyboardMouseHook(_mouseHookID);
-                mouseListener.StopHook();
-                HookAPI.RemoveKeyboardMouseHook(_keyboardHookID);
+                mouseListener?.StopHook();
+                //HookAPI.RemoveKeyboardMouseHook(_keyboardHookID);
+                keyboardListener?.StopHook();
 
                 if (performWindowCapture)
                 {
@@ -249,68 +284,69 @@ namespace taskt.Core.Automation.User32
 
                 //BuildCommentCommand();
 
-                mouseListener = null;
+                mouseListener?.Dispose();
+                keyboardListener?.Dispose();
 
                 HookStopped(null, new EventArgs());
             }
 
-            /// <summary>
-            /// hook procedure (callback) when keyboard input occered. low level keyboard input events hook
-            /// https://learn.microsoft.com/en-us/windows/win32/winmsg/lowlevelkeyboardproc
-            /// </summary>
-            /// <param name="nCode"></param>
-            /// <param name="wParam">WM_KEYDOWN, WM_KEYUP, WM_SYSKEYDOWN, or WM_SYSKEYUP</param>
-            /// <param name="lParam">KBDLLHOOKSTRUCT structure
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-kbdllhookstruct</param>
-            /// <returns></returns>
-            private static IntPtr KeyboardHookEvent(int nCode, IntPtr wParam, IntPtr lParam)
-            {
-                if (nCode >= 0 && wParam == (IntPtr)HookAPI.KeyboardMessages.WM_KEYDOWN)
-                {
-                    // KBDLLHOOKSTRUCT vkCode (virtual key code)
-                    var hookStruct = (HookAPI.KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(HookAPI.KBDLLHOOKSTRUCT));
+            ///// <summary>
+            ///// hook procedure (callback) when keyboard input occered. low level keyboard input events hook
+            ///// https://learn.microsoft.com/en-us/windows/win32/winmsg/lowlevelkeyboardproc
+            ///// </summary>
+            ///// <param name="nCode"></param>
+            ///// <param name="wParam">WM_KEYDOWN, WM_KEYUP, WM_SYSKEYDOWN, or WM_SYSKEYUP</param>
+            ///// <param name="lParam">KBDLLHOOKSTRUCT structure
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-kbdllhookstruct</param>
+            ///// <returns></returns>
+            //private static IntPtr KeyboardHookEvent(int nCode, IntPtr wParam, IntPtr lParam)
+            //{
+            //    if (nCode >= 0 && wParam == (IntPtr)HookAPI.KeyboardMessages.WM_KEYDOWN)
+            //    {
+            //        // KBDLLHOOKSTRUCT vkCode (virtual key code)
+            //        var hookStruct = (HookAPI.KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(HookAPI.KBDLLHOOKSTRUCT));
 
-                    BuildKeyboardCommad(hookStruct);
-                }
+            //        BuildKeyboardCommad(hookStruct);
+            //    }
 
-                return CallNextHookEx(_keyboardHookID, nCode, wParam, lParam);
-            }
+            //    return CallNextHookEx(_keyboardHookID, nCode, wParam, lParam);
+            //}
 
-            /// <summary>
-            /// mouse event?
-            /// </summary>
-            public static event EventHandler<MouseCoordinateEventArgs> MouseEvent;
+            ///// <summary>
+            ///// mouse event?
+            ///// </summary>
+            //public static event EventHandler<MouseCoordinateEventArgs> MouseEvent;
 
-            /// <summary>
-            /// hook procedure (callback) when mouse input occered. low level mouse input events hook
-            /// https://learn.microsoft.com/en-us/windows/win32/winmsg/lowlevelmouseproc
-            /// </summary>
-            /// <param name="nCode"></param>
-            /// <param name="wParam">WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MOUSEMOVE, WM_MOUSEWHEEL, WM_RBUTTONDOWN, WM_RBUTTONUP, WM_MBUTTONDOWN, WM_MBUTTONUP, WM_XBUTTONDOWN, or WM_XBUTTONUP</param>
-            /// <param name="lParam">MSLLHOOKSTRUCT structure
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct</param>
-            /// <returns></returns>
-            private static IntPtr MouseHookForLeftClickUpEvent(int nCode, IntPtr wParam, IntPtr lParam)
-            {
-                if (nCode >= 0)
-                {
-                    var message = (HookAPI.MouseMessages)wParam;
+            ///// <summary>
+            ///// hook procedure (callback) when mouse input occered. low level mouse input events hook
+            ///// https://learn.microsoft.com/en-us/windows/win32/winmsg/lowlevelmouseproc
+            ///// </summary>
+            ///// <param name="nCode"></param>
+            ///// <param name="wParam">WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MOUSEMOVE, WM_MOUSEWHEEL, WM_RBUTTONDOWN, WM_RBUTTONUP, WM_MBUTTONDOWN, WM_MBUTTONUP, WM_XBUTTONDOWN, or WM_XBUTTONUP</param>
+            ///// <param name="lParam">MSLLHOOKSTRUCT structure
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct</param>
+            ///// <returns></returns>
+            //private static IntPtr MouseHookForLeftClickUpEvent(int nCode, IntPtr wParam, IntPtr lParam)
+            //{
+            //    if (nCode >= 0)
+            //    {
+            //        var message = (HookAPI.MouseMessages)wParam;
 
-                    if (message == HookAPI.MouseMessages.WM_LBUTTONDOWN)
-                    {
-                        if (stopOnClick)
-                        {
-                            HookAPI.RemoveKeyboardMouseHook(_mouseHookID);
-                        }
+            //        if (message == HookAPI.MouseMessages.WM_LBUTTONDOWN)
+            //        {
+            //            if (stopOnClick)
+            //            {
+            //                HookAPI.RemoveKeyboardMouseHook(_mouseHookID);
+            //            }
 
-                        var hookStruct = (HookAPI.MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(HookAPI.MSLLHOOKSTRUCT));
-                        var point = new System.Windows.Point(hookStruct.pt.x, hookStruct.pt.y);
-                        MouseEvent?.Invoke(null, new MouseCoordinateEventArgs() { MouseCoordinates = point });
-                    }
-                }
+            //            var hookStruct = (HookAPI.MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(HookAPI.MSLLHOOKSTRUCT));
+            //            var point = new System.Windows.Point(hookStruct.pt.x, hookStruct.pt.y);
+            //            MouseEvent?.Invoke(null, new MouseCoordinateEventArgs() { MouseCoordinates = point });
+            //        }
+            //    }
 
-                return CallNextHookEx(_mouseHookID, nCode, wParam, lParam);
-            }
+            //    return CallNextHookEx(_mouseHookID, nCode, wParam, lParam);
+            //}
 
             ///// <summary>
             ///// hook procedure (callback) when mouse move occered
@@ -365,19 +401,20 @@ namespace taskt.Core.Automation.User32
 
                 var selectedKey = KeyboardAPI.ConvertVirtualKeyToString(hookInfo);
 
-                if ((selectedKey == "") || (selectedKey == "\r"))
-                {
-                    selectedKey = key.ToString();
-                }
+                //if ((selectedKey == "") || (selectedKey == "\r"))
+                //{
+                //    selectedKey = key.ToString();
+                //}
 
-                // translate key press to sendkeys identifier
-                if (selectedKey == stopHookKey)
-                {
-                    // stop hook
-                    StopHook();
-                    return;
-                }
-                else if (selectedKey == "Return")
+                //// translate key press to sendkeys identifier
+                //if (selectedKey == stopHookKey)
+                //{
+                //    // stop hook
+                //    StopHook();
+                //    return;
+                //}
+
+                if (selectedKey == "Return")
                 {
                     selectedKey = "ENTER";
 
@@ -403,10 +440,10 @@ namespace taskt.Core.Automation.User32
                     return;
                 }
 
-                if (!performKeyboardCapture)
-                {
-                    return;
-                }
+                //if (!performKeyboardCapture)
+                //{
+                //    return;
+                //}
 
                 // add braces
                 if (selectedKey.Length > 1)
@@ -455,6 +492,19 @@ namespace taskt.Core.Automation.User32
                         v_WindowName = GetCurrentWindowVariable(),
                     };
                     generatedCommands.Add(keyboardCommand);
+                }
+            }
+
+            /// <summary>
+            /// cancel script record hotkey hook
+            /// </summary>
+            /// <param name="hookInfo"></param>
+            private static void CancelScriptRecordHotkey(HookAPI.KBDLLHOOKSTRUCT hookInfo)
+            {
+                if (KeyboardAPI.ConvertVirtualKeyToString(hookInfo) == stopHookKey)
+                {
+                    // stop hook
+                    StopHook();
                 }
             }
 
@@ -526,7 +576,6 @@ namespace taskt.Core.Automation.User32
 
                 // build a pause command to track pause since last command
                 BuildPauseCommand();
-
 
                 // define new mouse command
                 var mouseMove = new MoveMouseCommand
@@ -775,17 +824,17 @@ namespace taskt.Core.Automation.User32
             //[return: MarshalAs(UnmanagedType.Bool)]
             //private static extern bool UnhookWindowsHookEx(IntPtr hhk);
 
-            /// <summary>
-            /// passes the hook informationt to the next hook procedure
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-callnexthookex
-            /// </summary>
-            /// <param name="hhk"></param>
-            /// <param name="nCode"></param>
-            /// <param name="wParam"></param>
-            /// <param name="lParam"></param>
-            /// <returns></returns>
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+            ///// <summary>
+            ///// passes the hook informationt to the next hook procedure
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-callnexthookex
+            ///// </summary>
+            ///// <param name="hhk"></param>
+            ///// <param name="nCode"></param>
+            ///// <param name="wParam"></param>
+            ///// <param name="lParam"></param>
+            ///// <returns></returns>
+            //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            //private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
 
             ///// <summary>
             ///// get a module handle for the specified module

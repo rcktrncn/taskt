@@ -1043,6 +1043,7 @@
     <Compile Include="Core\Automation\Engine\ScriptFinishedEventArgs.cs" />
     <Compile Include="Core\Automation\Engine\SystemVariables.cs" />
     <Compile Include="Core\Automation\Commands\FormUIControls.cs" />
+    <Compile Include="Core\Hook\KeyboardEventListener.cs" />
     <Compile Include="Core\Hook\MouseEventListener.cs" />
     <Compile Include="Core\IO\Files.cs" />
     <Compile Include="Core\MyURLs.UserOriginal.cs" />
