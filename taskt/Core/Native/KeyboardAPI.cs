@@ -52,6 +52,7 @@ namespace taskt.Core.Native.Windows
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         private static extern int ToUnicode(uint virtualKeyCode, uint scanCode, byte[] keyboardState, StringBuilder receivingBuffer, int bufferSize, uint flags);
 
+        // TODO: update to SendInput
         /// <summary>
         /// send keyboad event (old api)
         /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-keybd_event

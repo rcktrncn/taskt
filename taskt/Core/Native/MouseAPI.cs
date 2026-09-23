@@ -23,6 +23,7 @@ namespace taskt.Core.Native.Windows
         [DllImport("user32.dll")]
         private static extern bool SetCursorPos(int x, int y);
 
+        // TODO: update to SendInput
         /// <summary>
         /// execute mouse event (old api)
         /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-mouse_event
