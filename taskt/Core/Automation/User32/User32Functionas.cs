@@ -18,6 +18,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using taskt.Core.Automation.Commands;
 using taskt.Core.Automation.Engine;
+using taskt.Core.Hook;
 using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.User32
@@ -43,10 +44,10 @@ namespace taskt.Core.Automation.User32
             /// </summary>
             private static readonly HookAPI.LowLevelKeyboardProcDelegate _kbProc = KeyboardHookEvent;
 
-            /// <summary>
-            /// low level mouse move hook procedure
-            /// </summary>
-            private static readonly HookAPI.LowLevelMouseProcDelegate _mouseProc = MouseHookEvent;
+            ///// <summary>
+            ///// low level mouse move hook procedure
+            ///// </summary>
+            //private static readonly HookAPI.LowLevelMouseProcDelegate _mouseProc = MouseHookEvent;
 
             /// <summary>
             /// low level mouse click hook procedure
@@ -73,6 +74,8 @@ namespace taskt.Core.Automation.User32
             /// mouse input hook procedure handle
             /// </summary>
             private static IntPtr _mouseHookID = IntPtr.Zero;
+
+            private static MouseEventListener mouseListener;
 
             /// <summary>
             /// stop watch for timing all event occurences
@@ -202,7 +205,16 @@ namespace taskt.Core.Automation.User32
                 stopHookKey = stopHookHotKey;
 
                 // start hook
-                _mouseHookID = HookAPI.SetMouseHook(_mouseProc);
+                //_mouseHookID = HookAPI.SetMouseHook(_mouseProc);
+                mouseListener = new MouseEventListener(new HookAPI.MouseHookActionDelegate((nCode, message, hookStruct) =>
+                {
+                    if (nCode > 0)
+                    {
+                        BuildMouseCommand(hookStruct, message);
+                    }
+                    //Console.WriteLine($"mouse hook! {DateTime.Now}");
+                }));
+                mouseListener.StartHook();
                 _keyboardHookID = HookAPI.SetKeyboardHook(_kbProc);
 
                 // if user decided to capture window events
@@ -226,15 +238,18 @@ namespace taskt.Core.Automation.User32
             /// </summary>
             public static void StopHook()
             {
+                //HookAPI.RemoveKeyboardMouseHook(_mouseHookID);
+                mouseListener.StopHook();
                 HookAPI.RemoveKeyboardMouseHook(_keyboardHookID);
-                HookAPI.RemoveKeyboardMouseHook(_mouseHookID);
 
                 if (performWindowCapture)
                 {
                     HookAPI.RemoveWindowHook(_WinEventHook);
                 }
-                
+
                 //BuildCommentCommand();
+
+                mouseListener = null;
 
                 HookStopped(null, new EventArgs());
             }
@@ -297,24 +312,24 @@ namespace taskt.Core.Automation.User32
                 return CallNextHookEx(_mouseHookID, nCode, wParam, lParam);
             }
 
-            /// <summary>
-            /// hook procedure (callback) when mouse move occered
-            /// </summary>
-            /// <param name="nCode"></param>
-            /// <param name="wParam">WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MOUSEMOVE, WM_MOUSEWHEEL, WM_RBUTTONDOWN, WM_RBUTTONUP, WM_MBUTTONDOWN, WM_MBUTTONUP, WM_XBUTTONDOWN, or WM_XBUTTONUP</param>
-            /// <param name="lParam">MSLLHOOKSTRUCT structure
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct</param>
-            /// <returns></returns>
-            private static IntPtr MouseHookEvent(int nCode, IntPtr wParam, IntPtr lParam)
-            {
-                if (nCode >= 0)
-                {
-                    var hookStruct = (HookAPI.MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(HookAPI.MSLLHOOKSTRUCT));
-                    BuildMouseCommand(hookStruct, (HookAPI.MouseMessages)wParam);
-                }
+            ///// <summary>
+            ///// hook procedure (callback) when mouse move occered
+            ///// </summary>
+            ///// <param name="nCode"></param>
+            ///// <param name="wParam">WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MOUSEMOVE, WM_MOUSEWHEEL, WM_RBUTTONDOWN, WM_RBUTTONUP, WM_MBUTTONDOWN, WM_MBUTTONUP, WM_XBUTTONDOWN, or WM_XBUTTONUP</param>
+            ///// <param name="lParam">MSLLHOOKSTRUCT structure
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msllhookstruct</param>
+            ///// <returns></returns>
+            //private static IntPtr MouseHookEvent(int nCode, IntPtr wParam, IntPtr lParam)
+            //{
+            //    if (nCode >= 0)
+            //    {
+            //        var hookStruct = (HookAPI.MSLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(HookAPI.MSLLHOOKSTRUCT));
+            //        BuildMouseCommand(hookStruct, (HookAPI.MouseMessages)wParam);
+            //    }
 
-                return CallNextHookEx(_mouseHookID, nCode, wParam, lParam);
-            }
+            //    return CallNextHookEx(_mouseHookID, nCode, wParam, lParam);
+            //}
 
             /// <summary>
             /// last or current key event occered time

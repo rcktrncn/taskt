@@ -189,7 +189,7 @@ namespace taskt.Core.Native.Windows
         /// passes the hook informationt to the next hook procedure
         /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-callnexthookex
         /// </summary>
-        /// <param name="hhk"></param>
+        /// <param name="hhk">value is ignored</param>
         /// <param name="nCode"></param>
         /// <param name="wParam"></param>
         /// <param name="lParam"></param>
@@ -320,9 +320,9 @@ namespace taskt.Core.Native.Windows
         /// <summary>
         /// create keyboad hook procedure
         /// </summary>
-        /// <param name="hookId"></param>
+        /// <param name="hookAction"></param>
         /// <returns></returns>
-        public static LowLevelKeyboardProcDelegate CreateKeyboadHookProcess(IntPtr hookId, Action<int, KeyboardMessages, KBDLLHOOKSTRUCT> hookAction)
+        public static LowLevelKeyboardProcDelegate CreateKeyboadHookProcess(Action<int, KeyboardMessages, KBDLLHOOKSTRUCT> hookAction)
         {
             LowLevelKeyboardProcDelegate ret = (nCode, wParam, lParam) =>
             {
@@ -331,18 +331,25 @@ namespace taskt.Core.Native.Windows
 
                 hookAction(nCode, keyboadMessage, hookStruct);
 
-                return CallNextHookEx(hookId, nCode, wParam, lParam);
+                return CallNextHookEx(IntPtr.Zero, nCode, wParam, lParam);
             };
             return ret;
         }
 
         /// <summary>
+        /// mouse hook action
+        /// </summary>
+        /// <param name="nCode"></param>
+        /// <param name="message"></param>
+        /// <param name="hookStruct"></param>
+        public delegate void MouseHookActionDelegate(int nCode, MouseMessages message, MSLLHOOKSTRUCT hookStruct);
+
+        /// <summary>
         /// create mouse hook procedure
         /// </summary>
-        /// <param name="hookId"></param>
         /// <param name="hookAction"></param>
         /// <returns></returns>
-        public static LowLevelMouseProcDelegate CreateMouseHookProcess(IntPtr hookId, Action<int, MouseMessages, MSLLHOOKSTRUCT> hookAction)
+        public static LowLevelMouseProcDelegate CreateMouseHookProcess(MouseHookActionDelegate hookAction)
         {
             LowLevelMouseProcDelegate ret = (nCode, wParam, lParam) =>
             {
@@ -351,7 +358,7 @@ namespace taskt.Core.Native.Windows
 
                 hookAction(nCode, mouseMessage, hookStruct);
 
-                return CallNextHookEx(hookId, nCode, wParam, lParam);
+                return CallNextHookEx(IntPtr.Zero, nCode, wParam, lParam);
             };
             return ret;
         }
