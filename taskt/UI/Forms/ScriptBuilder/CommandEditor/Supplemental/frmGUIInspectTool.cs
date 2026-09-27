@@ -42,6 +42,16 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
         /// </summary>
         private Point oldCursorPosition = new Point(-1, -1);
 
+        /// <summary>
+        /// fill color UIElement parse finished
+        /// </summary>
+        private static readonly Color ParsedElementColor = Color.Yellow;
+
+        /// <summary>
+        /// fill color UIElement parse process
+        /// </summary>
+        private static readonly Color ParseProcessColor = Color.Salmon;
+
         public frmGUIInspectTool()
         {
             InitializeComponent();
@@ -694,7 +704,7 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
         /// highlight (wrap yellow line) UIElement
         /// </summary>
         /// <param name="elem"></param>
-        private void HighlightUIElement(AutomationElement elem)
+        private void HighlightUIElement(AutomationElement elem, Color fillColor = default)
         {
             try
             {
@@ -723,8 +733,13 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 
                 Graphics g = Graphics.FromHwnd(IntPtr.Zero);
 
+                if (fillColor == default)
+                {
+                    fillColor = ParsedElementColor;
+                }
+
                 g.DrawRectangle(new Pen(Color.Black, 1), outerRect);
-                g.DrawRectangle(new Pen(Color.Yellow, 2), middleRect);
+                g.DrawRectangle(new Pen(fillColor, 2), middleRect);
                 g.DrawRectangle(new Pen(Color.Black, 1), innerRect);
             }
             catch
@@ -911,13 +926,13 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
                 StopTimerActionAfterRestoreTimer(new Action(() =>
                 {
                     var elem = AutomationElement.FromPoint(new System.Windows.Point(p.X, p.Y));
-                    HighlightUIElement(elem);
+                    HighlightUIElement(elem, ParseProcessColor);
 
                     tvElementsReloadProcess(new Func<TreeNode>(() =>
                     {
                         return CreateXMLTreeAndTreeNodeFromCursor(p);
                     }));
-                    
+                    HighlightUIElement(elem);   // finished
                 }), timerMouseMove);
             }
         }
@@ -930,7 +945,7 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
         {
             var point = new System.Windows.Point(mouseCursorPoint.X, mouseCursorPoint.Y);
             var targetElement = AutomationElement.FromPoint(point);
-            HighlightUIElement(targetElement);
+            HighlightUIElement(targetElement, ParseProcessColor);
 
             // get window name, handle
             (var winName, var whnd) = EM_CanHandleUIElementExtentionMethods.GetWindowNameAndHandle(targetElement);
