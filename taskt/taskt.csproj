@@ -431,11 +431,11 @@
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelMoveShapeByNameCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelSelectShapeByNameCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelSelectChartByNameCommand.cs" />
-    <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelRemoveShapeByNameCommand.cs" />
+    <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelDeleteShapeByNameCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelCopyShapeByNameCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelRenameShapeByNameCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelRenameChartByNameCommand.cs" />
-    <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelRemoveChartByNameCommand.cs" />
+    <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelDeleteChartByNameCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelMoveChartByNameCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelResizeShapeNameCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelResizeChartNameCommand.cs" />

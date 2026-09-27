@@ -6,16 +6,16 @@ namespace taskt.Core.Automation.Commands
     [Serializable]
     [Attributes.ClassAttributes.Group("Excel")]
     [Attributes.ClassAttributes.SubGruop("Shape")]
-    [Attributes.ClassAttributes.CommandSettings("Remove Shape By Name")]
-    [Attributes.ClassAttributes.Description("This command allows you to remove Shape by Name")]
-    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to remove Shape by Name")]
+    [Attributes.ClassAttributes.CommandSettings("Delete Shape By Name")]
+    [Attributes.ClassAttributes.Description("This command allows you to delete Shape by Name")]
+    [Attributes.ClassAttributes.UsesDescription("Use this command when you want to delete Shape by Name")]
     [Attributes.ClassAttributes.ImplementationDescription("This command implements 'Excel Interop' to achieve automation.")]
     [Attributes.ClassAttributes.CommandIcon(nameof(Properties.Resources.command_spreadsheet))]
     [Attributes.ClassAttributes.EnableAutomateRender(true)]
     [Attributes.ClassAttributes.EnableAutomateDisplayText(true)]
-    public sealed class ExcelRemoveShapeByNameCommand : AExcelShapeActionCommands
+    public sealed class ExcelDeleteShapeByNameCommand : AExcelShapeActionCommands
     {
-        public ExcelRemoveShapeByNameCommand()
+        public ExcelDeleteShapeByNameCommand()
         {
         }
 

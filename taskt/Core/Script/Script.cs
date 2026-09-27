@@ -781,6 +781,10 @@ namespace taskt.Core.Script
             {
                 convertTo3_5_2_71(doc);
             }
+            if (IsOldVersion(myVersion, "3.5.2.74"))
+            {
+                convertTo3_5_2_74(doc);
+            }
             return doc;
         }
 
@@ -5837,6 +5841,14 @@ namespace taskt.Core.Script
 
             // ConvertDictionaryToTextCommand fix command name
             ChangeCommandName(doc, "ConvertDictionaryToTextCommand", "ConvertDictionaryToTextCommand", "Convert Dictionary To Text");
+        }
+
+        private static void convertTo3_5_2_74(XDocument doc)
+        {
+            // ExcelRemoveChartByNameCommand -> ExcelDeleteChartByNameCommand
+            ChangeCommandName(doc, "ExcelRemoveChartByNameCommand", "ExcelDeleteChartByNameCommand", "Delete Chart By Name");
+            // ExcelRemoveShapeByNameCommand -> ExcelDeleteShapeByNameCommand
+            ChangeCommandName(doc, "ExcelRemoveShapeByNameCommand", "ExcelDeleteShapeByNameCommand", "Delete Shape By Name");
         }
 
         /// <summary>
