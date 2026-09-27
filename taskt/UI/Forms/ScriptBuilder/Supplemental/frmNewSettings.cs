@@ -584,7 +584,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
             //Button btnChrome = CreateButton("btnChrome", "Chrome Driver", 280, true);
             //btnChrome.Click += (sender, e) => btnChromeDriver_Click(sender, e);
-            CreateButton("btnChrome", "Chrome Driver", 280, new Action<object, EventArgs>((sender, e) =>
+            CreateButton("btnChrome", "Get Chrome Driver", 280, new Action<object, EventArgs>((sender, e) =>
             {
                 System.Diagnostics.Process.Start(MyURLs.ChromeDriverURL);
             }), true);
@@ -592,7 +592,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             CreateLabel("lblEdgeDriver", "Edge Driver Version Result: " + versions["edge"], FontSize.Small, true);
             //Button btnEdge = CreateButton("btnEdge", "Edge Driver", 280, true);
             //btnEdge.Click += (sender, e) => btnEdgeDriver_Click(sender, e);
-            CreateButton("btnEdge", "Edge Driver", 280, new Action<object, EventArgs>((sender, e) =>
+            CreateButton("btnEdge", "Get Edge Driver", 280, new Action<object, EventArgs>((sender, e) =>
             {
                 System.Diagnostics.Process.Start(MyURLs.EdgeDriverURL);
             }), true);
@@ -600,7 +600,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             CreateLabel("lblGeckoDriver", "geckodriver Version Result: " + versions["gecko"], FontSize.Small, true);
             //Button btnGecko = CreateButton("btnGecko", "geckodriver (Firefox)", 280, true);
             //btnGecko.Click += (sender, e) => btnGeckoDriver_Click(sender, e);
-            CreateButton("btnGecko", "geckodriver (Firefox)", 280, new Action<object, EventArgs>((sender, e) =>
+            CreateButton("btnGecko", "Get geckodriver (Firefox)", 280, new Action<object, EventArgs>((sender, e) =>
             {
                 System.Diagnostics.Process.Start(MyURLs.GeckoDriverURL);
             }), true);
@@ -608,7 +608,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
             CreateLabel("lblIEDriver", "IE Driver Version Result: " + versions["ie"], FontSize.Small, true);
             //Button btnIE = CreateButton("btnIE", "IE Driver", 280, true);
             //btnIE.Click += (sender, e) => btnIEDriver_Click(sender, e);
-            CreateButton("btnIE", "IE Driver", 280, new Action<object, EventArgs>((sender, e) =>
+            CreateButton("btnIE", "Get IE Driver", 280, new Action<object, EventArgs>((sender, e) =>
             {
                 System.Diagnostics.Process.Start(MyURLs.IEDriverURL);
             }), true);
