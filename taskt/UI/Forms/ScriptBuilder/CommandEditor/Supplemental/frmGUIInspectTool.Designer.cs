@@ -35,6 +35,7 @@
             this.cmbInspectMode = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelXPath = new System.Windows.Forms.Panel();
+            this.btnParametersEvaluate = new System.Windows.Forms.Button();
             this.btnXPathEvaluate = new System.Windows.Forms.Button();
             this.chkUseAutomationIdAttr = new System.Windows.Forms.CheckBox();
             this.chkUseNameAttr = new System.Windows.Forms.CheckBox();
@@ -43,6 +44,8 @@
             this.tvElements = new System.Windows.Forms.TreeView();
             this.txtElementInformation = new System.Windows.Forms.TextBox();
             this.panelFooter = new System.Windows.Forms.FlowLayoutPanel();
+            this.uiBtnAdd = new taskt.UI.CustomControls.UIPictureButton();
+            this.uiBtnCancel = new taskt.UI.CustomControls.UIPictureButton();
             this.panelFooterContainer = new System.Windows.Forms.Panel();
             this.lblMessage = new System.Windows.Forms.Label();
             this.panelMenu = new System.Windows.Forms.Panel();
@@ -52,15 +55,12 @@
             this.chkShowInTree = new System.Windows.Forms.CheckBox();
             this.panelWindow = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnReload = new System.Windows.Forms.Button();
             this.cmbWindowList = new System.Windows.Forms.ComboBox();
             this.timerLabelShowTime = new System.Windows.Forms.Timer(this.components);
             this.myToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.timerElementReload = new System.Windows.Forms.Timer(this.components);
             this.timerMouseMove = new System.Windows.Forms.Timer(this.components);
-            this.uiBtnAdd = new taskt.UI.CustomControls.UIPictureButton();
-            this.uiBtnCancel = new taskt.UI.CustomControls.UIPictureButton();
-            this.btnReload = new System.Windows.Forms.Button();
-            this.btnParametersEvaluate = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelTitle.SuspendLayout();
             this.panelXPath.SuspendLayout();
@@ -69,11 +69,11 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panelFooter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.uiBtnAdd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uiBtnCancel)).BeginInit();
             this.panelFooterContainer.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panelWindow.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.uiBtnAdd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.uiBtnCancel)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -162,6 +162,17 @@
             this.panelXPath.Name = "panelXPath";
             this.panelXPath.Size = new System.Drawing.Size(569, 80);
             this.panelXPath.TabIndex = 1;
+            // 
+            // btnParametersEvaluate
+            // 
+            this.btnParametersEvaluate.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnParametersEvaluate.Location = new System.Drawing.Point(482, 47);
+            this.btnParametersEvaluate.Name = "btnParametersEvaluate";
+            this.btnParametersEvaluate.Size = new System.Drawing.Size(79, 23);
+            this.btnParametersEvaluate.TabIndex = 4;
+            this.btnParametersEvaluate.Text = "ParamsEval";
+            this.btnParametersEvaluate.UseVisualStyleBackColor = true;
+            this.btnParametersEvaluate.Click += new System.EventHandler(this.btnParametersEvaluate_Click);
             // 
             // btnXPathEvaluate
             // 
@@ -267,6 +278,42 @@
             this.panelFooter.Name = "panelFooter";
             this.panelFooter.Size = new System.Drawing.Size(569, 57);
             this.panelFooter.TabIndex = 3;
+            // 
+            // uiBtnAdd
+            // 
+            this.uiBtnAdd.BackColor = System.Drawing.Color.Transparent;
+            this.uiBtnAdd.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.uiBtnAdd.DisplayText = "Ok";
+            this.uiBtnAdd.DisplayTextBrush = System.Drawing.Color.White;
+            this.uiBtnAdd.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.uiBtnAdd.Image = global::taskt.Properties.Resources.various_ok_button;
+            this.uiBtnAdd.IsMouseOver = false;
+            this.uiBtnAdd.Location = new System.Drawing.Point(6, 5);
+            this.uiBtnAdd.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.uiBtnAdd.Name = "uiBtnAdd";
+            this.uiBtnAdd.Size = new System.Drawing.Size(88, 49);
+            this.uiBtnAdd.TabIndex = 18;
+            this.uiBtnAdd.TabStop = false;
+            this.uiBtnAdd.Text = "Ok";
+            this.uiBtnAdd.Click += new System.EventHandler(this.uiBtnAdd_Click);
+            // 
+            // uiBtnCancel
+            // 
+            this.uiBtnCancel.BackColor = System.Drawing.Color.Transparent;
+            this.uiBtnCancel.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.uiBtnCancel.DisplayText = "Cancel";
+            this.uiBtnCancel.DisplayTextBrush = System.Drawing.Color.White;
+            this.uiBtnCancel.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.uiBtnCancel.Image = global::taskt.Properties.Resources.various_cancel_button;
+            this.uiBtnCancel.IsMouseOver = false;
+            this.uiBtnCancel.Location = new System.Drawing.Point(106, 5);
+            this.uiBtnCancel.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.uiBtnCancel.Name = "uiBtnCancel";
+            this.uiBtnCancel.Size = new System.Drawing.Size(88, 49);
+            this.uiBtnCancel.TabIndex = 19;
+            this.uiBtnCancel.TabStop = false;
+            this.uiBtnCancel.Text = "Cancel";
+            this.uiBtnCancel.Click += new System.EventHandler(this.uiBtnCancel_Click);
             // 
             // panelFooterContainer
             // 
@@ -379,6 +426,19 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "&Window Name";
             // 
+            // btnReload
+            // 
+            this.btnReload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReload.BackgroundImage = global::taskt.Properties.Resources.action_bar_restart;
+            this.btnReload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnReload.Location = new System.Drawing.Point(531, 6);
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Size = new System.Drawing.Size(30, 30);
+            this.btnReload.TabIndex = 2;
+            this.myToolTip.SetToolTip(this.btnReload, "up-to-date");
+            this.btnReload.UseVisualStyleBackColor = true;
+            this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
+            // 
             // cmbWindowList
             // 
             this.cmbWindowList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -407,66 +467,6 @@
             this.timerMouseMove.Interval = 2000;
             this.timerMouseMove.Tick += new System.EventHandler(this.timerMouseMove_Tick);
             // 
-            // uiBtnAdd
-            // 
-            this.uiBtnAdd.BackColor = System.Drawing.Color.Transparent;
-            this.uiBtnAdd.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.uiBtnAdd.DisplayText = "Ok";
-            this.uiBtnAdd.DisplayTextBrush = System.Drawing.Color.White;
-            this.uiBtnAdd.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.uiBtnAdd.Image = global::taskt.Properties.Resources.various_ok_button;
-            this.uiBtnAdd.IsMouseOver = false;
-            this.uiBtnAdd.Location = new System.Drawing.Point(6, 5);
-            this.uiBtnAdd.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.uiBtnAdd.Name = "uiBtnAdd";
-            this.uiBtnAdd.Size = new System.Drawing.Size(88, 49);
-            this.uiBtnAdd.TabIndex = 18;
-            this.uiBtnAdd.TabStop = false;
-            this.uiBtnAdd.Text = "Ok";
-            this.uiBtnAdd.Click += new System.EventHandler(this.uiBtnAdd_Click);
-            // 
-            // uiBtnCancel
-            // 
-            this.uiBtnCancel.BackColor = System.Drawing.Color.Transparent;
-            this.uiBtnCancel.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.uiBtnCancel.DisplayText = "Cancel";
-            this.uiBtnCancel.DisplayTextBrush = System.Drawing.Color.White;
-            this.uiBtnCancel.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.uiBtnCancel.Image = global::taskt.Properties.Resources.various_cancel_button;
-            this.uiBtnCancel.IsMouseOver = false;
-            this.uiBtnCancel.Location = new System.Drawing.Point(106, 5);
-            this.uiBtnCancel.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.uiBtnCancel.Name = "uiBtnCancel";
-            this.uiBtnCancel.Size = new System.Drawing.Size(88, 49);
-            this.uiBtnCancel.TabIndex = 19;
-            this.uiBtnCancel.TabStop = false;
-            this.uiBtnCancel.Text = "Cancel";
-            this.uiBtnCancel.Click += new System.EventHandler(this.uiBtnCancel_Click);
-            // 
-            // btnReload
-            // 
-            this.btnReload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReload.BackgroundImage = global::taskt.Properties.Resources.action_bar_restart;
-            this.btnReload.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnReload.Location = new System.Drawing.Point(531, 6);
-            this.btnReload.Name = "btnReload";
-            this.btnReload.Size = new System.Drawing.Size(30, 30);
-            this.btnReload.TabIndex = 2;
-            this.myToolTip.SetToolTip(this.btnReload, "up-to-date");
-            this.btnReload.UseVisualStyleBackColor = true;
-            this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
-            // 
-            // btnParametersEvaluate
-            // 
-            this.btnParametersEvaluate.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnParametersEvaluate.Location = new System.Drawing.Point(482, 47);
-            this.btnParametersEvaluate.Name = "btnParametersEvaluate";
-            this.btnParametersEvaluate.Size = new System.Drawing.Size(79, 23);
-            this.btnParametersEvaluate.TabIndex = 4;
-            this.btnParametersEvaluate.Text = "ParamsEval";
-            this.btnParametersEvaluate.UseVisualStyleBackColor = true;
-            this.btnParametersEvaluate.Click += new System.EventHandler(this.btnParametersEvaluate_Click);
-            // 
             // frmGUIInspectTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -487,14 +487,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.panelFooter.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.uiBtnAdd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uiBtnCancel)).EndInit();
             this.panelFooterContainer.ResumeLayout(false);
             this.panelFooterContainer.PerformLayout();
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();
             this.panelWindow.ResumeLayout(false);
             this.panelWindow.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.uiBtnAdd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.uiBtnCancel)).EndInit();
             this.ResumeLayout(false);
 
         }

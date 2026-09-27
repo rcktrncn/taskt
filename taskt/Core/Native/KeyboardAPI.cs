@@ -165,7 +165,15 @@ namespace taskt.Core.Native.Windows
             var key = (Keys)kbd.vkCode;
             ToUnicode((uint)key, 0, keyboardState, buf, 256, 0);
 
-            return buf.ToString();
+            var t = buf.ToString();
+            if ((t == "") || (t == "\r"))
+            {
+                return key.ToString();
+            }
+            else
+            {
+                return t;
+            }
         }
 
         /// <summary>
