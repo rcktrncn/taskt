@@ -165,6 +165,9 @@ namespace taskt.Core.Automation.User32
             /// </summary>
             public static event EventHandler HookStopped = delegate { };
 
+            /// <summary>
+            /// Screen Recorder From handle, this form is not target to record
+            /// </summary>
             private static IntPtr recordFormHandle;
 
             /// <summary>
