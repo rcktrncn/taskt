@@ -5762,8 +5762,8 @@ namespace taskt.Core.Script
                 if (winSelAttr == null)
                 {
                     var selAttr = cmd.Attribute("v_SelectionMethod");
-                    var winSelValue = selAttr.Value;
-                    selAttr.Remove();
+                    var winSelValue = selAttr?.Value ?? string.Empty;
+                    selAttr?.Remove();
                     cmd.SetAttributeValue("v_WindowSelectionMethod", winSelValue);
                 }
             }
