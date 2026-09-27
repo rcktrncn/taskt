@@ -6,7 +6,7 @@ using static taskt.Core.Native.Windows.HookAPI;
 namespace taskt.Core.Hook
 {
     /// <summary>
-    /// keyboard events listener (hook)
+    /// UI events listener (hook)
     /// </summary>
     public class UIEventListner: IDisposable
     {
