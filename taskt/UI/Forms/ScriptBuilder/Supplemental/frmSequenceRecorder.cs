@@ -102,8 +102,10 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
                 outputList = commandList;
             }
 
-            var commentCommand = new Core.Automation.Commands.CommentCommand();
-            commentCommand.v_Comment = "Sequence Recorded " + DateTime.Now.ToString();
+            var commentCommand = new Core.Automation.Commands.CommentCommand
+            {
+                v_Comment = $"Sequence Recorded {DateTime.Now}",
+            };
             outputList.Insert(0, commentCommand);
 
             foreach (var cmd in outputList)
@@ -148,13 +150,12 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
                 lblRecording.Show();
 
-
                 int.TryParse(txtHookResolution.Text, out int samplingResolution);
 
                 GlobalHook.HookStopped += new EventHandler(OnHookStopped);
-                GlobalHook.StartScreenRecordingHook(chkCaptureClicks.Checked, chkCaptureMouse.Checked, chkGroupMovesIntoSequences.Checked, chkCaptureKeyboard.Checked, chkCaptureWindowEvents.Checked, chkActivateTopLeft.Checked, chkTrackWindowSize.Checked, chkTrackWindowsOpenLocation.Checked, samplingResolution, txtHookStop.Text);
-                lblRecording.Text = "Press '" + txtHookStop.Text + "' key to stop recording!";
-               // WindowHook.StartHook();
+                GlobalHook.StartScreenRecordingHook(chkCaptureClicks.Checked, chkCaptureMouse.Checked, chkGroupMovesIntoSequences.Checked, chkCaptureKeyboard.Checked, chkCaptureWindowEvents.Checked, chkActivateTopLeft.Checked, chkTrackWindowSize.Checked, chkTrackWindowsOpenLocation.Checked, samplingResolution, txtHookStop.Text, this.Handle);
+                lblRecording.Text = $"Press '{txtHookStop.Text}' key to stop recording!";
+                // WindowHook.StartHook();
 
                 commandList = new List<Core.Automation.Commands.ScriptCommand>();
 

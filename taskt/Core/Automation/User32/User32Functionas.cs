@@ -54,16 +54,16 @@ namespace taskt.Core.Automation.User32
             ///// </summary>
             //private static readonly HookAPI.LowLevelMouseProcDelegate _mouseLeftUpProc = MouseHookForLeftClickUpEvent;
 
-            /// <summary>
-            /// return value of SetWinEventHook
-            /// </summary>
-            private static IntPtr _WinEventHook;
+            ///// <summary>
+            ///// return value of SetWinEventHook
+            ///// </summary>
+            //private static IntPtr _WinEventHook;
 
-            /// <summary>
-            /// window event hook
-            /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-wineventproc
-            /// </summary>
-            private static HookAPI.SystemEventHandlerDelegate _WinEventHookHandler;
+            ///// <summary>
+            ///// window event hook
+            ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-wineventproc
+            ///// </summary>
+            //private static HookAPI.SystemEventHandlerDelegate _WinEventHookHandler;
 
             ///// <summary>
             ///// keyboard input hook procedure handle
@@ -84,6 +84,11 @@ namespace taskt.Core.Automation.User32
             /// keyboard event hook manage
             /// </summary>
             private static KeyboardEventListener keyboardListener;
+
+            /// <summary>
+            /// window event hook manage
+            /// </summary>
+            private static UIEventListner uiEventListener;
 
             /// <summary>
             /// stop watch for timing all event occurences
@@ -160,6 +165,8 @@ namespace taskt.Core.Automation.User32
             /// </summary>
             public static event EventHandler HookStopped = delegate { };
 
+            private static IntPtr recordFormHandle;
+
             /// <summary>
             /// set keyboard input hook and hot key to stop hook
             /// </summary>
@@ -195,22 +202,24 @@ namespace taskt.Core.Automation.User32
             /// <param name="trackWindowsOpenLocation">track activate window position</param>
             /// <param name="eventResolution">mouse move sampling (ms)</param>
             /// <param name="stopHookHotKey">hot key to stop hook</param>
-            public static void StartScreenRecordingHook(bool captureClick, bool captureMouse, bool groupMouseMoves, bool captureKeyboard, bool captureWindow, bool activateTopLeft, bool trackActivatedWindowSize, bool trackWindowsOpenLocation, int eventResolution, string stopHookHotKey)
+            /// <param name="recordFormHandle">Script Recorder form Window Handle</param>
+            public static void StartScreenRecordingHook(bool captureClick, bool captureMouse, bool groupMouseMoves, bool captureKeyboard, bool captureWindow, bool activateTopLeft, bool trackActivatedWindowSize, bool trackWindowsOpenLocation, int eventResolution, string stopHookHotKey, IntPtr recordFormHandle)
             {
                 // create new list for commands generated
                 generatedCommands = new List<ScriptCommand>();
 
                 // setup variables
-                performMouseClickCapture = captureClick;
-                performMouseMoveCapture = captureMouse;
-                performKeyboardCapture = captureKeyboard;
-                groupMouseMovesIntoSequence = groupMouseMoves;
-                performWindowCapture = captureWindow;
-                activateWindowTopLeft = activateTopLeft;
-                trackActivatedWindowSizes = trackActivatedWindowSize;
-                trackWindowOpenLocations = trackWindowsOpenLocation;
-                msResolution = eventResolution;
-                stopHookKey = stopHookHotKey;
+                GlobalHook.performMouseClickCapture = captureClick;
+                GlobalHook.performMouseMoveCapture = captureMouse;
+                GlobalHook.performKeyboardCapture = captureKeyboard;
+                GlobalHook.groupMouseMovesIntoSequence = groupMouseMoves;
+                GlobalHook.performWindowCapture = captureWindow;
+                GlobalHook.activateWindowTopLeft = activateTopLeft;
+                GlobalHook.trackActivatedWindowSizes = trackActivatedWindowSize;
+                GlobalHook.trackWindowOpenLocations = trackWindowsOpenLocation;
+                GlobalHook.msResolution = eventResolution;
+                GlobalHook.stopHookKey = stopHookHotKey;
+                GlobalHook.recordFormHandle = recordFormHandle;
 
                 // start hook
                 //_mouseHookID = HookAPI.SetMouseHook(_mouseProc);
@@ -254,10 +263,12 @@ namespace taskt.Core.Automation.User32
                 // if user decided to capture window events
                 if (performWindowCapture)
                 {
-                    _WinEventHookHandler = BuildWindowCommand;
-                    _WinEventHook = HookAPI.SetWindowHook(_WinEventHookHandler);
+                    //_WinEventHookHandler = BuildWindowCommand;
+                    //_WinEventHook = HookAPI.SetSomeUIEventsHook(_WinEventHookHandler);
+                    uiEventListener = new UIEventListner(BuildWindowCommand);
+                    uiEventListener.StartHook();
                 }
-              
+
                 // start stopwatch for timing all event occurences
                 sw = new Stopwatch();
                 sw.Start();
@@ -279,13 +290,15 @@ namespace taskt.Core.Automation.User32
 
                 if (performWindowCapture)
                 {
-                    HookAPI.RemoveWindowHook(_WinEventHook);
+                    //HookAPI.RemoveSomeUIEventsHook(_WinEventHook);
+                    uiEventListener?.StopHook();
                 }
 
                 //BuildCommentCommand();
 
                 mouseListener?.Dispose();
                 keyboardListener?.Dispose();
+                uiEventListener.Dispose();
 
                 HookStopped(null, new EventArgs());
             }
@@ -617,23 +630,29 @@ namespace taskt.Core.Automation.User32
                         return;
                     case HookAPI.SystemEvents.EVENT_MAX:
                         return;
-                    case HookAPI.SystemEvents.EVENT_SYSTEM_FOREGROUND:
-                        break;
                     case HookAPI.SystemEvents.MINIMIZE_END:
                         return;
                     case HookAPI.SystemEvents.MINIMIZE_START:
                         return;
+                    case HookAPI.SystemEvents.EVENT_SYSTEM_FOREGROUND:  // build command
+                        break;
                     default:
                         return;
+                }
+
+                // bypass screen recorder
+                if (hwnd == GlobalHook.recordFormHandle)
+                {
+                    return;
                 }
 
                 var windowName = WindowAPI.GetWindowName(hwnd);
 
                 // bypass screen recorder and Cortana (Win10) which throws errors
-                if ((windowName == "Screen Recorder") || (windowName == "Cortana"))
-                {
-                    return;
-                }
+                //if ((windowName == "Screen Recorder") || (windowName == "Cortana"))
+                //{
+                //    return;
+                //}
 
                 //if (length > 0)
                 if (!string.IsNullOrEmpty(windowName))
@@ -663,7 +682,7 @@ namespace taskt.Core.Automation.User32
                         generatedCommands.Add(moveWindowCommand);
 
                     }
-                   else if (activateWindowTopLeft)
+                    else if (activateWindowTopLeft)
                     {
                         // generate move window command
                         var moveWindowCommand = new MoveOneWindowCommand()

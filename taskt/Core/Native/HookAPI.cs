@@ -207,25 +207,40 @@ namespace taskt.Core.Native.Windows
         private static extern IntPtr GetModuleHandle(string lpModuleName);
 
         /// <summary>
-        /// WinEvents
+        /// UI events (WinEvent)
         /// https://learn.microsoft.com/en-us/windows/win32/winauto/event-constants?redirectedfrom=MSDN
         /// </summary>
         public enum SystemEvents
         {
-            EVENT_MIN = 0x00000001,       // MIN
-            EVENT_MAX = 0x7FFFFFFF,          // MAX
-            EVENT_SYSTEM_FOREGROUND = 0x3,  // The foreground window has changed. The system sends this event even if the foreground window has changed to another window in the same thread. Server applications never send this event.
-            MINIMIZE_END = 0x0017, // A window object is about to be restored. This event is sent by the system, never by servers.
-            MINIMIZE_START = 0x0016 // A window object is about to be minimized. This event is sent by the system, never by servers.
+            /// <summary>
+            /// lowest event value
+            /// </summary>
+            EVENT_MIN = 0x00000001,
+            /// <summary>
+            /// highest event value
+            /// </summary>
+            EVENT_MAX = 0x7FFFFFFF,
+            /// <summary>
+            /// The foreground window has changed. The system sends this event even if the foreground window has changed to another window in the same thread. Server applications never send this event.
+            /// </summary>
+            EVENT_SYSTEM_FOREGROUND = 0x3,
+            /// <summary>
+            /// A window object is about to be restored. This event is sent by the system, never by servers.
+            /// </summary>
+            MINIMIZE_END = 0x0017,
+            /// <summary>
+            /// A window object is about to be minimized. This event is sent by the system, never by servers.
+            /// </summary>
+            MINIMIZE_START = 0x0016
         }
 
         /// <summary>
-        /// call back for WinEvents
+        /// call back for UI events (WinEvent)
         /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nc-winuser-wineventproc
         /// </summary>
         /// <param name="hWinEventHook"></param>
         /// <param name="event"></param>
-        /// <param name="hwnd"></param>
+        /// <param name="hwnd">event window handle</param>
         /// <param name="idObject"></param>
         /// <param name="idChild"></param>
         /// <param name="dwEventThread"></param>
@@ -233,7 +248,7 @@ namespace taskt.Core.Native.Windows
         public delegate void SystemEventHandlerDelegate(IntPtr hWinEventHook, SystemEvents @event, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
 
         /// <summary>
-        /// sets an event hook function for a range of events (WinEvents)
+        /// sets an event hook function for a range of events (UI events) (WinEvent)
         /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwineventhook
         /// </summary>
         /// <param name="eventMin">hook event lowest value</param>
@@ -248,7 +263,7 @@ namespace taskt.Core.Native.Windows
         private static extern IntPtr SetWinEventHook(SystemEvents eventMin, SystemEvents eventMax, IntPtr hmodWinEventProc, SystemEventHandlerDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
 
         /// <summary>
-        /// remove event hook function created by SetWinEventHook (WinEvents)
+        /// remove event hook function created by SetWinEventHook (UI events) (WinEvent)
         /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-unhookwinevent
         /// </summary>
         /// <param name="hWinEventHook"></param>
@@ -299,20 +314,20 @@ namespace taskt.Core.Native.Windows
         }
 
         /// <summary>
-        /// set window event hook
+        /// set some UI Events hook
         /// </summary>
         /// <param name="ev"></param>
         /// <returns></returns>
-        public static IntPtr SetWindowHook(SystemEventHandlerDelegate ev)
+        public static IntPtr SetSomeUIEventsHook(SystemEventHandlerDelegate ev)
         {
             return SetWinEventHook(SystemEvents.EVENT_MIN, SystemEvents.EVENT_MAX, IntPtr.Zero, ev, 0, 0, 0);
         }
 
         /// <summary>
-        /// remove window event hook
+        /// remove some UI events hook
         /// </summary>
         /// <param name="hhk"></param>
-        public static void RemoveWindowHook(IntPtr hhk)
+        public static void RemoveSomeUIEventsHook(IntPtr hhk)
         {
             UnhookWindowsHookEx(hhk);
         }
