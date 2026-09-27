@@ -429,6 +429,8 @@
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelGetShapesCountCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelGetShapeNamesAsListCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelMoveShapeByNameCommand.cs" />
+    <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelSelectShapeByNameCommand.cs" />
+    <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelSelectChartByNameCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelRemoveShapeByNameCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelCopyShapeByNameCommand.cs" />
     <Compile Include="Core\Automation\Commands\ExcelGroup\ExcelRenameShapeByNameCommand.cs" />
