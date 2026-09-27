@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Automation;
-using taskt.Core.Automation.Commands.WindowGroup;
 using taskt.Core.Native.Windows;
 
 namespace taskt.Core.Automation.Commands.UIAutomationGroup
