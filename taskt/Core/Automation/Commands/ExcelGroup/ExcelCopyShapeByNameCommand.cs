@@ -23,6 +23,7 @@ namespace taskt.Core.Automation.Commands
         [PropertyVirtualProperty(nameof(ExcelControls), nameof(ExcelControls.v_ChartName))]
         [PropertyDescription("New Shape Name")]
         [PropertyValidationRule("New Shape Name", PropertyValidationRule.ValidationRuleFlags.None)]
+        [PropertyIsOptional(true)]
         [PropertyDisplayText(true, "New Shape Name")]
         [PropertyParameterOrder(8000)]
         public string v_NewName { get; set; }
