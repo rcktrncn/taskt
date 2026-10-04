@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Automation;
 using System.Xml.Linq;
+using taskt.Core.AutomationElement_UIElement;
 
 namespace taskt.Core.Automation.Commands.UIAutomationGroup
 {
@@ -89,7 +90,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
             var siblingFunc = command.GetMaxSiblingsFunc(engine);
             var depthFunc = command.GetMaxDepthFunc(engine);
 
-            var rootXML = EM_CanHandleUIElementXMLExtentionMethods.CreateXmlElement(targetElement);
+            var rootXML = UIElementInspector.CreateXmlElement(targetElement);
 
             var hashDic = new Dictionary<string, AutomationElement>()
             {
@@ -141,7 +142,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
                     hash += $"-{i}";
                 }
 
-                var childNode = EM_CanHandleUIElementXMLExtentionMethods.CreateXmlElement(targetElement, hash);
+                var childNode = UIElementInspector.CreateXmlElement(targetElement, hash);
                 parentXMLNode.Add(childNode);
                 elemsDic.Add(hash, targetElement);
 

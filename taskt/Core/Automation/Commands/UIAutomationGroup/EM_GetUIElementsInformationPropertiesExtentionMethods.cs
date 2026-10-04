@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using System.Windows.Automation;
+using taskt.Core.AutomationElement_UIElement;
 
 namespace taskt.Core.Automation.Commands.UIAutomationGroup
 {
@@ -13,15 +15,17 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         /// <param name="engine"></param>
         public static void StoreUIElementsInformationInUserVariable(this IGetUIElementsInformationProperties command, List<AutomationElement> elems, Engine.AutomationEngineInstance engine)
         {
-            string result = "";
+            //string result = "";
+
+            var result = new StringBuilder();
 
             int counts = elems.Count;
             for (int i = 0; i < counts; i++)
             {
                 var elem = elems[i];
-                result += $"Index: {i}, Name: {elem.Current.Name}, LocalizedControlType: {elem.Current.LocalizedControlType}, ControlType: {EM_CanHandleUIElementExtentionMethods.GetControlTypeText(elem)}\n";
+                result.Append($"Index: {i}, Name: {elem.Current.Name}, LocalizedControlType: {elem.Current.LocalizedControlType}, ControlType: {UIElementInspector.GetControlTypeText(elem)}\n");
             }
-            result.Trim().StoreInUserVariable(engine, command.v_Result);
+            result.ToString().Trim().StoreInUserVariable(engine, command.v_Result);
         }
     }
 }

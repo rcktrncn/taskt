@@ -3,6 +3,7 @@ using System.Windows.Automation;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using taskt.Core.Automation.Commands.UIAutomationGroup;
+using taskt.Core.AutomationElement_UIElement;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -68,14 +69,14 @@ namespace taskt.Core.Automation.Commands
                 {
                     try
                     {
-                        var p = EM_CanHandleUIElementExtentionMethods.GetParentUIElement(targetElement);
+                        var p = UIElementInspector.GetParentUIElement(targetElement);
                         p.StoreInUserVariable(engine, v_Result);
                     }
                     catch
                     {
                         this.ValueCanNotRetrievedProcess("Parent Element", new Action(() =>
                         {
-                            "".StoreInUserVariable(engine, v_Result);
+                            string.Empty.StoreInUserVariable(engine, v_Result);
                         }), engine);
                     }
                 })

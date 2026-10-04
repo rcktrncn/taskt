@@ -19,13 +19,6 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
             // core process
             actionFunc(targetElement);
 
-            //if (command.IsWindowNameOrWindowHandleResultsSpecified())
-            //{
-            //    // get window name and window handle
-            //    (var windowName, var whnd) = EM_CanHandleUIElementExtentionMethods.GetWindowNameAndHandle(targetElement);
-
-            //    command.StoreWindowNameAndWindowHandleResultsInUserVariables(windowName, whnd, engine);
-            //}
             command.StoreWindowNameAndWindowHandleInUserVariablesFromUIElement(targetElement, engine);
         }
     }

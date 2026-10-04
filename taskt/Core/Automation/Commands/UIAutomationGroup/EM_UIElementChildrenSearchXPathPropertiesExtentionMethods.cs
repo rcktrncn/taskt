@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Automation;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using taskt.Core.AutomationElement_UIElement;
 
 namespace taskt.Core.Automation.Commands.UIAutomationGroup
 {
@@ -78,7 +79,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         }
 
         /// <summary>
-        /// chidren search UIElement by XPath
+        /// children search UIElement by XPath
         /// </summary>
         /// <param name="command"></param>
         /// <param name="rootElement"></param>
@@ -124,7 +125,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         /// <returns></returns>
         public static (XElement, Dictionary<string, AutomationElement>) CreateChildrenXMLCore(this IUIElementChildrenSearchXPathProperties command, AutomationElement rootElement, Func<bool> waitFunc, Engine.AutomationEngineInstance engine)
         {
-            var parentXMLNode = EM_CanHandleUIElementXMLExtentionMethods.CreateXmlElement(rootElement);
+            var parentXMLNode = UIElementInspector.CreateXmlElement(rootElement);
             var elemsDic = new Dictionary<string, AutomationElement>()
             {
                 { parentXMLNode.GetHashCode().ToString(), rootElement }
@@ -149,7 +150,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
                     hash += $"-{i}";
                 }
 
-                var childNode = EM_CanHandleUIElementXMLExtentionMethods.CreateXmlElement(targetElement, hash);
+                var childNode = UIElementInspector.CreateXmlElement(targetElement, hash);
                 parentXMLNode.Add(childNode);
                 elemsDic.Add(hash, targetElement);
 

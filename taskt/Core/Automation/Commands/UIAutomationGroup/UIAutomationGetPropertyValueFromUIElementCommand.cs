@@ -3,6 +3,7 @@ using System.Windows.Automation;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
 using taskt.Core.Automation.Commands.UIAutomationGroup;
+using taskt.Core.AutomationElement_UIElement;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -224,7 +225,7 @@ namespace taskt.Core.Automation.Commands
                     {
                         //var c = (ControlType)targetElement.Current.GetType().GetProperty(propName).GetValue(targetElement.Current);
                         //v = UIElementControls.GetControlTypeText(c);
-                        v = EM_CanHandleUIElementExtentionMethods.GetControlTypeText(targetElement);
+                        v = UIElementInspector.GetControlTypeText(targetElement);
                     }
                     else
                     {

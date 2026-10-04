@@ -1,6 +1,6 @@
-﻿using System;
-using System.Windows.Automation;
+﻿using System.Windows.Automation;
 using taskt.Core.Automation.Commands.WindowGroup;
+using taskt.Core.AutomationElement_UIElement;
 
 namespace taskt.Core.Automation.Commands.UIAutomationGroup
 {
@@ -16,7 +16,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
         {
             if (command.IsWindowNameOrWindowHandleResultsSpecified())
             {
-                (var name, var whnd) = EM_CanHandleUIElementExtentionMethods.GetWindowNameAndHandle(targetElement);
+                (var name, var whnd) = UIElementInspector.GetWindowNameAndHandleFromUIElement(targetElement);
                 command.StoreWindowNameAndWindowHandleResultsInUserVariables(name, whnd, engine);
             }
         }

@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Security;
-using System.Text;
 using System.Windows.Automation;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using taskt.Core.Automation.Commands;
-using taskt.Core.Automation.Commands.UIAutomationGroup;
 using taskt.Core.Automation.Engine;
+using taskt.Core.AutomationElement_UIElement;
 using taskt.Core.Native.Windows;
-using taskt.Core.Script;
-using static taskt.Core.Automation.Commands.UIAutomationGroup.EM_CanHandleUIElementExtentionMethods;
 
 /*
  * NOTE: This form is called primarily by frmCommandEditor, so the namespace looks like this
@@ -123,12 +118,12 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
             cmbWindowList.BeginUpdate();
             cmbWindowList.Items.Clear();
 
-            //var windows = EM_CanHandleWindowNameExtensionMethods.GetAllWindowNames();
             var windows = WindowAPI.GetAllWindowNames();
-            foreach (string win in windows)
-            {
-                cmbWindowList.Items.Add(win);
-            }
+            //foreach (string win in windows)
+            //{
+            //    cmbWindowList.Items.Add(win);
+            //}
+            cmbWindowList.Items.AddRange(windows.ToArray());
 
             if (cmbWindowList.Items.Contains(currentWindow))
             {
@@ -169,284 +164,287 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 
                 tvElementsReloadProcess(new Func<TreeNode>(() =>
                 {
-                    return CreateXMLTreeAndTreeNodeFromWindowName(windowName, engine);
+                    (var t, var x, var h) = UIElementInspector.CreateXMLTreeAndTreeNodeFromWindowName(windowName);
+                    windowXMLTree = x;
+                    uiElementHashTable = h;
+                    return t;
                 }));
 
                 cmbWindowList.Enabled = true;
             }), timerElementReload);
         }
 
-        /// <summary>
-        /// create xml-tree and TreeNode from window name
-        /// </summary>
-        /// <param name="windowName"></param>
-        /// <param name="engine"></param>
-        /// <returns></returns>
-        private TreeNode CreateXMLTreeAndTreeNodeFromWindowName(string windowName, AutomationEngineInstance engine)
-        {
-            AutomationElement winRoot;
-            using (var winElem = new InnerScriptVariable(engine))
-            {
-                // get target window UIElement
-                var getWinElem = new UIAutomationGetWindowUIElementFromWindowNameCommand()
-                {
-                    v_WindowName = windowName,
-                    v_Result = winElem.VariableName,
-                };
-                getWinElem.RunCommand(engine);
+        ///// <summary>
+        ///// create xml-tree and TreeNode from window name
+        ///// </summary>
+        ///// <param name="windowName"></param>
+        ///// <param name="engine"></param>
+        ///// <returns></returns>
+        //private TreeNode CreateXMLTreeAndTreeNodeFromWindowName(string windowName, AutomationEngineInstance engine)
+        //{
+        //    AutomationElement winRoot;
+        //    using (var winElem = new InnerScriptVariable(engine))
+        //    {
+        //        // get target window UIElement
+        //        var getWinElem = new UIAutomationGetWindowUIElementFromWindowNameCommand()
+        //        {
+        //            v_WindowName = windowName,
+        //            v_Result = winElem.VariableName,
+        //        };
+        //        getWinElem.RunCommand(engine);
 
-                winRoot = (AutomationElement)winElem.VariableValue;
-            }
+        //        winRoot = (AutomationElement)winElem.VariableValue;
+        //    }
 
-            // wait time func
-            var stopDateTime = DateTime.Now.AddSeconds(App.Taskt_Settings.ClientSettings.GUIInspectSearchTime);
-            var waitFunc = new Func<bool>(() =>
-            {
-                return DateTime.Now > stopDateTime;
-            });
+        //    // wait time func
+        //    var stopDateTime = DateTime.Now.AddSeconds(App.Taskt_Settings.ClientSettings.GUIInspectSearchTime);
+        //    var waitFunc = new Func<bool>(() =>
+        //    {
+        //        return DateTime.Now > stopDateTime;
+        //    });
 
-            // create XML tree
-            var searchXML = new UIAutomationUIElementActionAfterSearchUIElementByXPathFromWindowNameCommand()
-            {
-                v_WindowName = windowName,
-                v_MaxSiblings = App.Taskt_Settings.ClientSettings.GUIInspectMaxSiblings.ToString(),
-                v_MaxDepth = App.Taskt_Settings.ClientSettings.GUIInspectMaxDepth.ToString(),
-            };
-            (windowXMLTree, uiElementHashTable) = searchXML.DeepCreateUIElementXMLCore(winRoot, waitFunc, engine);
+        //    // create XML tree
+        //    var searchXML = new UIAutomationUIElementActionAfterSearchUIElementByXPathFromWindowNameCommand()
+        //    {
+        //        v_WindowName = windowName,
+        //        v_MaxSiblings = App.Taskt_Settings.ClientSettings.GUIInspectMaxSiblings.ToString(),
+        //        v_MaxDepth = App.Taskt_Settings.ClientSettings.GUIInspectMaxDepth.ToString(),
+        //    };
+        //    (windowXMLTree, uiElementHashTable) = searchXML.DeepCreateUIElementXMLCore(winRoot, waitFunc, engine);
 
-            // DGB
-            //Console.WriteLine("## element list");
-            //foreach(var item in hashTable)
-            //{
-            //    var key = item.Key;
-            //    var v = item.Value;
-            //    Console.WriteLine($"{item.Key}, {v.Current.Name}, {v.Current.GetHashCode()}");
-            //}
+        //    // DGB
+        //    //Console.WriteLine("## element list");
+        //    //foreach(var item in hashTable)
+        //    //{
+        //    //    var key = item.Key;
+        //    //    var v = item.Value;
+        //    //    Console.WriteLine($"{item.Key}, {v.Current.Name}, {v.Current.GetHashCode()}");
+        //    //}
 
-            var tree = CreateTreeNodeFromUIElement(winRoot);
-            CreateTreeNodeFromChildElementsOfUIElementXML(tree, windowXMLTree);
-            return tree;
-        }
+        //    var tree = CreateTreeNodeFromUIElement(winRoot);
+        //    CreateTreeNodeFromChildElementsOfUIElementXML(tree, windowXMLTree);
+        //    return tree;
+        //}
 
-        /// <summary>
-        /// create tree node From Child
-        /// </summary>
-        /// <param name="tree"></param>
-        /// <param name="root"></param>
-        private void CreateTreeNodeFromChildElementsOfUIElementXML(TreeNode tree, XElement root)
-        {
-            foreach (var element in root.Elements())
-            {
-                var node = CreateTreeNodeFromUIElement(GetUIElementFromXML(element));
-                tree.Nodes.Add(node);
-                if (element.Elements().Count() > 0)
-                {
-                    CreateTreeNodeFromChildElementsOfUIElementXML(node, element);
-                }
-            }
-        }
+        ///// <summary>
+        ///// create child tree node From XML Tree
+        ///// </summary>
+        ///// <param name="tree"></param>
+        ///// <param name="root"></param>
+        //private void CreateChildTreeNodeFromXMLTree(TreeNode tree, XElement root)
+        //{
+        //    foreach (var element in root.Elements())
+        //    {
+        //        var node = CreateTreeNodeFromUIElement(UIElementInspector.GetUIElementFromXMLTree(element, uiElementHashTable));
+        //        tree.Nodes.Add(node);
+        //        if (element.Elements().Count() > 0)
+        //        {
+        //            UIElementInspector.CreateChildTreeNodeFromXMLTree(node, element, uiElementHashTable);
+        //        }
+        //    }
+        //}
 
-        /// <summary>
-        /// get UIElement from XML Tree
-        /// </summary>
-        /// <param name="elem"></param>
-        /// <returns></returns>
-        private AutomationElement GetUIElementFromXML(XElement elem)
-        {
-            var h = elem.Attribute("Hash").Value;
-            if (uiElementHashTable.ContainsKey(h))
-            {
-                return uiElementHashTable[h];
-            }
-            else
-            {
-                throw new Exception($"Strange UIElement Specified. Hash '{h}'");
-            }
-        }
+        ///// <summary>
+        ///// get UIElement from XML Tree
+        ///// </summary>
+        ///// <param name="elem"></param>
+        ///// <returns></returns>
+        //private AutomationElement GetUIElementFromXML(XElement elem)
+        //{
+        //    var h = elem.Attribute("Hash").Value;
+        //    if (uiElementHashTable.ContainsKey(h))
+        //    {
+        //        return uiElementHashTable[h];
+        //    }
+        //    else
+        //    {
+        //        throw new Exception($"Strange UIElement Specified. Hash '{h}'");
+        //    }
+        //}
 
-        /// <summary>
-        /// Create treeNode from UIElement
-        /// </summary>
-        /// <param name="targetElement"></param>
-        /// <returns></returns>
-        private static TreeNode CreateTreeNodeFromUIElement(AutomationElement targetElement)
-        {
-            string nameValue = GetPropertyValueAsString(targetElement, AutomationElement.NameProperty, AutomationElementPropertyValueTypes.String);
-            string localTypeValue = GetPropertyValueAsString(targetElement, AutomationElement.LocalizedControlTypeProperty, AutomationElementPropertyValueTypes.String);
+        ///// <summary>
+        ///// Create treeNode from UIElement
+        ///// </summary>
+        ///// <param name="targetElement"></param>
+        ///// <returns></returns>
+        //private static TreeNode CreateTreeNodeFromUIElement(AutomationElement targetElement)
+        //{
+        //    string nameValue = UIElementInspector.GetPropertyValueAsString(targetElement, AutomationElement.NameProperty, UIElementInspector.AutomationElementPropertyValueTypes.String);
+        //    string localTypeValue = UIElementInspector.GetPropertyValueAsString(targetElement, AutomationElement.LocalizedControlTypeProperty, UIElementInspector.AutomationElementPropertyValueTypes.String);
 
-            var node = new TreeNode
-            {
-                Text = $"\"{nameValue}\" {localTypeValue}",
-                Tag = targetElement
-            };
-            return node;
-        }
+        //    var node = new TreeNode
+        //    {
+        //        Text = $"\"{nameValue}\" {localTypeValue}",
+        //        Tag = targetElement
+        //    };
+        //    return node;
+        //}
 
-        /// <summary>
-        /// get UIElement Hash
-        /// </summary>
-        /// <param name="elem"></param>
-        /// <returns></returns>
-        private string GetUIElementHash(AutomationElement elem)
-        {
-            try
-            {
-                return uiElementHashTable.FirstOrDefault(item => (item.Value == elem)).Key;
-            }
-            catch
-            {
-                throw new Exception($"hashTable firstOrDefalult {elem.Current.Name} {elem.Current.LocalizedControlType}");
-            }
-        }
+        ///// <summary>
+        ///// get UIElement Hash
+        ///// </summary>
+        ///// <param name="elem"></param>
+        ///// <returns></returns>
+        //private string GetUIElementHash(AutomationElement elem)
+        //{
+        //    try
+        //    {
+        //        return uiElementHashTable.FirstOrDefault(item => (item.Value == elem)).Key;
+        //    }
+        //    catch
+        //    {
+        //        throw new Exception($"hashTable firstOrDefalult {elem.Current.Name} {elem.Current.LocalizedControlType}");
+        //    }
+        //}
 
         /// <summary>
         /// get XElement from UIElement
         /// </summary>
         /// <param name="elem"></param>
         /// <returns></returns>
-        private XElement GetXElementFromUIElement(AutomationElement elem)
-        {
-            var searchPath = $"//{EM_CanHandleUIElementExtentionMethods.GetControlTypeText(elem)}[@Hash=\"{GetUIElementHash(elem)}\"]";
-            return windowXMLTree.XPathSelectElement(searchPath);
-        }
+        //private XElement GetXElementFromUIElement(AutomationElement elem)
+        //{
+        //    var searchPath = $"//{UIElementInspector.GetControlTypeText(elem)}[@Hash=\"{UIElementInspector.GetHashFromUIElement(elem, uiElementHashTable)}\"]";
+        //    return windowXMLTree.XPathSelectElement(searchPath);
+        //}
 
-        /// <summary>
-        /// Get XPath from Root
-        /// </summary>
-        /// <param name="xml"></param>
-        /// <param name="elem"></param>
-        /// <param name="useNameAttribute"></param>
-        /// <param name="useAutomationIdAttribute"></param>
-        /// <returns></returns>
-        private string GetXPathFromRoot(AutomationElement elem, bool useNameAttribute = true, bool useAutomationIdAttribute = false)
-        {
-            var trgElement = GetXElementFromUIElement(elem);
+        ///// <summary>
+        ///// Get XPath from Root
+        ///// </summary>
+        ///// <param name="xml"></param>
+        ///// <param name="elem"></param>
+        ///// <param name="useNameAttribute"></param>
+        ///// <param name="useAutomationIdAttribute"></param>
+        ///// <returns></returns>
+        //private string GetXPathFromRoot(AutomationElement elem, bool useNameAttribute = true, bool useAutomationIdAttribute = false)
+        //{
+        //    var trgElement = UIElementInspector.GetXElementFromUIElement(elem, windowXMLTree, uiElementHashTable);
 
-            // not found
-            if (trgElement == null)
-            {
-                return string.Empty;
-            }
+        //    // not found
+        //    if (trgElement == null)
+        //    {
+        //        return string.Empty;
+        //    }
 
-            var xpath = string.Empty;
-            while (trgElement.Parent != null)
-            {
-                xpath = CreateXPath(trgElement, useNameAttribute, useAutomationIdAttribute) + xpath;
-                trgElement = trgElement.Parent;
-            }
+        //    var xpath = string.Empty;
+        //    while (trgElement.Parent != null)
+        //    {
+        //        xpath = CreateXPath(trgElement, useNameAttribute, useAutomationIdAttribute) + xpath;
+        //        trgElement = trgElement.Parent;
+        //    }
 
-            return xpath;
-        }
+        //    return xpath;
+        //}
 
-        /// <summary>
-        ///  get xpath from UIElement
-        /// </summary>
-        /// <param name="trgElem"></param>
-        /// <param name="curElem"></param>
-        /// <param name="useNameAttribute"></param>
-        /// <param name="useAutomationIdAttribute"></param>
-        /// <returns></returns>
-        public string GetXPathFromUIElement(AutomationElement trgElem, AutomationElement curElem, bool useNameAttribute = true, bool useAutomationIdAttribute = false)
-        {
-            var trgElement = GetXElementFromUIElement(trgElem);
+        ///// <summary>
+        ///// get xpath from UIElement
+        ///// </summary>
+        ///// <param name="trgElem"></param>
+        ///// <param name="curElem"></param>
+        ///// <param name="useNameAttribute"></param>
+        ///// <param name="useAutomationIdAttribute"></param>
+        ///// <returns></returns>
+        //public string GetXPathFromUIElement(AutomationElement trgElem, AutomationElement curElem, bool useNameAttribute = true, bool useAutomationIdAttribute = false)
+        //{
+        //    var trgElement = UIElementInspector.GetXElementFromUIElement(trgElem, windowXMLTree, uiElementHashTable);
 
-            var curElement = GetXElementFromUIElement(curElem);
-            if (curElement == null)
-            {
-                // curElem is root-window-node ?
-                if (windowXMLTree.Attribute("Hash").Value == curElem.GetHashCode().ToString())
-                {
-                    curElement = windowXMLTree;
-                }
-            }
+        //    var curElement = UIElementInspector.GetXElementFromUIElement(curElem, windowXMLTree, uiElementHashTable);
+        //    if (curElement == null)
+        //    {
+        //        // curElem is root-window-node ?
+        //        if (windowXMLTree.Attribute("Hash").Value == curElem.GetHashCode().ToString())
+        //        {
+        //            curElement = windowXMLTree;
+        //        }
+        //    }
 
-            // no found
-            if ((trgElement == null) || (curElement == null))
-            {
-                return string.Empty;
-            }
+        //    // no found
+        //    if ((trgElement == null) || (curElement == null))
+        //    {
+        //        return string.Empty;
+        //    }
 
-            string xpath = string.Empty;
-            while (trgElement.Parent != null)
-            {
-                xpath = CreateXPath(trgElement, useNameAttribute, useAutomationIdAttribute) + xpath;
-                trgElement = trgElement.Parent;
+        //    string xpath = string.Empty;
+        //    while (trgElement.Parent != null)
+        //    {
+        //        xpath = CreateXPath(trgElement, useNameAttribute, useAutomationIdAttribute) + xpath;
+        //        trgElement = trgElement.Parent;
 
-                if (trgElement == curElement)
-                {
-                    break;
-                }
-            }
+        //        if (trgElement == curElement)
+        //        {
+        //            break;
+        //        }
+        //    }
 
-            if (trgElement == curElement)
-            {
-                return $"/{xpath}";
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
+        //    if (trgElement == curElement)
+        //    {
+        //        return $"/{xpath}";
+        //    }
+        //    else
+        //    {
+        //        return string.Empty;
+        //    }
+        //}
 
-        /// <summary>
-        /// create XPath
-        /// </summary>
-        /// <param name="elemNode"></param>
-        /// <param name="useNameAttribute"></param>
-        /// <param name="useAutomationIdAttribute"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        private string CreateXPath(XElement elemNode, bool useNameAttribute = true, bool useAutomationIdAttribute = false)
-        {
-            var parentNode = elemNode.Parent;
+        ///// <summary>
+        ///// create XPath
+        ///// </summary>
+        ///// <param name="elemNode"></param>
+        ///// <param name="useNameAttribute"></param>
+        ///// <param name="useAutomationIdAttribute"></param>
+        ///// <returns></returns>
+        ///// <exception cref="Exception"></exception>
+        //private string CreateXPath(XElement elemNode, bool useNameAttribute = true, bool useAutomationIdAttribute = false)
+        //{
+        //    var parentNode = elemNode.Parent;
 
-            string elemType = elemNode.Name.ToString();
-            string elemHash = elemNode.Attribute("Hash").Value;
-            string xpath;
+        //    string elemType = elemNode.Name.ToString();
+        //    string elemHash = elemNode.Attribute("Hash").Value;
+        //    string xpath;
 
-            // use AutomationId attribute
-            if (useAutomationIdAttribute && (elemNode.Attribute("AutomationId").Value != string.Empty))
-            {
-                xpath = $"/{elemType}[@AutomationId=\"{SecurityElement.Escape(elemNode.Attribute("AutomationId").Value)}\"]";
-                var idNode = parentNode.XPathSelectElement($".{xpath}");
-                if (idNode != null)
-                {
-                    if (idNode.Attribute("Hash").Value == elemHash)
-                    {
-                        return xpath;
-                    }
-                }
-            }
+        //    // use AutomationId attribute
+        //    if (useAutomationIdAttribute && (elemNode.Attribute("AutomationId").Value != string.Empty))
+        //    {
+        //        xpath = $"/{elemType}[@AutomationId=\"{SecurityElement.Escape(elemNode.Attribute("AutomationId").Value)}\"]";
+        //        var idNode = parentNode.XPathSelectElement($".{xpath}");
+        //        if (idNode != null)
+        //        {
+        //            if (idNode.Attribute("Hash").Value == elemHash)
+        //            {
+        //                return xpath;
+        //            }
+        //        }
+        //    }
 
-            // use Name attribute
-            if (useNameAttribute && (elemNode.Attribute("Name").Value != string.Empty))
-            {
-                xpath = $"/{elemType}[@Name=\"{SecurityElement.Escape(elemNode.Attribute("Name").Value)}\"]";
-                var nameNode = parentNode.XPathSelectElement($".{xpath}");
-                if (nameNode != null)
-                {
-                    if (nameNode.Attribute("Hash").Value == elemHash)
-                    {
-                        return xpath;
-                    }
-                }
-            }
+        //    // use Name attribute
+        //    if (useNameAttribute && (elemNode.Attribute("Name").Value != string.Empty))
+        //    {
+        //        xpath = $"/{elemType}[@Name=\"{SecurityElement.Escape(elemNode.Attribute("Name").Value)}\"]";
+        //        var nameNode = parentNode.XPathSelectElement($".{xpath}");
+        //        if (nameNode != null)
+        //        {
+        //            if (nameNode.Attribute("Hash").Value == elemHash)
+        //            {
+        //                return xpath;
+        //            }
+        //        }
+        //    }
 
-            // tag-name & index XPath
-            xpath = $"/{elemType}";
-            var typeNodes = parentNode.XPathSelectElements($".{xpath}");
-            int idx = 1;
-            foreach (XElement nd in typeNodes)
-            {
-                if (nd.Attribute("Hash").Value == elemHash)
-                {
-                    return $"{xpath}[{idx}]";
-                }
-                idx++;
-            }
+        //    // tag-name & index XPath
+        //    xpath = $"/{elemType}";
+        //    var typeNodes = parentNode.XPathSelectElements($".{xpath}");
+        //    int idx = 1;
+        //    foreach (XElement nd in typeNodes)
+        //    {
+        //        if (nd.Attribute("Hash").Value == elemHash)
+        //        {
+        //            return $"{xpath}[{idx}]";
+        //        }
+        //        idx++;
+        //    }
 
-            throw new Exception("Fail Create UIElement XPath");
-        }
+        //    throw new Exception("Fail Create UIElement XPath");
+        //}
         #endregion
 
         #region treeview events
@@ -456,7 +454,7 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
             {
                 var elem = (AutomationElement)e.Node.Tag;
                 ShowUIElementInformation((AutomationElement)e.Node.Tag);
-                HighlightUIElement(elem);
+                UIElementInspector.HighlightUIElement(elem);
             }
             else
             {
@@ -618,67 +616,67 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
 
         #region node methods
 
-        /// <summary>
-        /// get (Microsoft) Inspect Tool like result from UIElement
-        /// </summary>
-        /// <param name="elem"></param>
-        /// <returns></returns>
-        public static string GetInspectResultFromUIElement(AutomationElement elem)
-        {
-            //string res = "";
-            var res = new StringBuilder();
+        ///// <summary>
+        ///// get (Microsoft) Inspect Tool like result from UIElement
+        ///// </summary>
+        ///// <param name="elem"></param>
+        ///// <returns></returns>
+        //public static string GetInspectResultFromUIElement(AutomationElement elem)
+        //{
+        //    //string res = "";
+        //    var res = new StringBuilder();
 
-            try
-            {
-                res.Append($"Name:\t\"{GetPropertyValueAsString(elem, AutomationElement.NameProperty, AutomationElementPropertyValueTypes.String)}\"\r\n");
-                res.Append($"ControlType:\t{GetControlTypeText(elem)}\r\n");
-                res.Append($"LocalizedControlType:\t\"{elem.Current.LocalizedControlType}\"\r\n");
-                res.Append($"IsEnabled:\t{elem.Current.IsEnabled}\r\n");
-                res.Append($"IsOffscreen:\t{elem.Current.IsOffscreen}\r\n");
-                res.Append($"IsKeyboardFocusable:\t{elem.Current.IsKeyboardFocusable}\r\n");
-                res.Append($"HasKeyboardFocusable:\t{elem.Current.HasKeyboardFocus}\r\n");
-                res.Append($"AccessKey:\t\"{elem.Current.AccessKey}\"\r\n");
-                res.Append($"ProcessId:\t{elem.Current.ProcessId}\r\n");
-                res.Append($"AutomationId:\t\"{elem.Current.AutomationId}\"\r\n");
-                res.Append($"FrameworkId:\t\"{elem.Current.FrameworkId}\"\r\n");
-                res.Append($"ClassName:\t\"{elem.Current.ClassName}\"\r\n");
-                res.Append($"IsContentElement:\t{elem.Current.IsContentElement}\r\n");
-                res.Append($"IsPassword:\t{elem.Current.IsPassword}\r\n");
+        //    try
+        //    {
+        //        res.Append($"Name:\t\"{UIElementInspector.GetPropertyValueAsString(elem, AutomationElement.NameProperty, UIElementInspector.AutomationElementPropertyValueTypes.String)}\"\r\n");
+        //        res.Append($"ControlType:\t{UIElementInspector.GetControlTypeText(elem)}\r\n");
+        //        res.Append($"LocalizedControlType:\t\"{elem.Current.LocalizedControlType}\"\r\n");
+        //        res.Append($"IsEnabled:\t{elem.Current.IsEnabled}\r\n");
+        //        res.Append($"IsOffscreen:\t{elem.Current.IsOffscreen}\r\n");
+        //        res.Append($"IsKeyboardFocusable:\t{elem.Current.IsKeyboardFocusable}\r\n");
+        //        res.Append($"HasKeyboardFocusable:\t{elem.Current.HasKeyboardFocus}\r\n");
+        //        res.Append($"AccessKey:\t\"{elem.Current.AccessKey}\"\r\n");
+        //        res.Append($"ProcessId:\t{elem.Current.ProcessId}\r\n");
+        //        res.Append($"AutomationId:\t\"{elem.Current.AutomationId}\"\r\n");
+        //        res.Append($"FrameworkId:\t\"{elem.Current.FrameworkId}\"\r\n");
+        //        res.Append($"ClassName:\t\"{elem.Current.ClassName}\"\r\n");
+        //        res.Append($"IsContentElement:\t{elem.Current.IsContentElement}\r\n");
+        //        res.Append($"IsPassword:\t{elem.Current.IsPassword}\r\n");
 
-                res.Append($"AcceleratorKey:\t\"{elem.Current.AcceleratorKey}\"\r\n");
-                res.Append($"HelpText:\t\"{elem.Current.HelpText}\"\r\n");
-                res.Append($"IsControlElement:\t{elem.Current.IsControlElement}\r\n");
-                res.Append($"IsRequiredForForm:\t{elem.Current.IsRequiredForForm}\r\n");
-                res.Append($"ItemStatus:\t\"{elem.Current.ItemStatus}\"\r\n");
-                res.Append($"ItemType:\t\"{elem.Current.ItemType}\"\r\n");
-                res.Append($"NativeWindowHandle:\t{elem.Current.NativeWindowHandle}\r\n");
+        //        res.Append($"AcceleratorKey:\t\"{elem.Current.AcceleratorKey}\"\r\n");
+        //        res.Append($"HelpText:\t\"{elem.Current.HelpText}\"\r\n");
+        //        res.Append($"IsControlElement:\t{elem.Current.IsControlElement}\r\n");
+        //        res.Append($"IsRequiredForForm:\t{elem.Current.IsRequiredForForm}\r\n");
+        //        res.Append($"ItemStatus:\t\"{elem.Current.ItemStatus}\"\r\n");
+        //        res.Append($"ItemType:\t\"{elem.Current.ItemType}\"\r\n");
+        //        res.Append($"NativeWindowHandle:\t{elem.Current.NativeWindowHandle}\r\n");
 
-                res.Append($"IsDockPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsDockPatternAvailableProperty)}\r\n");
-                res.Append($"IsExpandCollapsePatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsExpandCollapsePatternAvailableProperty)}\r\n");
-                res.Append($"IsGridPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsGridPatternAvailableProperty)}\r\n");
-                res.Append($"IsGridItemPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsGridItemPatternAvailableProperty)}\r\n");
-                res.Append($"IsInvokePatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsInvokePatternAvailableProperty)}\r\n");
-                res.Append($"IsMultipleViewPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsMultipleViewPatternAvailableProperty)}\r\n");
-                res.Append($"IsRangeValuePatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsRangeValuePatternAvailableProperty)}\r\n");
-                res.Append($"IsScrollPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsScrollPatternAvailableProperty)}\r\n");
-                res.Append($"IsScrollItemPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsScrollItemPatternAvailableProperty)}\r\n");
-                res.Append($"IsSelectionPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsSelectionPatternAvailableProperty)}\r\n");
-                res.Append($"IsSelectionItemPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsSelectionItemPatternAvailableProperty)}\r\n");
-                res.Append($"IsTablePatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsTablePatternAvailableProperty)}\r\n");
-                res.Append($"IsTableItemPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsTableItemPatternAvailableProperty)}\r\n");
-                res.Append($"IsTextPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsTextPatternAvailableProperty)}\r\n");
-                res.Append($"IsTogglePatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsTogglePatternAvailableProperty)}\r\n");
-                res.Append($"IsTransformPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsTransformPatternAvailableProperty)}\r\n");
-                res.Append($"IsValuePatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsValuePatternAvailableProperty)}\r\n");
-                res.Append($"IsWindowPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsWindowPatternAvailableProperty)}\r\n");
-            }
-            catch (Exception ex)
-            {
-                res.Append($"Error: {ex.Message}");
-            }
+        //        res.Append($"IsDockPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsDockPatternAvailableProperty)}\r\n");
+        //        res.Append($"IsExpandCollapsePatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsExpandCollapsePatternAvailableProperty)}\r\n");
+        //        res.Append($"IsGridPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsGridPatternAvailableProperty)}\r\n");
+        //        res.Append($"IsGridItemPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsGridItemPatternAvailableProperty)}\r\n");
+        //        res.Append($"IsInvokePatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsInvokePatternAvailableProperty)}\r\n");
+        //        res.Append($"IsMultipleViewPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsMultipleViewPatternAvailableProperty)}\r\n");
+        //        res.Append($"IsRangeValuePatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsRangeValuePatternAvailableProperty)}\r\n");
+        //        res.Append($"IsScrollPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsScrollPatternAvailableProperty)}\r\n");
+        //        res.Append($"IsScrollItemPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsScrollItemPatternAvailableProperty)}\r\n");
+        //        res.Append($"IsSelectionPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsSelectionPatternAvailableProperty)}\r\n");
+        //        res.Append($"IsSelectionItemPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsSelectionItemPatternAvailableProperty)}\r\n");
+        //        res.Append($"IsTablePatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsTablePatternAvailableProperty)}\r\n");
+        //        res.Append($"IsTableItemPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsTableItemPatternAvailableProperty)}\r\n");
+        //        res.Append($"IsTextPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsTextPatternAvailableProperty)}\r\n");
+        //        res.Append($"IsTogglePatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsTogglePatternAvailableProperty)}\r\n");
+        //        res.Append($"IsTransformPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsTransformPatternAvailableProperty)}\r\n");
+        //        res.Append($"IsValuePatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsValuePatternAvailableProperty)}\r\n");
+        //        res.Append($"IsWindowPatternAvailableProperty:\t{(bool)elem.GetCurrentPropertyValue(AutomationElement.IsWindowPatternAvailableProperty)}\r\n");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        res.Append($"Error: {ex.Message}");
+        //    }
 
-            return res.ToString();
-        }
+        //    return res.ToString();
+        //}
 
         /// <summary>
         /// show UIElement Information
@@ -686,67 +684,67 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
         /// <param name="elem"></param>
         private void ShowUIElementInformation(AutomationElement elem)
         {
-            txtElementInformation.Text = GetInspectResultFromUIElement(elem);
+            txtElementInformation.Text = UIElementInspector.GetInspectResultFromUIElement(elem);
 
             if ((chkShowInTree.Checked) && (chkXPathRelative.Checked))
             {
                 TreeNode chk = GetCheckedNode();
                 AutomationElement curElem = (AutomationElement)chk.Tag;
-                txtXPath.Text = GetXPathFromUIElement(elem, curElem, chkUseNameAttr.Checked, chkUseAutomationIdAttr.Checked);
+                txtXPath.Text = UIElementInspector.GetXPathFromUIElement(elem, curElem, windowXMLTree, uiElementHashTable, chkUseNameAttr.Checked, chkUseAutomationIdAttr.Checked);
             }
             else
             {
-                txtXPath.Text = GetXPathFromRoot(elem, chkUseNameAttr.Checked, chkUseAutomationIdAttr.Checked);
+                txtXPath.Text = UIElementInspector.GetXPathFromXMLTreeRoot(elem, windowXMLTree, uiElementHashTable, chkUseNameAttr.Checked, chkUseAutomationIdAttr.Checked);
             }
         }
 
-        /// <summary>
-        /// highlight (wrap yellow line) UIElement
-        /// </summary>
-        /// <param name="elem"></param>
-        private void HighlightUIElement(AutomationElement elem, Color fillColor = default)
-        {
-            try
-            {
-                System.Windows.Rect rect = elem.Current.BoundingRectangle;
-                Rectangle outerRect = new Rectangle
-                {
-                    X = (int)rect.X - 3,
-                    Y = (int)rect.Y - 3,
-                    Width = (int)rect.Width + 6,
-                    Height = (int)rect.Height + 6
-                };
-                Rectangle middleRect = new Rectangle
-                {
-                    X = (int)rect.X - 2,
-                    Y = (int)rect.Y - 2,
-                    Width = (int)rect.Width + 4,
-                    Height = (int)rect.Height + 4
-                };
-                Rectangle innerRect = new Rectangle
-                {
-                    X = (int)rect.X,
-                    Y = (int)rect.Y,
-                    Width = (int)rect.Width,
-                    Height = (int)rect.Height
-                };
+        ///// <summary>
+        ///// highlight (wrap yellow line) UIElement
+        ///// </summary>
+        ///// <param name="elem"></param>
+        //private void HighlightUIElement(AutomationElement elem, Color fillColor = default)
+        //{
+        //    try
+        //    {
+        //        System.Windows.Rect rect = elem.Current.BoundingRectangle;
+        //        Rectangle outerRect = new Rectangle
+        //        {
+        //            X = (int)rect.X - 3,
+        //            Y = (int)rect.Y - 3,
+        //            Width = (int)rect.Width + 6,
+        //            Height = (int)rect.Height + 6
+        //        };
+        //        Rectangle middleRect = new Rectangle
+        //        {
+        //            X = (int)rect.X - 2,
+        //            Y = (int)rect.Y - 2,
+        //            Width = (int)rect.Width + 4,
+        //            Height = (int)rect.Height + 4
+        //        };
+        //        Rectangle innerRect = new Rectangle
+        //        {
+        //            X = (int)rect.X,
+        //            Y = (int)rect.Y,
+        //            Width = (int)rect.Width,
+        //            Height = (int)rect.Height
+        //        };
 
-                Graphics g = Graphics.FromHwnd(IntPtr.Zero);
+        //        Graphics g = Graphics.FromHwnd(IntPtr.Zero);
 
-                if (fillColor == default)
-                {
-                    fillColor = ParsedElementColor;
-                }
+        //        if (fillColor == default)
+        //        {
+        //            fillColor = ParsedElementColor;
+        //        }
 
-                g.DrawRectangle(new Pen(Color.Black, 1), outerRect);
-                g.DrawRectangle(new Pen(fillColor, 2), middleRect);
-                g.DrawRectangle(new Pen(Color.Black, 1), innerRect);
-            }
-            catch
-            {
-                return;
-            }
-        }
+        //        g.DrawRectangle(new Pen(Color.Black, 1), outerRect);
+        //        g.DrawRectangle(new Pen(fillColor, 2), middleRect);
+        //        g.DrawRectangle(new Pen(Color.Black, 1), innerRect);
+        //    }
+        //    catch
+        //    {
+        //        return;
+        //    }
+        //}
         #endregion
 
         #region Footer buttons
@@ -926,141 +924,148 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
                 StopTimerActionAfterRestoreTimer(new Action(() =>
                 {
                     var elem = AutomationElement.FromPoint(new System.Windows.Point(p.X, p.Y));
-                    HighlightUIElement(elem, ParseProcessColor);
+                    UIElementInspector.HighlightUIElement(elem, ParseProcessColor);
 
                     tvElementsReloadProcess(new Func<TreeNode>(() =>
                     {
-                        return CreateXMLTreeAndTreeNodeFromCursor(p);
+                        (var n, var t, var x, var h) = UIElementInspector.CreateXMLTreeAndTreeNodeFromCursor(p);
+
+                        ReloadWindowNamesInCmbWindowList();
+                        cmbWindowList.Text = n;
+
+                        windowXMLTree = x;
+                        uiElementHashTable = h;
+                        return t;
                     }));
-                    HighlightUIElement(elem);   // finished
+                    UIElementInspector.HighlightUIElement(elem);   // finished
                 }), timerMouseMove);
             }
         }
 
-        /// <summary>
-        /// create xml-tree and TreeNode from Mouse cursor position
-        /// </summary>
-        /// <param name="mouseCursorPoint"></param>
-        private TreeNode CreateXMLTreeAndTreeNodeFromCursor(Point mouseCursorPoint)
-        {
-            var point = new System.Windows.Point(mouseCursorPoint.X, mouseCursorPoint.Y);
-            var targetElement = AutomationElement.FromPoint(point);
-            HighlightUIElement(targetElement, ParseProcessColor);
+        ///// <summary>
+        ///// create xml-tree and TreeNode from Mouse cursor position
+        ///// </summary>
+        ///// <param name="mouseCursorPoint"></param>
+        //private TreeNode CreateXMLTreeAndTreeNodeFromCursor(Point mouseCursorPoint)
+        //{
+        //    var point = new System.Windows.Point(mouseCursorPoint.X, mouseCursorPoint.Y);
+        //    var targetElement = AutomationElement.FromPoint(point);
+        //    UIElementInspector.HighlightUIElement(targetElement, ParseProcessColor);
 
-            // get window name, handle
-            (var winName, var whnd) = EM_CanHandleUIElementExtentionMethods.GetWindowNameAndHandle(targetElement);
-            ReloadWindowNamesInCmbWindowList();
-            cmbWindowList.Text = winName;
+        //    // get window name, handle
+        //    (var winName, var whnd) = UIElementInspector.GetWindowNameAndHandleFromUIElement(targetElement);
+        //    ReloadWindowNamesInCmbWindowList();
+        //    cmbWindowList.Text = winName;
 
-            var thash = new Dictionary<string, AutomationElement>();
+        //    var thash = new Dictionary<string, AutomationElement>();
 
-            var walker = TreeWalker.RawViewWalker;
+        //    var walker = TreeWalker.RawViewWalker;
             
-            var targetChild = targetElement;
-            var parentNode = walker.GetParent(targetElement);
+        //    var targetChild = targetElement;
+        //    var parentNode = walker.GetParent(targetElement);
 
-            void AddChildrenXMLProcess(List<XElement> parentNodes, List<XElement> childrenNodes)
-            {
-                if (childrenNodes != null)
-                {
-                    var p = parentNodes[parentNodes.Count - 1];
-                    foreach (var x in childrenNodes)
-                    {
-                        p.Add(x);
-                    }
-                }
-            }
+        //    void AddChildrenXMLProcess(List<XElement> parentNodes, List<XElement> childrenNodes)
+        //    {
+        //        if (childrenNodes != null)
+        //        {
+        //            var p = parentNodes[parentNodes.Count - 1];
+        //            foreach (var x in childrenNodes)
+        //            {
+        //                p.Add(x);
+        //            }
+        //        }
+        //    }
 
-            List<XElement> childXMLs = null;
-            while ((IntPtr)parentNode.Current.NativeWindowHandle != whnd)
-            {
-                // DBG
-                //Console.WriteLine($"#Build Children {parentNode.Current.Name}, {EM_CanHandleUIElementExtentionMethods.GetControlTypeText(parentNode)}");
+        //    List<XElement> childXMLs = null;
+        //    while ((IntPtr)parentNode.Current.NativeWindowHandle != whnd)
+        //    {
+        //        // DBG
+        //        //Console.WriteLine($"#Build Children {parentNode.Current.Name}, {EM_CanHandleUIElementExtentionMethods.GetControlTypeText(parentNode)}");
 
-                var xmls = CreateChildUIElementXMLNodes(parentNode, targetChild, thash, walker);
+        //        var xmls = CreateChildUIElementXMLNodes(parentNode, targetChild, thash, walker);
 
-                AddChildrenXMLProcess(xmls, childXMLs);
+        //        AddChildrenXMLProcess(xmls, childXMLs);
                 
-                childXMLs = xmls;
+        //        childXMLs = xmls;
 
-                targetChild = parentNode;
+        //        targetChild = parentNode;
 
-                parentNode = walker.GetParent(parentNode);
+        //        parentNode = walker.GetParent(parentNode);
 
-                // DGB
-                //Console.WriteLine("Go ParentNode");
-            }
+        //        // DGB
+        //        //Console.WriteLine("Go ParentNode");
+        //    }
 
-            // now parentNode is Window
-            var xxmls = CreateChildUIElementXMLNodes(parentNode, targetChild, thash, walker);
-            AddChildrenXMLProcess(xxmls, childXMLs);
-            childXMLs = xxmls;
+        //    // now parentNode is Window
+        //    var xxmls = CreateChildUIElementXMLNodes(parentNode, targetChild, thash, walker);
+        //    AddChildrenXMLProcess(xxmls, childXMLs);
+        //    childXMLs = xxmls;
 
-            // create Window UIElement xml
-            var windowElems = new List<XElement>();
-            AddXMLNodeHashTableProcess(parentNode, windowElems, thash);
-            AddChildrenXMLProcess(windowElems, childXMLs);
+        //    // create Window UIElement xml
+        //    var windowElems = new List<XElement>();
+        //    AddXMLNodeHashTableProcess(parentNode, windowElems, thash);
+        //    AddChildrenXMLProcess(windowElems, childXMLs);
 
-            // store global variables
-            windowXMLTree = windowElems[0];
-            uiElementHashTable = thash;
+        //    // store global variables
+        //    windowXMLTree = windowElems[0];
+        //    uiElementHashTable = thash;
 
-            var tree = CreateTreeNodeFromUIElement(parentNode);
-            CreateTreeNodeFromChildElementsOfUIElementXML(tree, windowXMLTree);
+        //    var tree = UIElementInspector.CreateTreeNodeFromUIElement(parentNode);
+        //    UIElementInspector.CreateChildTreeNodeFromXMLTree(tree, windowXMLTree, uiElementHashTable);
 
-            return tree;
-        }
+        //    return tree;
+        //}
 
-        /// <summary>
-        /// create child UIElements XML node
-        /// </summary>
-        /// <param name="parentNode"></param>
-        /// <param name="targetChildNode"></param>
-        /// <param name="myHashTable"></param>
-        /// <param name="walker"></param>
-        /// <returns></returns>
-        private static List<XElement> CreateChildUIElementXMLNodes(AutomationElement parentNode, AutomationElement targetChildNode, Dictionary<string, AutomationElement> myHashTable, TreeWalker walker)
-        {
-            var elemList = new List<XElement>();
+        ///// <summary>
+        ///// create child UIElements XML node
+        ///// </summary>
+        ///// <param name="parentNode"></param>
+        ///// <param name="targetChildNode"></param>
+        ///// <param name="myHashTable"></param>
+        ///// <param name="walker"></param>
+        ///// <returns></returns>
+        //private static List<XElement> CreateChildUIElementXMLNodes(AutomationElement parentNode, AutomationElement targetChildNode, Dictionary<string, AutomationElement> myHashTable, TreeWalker walker)
+        //{
+        //    var elemList = new List<XElement>();
 
-            var currentChild = walker.GetFirstChild(parentNode);
-            while (currentChild != targetChildNode)
-            {
-                AddXMLNodeHashTableProcess(currentChild, elemList, myHashTable);
-                currentChild = walker.GetNextSibling(currentChild);
-            }
-            // add target child UIElement node
-            AddXMLNodeHashTableProcess(currentChild, elemList, myHashTable);
+        //    var currentChild = walker.GetFirstChild(parentNode);
+        //    while (currentChild != targetChildNode)
+        //    {
+        //        AddXMLNodeHashTableProcess(currentChild, elemList, myHashTable);
+        //        currentChild = walker.GetNextSibling(currentChild);
+        //    }
+        //    // add target child UIElement node
+        //    AddXMLNodeHashTableProcess(currentChild, elemList, myHashTable);
 
-            return elemList;
-        }
+        //    return elemList;
+        //}
 
-        /// <summary>
-        /// create xml and add hash-table process
-        /// </summary>
-        /// <param name="targetElement"></param>
-        /// <param name="parentXML"></param>
-        /// <param name="myHashTable"></param>
-        private static void AddXMLNodeHashTableProcess(AutomationElement targetElement, List<XElement> elems, Dictionary<string, AutomationElement> myHashTable)
-        {
-            var hash = targetElement.GetHashCode().ToString();
-            if (myHashTable.ContainsKey(hash))
-            {
-                int i = 1;
-                while (myHashTable.ContainsKey($"{hash}-{i}"))
-                {
-                    i++;
-                }
-                hash = $"{hash}-{i}";
-            }
-            myHashTable.Add(hash, targetElement);
+        ///// <summary>
+        ///// create xml and add hash-table process
+        ///// </summary>
+        ///// <param name="targetElement"></param>
+        ///// <param name="parentXML"></param>
+        ///// <param name="myHashTable"></param>
+        //private static void AddXMLNodeHashTableProcess(AutomationElement targetElement, List<XElement> elems, Dictionary<string, AutomationElement> myHashTable)
+        //{
+        //    var hash = targetElement.GetHashCode().ToString();
+        //    if (myHashTable.ContainsKey(hash))
+        //    {
+        //        int i = 1;
+        //        while (myHashTable.ContainsKey($"{hash}-{i}"))
+        //        {
+        //            i++;
+        //        }
+        //        hash = $"{hash}-{i}";
+        //    }
+        //    myHashTable.Add(hash, targetElement);
 
-            var txml = EM_CanHandleUIElementXMLExtentionMethods.CreateXmlElement(targetElement, hash);
-            elems.Add(txml);
+        //    var txml = UIElementInspector.CreateXmlElement(targetElement, hash);
+        //    elems.Add(txml);
 
-            // DBG
-            //Console.WriteLine($"UIElement added. {targetElement.Current.Name}, {EM_CanHandleUIElementExtentionMethods.GetControlTypeText(targetElement)}");
-        }
+        //    // DBG
+        //    //Console.WriteLine($"UIElement added. {targetElement.Current.Name}, {EM_CanHandleUIElementExtentionMethods.GetControlTypeText(targetElement)}");
+        //}
 
         /// <summary>
         /// checkEnableInspect is changed -> timerMouseMove enable/disabled

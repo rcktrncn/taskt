@@ -2,6 +2,7 @@
 using System.Windows.Automation;
 using taskt.Core.Automation.Commands.WindowGroup;
 using taskt.Core.Automation.Engine;
+using taskt.Core.AutomationElement_UIElement;
 
 namespace taskt.Core.Automation.Commands.UIAutomationGroup
 {
@@ -81,7 +82,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
             command.WaitBeforeAction(engine);
 
             // get window name and window handle
-            (var windowName, var whnd) = EM_CanHandleUIElementExtentionMethods.GetWindowNameAndHandle(targetElement);
+            (var windowName, var whnd) = UIElementInspector.GetWindowNameAndHandleFromUIElement(targetElement);
 
             // activate before action
             if (command.ToScriptCommand().ExpandValueOrUserVariableAsYesNo(nameof(command.v_ActivateWindowBeforeAction), engine))
@@ -99,9 +100,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
             // wait after action
             command.WaitAfterAction(engine);
 
-            //// store window name, handle
-            //command.StoreWindowNameResultInUserVariable(windowName, engine);
-            //command.StoreWindowHandleResultInUserVariable(whnd, engine);
+            // store window name, handle
             command.StoreWindowNameAndWindowHandleResultsInUserVariables(windowName, whnd, engine);
         }
     }
