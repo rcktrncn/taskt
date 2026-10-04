@@ -6,7 +6,6 @@ using System.Windows.Automation;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using taskt.Core.Automation.Engine;
 using taskt.Core.AutomationElement_UIElement;
 using taskt.Core.Native.Windows;
 
@@ -27,25 +26,25 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
         /// </summary>
         private Dictionary<string, AutomationElement> uiElementHashTable = null;
 
-        /// <summary>
-        /// for command execute
-        /// </summary>
-        private AutomationEngineInstance engine = new AutomationEngineInstance(false);
+        ///// <summary>
+        ///// for command execute
+        ///// </summary>
+        //private AutomationEngineInstance engine = new AutomationEngineInstance(false);
 
         /// <summary>
         /// old mouse cursor position
         /// </summary>
         private Point oldCursorPosition = new Point(-1, -1);
 
-        /// <summary>
-        /// fill color UIElement parse finished
-        /// </summary>
-        private static readonly Color ParsedElementColor = Color.Yellow;
+        ///// <summary>
+        ///// fill color UIElement parse finished
+        ///// </summary>
+        //private static readonly Color ParsedElementColor = Color.Yellow;
 
-        /// <summary>
-        /// fill color UIElement parse process
-        /// </summary>
-        private static readonly Color ParseProcessColor = Color.Salmon;
+        ///// <summary>
+        ///// fill color UIElement parse process
+        ///// </summary>
+        //private static readonly Color ParseProcessColor = Color.Salmon;
 
         public frmGUIInspectTool()
         {
@@ -924,7 +923,7 @@ namespace taskt.UI.Forms.ScriptBuilder.CommandEditor.Supplemental
                 StopTimerActionAfterRestoreTimer(new Action(() =>
                 {
                     var elem = AutomationElement.FromPoint(new System.Windows.Point(p.X, p.Y));
-                    UIElementInspector.HighlightUIElement(elem, ParseProcessColor);
+                    UIElementInspector.HighlightUIElement(elem, UIElementInspector.InspectProcessColor);
 
                     tvElementsReloadProcess(new Func<TreeNode>(() =>
                     {
