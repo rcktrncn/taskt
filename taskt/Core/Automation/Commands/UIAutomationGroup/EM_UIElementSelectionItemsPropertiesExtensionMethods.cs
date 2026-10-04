@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Automation;
 using taskt.Core.Automation.Engine;
+using taskt.Core.AutomationElement_UIElement;
 using taskt.Core.Script;
 
 namespace taskt.Core.Automation.Commands.UIAutomationGroup
@@ -41,7 +42,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
 
                         if (!isCmb)
                         {
-                            curElement = EM_CanHandleUIElementExtentionMethods.GetParentUIElement(curElement);
+                            curElement = UIElementInspector.GetParentUIElement(curElement);
                             isCmb = (bool)curElement.GetCurrentPropertyValue(AutomationElement.IsExpandCollapsePatternAvailableProperty);
                         }
 

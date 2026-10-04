@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Automation;
+using taskt.Core.AutomationElement_UIElement;
 
 namespace taskt.Core.Automation.Commands.UIAutomationGroup
 {
@@ -15,7 +12,7 @@ namespace taskt.Core.Automation.Commands.UIAutomationGroup
             {
                 if (targetElement.Current.ControlType == ControlType.ScrollBar)
                 {
-                    var parentElement = EM_CanHandleUIElementExtentionMethods.GetParentUIElement(targetElement);
+                    var parentElement = UIElementInspector.GetParentUIElement(targetElement);
                     if (!parentElement.TryGetCurrentPattern(ScrollPattern.Pattern, out scrollPtn))
                     {
                         notScrollBarAction();
