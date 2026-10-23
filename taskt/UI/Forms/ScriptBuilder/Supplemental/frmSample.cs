@@ -209,14 +209,16 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
         private string ConvertTreeNodeToFileName(string treeText)
         {
-            return treeText.Replace(" ", "_") + ".xml";
+            return $"{treeText.Replace(" ", "_")}.xml";
         }
 
         private string GetSelectedScriptPath()
         {
-            if (tvSamples.SelectedNode.Level != 1)
+            var level = tvSamples.SelectedNode?.Level ?? -1;
+
+            if (level != 1)
             {
-                return "";
+                return string.Empty;
             }
             else
             {
@@ -229,7 +231,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             var targetFile = GetSelectedScriptPath();
             //string fileName = Path.GetFileName(targetFile);
-            if (targetFile != "")
+            if (!string.IsNullOrEmpty(targetFile))
             {
                 parentForm.OpenScriptFromFilePath(targetFile);
                 this.Close();
@@ -240,7 +242,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             var targetFile = GetSelectedScriptPath();
             //string fileName = Path.GetFileName(targetFile);
-            if (targetFile != "")
+            if (!string.IsNullOrEmpty(targetFile))
             {
                 parentForm.ImportScriptFromFilePath(targetFile);
                 this.Close();
@@ -251,12 +253,12 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         {
             var targetFile = GetSelectedScriptPath();
             //string fileName = Path.GetFileName(targetFile);
-            if (targetFile != "")
+            if (!string.IsNullOrEmpty(targetFile))
             {
                 System.Diagnostics.ProcessStartInfo pInfo = new System.Diagnostics.ProcessStartInfo
                 {
                     FileName = Assembly.GetEntryAssembly().Location,
-                    Arguments = "-oh \"" + GetSelectedScriptPath() + "\""
+                    Arguments = $"-oh \"{GetSelectedScriptPath()}\""
                 };
                 System.Diagnostics.Process.Start(pInfo);
                 this.Close();
@@ -394,7 +396,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
 
                 foreach (TreeNode parentNode in bufferdSampleNodes)
                 {
-                    var paNode = new TreeNode("", 1, 1);
+                    var paNode = new TreeNode(string.Empty, 1, 1);
                     foreach (TreeNode node in parentNode.Nodes)
                     {
                         if (node.Text.ToLower().Contains(keyword))
@@ -425,7 +427,7 @@ namespace taskt.UI.Forms.ScriptBuilder.Supplemental
         /// </summary>
         private void ShowAllSamplesProcess()
         {
-            txtSearchBox.Text = "";
+            txtSearchBox.Text = string.Empty;
 
             tvSamplesUpdateProcess(new Action(() => {
                 tvSamples.Nodes.Clear();
