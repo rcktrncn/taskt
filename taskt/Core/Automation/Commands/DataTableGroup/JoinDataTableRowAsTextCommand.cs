@@ -7,7 +7,7 @@ namespace taskt.Core.Automation.Commands
 {
     [Serializable]
     [Attributes.ClassAttributes.Group("DataTable")]
-    [Attributes.ClassAttributes.SubGruop("Row Action")]
+    [Attributes.ClassAttributes.SubGruop("Convert Row")]
     [Attributes.ClassAttributes.CommandSettings("Join DataTable Row As Text")]
     [Attributes.ClassAttributes.Description("This command allows you to join DataTable Row Values as Text")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to join DataTable Row Values as Text.")]

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="45ff15d5-e91a-4a24-b2f3-5d02f34179f5" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Get Randome Folder Path sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="cced63ec-9cab-4953-b406-d745c04e8fe8" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Get randome folder path in Desktop" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="GetRandomFolderPathCommand" CommandID="9e79a97c-93d3-473f-a5f5-8da35fa04713" CommandName="GetRandomFolderPathCommand" IsCommented="false" SelectionName="Get Random Folder Path" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_TargetFolderPath="⦃Folder.Desktop⦄" v_WaitTimeForFolder="10" v_ResultPath="" v_Result="vPath" v_CheckFolderDoesNotExists="Yes" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="8c02954c-8342-4c1d-8964-10027a14afa0" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="⦃vPath⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" v_DialogType="" v_DialogTitle="ShowMessage Comamnd" v_WaitForAnswer="Yes" v_DialogResult="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.76</TasktVersion>
+    <Author />
+    <LastRunTime>2026-10-25T11:33:06.951513+09:00</LastRunTime>
+    <RunTimes>3</RunTimes>
+    <Revision>3</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vPath</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>

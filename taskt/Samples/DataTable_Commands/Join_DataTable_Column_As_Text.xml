@@ -2,7 +2,7 @@
 <Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Commands>
     <ScriptAction>
-      <ScriptCommand xsi:type="CommentCommand" CommandID="c5d4b9c3-cf5e-48e5-863f-2f407353c4e7" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Join DataTable Column As List Sample" CommandEnabled="true" />
+      <ScriptCommand xsi:type="CommentCommand" CommandID="c5d4b9c3-cf5e-48e5-863f-2f407353c4e7" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Join DataTable Column As Text Sample" CommandEnabled="true" />
     </ScriptAction>
     <ScriptAction>
       <ScriptCommand xsi:type="CommentCommand" CommandID="2bd1753b-3c8b-4905-be21-d2939a5ec80d" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Create Table, Column is name, age" CommandEnabled="true" />
@@ -145,11 +145,11 @@
     </ScriptAction>
   </Commands>
   <Info>
-    <TasktVersion>3.5.2.4</TasktVersion>
+    <TasktVersion>3.5.2.76</TasktVersion>
     <Author />
     <LastRunTime>2024-09-12T22:24:43.0842533+09:00</LastRunTime>
     <RunTimes>5</RunTimes>
-    <Revision>7</Revision>
+    <Revision>8</Revision>
     <ScriptVersion>0.0.0</ScriptVersion>
     <Description />
   </Info>

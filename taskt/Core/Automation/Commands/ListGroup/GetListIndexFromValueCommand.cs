@@ -38,7 +38,7 @@ namespace taskt.Core.Automation.Commands
         public string v_SearchMethod { get; set; }
 
         [XmlAttribute]
-        //[PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
+        [PropertyVirtualProperty(nameof(GeneralPropertyControls), nameof(GeneralPropertyControls.v_Result))]
         [Remarks("When List does not have value, Result is **-1**")]
         public override string v_Result { get; set; }
 

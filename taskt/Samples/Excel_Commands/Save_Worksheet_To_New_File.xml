@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="31e7496a-2d56-4e16-9001-404abe8cc565" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Save Worksheet To New File sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="9b4bf38a-83ff-4cbd-8d3e-a684c2648aca" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="Open Excel File" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCreateExcelInstanceCommand" CommandID="abff5193-3a50-4ab7-89e9-443c0392b64a" CommandName="ExcelCreateExcelInstanceCommand" IsCommented="false" SelectionName="Create Excel Instance" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_WindowHandle="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelOpenWorkbookCommand" CommandID="a3c5f1d2-5f8e-4a15-85b6-f8eaa5f7c588" CommandName="ExcelOpenWorkbookCommand" IsCommented="false" SelectionName="Open Workbook" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_TargetFilePath="⦃Folder.SamplesPath⦄\Resources\sample_excel.xlsx" v_Password="" v_IfWorksheetExists="" v_WaitTimeForFile="10" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="35f9f177-e9a0-446f-a75b-0169bd338b46" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" v_Comment="Save Sheet1 as &quot;sheet1_only.xlsx&quot;" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelSaveWorksheetToNewFileCommand" CommandID="a424e4ef-4f93-4c0f-b482-5f1905958634" CommandName="ExcelSaveWorksheetToNewFileCommand" IsCommented="false" SelectionName="Save Worksheet To New File" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_SheetName="Sheet1" v_FileName="⦃Folder.Desktop⦄\sheet1_only.xlsx" v_IfExcelFileExists="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ExcelCloseExcelInstanceCommand" CommandID="f98f2bca-c62e-491f-8582-dfc8382ea1f7" CommandName="ExcelCloseExcelInstanceCommand" IsCommented="false" SelectionName="Close Excel Instance" DefaultPause="0" LineNumber="7" PauseBeforeExeucution="false" CommandEnabled="true" v_InstanceName="RPAExcel" v_ExcelSaveOnExit="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.76</TasktVersion>
+    <Author />
+    <LastRunTime>2026-10-25T11:00:24.204753+09:00</LastRunTime>
+    <RunTimes>5</RunTimes>
+    <Revision>9</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables />
+</Script>
