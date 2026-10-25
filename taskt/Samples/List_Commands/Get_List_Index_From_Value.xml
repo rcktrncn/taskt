@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Commands>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="f83aaf1f-b0ce-4a6e-9e07-d143c3d15add" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="1" PauseBeforeExeucution="false" v_Comment="Get List Index From Value sample" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="e41f6588-87d1-4630-aa50-c14eb1dc84f6" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="2" PauseBeforeExeucution="false" v_Comment="vList has 3 items, index is 0 to 2" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CreateListCommand" CommandID="bb8af3e0-61f5-41cb-81e4-8df5ac60912c" CommandName="CreateListCommand" IsCommented="false" SelectionName="Create List" DefaultPause="0" LineNumber="3" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList">
+        <v_ListValues>
+          <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+            <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="ListValues021925.103215" msdata:UseCurrentLocale="true">
+              <xs:complexType>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                  <xs:element name="ListValues021925.103215">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="Values" type="xs:string" minOccurs="0" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+          </xs:schema>
+          <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+            <DocumentElement>
+              <ListValues021925.103215 diffgr:id="ListValues021925.1032151" msdata:rowOrder="0" diffgr:hasChanges="modified">
+                <Values>a</Values>
+              </ListValues021925.103215>
+              <ListValues021925.103215 diffgr:id="ListValues021925.1032152" msdata:rowOrder="1" diffgr:hasChanges="modified">
+                <Values>b</Values>
+              </ListValues021925.103215>
+              <ListValues021925.103215 diffgr:id="ListValues021925.1032153" msdata:rowOrder="2" diffgr:hasChanges="modified">
+                <Values>c</Values>
+              </ListValues021925.103215>
+            </DocumentElement>
+            <diffgr:before>
+              <ListValues021925.103215 diffgr:id="ListValues021925.1032151" msdata:rowOrder="0">
+                <Values>a</Values>
+              </ListValues021925.103215>
+              <ListValues021925.103215 diffgr:id="ListValues021925.1032152" msdata:rowOrder="1">
+                <Values>b</Values>
+              </ListValues021925.103215>
+              <ListValues021925.103215 diffgr:id="ListValues021925.1032153" msdata:rowOrder="2">
+                <Values>c</Values>
+              </ListValues021925.103215>
+            </diffgr:before>
+          </diffgr:diffgram>
+        </v_ListValues>
+      </ScriptCommand>
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="CommentCommand" CommandID="e98cd8d9-b325-4bb6-9af7-32ad080b5ee1" CommandName="CommentCommand" IsCommented="false" SelectionName="Comment" DefaultPause="0" LineNumber="4" PauseBeforeExeucution="false" v_Comment="Check &quot;a&quot; index" CommandEnabled="true" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="GetListIndexFromValueCommand" CommandID="c8ee8e19-c414-4645-99c1-f80c0dc7f43c" CommandName="GetListIndexFromValueCommand" IsCommented="false" SelectionName="Get List Index From Value" DefaultPause="0" LineNumber="5" PauseBeforeExeucution="false" CommandEnabled="true" v_List="vList" v_Result="vResult" v_Value="a" v_SearchMethod="" />
+    </ScriptAction>
+    <ScriptAction>
+      <ScriptCommand xsi:type="ShowMessageCommand" CommandID="c6882ffe-474a-4bc8-9d75-65132397258d" CommandName="ShowMessageCommand" IsCommented="false" SelectionName="Show Message" DefaultPause="0" LineNumber="6" PauseBeforeExeucution="false" CommandEnabled="true" v_Message="&quot;a&quot; index is ⦃vResult⦄" v_AutoCloseAfter="0" v_FontName="" v_FontSize="" />
+    </ScriptAction>
+  </Commands>
+  <Info>
+    <TasktVersion>3.5.2.76</TasktVersion>
+    <Author />
+    <LastRunTime>2026-10-25T11:50:27.8208813+09:00</LastRunTime>
+    <RunTimes>2</RunTimes>
+    <Revision>4</Revision>
+    <ScriptVersion>0.0.0</ScriptVersion>
+    <Description />
+  </Info>
+  <Variables>
+    <ScriptVariable>
+      <VariableName>vList</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+    <ScriptVariable>
+      <VariableName>vResult</VariableName>
+      <VariableValue xsi:type="xsd:string"></VariableValue>
+    </ScriptVariable>
+  </Variables>
+</Script>
