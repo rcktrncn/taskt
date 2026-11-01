@@ -8,7 +8,7 @@ namespace taskt.Core.Automation.Commands
 {
     [Serializable]
     [Attributes.ClassAttributes.Group("Window")]
-    [Attributes.ClassAttributes.SubGruop("Get From Window Name")]
+    [Attributes.ClassAttributes.SubGruop("Get From Multi Window Name")]
     [Attributes.ClassAttributes.CommandSettings("Get Window States From Window Names As DataTable")]
     [Attributes.ClassAttributes.Description("This command returns window process states.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get window states.")]
