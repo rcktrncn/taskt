@@ -7,8 +7,8 @@ namespace taskt.Core.Automation.Commands
 {
     [Serializable]
     [Attributes.ClassAttributes.Group("Window")]
-    [Attributes.ClassAttributes.SubGruop("Get From Window Name")]
-    [Attributes.ClassAttributes.CommandSettings("Get Window States From Window States As List")]
+    [Attributes.ClassAttributes.SubGruop("Get From Multi Window Name")]
+    [Attributes.ClassAttributes.CommandSettings("Get Window States From Window Names As List")]
     [Attributes.ClassAttributes.Description("This command returns window handles.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get window states.")]
     [Attributes.ClassAttributes.ImplementationDescription("")]

@@ -785,6 +785,10 @@ namespace taskt.Core.Script
             {
                 convertTo3_5_2_74(doc);
             }
+            if (IsOldVersion(myVersion, "3.5.2.78"))
+            {
+                convertTo3_5_2_78(doc);
+            }
             return doc;
         }
 
@@ -5849,6 +5853,12 @@ namespace taskt.Core.Script
             ChangeCommandName(doc, "ExcelRemoveChartByNameCommand", "ExcelDeleteChartByNameCommand", "Delete Chart By Name");
             // ExcelRemoveShapeByNameCommand -> ExcelDeleteShapeByNameCommand
             ChangeCommandName(doc, "ExcelRemoveShapeByNameCommand", "ExcelDeleteShapeByNameCommand", "Delete Shape By Name");
+        }
+
+        private static void convertTo3_5_2_78(XDocument doc)
+        {
+            // GetWindowStatesFromWindowNamesAsListCommand command name fix
+            ChangeCommandName(doc, "GetWindowStatesFromWindowNamesAsListCommand", "GetWindowStatesFromWindowNamesAsListCommand", "Get Window States From Window Names As List");
         }
 
         /// <summary>

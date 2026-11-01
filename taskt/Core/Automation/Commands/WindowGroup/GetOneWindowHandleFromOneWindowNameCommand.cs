@@ -6,7 +6,7 @@ namespace taskt.Core.Automation.Commands
 {
     [Serializable]
     [Attributes.ClassAttributes.Group("Window")]
-    [Attributes.ClassAttributes.SubGruop("Get From Window Name")]
+    [Attributes.ClassAttributes.SubGruop("Get From One Window Name")]
     [Attributes.ClassAttributes.CommandSettings("Get One Window Handle From One Window Name")]
     [Attributes.ClassAttributes.Description("This command returns one window handle.")]
     [Attributes.ClassAttributes.UsesDescription("Use this command when you want to get one window handle.")]
