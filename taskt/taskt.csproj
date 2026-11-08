@@ -1054,6 +1054,7 @@
     <Compile Include="Core\Native\GDIAPI.cs" />
     <Compile Include="Core\Native\GUIAPI.cs" />
     <Compile Include="Core\Native\HookAPI.cs" />
+    <Compile Include="Core\Native\InputAPI.cs" />
     <Compile Include="Core\Native\KeyboardAPI.cs" />
     <Compile Include="Core\Native\MouseAPI.cs" />
     <Compile Include="Core\Native\DEF_POINT.cs" />
