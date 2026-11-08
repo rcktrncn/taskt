@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Threading;
 using static taskt.Core.Native.DEF_POINT;
 
 namespace taskt.Core.Native.Windows
@@ -34,13 +35,13 @@ namespace taskt.Core.Native.Windows
         /// <param name="cButtons"></param>
         /// <param name="dwExtraInfo"></param>
         [DllImport("user32.dll")]
-        private static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+        private static extern void mouse_event(uint dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
         /// <summary>
         /// mouse events
         /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-mouse_event
         /// </summary>
-        private enum MouseEvents
+        private enum MouseEvents : uint
         {
             MOUSEEVENTF_LEFTDOWN = 0x02,
             MOUSEEVENTF_LEFTUP = 0x04,
@@ -98,8 +99,10 @@ namespace taskt.Core.Native.Windows
                     break;
 
                 case "left click":
-                    actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP });
-                    break;
+                    //actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP });
+                    //break;
+                    SendLeftClick();
+                    return;
 
                 case "right click":
                     actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_RIGHTDOWN, MouseEvents.MOUSEEVENTF_RIGHTUP });
@@ -139,8 +142,72 @@ namespace taskt.Core.Native.Windows
 
             foreach (var mouse in actions)
             {
-                mouse_event((int)mouse, xMousePosition, yMousePosition, 0, 0);
+                mouse_event((uint)mouse, xMousePosition, yMousePosition, 0, 0);
             }
+        }
+
+        /// <summary>
+        /// send mouse actions use InputAPI.SendInput
+        /// </summary>
+        /// <param name="inputs"></param>
+        private static void SendMouseActions(InputAPI.INPUT[] inputs)
+        {
+            InputAPI.SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(InputAPI.INPUT)));
+        }
+
+        /// <summary>
+        /// create Mouse Inputs for InputAPI.SendInput
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private static InputAPI.INPUT[] CreateMouseInputs(MouseEvents e)
+        {
+            return new InputAPI.INPUT[]
+            {
+                new InputAPI.INPUT
+                {
+                     type = InputAPI.InputType.INPUT_MOUSE,
+                    U = new InputAPI.InputUnion
+                    {
+                        mi = new InputAPI.MOUSEINPUT
+                        {
+                            dwFlags = (uint)e,
+                        }
+                    }
+                }
+            };
+        }
+
+        /// <summary>
+        /// send mouse left down
+        /// </summary>
+        public static void SendLeftDown()
+        {
+            SendMouseActions(CreateMouseInputs(MouseEvents.MOUSEEVENTF_LEFTDOWN));
+        }
+
+        /// <summary>
+        /// send mouse left up
+        /// </summary>
+        public static void SendLeftUp()
+        {
+            SendMouseActions(CreateMouseInputs(MouseEvents.MOUSEEVENTF_LEFTUP));
+        }
+
+        /// <summary>
+        /// send mouse left click
+        /// </summary>
+        /// <param name="pressDuration">ms</param>
+        public static void SendLeftClick(int pressDuration = 50)
+        {
+            if (pressDuration < 0)
+            {
+                pressDuration = 50;
+            }
+
+            SendLeftDown();
+            Thread.Sleep(pressDuration);
+            SendLeftUp();
         }
     }
 }
