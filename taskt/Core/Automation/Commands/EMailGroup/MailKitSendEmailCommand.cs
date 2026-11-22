@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 using taskt.Core.Automation.Attributes.PropertyAttributes;
+using MailKit;
 
 namespace taskt.Core.Automation.Commands
 {
@@ -202,6 +203,7 @@ namespace taskt.Core.Automation.Commands
                 };
             }
 
+            // https://github.com/jstedfast/MailKit/blob/master/PortingGuide.md
             using (var client = new MailKit.Net.Smtp.SmtpClient())
             {
                 var option = this.GetMailKitSecureOption(nameof(v_SMTPSecureOption), engine);
