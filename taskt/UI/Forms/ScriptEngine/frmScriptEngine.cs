@@ -236,9 +236,12 @@ namespace taskt.UI.Forms.ScriptEngine
 
             this.Result = engineInstance.TasktResult;
 
+            // set state frmScriptBuider
+            callBackForm?.SetScriptRunningStopped();
+
             AddSteppingCommandsReport($"Total Execution Time: {e.ExecutionTime}");
 
-            if(CloseWhenDone)
+            if (CloseWhenDone)
             {
                 //engineInstance.tasktEngineUI.Invoke((Action)delegate () { this.Close(); });
                 engineInstance.tasktEngineUI.Invoke(new Action(() =>

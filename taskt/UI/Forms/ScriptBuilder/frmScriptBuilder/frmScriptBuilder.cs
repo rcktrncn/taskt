@@ -60,6 +60,11 @@ namespace taskt.UI.Forms.ScriptBuilder
         private int[,] miniMap = null;
         private Bitmap miniMapImg = null;
 
+        /// <summary>
+        /// flag for script running
+        /// </summary>
+        private bool _isScriptRunning = false;
+
         //List<string> notificationList = new List<string>();
         //private DateTime notificationExpires;
         //private bool isDisplaying;
@@ -769,5 +774,13 @@ namespace taskt.UI.Forms.ScriptBuilder
             isRememberChildCommandEditorPosition = true;
         }
         #endregion
+
+        /// <summary>
+        /// force change state isRunningScript
+        /// </summary>
+        public void SetScriptRunningStopped()
+        {
+            _isScriptRunning = false;
+        }
     }
 }
