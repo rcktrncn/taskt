@@ -23,18 +23,18 @@ namespace taskt.Core.Native.Windows
         [DllImport("user32.dll")]
         private static extern bool SetCursorPos(int x, int y);
 
-        // TODO: update to SendInput
-        /// <summary>
-        /// execute mouse event (old api)
-        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-mouse_event
-        /// </summary>
-        /// <param name="dwFlags"></param>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="cButtons"></param>
-        /// <param name="dwExtraInfo"></param>
-        [DllImport("user32.dll")]
-        private static extern void mouse_event(uint dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+        //// TODO: update to SendInput
+        ///// <summary>
+        ///// execute mouse event (old api)
+        ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-mouse_event
+        ///// </summary>
+        ///// <param name="dwFlags"></param>
+        ///// <param name="dx"></param>
+        ///// <param name="dy"></param>
+        ///// <param name="cButtons"></param>
+        ///// <param name="dwExtraInfo"></param>
+        //[DllImport("user32.dll")]
+        //private static extern void mouse_event(uint dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
         /// <summary>
         /// mouse events
