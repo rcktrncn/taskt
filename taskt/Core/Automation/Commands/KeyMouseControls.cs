@@ -40,6 +40,8 @@ namespace taskt.Core.Automation.Commands
         [PropertyUISelectionOption("Middle Up")]
         [PropertyUISelectionOption("Right Up")]
         [PropertyUISelectionOption("Double Left Click")]
+        [PropertyUISelectionOption("Double Middle Click")]
+        [PropertyUISelectionOption("Double Right Click")]
         [PropertyUISelectionOption("None")]
         [Remarks("You can simulate custom click by using multiple mouse click commands in succession, adding **Pause Command** in between where required.")]
         [PropertyValidationRule("Mouse Click", PropertyValidationRule.ValidationRuleFlags.Empty)]

@@ -38,8 +38,11 @@ namespace taskt.UI.Forms.ScriptBuilder
                 // if user selected file
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // open file
-                    OpenFile(openFileDialog.FileName);
+                    ExecutedWithDisalbeRunScriptButtons(new Action(() =>
+                    {
+                        // open file
+                        OpenFile(openFileDialog.FileName);
+                    }));
                 }
             }
         }
@@ -183,7 +186,12 @@ namespace taskt.UI.Forms.ScriptBuilder
                 {
                     // import
                     Cursor.Current = Cursors.WaitCursor;
-                    Import(openFileDialog.FileName);
+
+                    ExecutedWithDisalbeRunScriptButtons(new Action(() =>
+                    {
+                        Import(openFileDialog.FileName);
+                    }));
+
                     Cursor.Current = Cursors.Default;
                 }
             }
@@ -490,7 +498,11 @@ namespace taskt.UI.Forms.ScriptBuilder
 
         public bool ImportScriptFromFilePath(string filePath)
         {
-            Import(filePath);
+            ExecutedWithDisalbeRunScriptButtons(new Action(() =>
+            {
+                Import(filePath);
+            }));
+            
             return true;
         }
 
@@ -501,7 +513,10 @@ namespace taskt.UI.Forms.ScriptBuilder
                 return false;
             }
 
-            OpenFile(filePath);
+            ExecutedWithDisalbeRunScriptButtons(new Action(() =>
+            {
+                OpenFile(filePath);
+            }));
             if (normalFileOpen)
             {
                 this.ScriptFilePath = filePath;
@@ -517,6 +532,11 @@ namespace taskt.UI.Forms.ScriptBuilder
 
         private void BeginRunScriptProcess()
         {
+            if (_isScriptRunning)
+            {
+                return;
+            }
+
             if (lstScriptActions.Items.Count == 0)
             {
                 Notify("You must first build the script by adding commands!");
@@ -533,10 +553,17 @@ namespace taskt.UI.Forms.ScriptBuilder
             // clear selected items
             ClearSelectedListViewItems();
 
+            // DBG
+            //Console.WriteLine("now script start!");
+
             Notify("Running Script.");
 
-            var newEngine = new Forms.ScriptEngine.frmScriptEngine(ScriptFilePath, this);
-            newEngine.callBackForm = this;
+            _isScriptRunning = true;
+
+            var newEngine = new Forms.ScriptEngine.frmScriptEngine(ScriptFilePath, this)
+            {
+                callBackForm = this
+            };
             newEngine.Show();
         }
 
@@ -611,6 +638,43 @@ namespace taskt.UI.Forms.ScriptBuilder
 
             // notify
             Notify($"{(isUndo ? "Undo" : "Redo")} is completed successfully.");
+        }
+
+        /// <summary>
+        /// set state to Run Script Buttons (menu, button, etc)
+        /// </summary>
+        /// <param name="state"></param>
+        public void SetStateToRunScriptButtons(bool state)
+        {
+            runToolStripMenuItem.Enabled = state;
+            saveAndRunToolStripMenuItem.Enabled = state;
+            uiBtnRunScript.Enabled = state;
+        }
+
+        /// <summary>
+        /// disable run-script-buttons between innerFunc executed
+        /// </summary>
+        /// <param name="innerFunc"></param>
+        private void ExecutedWithDisalbeRunScriptButtons(Action innerFunc)
+        {
+            SetStateToRunScriptButtons(false);
+            //DBG
+            //Console.WriteLine("now disabled run buttons");
+            try
+            {
+                innerFunc();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                SetStateToRunScriptButtons(true);
+
+                // DBG
+                //Console.WriteLine("now ENABLED run buttons");
+            }
         }
     }
 }

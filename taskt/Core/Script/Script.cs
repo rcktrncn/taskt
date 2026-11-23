@@ -189,9 +189,9 @@ namespace taskt.Core.Script
         public static Script DeserializeFile(string scriptFilePath, IEngineSettings engineSettings, XmlSerializer serializer = null)
         {
             // backup before converted
-            var fileName = $"bc-{Path.GetFileNameWithoutExtension(scriptFilePath)}-{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.xml";
-            //var bkFile = Path.Combine(GetBeforeConvertedFolderPath(), fileName);
-            var bkFile = Path.Combine(IO.Folders.GetBeforeConvertedFolderPath(), fileName);
+            //var fileName = $"bc-{Path.GetFileNameWithoutExtension(scriptFilePath)}-{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.xml";
+            //var bkFile = Path.Combine(IO.Folders.GetBeforeConvertedFolderPath(), fileName);
+            var bkFile = GetBeforeConvertedScriptFilePath(scriptFilePath);
             File.Copy(scriptFilePath, bkFile);
 
             var xmlScript = XDocument.Load(scriptFilePath);
@@ -343,7 +343,51 @@ namespace taskt.Core.Script
             //var runPath = GetRunWithoutSavingFolderPath();
             var runPath = IO.Folders.GetRunWithoutSavingFolderPath();
             var saveTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
-            return Path.Combine(runPath, $"run-{saveTime}.xml");
+            var saveFilePath = Path.Combine(runPath, $"run-{saveTime}.xml");
+            if (!File.Exists(saveFilePath))
+            {
+                return saveFilePath;
+            }
+            else
+            {
+                // search safe file name
+                int cnt = 1;
+                while (true)
+                {
+                    saveFilePath = Path.Combine(runPath, $"run-{saveTime}-{cnt}.xml");
+                    if (!File.Exists(saveFilePath))
+                    {
+                        return saveFilePath;
+                    }
+                    cnt++;
+                }
+            }
+        }
+
+        public static string GetBeforeConvertedScriptFilePath(string scriptFilePath)
+        {
+            var realFileName = Path.GetFileNameWithoutExtension(scriptFilePath);
+            var saveTime = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+            var fileName = $"bc-{realFileName}-{saveTime}.xml";
+            var bkFile = Path.Combine(IO.Folders.GetBeforeConvertedFolderPath(), fileName);
+            if (!File.Exists(bkFile))
+            {
+                return bkFile;
+            }
+            else
+            {
+                int cnt = 1;
+                while (true)
+                {
+                    fileName = $"bc-{realFileName}-{saveTime}-{cnt}.xml";
+                    bkFile = Path.Combine(IO.Folders.GetBeforeConvertedFolderPath(), fileName);
+                    if (!File.Exists(bkFile))
+                    {
+                        return bkFile;
+                    }
+                    cnt++;
+                }
+            }
         }
 
         /// <summary>

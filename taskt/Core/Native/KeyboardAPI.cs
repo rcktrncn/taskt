@@ -52,18 +52,21 @@ namespace taskt.Core.Native.Windows
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         private static extern int ToUnicode(uint virtualKeyCode, uint scanCode, byte[] keyboardState, StringBuilder receivingBuffer, int bufferSize, uint flags);
 
-        // TODO: update to SendInput
-        /// <summary>
-        /// send keyboad event (old api)
-        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-keybd_event
-        /// </summary>
-        /// <param name="bVk"></param>
-        /// <param name="bScan"></param>
-        /// <param name="dwFlags"></param>
-        /// <param name="dwExtraInfo"></param>
-        [DllImport("user32.dll")]
-        private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+        //// TODO: update to SendInput
+        ///// <summary>
+        ///// send keyboad event (old api)
+        ///// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-keybd_event
+        ///// </summary>
+        ///// <param name="bVk"></param>
+        ///// <param name="bScan"></param>
+        ///// <param name="dwFlags"></param>
+        ///// <param name="dwExtraInfo"></param>
+        //[DllImport("user32.dll")]
+        //private static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
 
+        /// <summary>
+        /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-keybdinput
+        /// </summary>
         private enum KeyboadEvents
         {
             KEYEVENTF_EXTENDEDKEY = 0x1,
@@ -199,7 +202,8 @@ namespace taskt.Core.Native.Windows
         /// <param name="vKey"></param>
         public static void SendKeyDown(Keys vKey)
         {
-            keybd_event((byte)vKey, 0, (int)KeyboadEvents.KEYEVENTF_EXTENDEDKEY, 0);
+            //keybd_event((byte)vKey, 0, (int)KeyboadEvents.KEYEVENTF_EXTENDEDKEY, 0);
+            SendKeyboardActions(CreateKeyboradInputs(vKey, (uint)KeyboadEvents.KEYEVENTF_EXTENDEDKEY));
         }
 
         /// <summary>
@@ -208,7 +212,42 @@ namespace taskt.Core.Native.Windows
         /// <param name="vKey"></param>
         public static void SendKeyUp(Keys vKey)
         {
-            keybd_event((byte)vKey, 0, (int)(KeyboadEvents.KEYEVENTF_EXTENDEDKEY | KeyboadEvents.KEYEVENTF_KEYUP), 0);
+            //keybd_event((byte)vKey, 0, (int)(KeyboadEvents.KEYEVENTF_EXTENDEDKEY | KeyboadEvents.KEYEVENTF_KEYUP), 0);
+            SendKeyboardActions(CreateKeyboradInputs(vKey, (uint)(KeyboadEvents.KEYEVENTF_EXTENDEDKEY | KeyboadEvents.KEYEVENTF_KEYUP)));
+        }
+
+        /// <summary>
+        /// send keyboard actions
+        /// </summary>
+        /// <param name="inputs"></param>
+        private static void SendKeyboardActions(InputAPI.INPUT[] inputs)
+        {
+            InputAPI.SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(InputAPI.INPUT)));
+        }
+
+        /// <summary>
+        /// create keyboard inputs
+        /// </summary>
+        /// <param name="vKey">key</param>
+        /// <param name="e">KeyboardEvents value</param>
+        /// <returns></returns>
+        private static InputAPI.INPUT[] CreateKeyboradInputs(Keys vKey, uint e)
+        {
+            return new InputAPI.INPUT[]
+            {
+                new InputAPI.INPUT
+                {
+                     type = InputAPI.InputType.INPUT_KEYBOARD,
+                    U = new InputAPI.InputUnion
+                    {
+                        ki = new InputAPI.KEYBDINPUT
+                        {
+                            wVk = (ushort)vKey,
+                            dwFlags = e,
+                        }
+                    }
+                }
+            };
         }
     }
 }
