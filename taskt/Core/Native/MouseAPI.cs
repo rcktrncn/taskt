@@ -86,65 +86,144 @@ namespace taskt.Core.Native.Windows
         /// send mouse click
         /// </summary>
         /// <param name="clickType"></param>
-        /// <param name="xMousePosition"></param>
-        /// <param name="yMousePosition"></param>
-        public static void SendMouseClick(string clickType, int xMousePosition, int yMousePosition)
+        public static void SendMouseClick(string clickType)
         {
-            var actions = new List<MouseEvents>();
-
             switch (clickType.ToLower())
             {
                 case "double left click":
-                    actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP, MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP });
-                    break;
+                    SendLeftDoubleClick();
+                    return;
+
+                case "double middle click":
+                    SendMiddleDoubleClick();
+                    return;
+
+                case "double right click":
+                    SendRightDoubleClick();
+                    return;
 
                 case "left click":
-                    //actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP });
-                    //break;
                     SendLeftClick();
                     return;
 
                 case "right click":
-                    actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_RIGHTDOWN, MouseEvents.MOUSEEVENTF_RIGHTUP });
-                    break;
+                    SendRightClick();
+                    return;
 
                 case "middle click":
-                    actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_MIDDLEDOWN, MouseEvents.MOUSEEVENTF_MIDDLEUP });
-                    break;
+                    SendMiddleClick();
+                    return;
 
                 case "left down":
-                    actions.Add(MouseEvents.MOUSEEVENTF_LEFTDOWN);
-                    break;
+                    SendLeftDown();
+                    return;
 
                 case "right down":
-                    actions.Add(MouseEvents.MOUSEEVENTF_RIGHTDOWN);
-                    break;
+                    SendRightDown();
+                    return;
 
                 case "middle down":
-                    actions.Add(MouseEvents.MOUSEEVENTF_MIDDLEDOWN);
-                    break;
+                    SendMiddleDown();
+                    return;
 
                 case "left up":
-                    actions.Add(MouseEvents.MOUSEEVENTF_LEFTUP);
-                    break;
+                    SendLeftUp();
+                    return;
 
                 case "right up":
-                    actions.Add(MouseEvents.MOUSEEVENTF_RIGHTUP);
-                    break;
+                    SendRightUp();
+                    return;
 
                 case "middle up":
-                    actions.Add(MouseEvents.MOUSEEVENTF_MIDDLEUP);
-                    break;
+                    SendMiddleUp();
+                    return;
 
                 default:
                     break;
             }
-
-            foreach (var mouse in actions)
-            {
-                mouse_event((uint)mouse, xMousePosition, yMousePosition, 0, 0);
-            }
         }
+
+        /// <summary>
+        /// send mouse click
+        /// </summary>
+        /// <param name="clickType"></param>
+        /// <param name="xMousePosition"></param>
+        /// <param name="yMousePosition"></param>
+        //public static void SendMouseClick(string clickType, int xMousePosition, int yMousePosition)
+        //{
+        //    var actions = new List<MouseEvents>();
+
+        //    switch (clickType.ToLower())
+        //    {
+        //        case "double left click":
+        //            actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP, MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP });
+        //            break;
+        //            SendLeftDoubleClick();
+        //            return;
+
+        //        case "left click":
+        //            actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_LEFTDOWN, MouseEvents.MOUSEEVENTF_LEFTUP });
+        //            break;
+        //            SendLeftClick();
+        //            return;
+
+        //        case "right click":
+        //            actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_RIGHTDOWN, MouseEvents.MOUSEEVENTF_RIGHTUP });
+        //            break;
+        //            SendRightClick();
+        //            return;
+
+        //        case "middle click":
+        //            actions.AddRange(new MouseEvents[] { MouseEvents.MOUSEEVENTF_MIDDLEDOWN, MouseEvents.MOUSEEVENTF_MIDDLEUP });
+        //            break;
+        //            SendMiddleClick();
+        //            return;
+
+        //        case "left down":
+        //            actions.Add(MouseEvents.MOUSEEVENTF_LEFTDOWN);
+        //            break;
+        //            SendLeftDown();
+        //            return;
+
+        //        case "right down":
+        //            actions.Add(MouseEvents.MOUSEEVENTF_RIGHTDOWN);
+        //            break;
+        //            SendRightDown();
+        //            return;
+
+        //        case "middle down":
+        //            actions.Add(MouseEvents.MOUSEEVENTF_MIDDLEDOWN);
+        //            break;
+        //            SendMiddleDown();
+        //            return;
+
+        //        case "left up":
+        //            actions.Add(MouseEvents.MOUSEEVENTF_LEFTUP);
+        //            break;
+        //            SendLeftUp();
+        //            return;
+
+        //        case "right up":
+        //            actions.Add(MouseEvents.MOUSEEVENTF_RIGHTUP);
+        //            break;
+        //            SendRightUp();
+        //            return;
+
+        //        case "middle up":
+        //            actions.Add(MouseEvents.MOUSEEVENTF_MIDDLEUP);
+        //            break;
+        //            SendMiddleUp();
+        //            return;
+
+        //        default:
+        //            break;
+        //    }
+
+        //    foreach (var mouse in actions)
+        //    {
+        //        mouse_event((uint)mouse, xMousePosition, yMousePosition, 0, 0);
+        //    }
+        //}
 
         /// <summary>
         /// send mouse actions use InputAPI.SendInput
@@ -208,6 +287,133 @@ namespace taskt.Core.Native.Windows
             SendLeftDown();
             Thread.Sleep(pressDuration);
             SendLeftUp();
+        }
+
+        /// <summary>
+        /// send mouse right down
+        /// </summary>
+        public static void SendRightDown()
+        {
+            SendMouseActions(CreateMouseInputs(MouseEvents.MOUSEEVENTF_RIGHTDOWN));
+        }
+
+        /// <summary>
+        /// send mouse right up
+        /// </summary>
+        public static void SendRightUp()
+        {
+            SendMouseActions(CreateMouseInputs(MouseEvents.MOUSEEVENTF_RIGHTUP));
+        }
+
+        /// <summary>
+        /// send mouse right click
+        /// </summary>
+        /// <param name="pressDuration">ms</param>
+        public static void SendRightClick(int pressDuration = 50)
+        {
+            if (pressDuration < 0)
+            {
+                pressDuration = 50;
+            }
+
+            SendRightDown();
+            Thread.Sleep(pressDuration);
+            SendRightUp();
+        }
+
+        /// <summary>
+        /// send mouse middle down
+        /// </summary>
+        public static void SendMiddleDown()
+        {
+            SendMouseActions(CreateMouseInputs(MouseEvents.MOUSEEVENTF_MIDDLEDOWN));
+        }
+
+        /// <summary>
+        /// send mouse middle up
+        /// </summary>
+        public static void SendMiddleUp()
+        {
+            SendMouseActions(CreateMouseInputs(MouseEvents.MOUSEEVENTF_MIDDLEUP));
+        }
+
+        /// <summary>
+        /// send mouse middle click
+        /// </summary>
+        /// <param name="pressDuration">ms</param>
+        public static void SendMiddleClick(int pressDuration = 50)
+        {
+            if (pressDuration < 0)
+            {
+                pressDuration = 50;
+            }
+
+            SendMiddleDown();
+            Thread.Sleep(pressDuration);
+            SendMiddleUp();
+        }
+
+        /// <summary>
+        /// send left double-click
+        /// </summary>
+        /// <param name="pressDuration"></param>
+        /// <param name="intervalSecondClick"></param>
+        public static void SendLeftDoubleClick(int pressDuration = 50, int intervalSecondClick = 100)
+        {
+            if (pressDuration < 0)
+            {
+                pressDuration = 50;
+            }
+            if (intervalSecondClick < 0)
+            {
+                intervalSecondClick = 50;
+            }
+
+            SendLeftClick(pressDuration);
+            Thread.Sleep(intervalSecondClick);
+            SendLeftClick(pressDuration);
+        }
+
+        /// <summary>
+        /// send right double-click
+        /// </summary>
+        /// <param name="pressDuration"></param>
+        /// <param name="intervalSecondClick"></param>
+        public static void SendRightDoubleClick(int pressDuration = 50, int intervalSecondClick = 100)
+        {
+            if (pressDuration < 0)
+            {
+                pressDuration = 50;
+            }
+            if (intervalSecondClick < 0)
+            {
+                intervalSecondClick = 50;
+            }
+
+            SendRightClick(pressDuration);
+            Thread.Sleep(intervalSecondClick);
+            SendRightClick(pressDuration);
+        }
+
+        /// <summary>
+        /// send middle double-click
+        /// </summary>
+        /// <param name="pressDuration"></param>
+        /// <param name="intervalSecondClick"></param>
+        public static void SendMiddleDoubleClick(int pressDuration = 50, int intervalSecondClick = 100)
+        {
+            if (pressDuration < 0)
+            {
+                pressDuration = 50;
+            }
+            if (intervalSecondClick < 0)
+            {
+                intervalSecondClick = 50;
+            }
+
+            SendMiddleClick(pressDuration);
+            Thread.Sleep(intervalSecondClick);
+            SendMiddleClick(pressDuration);
         }
     }
 }

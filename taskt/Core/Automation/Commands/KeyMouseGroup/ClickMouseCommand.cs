@@ -45,7 +45,7 @@ namespace taskt.Core.Automation.Commands
             var clickType = this.ExpandValueOrUserVariableAsSelectionItem(nameof(v_MouseClick), engine);
 
             (int x, int y) = MouseAPI.GetCursorPosition();
-            MouseAPI.SendMouseClick(clickType, x, y);
+            MouseAPI.SendMouseClick(clickType);
 
             var isIgnore = this.ExpandValueOrUserVariableAsYesNo(nameof(v_IgnoreWaitTime), engine);
 
