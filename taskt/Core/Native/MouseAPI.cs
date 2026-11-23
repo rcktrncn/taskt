@@ -142,12 +142,12 @@ namespace taskt.Core.Native.Windows
             }
         }
 
-        /// <summary>
-        /// send mouse click
-        /// </summary>
-        /// <param name="clickType"></param>
-        /// <param name="xMousePosition"></param>
-        /// <param name="yMousePosition"></param>
+        ///// <summary>
+        ///// send mouse click
+        ///// </summary>
+        ///// <param name="clickType"></param>
+        ///// <param name="xMousePosition"></param>
+        ///// <param name="yMousePosition"></param>
         //public static void SendMouseClick(string clickType, int xMousePosition, int yMousePosition)
         //{
         //    var actions = new List<MouseEvents>();
